@@ -1,6 +1,8 @@
 import { mkdirSync, writeFileSync } from 'node:fs'
 import { dirname, join } from 'node:path'
 
+import { format } from 'prettier'
+
 import { registryItems } from '../registry/ui'
 
 const docs = {
@@ -22,6 +24,15 @@ const docs = {
       '<Input disabled aria-label="Disabled input" placeholder="Disabled" />',
     ],
   },
+  select: {
+    title: 'Select',
+    description: 'Lets a user choose one option from a native menu.',
+    examples: [
+      '<Select aria-label="Status"><option>Draft</option><option>Published</option></Select>',
+      '<Select invalid aria-label="Status"><option>Choose a status</option></Select>',
+      '<Select disabled aria-label="Disabled select"><option>Disabled</option></Select>',
+    ],
+  },
   textarea: {
     title: 'Textarea',
     description: 'Collects multi-line text from a user.',
@@ -36,7 +47,7 @@ const docs = {
 const rootDirectory = process.cwd()
 const generatedDirectory = join(rootDirectory, 'apps/docs/content/components')
 
-const writeGeneratedDoc = (name: keyof typeof docs) => {
+const writeGeneratedDoc = async (name: keyof typeof docs) => {
   const item = registryItems.find((registryItem) => registryItem.name === name)
 
   if (item === undefined) {
@@ -80,9 +91,9 @@ ${example}
 `
 
   mkdirSync(dirname(path), { recursive: true })
-  writeFileSync(path, content)
+  writeFileSync(path, await format(content, { parser: 'mdx' }))
 }
 
 for (const name of Object.keys(docs) as (keyof typeof docs)[]) {
-  writeGeneratedDoc(name)
+  await writeGeneratedDoc(name)
 }

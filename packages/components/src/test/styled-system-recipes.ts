@@ -16,6 +16,16 @@ export const input = ({ invalid = false, size = 'md' }: InputRecipeOptions = {})
     .filter(Boolean)
     .join(' ')
 
+interface SelectRecipeOptions {
+  invalid?: boolean
+  size?: 'sm' | 'md' | 'lg'
+}
+
+export const select = ({ invalid = false, size = 'md' }: SelectRecipeOptions = {}) =>
+  ['stalk-select', `stalk-select--${size}`, invalid ? 'stalk-select--invalid' : undefined]
+    .filter(Boolean)
+    .join(' ')
+
 interface TextareaRecipeOptions {
   invalid?: boolean
   size?: 'sm' | 'md' | 'lg'
