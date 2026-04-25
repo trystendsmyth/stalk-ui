@@ -1,0 +1,16 @@
+{
+  "$schema": "https://unpkg.com/@changesets/config@3.0.0/schema.json",
+  "access": "public",
+  "baseBranch": "main",
+  "changelog": [
+    "@changesets/changelog-github",
+    {
+      "repo": "trystendsmyth/stalk-ui"
+    }
+  ],
+  "commit": false,
+  "fixed": [],
+  "ignore": ["@stalk-ui/docs", "@stalk-ui/storybook"],
+  "linked": [["@stalk-ui/preset", "@stalk-ui/i18n", "@stalk-ui/cli"]],
+  "updateInternalDependencies": "patch"
+}
