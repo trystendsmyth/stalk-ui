@@ -1,12 +1,12 @@
-import js from '@eslint/js';
-import importPlugin from 'eslint-plugin-import';
-import jsxA11y from 'eslint-plugin-jsx-a11y';
-import reactPlugin from 'eslint-plugin-react';
-import reactHooks from 'eslint-plugin-react-hooks';
-import storybook from 'eslint-plugin-storybook';
-import unicorn from 'eslint-plugin-unicorn';
-import prettier from 'eslint-config-prettier';
-import tseslint from 'typescript-eslint';
+import js from '@eslint/js'
+import importPlugin from 'eslint-plugin-import'
+import jsxA11y from 'eslint-plugin-jsx-a11y'
+import reactPlugin from 'eslint-plugin-react'
+import reactHooks from 'eslint-plugin-react-hooks'
+import storybook from 'eslint-plugin-storybook'
+import unicorn from 'eslint-plugin-unicorn'
+import prettier from 'eslint-config-prettier'
+import tseslint from 'typescript-eslint'
 
 export default tseslint.config(
   {
@@ -63,10 +63,7 @@ export default tseslint.config(
       'react/react-in-jsx-scope': 'off',
       'react/self-closing-comp': 'error',
 
-      '@typescript-eslint/consistent-type-imports': [
-        'error',
-        { prefer: 'type-imports' },
-      ],
+      '@typescript-eslint/consistent-type-imports': ['error', { prefer: 'type-imports' }],
       '@typescript-eslint/no-explicit-any': 'error',
       '@typescript-eslint/no-unused-vars': [
         'error',
@@ -77,15 +74,7 @@ export default tseslint.config(
         'error',
         {
           alphabetize: { caseInsensitive: true, order: 'asc' },
-          groups: [
-            'builtin',
-            'external',
-            'internal',
-            'parent',
-            'sibling',
-            'index',
-            'type',
-          ],
+          groups: ['builtin', 'external', 'internal', 'parent', 'sibling', 'index', 'type'],
           'newlines-between': 'always',
         },
       ],
@@ -107,4 +96,4 @@ export default tseslint.config(
     ...storybook.configs['flat/recommended'],
   },
   prettier,
-);
+)

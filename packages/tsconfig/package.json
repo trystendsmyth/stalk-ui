@@ -12,7 +12,7 @@
   },
   "scripts": {
     "build": "pnpm typecheck",
-    "typecheck": "tsc --showConfig --project base.json > /dev/null",
-    "test": "echo \"No tests for @stalk-ui/tsconfig\""
+    "test": "echo \"No tests for @stalk-ui/tsconfig\"",
+    "typecheck": "tsc --showConfig --project base.json > /dev/null"
   }
 }

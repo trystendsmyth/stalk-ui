@@ -4,11 +4,11 @@ Stalk UI is built with Node 24, pnpm 10, TypeScript 5.x, React 19, and PandaCSS 
 
 ## Port Allocations
 
-| Port | Service |
-| ---- | ------- |
-| 3000 | `apps/docs` development server |
-| 6006 | Storybook development server and test-runner target |
-| 4873 | Verdaccio local npm registry |
+| Port | Service                                                                  |
+| ---- | ------------------------------------------------------------------------ |
+| 3000 | `apps/docs` development server                                           |
+| 6006 | Storybook development server and test-runner target                      |
+| 4873 | Verdaccio local npm registry                                             |
 | 4874 | Local registry server for `public/r/*.json` and `public/r/shadcn/*.json` |
 
 ## Development Setup
@@ -79,6 +79,7 @@ Let CI fail once for the first baseline of a component, download the artifact, a
 ## Maintaining shadcn Compatibility
 
 The `shadcn-compat` CI job runs on PRs touching registry or component code. If it fails, check for shadcn CLI schema drift, run `pnpm test:shadcn-compat`, update the serializer, and update compatibility docs when user-visible behavior changes.
+
 # Contributing
 
 Stalk UI is built with Node 24, pnpm 10, TypeScript 5.x, React 19, and PandaCSS 1.9.1. PandaCSS is pinned at 1.9.1; do not upgrade it to 1.10+ without explicit maintainer approval.

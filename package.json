@@ -5,30 +5,21 @@
   "description": "A PandaCSS-native component library distributed through a first-party CLI, preset, and static registry manifests.",
   "license": "MIT",
   "type": "module",
+  "scripts": {
+    "build": "turbo run build",
+    "clean": "turbo run clean && rm -rf node_modules .turbo",
+    "format": "prettier --write . --cache",
+    "format:check": "prettier --check . --cache",
+    "lint": "eslint . --cache",
+    "test": "turbo run test",
+    "typecheck": "turbo run typecheck"
+  },
+  "devDependencies": {
+    "turbo": "^2.9.6"
+  },
   "packageManager": "pnpm@10.0.0",
   "engines": {
     "node": ">=24.0.0",
     "pnpm": ">=10.0.0"
-  },
-  "scripts": {
-    "build": "turbo run build",
-    "typecheck": "turbo run typecheck",
-    "lint": "eslint . --cache",
-    "test": "turbo run test",
-    "clean": "turbo run clean && rm -rf node_modules .turbo"
-  },
-  "devDependencies": {
-    "@eslint/js": "^9",
-    "eslint": "^9",
-    "eslint-config-prettier": "^10.1.8",
-    "eslint-plugin-import": "^2.32.0",
-    "eslint-plugin-jsx-a11y": "^6.10.2",
-    "eslint-plugin-react": "^7.37.5",
-    "eslint-plugin-react-hooks": "^7.1.1",
-    "eslint-plugin-storybook": "^10.3.5",
-    "eslint-plugin-unicorn": "^64.0.0",
-    "turbo": "^2.9.6",
-    "typescript": "catalog:",
-    "typescript-eslint": "^8.59.0"
   }
 }

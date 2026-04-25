@@ -57,6 +57,7 @@ See `CONTRIBUTING.md`.
 ## License
 
 MIT
+
 # Stalk UI
 
 Stalk UI is a PandaCSS-native component library distributed through a first-party CLI, a PandaCSS preset package, and generated static registry manifests.
