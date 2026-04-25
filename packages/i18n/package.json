@@ -1,0 +1,13 @@
+{
+  "name": "@stalk-ui/i18n",
+  "version": "0.0.0",
+  "description": "Internationalization utilities for Stalk UI.",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "build": "echo \"No i18n build configured yet\"",
+    "lint": "echo \"No i18n lint configured yet\"",
+    "test": "echo \"No i18n tests configured yet\"",
+    "typecheck": "echo \"No i18n typecheck configured yet\""
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "name": "@stalk-ui/cli",
+  "version": "0.0.0",
+  "description": "CLI for installing and upgrading Stalk UI components.",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "build": "echo \"No CLI build configured yet\"",
+    "lint": "echo \"No CLI lint configured yet\"",
+    "test": "echo \"No CLI tests configured yet\"",
+    "typecheck": "echo \"No CLI typecheck configured yet\""
+  }
+}

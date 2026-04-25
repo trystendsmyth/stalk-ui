@@ -1,0 +1,13 @@
+{
+  "name": "@stalk-ui/preset",
+  "version": "0.0.0",
+  "description": "PandaCSS preset for Stalk UI.",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "build": "echo \"No preset build configured yet\"",
+    "lint": "echo \"No preset lint configured yet\"",
+    "test": "echo \"No preset tests configured yet\"",
+    "typecheck": "echo \"No preset typecheck configured yet\""
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "name": "@stalk-ui/utils",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Private copied helper source workspace for Stalk UI.",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "build": "echo \"No utils build configured yet\"",
+    "lint": "echo \"No utils lint configured yet\"",
+    "test": "echo \"No utils tests configured yet\"",
+    "typecheck": "echo \"No utils typecheck configured yet\""
+  }
+}

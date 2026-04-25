@@ -12,7 +12,8 @@
   },
   "scripts": {
     "build": "pnpm typecheck",
+    "lint": "echo \"No tsconfig lint configured yet\"",
     "test": "echo \"No tests for @stalk-ui/tsconfig\"",
-    "typecheck": "tsc --showConfig --project base.json > /dev/null"
+    "typecheck": "pnpm --workspace-root exec tsc --noEmit --project tsconfig.json"
   }
 }
