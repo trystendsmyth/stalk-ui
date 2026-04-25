@@ -51,6 +51,15 @@ const docs = {
       '<Select disabled aria-label="Disabled select"><option>Disabled</option></Select>',
     ],
   },
+  switch: {
+    title: 'Switch',
+    description: 'Toggles a setting on or off.',
+    examples: [
+      '<Switch label="Email notifications" />',
+      '<Switch description="Send product updates." id="product-updates" label="Product updates" />',
+      '<Switch invalid label="Required setting" />',
+    ],
+  },
   textarea: {
     title: 'Textarea',
     description: 'Collects multi-line text from a user.',

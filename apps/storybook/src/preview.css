@@ -189,6 +189,89 @@
   color: #a1a1aa;
 }
 
+.stalk-switch-field {
+  display: inline-flex;
+  align-items: flex-start;
+  gap: 0.625rem;
+  color: #18181b;
+  font:
+    500 0.875rem/1.4 system-ui,
+    sans-serif;
+}
+
+.stalk-switch {
+  position: relative;
+  appearance: none;
+  border: 1px solid transparent;
+  border-radius: 9999px;
+  background: #d4d4d8;
+  cursor: pointer;
+}
+
+.stalk-switch::before {
+  position: absolute;
+  top: 50%;
+  left: 2px;
+  width: calc(50% - 2px);
+  height: calc(100% - 4px);
+  border-radius: 9999px;
+  background: #fff;
+  content: '';
+  transform: translateY(-50%);
+  transition: transform 150ms ease;
+}
+
+.stalk-switch:checked {
+  background: #2563eb;
+}
+
+.stalk-switch:checked::before {
+  transform: translate(100%, -50%);
+}
+
+.stalk-switch:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+.stalk-switch--sm {
+  width: 2rem;
+  height: 1rem;
+}
+
+.stalk-switch--md {
+  width: 2.25rem;
+  height: 1.25rem;
+}
+
+.stalk-switch--lg {
+  width: 2.75rem;
+  height: 1.5rem;
+}
+
+.stalk-switch--invalid {
+  outline: 2px solid #fecaca;
+  border-color: #dc2626;
+}
+
+.stalk-switch-field__content {
+  display: grid;
+  gap: 0.125rem;
+}
+
+.stalk-switch-field__description {
+  color: #52525b;
+  font-weight: 400;
+}
+
+[data-color-mode='dark'] .stalk-switch-field {
+  color: #f6f7f9;
+}
+
+[data-color-mode='dark'] .stalk-switch-field__description {
+  color: #a1a1aa;
+}
+
 .stalk-input {
   width: 100%;
   border: 1px solid #d4d4d8;

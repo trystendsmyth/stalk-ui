@@ -1,0 +1,28 @@
+{
+  "$schema": "https://stalk-ui.com/schema/v1/registry-item.json",
+  "name": "switch",
+  "type": "registry:ui",
+  "dependencies": ["@stalk-ui/preset"],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "src/components/ui/switch.tsx",
+      "type": "registry:ui",
+      "content": "import { forwardRef, useId } from 'react'\nimport { switchRecipe } from 'styled-system/recipes'\n\nimport type { InputHTMLAttributes, ReactNode } from 'react'\n\nexport type SwitchSize = 'sm' | 'md' | 'lg'\n\nexport interface SwitchProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'size' | 'type'> {\n  description?: ReactNode\n  invalid?: boolean\n  label?: ReactNode\n  size?: SwitchSize\n}\n\nconst joinClassNames = (...classNames: (string | undefined)[]) =>\n  classNames\n    .filter((className): className is string => className !== undefined && className.length > 0)\n    .join(' ')\n\nexport const Switch = forwardRef<HTMLInputElement, SwitchProps>(\n  (\n    {\n      'aria-describedby': ariaDescribedBy,\n      'aria-invalid': ariaInvalid,\n      className,\n      description,\n      disabled,\n      invalid = false,\n      label,\n      size = 'md',\n      ...props\n    },\n    ref,\n  ) => {\n    const isInvalid = invalid || ariaInvalid === true || ariaInvalid === 'true'\n    const generatedId = useId()\n    const inputId = props.id ?? generatedId\n    const labelId = label === undefined ? undefined : `${inputId}-label`\n    const descriptionId = description === undefined ? undefined : `${inputId}-description`\n    const describedBy = [ariaDescribedBy, descriptionId].filter(Boolean).join(' ') || undefined\n    const input = (\n      <input\n        ref={ref}\n        aria-describedby={describedBy}\n        aria-labelledby={labelId}\n        className={joinClassNames(switchRecipe({ invalid: isInvalid, size }), className)}\n        data-invalid={isInvalid ? '' : undefined}\n        disabled={disabled}\n        id={inputId}\n        role=\"switch\"\n        type=\"checkbox\"\n        {...props}\n      />\n    )\n\n    if (label === undefined && description === undefined) {\n      return input\n    }\n\n    return (\n      <div className=\"stalk-switch-field\">\n        {input}\n        <span className=\"stalk-switch-field__content\">\n          {label === undefined ? null : (\n            <label htmlFor={inputId} id={labelId}>\n              {label}\n            </label>\n          )}\n          {description === undefined ? null : (\n            <span className=\"stalk-switch-field__description\" id={descriptionId}>\n              {description}\n            </span>\n          )}\n        </span>\n      </div>\n    )\n  },\n)\n\nSwitch.displayName = 'Switch'\n"
+    }
+  ],
+  "stalk": {
+    "schemaVersion": "1.0",
+    "preset": {
+      "semanticTokens": {},
+      "recipes": ["switch"]
+    },
+    "packageDependencies": {
+      "preset": "@stalk-ui/preset"
+    },
+    "pandaCodegen": true,
+    "importAliases": {
+      "styledSystem": "styled-system"
+    }
+  }
+}

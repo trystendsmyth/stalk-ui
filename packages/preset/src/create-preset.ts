@@ -1,4 +1,4 @@
-import { badge, button, checkbox, input, radio, select, textarea } from './recipes'
+import { badge, button, checkbox, input, radio, select, switchRecipe, textarea } from './recipes'
 import { card } from './slot-recipes'
 import {
   createAccentTheme,
@@ -41,6 +41,7 @@ export const createPreset = ({
         input,
         radio,
         select,
+        switch: switchRecipe,
         textarea,
       },
       slotRecipes: {

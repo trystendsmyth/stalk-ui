@@ -34,6 +34,13 @@ declare module 'styled-system/recipes' {
 
   export const select: (options?: SelectRecipeOptions) => string
 
+  interface SwitchRecipeOptions {
+    invalid?: boolean
+    size?: 'sm' | 'md' | 'lg'
+  }
+
+  export const switchRecipe: (options?: SwitchRecipeOptions) => string
+
   interface TextareaRecipeOptions {
     invalid?: boolean
     size?: 'sm' | 'md' | 'lg'

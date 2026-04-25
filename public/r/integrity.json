@@ -42,6 +42,14 @@
       "path": "/r/shadcn/select.json",
       "sha256": "8a6708af4cd94feec150d812f27cf2a7ec8df9342d668d593485e40aabbbd924"
     },
+    "switch": {
+      "path": "/r/switch.json",
+      "sha256": "b5d1c44aebba7ae4749a46d93d3f122355bfa8ea627ee8c143c76bac6f1e12a3"
+    },
+    "shadcn/switch": {
+      "path": "/r/shadcn/switch.json",
+      "sha256": "9bc44233b51c9f5de766660571686f787ba71258c81cbe0d192b3b12878fca9d"
+    },
     "textarea": {
       "path": "/r/textarea.json",
       "sha256": "f2e0eb56acd801052c16bc882523476b76dc43b6efe9b222c87c42382b0b6e46"

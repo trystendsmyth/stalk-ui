@@ -11,6 +11,7 @@
     "http://127.0.0.1:3000/en/components/input",
     "http://127.0.0.1:3000/en/components/radio",
     "http://127.0.0.1:3000/en/components/select",
+    "http://127.0.0.1:3000/en/components/switch",
     "http://127.0.0.1:3000/en/components/textarea"
   ]
 }
