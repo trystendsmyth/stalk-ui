@@ -1,0 +1,28 @@
+[
+  {
+    "name": "@stalk-ui/preset",
+    "path": "packages/preset/dist/index.js",
+    "limit": "10 KB"
+  },
+  {
+    "name": "@stalk-ui/i18n (main entry - provider + Intl wrappers)",
+    "path": "packages/i18n/dist/index.js",
+    "limit": "4 KB"
+  },
+  {
+    "name": "@stalk-ui/i18n/locales/en (single locale)",
+    "path": "packages/i18n/dist/locales/en.js",
+    "limit": "2 KB"
+  },
+  {
+    "name": "@stalk-ui/i18n tree-shake test (main + en only)",
+    "path": ".size-limit-fixtures/i18n-en-only/dist/assets/*.js",
+    "limit": "5 KB",
+    "ignore": ["react", "react-dom"]
+  },
+  {
+    "name": "@stalk-ui/cli",
+    "path": "packages/cli/dist/bin.js",
+    "limit": "40 KB"
+  }
+]
