@@ -24,6 +24,16 @@ export const checkbox = ({ invalid = false, size = 'md' }: CheckboxRecipeOptions
     .filter(Boolean)
     .join(' ')
 
+export const dialog = () => ({
+  close: 'stalk-dialog__close',
+  content: 'stalk-dialog__content',
+  description: 'stalk-dialog__description',
+  footer: 'stalk-dialog__footer',
+  header: 'stalk-dialog__header',
+  overlay: 'stalk-dialog__overlay',
+  title: 'stalk-dialog__title',
+})
+
 interface InputRecipeOptions {
   invalid?: boolean
   size?: 'sm' | 'md' | 'lg'

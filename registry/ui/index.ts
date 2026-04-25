@@ -115,6 +115,34 @@ export const registryItems = [
   },
   {
     $schema: 'https://stalk-ui.com/schema/v1/registry-item.json',
+    name: 'dialog',
+    type: 'registry:ui',
+    dependencies: ['@radix-ui/react-dialog', '@stalk-ui/preset'],
+    registryDependencies: [],
+    files: [
+      {
+        path: 'src/components/ui/dialog.tsx',
+        type: 'registry:ui',
+        sourcePath: 'packages/components/src/dialog.tsx',
+      },
+    ],
+    stalk: {
+      schemaVersion: '1.0',
+      preset: {
+        semanticTokens: {},
+        recipes: ['dialog'],
+      },
+      packageDependencies: {
+        preset: '@stalk-ui/preset',
+      },
+      pandaCodegen: true,
+      importAliases: {
+        styledSystem: 'styled-system',
+      },
+    },
+  },
+  {
+    $schema: 'https://stalk-ui.com/schema/v1/registry-item.json',
     name: 'label',
     type: 'registry:ui',
     dependencies: ['@stalk-ui/preset'],

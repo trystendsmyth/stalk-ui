@@ -33,6 +33,15 @@ const docs = {
       '<Checkbox invalid label="Required checkbox" />',
     ],
   },
+  dialog: {
+    title: 'Dialog',
+    description: 'Displays modal content in a focus-trapped overlay.',
+    examples: [
+      '<Dialog.Root><Dialog.Trigger>Open</Dialog.Trigger><Dialog.Content><Dialog.Title>Title</Dialog.Title></Dialog.Content></Dialog.Root>',
+      '<Dialog.Content><Dialog.Header><Dialog.Title>Settings</Dialog.Title><Dialog.Description>Manage preferences.</Dialog.Description></Dialog.Header></Dialog.Content>',
+      '<Dialog.Footer><Dialog.Close>Cancel</Dialog.Close></Dialog.Footer>',
+    ],
+  },
   input: {
     title: 'Input',
     description: 'Collects short-form text from a user.',

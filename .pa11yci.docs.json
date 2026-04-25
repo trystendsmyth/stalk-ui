@@ -9,6 +9,7 @@
     "http://127.0.0.1:3000/en/components/badge",
     "http://127.0.0.1:3000/en/components/button",
     "http://127.0.0.1:3000/en/components/checkbox",
+    "http://127.0.0.1:3000/en/components/dialog",
     "http://127.0.0.1:3000/en/components/input",
     "http://127.0.0.1:3000/en/components/label",
     "http://127.0.0.1:3000/en/components/radio",

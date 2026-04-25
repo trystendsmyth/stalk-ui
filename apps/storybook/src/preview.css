@@ -169,6 +169,76 @@
   color: #a1a1aa;
 }
 
+.stalk-dialog__overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  background: rgb(0 0 0 / 0.55);
+}
+
+.stalk-dialog__content {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  z-index: 50;
+  width: min(calc(100vw - 2rem), 32rem);
+  max-height: calc(100vh - 2rem);
+  overflow: auto;
+  transform: translate(-50%, -50%);
+  border: 1px solid #d4d4d8;
+  border-radius: 0.75rem;
+  background: #fff;
+  color: #18181b;
+  padding: 1.5rem;
+  box-shadow:
+    0 24px 48px rgb(0 0 0 / 0.18),
+    0 8px 16px rgb(0 0 0 / 0.12);
+}
+
+.stalk-dialog__header {
+  display: grid;
+  gap: 0.375rem;
+  padding-block-end: 1rem;
+}
+
+.stalk-dialog__title {
+  margin: 0;
+  font-size: 1.125rem;
+  font-weight: 650;
+  line-height: 1.2;
+}
+
+.stalk-dialog__description {
+  margin: 0;
+  color: #52525b;
+  font-size: 0.875rem;
+  line-height: 1.6;
+}
+
+.stalk-dialog__footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  padding-block-start: 1rem;
+}
+
+.stalk-dialog__close {
+  position: absolute;
+  inset-block-start: 1rem;
+  inset-inline-end: 1rem;
+}
+
+[data-color-mode='dark'] .stalk-dialog__content {
+  border-color: #3f3f46;
+  background: #18181b;
+  color: #f6f7f9;
+}
+
+[data-color-mode='dark'] .stalk-dialog__description {
+  color: #a1a1aa;
+}
+
 .stalk-radio-field {
   display: inline-flex;
   align-items: flex-start;

@@ -20,6 +20,18 @@ declare module 'styled-system/recipes' {
 
   export const checkbox: (options?: CheckboxRecipeOptions) => string
 
+  interface DialogSlotClasses {
+    close: string
+    content: string
+    description: string
+    footer: string
+    header: string
+    overlay: string
+    title: string
+  }
+
+  export const dialog: () => DialogSlotClasses
+
   interface InputRecipeOptions {
     invalid?: boolean
     size?: 'sm' | 'md' | 'lg'

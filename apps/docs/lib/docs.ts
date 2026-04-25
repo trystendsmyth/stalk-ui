@@ -56,6 +56,7 @@ const componentSlugs = [
   'badge',
   'button',
   'checkbox',
+  'dialog',
   'input',
   'label',
   'radio',
