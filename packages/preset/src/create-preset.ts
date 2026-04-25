@@ -1,4 +1,4 @@
-import { badge, button, input, select, textarea } from './recipes'
+import { badge, button, checkbox, input, select, textarea } from './recipes'
 import { card } from './slot-recipes'
 import {
   createAccentTheme,
@@ -37,6 +37,7 @@ export const createPreset = ({
       recipes: {
         badge,
         button,
+        checkbox,
         input,
         select,
         textarea,

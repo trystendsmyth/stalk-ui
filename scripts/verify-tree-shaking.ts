@@ -2,6 +2,7 @@ import { readFileSync } from 'node:fs'
 
 const components = [
   ['Button', 'packages/components/src/button.tsx'],
+  ['Checkbox', 'packages/components/src/checkbox.tsx'],
   ['Input', 'packages/components/src/input.tsx'],
   ['Select', 'packages/components/src/select.tsx'],
   ['Textarea', 'packages/components/src/textarea.tsx'],
@@ -21,4 +22,4 @@ for (const [name, path] of components) {
   }
 }
 
-console.log('Tree-shaking invariants passed for Button, Input, Select, and Textarea.')
+console.log('Tree-shaking invariants passed for Button, Checkbox, Input, Select, and Textarea.')

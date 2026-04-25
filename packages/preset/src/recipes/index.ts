@@ -1,5 +1,6 @@
 export { badge } from './badge'
 export { button } from './button'
+export { checkbox } from './checkbox'
 export { input } from './input'
 export { select } from './select'
 export { textarea } from './textarea'

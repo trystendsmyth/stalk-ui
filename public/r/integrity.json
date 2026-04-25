@@ -10,6 +10,14 @@
       "path": "/r/shadcn/button.json",
       "sha256": "794b718c2fabfdc70341a38e7ddcd7d2ac77bb8855995207fe517fa08bdfbdf0"
     },
+    "checkbox": {
+      "path": "/r/checkbox.json",
+      "sha256": "f695080b15ea0ada288cff9968ae0d96dfbc6a93b342e62bcd343a36bfa2ae34"
+    },
+    "shadcn/checkbox": {
+      "path": "/r/shadcn/checkbox.json",
+      "sha256": "4e606c4e800c4b40682920c8c44c879a7a1737c9b70a44e7b537cfc1e22b4925"
+    },
     "input": {
       "path": "/r/input.json",
       "sha256": "3939a198972eb798a2ba82e70ca885b2c10c6406c35fc12d23e6a81529d55747"

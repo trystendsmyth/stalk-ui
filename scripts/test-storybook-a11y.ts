@@ -18,6 +18,10 @@ const requiredStories = [
   'components-button--variants',
   'components-button--rtl',
   'components-button--dark-mode',
+  'components-checkbox--default',
+  'components-checkbox--states',
+  'components-checkbox--rtl',
+  'components-checkbox--dark-mode',
   'components-input--default',
   'components-input--states',
   'components-input--rtl',
@@ -38,4 +42,4 @@ for (const storyId of requiredStories) {
   }
 }
 
-console.log('Storybook a11y addon build and required Button stories passed.')
+console.log('Storybook a11y addon build and required component stories passed.')

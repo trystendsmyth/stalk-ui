@@ -6,6 +6,13 @@ declare module 'styled-system/recipes' {
 
   export const button: (options?: ButtonRecipeOptions) => string
 
+  interface CheckboxRecipeOptions {
+    invalid?: boolean
+    size?: 'sm' | 'md' | 'lg'
+  }
+
+  export const checkbox: (options?: CheckboxRecipeOptions) => string
+
   interface InputRecipeOptions {
     invalid?: boolean
     size?: 'sm' | 'md' | 'lg'

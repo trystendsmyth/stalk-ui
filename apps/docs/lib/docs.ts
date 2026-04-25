@@ -52,7 +52,7 @@ export const gettingStartedPages = [
 ] satisfies GettingStartedPage[]
 
 const contentDirectory = join(process.cwd(), 'content/components')
-const componentSlugs = ['button', 'input', 'select', 'textarea'] as const
+const componentSlugs = ['button', 'checkbox', 'input', 'select', 'textarea'] as const
 
 const frontmatterValue = (source: string, key: string) => {
   const match = new RegExp(`^${key}:\\s*(.+)$`, 'm').exec(source)

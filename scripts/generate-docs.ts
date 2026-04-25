@@ -1,7 +1,7 @@
 import { mkdirSync, writeFileSync } from 'node:fs'
 import { dirname, join } from 'node:path'
 
-import { format } from 'prettier'
+import { format, resolveConfig } from 'prettier'
 
 import { registryItems } from '../registry/ui'
 
@@ -13,6 +13,15 @@ const docs = {
       '<Button>Save</Button>',
       '<Button variant="outline">Cancel</Button>',
       '<Button loading>Saving</Button>',
+    ],
+  },
+  checkbox: {
+    title: 'Checkbox',
+    description: 'Toggles a binary option in a form or settings surface.',
+    examples: [
+      '<Checkbox label="Accept terms" />',
+      '<Checkbox description="Receive product release notes." id="release-notes" label="Release notes" />',
+      '<Checkbox invalid label="Required checkbox" />',
     ],
   },
   input: {
@@ -46,6 +55,7 @@ const docs = {
 
 const rootDirectory = process.cwd()
 const generatedDirectory = join(rootDirectory, 'apps/docs/content/components')
+const prettierConfig = await resolveConfig(join(generatedDirectory, 'component.mdx'))
 
 const writeGeneratedDoc = async (name: keyof typeof docs) => {
   const item = registryItems.find((registryItem) => registryItem.name === name)
@@ -91,7 +101,7 @@ ${example}
 `
 
   mkdirSync(dirname(path), { recursive: true })
-  writeFileSync(path, await format(content, { parser: 'mdx' }))
+  writeFileSync(path, await format(content, { ...prettierConfig, filepath: path, parser: 'mdx' }))
 }
 
 for (const name of Object.keys(docs) as (keyof typeof docs)[]) {

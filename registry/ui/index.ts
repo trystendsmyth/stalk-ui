@@ -31,6 +31,34 @@ export const registryItems = [
   },
   {
     $schema: 'https://stalk-ui.com/schema/v1/registry-item.json',
+    name: 'checkbox',
+    type: 'registry:ui',
+    dependencies: ['@stalk-ui/preset'],
+    registryDependencies: [],
+    files: [
+      {
+        path: 'src/components/ui/checkbox.tsx',
+        type: 'registry:ui',
+        sourcePath: 'packages/components/src/checkbox.tsx',
+      },
+    ],
+    stalk: {
+      schemaVersion: '1.0',
+      preset: {
+        semanticTokens: {},
+        recipes: ['checkbox'],
+      },
+      packageDependencies: {
+        preset: '@stalk-ui/preset',
+      },
+      pandaCodegen: true,
+      importAliases: {
+        styledSystem: 'styled-system',
+      },
+    },
+  },
+  {
+    $schema: 'https://stalk-ui.com/schema/v1/registry-item.json',
     name: 'input',
     type: 'registry:ui',
     dependencies: ['@stalk-ui/preset'],

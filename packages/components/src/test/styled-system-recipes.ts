@@ -6,6 +6,16 @@ interface ButtonRecipeOptions {
 export const button = ({ size = 'md', variant = 'solid' }: ButtonRecipeOptions = {}) =>
   `stalk-button stalk-button--${variant} stalk-button--${size}`
 
+interface CheckboxRecipeOptions {
+  invalid?: boolean
+  size?: 'sm' | 'md' | 'lg'
+}
+
+export const checkbox = ({ invalid = false, size = 'md' }: CheckboxRecipeOptions = {}) =>
+  ['stalk-checkbox', `stalk-checkbox--${size}`, invalid ? 'stalk-checkbox--invalid' : undefined]
+    .filter(Boolean)
+    .join(' ')
+
 interface InputRecipeOptions {
   invalid?: boolean
   size?: 'sm' | 'md' | 'lg'
