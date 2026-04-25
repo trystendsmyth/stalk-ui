@@ -60,6 +60,7 @@ const componentSlugs = [
   'dropdown-menu',
   'input',
   'label',
+  'popover',
   'radio',
   'select',
   'switch',

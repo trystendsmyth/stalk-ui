@@ -58,6 +58,14 @@
       "path": "/r/shadcn/label.json",
       "sha256": "ec43a003038333e88e0332c226bdb4da2b44c973289723762544675dab3a860f"
     },
+    "popover": {
+      "path": "/r/popover.json",
+      "sha256": "9ad948746783f039ef0f5f6f021c2242c650662fe4d70b5371cd96bb7444da67"
+    },
+    "shadcn/popover": {
+      "path": "/r/shadcn/popover.json",
+      "sha256": "d7e1375e145eb3b8a72b6ea252cbb3de921e4f4b4cee3decf23ca5969a47db41"
+    },
     "radio": {
       "path": "/r/radio.json",
       "sha256": "e4ec889e981218043b46b35f4a100a1f0cd9d30e45b92e9b6520cdecddcdf23e"

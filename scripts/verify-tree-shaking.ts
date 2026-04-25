@@ -8,6 +8,7 @@ const components = [
   ['DropdownMenu', 'packages/components/src/dropdown-menu.tsx'],
   ['Input', 'packages/components/src/input.tsx'],
   ['Label', 'packages/components/src/label.tsx'],
+  ['Popover', 'packages/components/src/popover.tsx'],
   ['Radio', 'packages/components/src/radio.tsx'],
   ['Select', 'packages/components/src/select.tsx'],
   ['Switch', 'packages/components/src/switch.tsx'],
@@ -30,5 +31,5 @@ for (const [name, path] of components) {
 }
 
 console.log(
-  'Tree-shaking invariants passed for Badge, Button, Checkbox, Dialog, DropdownMenu, Input, Label, Radio, Select, Switch, Tooltip, and Textarea.',
+  'Tree-shaking invariants passed for Badge, Button, Checkbox, Dialog, DropdownMenu, Input, Label, Popover, Radio, Select, Switch, Tooltip, and Textarea.',
 )

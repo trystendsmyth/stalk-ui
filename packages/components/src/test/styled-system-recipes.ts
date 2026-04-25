@@ -62,6 +62,12 @@ export const label = ({ required = false, size = 'md' }: LabelRecipeOptions = {}
     .filter(Boolean)
     .join(' ')
 
+export const popover = () => ({
+  arrow: 'stalk-popover__arrow',
+  close: 'stalk-popover__close',
+  content: 'stalk-popover__content',
+})
+
 interface RadioRecipeOptions {
   invalid?: boolean
   size?: 'sm' | 'md' | 'lg'

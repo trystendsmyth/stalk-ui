@@ -199,6 +199,34 @@ export const registryItems = [
   },
   {
     $schema: 'https://stalk-ui.com/schema/v1/registry-item.json',
+    name: 'popover',
+    type: 'registry:ui',
+    dependencies: ['@radix-ui/react-popover', '@stalk-ui/preset'],
+    registryDependencies: [],
+    files: [
+      {
+        path: 'src/components/ui/popover.tsx',
+        type: 'registry:ui',
+        sourcePath: 'packages/components/src/popover.tsx',
+      },
+    ],
+    stalk: {
+      schemaVersion: '1.0',
+      preset: {
+        semanticTokens: {},
+        recipes: ['popover'],
+      },
+      packageDependencies: {
+        preset: '@stalk-ui/preset',
+      },
+      pandaCodegen: true,
+      importAliases: {
+        styledSystem: 'styled-system',
+      },
+    },
+  },
+  {
+    $schema: 'https://stalk-ui.com/schema/v1/registry-item.json',
     name: 'radio',
     type: 'registry:ui',
     dependencies: ['@stalk-ui/preset'],

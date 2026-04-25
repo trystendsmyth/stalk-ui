@@ -56,6 +56,14 @@ declare module 'styled-system/recipes' {
 
   export const label: (options?: LabelRecipeOptions) => string
 
+  interface PopoverSlotClasses {
+    arrow: string
+    close: string
+    content: string
+  }
+
+  export const popover: () => PopoverSlotClasses
+
   interface RadioRecipeOptions {
     invalid?: boolean
     size?: 'sm' | 'md' | 'lg'

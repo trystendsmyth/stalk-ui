@@ -33,6 +33,15 @@ export { Input } from './input'
 export type { InputProps, InputSize } from './input'
 export { Label } from './label'
 export type { LabelProps, LabelSize } from './label'
+export {
+  Popover,
+  PopoverAnchor,
+  PopoverClose,
+  PopoverContent,
+  PopoverPortal,
+  PopoverRoot,
+  PopoverTrigger,
+} from './popover'
 export { Radio } from './radio'
 export type { RadioProps, RadioSize } from './radio'
 export { Select } from './select'

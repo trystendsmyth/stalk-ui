@@ -69,6 +69,15 @@ const docs = {
       '<Label size="lg">Large label</Label>',
     ],
   },
+  popover: {
+    title: 'Popover',
+    description: 'Displays interactive floating content from a trigger.',
+    examples: [
+      '<Popover.Root><Popover.Trigger>Open</Popover.Trigger><Popover.Content>Interactive content</Popover.Content></Popover.Root>',
+      '<Popover.Content aria-label="Project settings"><Popover.Close>Close</Popover.Close></Popover.Content>',
+      '<Popover.Content side="bottom">Positioned below the trigger</Popover.Content>',
+    ],
+  },
   radio: {
     title: 'Radio',
     description: 'Selects one option from a related set of choices.',
