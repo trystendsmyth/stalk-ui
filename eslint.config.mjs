@@ -1,4 +1,5 @@
 import js from '@eslint/js'
+import nextPlugin from '@next/eslint-plugin-next'
 import importPlugin from 'eslint-plugin-import'
 import jsxA11y from 'eslint-plugin-jsx-a11y'
 import reactPlugin from 'eslint-plugin-react'
@@ -86,14 +87,28 @@ export default tseslint.config(
     },
   },
   {
+    files: ['apps/docs/**/*.{ts,tsx}'],
+    plugins: {
+      '@next/next': nextPlugin,
+    },
+    rules: {
+      ...nextPlugin.configs.recommended.rules,
+      ...nextPlugin.configs['core-web-vitals'].rules,
+      '@next/next/no-html-link-for-pages': 'off',
+    },
+  },
+  {
+    files: ['apps/docs/next-env.d.ts'],
+    rules: {
+      '@typescript-eslint/triple-slash-reference': 'off',
+    },
+  },
+  {
     files: ['**/*.test.{ts,tsx}', '**/*.stories.{ts,tsx}'],
     rules: {
       '@typescript-eslint/no-explicit-any': 'off',
     },
   },
-  {
-    files: ['**/*.stories.{ts,tsx}'],
-    ...storybook.configs['flat/recommended'],
-  },
+  ...storybook.configs['flat/recommended'],
   prettier,
 )

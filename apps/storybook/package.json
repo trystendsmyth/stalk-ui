@@ -6,9 +6,21 @@
   "license": "MIT",
   "type": "module",
   "scripts": {
-    "build": "echo \"No Storybook build configured yet\"",
+    "build": "storybook build --output-dir storybook-static",
+    "dev": "storybook dev --port 6006",
     "lint": "echo \"No Storybook lint configured yet\"",
     "test": "echo \"No Storybook tests configured yet\"",
-    "typecheck": "echo \"No Storybook typecheck configured yet\""
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "react": "catalog:",
+    "react-dom": "catalog:"
+  },
+  "devDependencies": {
+    "@storybook/react-vite": "^10.3.0",
+    "@types/react": "catalog:",
+    "@types/react-dom": "catalog:",
+    "storybook": "catalog:",
+    "vite": "^8.0.10"
   }
 }
