@@ -1,0 +1,54 @@
+.stalk-button {
+  align-items: center;
+  border: 0;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  display: inline-flex;
+  font:
+    600 0.875rem/1 system-ui,
+    sans-serif;
+  gap: 0.5rem;
+  justify-content: center;
+}
+
+.stalk-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+.stalk-button--sm {
+  min-height: 2rem;
+  padding-inline: 0.75rem;
+}
+
+.stalk-button--md {
+  min-height: 2.5rem;
+  padding-inline: 1rem;
+}
+
+.stalk-button--lg {
+  font-size: 1rem;
+  min-height: 3rem;
+  padding-inline: 1.25rem;
+}
+
+.stalk-button--solid {
+  background: #2563eb;
+  color: #fff;
+}
+
+.stalk-button--outline {
+  background: transparent;
+  border: 1px solid #d4d4d8;
+  color: #18181b;
+}
+
+.stalk-button--ghost {
+  background: transparent;
+  color: #18181b;
+}
+
+.stalk-button--subtle {
+  background: #dbeafe;
+  color: #1e40af;
+}

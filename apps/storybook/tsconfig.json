@@ -3,5 +3,11 @@
   "compilerOptions": {
     "noEmit": true
   },
-  "include": [".storybook/**/*.ts", "src/**/*.ts", "src/**/*.tsx"]
+  "include": [
+    ".storybook/**/*.ts",
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "../../packages/components/src/**/*.ts",
+    "../../packages/components/src/**/*.tsx"
+  ]
 }

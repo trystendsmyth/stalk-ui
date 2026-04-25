@@ -4,5 +4,5 @@
     "noEmit": true,
     "types": ["node"]
   },
-  "include": ["registry/**/*.ts", "scripts/**/*.ts"]
+  "include": [".size-limit-fixtures/**/*.ts", "registry/**/*.ts", "scripts/**/*.ts"]
 }

@@ -2,6 +2,8 @@ import { createHash } from 'node:crypto'
 import { mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs'
 import { dirname, join } from 'node:path'
 
+import { format } from 'prettier'
+
 import { registryIndexSchema, registryItemSchema, schemaVersion } from '../registry/schema'
 import { registryItems } from '../registry/ui'
 
@@ -16,9 +18,9 @@ const generatedAt = process.env.STALK_REGISTRY_GENERATED_AT ?? '1970-01-01T00:00
 const stableJson = (value: unknown) => `${JSON.stringify(value, null, 2)}\n`
 const sha256 = (value: string) => createHash('sha256').update(value).digest('hex')
 
-const writeJson = (path: string, value: unknown) => {
+const writeJson = async (path: string, value: unknown) => {
   mkdirSync(dirname(path), { recursive: true })
-  const content = stableJson(value)
+  const content = await format(stableJson(value), { parser: 'json' })
   writeFileSync(path, content)
   return content
 }
@@ -53,7 +55,7 @@ const toShadcnItem = (item: RegistryItem): RegistryItem => ({
     content:
       file.content === undefined
         ? undefined
-        : `/* Stalk UI requires PandaCSS and @stalk-ui/preset setup. */\n${file.content}`,
+        : `/* Stalk UI component - requires PandaCSS setup and @stalk-ui/preset. */\n${file.content}`,
   })),
 })
 
@@ -67,8 +69,8 @@ for (const item of registryItems) {
   const shadcnItem = registryItemSchema.parse(toShadcnItem(nativeItem))
   const nativePath = join(registryDirectory, `${nativeItem.name}.json`)
   const shadcnPath = join(shadcnDirectory, `${nativeItem.name}.json`)
-  const nativeContent = writeJson(nativePath, nativeItem)
-  const shadcnContent = writeJson(shadcnPath, shadcnItem)
+  const nativeContent = await writeJson(nativePath, nativeItem)
+  const shadcnContent = await writeJson(shadcnPath, shadcnItem)
 
   manifests[nativeItem.name] = {
     path: `/r/${nativeItem.name}.json`,
@@ -86,7 +88,7 @@ const index = registryIndexSchema.parse({
   manifests,
 })
 
-writeJson(join(registryDirectory, 'integrity.json'), index)
+await writeJson(join(registryDirectory, 'integrity.json'), index)
 
 writeFileSync(
   join(publicDirectory, '_headers'),

@@ -1,5 +1,14 @@
 {
   "schemaVersion": "1.0",
   "generatedAt": "1970-01-01T00:00:00.000Z",
-  "manifests": {}
+  "manifests": {
+    "button": {
+      "path": "/r/button.json",
+      "sha256": "5610bb63bdd6d7bdff5b0a96e30ae69b956a12ffcf24f17019514dbb80aa3d29"
+    },
+    "shadcn/button": {
+      "path": "/r/shadcn/button.json",
+      "sha256": "794b718c2fabfdc70341a38e7ddcd7d2ac77bb8855995207fe517fa08bdfbdf0"
+    }
+  }
 }

@@ -16,7 +16,7 @@ pnpm dlx stalk-ui@latest add @stalk-ui/button
 **shadcn CLI (for mixed shadcn + Stalk projects)**
 
 ```sh
-npx shadcn@latest add https://stalk-ui.dev/r/shadcn/button.json
+npx shadcn@latest add https://stalk-ui.com/r/shadcn/button.json
 ```
 
 The shadcn-compatible path assumes the project already satisfies Stalk UI's PandaCSS prerequisites.
@@ -39,7 +39,7 @@ pnpm dlx stalk-ui@latest theme violet
 
 ## Documentation
 
-- Docs: https://stalk-ui.dev
+- Docs: https://stalk-ui.com
 - Storybook: https://trystendsmyth.github.io/stalk-ui
 
 ## Packages

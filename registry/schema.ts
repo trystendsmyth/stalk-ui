@@ -1,7 +1,7 @@
 import { z } from 'zod'
 
 export const schemaVersion = '1.0'
-export const registryItemSchemaUrl = 'https://stalk-ui.dev/schema/v1/registry-item.json'
+export const registryItemSchemaUrl = 'https://stalk-ui.com/schema/v1/registry-item.json'
 
 export const registryFileSchema = z.object({
   path: z.string().min(1),

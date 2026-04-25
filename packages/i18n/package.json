@@ -9,7 +9,7 @@
     "locale",
     "stalk-ui"
   ],
-  "homepage": "https://stalk-ui.dev",
+  "homepage": "https://stalk-ui.com",
   "bugs": "https://github.com/trystendsmyth/stalk-ui/issues",
   "repository": {
     "type": "git",
@@ -50,7 +50,6 @@
   },
   "devDependencies": {
     "@types/react": "catalog:",
-    "@types/react-dom": "catalog:",
     "react": "catalog:"
   },
   "peerDependencies": {

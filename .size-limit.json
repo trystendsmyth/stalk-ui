@@ -1,18 +1,24 @@
 [
   {
     "name": "@stalk-ui/preset",
+    "disablePlugins": ["@size-limit/esbuild", "@size-limit/webpack"],
     "path": "packages/preset/dist/index.js",
-    "limit": "10 KB"
+    "limit": "10 KB",
+    "webpack": false
   },
   {
     "name": "@stalk-ui/i18n (main entry - provider + Intl wrappers)",
+    "disablePlugins": ["@size-limit/esbuild", "@size-limit/webpack"],
     "path": "packages/i18n/dist/index.js",
-    "limit": "4 KB"
+    "limit": "4 KB",
+    "webpack": false
   },
   {
     "name": "@stalk-ui/i18n/locales/en (single locale)",
+    "disablePlugins": ["@size-limit/esbuild", "@size-limit/webpack"],
     "path": "packages/i18n/dist/locales/en.js",
-    "limit": "2 KB"
+    "limit": "2 KB",
+    "webpack": false
   },
   {
     "name": "@stalk-ui/i18n tree-shake test (main + en only)",
@@ -22,7 +28,9 @@
   },
   {
     "name": "@stalk-ui/cli",
+    "disablePlugins": ["@size-limit/esbuild", "@size-limit/webpack"],
     "path": "packages/cli/dist/bin.js",
-    "limit": "40 KB"
+    "limit": "40 KB",
+    "webpack": false
   }
 ]

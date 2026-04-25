@@ -1,6 +1,6 @@
 const links = [
-  { href: 'https://stalk-ui.dev/r/', label: 'Native registry' },
-  { href: 'https://stalk-ui.dev/r/shadcn/', label: 'shadcn-compatible registry' },
+  { href: 'https://stalk-ui.com/r/', label: 'Native registry' },
+  { href: 'https://stalk-ui.com/r/shadcn/', label: 'shadcn-compatible registry' },
 ]
 
 export default function HomePage() {

@@ -19,6 +19,7 @@ export default tseslint.config(
       '**/storybook-static/**',
       '**/.turbo/**',
       '**/coverage/**',
+      '**/.size-limit-fixtures/**',
     ],
   },
   js.configs.recommended,

@@ -8,13 +8,20 @@
   "scripts": {
     "build": "echo \"No components build configured yet\"",
     "lint": "echo \"No components lint configured yet\"",
-    "test": "echo \"No components tests configured yet\"",
+    "test": "vitest run",
     "typecheck": "tsc --noEmit"
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.2",
+    "@testing-library/user-event": "^14.6.1",
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",
-    "react": "catalog:"
+    "jsdom": "^29.0.2",
+    "react": "catalog:",
+    "react-dom": "catalog:",
+    "vitest": "^4.1.5",
+    "vitest-axe": "^0.1.0"
   },
   "peerDependencies": {
     "@stalk-ui/i18n": "workspace:*",

@@ -1,0 +1,20 @@
+storage: ./storage
+auth:
+  htpasswd:
+    file: ./htpasswd
+    max_users: 1000
+uplinks:
+  npmjs:
+    url: https://registry.npmjs.org/
+packages:
+  '@stalk-ui/*':
+    access: $all
+    publish: $authenticated
+    proxy: npmjs
+  '**':
+    access: $all
+    publish: $authenticated
+    proxy: npmjs
+logs:
+  - { type: stdout, format: pretty, level: http }
+listen: 0.0.0.0:4873

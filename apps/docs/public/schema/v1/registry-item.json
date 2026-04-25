@@ -1,11 +1,11 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://stalk-ui.dev/schema/v1/registry-item.json",
+  "$id": "https://stalk-ui.com/schema/v1/registry-item.json",
   "type": "object",
   "required": ["$schema", "name", "type", "dependencies", "registryDependencies", "files", "stalk"],
   "properties": {
     "$schema": {
-      "const": "https://stalk-ui.dev/schema/v1/registry-item.json"
+      "const": "https://stalk-ui.com/schema/v1/registry-item.json"
     },
     "name": {
       "type": "string",
