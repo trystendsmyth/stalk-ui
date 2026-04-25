@@ -304,6 +304,33 @@
   color: #a1a1aa;
 }
 
+.stalk-tooltip__content {
+  z-index: 50;
+  max-width: 18rem;
+  border-radius: 0.5rem;
+  background: #18181b;
+  color: #fff;
+  padding: 0.375rem 0.5rem;
+  font-size: 0.75rem;
+  line-height: 1.5;
+  box-shadow:
+    0 12px 24px rgb(0 0 0 / 0.16),
+    0 4px 8px rgb(0 0 0 / 0.12);
+}
+
+.stalk-tooltip__arrow {
+  fill: #18181b;
+}
+
+[data-color-mode='dark'] .stalk-tooltip__content {
+  background: #f6f7f9;
+  color: #18181b;
+}
+
+[data-color-mode='dark'] .stalk-tooltip__arrow {
+  fill: #f6f7f9;
+}
+
 .stalk-radio-field {
   display: inline-flex;
   align-items: flex-start;

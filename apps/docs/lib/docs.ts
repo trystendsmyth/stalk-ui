@@ -63,6 +63,7 @@ const componentSlugs = [
   'radio',
   'select',
   'switch',
+  'tooltip',
   'textarea',
 ] as const
 

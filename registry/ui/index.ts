@@ -283,6 +283,34 @@ export const registryItems = [
   },
   {
     $schema: 'https://stalk-ui.com/schema/v1/registry-item.json',
+    name: 'tooltip',
+    type: 'registry:ui',
+    dependencies: ['@radix-ui/react-tooltip', '@stalk-ui/preset'],
+    registryDependencies: [],
+    files: [
+      {
+        path: 'src/components/ui/tooltip.tsx',
+        type: 'registry:ui',
+        sourcePath: 'packages/components/src/tooltip.tsx',
+      },
+    ],
+    stalk: {
+      schemaVersion: '1.0',
+      preset: {
+        semanticTokens: {},
+        recipes: ['tooltip'],
+      },
+      packageDependencies: {
+        preset: '@stalk-ui/preset',
+      },
+      pandaCodegen: true,
+      importAliases: {
+        styledSystem: 'styled-system',
+      },
+    },
+  },
+  {
+    $schema: 'https://stalk-ui.com/schema/v1/registry-item.json',
     name: 'textarea',
     type: 'registry:ui',
     dependencies: ['@stalk-ui/preset'],

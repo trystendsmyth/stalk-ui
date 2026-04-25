@@ -96,6 +96,15 @@ const docs = {
       '<Switch invalid label="Required setting" />',
     ],
   },
+  tooltip: {
+    title: 'Tooltip',
+    description: 'Provides supplemental context when a control is hovered or focused.',
+    examples: [
+      '<Tooltip.Provider><Tooltip.Root><Tooltip.Trigger>Help</Tooltip.Trigger><Tooltip.Content>Helpful context</Tooltip.Content></Tooltip.Root></Tooltip.Provider>',
+      '<Tooltip.Root defaultOpen><Tooltip.Trigger>Open</Tooltip.Trigger><Tooltip.Content>Visible by default</Tooltip.Content></Tooltip.Root>',
+      '<Tooltip.Content side="bottom">Positioned below the trigger</Tooltip.Content>',
+    ],
+  },
   textarea: {
     title: 'Textarea',
     description: 'Collects multi-line text from a user.',

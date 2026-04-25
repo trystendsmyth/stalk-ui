@@ -41,3 +41,11 @@ export { Switch } from './switch'
 export type { SwitchProps, SwitchSize } from './switch'
 export { Textarea } from './textarea'
 export type { TextareaProps, TextareaSize } from './textarea'
+export {
+  Tooltip,
+  TooltipContent,
+  TooltipPortal,
+  TooltipProvider,
+  TooltipRoot,
+  TooltipTrigger,
+} from './tooltip'

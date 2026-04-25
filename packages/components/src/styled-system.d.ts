@@ -77,6 +77,13 @@ declare module 'styled-system/recipes' {
 
   export const switchRecipe: (options?: SwitchRecipeOptions) => string
 
+  interface TooltipSlotClasses {
+    arrow: string
+    content: string
+  }
+
+  export const tooltip: () => TooltipSlotClasses
+
   interface TextareaRecipeOptions {
     invalid?: boolean
     size?: 'sm' | 'md' | 'lg'

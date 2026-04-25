@@ -82,6 +82,14 @@
       "path": "/r/shadcn/switch.json",
       "sha256": "9bc44233b51c9f5de766660571686f787ba71258c81cbe0d192b3b12878fca9d"
     },
+    "tooltip": {
+      "path": "/r/tooltip.json",
+      "sha256": "9ff340ead89d51ae1d6936515b50ab243259d13bc171f6f92e19071c5d13afe1"
+    },
+    "shadcn/tooltip": {
+      "path": "/r/shadcn/tooltip.json",
+      "sha256": "ead915b989d2e288419c368a4d5f8482b56ec293d345d2fbb6d2b3e2bb74eb15"
+    },
     "textarea": {
       "path": "/r/textarea.json",
       "sha256": "f2e0eb56acd801052c16bc882523476b76dc43b6efe9b222c87c42382b0b6e46"

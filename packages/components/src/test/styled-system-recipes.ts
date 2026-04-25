@@ -92,6 +92,11 @@ export const switchRecipe = ({ invalid = false, size = 'md' }: SwitchRecipeOptio
     .filter(Boolean)
     .join(' ')
 
+export const tooltip = () => ({
+  arrow: 'stalk-tooltip__arrow',
+  content: 'stalk-tooltip__content',
+})
+
 interface TextareaRecipeOptions {
   invalid?: boolean
   size?: 'sm' | 'md' | 'lg'

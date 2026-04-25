@@ -9,7 +9,7 @@ import {
   switchRecipe,
   textarea,
 } from './recipes'
-import { card, dialog, dropdownMenu } from './slot-recipes'
+import { card, dialog, dropdownMenu, tooltip } from './slot-recipes'
 import {
   createAccentTheme,
   createRadiusTokens,
@@ -59,6 +59,7 @@ export const createPreset = ({
         card,
         dialog,
         dropdownMenu,
+        tooltip,
       },
     },
     themes,
