@@ -52,3 +52,19 @@
   background: #dbeafe;
   color: #1e40af;
 }
+
+[dir='rtl'] .stalk-button {
+  direction: rtl;
+}
+
+[data-color-mode='dark'] {
+  min-height: 100vh;
+  padding: 1rem;
+  background: #0f1115;
+  color: #f6f7f9;
+}
+
+[data-color-mode='dark'] .stalk-button--outline,
+[data-color-mode='dark'] .stalk-button--ghost {
+  color: #f6f7f9;
+}

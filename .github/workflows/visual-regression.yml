@@ -1,0 +1,35 @@
+name: Visual Regression
+
+on:
+  pull_request:
+    paths:
+      - 'apps/storybook/**'
+      - 'packages/components/**'
+      - 'packages/preset/**'
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  lost-pixel:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: '.nvmrc'
+          cache: 'pnpm'
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm --filter @stalk-ui/storybook build
+      - run: pnpm exec lost-pixel
+      - if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: lost-pixel-diff
+          path: |
+            .lostpixel/**
+            apps/storybook/.lost-pixel/**

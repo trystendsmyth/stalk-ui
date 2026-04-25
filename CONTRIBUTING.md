@@ -75,9 +75,9 @@ Stalk UI uses Lost Pixel in OSS mode. Baseline screenshots live in `apps/storybo
 ### When You Intentionally Change Appearance
 
 1. Make your code change.
-2. Run `pnpm lost-pixel:local`.
+2. Run `pnpm lost-pixel`.
 3. Review PNGs in `apps/storybook/.lost-pixel/difference/`.
-4. Run `pnpm lost-pixel:update`.
+4. Copy reviewed `current/*.png` files into `apps/storybook/.lost-pixel/baseline/`.
 5. Commit code and updated baseline PNGs.
 6. Mention in the PR description that baselines changed and why.
 
@@ -91,6 +91,10 @@ Stalk UI uses Lost Pixel in OSS mode. Baseline screenshots live in `apps/storybo
 ### Seeding Initial Baselines
 
 Let CI fail once for the first baseline of a component, download the artifact, and copy `current/*.png` into `apps/storybook/.lost-pixel/baseline/`. Do not create first baselines locally if CI runs on Ubuntu.
+
+## Required Status Checks
+
+Branch protection should require `lint`, `typecheck`, `format:check`, `syncpack:check`, `changeset-check`, `build`, `test`, `size-limit`, `verify-tree-shaking`, `registry-json-drift`, `i18n-exports-drift`, `preset-css-drift`, `docs-generation-drift`, `integration-next`, `integration-vite`, `integration-shadcn`, `a11y`, `pa11y-docs`, `lost-pixel`, `dependency-review`, and `codeql`.
 
 ## Maintaining shadcn Compatibility
 

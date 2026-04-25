@@ -1,3 +1,6 @@
+import { RootProvider } from 'fumadocs-ui/provider'
+import 'fumadocs-ui/style.css'
+
 import type { Metadata } from 'next'
 import type { ReactNode } from 'react'
 
@@ -15,7 +18,9 @@ interface RootLayoutProps {
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <RootProvider>{children}</RootProvider>
+      </body>
     </html>
   )
 }

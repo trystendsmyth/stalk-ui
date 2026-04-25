@@ -1,0 +1,11 @@
+{
+  "defaults": {
+    "timeout": 30000
+  },
+  "urls": [
+    "http://127.0.0.1:3000/en",
+    "http://127.0.0.1:3000/en/docs",
+    "http://127.0.0.1:3000/en/docs/getting-started/installation",
+    "http://127.0.0.1:3000/en/components/button"
+  ]
+}

@@ -4,5 +4,10 @@
     "noEmit": true,
     "types": ["node"]
   },
-  "include": [".size-limit-fixtures/**/*.ts", "registry/**/*.ts", "scripts/**/*.ts"]
+  "include": [
+    ".size-limit-fixtures/**/*.ts",
+    "lostpixel.config.ts",
+    "registry/**/*.ts",
+    "scripts/**/*.ts"
+  ]
 }
