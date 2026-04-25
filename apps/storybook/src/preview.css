@@ -107,3 +107,45 @@
   background: #18181b;
   color: #f6f7f9;
 }
+
+.stalk-textarea {
+  width: 100%;
+  min-width: 0;
+  border: 1px solid #d4d4d8;
+  border-radius: 0.5rem;
+  background: #fff;
+  color: #18181b;
+  line-height: 1.5;
+  resize: vertical;
+}
+
+.stalk-textarea:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+  resize: none;
+}
+
+.stalk-textarea--sm {
+  min-height: 5rem;
+  padding: 0.5rem 0.75rem;
+}
+
+.stalk-textarea--md {
+  min-height: 6rem;
+  padding: 0.75rem 1rem;
+}
+
+.stalk-textarea--lg {
+  min-height: 8rem;
+  padding: 1rem 1.25rem;
+}
+
+.stalk-textarea--invalid {
+  border-color: #dc2626;
+}
+
+[data-color-mode='dark'] .stalk-textarea {
+  border-color: #3f3f46;
+  background: #18181b;
+  color: #f6f7f9;
+}

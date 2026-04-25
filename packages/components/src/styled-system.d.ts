@@ -12,4 +12,11 @@ declare module 'styled-system/recipes' {
   }
 
   export const input: (options?: InputRecipeOptions) => string
+
+  interface TextareaRecipeOptions {
+    invalid?: boolean
+    size?: 'sm' | 'md' | 'lg'
+  }
+
+  export const textarea: (options?: TextareaRecipeOptions) => string
 }

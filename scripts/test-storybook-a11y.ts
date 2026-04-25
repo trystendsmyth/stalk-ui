@@ -22,6 +22,10 @@ const requiredStories = [
   'components-input--states',
   'components-input--rtl',
   'components-input--dark-mode',
+  'components-textarea--default',
+  'components-textarea--states',
+  'components-textarea--rtl',
+  'components-textarea--dark-mode',
 ]
 
 for (const storyId of requiredStories) {

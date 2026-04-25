@@ -17,6 +17,14 @@
     "shadcn/input": {
       "path": "/r/shadcn/input.json",
       "sha256": "458957e0616e16fbdd92e65a4f7e26edf60dbed38a9ddf88ad4406e25c66bedc"
+    },
+    "textarea": {
+      "path": "/r/textarea.json",
+      "sha256": "f2e0eb56acd801052c16bc882523476b76dc43b6efe9b222c87c42382b0b6e46"
+    },
+    "shadcn/textarea": {
+      "path": "/r/shadcn/textarea.json",
+      "sha256": "cc81a1b7811a4a657b527f70edf54adfcf278b7b10f955571b3a6fb9c7a90d3d"
     }
   }
 }

@@ -22,6 +22,15 @@ const docs = {
       '<Input disabled aria-label="Disabled input" placeholder="Disabled" />',
     ],
   },
+  textarea: {
+    title: 'Textarea',
+    description: 'Collects multi-line text from a user.',
+    examples: [
+      '<Textarea aria-label="Message" placeholder="Write a message..." />',
+      '<Textarea invalid aria-label="Message" placeholder="Message is required" />',
+      '<Textarea disabled aria-label="Disabled textarea" placeholder="Disabled" />',
+    ],
+  },
 } as const
 
 const rootDirectory = process.cwd()
