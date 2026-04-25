@@ -1,13 +1,64 @@
 {
   "name": "@stalk-ui/preset",
   "version": "0.0.0",
-  "description": "PandaCSS preset for Stalk UI.",
+  "description": "PandaCSS preset for Stalk UI",
+  "keywords": [
+    "pandacss",
+    "preset",
+    "design-system",
+    "stalk-ui"
+  ],
+  "homepage": "https://stalk-ui.dev",
+  "bugs": "https://github.com/trystendsmyth/stalk-ui/issues",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/trystendsmyth/stalk-ui.git",
+    "directory": "packages/preset"
+  },
   "license": "MIT",
+  "author": "Tristan Smith trystendsmyth@gmail.com",
+  "sideEffects": false,
   "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    },
+    "./recipes": {
+      "types": "./dist/recipes/index.d.ts",
+      "import": "./dist/recipes/index.js",
+      "require": "./dist/recipes/index.cjs"
+    },
+    "./tokens": {
+      "types": "./dist/tokens/index.d.ts",
+      "import": "./dist/tokens/index.js",
+      "require": "./dist/tokens/index.cjs"
+    },
+    "./package.json": "./package.json"
+  },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
   "scripts": {
-    "build": "echo \"No preset build configured yet\"",
+    "build": "tsup",
     "lint": "echo \"No preset lint configured yet\"",
     "test": "echo \"No preset tests configured yet\"",
-    "typecheck": "echo \"No preset typecheck configured yet\""
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@pandacss/dev": "catalog:"
+  },
+  "peerDependencies": {
+    "@pandacss/dev": "catalog:"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
   }
 }

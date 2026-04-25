@@ -5,6 +5,7 @@
 **/storybook-static
 **/.turbo
 **/coverage
+packages/preset/__snapshots__
 pnpm-lock.yaml
 CHANGELOG.md
 .changeset/*.md

@@ -10,6 +10,7 @@
     "changeset": "changeset",
     "changeset:publish": "turbo run build && changeset publish",
     "changeset:version": "changeset version",
+    "check-exports": "echo \"No package export checks configured yet\"",
     "clean": "turbo run clean && rm -rf node_modules .turbo",
     "format": "prettier --write . --cache",
     "format:check": "prettier --check . --cache",
@@ -19,7 +20,8 @@
     "syncpack:check": "syncpack lint",
     "syncpack:fix": "syncpack fix",
     "test": "turbo run test",
-    "typecheck": "turbo run typecheck"
+    "typecheck": "turbo run typecheck",
+    "verify-preset": "tsx scripts/verify-preset.ts"
   },
   "lint-staged": {
     "*.{ts,tsx,js,jsx,mjs,cjs}": [
@@ -41,6 +43,8 @@
     "@commitlint/config-conventional": "^20.5.0",
     "@eslint/js": "^9",
     "@next/eslint-plugin-next": "15",
+    "@pandacss/dev": "catalog:",
+    "@pandacss/preset-base": "1.9.1",
     "@types/node": "^24.12.2",
     "eslint": "^9",
     "eslint-config-prettier": "^10.1.8",
@@ -56,6 +60,7 @@
     "prettier-plugin-packagejson": "^3.0.2",
     "size-limit": "^12.1.0",
     "syncpack": "^14.3.0",
+    "tsup": "^8.5.1",
     "tsx": "^4.21.0",
     "turbo": "^2.9.6",
     "typescript": "catalog:",
