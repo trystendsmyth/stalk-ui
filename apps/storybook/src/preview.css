@@ -68,3 +68,42 @@
 [data-color-mode='dark'] .stalk-button--ghost {
   color: #f6f7f9;
 }
+
+.stalk-input {
+  width: 100%;
+  border: 1px solid #d4d4d8;
+  border-radius: 0.5rem;
+  background: #fff;
+  color: #18181b;
+}
+
+.stalk-input:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+.stalk-input--sm {
+  min-height: 2rem;
+  padding-inline: 0.75rem;
+}
+
+.stalk-input--md {
+  min-height: 2.5rem;
+  padding-inline: 1rem;
+}
+
+.stalk-input--lg {
+  font-size: 1rem;
+  min-height: 3rem;
+  padding-inline: 1.25rem;
+}
+
+.stalk-input--invalid {
+  border-color: #dc2626;
+}
+
+[data-color-mode='dark'] .stalk-input {
+  border-color: #3f3f46;
+  background: #18181b;
+  color: #f6f7f9;
+}

@@ -5,4 +5,11 @@ declare module 'styled-system/recipes' {
   }
 
   export const button: (options?: ButtonRecipeOptions) => string
+
+  interface InputRecipeOptions {
+    invalid?: boolean
+    size?: 'sm' | 'md' | 'lg'
+  }
+
+  export const input: (options?: InputRecipeOptions) => string
 }

@@ -52,6 +52,7 @@ export const gettingStartedPages = [
 ] satisfies GettingStartedPage[]
 
 const contentDirectory = join(process.cwd(), 'content/components')
+const componentSlugs = ['button', 'input'] as const
 
 const frontmatterValue = (source: string, key: string) => {
   const match = new RegExp(`^${key}:\\s*(.+)$`, 'm').exec(source)
@@ -68,20 +69,19 @@ const registryLines = (source: string) =>
     .map((line) => line.slice(2))
 
 export const getComponentDocs = () => {
-  const slug = 'button'
-  const source = readFileSync(join(contentDirectory, `${slug}.mdx`), 'utf8')
-  const blocks = fencedBlocks(source)
+  return componentSlugs.map((slug) => {
+    const source = readFileSync(join(contentDirectory, `${slug}.mdx`), 'utf8')
+    const blocks = fencedBlocks(source)
 
-  return [
-    {
+    return {
       slug,
       title: frontmatterValue(source, 'title'),
       description: frontmatterValue(source, 'description'),
       installCommand: blocks[0] ?? '',
       examples: blocks.slice(1),
       registry: registryLines(source),
-    },
-  ] satisfies ComponentDoc[]
+    }
+  }) satisfies ComponentDoc[]
 }
 
 export const getComponentDoc = (slug: string) => getComponentDocs().find((doc) => doc.slug === slug)

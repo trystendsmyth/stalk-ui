@@ -18,6 +18,10 @@ const requiredStories = [
   'components-button--variants',
   'components-button--rtl',
   'components-button--dark-mode',
+  'components-input--default',
+  'components-input--states',
+  'components-input--rtl',
+  'components-input--dark-mode',
 ]
 
 for (const storyId of requiredStories) {

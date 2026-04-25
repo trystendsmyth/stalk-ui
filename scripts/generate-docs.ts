@@ -13,6 +13,15 @@ const docs = {
       '<Button loading>Saving</Button>',
     ],
   },
+  input: {
+    title: 'Input',
+    description: 'Collects short-form text from a user.',
+    examples: [
+      '<Input aria-label="Email" placeholder="hello@stalk-ui.com" />',
+      '<Input invalid aria-label="Email" placeholder="Invalid email" />',
+      '<Input disabled aria-label="Disabled input" placeholder="Disabled" />',
+    ],
+  },
 } as const
 
 const rootDirectory = process.cwd()
@@ -65,4 +74,6 @@ ${example}
   writeFileSync(path, content)
 }
 
-writeGeneratedDoc('button')
+for (const name of Object.keys(docs) as (keyof typeof docs)[]) {
+  writeGeneratedDoc(name)
+}
