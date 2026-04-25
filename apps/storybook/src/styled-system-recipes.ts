@@ -34,6 +34,14 @@ export const dialog = () => ({
   title: 'stalk-dialog__title',
 })
 
+export const dropdownMenu = () => ({
+  content: 'stalk-dropdown-menu__content',
+  item: 'stalk-dropdown-menu__item',
+  label: 'stalk-dropdown-menu__label',
+  separator: 'stalk-dropdown-menu__separator',
+  shortcut: 'stalk-dropdown-menu__shortcut',
+})
+
 interface InputRecipeOptions {
   invalid?: boolean
   size?: 'sm' | 'md' | 'lg'

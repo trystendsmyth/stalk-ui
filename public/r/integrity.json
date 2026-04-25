@@ -42,6 +42,14 @@
       "path": "/r/shadcn/dialog.json",
       "sha256": "0143444de35fed2efee5b58f6ae3066671693bb97028275b54eece85630a4902"
     },
+    "dropdown-menu": {
+      "path": "/r/dropdown-menu.json",
+      "sha256": "d6bac8d08dc44b6fe1404f5a5ce7377544484eb70f7fe39e94b612fd3dc28e51"
+    },
+    "shadcn/dropdown-menu": {
+      "path": "/r/shadcn/dropdown-menu.json",
+      "sha256": "4e76ccb85f43e9161a7f2ff5cee107f3d52f415267ef50dc266e182cc4689e2e"
+    },
     "label": {
       "path": "/r/label.json",
       "sha256": "6ab03ecffba787fc3a67181863635a9219b4f7ac3f3c84c5eb815d92d2434ac5"

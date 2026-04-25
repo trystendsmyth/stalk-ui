@@ -32,6 +32,16 @@ declare module 'styled-system/recipes' {
 
   export const dialog: () => DialogSlotClasses
 
+  interface DropdownMenuSlotClasses {
+    content: string
+    item: string
+    label: string
+    separator: string
+    shortcut: string
+  }
+
+  export const dropdownMenu: () => DropdownMenuSlotClasses
+
   interface InputRecipeOptions {
     invalid?: boolean
     size?: 'sm' | 'md' | 'lg'

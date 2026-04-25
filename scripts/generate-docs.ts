@@ -42,6 +42,15 @@ const docs = {
       '<Dialog.Footer><Dialog.Close>Cancel</Dialog.Close></Dialog.Footer>',
     ],
   },
+  'dropdown-menu': {
+    title: 'DropdownMenu',
+    description: 'Displays a keyboard-accessible menu of actions from a trigger.',
+    examples: [
+      '<DropdownMenu.Root><DropdownMenu.Trigger>Open</DropdownMenu.Trigger><DropdownMenu.Content><DropdownMenu.Item>Edit</DropdownMenu.Item></DropdownMenu.Content></DropdownMenu.Root>',
+      '<DropdownMenu.Label>Project</DropdownMenu.Label><DropdownMenu.Separator />',
+      '<DropdownMenu.Item>Rename<DropdownMenu.Shortcut>⌘R</DropdownMenu.Shortcut></DropdownMenu.Item>',
+    ],
+  },
   input: {
     title: 'Input',
     description: 'Collects short-form text from a user.',

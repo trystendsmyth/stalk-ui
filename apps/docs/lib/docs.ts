@@ -57,6 +57,7 @@ const componentSlugs = [
   'button',
   'checkbox',
   'dialog',
+  'dropdown-menu',
   'input',
   'label',
   'radio',
