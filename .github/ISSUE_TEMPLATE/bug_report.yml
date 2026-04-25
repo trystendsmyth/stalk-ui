@@ -1,0 +1,35 @@
+name: Bug report
+description: Report a reproducible Stalk UI bug
+title: 'fix: '
+labels: ['bug']
+body:
+  - type: textarea
+    id: summary
+    attributes:
+      label: Summary
+      description: What happened?
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Reproduction
+      description: Provide steps, a minimal repo, or a failing test.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Version
+      description: Package or registry version, if known.
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: Node, pnpm, framework, browser, and OS versions.

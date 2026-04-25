@@ -1,0 +1,41 @@
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+    open-pull-requests-limit: 5
+    ignore:
+      - dependency-name: '@pandacss/dev'
+        versions: ['1.10.x', '1.11.x', '>=1.10.0']
+      - dependency-name: '@pandacss/preset-base'
+        versions: ['>=1.10.0']
+      - dependency-name: '@pandacss/preset-panda'
+        versions: ['>=1.10.0']
+    groups:
+      react:
+        patterns: ['react', 'react-dom', '@types/react*']
+      radix:
+        patterns: ['@radix-ui/*']
+      base-ui:
+        patterns: ['@base-ui-components/*']
+      panda:
+        patterns: ['@pandacss/*']
+      storybook:
+        patterns: ['storybook', '@storybook/*']
+      testing:
+        patterns: ['vitest', '@testing-library/*', 'vitest-axe']
+      dev-dependencies:
+        dependency-type: development
+    commit-message:
+      prefix: chore
+      prefix-development: chore
+      include: scope
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: monthly
+    commit-message:
+      prefix: ci
