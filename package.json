@@ -11,11 +11,41 @@
     "format": "prettier --write . --cache",
     "format:check": "prettier --check . --cache",
     "lint": "eslint . --cache",
+    "prepare": "husky",
     "test": "turbo run test",
     "typecheck": "turbo run typecheck"
   },
+  "lint-staged": {
+    "*.{ts,tsx,js,jsx,mjs,cjs}": [
+      "eslint --cache --fix",
+      "prettier --write"
+    ],
+    "*.{json,md,mdx,yml,yaml}": [
+      "prettier --write"
+    ],
+    "package.json": [
+      "prettier --write --plugin prettier-plugin-packagejson"
+    ]
+  },
   "devDependencies": {
-    "turbo": "^2.9.6"
+    "@commitlint/cli": "^20.5.0",
+    "@commitlint/config-conventional": "^20.5.0",
+    "@eslint/js": "^9",
+    "eslint": "^9",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-import": "^2.32.0",
+    "eslint-plugin-jsx-a11y": "^6.10.2",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^7.1.1",
+    "eslint-plugin-storybook": "^10.3.5",
+    "eslint-plugin-unicorn": "^64.0.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.4.0",
+    "prettier": "^3.8.3",
+    "prettier-plugin-packagejson": "^3.0.2",
+    "turbo": "^2.9.6",
+    "typescript": "catalog:",
+    "typescript-eslint": "^8.59.0"
   },
   "packageManager": "pnpm@10.0.0",
   "engines": {
