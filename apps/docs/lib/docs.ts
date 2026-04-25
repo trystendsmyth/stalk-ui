@@ -56,6 +56,7 @@ const componentSlugs = [
   'button',
   'checkbox',
   'input',
+  'label',
   'radio',
   'select',
   'switch',

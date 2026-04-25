@@ -20,6 +20,13 @@ declare module 'styled-system/recipes' {
 
   export const input: (options?: InputRecipeOptions) => string
 
+  interface LabelRecipeOptions {
+    required?: boolean
+    size?: 'sm' | 'md' | 'lg'
+  }
+
+  export const label: (options?: LabelRecipeOptions) => string
+
   interface RadioRecipeOptions {
     invalid?: boolean
     size?: 'sm' | 'md' | 'lg'

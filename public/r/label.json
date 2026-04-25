@@ -1,0 +1,28 @@
+{
+  "$schema": "https://stalk-ui.com/schema/v1/registry-item.json",
+  "name": "label",
+  "type": "registry:ui",
+  "dependencies": ["@stalk-ui/preset"],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "src/components/ui/label.tsx",
+      "type": "registry:ui",
+      "content": "import { forwardRef } from 'react'\nimport { label as labelRecipe } from 'styled-system/recipes'\n\nimport type { LabelHTMLAttributes } from 'react'\n\nexport type LabelSize = 'sm' | 'md' | 'lg'\n\nexport interface LabelProps extends LabelHTMLAttributes<HTMLLabelElement> {\n  required?: boolean\n  size?: LabelSize\n}\n\nconst joinClassNames = (...classNames: (string | undefined)[]) =>\n  classNames\n    .filter((className): className is string => className !== undefined && className.length > 0)\n    .join(' ')\n\nexport const Label = forwardRef<HTMLLabelElement, LabelProps>(\n  ({ children, className, required = false, size = 'md', ...props }, ref) => {\n    return (\n      <label\n        ref={ref}\n        className={joinClassNames(labelRecipe({ required, size }), className)}\n        data-required={required ? '' : undefined}\n        {...props}\n      >\n        {children}\n      </label>\n    )\n  },\n)\n\nLabel.displayName = 'Label'\n"
+    }
+  ],
+  "stalk": {
+    "schemaVersion": "1.0",
+    "preset": {
+      "semanticTokens": {},
+      "recipes": ["label"]
+    },
+    "packageDependencies": {
+      "preset": "@stalk-ui/preset"
+    },
+    "pandaCodegen": true,
+    "importAliases": {
+      "styledSystem": "styled-system"
+    }
+  }
+}

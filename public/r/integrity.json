@@ -26,6 +26,14 @@
       "path": "/r/shadcn/input.json",
       "sha256": "458957e0616e16fbdd92e65a4f7e26edf60dbed38a9ddf88ad4406e25c66bedc"
     },
+    "label": {
+      "path": "/r/label.json",
+      "sha256": "6ab03ecffba787fc3a67181863635a9219b4f7ac3f3c84c5eb815d92d2434ac5"
+    },
+    "shadcn/label": {
+      "path": "/r/shadcn/label.json",
+      "sha256": "ec43a003038333e88e0332c226bdb4da2b44c973289723762544675dab3a860f"
+    },
     "radio": {
       "path": "/r/radio.json",
       "sha256": "e4ec889e981218043b46b35f4a100a1f0cd9d30e45b92e9b6520cdecddcdf23e"

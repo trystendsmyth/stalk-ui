@@ -33,6 +33,15 @@ const docs = {
       '<Input disabled aria-label="Disabled input" placeholder="Disabled" />',
     ],
   },
+  label: {
+    title: 'Label',
+    description: 'Associates text with a form control.',
+    examples: [
+      '<Label htmlFor="email">Email</Label>',
+      '<Label required htmlFor="name">Name</Label>',
+      '<Label size="lg">Large label</Label>',
+    ],
+  },
   radio: {
     title: 'Radio',
     description: 'Selects one option from a related set of choices.',

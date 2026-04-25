@@ -272,6 +272,33 @@
   color: #a1a1aa;
 }
 
+.stalk-label {
+  color: #18181b;
+  font-weight: 500;
+  line-height: 1.25;
+}
+
+.stalk-label--sm {
+  font-size: 0.75rem;
+}
+
+.stalk-label--md {
+  font-size: 0.875rem;
+}
+
+.stalk-label--lg {
+  font-size: 1rem;
+}
+
+.stalk-label--required::after {
+  color: #dc2626;
+  content: ' *';
+}
+
+[data-color-mode='dark'] .stalk-label {
+  color: #f6f7f9;
+}
+
 .stalk-input {
   width: 100%;
   border: 1px solid #d4d4d8;

@@ -26,6 +26,16 @@ export const input = ({ invalid = false, size = 'md' }: InputRecipeOptions = {})
     .filter(Boolean)
     .join(' ')
 
+interface LabelRecipeOptions {
+  required?: boolean
+  size?: 'sm' | 'md' | 'lg'
+}
+
+export const label = ({ required = false, size = 'md' }: LabelRecipeOptions = {}) =>
+  ['stalk-label', `stalk-label--${size}`, required ? 'stalk-label--required' : undefined]
+    .filter(Boolean)
+    .join(' ')
+
 interface RadioRecipeOptions {
   invalid?: boolean
   size?: 'sm' | 'md' | 'lg'
