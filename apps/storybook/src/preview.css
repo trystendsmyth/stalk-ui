@@ -129,6 +129,66 @@
   color: #a1a1aa;
 }
 
+.stalk-radio-field {
+  display: inline-flex;
+  align-items: flex-start;
+  gap: 0.625rem;
+  color: #18181b;
+  font:
+    500 0.875rem/1.4 system-ui,
+    sans-serif;
+}
+
+.stalk-radio {
+  border: 1px solid #d4d4d8;
+  border-radius: 9999px;
+  accent-color: #2563eb;
+  cursor: pointer;
+}
+
+.stalk-radio:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+.stalk-radio--sm {
+  width: 0.875rem;
+  height: 0.875rem;
+}
+
+.stalk-radio--md {
+  width: 1rem;
+  height: 1rem;
+}
+
+.stalk-radio--lg {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.stalk-radio--invalid {
+  outline: 2px solid #fecaca;
+  border-color: #dc2626;
+}
+
+.stalk-radio-field__content {
+  display: grid;
+  gap: 0.125rem;
+}
+
+.stalk-radio-field__description {
+  color: #52525b;
+  font-weight: 400;
+}
+
+[data-color-mode='dark'] .stalk-radio-field {
+  color: #f6f7f9;
+}
+
+[data-color-mode='dark'] .stalk-radio-field__description {
+  color: #a1a1aa;
+}
+
 .stalk-input {
   width: 100%;
   border: 1px solid #d4d4d8;

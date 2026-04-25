@@ -33,6 +33,15 @@ const docs = {
       '<Input disabled aria-label="Disabled input" placeholder="Disabled" />',
     ],
   },
+  radio: {
+    title: 'Radio',
+    description: 'Selects one option from a related set of choices.',
+    examples: [
+      '<Radio label="Basic" name="plan" value="basic" />',
+      '<Radio description="Best for small teams." id="plan-basic" label="Basic" name="plan" value="basic" />',
+      '<Radio invalid label="Required choice" name="plan" value="required" />',
+    ],
+  },
   select: {
     title: 'Select',
     description: 'Lets a user choose one option from a native menu.',

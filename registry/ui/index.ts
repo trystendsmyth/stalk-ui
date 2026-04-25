@@ -87,6 +87,34 @@ export const registryItems = [
   },
   {
     $schema: 'https://stalk-ui.com/schema/v1/registry-item.json',
+    name: 'radio',
+    type: 'registry:ui',
+    dependencies: ['@stalk-ui/preset'],
+    registryDependencies: [],
+    files: [
+      {
+        path: 'src/components/ui/radio.tsx',
+        type: 'registry:ui',
+        sourcePath: 'packages/components/src/radio.tsx',
+      },
+    ],
+    stalk: {
+      schemaVersion: '1.0',
+      preset: {
+        semanticTokens: {},
+        recipes: ['radio'],
+      },
+      packageDependencies: {
+        preset: '@stalk-ui/preset',
+      },
+      pandaCodegen: true,
+      importAliases: {
+        styledSystem: 'styled-system',
+      },
+    },
+  },
+  {
+    $schema: 'https://stalk-ui.com/schema/v1/registry-item.json',
     name: 'select',
     type: 'registry:ui',
     dependencies: ['@stalk-ui/preset'],

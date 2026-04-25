@@ -4,6 +4,7 @@ const components = [
   ['Button', 'packages/components/src/button.tsx'],
   ['Checkbox', 'packages/components/src/checkbox.tsx'],
   ['Input', 'packages/components/src/input.tsx'],
+  ['Radio', 'packages/components/src/radio.tsx'],
   ['Select', 'packages/components/src/select.tsx'],
   ['Textarea', 'packages/components/src/textarea.tsx'],
 ] as const
@@ -22,4 +23,6 @@ for (const [name, path] of components) {
   }
 }
 
-console.log('Tree-shaking invariants passed for Button, Checkbox, Input, Select, and Textarea.')
+console.log(
+  'Tree-shaking invariants passed for Button, Checkbox, Input, Radio, Select, and Textarea.',
+)
