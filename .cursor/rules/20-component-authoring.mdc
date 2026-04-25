@@ -1,0 +1,23 @@
+---
+description: Component authoring rules
+globs: ["packages/components/**/*.tsx", "registry/**/*.ts", "apps/storybook/**/*.tsx"]
+---
+
+Every component must:
+
+1. Live in `packages/components/src/<kebab-case-name>.tsx`.
+2. Have a matching manifest in `registry/ui/<kebab-case-name>.ts`.
+3. Export named React symbols and compose the public API via `Object.assign` dot notation.
+4. Have stories covering variants, states, RTL, and dark mode.
+5. Have tests covering axe, interactions, and screen reader labels.
+6. Support `asChild` where applicable through `@radix-ui/react-slot`.
+7. Forward refs via `React.forwardRef`.
+8. Accept `className` and compose through preset recipes.
+9. Include `displayName` for devtools.
+10. Stay fully typed. Do not use `any`.
+11. Declare `lucide-react` only when the manifest actually needs it.
+12. Keep user-facing strings localizable.
+13. Document any `stalk.preset` manifest extensions required by installation.
+14. Keep dot-notation namespaces tree-shakeable by building them from named exports.
+
+Naming: source and manifest files use kebab-case; React exports use PascalCase.

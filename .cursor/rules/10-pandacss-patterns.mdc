@@ -1,0 +1,13 @@
+---
+description: PandaCSS authoring conventions
+globs: ["packages/components/**/*.tsx", "registry/**/*.ts", "packages/preset/**/*.ts"]
+---
+
+- All recipes live in `packages/preset/src/recipes/` or `packages/preset/src/slot-recipes/`.
+- Components copied into consumer repos import recipes from `@stalk-ui/preset/recipes`.
+- Use recipes (`cva`) for variant-driven components.
+- Use slot recipes for compound components such as Dialog, Card, and Menu.
+- Use semantic tokens only, such as `bg.default`, `fg.muted`, and `accent.solid`.
+- Never hardcode colors or raw class strings.
+- Use logical properties for RTL, such as `marginInlineStart`, `paddingInlineEnd`, and `insetInlineStart`.
+- PandaCSS is pinned at 1.9.1. Do not upgrade to 1.10+ without explicit approval.

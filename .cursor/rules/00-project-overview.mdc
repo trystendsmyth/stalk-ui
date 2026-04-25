@@ -1,0 +1,25 @@
+---
+description: Stalk UI project context
+alwaysApply: true
+---
+
+Stalk UI is a PandaCSS-native component library distributed through `@stalk-ui/cli`, `@stalk-ui/preset`, published `@stalk-ui/i18n`, and static registry manifests under `public/r/`. The shadcn CLI path is secondary compatibility output, not the primary install path.
+
+Tech stack:
+
+- Node 24, pnpm 10, TypeScript 5.x strict mode
+- React 19
+- PandaCSS 1.9.1, pinned until explicitly approved otherwise
+- Storybook 10.3.x
+- Radix UI primary for v1 primitives
+- Lucide as a peer dependency
+
+Artifacts:
+
+- `@stalk-ui/cli`: install and management tool
+- `@stalk-ui/preset`: PandaCSS preset and theme factory
+- `@stalk-ui/i18n`: published locale/runtime support
+- `packages/components/`: private component source of truth
+- `public/r/*.json` and `public/r/shadcn/*.json`: generated registry manifests
+
+Accessibility is a blocking requirement enforced in lint, tests, stories, and CI.

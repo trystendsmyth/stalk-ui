@@ -1,0 +1,25 @@
+---
+description: Commit message format
+alwaysApply: true
+---
+
+Conventional Commits:
+
+```text
+<type>(<scope>): <subject>
+```
+
+Types: `feat`, `fix`, `docs`, `style`, `refactor`, `perf`, `test`, `build`, `ci`, `chore`, `revert`, `a11y`.
+
+Common scopes: `preset`, `cli`, `i18n`, `registry`, `docs`, `storybook`, `ci`, `deps`, `repo`.
+
+Subject: imperative, lowercase, no trailing period.
+
+Examples:
+
+```text
+feat(registry): add dialog component
+fix(preset): correct dark mode semantic tokens
+a11y(combobox): add aria-activedescendant for option focus
+chore(deps): bump radix-ui
+```

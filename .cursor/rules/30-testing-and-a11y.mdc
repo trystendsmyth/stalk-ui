@@ -1,0 +1,24 @@
+---
+description: Testing and accessibility conventions
+globs: ["**/*.test.{ts,tsx}", "**/*.stories.{ts,tsx}"]
+---
+
+Testing stack: Vitest, Testing Library, user-event, and vitest-axe.
+
+Required for every component:
+
+- Axe test covering default render and each variant.
+- Keyboard navigation test for applicable keys.
+- Screen reader label test for aria-label, aria-labelledby, or aria-describedby.
+- Focus management test where applicable.
+- Use user-event for interactions, never fireEvent.
+- Query by role, label, or text. Do not query by class name.
+
+Stories serve as integration tests through Storybook and the test runner.
+
+Accessibility gates block merges:
+
+- jsx-a11y strict rule violations
+- axe violations in unit tests
+- axe violations in Storybook test runner
+- pa11y-ci violations on the docs site
