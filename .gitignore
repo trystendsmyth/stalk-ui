@@ -1,0 +1,42 @@
+# Deps
+node_modules/
+.pnpm-store/
+
+# Build
+dist/
+build/
+.next/
+out/
+storybook-static/
+styled-system/
+.turbo/
+*.tsbuildinfo
+
+# Env
+.env
+.env.local
+.env.*.local
+
+# OS / Editor
+.DS_Store
+Thumbs.db
+*.swp
+
+# Logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+
+# Testing
+coverage/
+.vitest-cache/
+apps/storybook/.lost-pixel/current/
+apps/storybook/.lost-pixel/difference/
+
+# IDE
+.idea/
+*.sublime-*
+
+# Misc
+.eslintcache
+.prettiercache
