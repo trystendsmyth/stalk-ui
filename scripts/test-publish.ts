@@ -8,11 +8,21 @@ const tempDirectory = await mkdtemp(join(tmpdir(), 'stalk-publish-test-'))
 const npmUserConfig = join(tempDirectory, '.npmrc')
 const testEnvironment = {
   ...process.env,
+  NPM_CONFIG_STRICT_PEER_DEPENDENCIES: 'true',
   NPM_CONFIG_USERCONFIG: npmUserConfig,
 }
 
+const exec = (command: string, args: string[], cwd = tempDirectory) =>
+  execFileSync(command, args, {
+    cwd,
+    env: testEnvironment,
+    stdio: 'inherit',
+  })
+
 await rm('.verdaccio/storage', { force: true, recursive: true })
 await rm('.verdaccio/htpasswd', { force: true })
+await rm('storage', { force: true, recursive: true })
+await rm('htpasswd', { force: true })
 
 const verdaccio = spawn('pnpm', ['dlx', 'verdaccio', '--config', '.verdaccio/config.yaml'], {
   stdio: 'pipe',
@@ -80,27 +90,53 @@ try {
   )
   execFileSync(
     'pnpm',
-    ['add', '@stalk-ui/cli', '@stalk-ui/preset', '@stalk-ui/i18n', '--registry', registry],
+    [
+      'add',
+      '@pandacss/dev@1.9.1',
+      '@stalk-ui/cli',
+      '@stalk-ui/preset',
+      '@stalk-ui/i18n',
+      'react',
+      '--registry',
+      registry,
+      '--strict-peer-dependencies',
+    ],
     {
       cwd: tempDirectory,
       env: testEnvironment,
       stdio: 'inherit',
     },
   )
-  execFileSync('pnpm', ['exec', 'stalk-ui', '--version'], {
-    cwd: tempDirectory,
-    env: testEnvironment,
-    stdio: 'inherit',
-  })
+  exec('pnpm', ['exec', 'which', 'stalk-ui'])
+  exec('pnpm', ['exec', 'stalk-ui', '--version'])
   execFileSync(
     'node',
     [
       '--input-type=module',
       '-e',
-      "await import('@stalk-ui/i18n'); await import('@stalk-ui/i18n/locales/en'); await import('@stalk-ui/preset');",
+      "await import('@stalk-ui/i18n'); await import('@stalk-ui/i18n/locales/en'); await import('@stalk-ui/preset'); await import('@stalk-ui/preset/recipes');",
     ],
     { cwd: tempDirectory, env: testEnvironment, stdio: 'inherit' },
   )
+  try {
+    execFileSync(
+      'node',
+      ['--input-type=module', '-e', "await import('@stalk-ui/i18n/locales/nonexistent');"],
+      {
+        cwd: tempDirectory,
+        env: testEnvironment,
+        stdio: 'pipe',
+      },
+    )
+    throw new Error('Nonexistent locale import unexpectedly resolved.')
+  } catch (error) {
+    if (
+      error instanceof Error &&
+      error.message === 'Nonexistent locale import unexpectedly resolved.'
+    ) {
+      throw error
+    }
+  }
 } finally {
   verdaccio.kill('SIGTERM')
   await rm(tempDirectory, { force: true, recursive: true })

@@ -94,7 +94,25 @@ Let CI fail once for the first baseline of a component, download the artifact, a
 
 ## Required Status Checks
 
-Branch protection should require `lint`, `typecheck`, `format:check`, `syncpack:check`, `changeset-check`, `build`, `test`, `size-limit`, `verify-tree-shaking`, `registry-json-drift`, `i18n-exports-drift`, `preset-css-drift`, `docs-generation-drift`, `integration-next`, `integration-vite`, `integration-shadcn`, `a11y`, `pa11y-docs`, `lost-pixel`, `dependency-review`, and `codeql`.
+Branch protection should require `lint`, `typecheck`, `format:check`, `syncpack:check`, `changeset-check`, `build`, `test`, `size-limit`, `verify-tree-shaking`, `registry-json-drift`, `i18n-exports-drift`, `preset-css-drift`, `docs-generation-drift`, `integration-next`, `integration-vite`, `integration-shadcn`, `publish-dry-run`, `shadcn-compat`, `a11y`, `pa11y-docs`, `lost-pixel`, `dependency-review`, and `codeql`.
+
+## Before Releasing
+
+Run the publish verification smoke test before preparing a release candidate:
+
+```bash
+pnpm test:publish
+```
+
+The test starts Verdaccio on port 4873, publishes `@stalk-ui/cli`, `@stalk-ui/preset`, and `@stalk-ui/i18n`, installs them into a temporary project with required peers, verifies the `stalk-ui` binary resolves, checks public import paths, and confirms typoed locale imports fail.
+
+Run shadcn compatibility verification for registry changes:
+
+```bash
+pnpm test:shadcn-compat
+```
+
+The compatibility test serves the generated registry on port 4874 and uses the latest shadcn CLI against the shadcn-compatible button manifest.
 
 ## Maintaining shadcn Compatibility
 

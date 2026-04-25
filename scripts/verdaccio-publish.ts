@@ -3,11 +3,7 @@ import { readFileSync, writeFileSync } from 'node:fs'
 import { join } from 'node:path'
 
 const registry = process.env.STALK_VERDACCIO_REGISTRY ?? 'http://localhost:4873'
-const packages = [
-  ['@stalk-ui/preset', 'packages/preset/package.json'],
-  ['@stalk-ui/i18n', 'packages/i18n/package.json'],
-  ['@stalk-ui/cli', 'packages/cli/package.json'],
-] as const
+const packageDirectories = ['packages/preset', 'packages/i18n', 'packages/cli'] as const
 const publishEnvironment = {
   ...process.env,
   NPM_CONFIG_PROVENANCE: 'false',
@@ -15,8 +11,9 @@ const publishEnvironment = {
 
 execFileSync('pnpm', ['build'], { stdio: 'inherit' })
 
-for (const [packageName, packageJsonPath] of packages) {
-  const absolutePackageJsonPath = join(process.cwd(), packageJsonPath)
+for (const packageDirectory of packageDirectories) {
+  const absolutePackageDirectory = join(process.cwd(), packageDirectory)
+  const absolutePackageJsonPath = join(absolutePackageDirectory, 'package.json')
   const originalPackageJson = readFileSync(absolutePackageJsonPath, 'utf8')
 
   try {
@@ -31,17 +28,8 @@ for (const [packageName, packageJsonPath] of packages) {
 
     execFileSync(
       'pnpm',
-      [
-        '--filter',
-        packageName,
-        'publish',
-        '--registry',
-        registry,
-        '--no-git-checks',
-        '--access',
-        'public',
-      ],
-      { env: publishEnvironment, stdio: 'inherit' },
+      ['publish', '--registry', registry, '--no-git-checks', '--access', 'public'],
+      { cwd: absolutePackageDirectory, env: publishEnvironment, stdio: 'inherit' },
     )
   } finally {
     writeFileSync(absolutePackageJsonPath, originalPackageJson)

@@ -72,6 +72,8 @@ const createVerdaccioUser = async () => {
 
 await rm('.verdaccio/storage', { force: true, recursive: true })
 await rm('.verdaccio/htpasswd', { force: true })
+await rm('storage', { force: true, recursive: true })
+await rm('htpasswd', { force: true })
 execFileSync('pnpm', ['build:registry'], { stdio: 'inherit' })
 
 const verdaccio = spawn('pnpm', ['dlx', 'verdaccio', '--config', '.verdaccio/config.yaml'], {
