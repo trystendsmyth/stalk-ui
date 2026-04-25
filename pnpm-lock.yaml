@@ -119,6 +119,9 @@ importers:
       typescript-eslint:
         specifier: ^8.59.0
         version: 8.59.0(eslint@9.39.4(jiti@2.6.1))(typescript@5.9.3)
+      zod:
+        specifier: ^4.3.6
+        version: 4.3.6
 
   apps/docs:
     dependencies:
@@ -172,9 +175,36 @@ importers:
 
   packages/cli: {}
 
-  packages/components: {}
+  packages/components:
+    dependencies:
+      '@stalk-ui/i18n':
+        specifier: workspace:*
+        version: link:../i18n
+      '@stalk-ui/preset':
+        specifier: workspace:*
+        version: link:../preset
+    devDependencies:
+      '@types/react':
+        specifier: 'catalog:'
+        version: 19.2.14
+      '@types/react-dom':
+        specifier: 'catalog:'
+        version: 19.2.3(@types/react@19.2.14)
+      react:
+        specifier: 'catalog:'
+        version: 19.2.5
 
-  packages/i18n: {}
+  packages/i18n:
+    devDependencies:
+      '@types/react':
+        specifier: 'catalog:'
+        version: 19.2.14
+      '@types/react-dom':
+        specifier: 'catalog:'
+        version: 19.2.3(@types/react@19.2.14)
+      react:
+        specifier: 'catalog:'
+        version: 19.2.5
 
   packages/preset:
     devDependencies:

@@ -9,6 +9,16 @@
     "build": "echo \"No components build configured yet\"",
     "lint": "echo \"No components lint configured yet\"",
     "test": "echo \"No components tests configured yet\"",
-    "typecheck": "echo \"No components typecheck configured yet\""
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@types/react": "catalog:",
+    "@types/react-dom": "catalog:",
+    "react": "catalog:"
+  },
+  "peerDependencies": {
+    "@stalk-ui/i18n": "workspace:*",
+    "@stalk-ui/preset": "workspace:*",
+    "react": "catalog:"
   }
 }

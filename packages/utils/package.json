@@ -9,6 +9,6 @@
     "build": "echo \"No utils build configured yet\"",
     "lint": "echo \"No utils lint configured yet\"",
     "test": "echo \"No utils tests configured yet\"",
-    "typecheck": "echo \"No utils typecheck configured yet\""
+    "typecheck": "tsc --noEmit"
   }
 }

@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://stalk-ui.dev/schema/v1/config.json",
+  "type": "object",
+  "required": ["$schema", "registries", "paths", "styledSystem"],
+  "properties": {
+    "$schema": {
+      "const": "https://stalk-ui.dev/schema/v1/config.json"
+    },
+    "registries": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string",
+        "format": "uri"
+      }
+    },
+    "paths": {
+      "type": "object",
+      "required": ["ui", "utils"],
+      "properties": {
+        "ui": {
+          "type": "string"
+        },
+        "utils": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "styledSystem": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": false
+}

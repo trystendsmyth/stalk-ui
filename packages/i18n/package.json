@@ -1,13 +1,63 @@
 {
   "name": "@stalk-ui/i18n",
   "version": "0.0.0",
-  "description": "Internationalization utilities for Stalk UI.",
+  "description": "Internationalization utilities for Stalk UI - provider, Intl wrappers, locale messages.",
+  "keywords": [
+    "i18n",
+    "react",
+    "intl",
+    "locale",
+    "stalk-ui"
+  ],
+  "homepage": "https://stalk-ui.dev",
+  "bugs": "https://github.com/trystendsmyth/stalk-ui/issues",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/trystendsmyth/stalk-ui.git",
+    "directory": "packages/i18n"
+  },
   "license": "MIT",
+  "author": "Tristan Smith trystendsmyth@gmail.com",
+  "sideEffects": false,
   "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    },
+    "./locales/*": {
+      "types": "./dist/locales/*.d.ts",
+      "import": "./dist/locales/*.js",
+      "require": "./dist/locales/*.cjs"
+    },
+    "./package.json": "./package.json"
+  },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
   "scripts": {
-    "build": "echo \"No i18n build configured yet\"",
+    "build": "tsup",
     "lint": "echo \"No i18n lint configured yet\"",
+    "prepack": "tsx ../../scripts/generate-i18n-exports.ts",
     "test": "echo \"No i18n tests configured yet\"",
-    "typecheck": "echo \"No i18n typecheck configured yet\""
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@types/react": "catalog:",
+    "@types/react-dom": "catalog:",
+    "react": "catalog:"
+  },
+  "peerDependencies": {
+    "react": "catalog:"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
   }
 }

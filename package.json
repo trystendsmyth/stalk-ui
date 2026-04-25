@@ -7,10 +7,12 @@
   "type": "module",
   "scripts": {
     "build": "turbo run build",
+    "build:registry": "tsx scripts/build-registry.ts",
     "changeset": "changeset",
     "changeset:publish": "turbo run build && changeset publish",
     "changeset:version": "changeset version",
-    "check-exports": "echo \"No package export checks configured yet\"",
+    "check-exports": "pnpm --filter @stalk-ui/i18n build && tsx scripts/check-exports.ts",
+    "check-i18n-exports": "tsx scripts/check-i18n-exports-drift.ts",
     "clean": "turbo run clean && rm -rf node_modules .turbo",
     "format": "prettier --write . --cache",
     "format:check": "prettier --check . --cache",
@@ -64,7 +66,8 @@
     "tsx": "^4.21.0",
     "turbo": "^2.9.6",
     "typescript": "catalog:",
-    "typescript-eslint": "^8.59.0"
+    "typescript-eslint": "^8.59.0",
+    "zod": "^4.3.6"
   },
   "packageManager": "pnpm@10.0.0",
   "engines": {

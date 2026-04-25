@@ -94,6 +94,18 @@ jobs:
       - run: pnpm install --frozen-lockfile
       - run: pnpm build
 
+  check-exports:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: '.nvmrc'
+          cache: 'pnpm'
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm check-exports
+
   preset-css-drift:
     runs-on: ubuntu-latest
     steps:
@@ -106,3 +118,28 @@ jobs:
       - run: pnpm install --frozen-lockfile
       - run: pnpm verify-preset
       - run: git diff --exit-code packages/preset/__snapshots__/
+
+  registry-json-drift:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: '.nvmrc'
+          cache: 'pnpm'
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm build:registry
+      - run: git diff --exit-code public/r public/_headers
+
+  i18n-exports-drift:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: '.nvmrc'
+          cache: 'pnpm'
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm check-i18n-exports
