@@ -1,0 +1,25 @@
+{
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "typescript.enablePromptUseWorkspaceTsdk": true,
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit",
+    "source.organizeImports": "never"
+  },
+  "eslint.useFlatConfig": true,
+  "eslint.workingDirectories": [{ "mode": "auto" }],
+  "files.associations": {
+    "*.mdx": "mdx"
+  },
+  "search.exclude": {
+    "**/styled-system": true,
+    "**/dist": true,
+    "**/.next": true,
+    "**/storybook-static": true,
+    "**/.turbo": true,
+    "**/coverage": true
+  },
+  "panda.tokens.preview": true,
+  "panda.color-hints.enabled": true
+}

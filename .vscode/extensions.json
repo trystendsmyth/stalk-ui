@@ -1,0 +1,16 @@
+{
+  "recommendations": [
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode",
+    "pandacss.panda-css-vscode",
+    "streetsidesoftware.code-spell-checker",
+    "editorconfig.editorconfig",
+    "unifiedjs.vscode-mdx",
+    "github.vscode-github-actions",
+    "yoavbls.pretty-ts-errors",
+    "usernamehw.errorlens",
+    "ms-playwright.playwright",
+    "deque-systems.vscode-axe-linter"
+  ],
+  "unwantedRecommendations": ["bradlc.vscode-tailwindcss"]
+}
