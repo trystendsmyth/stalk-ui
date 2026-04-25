@@ -11,6 +11,42 @@
   justify-content: center;
 }
 
+.stalk-badge {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 9999px;
+  font-weight: 600;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.stalk-badge--sm {
+  min-height: 1.25rem;
+  padding-inline: 0.5rem;
+  font-size: 0.75rem;
+}
+
+.stalk-badge--md {
+  min-height: 1.5rem;
+  padding-inline: 0.625rem;
+  font-size: 0.875rem;
+}
+
+.stalk-badge--solid {
+  background: #2563eb;
+  color: #fff;
+}
+
+.stalk-badge--subtle {
+  background: #dbeafe;
+  color: #1e40af;
+}
+
+.stalk-badge--outline {
+  border: 1px solid #d4d4d8;
+  color: #18181b;
+}
+
 .stalk-button:disabled {
   cursor: not-allowed;
   opacity: 0.55;
@@ -66,6 +102,10 @@
 
 [data-color-mode='dark'] .stalk-button--outline,
 [data-color-mode='dark'] .stalk-button--ghost {
+  color: #f6f7f9;
+}
+
+[data-color-mode='dark'] .stalk-badge--outline {
   color: #f6f7f9;
 }
 

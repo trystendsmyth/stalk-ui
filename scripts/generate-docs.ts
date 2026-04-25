@@ -6,6 +6,15 @@ import { format, resolveConfig } from 'prettier'
 import { registryItems } from '../registry/ui'
 
 const docs = {
+  badge: {
+    title: 'Badge',
+    description: 'Displays compact status or metadata.',
+    examples: [
+      '<Badge>Published</Badge>',
+      '<Badge variant="solid">Stable</Badge>',
+      '<Badge size="sm" variant="outline">Beta</Badge>',
+    ],
+  },
   button: {
     title: 'Button',
     description: 'Triggers an action or submits a form.',

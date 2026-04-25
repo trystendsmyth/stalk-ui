@@ -3,6 +3,34 @@ import type { RegistryItem } from '../schema'
 export const registryItems = [
   {
     $schema: 'https://stalk-ui.com/schema/v1/registry-item.json',
+    name: 'badge',
+    type: 'registry:ui',
+    dependencies: ['@stalk-ui/preset'],
+    registryDependencies: [],
+    files: [
+      {
+        path: 'src/components/ui/badge.tsx',
+        type: 'registry:ui',
+        sourcePath: 'packages/components/src/badge.tsx',
+      },
+    ],
+    stalk: {
+      schemaVersion: '1.0',
+      preset: {
+        semanticTokens: {},
+        recipes: ['badge'],
+      },
+      packageDependencies: {
+        preset: '@stalk-ui/preset',
+      },
+      pandaCodegen: true,
+      importAliases: {
+        styledSystem: 'styled-system',
+      },
+    },
+  },
+  {
+    $schema: 'https://stalk-ui.com/schema/v1/registry-item.json',
     name: 'button',
     type: 'registry:ui',
     dependencies: ['@stalk-ui/preset'],

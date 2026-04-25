@@ -53,6 +53,7 @@ export const gettingStartedPages = [
 
 const contentDirectory = join(process.cwd(), 'content/components')
 const componentSlugs = [
+  'badge',
   'button',
   'checkbox',
   'input',

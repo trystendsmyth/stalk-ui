@@ -1,3 +1,11 @@
+interface BadgeRecipeOptions {
+  size?: 'sm' | 'md'
+  variant?: 'solid' | 'subtle' | 'outline'
+}
+
+export const badge = ({ size = 'md', variant = 'subtle' }: BadgeRecipeOptions = {}) =>
+  `stalk-badge stalk-badge--${variant} stalk-badge--${size}`
+
 interface ButtonRecipeOptions {
   size?: 'sm' | 'md' | 'lg'
   variant?: 'solid' | 'outline' | 'ghost' | 'subtle'

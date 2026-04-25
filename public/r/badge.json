@@ -1,0 +1,28 @@
+{
+  "$schema": "https://stalk-ui.com/schema/v1/registry-item.json",
+  "name": "badge",
+  "type": "registry:ui",
+  "dependencies": ["@stalk-ui/preset"],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "src/components/ui/badge.tsx",
+      "type": "registry:ui",
+      "content": "import { forwardRef } from 'react'\nimport { badge as badgeRecipe } from 'styled-system/recipes'\n\nimport type { HTMLAttributes } from 'react'\n\nexport type BadgeSize = 'sm' | 'md'\nexport type BadgeVariant = 'solid' | 'subtle' | 'outline'\n\nexport interface BadgeProps extends HTMLAttributes<HTMLSpanElement> {\n  size?: BadgeSize\n  variant?: BadgeVariant\n}\n\nconst joinClassNames = (...classNames: (string | undefined)[]) =>\n  classNames\n    .filter((className): className is string => className !== undefined && className.length > 0)\n    .join(' ')\n\nexport const Badge = forwardRef<HTMLSpanElement, BadgeProps>(\n  ({ className, size = 'md', variant = 'subtle', ...props }, ref) => {\n    return (\n      <span\n        ref={ref}\n        className={joinClassNames(badgeRecipe({ size, variant }), className)}\n        {...props}\n      />\n    )\n  },\n)\n\nBadge.displayName = 'Badge'\n"
+    }
+  ],
+  "stalk": {
+    "schemaVersion": "1.0",
+    "preset": {
+      "semanticTokens": {},
+      "recipes": ["badge"]
+    },
+    "packageDependencies": {
+      "preset": "@stalk-ui/preset"
+    },
+    "pandaCodegen": true,
+    "importAliases": {
+      "styledSystem": "styled-system"
+    }
+  }
+}

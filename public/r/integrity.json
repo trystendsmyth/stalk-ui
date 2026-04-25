@@ -2,6 +2,14 @@
   "schemaVersion": "1.0",
   "generatedAt": "1970-01-01T00:00:00.000Z",
   "manifests": {
+    "badge": {
+      "path": "/r/badge.json",
+      "sha256": "2acb60abd7edc2458b191488a963888045d91a2088837c0f67accea851112367"
+    },
+    "shadcn/badge": {
+      "path": "/r/shadcn/badge.json",
+      "sha256": "2a0879b54893e014c2986f4f23fd1719e068c48ccd5283dd728237b4bdce5275"
+    },
     "button": {
       "path": "/r/button.json",
       "sha256": "5610bb63bdd6d7bdff5b0a96e30ae69b956a12ffcf24f17019514dbb80aa3d29"

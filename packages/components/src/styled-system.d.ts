@@ -1,4 +1,11 @@
 declare module 'styled-system/recipes' {
+  interface BadgeRecipeOptions {
+    size?: 'sm' | 'md'
+    variant?: 'solid' | 'subtle' | 'outline'
+  }
+
+  export const badge: (options?: BadgeRecipeOptions) => string
+
   interface ButtonRecipeOptions {
     size?: 'sm' | 'md' | 'lg'
     variant?: 'solid' | 'outline' | 'ghost' | 'subtle'
