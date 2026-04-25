@@ -1,0 +1,23 @@
+{
+  "name": "stalk-ui",
+  "version": "0.0.0",
+  "private": true,
+  "description": "A PandaCSS-native component library distributed through a first-party CLI, preset, and static registry manifests.",
+  "license": "MIT",
+  "type": "module",
+  "packageManager": "pnpm@10.0.0",
+  "engines": {
+    "node": ">=24.0.0",
+    "pnpm": ">=10.0.0"
+  },
+  "scripts": {
+    "build": "turbo run build",
+    "typecheck": "turbo run typecheck",
+    "lint": "turbo run lint",
+    "test": "turbo run test",
+    "clean": "turbo run clean && rm -rf node_modules .turbo"
+  },
+  "devDependencies": {
+    "turbo": "^2.9.6"
+  }
+}
