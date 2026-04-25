@@ -11,6 +11,7 @@ concurrency:
 
 permissions:
   contents: read
+  pull-requests: read
 
 env:
   TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
@@ -251,6 +252,30 @@ jobs:
           cache: 'pnpm'
       - run: pnpm install --frozen-lockfile
       - run: pnpm test:a11y:docs
+
+  shadcn-compat:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - id: changes
+        if: github.event_name == 'pull_request'
+        uses: dorny/paths-filter@v3
+        with:
+          filters: |
+            compat:
+              - 'registry/**'
+              - 'packages/components/**'
+      - uses: pnpm/action-setup@v4
+        if: github.event_name != 'pull_request' || steps.changes.outputs.compat == 'true'
+      - uses: actions/setup-node@v4
+        if: github.event_name != 'pull_request' || steps.changes.outputs.compat == 'true'
+        with:
+          node-version-file: '.nvmrc'
+          cache: 'pnpm'
+      - run: pnpm install --frozen-lockfile
+        if: github.event_name != 'pull_request' || steps.changes.outputs.compat == 'true'
+      - run: pnpm test:shadcn-compat
+        if: github.event_name != 'pull_request' || steps.changes.outputs.compat == 'true'
 
   publish-dry-run:
     runs-on: ubuntu-latest

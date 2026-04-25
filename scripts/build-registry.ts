@@ -17,6 +17,8 @@ const generatedAt = process.env.STALK_REGISTRY_GENERATED_AT ?? '1970-01-01T00:00
 
 const stableJson = (value: unknown) => `${JSON.stringify(value, null, 2)}\n`
 const sha256 = (value: string) => createHash('sha256').update(value).digest('hex')
+const shadcnCompatibilityHeader =
+  '// Stalk UI component - requires PandaCSS setup and @stalk-ui/preset.'
 
 const writeJson = async (path: string, value: unknown) => {
   mkdirSync(dirname(path), { recursive: true })
@@ -48,14 +50,23 @@ const toSerializableItem = (item: RegistryItem): RegistryItem => {
   }
 }
 
+const withShadcnCompatibilityHeader = (content: string) => {
+  const firstNewline = content.indexOf('\n')
+
+  if (firstNewline === -1) {
+    return `${shadcnCompatibilityHeader}\n${content}`
+  }
+
+  return `${content.slice(0, firstNewline + 1)}${shadcnCompatibilityHeader}\n${content.slice(
+    firstNewline + 1,
+  )}`
+}
+
 const toShadcnItem = (item: RegistryItem): RegistryItem => ({
   ...item,
   files: item.files.map((file) => ({
     ...file,
-    content:
-      file.content === undefined
-        ? undefined
-        : `/* Stalk UI component - requires PandaCSS setup and @stalk-ui/preset. */\n${file.content}`,
+    content: file.content === undefined ? undefined : withShadcnCompatibilityHeader(file.content),
   })),
 })
 
