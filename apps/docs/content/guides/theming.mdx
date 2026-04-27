@@ -1,0 +1,54 @@
+---
+title: Theming
+description: How Stalk UI's themes work and how to apply them.
+---
+
+Stalk UI ships with two themes:
+
+- **neutral** (default): applied automatically. No configuration is required.
+- **rainbow**: applied with `data-panda-theme="rainbow"`.
+
+## Applying A Theme
+
+Add `data-panda-theme` to the element you want themed:
+
+```html
+<!-- Whole app -->
+<html data-panda-theme="rainbow">
+  <!-- Subtree only -->
+  <div data-panda-theme="rainbow">
+    <button>This button uses rainbow</button>
+  </div>
+</html>
+```
+
+The default `neutral` theme is the implicit baseline, so it does not need an
+attribute.
+
+## Runtime Theme Switching
+
+Stalk UI does not ship a theme provider. If your app needs to switch themes at
+runtime, use a small app-level wrapper:
+
+```tsx
+'use client'
+
+import { useState, type ReactNode } from 'react'
+
+export function ThemeProvider({ children }: { children: ReactNode }) {
+  const [theme, setTheme] = useState<'neutral' | 'rainbow'>('neutral')
+
+  return (
+    <div data-panda-theme={theme === 'neutral' ? undefined : theme}>
+      {children}
+      <button onClick={() => setTheme(theme === 'neutral' ? 'rainbow' : 'neutral')}>
+        Toggle theme
+      </button>
+    </div>
+  )
+}
+```
+
+For persistent theme selection, store the current theme in `localStorage` and
+restore it with `useEffect`. This is standard React application state; Stalk UI
+only needs the final `data-panda-theme` attribute.

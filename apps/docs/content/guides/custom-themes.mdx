@@ -1,0 +1,51 @@
+---
+title: Custom Themes
+description: How to add your own themes to Stalk UI.
+---
+
+Stalk UI themes are PandaCSS themes registered alongside the preset. Keep the
+Stalk preset as a string reference, then add your own theme in the consumer
+`panda.config.ts`:
+
+```ts
+import { defineConfig } from '@pandacss/dev'
+
+export default defineConfig({
+  preflight: true,
+  presets: ['@stalk-ui/preset'],
+  themes: {
+    midnight: {
+      semanticTokens: {
+        colors: {
+          accent: {
+            solid: {
+              value: {
+                base: '{colors.indigo.9}',
+                _dark: '{colors.indigoDark.9}',
+              },
+            },
+            contrast: {
+              value: {
+                base: '{colors.gray.1}',
+                _dark: '{colors.grayDark.12}',
+              },
+            },
+            // Add the rest of the accent palette used by your components.
+          },
+        },
+      },
+    },
+  },
+})
+```
+
+Apply the custom theme like any built-in theme:
+
+```html
+<div data-panda-theme="midnight">
+  <button>Midnight blue button</button>
+</div>
+```
+
+See the [PandaCSS theming docs](https://panda-css.com/docs/customization/theme)
+for the full theme structure and token syntax.

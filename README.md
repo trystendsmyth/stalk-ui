@@ -13,6 +13,16 @@ pnpm dlx stalk-ui@latest init
 pnpm dlx stalk-ui@latest add @stalk-ui/button
 ```
 
+The CLI configures PandaCSS with the Stalk preset by reference:
+
+```ts
+import { defineConfig } from '@pandacss/dev'
+
+export default defineConfig({
+  presets: ['@stalk-ui/preset'],
+})
+```
+
 **shadcn CLI (for mixed shadcn + Stalk projects)**
 
 ```sh
@@ -34,7 +44,6 @@ The shadcn-compatible path assumes the project already satisfies Stalk UI's Pand
 ```sh
 pnpm dlx stalk-ui@latest init
 pnpm dlx stalk-ui@latest add @stalk-ui/button
-pnpm dlx stalk-ui@latest theme violet
 ```
 
 ## Documentation

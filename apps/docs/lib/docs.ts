@@ -49,10 +49,19 @@ export const gettingStartedPages = [
   {
     slug: 'theming',
     title: 'Theming',
-    description: 'Use preset options and named accent themes to adapt components.',
+    description: 'Apply the neutral baseline or rainbow theme with PandaCSS theme attributes.',
     body: [
-      'Stalk UI ships recipes and semantic tokens through @stalk-ui/preset.',
-      'Run stalk-ui theme <name> to register an additional accent theme for previews and product surfaces.',
+      'Stalk UI ships recipes, semantic tokens, and themes through @stalk-ui/preset.',
+      'Use data-panda-theme="rainbow" on the whole app or a subtree to opt into the alternate built-in theme.',
+    ],
+  },
+  {
+    slug: 'custom-themes',
+    title: 'Custom Themes',
+    description: 'Extend the preset with your own PandaCSS theme definitions.',
+    body: [
+      'Keep presets: ["@stalk-ui/preset"] in panda.config.ts, then add custom themes through PandaCSS theme configuration.',
+      'Apply custom themes with the same data-panda-theme attribute used by the built-in rainbow theme.',
     ],
   },
   {
