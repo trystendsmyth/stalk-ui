@@ -28,6 +28,12 @@ export const checkbox = {
     },
   },
   variants: {
+    invalid: {
+      true: {
+        borderColor: 'red.600',
+        boxShadow: '0 0 0 3px {colors.red.200}',
+      },
+    },
     size: {
       sm: {
         width: '3.5',
@@ -44,6 +50,7 @@ export const checkbox = {
     },
   },
   defaultVariants: {
+    invalid: false,
     size: 'md',
   },
 } satisfies RecipeConfig

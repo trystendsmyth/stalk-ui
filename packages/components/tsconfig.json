@@ -1,6 +1,10 @@
 {
   "extends": "../tsconfig/react-library.json",
   "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "styled-system/*": ["../../apps/storybook/styled-system/*"]
+    },
     "rootDir": "."
   },
   "include": ["src/**/*.ts", "src/**/*.tsx", "vitest.config.ts"]

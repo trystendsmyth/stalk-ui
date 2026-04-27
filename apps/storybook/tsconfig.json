@@ -1,10 +1,15 @@
 {
   "extends": "../../packages/tsconfig/react.json",
   "compilerOptions": {
-    "noEmit": true
+    "baseUrl": ".",
+    "noEmit": true,
+    "paths": {
+      "styled-system/*": ["styled-system/*"]
+    }
   },
   "include": [
     ".storybook/**/*.ts",
+    "panda.config.ts",
     "src/**/*.ts",
     "src/**/*.tsx",
     "../../packages/components/src/**/*.ts",

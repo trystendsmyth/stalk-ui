@@ -52,7 +52,7 @@ export const createPreset = ({
         label,
         radio,
         select,
-        switch: switchRecipe,
+        switchRecipe,
         textarea,
       },
       slotRecipes: {

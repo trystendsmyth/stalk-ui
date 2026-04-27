@@ -2,6 +2,7 @@ import { createElement } from 'react'
 
 import type { Preview } from '@storybook/react-vite'
 
+import '../styled-system/styles.css'
 import '../src/preview.css'
 
 interface StorybookGlobals {

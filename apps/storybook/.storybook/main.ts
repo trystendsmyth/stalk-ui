@@ -20,7 +20,7 @@ const config: StorybookConfig = {
     resolve: {
       ...config.resolve,
       alias: {
-        'styled-system/recipes': join(storybookDirectory, '../src/styled-system-recipes.ts'),
+        'styled-system': join(storybookDirectory, '../styled-system'),
       },
     },
   }),

@@ -30,6 +30,12 @@ export const input = {
     },
   },
   variants: {
+    invalid: {
+      true: {
+        borderColor: 'red.600',
+        boxShadow: '0 0 0 3px {colors.red.200}',
+      },
+    },
     size: {
       sm: {
         fontSize: 'sm',
@@ -49,6 +55,7 @@ export const input = {
     },
   },
   defaultVariants: {
+    invalid: false,
     size: 'md',
   },
 } satisfies RecipeConfig

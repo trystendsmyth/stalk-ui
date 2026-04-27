@@ -9,6 +9,7 @@ build/
 out/
 storybook-static/
 styled-system/
+apps/storybook/styled-system/
 .turbo/
 *.tsbuildinfo
 .size-limit-fixtures/*/dist/

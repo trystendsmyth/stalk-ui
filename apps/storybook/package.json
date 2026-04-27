@@ -6,7 +6,9 @@
   "license": "MIT",
   "type": "module",
   "scripts": {
+    "prebuild": "pnpm --filter @stalk-ui/preset build && panda codegen && panda cssgen",
     "build": "storybook build --output-dir storybook-static",
+    "predev": "pnpm --filter @stalk-ui/preset build && panda codegen && panda cssgen",
     "dev": "storybook dev --port 6006",
     "lint": "echo \"No Storybook lint configured yet\"",
     "test": "echo \"No Storybook tests configured yet\"",
@@ -17,6 +19,9 @@
     "react-dom": "catalog:"
   },
   "devDependencies": {
+    "@pandacss/dev": "catalog:",
+    "@pandacss/preset-base": "1.9.1",
+    "@stalk-ui/preset": "workspace:*",
     "@storybook/addon-a11y": "^10.3.5",
     "@storybook/addon-themes": "^10.3.5",
     "@storybook/addon-vitest": "^10.3.5",
