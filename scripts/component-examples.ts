@@ -45,9 +45,9 @@ export const componentExamples = {
     '<Radio.Root name="plan"><Radio.Item invalid label="Required choice" value="required" /></Radio.Root>',
   ],
   select: [
-    '<Select aria-label="Status"><option>Draft</option><option>Published</option></Select>',
-    '<Select invalid aria-label="Status"><option>Choose a status</option></Select>',
-    '<Select disabled aria-label="Disabled select"><option>Disabled</option></Select>',
+    '<Select.Root><Select.Trigger aria-label="Status"><Select.Value placeholder="Choose a status" /></Select.Trigger><Select.Content><Select.Item value="draft">Draft</Select.Item><Select.Item value="published">Published</Select.Item></Select.Content></Select.Root>',
+    '<Select.Root><Select.Trigger invalid aria-label="Status"><Select.Value placeholder="Choose a status" /></Select.Trigger><Select.Content><Select.Item value="draft">Draft</Select.Item></Select.Content></Select.Root>',
+    '<Select.Root><Select.Trigger disabled aria-label="Disabled select"><Select.Value placeholder="Disabled" /></Select.Trigger><Select.Content><Select.Item value="disabled">Disabled</Select.Item></Select.Content></Select.Root>',
   ],
   switch: [
     '<Switch label="Email notifications" />',

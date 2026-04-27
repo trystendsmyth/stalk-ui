@@ -20,46 +20,58 @@ pnpm dlx @stalk-ui/cli add @stalk-ui/select
 <ComponentPreview
   slug="select"
   example={0}
-  code={`<Select aria-label="Status"><option>Draft</option><option>Published</option></Select>`}
+  code={`<Select.Root><Select.Trigger aria-label="Status"><Select.Value placeholder="Choose a status" /></Select.Trigger><Select.Content><Select.Item value="draft">Draft</Select.Item><Select.Item value="published">Published</Select.Item></Select.Content></Select.Root>`}
 />
 
 ```tsx
-<Select aria-label="Status">
-  <option>Draft</option>
-  <option>Published</option>
-</Select>
+<Select.Root>
+  <Select.Trigger aria-label="Status">
+    <Select.Value placeholder="Choose a status" />
+  </Select.Trigger>
+  <Select.Content>
+    <Select.Item value="draft">Draft</Select.Item>
+    <Select.Item value="published">Published</Select.Item>
+  </Select.Content>
+</Select.Root>
 ```
 
 <ComponentPreview
   slug="select"
   example={1}
-  code={`<Select invalid aria-label="Status"><option>Choose a status</option></Select>`}
+  code={`<Select.Root><Select.Trigger invalid aria-label="Status"><Select.Value placeholder="Choose a status" /></Select.Trigger><Select.Content><Select.Item value="draft">Draft</Select.Item></Select.Content></Select.Root>`}
 />
 
 ```tsx
-<Select invalid aria-label="Status">
-  <option>Choose a status</option>
-</Select>
+<Select.Root>
+  <Select.Trigger invalid aria-label="Status">
+    <Select.Value placeholder="Choose a status" />
+  </Select.Trigger>
+  <Select.Content>
+    <Select.Item value="draft">Draft</Select.Item>
+  </Select.Content>
+</Select.Root>
 ```
 
 <ComponentPreview
   slug="select"
   example={2}
-  code={`<Select disabled aria-label="Disabled select"><option>Disabled</option></Select>`}
+  code={`<Select.Root><Select.Trigger disabled aria-label="Disabled select"><Select.Value placeholder="Disabled" /></Select.Trigger><Select.Content><Select.Item value="disabled">Disabled</Select.Item></Select.Content></Select.Root>`}
 />
 
 ```tsx
-<Select disabled aria-label="Disabled select">
-  <option>Disabled</option>
-</Select>
+<Select.Root>
+  <Select.Trigger disabled aria-label="Disabled select">
+    <Select.Value placeholder="Disabled" />
+  </Select.Trigger>
+  <Select.Content>
+    <Select.Item value="disabled">Disabled</Select.Item>
+  </Select.Content>
+</Select.Root>
 ```
 
 ## Props
 
-| Prop      | Type         | Required | Default | Description |
-| --------- | ------------ | -------- | ------- | ----------- |
-| `invalid` | `boolean`    | No       | -       | -           |
-| `size`    | `SelectSize` | No       | -       | -           |
+No component-specific props are documented yet. Primitive props pass through to the underlying element or Radix part.
 
 ## Variants
 

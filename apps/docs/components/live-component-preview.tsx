@@ -95,10 +95,15 @@ const previewBySlug: Record<string, ReactNode[]> = {
     </Radio.Root>,
   ],
   select: [
-    <Select key="select" aria-label="Status">
-      <option>Draft</option>
-      <option>Published</option>
-    </Select>,
+    <Select.Root key="select">
+      <Select.Trigger aria-label="Status">
+        <Select.Value placeholder="Choose a status" />
+      </Select.Trigger>
+      <Select.Content>
+        <Select.Item value="draft">Draft</Select.Item>
+        <Select.Item value="published">Published</Select.Item>
+      </Select.Content>
+    </Select.Root>,
   ],
   switch: [<Switch key="switch" label="Email notifications" />],
   textarea: [<Textarea key="textarea" aria-label="Message" placeholder="Write a message..." />],

@@ -1,22 +1,31 @@
 import { Select } from './select'
 
+import type { SelectTriggerProps } from './select'
 import type { Meta, StoryObj } from '@storybook/react-vite'
 
-const selectOptions = (
-  <>
-    <option value="">Choose a status</option>
-    <option value="draft">Draft</option>
-    <option value="published">Published</option>
-    <option value="archived">Archived</option>
-  </>
+const SelectExample = ({
+  'aria-label': ariaLabel = 'Status',
+  disabled = false,
+  invalid = false,
+  size = 'md',
+}: SelectTriggerProps) => (
+  <Select.Root>
+    <Select.Trigger aria-label={ariaLabel} disabled={disabled} invalid={invalid} size={size}>
+      <Select.Value placeholder="Choose a status" />
+    </Select.Trigger>
+    <Select.Content>
+      <Select.Item value="draft">Draft</Select.Item>
+      <Select.Item value="published">Published</Select.Item>
+      <Select.Item value="archived">Archived</Select.Item>
+    </Select.Content>
+  </Select.Root>
 )
 
 const meta = {
   title: 'Components/Select',
-  component: Select,
+  component: Select.Trigger,
   args: {
     'aria-label': 'Status',
-    children: selectOptions,
   },
   argTypes: {
     size: {
@@ -24,26 +33,22 @@ const meta = {
       options: ['sm', 'md', 'lg'],
     },
   },
-} satisfies Meta<typeof Select>
+} satisfies Meta<typeof Select.Trigger>
 
 export default meta
 
 type Story = StoryObj<typeof meta>
 
-export const Default: Story = {}
+export const Default: Story = {
+  render: (args) => <SelectExample {...args} />,
+}
 
 export const Sizes: Story = {
   render: () => (
     <div style={{ display: 'grid', gap: 12, maxWidth: 320 }}>
-      <Select aria-label="Small select" size="sm">
-        {selectOptions}
-      </Select>
-      <Select aria-label="Medium select" size="md">
-        {selectOptions}
-      </Select>
-      <Select aria-label="Large select" size="lg">
-        {selectOptions}
-      </Select>
+      <SelectExample aria-label="Small select" size="sm" />
+      <SelectExample aria-label="Medium select" size="md" />
+      <SelectExample aria-label="Large select" size="lg" />
     </div>
   ),
 }
@@ -51,21 +56,17 @@ export const Sizes: Story = {
 export const States: Story = {
   render: () => (
     <div style={{ display: 'grid', gap: 12, maxWidth: 320 }}>
-      <Select aria-label="Default select">{selectOptions}</Select>
-      <Select invalid aria-label="Invalid select">
-        {selectOptions}
-      </Select>
-      <Select disabled aria-label="Disabled select">
-        {selectOptions}
-      </Select>
+      <SelectExample aria-label="Default select" />
+      <SelectExample invalid aria-label="Invalid select" />
+      <SelectExample disabled aria-label="Disabled select" />
     </div>
   ),
 }
 
-export const AlternateAccent: Story = {
+export const RainbowTheme: Story = {
   render: () => (
-    <div data-accent-color="violet" style={{ maxWidth: 320 }}>
-      <Select aria-label="Violet themed select">{selectOptions}</Select>
+    <div data-panda-theme="rainbow" style={{ maxWidth: 320 }}>
+      <SelectExample aria-label="Rainbow themed select" />
     </div>
   ),
 }
@@ -73,11 +74,15 @@ export const AlternateAccent: Story = {
 export const Rtl: Story = {
   render: () => (
     <div dir="rtl" style={{ maxWidth: 320 }}>
-      <Select aria-label="الحالة">
-        <option value="">اختر الحالة</option>
-        <option value="draft">مسودة</option>
-        <option value="published">منشور</option>
-      </Select>
+      <Select.Root>
+        <Select.Trigger aria-label="الحالة">
+          <Select.Value placeholder="اختر الحالة" />
+        </Select.Trigger>
+        <Select.Content>
+          <Select.Item value="draft">مسودة</Select.Item>
+          <Select.Item value="published">منشور</Select.Item>
+        </Select.Content>
+      </Select.Root>
     </div>
   ),
 }
@@ -85,7 +90,7 @@ export const Rtl: Story = {
 export const DarkMode: Story = {
   render: () => (
     <div data-color-mode="dark" style={{ background: '#111', maxWidth: 320, padding: 24 }}>
-      <Select aria-label="Dark select">{selectOptions}</Select>
+      <SelectExample aria-label="Dark select" />
     </div>
   ),
 }
