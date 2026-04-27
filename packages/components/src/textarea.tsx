@@ -1,4 +1,5 @@
 import { forwardRef } from 'react'
+import { cx } from 'styled-system/css'
 import { textarea as textareaRecipe } from 'styled-system/recipes'
 
 import type { TextareaHTMLAttributes } from 'react'
@@ -9,11 +10,6 @@ export interface TextareaProps extends TextareaHTMLAttributes<HTMLTextAreaElemen
   invalid?: boolean
   size?: TextareaSize
 }
-
-const joinClassNames = (...classNames: (string | undefined)[]) =>
-  classNames
-    .filter((className): className is string => className !== undefined && className.length > 0)
-    .join(' ')
 
 export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
   (
@@ -26,7 +22,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
       <textarea
         ref={ref}
         aria-invalid={isInvalid ? true : ariaInvalid}
-        className={joinClassNames(textareaRecipe({ invalid: isInvalid, size }), className)}
+        className={cx(textareaRecipe({ invalid: isInvalid, size }), className)}
         data-invalid={isInvalid ? '' : undefined}
         disabled={disabled}
         {...props}

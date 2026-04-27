@@ -43,10 +43,10 @@ export const States: Story = {
   ),
 }
 
-export const AlternateAccent: Story = {
+export const RainbowTheme: Story = {
   render: () => (
-    <div data-accent-color="violet" style={{ maxWidth: 360 }}>
-      <Textarea aria-label="Violet themed textarea" placeholder="Violet accent" />
+    <div data-panda-theme="rainbow" style={{ maxWidth: 360 }}>
+      <Textarea aria-label="Rainbow themed textarea" placeholder="Rainbow theme" />
     </div>
   ),
 }

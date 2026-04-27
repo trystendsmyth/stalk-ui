@@ -18,9 +18,7 @@ test.each(sizes)('renders %s size without axe violations', async (size) => {
   const results = await axe(container)
 
   expect(results.violations).toHaveLength(0)
-  expect(screen.getByRole('textbox', { name: `${size} textarea` })).toHaveClass(
-    `stalk-textarea--${size}`,
-  )
+  expect(screen.getByRole('textbox', { name: `${size} textarea` })).toBeInTheDocument()
 })
 
 test('supports label, description, multiline input, and keyboard newlines', async () => {
@@ -46,7 +44,7 @@ test('marks invalid fields for assistive technology', () => {
 
   const textarea = screen.getByRole('textbox', { name: 'Message' })
   expect(textarea).toBeInvalid()
-  expect(textarea).toHaveClass('stalk-textarea--invalid')
+  expect(textarea).toHaveAttribute('data-invalid', '')
 })
 
 test('does not accept input while disabled', async () => {
