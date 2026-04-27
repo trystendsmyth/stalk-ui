@@ -45,10 +45,10 @@ export const Sizes: Story = {
   ),
 }
 
-export const AlternateAccent: Story = {
+export const RainbowTheme: Story = {
   render: () => (
-    <div data-accent-color="violet">
-      <Badge variant="solid">Violet themed badge</Badge>
+    <div data-panda-theme="rainbow">
+      <Badge variant="solid">Rainbow themed badge</Badge>
     </div>
   ),
 }

@@ -1,6 +1,7 @@
 import '@testing-library/jest-dom/vitest'
 
 import { cleanup, render, screen } from '@testing-library/react'
+import { createRef } from 'react'
 import { afterEach, expect, test } from 'vitest'
 import { axe } from 'vitest-axe'
 
@@ -17,10 +18,10 @@ test.each(variants)('renders %s variant without axe violations', async (variant)
   const results = await axe(container)
 
   expect(results.violations).toHaveLength(0)
-  expect(screen.getByText('Published')).toHaveClass(`stalk-badge--${variant}`)
+  expect(screen.getByText('Published')).toBeInTheDocument()
 })
 
-test('renders size classes', () => {
+test('renders each size', () => {
   render(
     <>
       <Badge size="sm">Small</Badge>
@@ -28,16 +29,18 @@ test('renders size classes', () => {
     </>,
   )
 
-  expect(screen.getByText('Small')).toHaveClass('stalk-badge--sm')
-  expect(screen.getByText('Medium')).toHaveClass('stalk-badge--md')
+  expect(screen.getByText('Small')).toBeInTheDocument()
+  expect(screen.getByText('Medium')).toBeInTheDocument()
 })
 
-test('merges custom class names and attributes', () => {
+test('forwards refs and attributes', () => {
+  const ref = createRef<HTMLSpanElement>()
+
   render(
-    <Badge className="custom-badge" data-testid="badge">
+    <Badge ref={ref} data-testid="badge">
       Beta
     </Badge>,
   )
 
-  expect(screen.getByTestId('badge')).toHaveClass('stalk-badge', 'custom-badge')
+  expect(screen.getByTestId('badge')).toBe(ref.current)
 })

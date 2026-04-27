@@ -1,4 +1,5 @@
 import { forwardRef } from 'react'
+import { cx } from 'styled-system/css'
 import { badge as badgeRecipe } from 'styled-system/recipes'
 
 import type { HTMLAttributes } from 'react'
@@ -11,20 +12,9 @@ export interface BadgeProps extends HTMLAttributes<HTMLSpanElement> {
   variant?: BadgeVariant
 }
 
-const joinClassNames = (...classNames: (string | undefined)[]) =>
-  classNames
-    .filter((className): className is string => className !== undefined && className.length > 0)
-    .join(' ')
-
 export const Badge = forwardRef<HTMLSpanElement, BadgeProps>(
   ({ className, size = 'md', variant = 'subtle', ...props }, ref) => {
-    return (
-      <span
-        ref={ref}
-        className={joinClassNames(badgeRecipe({ size, variant }), className)}
-        {...props}
-      />
-    )
+    return <span ref={ref} className={cx(badgeRecipe({ size, variant }), className)} {...props} />
   },
 )
 
