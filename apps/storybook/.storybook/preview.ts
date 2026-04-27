@@ -1,3 +1,5 @@
+import { StalkI18nProvider } from '@stalk-ui/i18n'
+import { en } from '@stalk-ui/i18n/locales/en'
 import { createElement } from 'react'
 
 import type { Preview } from '@storybook/react-vite'
@@ -27,7 +29,7 @@ const StoryFrame = ({ children, globals }: StoryFrameProps) => {
       'data-panda-theme': theme === 'rainbow' ? 'rainbow' : undefined,
       dir: globals.direction ?? 'ltr',
     },
-    children,
+    createElement(StalkI18nProvider, { locale: 'en', messages: en }, children),
   )
 }
 

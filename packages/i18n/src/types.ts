@@ -13,7 +13,7 @@ export interface StalkI18nContextValue {
 }
 
 export interface StalkI18nProviderProps {
-  children: ReactNode
+  children?: ReactNode
   locale: string
   messages: MessageDictionary
 }
