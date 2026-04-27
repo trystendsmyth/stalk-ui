@@ -1,8 +1,9 @@
 import { createHash } from 'node:crypto'
-import { mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs'
+import { mkdirSync, readFileSync, writeFileSync } from 'node:fs'
 import { dirname, join } from 'node:path'
 
 import { format } from 'prettier'
+import { rimrafSync } from 'rimraf'
 
 import { registryIndexSchema, registryItemSchema, schemaVersion } from '../registry/schema'
 import { registryItems } from '../registry/ui'
@@ -70,7 +71,7 @@ const toShadcnItem = (item: RegistryItem): RegistryItem => ({
   })),
 })
 
-rmSync(registryDirectory, { force: true, recursive: true })
+rimrafSync(registryDirectory)
 mkdirSync(shadcnDirectory, { recursive: true })
 
 const manifests: RegistryIndex['manifests'] = {}

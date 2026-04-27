@@ -118,7 +118,7 @@ jobs:
           cache: 'pnpm'
       - run: pnpm install --frozen-lockfile
       - run: pnpm build
-      - run: pnpm size
+      - run: pnpm size:check
 
   verify-tree-shaking:
     runs-on: ubuntu-latest
@@ -239,7 +239,7 @@ jobs:
           node-version-file: '.nvmrc'
           cache: 'pnpm'
       - run: pnpm install --frozen-lockfile
-      - run: pnpm test:a11y:storybook
+      - run: pnpm check-storybook-a11y
 
   pa11y-docs:
     runs-on: ubuntu-latest

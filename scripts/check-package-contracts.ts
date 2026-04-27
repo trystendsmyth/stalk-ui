@@ -5,7 +5,13 @@ const rootDirectory = process.cwd()
 const workspaceRoots = ['apps', 'packages'] as const
 const requiredRootScripts = ['build', 'typecheck', 'lint', 'format', 'test', 'clean'] as const
 const requiredWorkspaceScripts = ['build', 'typecheck', 'test'] as const
+const requiredSourceOnlyWorkspaceScripts = ['typecheck', 'test'] as const
+const requiredRootVerifiedWorkspaceScripts = ['build', 'typecheck'] as const
+const requiredConfigOnlyWorkspaceScripts = ['typecheck'] as const
 const publishedPackages = new Set(['@stalk-ui/cli', '@stalk-ui/preset', '@stalk-ui/i18n'])
+const sourceOnlyPackages = new Set(['@stalk-ui/utils'])
+const rootVerifiedPackages = new Set(['@stalk-ui/preset'])
+const configOnlyPackages = new Set(['@stalk-ui/tsconfig'])
 
 interface PackageJson {
   name?: string
@@ -85,8 +91,15 @@ errors.push(...checkScripts('root package.json', rootPackage, requiredRootScript
 for (const packagePath of await workspacePackagePaths()) {
   const packageJson = await readPackageJson(packagePath)
   const label = packageJson.name ?? packagePath
+  const requiredScripts = configOnlyPackages.has(label)
+    ? requiredConfigOnlyWorkspaceScripts
+    : rootVerifiedPackages.has(label)
+      ? requiredRootVerifiedWorkspaceScripts
+      : sourceOnlyPackages.has(label)
+        ? requiredSourceOnlyWorkspaceScripts
+        : requiredWorkspaceScripts
 
-  errors.push(...checkScripts(label, packageJson, requiredWorkspaceScripts))
+  errors.push(...checkScripts(label, packageJson, requiredScripts))
 
   if (publishedPackages.has(label) && packageJson.private === true) {
     errors.push(`${label} is a published package and must not be marked private`)

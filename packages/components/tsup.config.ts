@@ -1,0 +1,36 @@
+import { defineConfig } from 'tsup'
+
+export default defineConfig({
+  entry: [
+    'src/index.ts',
+    'src/badge.tsx',
+    'src/button.tsx',
+    'src/checkbox.tsx',
+    'src/dialog.tsx',
+    'src/dropdown-menu.tsx',
+    'src/input.tsx',
+    'src/label.tsx',
+    'src/popover.tsx',
+    'src/radio.tsx',
+    'src/select.tsx',
+    'src/switch.tsx',
+    'src/textarea.tsx',
+    'src/tooltip.tsx',
+  ],
+  format: ['esm'],
+  dts: false,
+  clean: true,
+  sourcemap: true,
+  treeshake: true,
+  splitting: false,
+  minify: false,
+  target: 'es2022',
+  external: [
+    '@stalk-ui/i18n',
+    '@stalk-ui/preset',
+    'react',
+    'react-dom',
+    /^@radix-ui\//,
+    /^styled-system\//,
+  ],
+})

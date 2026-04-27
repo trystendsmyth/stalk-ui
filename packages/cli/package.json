@@ -32,7 +32,8 @@
   ],
   "scripts": {
     "build": "tsup",
-    "lint": "echo \"No CLI lint configured yet\"",
+    "clean": "rimraf dist",
+    "lint": "eslint .",
     "test": "vitest run",
     "typecheck": "tsc --noEmit"
   },

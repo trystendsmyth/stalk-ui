@@ -54,9 +54,9 @@ const main = async () => {
   program
     .command('theme [name]')
     .description('show Stalk UI theme usage')
-    .action(async (name?: string) => {
+    .action((name?: string) => {
       intro(name === undefined ? 'Stalk UI themes' : `Stalk UI theme ${name}`)
-      await themeCommand(name)
+      themeCommand(name)
       outro('Done')
     })
 

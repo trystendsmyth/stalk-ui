@@ -75,11 +75,12 @@ Stalk UI uses Lost Pixel in OSS mode. Baseline screenshots live in `apps/storybo
 ### When You Intentionally Change Appearance
 
 1. Make your code change.
-2. Run `pnpm lost-pixel`.
-3. Review PNGs in `apps/storybook/.lost-pixel/difference/`.
-4. Copy reviewed `current/*.png` files into `apps/storybook/.lost-pixel/baseline/`.
-5. Commit code and updated baseline PNGs.
-6. Mention in the PR description that baselines changed and why.
+2. Run `pnpm lost-pixel:install` once on a fresh machine if Chromium is missing.
+3. Run `pnpm lost-pixel`.
+4. Review PNGs in `apps/storybook/.lost-pixel/difference/`.
+5. Copy reviewed `current/*.png` files into `apps/storybook/.lost-pixel/baseline/`.
+6. Commit code and updated baseline PNGs.
+7. Mention in the PR description that baselines changed and why.
 
 ### When CI Finds An Unexpected Regression
 

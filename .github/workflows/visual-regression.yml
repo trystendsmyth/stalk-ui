@@ -24,8 +24,8 @@ jobs:
           node-version-file: '.nvmrc'
           cache: 'pnpm'
       - run: pnpm install --frozen-lockfile
-      - run: pnpm --filter @stalk-ui/storybook build
-      - run: pnpm exec lost-pixel
+      - run: pnpm lost-pixel:install
+      - run: pnpm lost-pixel
       - if: always()
         uses: actions/upload-artifact@v4
         with:

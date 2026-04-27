@@ -8,11 +8,12 @@
   "scripts": {
     "prebuild": "pnpm --filter @stalk-ui/preset build && panda codegen && panda cssgen",
     "build": "next build",
+    "clean": "rimraf .next styled-system",
     "predev": "pnpm --filter @stalk-ui/preset build && panda codegen && panda cssgen",
     "dev": "next dev --port 3000",
-    "lint": "echo \"No docs lint configured yet\"",
+    "lint": "eslint .",
     "start": "next start --port 3000",
-    "test": "echo \"No docs tests configured yet\"",
+    "test": "pnpm --workspace-root test:a11y:docs",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {

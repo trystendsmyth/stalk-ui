@@ -8,10 +8,11 @@
   "scripts": {
     "prebuild": "pnpm --filter @stalk-ui/preset build && panda codegen && panda cssgen",
     "build": "storybook build --output-dir storybook-static",
+    "clean": "rimraf storybook-static styled-system .lost-pixel/current .lost-pixel/difference",
     "predev": "pnpm --filter @stalk-ui/preset build && panda codegen && panda cssgen",
     "dev": "storybook dev --port 6006",
-    "lint": "echo \"No Storybook lint configured yet\"",
-    "test": "echo \"No Storybook tests configured yet\"",
+    "lint": "eslint .",
+    "test": "pnpm --workspace-root check-storybook-a11y",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {

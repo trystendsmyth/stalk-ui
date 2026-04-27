@@ -210,9 +210,9 @@ describe('CLI command golden files', () => {
   test('theme and upgrade expose expected output', async () => {
     await withFixture(async () => {
       const output = await captureOutput(async () => {
-        await themeCommand()
-        await themeCommand('rainbow')
-        await themeCommand('midnight')
+        themeCommand()
+        themeCommand('rainbow')
+        themeCommand('midnight')
         await upgradeCommand({ codegen: false, dryRun: true })
       })
 
@@ -230,20 +230,20 @@ describe('CLI command golden files', () => {
           <div data-panda-theme="rainbow">   <!-- a subtree -->
 
         For runtime switching between themes, see:
-        https://stalk-ui.com/docs/guides/theming",
+        https://stalk-ui.com/en/docs/getting-started/theming",
           "Theme: rainbow
 
         Apply via:
           <html data-panda-theme="rainbow">      // App-wide
           <div data-panda-theme="rainbow">       // Subtree
 
-        Runtime switching: https://stalk-ui.com/docs/guides/theming",
+        Runtime switching: https://stalk-ui.com/en/docs/getting-started/theming",
           "Unknown theme: midnight
 
         Available themes: neutral, rainbow
 
         To add custom themes, see:
-        https://stalk-ui.com/docs/guides/theming#custom-themes",
+        https://stalk-ui.com/en/docs/getting-started/custom-themes",
           "[dry-run] pnpm add @stalk-ui/preset@latest @stalk-ui/i18n@latest",
         ]
       `)

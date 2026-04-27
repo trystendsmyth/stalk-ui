@@ -1,7 +1,9 @@
 import { execFileSync } from 'node:child_process'
-import { existsSync, mkdtempSync, readFileSync, readdirSync, rmSync, writeFileSync } from 'node:fs'
+import { existsSync, mkdtempSync, readFileSync, readdirSync, writeFileSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
+
+import { rimrafSync } from 'rimraf'
 
 interface PackageJson {
   bin?: unknown
@@ -98,7 +100,7 @@ for (const packageDirectory of packageDirectories) {
     }
   } finally {
     writeFileSync(packageJsonPath, originalPackageJson)
-    rmSync(installDirectory, { force: true, recursive: true })
-    rmSync(packDirectory, { force: true, recursive: true })
+    rimrafSync(installDirectory)
+    rimrafSync(packDirectory)
   }
 }

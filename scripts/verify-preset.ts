@@ -1,6 +1,8 @@
 import { execFileSync } from 'node:child_process'
-import { mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs'
+import { mkdirSync, readFileSync, writeFileSync } from 'node:fs'
 import { dirname, join } from 'node:path'
+
+import { rimrafSync } from 'rimraf'
 
 const rootDirectory = process.cwd()
 const presetDirectory = join(rootDirectory, 'packages/preset')
@@ -14,7 +16,7 @@ const run = (command: string, args: string[], cwd = rootDirectory) => {
   })
 }
 
-rmSync(verifyDirectory, { force: true, recursive: true })
+rimrafSync(verifyDirectory)
 mkdirSync(join(verifyDirectory, 'src'), { recursive: true })
 
 writeFileSync(
@@ -64,4 +66,4 @@ const generatedCss = readFileSync(generatedCssPath, 'utf8')
 mkdirSync(dirname(snapshotPath), { recursive: true })
 writeFileSync(snapshotPath, `${generatedCss}\n`)
 
-rmSync(verifyDirectory, { force: true, recursive: true })
+rimrafSync(verifyDirectory)

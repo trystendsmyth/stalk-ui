@@ -12,8 +12,9 @@
     }
   },
   "scripts": {
-    "build": "echo \"No components build configured yet\"",
-    "lint": "echo \"No components lint configured yet\"",
+    "build": "tsup",
+    "clean": "rimraf dist",
+    "lint": "eslint .",
     "test": "vitest run",
     "typecheck": "tsc --noEmit"
   },

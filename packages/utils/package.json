@@ -13,8 +13,7 @@
     }
   },
   "scripts": {
-    "build": "echo \"No utils build configured yet\"",
-    "lint": "echo \"No utils lint configured yet\"",
+    "lint": "eslint .",
     "test": "vitest run",
     "typecheck": "tsc --noEmit"
   },

@@ -42,8 +42,8 @@
   ],
   "scripts": {
     "build": "tsup && tsx ../../scripts/write-preset-cjs-declaration.ts",
-    "lint": "echo \"No preset lint configured yet\"",
-    "test": "echo \"No preset tests configured yet\"",
+    "clean": "rimraf dist .verify",
+    "lint": "eslint .",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
