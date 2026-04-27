@@ -1,5 +1,5 @@
-import { cn } from '@stalk-ui/utils'
 import { forwardRef } from 'react'
+import { cx } from 'styled-system/css'
 import { label as labelRecipe } from 'styled-system/recipes'
 
 import type { LabelHTMLAttributes } from 'react'
@@ -16,7 +16,7 @@ export const Label = forwardRef<HTMLLabelElement, LabelProps>(
     return (
       <label
         ref={ref}
-        className={cn(labelRecipe({ required, size }), className)}
+        className={cx(labelRecipe({ required, size }), className)}
         data-required={required ? '' : undefined}
         {...props}
       >

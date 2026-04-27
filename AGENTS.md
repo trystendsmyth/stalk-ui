@@ -46,7 +46,7 @@ Use `packages/components/src/dialog.tsx` as the canonical compound component ref
 
 - Import Radix primitives where the interaction has an established accessible primitive, for example `import * as DialogPrimitive from '@radix-ui/react-dialog'`.
 - Import the generated Panda recipe from `styled-system/recipes`, for example `import { dialog as dialogRecipe } from 'styled-system/recipes'`.
-- Import `cn` from `@stalk-ui/utils` instead of creating local class-name helpers.
+- Import `cx` from generated `styled-system/css` instead of creating local class-name helpers.
 - Use `forwardRef` for every rendered part and assign a `displayName` immediately after each part.
 - Compose public compound APIs with named exports plus `Object.assign`, keeping each part independently tree-shakeable.
 - Do not add blanket component JSDoc. Prefer generated docs from source metadata and add comments only when they explain non-obvious behavior.
