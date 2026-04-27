@@ -1,6 +1,4 @@
-import { createElement, useEffect } from 'react'
-
-import { getTheme } from '../styled-system/themes'
+import { createElement } from 'react'
 
 import type { Preview } from '@storybook/react-vite'
 import type { ReactNode } from 'react'
@@ -21,25 +19,6 @@ interface StoryFrameProps {
 
 const StoryFrame = ({ children, globals }: StoryFrameProps) => {
   const theme = globals.theme ?? 'neutral'
-
-  useEffect(() => {
-    if (theme !== 'rainbow') {
-      return
-    }
-
-    void getTheme('rainbow').then((rainbowTheme) => {
-      const existingSheet = document.getElementById(rainbowTheme.id)
-
-      if (existingSheet !== null) {
-        return
-      }
-
-      const sheet = document.createElement('style')
-      sheet.id = rainbowTheme.id
-      sheet.textContent = rainbowTheme.css
-      document.head.append(sheet)
-    })
-  }, [theme])
 
   return createElement(
     'div',

@@ -27,6 +27,9 @@ const stalkPreset = definePreset({
   themes: {
     rainbow: rainbowTheme,
   },
+  staticCss: {
+    themes: ['rainbow'],
+  },
 } as Preset)
 
 export default stalkPreset

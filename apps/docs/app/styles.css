@@ -174,6 +174,38 @@ code {
   background: rgb(255 255 255 / 4%);
 }
 
+.component-preview__toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.component-preview__toolbar label {
+  display: inline-flex;
+  gap: 0.5rem;
+  align-items: center;
+  color: #c9ced8;
+  font-weight: 700;
+}
+
+.component-preview__toolbar select,
+.component-preview__toolbar button {
+  min-height: 2.25rem;
+  padding-inline: 0.75rem;
+  border: 1px solid #303746;
+  border-radius: 0.625rem;
+  background: #111827;
+  color: #f8fafc;
+  font: inherit;
+}
+
+.component-preview__toolbar button {
+  cursor: pointer;
+  font-weight: 700;
+}
+
 .component-preview__rendered {
   min-height: 12rem;
   display: grid;
@@ -184,12 +216,6 @@ code {
   color: #18181b;
 }
 
-.component-preview__code summary {
-  cursor: pointer;
-  color: #c9ced8;
-  font-weight: 700;
-}
-
-.component-preview__code pre {
+.component-preview pre {
   margin-block-end: 0;
 }
