@@ -40,6 +40,20 @@ Every component must have:
 8. Recipe usage from generated `styled-system/recipes`; components do not import from `@stalk-ui/preset` directly.
 9. Documentation and tree-shaking verification for compound components.
 
+## Component Template
+
+Use `packages/components/src/dialog.tsx` as the canonical compound component reference.
+
+- Import Radix primitives where the interaction has an established accessible primitive, for example `import * as DialogPrimitive from '@radix-ui/react-dialog'`.
+- Import the generated Panda recipe from `styled-system/recipes`, for example `import { dialog as dialogRecipe } from 'styled-system/recipes'`.
+- Import `cn` from `@stalk-ui/utils` instead of creating local class-name helpers.
+- Use `forwardRef` for every rendered part and assign a `displayName` immediately after each part.
+- Compose public compound APIs with named exports plus `Object.assign`, keeping each part independently tree-shakeable.
+- Do not add blanket component JSDoc. Prefer generated docs from source metadata and add comments only when they explain non-obvious behavior.
+- Tests should cover render behavior, axe, keyboard interactions, and role or label queries rather than class-name queries.
+- Stories should cover variants, states, RTL, and dark mode or alternate themes.
+- Components must work across color mode, theme, and RTL combinations.
+
 ## Testing And Accessibility
 
 Accessibility is a blocking requirement. jsx-a11y strict lint rules, axe tests, Storybook a11y checks, and docs accessibility checks should fail CI when violated.

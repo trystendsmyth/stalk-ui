@@ -2,13 +2,24 @@
   "name": "@stalk-ui/utils",
   "version": "0.0.0",
   "private": true,
-  "description": "Private copied helper source workspace for Stalk UI.",
+  "description": "Internal utility helpers (cn, mergeRefs, etc). Never published to npm; consumed by the CLI copy flow at v1 and inlined into @stalk-ui/components bundles at v1.1+. Do not flip private to false.",
   "license": "MIT",
+  "sideEffects": false,
   "type": "module",
+  "exports": {
+    ".": {
+      "types": "./src/index.ts",
+      "import": "./src/index.ts"
+    }
+  },
   "scripts": {
     "build": "echo \"No utils build configured yet\"",
     "lint": "echo \"No utils lint configured yet\"",
-    "test": "echo \"No utils tests configured yet\"",
+    "test": "vitest run",
     "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@types/react": "catalog:",
+    "vitest": "^4.1.5"
   }
 }

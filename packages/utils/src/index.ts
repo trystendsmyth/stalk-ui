@@ -1,2 +1,3 @@
-export const createDataAttribute = (name: string, value = '') =>
-  value.length > 0 ? { [`data-${name}`]: value } : { [`data-${name}`]: '' }
+export { cn } from './cn'
+export { createDataAttribute } from './create-data-attribute'
+export { mergeRefs } from './merge-refs'
