@@ -12,7 +12,7 @@
     "changeset:publish": "turbo run build && changeset publish",
     "changeset:version": "changeset version",
     "check-docs": "tsx scripts/check-docs-drift.ts",
-    "check-exports": "pnpm --filter @stalk-ui/i18n build && tsx scripts/check-exports.ts",
+    "check-exports": "pnpm --filter @stalk-ui/cli build && pnpm --filter @stalk-ui/i18n build && pnpm --filter @stalk-ui/preset build && tsx scripts/check-exports.ts",
     "check-i18n-exports": "tsx scripts/check-i18n-exports-drift.ts",
     "check-registry": "tsx scripts/check-registry-drift.ts",
     "clean": "turbo run clean && rm -rf node_modules .turbo",
@@ -54,6 +54,7 @@
     ]
   },
   "devDependencies": {
+    "@arethetypeswrong/cli": "^0.18.2",
     "@changesets/changelog-github": "^0.6.0",
     "@changesets/cli": "^2.31.0",
     "@changesets/release-utils": "^0.2.7",
@@ -82,6 +83,7 @@
     "pa11y-ci": "^4.1.0",
     "prettier": "^3.8.3",
     "prettier-plugin-packagejson": "^3.0.2",
+    "publint": "^0.3.18",
     "puppeteer": "^24.42.0",
     "size-limit": "^12.1.0",
     "syncpack": "^14.3.0",

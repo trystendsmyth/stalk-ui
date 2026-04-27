@@ -17,7 +17,7 @@ Tech stack:
 Artifacts:
 
 - `@stalk-ui/cli`: install and management tool
-- `@stalk-ui/preset`: PandaCSS preset and theme factory
+- `@stalk-ui/preset`: PandaCSS preset with a neutral baseline and rainbow theme
 - `@stalk-ui/i18n`: published locale/runtime support
 - `packages/components/`: private component source of truth
 - `public/r/*.json` and `public/r/shadcn/*.json`: generated registry manifests

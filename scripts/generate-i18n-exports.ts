@@ -20,9 +20,14 @@ const explicitLocaleExports = Object.fromEntries(
   locales.map((locale) => [
     `./locales/${locale}`,
     {
-      types: `./dist/locales/${locale}.d.ts`,
-      import: `./dist/locales/${locale}.js`,
-      require: `./dist/locales/${locale}.cjs`,
+      import: {
+        types: `./dist/locales/${locale}.d.ts`,
+        default: `./dist/locales/${locale}.js`,
+      },
+      require: {
+        types: `./dist/locales/${locale}.d.cts`,
+        default: `./dist/locales/${locale}.cjs`,
+      },
     },
   ]),
 )
