@@ -59,6 +59,22 @@ export const WithIcons: Story = {
   },
 }
 
+export const AsChild: Story = {
+  render: () => (
+    <Button asChild variant="outline">
+      <a href="https://stalk-ui.com">Open Stalk UI</a>
+    </Button>
+  ),
+}
+
+export const RainbowTheme: Story = {
+  render: () => (
+    <div data-panda-theme="rainbow">
+      <Button>Rainbow button</Button>
+    </div>
+  ),
+}
+
 export const Rtl: Story = {
   parameters: {
     direction: 'rtl',

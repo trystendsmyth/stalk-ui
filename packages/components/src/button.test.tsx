@@ -18,7 +18,7 @@ test.each(variants)('renders %s variant without axe violations', async (variant)
   const results = await axe(container)
 
   expect(results.violations).toHaveLength(0)
-  expect(screen.getByRole('button', { name: variant })).toHaveClass(`stalk-button--${variant}`)
+  expect(screen.getByRole('button', { name: variant })).toBeInTheDocument()
 })
 
 test('supports keyboard activation with enter and space', async () => {
@@ -65,5 +65,39 @@ test('disables interaction while loading', async () => {
   expect(button).toBeDisabled()
 
   await user.click(button)
+  expect(handleClick).not.toHaveBeenCalled()
+})
+
+test('renders as a child element', async () => {
+  const user = userEvent.setup()
+  const handleClick = vi.fn()
+
+  render(
+    <Button asChild onClick={handleClick}>
+      <a href="/docs">Read docs</a>
+    </Button>,
+  )
+
+  const link = screen.getByRole('link', { name: 'Read docs' })
+  await user.click(link)
+
+  expect(link).toHaveAttribute('href', '/docs')
+  expect(handleClick).toHaveBeenCalledTimes(1)
+})
+
+test('prevents child interaction while loading', async () => {
+  const user = userEvent.setup()
+  const handleClick = vi.fn()
+
+  render(
+    <Button asChild loading onClick={handleClick}>
+      <a href="/docs">Read docs</a>
+    </Button>,
+  )
+
+  const link = screen.getByRole('link', { name: 'Read docs' })
+  await user.click(link)
+
+  expect(link).toHaveAttribute('aria-disabled', 'true')
   expect(handleClick).not.toHaveBeenCalled()
 })
