@@ -1,4 +1,5 @@
 import { forwardRef } from 'react'
+import { cx } from 'styled-system/css'
 import { input as inputRecipe } from 'styled-system/recipes'
 
 import type { InputHTMLAttributes } from 'react'
@@ -9,11 +10,6 @@ export interface InputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 
   invalid?: boolean
   size?: InputSize
 }
-
-const joinClassNames = (...classNames: (string | undefined)[]) =>
-  classNames
-    .filter((className): className is string => className !== undefined && className.length > 0)
-    .join(' ')
 
 export const Input = forwardRef<HTMLInputElement, InputProps>(
   (
@@ -26,7 +22,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
       <input
         ref={ref}
         aria-invalid={isInvalid ? true : ariaInvalid}
-        className={joinClassNames(inputRecipe({ invalid: isInvalid, size }), className)}
+        className={cx(inputRecipe({ invalid: isInvalid, size }), className)}
         data-invalid={isInvalid ? '' : undefined}
         disabled={disabled}
         {...props}
