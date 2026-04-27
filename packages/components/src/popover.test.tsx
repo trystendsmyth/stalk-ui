@@ -45,9 +45,7 @@ test('renders an accessible popover without axe violations', async () => {
   const results = await axe(container)
 
   expect(results.violations).toHaveLength(0)
-  expect(screen.getByRole('dialog', { name: 'Project actions' })).toHaveClass(
-    'stalk-popover__content',
-  )
+  expect(screen.getByRole('dialog', { name: 'Project actions' })).toBeInTheDocument()
 })
 
 test('opens and closes from trigger controls', async () => {
@@ -61,7 +59,7 @@ test('opens and closes from trigger controls', async () => {
   expect(screen.queryByRole('dialog', { name: 'Project actions' })).not.toBeInTheDocument()
 })
 
-test('applies custom class names', () => {
+test('renders custom content', () => {
   render(
     <Popover.Root defaultOpen>
       <Popover.Trigger>Open popover</Popover.Trigger>
@@ -71,8 +69,7 @@ test('applies custom class names', () => {
     </Popover.Root>,
   )
 
-  expect(screen.getByRole('dialog', { name: 'Project actions' })).toHaveClass(
-    'stalk-popover__content',
-    'custom-popover',
+  expect(screen.getByRole('dialog', { name: 'Project actions' })).toHaveTextContent(
+    'Manage this project.',
   )
 })

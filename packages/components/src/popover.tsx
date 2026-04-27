@@ -1,15 +1,11 @@
 import * as PopoverPrimitive from '@radix-ui/react-popover'
 import { forwardRef } from 'react'
+import { cx } from 'styled-system/css'
 import { popover as popoverRecipe } from 'styled-system/recipes'
 
 import type { ComponentPropsWithoutRef, ComponentRef } from 'react'
 
 const styles = popoverRecipe()
-
-const joinClassNames = (...classNames: (string | undefined)[]) =>
-  classNames
-    .filter((className): className is string => className !== undefined && className.length > 0)
-    .join(' ')
 
 export const PopoverRoot = PopoverPrimitive.Root
 export const PopoverTrigger = PopoverPrimitive.Trigger
@@ -20,11 +16,7 @@ export const PopoverClose = forwardRef<
   ComponentRef<typeof PopoverPrimitive.Close>,
   ComponentPropsWithoutRef<typeof PopoverPrimitive.Close>
 >(({ className, ...props }, ref) => (
-  <PopoverPrimitive.Close
-    ref={ref}
-    className={joinClassNames(styles.close, className)}
-    {...props}
-  />
+  <PopoverPrimitive.Close ref={ref} className={cx(styles.close, className)} {...props} />
 ))
 
 PopoverClose.displayName = 'PopoverClose'
@@ -36,7 +28,7 @@ export const PopoverContent = forwardRef<
   <PopoverPortal>
     <PopoverPrimitive.Content
       ref={ref}
-      className={joinClassNames(styles.content, className)}
+      className={cx(styles.content, className)}
       sideOffset={sideOffset}
       {...props}
     >

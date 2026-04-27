@@ -45,9 +45,9 @@ export const Open: Story = {
   ),
 }
 
-export const AlternateAccent: Story = {
+export const RainbowTheme: Story = {
   render: () => (
-    <div data-accent-color="violet">
+    <div data-panda-theme="rainbow">
       <PopoverExample />
     </div>
   ),
