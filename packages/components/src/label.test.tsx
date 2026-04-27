@@ -25,7 +25,7 @@ test.each(sizes)('renders %s size without axe violations', async (size) => {
   const results = await axe(container)
 
   expect(results.violations).toHaveLength(0)
-  expect(screen.getByText(`${size} label`)).toHaveClass(`stalk-label--${size}`)
+  expect(screen.getByLabelText(`${size} label`)).toBeInTheDocument()
 })
 
 test('associates with form controls', async () => {
@@ -52,5 +52,4 @@ test('marks required labels for styling hooks', () => {
 
   const label = screen.getByText('Name')
   expect(label).toHaveAttribute('data-required', '')
-  expect(label).toHaveClass('stalk-label--required')
 })

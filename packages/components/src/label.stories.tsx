@@ -51,10 +51,10 @@ export const Required: Story = {
   ),
 }
 
-export const AlternateAccent: Story = {
+export const RainbowTheme: Story = {
   render: () => (
-    <div data-accent-color="violet">
-      <Label required>Violet themed label</Label>
+    <div data-panda-theme="rainbow">
+      <Label required>Rainbow themed label</Label>
     </div>
   ),
 }
