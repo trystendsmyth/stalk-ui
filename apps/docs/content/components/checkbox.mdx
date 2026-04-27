@@ -17,17 +17,47 @@ pnpm dlx @stalk-ui/cli add @stalk-ui/checkbox
 
 ## Examples
 
+<ComponentPreview slug="checkbox" example={0} code={`<Checkbox label="Accept terms" />`} />
+
 ```tsx
 <Checkbox label="Accept terms" />
 ```
+
+<ComponentPreview
+  slug="checkbox"
+  example={1}
+  code={`<Checkbox description="Receive product release notes." id="release-notes" label="Release notes" />`}
+/>
 
 ```tsx
 <Checkbox description="Receive product release notes." id="release-notes" label="Release notes" />
 ```
 
+<ComponentPreview
+  slug="checkbox"
+  example={2}
+  code={`<Checkbox invalid label="Required checkbox" />`}
+/>
+
 ```tsx
 <Checkbox invalid label="Required checkbox" />
 ```
+
+## Props
+
+| Prop          | Type           | Required | Default | Description |
+| ------------- | -------------- | -------- | ------- | ----------- |
+| `description` | `ReactNode`    | No       | -       | -           |
+| `invalid`     | `boolean`      | No       | -       | -           |
+| `label`       | `ReactNode`    | No       | -       | -           |
+| `size`        | `CheckboxSize` | No       | -       | -           |
+
+## Variants
+
+| Variant   | Values           |
+| --------- | ---------------- |
+| `invalid` | `true`           |
+| `size`    | `sm`, `md`, `lg` |
 
 ## Registry
 

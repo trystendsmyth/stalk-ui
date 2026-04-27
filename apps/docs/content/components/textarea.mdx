@@ -17,17 +17,49 @@ pnpm dlx @stalk-ui/cli add @stalk-ui/textarea
 
 ## Examples
 
+<ComponentPreview
+  slug="textarea"
+  example={0}
+  code={`<Textarea aria-label="Message" placeholder="Write a message..." />`}
+/>
+
 ```tsx
 <Textarea aria-label="Message" placeholder="Write a message..." />
 ```
+
+<ComponentPreview
+  slug="textarea"
+  example={1}
+  code={`<Textarea invalid aria-label="Message" placeholder="Message is required" />`}
+/>
 
 ```tsx
 <Textarea invalid aria-label="Message" placeholder="Message is required" />
 ```
 
+<ComponentPreview
+  slug="textarea"
+  example={2}
+  code={`<Textarea disabled aria-label="Disabled textarea" placeholder="Disabled" />`}
+/>
+
 ```tsx
 <Textarea disabled aria-label="Disabled textarea" placeholder="Disabled" />
 ```
+
+## Props
+
+| Prop      | Type           | Required | Default | Description |
+| --------- | -------------- | -------- | ------- | ----------- |
+| `invalid` | `boolean`      | No       | -       | -           |
+| `size`    | `TextareaSize` | No       | -       | -           |
+
+## Variants
+
+| Variant   | Values           |
+| --------- | ---------------- |
+| `invalid` | `true`           |
+| `size`    | `sm`, `md`, `lg` |
 
 ## Registry
 

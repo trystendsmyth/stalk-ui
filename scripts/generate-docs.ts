@@ -1,153 +1,263 @@
-import { mkdirSync, writeFileSync } from 'node:fs'
+import { existsSync, mkdirSync, writeFileSync } from 'node:fs'
 import { dirname, join } from 'node:path'
 
 import { format, resolveConfig } from 'prettier'
+import { Node, Project, SyntaxKind } from 'ts-morph'
 
 import { registryItems } from '../registry/ui'
 
-const docs = {
-  badge: {
-    title: 'Badge',
-    description: 'Displays compact status or metadata.',
-    examples: [
-      '<Badge>Published</Badge>',
-      '<Badge variant="solid">Stable</Badge>',
-      '<Badge size="sm" variant="outline">Beta</Badge>',
-    ],
-  },
-  button: {
-    title: 'Button',
-    description: 'Triggers an action or submits a form.',
-    examples: [
-      '<Button>Save</Button>',
-      '<Button variant="outline">Cancel</Button>',
-      '<Button loading>Saving</Button>',
-    ],
-  },
-  checkbox: {
-    title: 'Checkbox',
-    description: 'Toggles a binary option in a form or settings surface.',
-    examples: [
-      '<Checkbox label="Accept terms" />',
-      '<Checkbox description="Receive product release notes." id="release-notes" label="Release notes" />',
-      '<Checkbox invalid label="Required checkbox" />',
-    ],
-  },
-  dialog: {
-    title: 'Dialog',
-    description: 'Displays modal content in a focus-trapped overlay.',
-    examples: [
-      '<Dialog.Root><Dialog.Trigger>Open</Dialog.Trigger><Dialog.Content><Dialog.Title>Title</Dialog.Title></Dialog.Content></Dialog.Root>',
-      '<Dialog.Content><Dialog.Header><Dialog.Title>Settings</Dialog.Title><Dialog.Description>Manage preferences.</Dialog.Description></Dialog.Header></Dialog.Content>',
-      '<Dialog.Footer><Dialog.Close>Cancel</Dialog.Close></Dialog.Footer>',
-    ],
-  },
-  'dropdown-menu': {
-    title: 'DropdownMenu',
-    description: 'Displays a keyboard-accessible menu of actions from a trigger.',
-    examples: [
-      '<DropdownMenu.Root><DropdownMenu.Trigger>Open</DropdownMenu.Trigger><DropdownMenu.Content><DropdownMenu.Item>Edit</DropdownMenu.Item></DropdownMenu.Content></DropdownMenu.Root>',
-      '<DropdownMenu.Label>Project</DropdownMenu.Label><DropdownMenu.Separator />',
-      '<DropdownMenu.Item>Rename<DropdownMenu.Shortcut>⌘R</DropdownMenu.Shortcut></DropdownMenu.Item>',
-    ],
-  },
-  input: {
-    title: 'Input',
-    description: 'Collects short-form text from a user.',
-    examples: [
-      '<Input aria-label="Email" placeholder="hello@stalk-ui.com" />',
-      '<Input invalid aria-label="Email" placeholder="Invalid email" />',
-      '<Input disabled aria-label="Disabled input" placeholder="Disabled" />',
-    ],
-  },
-  label: {
-    title: 'Label',
-    description: 'Associates text with a form control.',
-    examples: [
-      '<Label htmlFor="email">Email</Label>',
-      '<Label required htmlFor="name">Name</Label>',
-      '<Label size="lg">Large label</Label>',
-    ],
-  },
-  popover: {
-    title: 'Popover',
-    description: 'Displays interactive floating content from a trigger.',
-    examples: [
-      '<Popover.Root><Popover.Trigger>Open</Popover.Trigger><Popover.Content>Interactive content</Popover.Content></Popover.Root>',
-      '<Popover.Content aria-label="Project settings"><Popover.Close>Close</Popover.Close></Popover.Content>',
-      '<Popover.Content side="bottom">Positioned below the trigger</Popover.Content>',
-    ],
-  },
-  radio: {
-    title: 'Radio',
-    description: 'Selects one option from a related set of choices.',
-    examples: [
-      '<Radio label="Basic" name="plan" value="basic" />',
-      '<Radio description="Best for small teams." id="plan-basic" label="Basic" name="plan" value="basic" />',
-      '<Radio invalid label="Required choice" name="plan" value="required" />',
-    ],
-  },
-  select: {
-    title: 'Select',
-    description: 'Lets a user choose one option from a native menu.',
-    examples: [
-      '<Select aria-label="Status"><option>Draft</option><option>Published</option></Select>',
-      '<Select invalid aria-label="Status"><option>Choose a status</option></Select>',
-      '<Select disabled aria-label="Disabled select"><option>Disabled</option></Select>',
-    ],
-  },
-  switch: {
-    title: 'Switch',
-    description: 'Toggles a setting on or off.',
-    examples: [
-      '<Switch label="Email notifications" />',
-      '<Switch description="Send product updates." id="product-updates" label="Product updates" />',
-      '<Switch invalid label="Required setting" />',
-    ],
-  },
-  tooltip: {
-    title: 'Tooltip',
-    description: 'Provides supplemental context when a control is hovered or focused.',
-    examples: [
-      '<Tooltip.Provider><Tooltip.Root><Tooltip.Trigger>Help</Tooltip.Trigger><Tooltip.Content>Helpful context</Tooltip.Content></Tooltip.Root></Tooltip.Provider>',
-      '<Tooltip.Root defaultOpen><Tooltip.Trigger>Open</Tooltip.Trigger><Tooltip.Content>Visible by default</Tooltip.Content></Tooltip.Root>',
-      '<Tooltip.Content side="bottom">Positioned below the trigger</Tooltip.Content>',
-    ],
-  },
-  textarea: {
-    title: 'Textarea',
-    description: 'Collects multi-line text from a user.',
-    examples: [
-      '<Textarea aria-label="Message" placeholder="Write a message..." />',
-      '<Textarea invalid aria-label="Message" placeholder="Message is required" />',
-      '<Textarea disabled aria-label="Disabled textarea" placeholder="Disabled" />',
-    ],
-  },
-} as const
+import { componentExamples } from './component-examples'
+
+interface ExtractedComponent {
+  description: string
+  displayName: string
+  examples: string[]
+  name: ComponentName
+  props: ExtractedProp[]
+  variants: ExtractedVariant[]
+}
+
+interface ExtractedProp {
+  defaultValue?: string
+  description: string
+  name: string
+  required: boolean
+  type: string
+}
+
+interface ExtractedVariant {
+  name: string
+  values: string[]
+}
+
+type ComponentName = keyof typeof componentExamples
+
+const componentDescriptions = {
+  badge: 'Displays compact status or metadata.',
+  button: 'Triggers an action or submits a form.',
+  checkbox: 'Toggles a binary option in a form or settings surface.',
+  dialog: 'Displays modal content in a focus-trapped overlay.',
+  'dropdown-menu': 'Displays a keyboard-accessible menu of actions from a trigger.',
+  input: 'Collects short-form text from a user.',
+  label: 'Associates text with a form control.',
+  popover: 'Displays interactive floating content from a trigger.',
+  radio: 'Selects one option from a related set of choices.',
+  select: 'Lets a user choose one option from a native menu.',
+  switch: 'Toggles a setting on or off.',
+  textarea: 'Collects multi-line text from a user.',
+  tooltip: 'Provides supplemental context when a control is hovered or focused.',
+} as const satisfies Record<ComponentName, string>
+
+const project = new Project({
+  tsConfigFilePath: 'packages/components/tsconfig.json',
+})
 
 const rootDirectory = process.cwd()
 const generatedDirectory = join(rootDirectory, 'apps/docs/content/components')
 const prettierConfig = await resolveConfig(join(generatedDirectory, 'component.mdx'))
 
-const writeGeneratedDoc = async (name: keyof typeof docs) => {
+const pascalCase = (name: string) =>
+  name
+    .split('-')
+    .map((part) => `${part[0]?.toUpperCase() ?? ''}${part.slice(1)}`)
+    .join('')
+
+const markdownCell = (value: string) =>
+  value.replaceAll('|', '\\|').replaceAll('\n', '<br />').replaceAll('`', '\\`')
+
+const jsDocText = (node: Node) => {
+  if (!Node.isJSDocable(node)) {
+    return ''
+  }
+
+  return (
+    node
+      .getJsDocs()
+      .map((doc) => doc.getDescription().trim())
+      .find((description) => description.length > 0) ?? ''
+  )
+}
+
+const jsDocDefault = (node: Node) => {
+  if (!Node.isJSDocable(node)) {
+    return undefined
+  }
+
+  const tag = node
+    .getJsDocs()
+    .flatMap((doc) => doc.getTags())
+    .find((jsDocTag) => jsDocTag.getTagName() === 'default')
+
+  return tag?.getCommentText()?.trim()
+}
+
+const findObjectLiteralProperty = (object: Node | undefined, name: string) => {
+  if (object === undefined || !Node.isObjectLiteralExpression(object)) {
+    return undefined
+  }
+
+  return object.getProperty(name)?.asKind(SyntaxKind.PropertyAssignment)?.getInitializer()
+}
+
+const objectKeys = (node: Node | undefined) => {
+  if (node === undefined || !Node.isObjectLiteralExpression(node)) {
+    return []
+  }
+
+  return node.getProperties().flatMap((property) => {
+    if (Node.isPropertyAssignment(property)) {
+      return [property.getName().replaceAll(/['"]/g, '')]
+    }
+
+    return []
+  })
+}
+
+const extractProps = (name: ComponentName) => {
+  const sourceFile = project.getSourceFileOrThrow(`packages/components/src/${name}.tsx`)
+  const propsInterface = sourceFile.getInterface(`${pascalCase(name)}Props`)
+
+  if (propsInterface === undefined) {
+    return []
+  }
+
+  return propsInterface.getProperties().map((property) => {
+    const defaultValue = jsDocDefault(property)
+
+    return {
+      ...(defaultValue === undefined ? {} : { defaultValue }),
+      description: jsDocText(property),
+      name: property.getName(),
+      required: !property.hasQuestionToken(),
+      type: property.getTypeNode()?.getText() ?? property.getType().getText(property),
+    }
+  })
+}
+
+const extractVariantsFromRecipe = (recipeName: string) => {
+  const recipePaths = [
+    join(rootDirectory, 'packages/preset/src/recipes', `${recipeName}.ts`),
+    join(
+      rootDirectory,
+      'packages/preset/src/recipes',
+      `${recipeName.replaceAll(/([A-Z])/g, '-$1').toLowerCase()}.ts`,
+    ),
+    join(rootDirectory, 'packages/preset/src/slot-recipes', `${recipeName}.ts`),
+    join(
+      rootDirectory,
+      'packages/preset/src/slot-recipes',
+      `${recipeName.replaceAll(/([A-Z])/g, '-$1').toLowerCase()}.ts`,
+    ),
+  ]
+  const path = recipePaths.find((candidate) => existsSync(candidate))
+
+  if (path === undefined) {
+    return []
+  }
+
+  const sourceFile = project.getSourceFile(path) ?? project.addSourceFileAtPath(path)
+  const declaration =
+    sourceFile.getVariableDeclaration(recipeName) ??
+    sourceFile.getVariableDeclarations().find((variable) => variable.getName() === recipeName)
+  const initializer = declaration?.getInitializer()
+  const recipeObject = Node.isSatisfiesExpression(initializer)
+    ? initializer.getExpression()
+    : initializer
+  const variantsObject = findObjectLiteralProperty(recipeObject, 'variants')
+
+  return objectKeys(variantsObject).map((variantName) => {
+    const valuesObject = findObjectLiteralProperty(variantsObject, variantName)
+
+    return {
+      name: variantName,
+      values: objectKeys(valuesObject),
+    }
+  })
+}
+
+const extractDescription = (name: ComponentName) => {
+  const sourceFile = project.getSourceFileOrThrow(`packages/components/src/${name}.tsx`)
+  const displayName = pascalCase(name)
+  const declaration = sourceFile.getVariableDeclaration(displayName)
+  const description = declaration === undefined ? '' : jsDocText(declaration)
+
+  if (description.length > 0) {
+    return description
+  }
+
+  return componentDescriptions[name]
+}
+
+const extractComponent = (name: ComponentName): ExtractedComponent => {
   const item = registryItems.find((registryItem) => registryItem.name === name)
 
   if (item === undefined) {
     throw new Error(`Missing registry item for ${name}.`)
   }
 
-  const doc = docs[name]
+  return {
+    name,
+    displayName: pascalCase(name),
+    description: extractDescription(name),
+    props: extractProps(name),
+    variants: item.stalk.preset.recipes.flatMap(extractVariantsFromRecipe),
+    examples: [...componentExamples[name]],
+  }
+}
+
+const propsTable = (props: ExtractedProp[]) => {
+  if (props.length === 0) {
+    return 'No component-specific props are documented yet. Primitive props pass through to the underlying element or Radix part.'
+  }
+
+  return `| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+${props
+  .map(
+    (prop) =>
+      `| \`${markdownCell(prop.name)}\` | \`${markdownCell(prop.type)}\` | ${
+        prop.required ? 'Yes' : 'No'
+      } | ${prop.defaultValue === undefined ? '-' : `\`${markdownCell(prop.defaultValue)}\``} | ${
+        prop.description.length === 0 ? '-' : markdownCell(prop.description)
+      } |`,
+  )
+  .join('\n')}`
+}
+
+const variantsTable = (variants: ExtractedVariant[]) => {
+  if (variants.length === 0) {
+    return 'No recipe variants are documented for this component.'
+  }
+
+  return `| Variant | Values |
+| --- | --- |
+${variants
+  .map(
+    (variant) =>
+      `| \`${markdownCell(variant.name)}\` | ${variant.values.map((value) => `\`${markdownCell(value)}\``).join(', ')} |`,
+  )
+  .join('\n')}`
+}
+
+const writeGeneratedDoc = async (component: ExtractedComponent) => {
+  const item = registryItems.find((registryItem) => registryItem.name === component.name)
+
+  if (item === undefined) {
+    throw new Error(`Missing registry item for ${component.name}.`)
+  }
+
+  const name = component.name
   const path = join(generatedDirectory, `${name}.mdx`)
   const content = `---
-title: ${doc.title}
-description: ${doc.description}
+title: ${component.displayName}
+description: ${component.description}
 ---
 
 <!-- This file is generated by scripts/generate-docs.ts. Do not edit manually. -->
 
-# ${doc.title}
+# ${component.displayName}
 
-${doc.description}
+${component.description}
 
 ## Install
 
@@ -157,13 +267,26 @@ pnpm dlx @stalk-ui/cli add @stalk-ui/${name}
 
 ## Examples
 
-${doc.examples
+${component.examples
   .map(
-    (example) => `\`\`\`tsx
+    (
+      example,
+      index,
+    ) => `<ComponentPreview slug="${name}" example={${String(index)}} code={\`${example}\`} />
+
+\`\`\`tsx
 ${example}
 \`\`\``,
   )
   .join('\n\n')}
+
+## Props
+
+${propsTable(component.props)}
+
+## Variants
+
+${variantsTable(component.variants)}
 
 ## Registry
 
@@ -176,6 +299,6 @@ ${example}
   writeFileSync(path, await format(content, { ...prettierConfig, filepath: path, parser: 'mdx' }))
 }
 
-for (const name of Object.keys(docs) as (keyof typeof docs)[]) {
-  await writeGeneratedDoc(name)
+for (const name of Object.keys(componentExamples) as ComponentName[]) {
+  await writeGeneratedDoc(extractComponent(name))
 }

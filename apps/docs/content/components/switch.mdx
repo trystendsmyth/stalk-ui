@@ -17,17 +17,40 @@ pnpm dlx @stalk-ui/cli add @stalk-ui/switch
 
 ## Examples
 
+<ComponentPreview slug="switch" example={0} code={`<Switch label="Email notifications" />`} />
+
 ```tsx
 <Switch label="Email notifications" />
 ```
+
+<ComponentPreview
+  slug="switch"
+  example={1}
+  code={`<Switch description="Send product updates." id="product-updates" label="Product updates" />`}
+/>
 
 ```tsx
 <Switch description="Send product updates." id="product-updates" label="Product updates" />
 ```
 
+<ComponentPreview slug="switch" example={2} code={`<Switch invalid label="Required setting" />`} />
+
 ```tsx
 <Switch invalid label="Required setting" />
 ```
+
+## Props
+
+| Prop          | Type         | Required | Default | Description |
+| ------------- | ------------ | -------- | ------- | ----------- |
+| `description` | `ReactNode`  | No       | -       | -           |
+| `invalid`     | `boolean`    | No       | -       | -           |
+| `label`       | `ReactNode`  | No       | -       | -           |
+| `size`        | `SwitchSize` | No       | -       | -           |
+
+## Variants
+
+No recipe variants are documented for this component.
 
 ## Registry
 

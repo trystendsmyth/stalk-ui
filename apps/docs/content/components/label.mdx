@@ -17,9 +17,13 @@ pnpm dlx @stalk-ui/cli add @stalk-ui/label
 
 ## Examples
 
+<ComponentPreview slug="label" example={0} code={`<Label htmlFor="email">Email</Label>`} />
+
 ```tsx
 <Label htmlFor="email">Email</Label>
 ```
+
+<ComponentPreview slug="label" example={1} code={`<Label required htmlFor="name">Name</Label>`} />
 
 ```tsx
 <Label required htmlFor="name">
@@ -27,9 +31,25 @@ pnpm dlx @stalk-ui/cli add @stalk-ui/label
 </Label>
 ```
 
+<ComponentPreview slug="label" example={2} code={`<Label size="lg">Large label</Label>`} />
+
 ```tsx
 <Label size="lg">Large label</Label>
 ```
+
+## Props
+
+| Prop       | Type        | Required | Default | Description |
+| ---------- | ----------- | -------- | ------- | ----------- |
+| `required` | `boolean`   | No       | -       | -           |
+| `size`     | `LabelSize` | No       | -       | -           |
+
+## Variants
+
+| Variant    | Values           |
+| ---------- | ---------------- |
+| `required` | `true`           |
+| `size`     | `sm`, `md`, `lg` |
 
 ## Registry
 

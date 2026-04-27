@@ -17,9 +17,21 @@ pnpm dlx @stalk-ui/cli add @stalk-ui/radio
 
 ## Examples
 
+<ComponentPreview
+  slug="radio"
+  example={0}
+  code={`<Radio label="Basic" name="plan" value="basic" />`}
+/>
+
 ```tsx
 <Radio label="Basic" name="plan" value="basic" />
 ```
+
+<ComponentPreview
+  slug="radio"
+  example={1}
+  code={`<Radio description="Best for small teams." id="plan-basic" label="Basic" name="plan" value="basic" />`}
+/>
 
 ```tsx
 <Radio
@@ -31,9 +43,31 @@ pnpm dlx @stalk-ui/cli add @stalk-ui/radio
 />
 ```
 
+<ComponentPreview
+  slug="radio"
+  example={2}
+  code={`<Radio invalid label="Required choice" name="plan" value="required" />`}
+/>
+
 ```tsx
 <Radio invalid label="Required choice" name="plan" value="required" />
 ```
+
+## Props
+
+| Prop          | Type        | Required | Default | Description |
+| ------------- | ----------- | -------- | ------- | ----------- |
+| `description` | `ReactNode` | No       | -       | -           |
+| `invalid`     | `boolean`   | No       | -       | -           |
+| `label`       | `ReactNode` | No       | -       | -           |
+| `size`        | `RadioSize` | No       | -       | -           |
+
+## Variants
+
+| Variant   | Values           |
+| --------- | ---------------- |
+| `invalid` | `true`           |
+| `size`    | `sm`, `md`, `lg` |
 
 ## Registry
 

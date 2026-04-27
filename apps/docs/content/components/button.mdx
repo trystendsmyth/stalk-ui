@@ -17,17 +17,40 @@ pnpm dlx @stalk-ui/cli add @stalk-ui/button
 
 ## Examples
 
+<ComponentPreview slug="button" example={0} code={`<Button>Save</Button>`} />
+
 ```tsx
 <Button>Save</Button>
 ```
+
+<ComponentPreview slug="button" example={1} code={`<Button variant="outline">Cancel</Button>`} />
 
 ```tsx
 <Button variant="outline">Cancel</Button>
 ```
 
+<ComponentPreview slug="button" example={2} code={`<Button loading>Saving</Button>`} />
+
 ```tsx
 <Button loading>Saving</Button>
 ```
+
+## Props
+
+| Prop           | Type            | Required | Default | Description |
+| -------------- | --------------- | -------- | ------- | ----------- |
+| `leadingIcon`  | `ReactNode`     | No       | -       | -           |
+| `loading`      | `boolean`       | No       | -       | -           |
+| `size`         | `ButtonSize`    | No       | -       | -           |
+| `trailingIcon` | `ReactNode`     | No       | -       | -           |
+| `variant`      | `ButtonVariant` | No       | -       | -           |
+
+## Variants
+
+| Variant   | Values                                |
+| --------- | ------------------------------------- |
+| `variant` | `solid`, `outline`, `ghost`, `subtle` |
+| `size`    | `sm`, `md`, `lg`                      |
 
 ## Registry
 

@@ -165,6 +165,31 @@ code {
   font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', monospace;
 }
 
+table {
+  width: 100%;
+  border-collapse: collapse;
+  overflow: hidden;
+  border: 1px solid #303746;
+  border-radius: 1rem;
+}
+
+th,
+td {
+  padding: 0.75rem;
+  border-block-end: 1px solid #303746;
+  text-align: start;
+  vertical-align: top;
+}
+
+th {
+  background: rgb(255 255 255 / 6%);
+  color: #f8fafc;
+}
+
+td {
+  color: #c9ced8;
+}
+
 .component-preview {
   display: grid;
   gap: 1rem;
@@ -212,8 +237,8 @@ code {
   place-items: center;
   padding: 1.5rem;
   border-radius: 0.75rem;
-  background: #f6f7f9;
-  color: #18181b;
+  background: #090b10;
+  color: #f8fafc;
 }
 
 .component-preview pre {

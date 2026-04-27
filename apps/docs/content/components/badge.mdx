@@ -17,19 +17,43 @@ pnpm dlx @stalk-ui/cli add @stalk-ui/badge
 
 ## Examples
 
+<ComponentPreview slug="badge" example={0} code={`<Badge>Published</Badge>`} />
+
 ```tsx
 <Badge>Published</Badge>
 ```
 
+<ComponentPreview slug="badge" example={1} code={`<Badge variant="solid">Stable</Badge>`} />
+
 ```tsx
 <Badge variant="solid">Stable</Badge>
 ```
+
+<ComponentPreview
+  slug="badge"
+  example={2}
+  code={`<Badge size="sm" variant="outline">Beta</Badge>`}
+/>
 
 ```tsx
 <Badge size="sm" variant="outline">
   Beta
 </Badge>
 ```
+
+## Props
+
+| Prop      | Type           | Required | Default | Description |
+| --------- | -------------- | -------- | ------- | ----------- |
+| `size`    | `BadgeSize`    | No       | -       | -           |
+| `variant` | `BadgeVariant` | No       | -       | -           |
+
+## Variants
+
+| Variant   | Values                       |
+| --------- | ---------------------------- |
+| `variant` | `solid`, `subtle`, `outline` |
+| `size`    | `sm`, `md`                   |
 
 ## Registry
 

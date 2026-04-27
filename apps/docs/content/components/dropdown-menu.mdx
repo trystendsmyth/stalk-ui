@@ -17,6 +17,12 @@ pnpm dlx @stalk-ui/cli add @stalk-ui/dropdown-menu
 
 ## Examples
 
+<ComponentPreview
+  slug="dropdown-menu"
+  example={0}
+  code={`<DropdownMenu.Root><DropdownMenu.Trigger>Open</DropdownMenu.Trigger><DropdownMenu.Content><DropdownMenu.Item>Edit</DropdownMenu.Item></DropdownMenu.Content></DropdownMenu.Root>`}
+/>
+
 ```tsx
 <DropdownMenu.Root>
   <DropdownMenu.Trigger>Open</DropdownMenu.Trigger>
@@ -26,15 +32,35 @@ pnpm dlx @stalk-ui/cli add @stalk-ui/dropdown-menu
 </DropdownMenu.Root>
 ```
 
+<ComponentPreview
+  slug="dropdown-menu"
+  example={1}
+  code={`<DropdownMenu.Label>Project</DropdownMenu.Label><DropdownMenu.Separator />`}
+/>
+
 ```tsx
 <DropdownMenu.Label>Project</DropdownMenu.Label><DropdownMenu.Separator />
 ```
+
+<ComponentPreview
+  slug="dropdown-menu"
+  example={2}
+  code={`<DropdownMenu.Item>Rename<DropdownMenu.Shortcut>⌘R</DropdownMenu.Shortcut></DropdownMenu.Item>`}
+/>
 
 ```tsx
 <DropdownMenu.Item>
   Rename<DropdownMenu.Shortcut>⌘R</DropdownMenu.Shortcut>
 </DropdownMenu.Item>
 ```
+
+## Props
+
+No component-specific props are documented yet. Primitive props pass through to the underlying element or Radix part.
+
+## Variants
+
+No recipe variants are documented for this component.
 
 ## Registry
 

@@ -16,9 +16,24 @@ export interface ComponentDoc {
   description: string
   examples: string[]
   installCommand: string
+  props: ComponentProp[]
   registry: string[]
   slug: string
   title: string
+  variants: ComponentVariant[]
+}
+
+export interface ComponentProp {
+  defaultValue: string
+  description: string
+  name: string
+  required: string
+  type: string
+}
+
+export interface ComponentVariant {
+  name: string
+  values: string
 }
 
 export const gettingStartedPages = [
@@ -82,6 +97,47 @@ const registryLines = (source: string) =>
     .filter((line) => line.startsWith('- '))
     .map((line) => line.slice(2))
 
+const sectionContent = (source: string, heading: string) => {
+  const start = source.indexOf(`## ${heading}`)
+
+  if (start === -1) {
+    return ''
+  }
+
+  const next = source.indexOf('\n## ', start + 1)
+
+  return source.slice(start, next === -1 ? undefined : next)
+}
+
+const tableRows = (source: string) =>
+  source
+    .split('\n')
+    .filter((line) => line.startsWith('|') && !line.includes('---'))
+    .slice(1)
+    .map((line) =>
+      line
+        .split('|')
+        .slice(1, -1)
+        .map((cell) => cell.trim().replaceAll('\\|', '|')),
+    )
+
+const propRows = (source: string) =>
+  tableRows(sectionContent(source, 'Props')).map(
+    ([name, type, required, defaultValue, description]) => ({
+      defaultValue: defaultValue ?? '',
+      description: description ?? '',
+      name: name ?? '',
+      required: required ?? '',
+      type: type ?? '',
+    }),
+  )
+
+const variantRows = (source: string) =>
+  tableRows(sectionContent(source, 'Variants')).map(([name, values]) => ({
+    name: name ?? '',
+    values: values ?? '',
+  }))
+
 export const getComponentDocs = () => {
   return componentSlugs.map((slug) => {
     const source = readFileSync(join(contentDirectory, `${slug}.mdx`), 'utf8')
@@ -93,7 +149,9 @@ export const getComponentDocs = () => {
       description: frontmatterValue(source, 'description'),
       installCommand: blocks[0] ?? '',
       examples: blocks.slice(1),
+      props: propRows(source),
       registry: registryLines(source),
+      variants: variantRows(source),
     }
   }) satisfies ComponentDoc[]
 }

@@ -35,12 +35,59 @@ export default async function ComponentPage({ params }: ComponentPageProps) {
       </pre>
 
       <h2>Examples</h2>
-      <LiveComponentPreview slug={component.slug} />
-      {component.examples.map((example) => (
-        <pre key={example}>
-          <code>{example}</code>
-        </pre>
+      {component.examples.map((example, index) => (
+        <LiveComponentPreview key={example} code={example} example={index} slug={component.slug} />
       ))}
+
+      <h2>Props</h2>
+      {component.props.length === 0 ? (
+        <p>No component-specific props are documented yet.</p>
+      ) : (
+        <table>
+          <thead>
+            <tr>
+              <th>Prop</th>
+              <th>Type</th>
+              <th>Required</th>
+              <th>Default</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            {component.props.map((prop) => (
+              <tr key={prop.name}>
+                <td>{prop.name}</td>
+                <td>{prop.type}</td>
+                <td>{prop.required}</td>
+                <td>{prop.defaultValue}</td>
+                <td>{prop.description}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      )}
+
+      <h2>Variants</h2>
+      {component.variants.length === 0 ? (
+        <p>No recipe variants are documented for this component.</p>
+      ) : (
+        <table>
+          <thead>
+            <tr>
+              <th>Variant</th>
+              <th>Values</th>
+            </tr>
+          </thead>
+          <tbody>
+            {component.variants.map((variant) => (
+              <tr key={variant.name}>
+                <td>{variant.name}</td>
+                <td>{variant.values}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      )}
 
       <h2>Registry</h2>
       <ul className="article-list">

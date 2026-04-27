@@ -17,6 +17,12 @@ pnpm dlx @stalk-ui/cli add @stalk-ui/select
 
 ## Examples
 
+<ComponentPreview
+  slug="select"
+  example={0}
+  code={`<Select aria-label="Status"><option>Draft</option><option>Published</option></Select>`}
+/>
+
 ```tsx
 <Select aria-label="Status">
   <option>Draft</option>
@@ -24,17 +30,43 @@ pnpm dlx @stalk-ui/cli add @stalk-ui/select
 </Select>
 ```
 
+<ComponentPreview
+  slug="select"
+  example={1}
+  code={`<Select invalid aria-label="Status"><option>Choose a status</option></Select>`}
+/>
+
 ```tsx
 <Select invalid aria-label="Status">
   <option>Choose a status</option>
 </Select>
 ```
 
+<ComponentPreview
+  slug="select"
+  example={2}
+  code={`<Select disabled aria-label="Disabled select"><option>Disabled</option></Select>`}
+/>
+
 ```tsx
 <Select disabled aria-label="Disabled select">
   <option>Disabled</option>
 </Select>
 ```
+
+## Props
+
+| Prop      | Type         | Required | Default | Description |
+| --------- | ------------ | -------- | ------- | ----------- |
+| `invalid` | `boolean`    | No       | -       | -           |
+| `size`    | `SelectSize` | No       | -       | -           |
+
+## Variants
+
+| Variant   | Values           |
+| --------- | ---------------- |
+| `invalid` | `true`           |
+| `size`    | `sm`, `md`, `lg` |
 
 ## Registry
 
