@@ -1,15 +1,11 @@
 import * as TooltipPrimitive from '@radix-ui/react-tooltip'
 import { forwardRef } from 'react'
+import { cx } from 'styled-system/css'
 import { tooltip as tooltipRecipe } from 'styled-system/recipes'
 
 import type { ComponentPropsWithoutRef, ComponentRef } from 'react'
 
 const styles = tooltipRecipe()
-
-const joinClassNames = (...classNames: (string | undefined)[]) =>
-  classNames
-    .filter((className): className is string => className !== undefined && className.length > 0)
-    .join(' ')
 
 export const TooltipProvider = TooltipPrimitive.Provider
 export const TooltipRoot = TooltipPrimitive.Root
@@ -23,7 +19,7 @@ export const TooltipContent = forwardRef<
   <TooltipPortal>
     <TooltipPrimitive.Content
       ref={ref}
-      className={joinClassNames(styles.content, className)}
+      className={cx(styles.content, className)}
       sideOffset={sideOffset}
       {...props}
     >
