@@ -1,23 +1,23 @@
+import * as SwitchPrimitive from '@radix-ui/react-switch'
 import { forwardRef, useId } from 'react'
+import { cx } from 'styled-system/css'
 import { switchRecipe } from 'styled-system/recipes'
 
-import type { InputHTMLAttributes, ReactNode } from 'react'
+import type { ComponentPropsWithoutRef, ComponentRef, ReactNode } from 'react'
 
 export type SwitchSize = 'sm' | 'md' | 'lg'
 
-export interface SwitchProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'size' | 'type'> {
+export interface SwitchProps extends Omit<
+  ComponentPropsWithoutRef<typeof SwitchPrimitive.Root>,
+  'children'
+> {
   description?: ReactNode
   invalid?: boolean
   label?: ReactNode
   size?: SwitchSize
 }
 
-const joinClassNames = (...classNames: (string | undefined)[]) =>
-  classNames
-    .filter((className): className is string => className !== undefined && className.length > 0)
-    .join(' ')
-
-export const Switch = forwardRef<HTMLInputElement, SwitchProps>(
+export const Switch = forwardRef<ComponentRef<typeof SwitchPrimitive.Root>, SwitchProps>(
   (
     {
       'aria-describedby': ariaDescribedBy,
@@ -38,28 +38,29 @@ export const Switch = forwardRef<HTMLInputElement, SwitchProps>(
     const labelId = label === undefined ? undefined : `${inputId}-label`
     const descriptionId = description === undefined ? undefined : `${inputId}-description`
     const describedBy = [ariaDescribedBy, descriptionId].filter(Boolean).join(' ') || undefined
-    const input = (
-      <input
+    const switchControl = (
+      <SwitchPrimitive.Root
         ref={ref}
         aria-describedby={describedBy}
         aria-labelledby={labelId}
-        className={joinClassNames(switchRecipe({ invalid: isInvalid, size }), className)}
+        aria-invalid={isInvalid ? true : ariaInvalid}
+        className={cx(switchRecipe({ invalid: isInvalid, size }), className)}
         data-invalid={isInvalid ? '' : undefined}
         disabled={disabled}
         id={inputId}
-        role="switch"
-        type="checkbox"
         {...props}
-      />
+      >
+        <SwitchPrimitive.Thumb aria-hidden="true" className="stalk-switch__thumb" />
+      </SwitchPrimitive.Root>
     )
 
     if (label === undefined && description === undefined) {
-      return input
+      return switchControl
     }
 
     return (
       <div className="stalk-switch-field">
-        {input}
+        {switchControl}
         <span className="stalk-switch-field__content">
           {label === undefined ? null : (
             <label htmlFor={inputId} id={labelId}>

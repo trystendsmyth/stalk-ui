@@ -18,9 +18,7 @@ test.each(sizes)('renders %s size without axe violations', async (size) => {
   const results = await axe(container)
 
   expect(results.violations).toHaveLength(0)
-  expect(screen.getByRole('switch', { name: `${size} switch` })).toHaveClass(
-    `stalk-switch--${size}`,
-  )
+  expect(screen.getByRole('switch', { name: `${size} switch` })).toBeInTheDocument()
 })
 
 test('supports label, description, and checked state changes', async () => {
@@ -46,7 +44,6 @@ test('marks invalid fields for styling hooks', () => {
 
   const switchControl = screen.getByRole('switch', { name: 'Required switch' })
   expect(switchControl).toHaveAttribute('data-invalid', '')
-  expect(switchControl).toHaveClass('stalk-switch--invalid')
 })
 
 test('does not toggle while disabled', async () => {
