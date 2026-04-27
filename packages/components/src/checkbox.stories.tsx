@@ -53,10 +53,10 @@ export const WithDescription: Story = {
   ),
 }
 
-export const AlternateAccent: Story = {
+export const RainbowTheme: Story = {
   render: () => (
-    <div data-accent-color="violet">
-      <Checkbox defaultChecked label="Violet themed checkbox" />
+    <div data-panda-theme="rainbow">
+      <Checkbox defaultChecked label="Rainbow themed checkbox" />
     </div>
   ),
 }

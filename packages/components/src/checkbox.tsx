@@ -1,13 +1,15 @@
+import * as CheckboxPrimitive from '@radix-ui/react-checkbox'
 import { forwardRef, useId } from 'react'
+import { cx } from 'styled-system/css'
 import { checkbox as checkboxRecipe } from 'styled-system/recipes'
 
-import type { InputHTMLAttributes, ReactNode } from 'react'
+import type { ComponentPropsWithoutRef, ComponentRef, ReactNode } from 'react'
 
 export type CheckboxSize = 'sm' | 'md' | 'lg'
 
 export interface CheckboxProps extends Omit<
-  InputHTMLAttributes<HTMLInputElement>,
-  'size' | 'type'
+  ComponentPropsWithoutRef<typeof CheckboxPrimitive.Root>,
+  'children'
 > {
   description?: ReactNode
   invalid?: boolean
@@ -15,12 +17,7 @@ export interface CheckboxProps extends Omit<
   size?: CheckboxSize
 }
 
-const joinClassNames = (...classNames: (string | undefined)[]) =>
-  classNames
-    .filter((className): className is string => className !== undefined && className.length > 0)
-    .join(' ')
-
-export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
+export const Checkbox = forwardRef<ComponentRef<typeof CheckboxPrimitive.Root>, CheckboxProps>(
   (
     {
       'aria-describedby': ariaDescribedBy,
@@ -41,28 +38,29 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
     const labelId = label === undefined ? undefined : `${inputId}-label`
     const descriptionId = description === undefined ? undefined : `${inputId}-description`
     const describedBy = [ariaDescribedBy, descriptionId].filter(Boolean).join(' ') || undefined
-    const input = (
-      <input
+    const checkbox = (
+      <CheckboxPrimitive.Root
         ref={ref}
         aria-labelledby={labelId}
         aria-describedby={describedBy}
         aria-invalid={isInvalid ? true : ariaInvalid}
-        className={joinClassNames(checkboxRecipe({ invalid: isInvalid, size }), className)}
+        className={cx(checkboxRecipe({ invalid: isInvalid, size }), className)}
         data-invalid={isInvalid ? '' : undefined}
         disabled={disabled}
         id={inputId}
-        type="checkbox"
         {...props}
-      />
+      >
+        <CheckboxPrimitive.Indicator aria-hidden="true">✓</CheckboxPrimitive.Indicator>
+      </CheckboxPrimitive.Root>
     )
 
     if (label === undefined && description === undefined) {
-      return input
+      return checkbox
     }
 
     return (
       <div className="stalk-checkbox-field">
-        {input}
+        {checkbox}
         <span className="stalk-checkbox-field__content">
           {label === undefined ? null : (
             <label htmlFor={inputId} id={labelId}>

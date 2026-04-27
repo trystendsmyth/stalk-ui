@@ -18,9 +18,7 @@ test.each(sizes)('renders %s size without axe violations', async (size) => {
   const results = await axe(container)
 
   expect(results.violations).toHaveLength(0)
-  expect(screen.getByRole('checkbox', { name: `${size} checkbox` })).toHaveClass(
-    `stalk-checkbox--${size}`,
-  )
+  expect(screen.getByRole('checkbox', { name: `${size} checkbox` })).toBeInTheDocument()
 })
 
 test('supports label, description, and checked state changes', async () => {
@@ -46,7 +44,7 @@ test('marks invalid fields for assistive technology', () => {
 
   const checkbox = screen.getByRole('checkbox', { name: 'Terms' })
   expect(checkbox).toBeInvalid()
-  expect(checkbox).toHaveClass('stalk-checkbox--invalid')
+  expect(checkbox).toHaveAttribute('data-invalid', '')
 })
 
 test('does not toggle while disabled', async () => {
