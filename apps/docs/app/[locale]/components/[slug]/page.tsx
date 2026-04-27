@@ -1,5 +1,6 @@
 import { notFound } from 'next/navigation'
 
+import { LiveComponentPreview } from '../../../../components/live-component-preview'
 import { getComponentDoc, getComponentDocs, locales } from '../../../../lib/docs'
 
 interface ComponentPageProps {
@@ -34,6 +35,7 @@ export default async function ComponentPage({ params }: ComponentPageProps) {
       </pre>
 
       <h2>Examples</h2>
+      <LiveComponentPreview slug={component.slug} />
       {component.examples.map((example) => (
         <pre key={example}>
           <code>{example}</code>

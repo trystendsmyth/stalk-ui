@@ -5,6 +5,12 @@
   "description": "Private component source workspace for Stalk UI.",
   "license": "MIT",
   "type": "module",
+  "exports": {
+    "./*": {
+      "types": "./src/*.tsx",
+      "import": "./src/*.tsx"
+    }
+  },
   "scripts": {
     "build": "echo \"No components build configured yet\"",
     "lint": "echo \"No components lint configured yet\"",

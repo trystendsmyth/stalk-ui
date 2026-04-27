@@ -4,6 +4,7 @@ import 'fumadocs-ui/style.css'
 import type { Metadata } from 'next'
 import type { ReactNode } from 'react'
 
+import '../styled-system/styles.css'
 import './styles.css'
 
 export const metadata: Metadata = {

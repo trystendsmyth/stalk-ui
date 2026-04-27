@@ -13,7 +13,12 @@ export default defineConfig({
       grayColor: 'neutral',
     }) as PandaPreset,
   ],
-  include: ['src/**/*.{ts,tsx}', '../../packages/components/src/**/*.{ts,tsx}'],
+  include: [
+    'app/**/*.{ts,tsx,mdx}',
+    'components/**/*.{ts,tsx}',
+    'content/**/*.{ts,tsx,mdx}',
+    '../../packages/components/src/**/*.{ts,tsx}',
+  ],
   jsxFramework: 'react',
   outdir: 'styled-system',
 })

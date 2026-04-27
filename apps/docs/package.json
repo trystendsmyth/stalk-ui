@@ -6,7 +6,9 @@
   "license": "MIT",
   "type": "module",
   "scripts": {
+    "prebuild": "pnpm --filter @stalk-ui/preset build && panda codegen && panda cssgen",
     "build": "next build",
+    "predev": "pnpm --filter @stalk-ui/preset build && panda codegen && panda cssgen",
     "dev": "next dev --port 3000",
     "lint": "echo \"No docs lint configured yet\"",
     "start": "next start --port 3000",
@@ -14,6 +16,9 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@stalk-ui/components": "workspace:*",
+    "@stalk-ui/i18n": "workspace:*",
+    "@stalk-ui/preset": "workspace:*",
     "fumadocs-core": "^15.8.5",
     "fumadocs-ui": "^15.8.5",
     "next": "15",
@@ -21,6 +26,8 @@
     "react-dom": "catalog:"
   },
   "devDependencies": {
+    "@pandacss/dev": "catalog:",
+    "@pandacss/preset-base": "1.9.1",
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:"
   }

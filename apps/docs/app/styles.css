@@ -164,3 +164,32 @@ pre {
 code {
   font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', monospace;
 }
+
+.component-preview {
+  display: grid;
+  gap: 1rem;
+  padding: 1rem;
+  border: 1px solid #303746;
+  border-radius: 1rem;
+  background: rgb(255 255 255 / 4%);
+}
+
+.component-preview__rendered {
+  min-height: 12rem;
+  display: grid;
+  place-items: center;
+  padding: 1.5rem;
+  border-radius: 0.75rem;
+  background: #f6f7f9;
+  color: #18181b;
+}
+
+.component-preview__code summary {
+  cursor: pointer;
+  color: #c9ced8;
+  font-weight: 700;
+}
+
+.component-preview__code pre {
+  margin-block-end: 0;
+}
