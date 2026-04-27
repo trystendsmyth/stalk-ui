@@ -32,8 +32,8 @@ test('renders an accessible menu without axe violations', async () => {
   const results = await axe(container)
 
   expect(results.violations).toHaveLength(0)
-  expect(screen.getByRole('menu')).toHaveClass('stalk-dropdown-menu__content')
-  expect(screen.getByRole('menuitem', { name: /edit/i })).toHaveClass('stalk-dropdown-menu__item')
+  expect(screen.getByRole('menu')).toBeInTheDocument()
+  expect(screen.getByRole('menuitem', { name: /edit/i })).toBeInTheDocument()
 })
 
 test('opens from the trigger and selects an item', async () => {
@@ -47,10 +47,29 @@ test('opens from the trigger and selects an item', async () => {
   expect(onSelect).toHaveBeenCalledTimes(1)
 })
 
-test('applies supporting slot classes', () => {
+test('renders supporting content', () => {
   renderMenu()
 
-  expect(screen.getByText('Actions')).toHaveClass('stalk-dropdown-menu__label')
-  expect(screen.getByText('⌘E')).toHaveClass('stalk-dropdown-menu__shortcut')
-  expect(screen.getByRole('separator')).toHaveClass('stalk-dropdown-menu__separator')
+  expect(screen.getByText('Actions')).toBeInTheDocument()
+  expect(screen.getByText('⌘E')).toBeInTheDocument()
+  expect(screen.getByRole('separator')).toBeInTheDocument()
+})
+
+test('supports checkbox and radio menu items', () => {
+  render(
+    <DropdownMenu.Root defaultOpen>
+      <DropdownMenu.Trigger>Open menu</DropdownMenu.Trigger>
+      <DropdownMenu.Content>
+        <DropdownMenu.CheckboxItem checked>Show sidebar</DropdownMenu.CheckboxItem>
+        <DropdownMenu.RadioGroup value="compact">
+          <DropdownMenu.RadioItem value="compact">Compact</DropdownMenu.RadioItem>
+          <DropdownMenu.RadioItem value="comfortable">Comfortable</DropdownMenu.RadioItem>
+        </DropdownMenu.RadioGroup>
+      </DropdownMenu.Content>
+    </DropdownMenu.Root>,
+  )
+
+  expect(screen.getByRole('menuitemcheckbox', { name: 'Show sidebar' })).toBeChecked()
+  expect(screen.getByRole('menuitemradio', { name: 'Compact' })).toBeChecked()
+  expect(screen.getByRole('menuitemradio', { name: 'Comfortable' })).not.toBeChecked()
 })

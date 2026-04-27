@@ -49,9 +49,33 @@ export const Open: Story = {
   ),
 }
 
-export const AlternateAccent: Story = {
+export const Complex: Story = {
   render: () => (
-    <div data-accent-color="violet">
+    <DropdownMenu.Root defaultOpen>
+      <DropdownMenu.Trigger asChild>
+        <Button variant="outline">Project actions</Button>
+      </DropdownMenu.Trigger>
+      <DropdownMenu.Content>
+        <DropdownMenu.CheckboxItem checked>Show sidebar</DropdownMenu.CheckboxItem>
+        <DropdownMenu.RadioGroup value="compact">
+          <DropdownMenu.RadioItem value="compact">Compact</DropdownMenu.RadioItem>
+          <DropdownMenu.RadioItem value="comfortable">Comfortable</DropdownMenu.RadioItem>
+        </DropdownMenu.RadioGroup>
+        <DropdownMenu.Sub>
+          <DropdownMenu.SubTrigger>Export</DropdownMenu.SubTrigger>
+          <DropdownMenu.SubContent>
+            <DropdownMenu.Item>PDF</DropdownMenu.Item>
+            <DropdownMenu.Item>CSV</DropdownMenu.Item>
+          </DropdownMenu.SubContent>
+        </DropdownMenu.Sub>
+      </DropdownMenu.Content>
+    </DropdownMenu.Root>
+  ),
+}
+
+export const RainbowTheme: Story = {
+  render: () => (
+    <div data-panda-theme="rainbow">
       <DropdownExample />
     </div>
   ),
