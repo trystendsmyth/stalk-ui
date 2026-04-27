@@ -40,9 +40,9 @@ export const componentExamples = {
     '<Popover.Content side="bottom">Positioned below the trigger</Popover.Content>',
   ],
   radio: [
-    '<Radio label="Basic" name="plan" value="basic" />',
-    '<Radio description="Best for small teams." id="plan-basic" label="Basic" name="plan" value="basic" />',
-    '<Radio invalid label="Required choice" name="plan" value="required" />',
+    '<Radio.Root name="plan"><Radio.Item label="Basic" value="basic" /></Radio.Root>',
+    '<Radio.Root name="plan"><Radio.Item description="Best for small teams." id="plan-basic" label="Basic" value="basic" /></Radio.Root>',
+    '<Radio.Root name="plan"><Radio.Item invalid label="Required choice" value="required" /></Radio.Root>',
   ],
   select: [
     '<Select aria-label="Status"><option>Draft</option><option>Published</option></Select>',

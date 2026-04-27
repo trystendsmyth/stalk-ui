@@ -1,23 +1,27 @@
+import * as RadioGroupPrimitive from '@radix-ui/react-radio-group'
 import { forwardRef, useId } from 'react'
+import { cx } from 'styled-system/css'
 import { radio as radioRecipe } from 'styled-system/recipes'
 
-import type { InputHTMLAttributes, ReactNode } from 'react'
+import type { ComponentPropsWithoutRef, ComponentRef, ReactNode } from 'react'
 
 export type RadioSize = 'sm' | 'md' | 'lg'
 
-export interface RadioProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'size' | 'type'> {
+export const RadioRoot = RadioGroupPrimitive.Root
+
+export interface RadioProps extends Omit<
+  ComponentPropsWithoutRef<typeof RadioGroupPrimitive.Item>,
+  'children'
+> {
   description?: ReactNode
   invalid?: boolean
   label?: ReactNode
   size?: RadioSize
 }
 
-const joinClassNames = (...classNames: (string | undefined)[]) =>
-  classNames
-    .filter((className): className is string => className !== undefined && className.length > 0)
-    .join(' ')
+export type RadioItemProps = RadioProps
 
-export const Radio = forwardRef<HTMLInputElement, RadioProps>(
+export const RadioItem = forwardRef<ComponentRef<typeof RadioGroupPrimitive.Item>, RadioItemProps>(
   (
     {
       'aria-describedby': ariaDescribedBy,
@@ -38,27 +42,29 @@ export const Radio = forwardRef<HTMLInputElement, RadioProps>(
     const labelId = label === undefined ? undefined : `${inputId}-label`
     const descriptionId = description === undefined ? undefined : `${inputId}-description`
     const describedBy = [ariaDescribedBy, descriptionId].filter(Boolean).join(' ') || undefined
-    const input = (
-      <input
+    const item = (
+      <RadioGroupPrimitive.Item
         ref={ref}
         aria-describedby={describedBy}
         aria-labelledby={labelId}
-        className={joinClassNames(radioRecipe({ invalid: isInvalid, size }), className)}
+        aria-invalid={isInvalid ? true : ariaInvalid}
+        className={cx(radioRecipe({ invalid: isInvalid, size }), className)}
         data-invalid={isInvalid ? '' : undefined}
         disabled={disabled}
         id={inputId}
-        type="radio"
         {...props}
-      />
+      >
+        <RadioGroupPrimitive.Indicator aria-hidden="true" className="stalk-radio__indicator" />
+      </RadioGroupPrimitive.Item>
     )
 
     if (label === undefined && description === undefined) {
-      return input
+      return item
     }
 
     return (
       <div className="stalk-radio-field">
-        {input}
+        {item}
         <span className="stalk-radio-field__content">
           {label === undefined ? null : (
             <label htmlFor={inputId} id={labelId}>
@@ -76,4 +82,9 @@ export const Radio = forwardRef<HTMLInputElement, RadioProps>(
   },
 )
 
-Radio.displayName = 'Radio'
+RadioItem.displayName = 'RadioItem'
+
+export const Radio = Object.assign(RadioRoot, {
+  Item: RadioItem,
+  Root: RadioRoot,
+})

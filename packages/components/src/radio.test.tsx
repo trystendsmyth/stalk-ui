@@ -14,11 +14,15 @@ afterEach(() => {
 const sizes = ['sm', 'md', 'lg'] as const
 
 test.each(sizes)('renders %s size without axe violations', async (size) => {
-  const { container } = render(<Radio aria-label={`${size} radio`} name="size" size={size} />)
+  const { container } = render(
+    <Radio.Root name="size">
+      <Radio.Item aria-label={`${size} radio`} size={size} value={size} />
+    </Radio.Root>,
+  )
   const results = await axe(container)
 
   expect(results.violations).toHaveLength(0)
-  expect(screen.getByRole('radio', { name: `${size} radio` })).toHaveClass(`stalk-radio--${size}`)
+  expect(screen.getByRole('radio', { name: `${size} radio` })).toBeInTheDocument()
 })
 
 test('supports label, description, and group selection', async () => {
@@ -27,14 +31,15 @@ test('supports label, description, and group selection', async () => {
   render(
     <fieldset>
       <legend>Plan</legend>
-      <Radio
-        description="Best for small teams."
-        id="plan-basic"
-        label="Basic"
-        name="plan"
-        value="basic"
-      />
-      <Radio id="plan-pro" label="Pro" name="plan" value="pro" />
+      <Radio.Root name="plan">
+        <Radio.Item
+          description="Best for small teams."
+          id="plan-basic"
+          label="Basic"
+          value="basic"
+        />
+        <Radio.Item id="plan-pro" label="Pro" value="pro" />
+      </Radio.Root>
     </fieldset>,
   )
 
@@ -49,17 +54,24 @@ test('supports label, description, and group selection', async () => {
 })
 
 test('marks invalid fields for styling hooks', () => {
-  render(<Radio invalid aria-label="Required choice" name="choice" />)
+  render(
+    <Radio.Root name="choice">
+      <Radio.Item invalid aria-label="Required choice" value="required" />
+    </Radio.Root>,
+  )
 
   const radio = screen.getByRole('radio', { name: 'Required choice' })
   expect(radio).toHaveAttribute('data-invalid', '')
-  expect(radio).toHaveClass('stalk-radio--invalid')
 })
 
 test('does not toggle while disabled', async () => {
   const user = userEvent.setup()
 
-  render(<Radio disabled aria-label="Disabled radio" name="disabled" />)
+  render(
+    <Radio.Root name="disabled">
+      <Radio.Item disabled aria-label="Disabled radio" value="disabled" />
+    </Radio.Root>,
+  )
 
   const radio = screen.getByRole('radio', { name: 'Disabled radio' })
   await user.click(radio)

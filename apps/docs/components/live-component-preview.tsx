@@ -89,7 +89,11 @@ const previewBySlug: Record<string, ReactNode[]> = {
       <Popover.Content>Interactive content</Popover.Content>
     </Popover.Root>,
   ],
-  radio: [<Radio key="radio" label="Basic" name="plan-preview" value="basic" />],
+  radio: [
+    <Radio.Root key="radio" name="plan-preview">
+      <Radio.Item label="Basic" value="basic" />
+    </Radio.Root>,
+  ],
   select: [
     <Select key="select" aria-label="Status">
       <option>Draft</option>

@@ -4,10 +4,9 @@ import type { Meta, StoryObj } from '@storybook/react-vite'
 
 const meta = {
   title: 'Components/Radio',
-  component: Radio,
+  component: Radio.Item,
   args: {
     label: 'Basic',
-    name: 'plan',
     value: 'basic',
   },
   argTypes: {
@@ -16,51 +15,60 @@ const meta = {
       options: ['sm', 'md', 'lg'],
     },
   },
-} satisfies Meta<typeof Radio>
+} satisfies Meta<typeof Radio.Item>
 
 export default meta
 
 type Story = StoryObj<typeof meta>
 
-export const Default: Story = {}
+export const Default: Story = {
+  render: () => (
+    <Radio.Root name="default-plan">
+      <Radio.Item label="Basic" value="basic" />
+    </Radio.Root>
+  ),
+}
 
 export const Sizes: Story = {
   render: () => (
-    <div style={{ display: 'grid', gap: 12 }}>
-      <Radio label="Small radio" name="sizes" size="sm" value="sm" />
-      <Radio label="Medium radio" name="sizes" size="md" value="md" />
-      <Radio label="Large radio" name="sizes" size="lg" value="lg" />
-    </div>
+    <Radio.Root name="sizes" style={{ display: 'grid', gap: 12 }}>
+      <Radio.Item label="Small radio" size="sm" value="sm" />
+      <Radio.Item label="Medium radio" size="md" value="md" />
+      <Radio.Item label="Large radio" size="lg" value="lg" />
+    </Radio.Root>
   ),
 }
 
 export const States: Story = {
   render: () => (
-    <div style={{ display: 'grid', gap: 12 }}>
-      <Radio label="Default radio" name="states" value="default" />
-      <Radio defaultChecked label="Checked radio" name="states" value="checked" />
-      <Radio invalid label="Invalid radio" name="invalid-state" value="invalid" />
-      <Radio disabled label="Disabled radio" name="disabled-state" value="disabled" />
-    </div>
+    <Radio.Root defaultValue="checked" name="states" style={{ display: 'grid', gap: 12 }}>
+      <Radio.Item label="Default radio" value="default" />
+      <Radio.Item label="Checked radio" value="checked" />
+      <Radio.Item invalid label="Invalid radio" value="invalid" />
+      <Radio.Item disabled label="Disabled radio" value="disabled" />
+    </Radio.Root>
   ),
 }
 
 export const WithDescription: Story = {
   render: () => (
-    <Radio
-      description="Best for small teams getting started with Stalk UI."
-      id="plan-basic"
-      label="Basic"
-      name="described-plan"
-      value="basic"
-    />
+    <Radio.Root name="described-plan">
+      <Radio.Item
+        description="Best for small teams getting started with Stalk UI."
+        id="plan-basic"
+        label="Basic"
+        value="basic"
+      />
+    </Radio.Root>
   ),
 }
 
-export const AlternateAccent: Story = {
+export const RainbowTheme: Story = {
   render: () => (
-    <div data-accent-color="violet">
-      <Radio defaultChecked label="Violet themed radio" name="accent" value="violet" />
+    <div data-panda-theme="rainbow">
+      <Radio.Root defaultValue="rainbow" name="rainbow">
+        <Radio.Item label="Rainbow themed radio" value="rainbow" />
+      </Radio.Root>
     </div>
   ),
 }
@@ -68,7 +76,9 @@ export const AlternateAccent: Story = {
 export const Rtl: Story = {
   render: () => (
     <div dir="rtl">
-      <Radio label="الخطة الأساسية" name="rtl-plan" value="basic" />
+      <Radio.Root name="rtl-plan">
+        <Radio.Item label="الخطة الأساسية" value="basic" />
+      </Radio.Root>
     </div>
   ),
 }
@@ -76,7 +86,9 @@ export const Rtl: Story = {
 export const DarkMode: Story = {
   render: () => (
     <div data-color-mode="dark" style={{ background: '#111', padding: 24 }}>
-      <Radio defaultChecked label="Dark radio" name="dark-plan" value="dark" />
+      <Radio.Root defaultValue="dark" name="dark-plan">
+        <Radio.Item label="Dark radio" value="dark" />
+      </Radio.Root>
     </div>
   ),
 }
