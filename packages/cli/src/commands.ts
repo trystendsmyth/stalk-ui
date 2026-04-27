@@ -19,10 +19,6 @@ interface InitOptions extends GlobalOptions {
   grayColor?: string
 }
 
-interface ThemeOptions extends GlobalOptions {
-  accentColor?: string
-}
-
 const backupRoot = (root: string) =>
   join(root, '.stalk-ui-backup', new Date().toISOString().replaceAll(':', '-'))
 
@@ -88,15 +84,7 @@ export const initCommand = async (options: InitOptions) => {
   }
 
   await ensureGitignoreEntry(context.root, options)
-  await patchPandaConfig(
-    context.root,
-    {
-      accentColor: options.accentColor,
-      borderRadius: options.borderRadius,
-      grayColor: options.grayColor,
-    },
-    options,
-  )
+  await patchPandaConfig(context.root, options)
 
   if (options.dryRun === true) {
     console.log(`[dry-run] write ${context.configPath}`)
@@ -143,18 +131,50 @@ export const addCommand = async (name: string, options: GlobalOptions) => {
   note(`Installed ${manifest.name} from ${manifestUrl}.`, 'Added component')
 }
 
-export const themeCommand = async (name: string, options: ThemeOptions) => {
-  const context = await resolveProject(options)
-  await patchPandaConfig(
-    context.root,
-    {
-      accentColor: options.accentColor ?? 'blue',
-      additionalThemes: [name],
-    },
-    options,
-  )
-  await runPandaCodegen(context.packageManager, options)
-  note(`Registered ${name} theme.`, 'Theme updated')
+const themes = {
+  neutral: {
+    description: 'applied automatically',
+  },
+  rainbow: {
+    description: 'apply via data-panda-theme="rainbow"',
+  },
+} as const
+
+export const themeCommand = (name?: string) => {
+  if (name === undefined) {
+    console.log(`Stalk UI ships with two themes:
+
+  neutral (default) - ${themes.neutral.description}
+  rainbow           - ${themes.rainbow.description}
+
+To use a theme, add the data-panda-theme attribute to the appropriate
+element in your HTML or layout:
+
+  <html data-panda-theme="rainbow">  <!-- whole app -->
+  <div data-panda-theme="rainbow">   <!-- a subtree -->
+
+For runtime switching between themes, see:
+https://stalk-ui.com/docs/guides/theming`)
+    return
+  }
+
+  if (name in themes) {
+    console.log(`Theme: ${name}
+
+Apply via:
+  <html data-panda-theme="${name}">      // App-wide
+  <div data-panda-theme="${name}">       // Subtree
+
+Runtime switching: https://stalk-ui.com/docs/guides/theming`)
+    return
+  }
+
+  console.log(`Unknown theme: ${name}
+
+Available themes: ${Object.keys(themes).join(', ')}
+
+To add custom themes, see:
+https://stalk-ui.com/docs/guides/theming#custom-themes`)
 }
 
 export const diffCommand = async (name: string, options: GlobalOptions) => {

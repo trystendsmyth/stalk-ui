@@ -174,9 +174,6 @@ importers:
       '@pandacss/dev':
         specifier: 'catalog:'
         version: 1.9.1(jsdom@29.0.2)(typescript@5.9.3)
-      '@pandacss/preset-base':
-        specifier: 1.9.1
-        version: 1.9.1
       '@types/react':
         specifier: 'catalog:'
         version: 19.2.14
@@ -196,9 +193,6 @@ importers:
       '@pandacss/dev':
         specifier: 'catalog:'
         version: 1.9.1(jsdom@29.0.2)(typescript@5.9.3)
-      '@pandacss/preset-base':
-        specifier: 1.9.1
-        version: 1.9.1
       '@stalk-ui/preset':
         specifier: workspace:*
         version: link:../../packages/preset
@@ -310,6 +304,10 @@ importers:
         version: 19.2.5
 
   packages/preset:
+    dependencies:
+      '@pandacss/preset-base':
+        specifier: 1.9.1
+        version: 1.9.1
     devDependencies:
       '@pandacss/dev':
         specifier: 'catalog:'

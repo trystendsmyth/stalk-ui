@@ -114,7 +114,7 @@ try {
     [
       '--input-type=module',
       '-e',
-      "await import('@stalk-ui/i18n'); await import('@stalk-ui/i18n/locales/en'); await import('@stalk-ui/preset'); await import('@stalk-ui/preset/recipes');",
+      "await import('@stalk-ui/i18n'); await import('@stalk-ui/i18n/locales/en'); await import('@stalk-ui/preset');",
     ],
     { cwd: tempDirectory, env: testEnvironment, stdio: 'inherit' },
   )

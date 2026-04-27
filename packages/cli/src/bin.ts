@@ -19,10 +19,6 @@ interface InitCommandOptions extends GlobalOptions {
   grayColor?: string
 }
 
-interface ThemeCommandOptions extends GlobalOptions {
-  accentColor?: string
-}
-
 const withGlobalOptions = (command: Command) =>
   command
     .option('--dry-run', 'print intended changes without writing files')
@@ -41,15 +37,11 @@ const main = async () => {
 
   withGlobalOptions(
     program.command('init').description('initialize Stalk UI in the current project'),
-  )
-    .option('--accent-color <color>', 'default accent color', 'blue')
-    .option('--gray-color <color>', 'default gray color', 'neutral')
-    .option('--border-radius <radius>', 'default border radius', 'md')
-    .action(async (options: InitCommandOptions) => {
-      intro('Stalk UI init')
-      await initCommand(options)
-      outro('Done')
-    })
+  ).action(async (options: InitCommandOptions) => {
+    intro('Stalk UI init')
+    await initCommand(options)
+    outro('Done')
+  })
 
   withGlobalOptions(
     program.command('add <name>').description('install a component from a registry'),
@@ -59,11 +51,12 @@ const main = async () => {
     outro('Done')
   })
 
-  withGlobalOptions(program.command('theme <name>').description('add an additional accent theme'))
-    .option('--accent-color <color>', 'base accent color used in the primary preset')
-    .action(async (name: string, options: ThemeCommandOptions) => {
-      intro(`Stalk UI theme ${name}`)
-      await themeCommand(name, options)
+  program
+    .command('theme [name]')
+    .description('show Stalk UI theme usage')
+    .action(async (name?: string) => {
+      intro(name === undefined ? 'Stalk UI themes' : `Stalk UI theme ${name}`)
+      await themeCommand(name)
       outro('Done')
     })
 

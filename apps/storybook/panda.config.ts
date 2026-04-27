@@ -1,18 +1,9 @@
 import { defineConfig } from '@pandacss/dev'
-import { createPreset } from '@stalk-ui/preset'
-
-type PandaPreset = NonNullable<Parameters<typeof defineConfig>[0]['presets']>[number]
+import stalkPreset from '@stalk-ui/preset'
 
 export default defineConfig({
   preflight: true,
-  presets: [
-    '@pandacss/preset-base',
-    createPreset({
-      accentColor: 'blue',
-      borderRadius: 'md',
-      grayColor: 'neutral',
-    }) as PandaPreset,
-  ],
+  presets: [stalkPreset],
   include: ['src/**/*.{ts,tsx}', '../../packages/components/src/**/*.{ts,tsx}'],
   jsxFramework: 'react',
   outdir: 'styled-system',

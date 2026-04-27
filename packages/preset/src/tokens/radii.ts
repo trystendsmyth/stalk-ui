@@ -23,3 +23,5 @@ export const createRadiusTokens = (borderRadius: BorderRadius): TokenGroup => {
     full: { value: '9999px' },
   }
 }
+
+export const radiusTokens = createRadiusTokens('md')

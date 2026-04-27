@@ -7,13 +7,6 @@ import { pathExists, readTextIfExists, writeText } from './fs'
 
 import type { GlobalOptions } from './types'
 
-interface PresetOptions {
-  accentColor?: string | undefined
-  additionalThemes?: string[]
-  borderRadius?: string | undefined
-  grayColor?: string | undefined
-}
-
 const configCandidates = [
   'panda.config.ts',
   'panda.config.mts',
@@ -21,21 +14,8 @@ const configCandidates = [
   'panda.config.mjs',
 ]
 
-const createPresetSource = (options: PresetOptions) => {
-  const entries = [
-    ['accentColor', options.accentColor ?? 'blue'],
-    ['grayColor', options.grayColor ?? 'neutral'],
-    ['borderRadius', options.borderRadius ?? 'md'],
-  ] as const
-  const themeSource =
-    options.additionalThemes === undefined || options.additionalThemes.length === 0
-      ? ''
-      : `,\n      additionalThemes: ${JSON.stringify(options.additionalThemes)}`
-
-  return `createPreset({\n      ${entries
-    .map(([key, value]) => `${key}: ${JSON.stringify(value)}`)
-    .join(',\n      ')}${themeSource}\n    })`
-}
+const presetSource = `'@stalk-ui/preset'`
+const legacyPresetFactoryName = ['create', 'Preset'].join('')
 
 export const findPandaConfigPath = async (root: string, override?: string) => {
   if (override !== undefined) {
@@ -53,30 +33,23 @@ export const findPandaConfigPath = async (root: string, override?: string) => {
   return join(root, 'panda.config.ts')
 }
 
-const createFreshPandaConfig = (
-  options: PresetOptions,
-) => `import { defineConfig } from '@pandacss/dev'
-import { createPreset } from '@stalk-ui/preset'
+const createFreshPandaConfig = () => `import { defineConfig } from '@pandacss/dev'
 
 export default defineConfig({
-  presets: [
-    ${createPresetSource(options)},
-  ],
+  preflight: true,
+  presets: [${presetSource}],
   include: ['./src/**/*.{ts,tsx,js,jsx}'],
+  jsxFramework: 'react',
   outdir: 'styled-system',
 })
 `
 
-export const patchPandaConfig = async (
-  root: string,
-  options: PresetOptions,
-  globalOptions: GlobalOptions,
-) => {
+export const patchPandaConfig = async (root: string, globalOptions: GlobalOptions) => {
   const configPath = await findPandaConfigPath(root, globalOptions.config)
   const existingSource = await readTextIfExists(configPath)
 
   if (existingSource === undefined) {
-    const source = createFreshPandaConfig(options)
+    const source = createFreshPandaConfig()
 
     if (globalOptions.dryRun === true) {
       console.log(`[dry-run] write ${configPath}`)
@@ -95,16 +68,12 @@ export const patchPandaConfig = async (
     throw new CliError(`Could not parse ${configPath}. Fix the TypeScript syntax and try again.`)
   }
 
-  const hasCreatePresetImport = sourceFile
+  sourceFile
     .getImportDeclarations()
-    .some((declaration) => declaration.getModuleSpecifierValue() === '@stalk-ui/preset')
-
-  if (!hasCreatePresetImport) {
-    sourceFile.insertImportDeclaration(0, {
-      moduleSpecifier: '@stalk-ui/preset',
-      namedImports: ['createPreset'],
+    .filter((declaration) => declaration.getModuleSpecifierValue() === '@stalk-ui/preset')
+    .forEach((declaration) => {
+      declaration.remove()
     })
-  }
 
   const callExpression = sourceFile
     .getDescendantsOfKind(SyntaxKind.CallExpression)
@@ -115,7 +84,6 @@ export const patchPandaConfig = async (
     throw new CliError(`Could not find defineConfig({ ... }) in ${configPath}.`)
   }
 
-  const presetSource = createPresetSource(options)
   const presetsProperty = configObject.getProperty('presets')?.asKind(SyntaxKind.PropertyAssignment)
   const presetsArray = presetsProperty?.getInitializerIfKind(SyntaxKind.ArrayLiteralExpression)
 
@@ -129,7 +97,9 @@ export const patchPandaConfig = async (
       .getElements()
       .find(
         (element) =>
-          element.asKind(SyntaxKind.CallExpression)?.getExpression().getText() === 'createPreset',
+          element.getText() === presetSource ||
+          element.asKind(SyntaxKind.CallExpression)?.getExpression().getText() ===
+            legacyPresetFactoryName,
       )
 
     if (existingPreset === undefined) {

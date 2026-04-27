@@ -207,16 +207,43 @@ describe('CLI command golden files', () => {
     }
   })
 
-  test('theme and upgrade expose expected dry-run changes', async () => {
+  test('theme and upgrade expose expected output', async () => {
     await withFixture(async () => {
       const output = await captureOutput(async () => {
-        await themeCommand('violet', { codegen: false, dryRun: true })
+        await themeCommand()
+        await themeCommand('rainbow')
+        await themeCommand('midnight')
         await upgradeCommand({ codegen: false, dryRun: true })
       })
 
       expect(normalizeOutput(process.cwd(), output)).toMatchInlineSnapshot(`
         [
-          "[dry-run] write $ROOT/panda.config.ts",
+          "Stalk UI ships with two themes:
+
+          neutral (default) - applied automatically
+          rainbow           - apply via data-panda-theme="rainbow"
+
+        To use a theme, add the data-panda-theme attribute to the appropriate
+        element in your HTML or layout:
+
+          <html data-panda-theme="rainbow">  <!-- whole app -->
+          <div data-panda-theme="rainbow">   <!-- a subtree -->
+
+        For runtime switching between themes, see:
+        https://stalk-ui.com/docs/guides/theming",
+          "Theme: rainbow
+
+        Apply via:
+          <html data-panda-theme="rainbow">      // App-wide
+          <div data-panda-theme="rainbow">       // Subtree
+
+        Runtime switching: https://stalk-ui.com/docs/guides/theming",
+          "Unknown theme: midnight
+
+        Available themes: neutral, rainbow
+
+        To add custom themes, see:
+        https://stalk-ui.com/docs/guides/theming#custom-themes",
           "[dry-run] pnpm add @stalk-ui/preset@latest @stalk-ui/i18n@latest",
         ]
       `)

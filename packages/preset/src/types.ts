@@ -35,33 +35,3 @@ export interface RecipeConfig {
   variants?: Record<string, Record<string, Record<string, unknown>>>
   defaultVariants?: Record<string, string | boolean>
 }
-
-export interface StalkPreset {
-  name: string
-  theme: {
-    tokens: {
-      colors: TokenGroup
-      radii: TokenGroup
-    }
-    semanticTokens: {
-      colors: TokenGroup
-    }
-    recipes: Record<string, RecipeConfig>
-    slotRecipes: Record<string, RecipeConfig>
-  }
-  themes: Record<
-    string,
-    {
-      semanticTokens: {
-        colors: TokenGroup
-      }
-    }
-  >
-}
-
-export interface CreatePresetOptions {
-  accentColor?: AccentColor
-  grayColor?: GrayColor
-  borderRadius?: BorderRadius
-  additionalThemes?: AccentColor[]
-}

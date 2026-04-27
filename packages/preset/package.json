@@ -25,16 +25,6 @@
       "import": "./dist/index.js",
       "require": "./dist/index.cjs"
     },
-    "./recipes": {
-      "types": "./dist/recipes/index.d.ts",
-      "import": "./dist/recipes/index.js",
-      "require": "./dist/recipes/index.cjs"
-    },
-    "./tokens": {
-      "types": "./dist/tokens/index.d.ts",
-      "import": "./dist/tokens/index.js",
-      "require": "./dist/tokens/index.cjs"
-    },
     "./package.json": "./package.json"
   },
   "main": "./dist/index.cjs",
@@ -50,6 +40,9 @@
     "lint": "echo \"No preset lint configured yet\"",
     "test": "echo \"No preset tests configured yet\"",
     "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@pandacss/preset-base": "1.9.1"
   },
   "devDependencies": {
     "@pandacss/dev": "catalog:"

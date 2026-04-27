@@ -6,7 +6,7 @@ Stalk UI is a PandaCSS-native component library.
 
 - TypeScript strict mode. Never use `any`.
 - PandaCSS 1.9.1 is pinned. Do not suggest 1.10+ upgrades.
-- Recipes live in `@stalk-ui/preset/recipes`; never duplicate them in copied component files.
+- Components consume generated `styled-system/recipes`; never duplicate recipes in copied component files.
 - Use semantic tokens such as `bg.default` and `accent.solid`. Never use raw colors.
 - Public component examples should prefer dot notation built from named exports.
 - Lucide is a peer dependency. Do not bundle icons.

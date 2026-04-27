@@ -20,7 +20,6 @@
   },
   "devDependencies": {
     "@pandacss/dev": "catalog:",
-    "@pandacss/preset-base": "1.9.1",
     "@stalk-ui/preset": "workspace:*",
     "@storybook/addon-a11y": "^10.3.5",
     "@storybook/addon-themes": "^10.3.5",

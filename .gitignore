@@ -8,9 +8,7 @@ build/
 .next/
 out/
 storybook-static/
-styled-system/
-apps/storybook/styled-system/
-apps/docs/styled-system/
+**/styled-system/
 .turbo/
 *.tsbuildinfo
 .size-limit-fixtures/*/dist/

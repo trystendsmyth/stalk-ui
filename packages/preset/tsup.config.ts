@@ -1,7 +1,7 @@
 import { defineConfig } from 'tsup'
 
 export default defineConfig({
-  entry: ['src/index.ts', 'src/recipes/index.ts', 'src/tokens/index.ts'],
+  entry: ['src/index.ts'],
   format: ['esm', 'cjs'],
   dts: true,
   clean: true,
@@ -10,5 +10,5 @@ export default defineConfig({
   splitting: false,
   minify: false,
   target: 'es2022',
-  external: ['@pandacss/dev', 'react', 'react-dom', 'lucide-react'],
+  external: ['@pandacss/dev'],
 })

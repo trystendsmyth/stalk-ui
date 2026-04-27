@@ -22,8 +22,8 @@ export const input = {
       boxShadow: '0 0 0 3px {colors.accent.subtle}',
     },
     _invalid: {
-      borderColor: 'red.600',
-      boxShadow: '0 0 0 3px {colors.red.200}',
+      borderColor: 'danger.solid',
+      boxShadow: '0 0 0 3px {colors.danger.subtle}',
     },
     _placeholder: {
       color: 'fg.muted',
@@ -32,8 +32,8 @@ export const input = {
   variants: {
     invalid: {
       true: {
-        borderColor: 'red.600',
-        boxShadow: '0 0 0 3px {colors.red.200}',
+        borderColor: 'danger.solid',
+        boxShadow: '0 0 0 3px {colors.danger.subtle}',
       },
     },
     size: {

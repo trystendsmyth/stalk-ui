@@ -20,22 +20,13 @@ mkdirSync(join(verifyDirectory, 'src'), { recursive: true })
 writeFileSync(
   join(verifyDirectory, 'panda.config.ts'),
   `import { defineConfig } from '@pandacss/dev'
-import presetBase from '@pandacss/preset-base'
-import { createPreset } from '../dist/index.js'
+import stalkPreset from '../dist/index.js'
 
 export default defineConfig({
   preflight: false,
   include: ['./src/**/*.{ts,tsx}'],
   outdir: 'styled-system',
-  presets: [
-    presetBase,
-    createPreset({
-      accentColor: 'violet',
-      grayColor: 'neutral',
-      borderRadius: 'md',
-      additionalThemes: ['teal'],
-    }),
-  ],
+  presets: [stalkPreset],
 })
 `,
 )
@@ -51,6 +42,12 @@ export const referenceClassName = css({
   color: 'accent.contrast',
   paddingInline: '4',
   paddingBlock: '2',
+})
+
+export const rainbowClassName = css({
+  backgroundColor: 'bg.default',
+  borderColor: 'danger.solid',
+  color: 'fg.default',
 })
 `,
 )

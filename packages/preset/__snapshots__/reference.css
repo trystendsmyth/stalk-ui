@@ -302,12 +302,12 @@
     --colors-border-default: var(--colors-neutral-6);
     --colors-border-muted: var(--colors-neutral-5);
     --colors-border-strong: var(--colors-neutral-8);
-    --colors-accent-surface: var(--colors-violet-2);
-    --colors-accent-subtle: var(--colors-violet-3);
-    --colors-accent-muted: var(--colors-violet-4);
-    --colors-accent-solid: var(--colors-violet-9);
-    --colors-accent-emphasis: var(--colors-violet-10);
-    --colors-accent-fg: var(--colors-violet-11);
+    --colors-accent-surface: var(--colors-blue-2);
+    --colors-accent-subtle: var(--colors-blue-3);
+    --colors-accent-muted: var(--colors-blue-4);
+    --colors-accent-solid: var(--colors-blue-9);
+    --colors-accent-emphasis: var(--colors-blue-10);
+    --colors-accent-fg: var(--colors-blue-11);
     --colors-accent-contrast: #ffffff;
     --colors-success-surface: var(--colors-emerald-2);
     --colors-success-subtle: var(--colors-emerald-3);
@@ -351,12 +351,12 @@
     --colors-border-default: var(--colors-neutral-dark-6);
     --colors-border-muted: var(--colors-neutral-dark-5);
     --colors-border-strong: var(--colors-neutral-dark-8);
-    --colors-accent-surface: var(--colors-violet-dark-2);
-    --colors-accent-subtle: var(--colors-violet-dark-3);
-    --colors-accent-muted: var(--colors-violet-dark-4);
-    --colors-accent-solid: var(--colors-violet-dark-9);
-    --colors-accent-emphasis: var(--colors-violet-dark-10);
-    --colors-accent-fg: var(--colors-violet-dark-11);
+    --colors-accent-surface: var(--colors-blue-dark-2);
+    --colors-accent-subtle: var(--colors-blue-dark-3);
+    --colors-accent-muted: var(--colors-blue-dark-4);
+    --colors-accent-solid: var(--colors-blue-dark-9);
+    --colors-accent-emphasis: var(--colors-blue-dark-10);
+    --colors-accent-fg: var(--colors-blue-dark-11);
     --colors-accent-contrast: #ffffff;
     --colors-success-surface: var(--colors-emerald-dark-2);
     --colors-success-subtle: var(--colors-emerald-dark-3);
@@ -407,11 +407,23 @@
     padding-block: 2px;
 }
 
+  .bd-c_danger\.solid {
+    border-color: var(--colors-danger-solid);
+}
+
   .bg-c_accent\.solid {
     background-color: var(--colors-accent-solid);
 }
 
   .c_accent\.contrast {
     color: var(--colors-accent-contrast);
+}
+
+  .bg-c_bg\.default {
+    background-color: var(--colors-bg-default);
+}
+
+  .c_fg\.default {
+    color: var(--colors-fg-default);
 }
 }

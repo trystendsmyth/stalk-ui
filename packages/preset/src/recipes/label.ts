@@ -17,7 +17,7 @@ export const label = {
     required: {
       true: {
         _after: {
-          color: 'red.600',
+          color: 'danger.solid',
           content: '" *"',
         },
       },

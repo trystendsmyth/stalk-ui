@@ -37,7 +37,7 @@ Every component must have:
 5. Tests covering axe, keyboard interactions, and screen reader labels.
 6. `asChild` support where applicable through `@radix-ui/react-slot`.
 7. Forwarded refs, `displayName`, and strict TypeScript types.
-8. Recipe usage from `@stalk-ui/preset/recipes`; do not duplicate recipes in copied component files.
+8. Recipe usage from generated `styled-system/recipes`; components do not import from `@stalk-ui/preset` directly.
 9. Documentation and tree-shaking verification for compound components.
 
 ## Testing And Accessibility
