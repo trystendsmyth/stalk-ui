@@ -154,7 +154,7 @@ element in your HTML or layout:
   <div data-panda-theme="rainbow">   <!-- a subtree -->
 
 For runtime switching between themes, see:
-https://stalk-ui.com/docs/guides/theming`)
+https://stalk-ui.com/en/docs/getting-started/theming`)
     return
   }
 
@@ -165,7 +165,7 @@ Apply via:
   <html data-panda-theme="${name}">      // App-wide
   <div data-panda-theme="${name}">       // Subtree
 
-Runtime switching: https://stalk-ui.com/docs/guides/theming`)
+Runtime switching: https://stalk-ui.com/en/docs/getting-started/theming`)
     return
   }
 
@@ -174,7 +174,7 @@ Runtime switching: https://stalk-ui.com/docs/guides/theming`)
 Available themes: ${Object.keys(themes).join(', ')}
 
 To add custom themes, see:
-https://stalk-ui.com/docs/guides/theming#custom-themes`)
+https://stalk-ui.com/en/docs/getting-started/custom-themes`)
 }
 
 export const diffCommand = async (name: string, options: GlobalOptions) => {
