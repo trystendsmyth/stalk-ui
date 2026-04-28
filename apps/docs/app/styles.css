@@ -1,5 +1,6 @@
+/* Align with fumadocs-ui dark tokens (see .dark in fumadocs dist/style.css). */
 :root {
-  color-scheme: light dark;
+  color-scheme: dark;
   font-family:
     Inter,
     ui-sans-serif,
@@ -8,8 +9,11 @@
     BlinkMacSystemFont,
     'Segoe UI',
     sans-serif;
-  background: #0f1115;
-  color: #f6f7f9;
+}
+
+html {
+  background-color: var(--color-fd-background);
+  color: var(--color-fd-foreground);
 }
 
 * {
@@ -28,7 +32,8 @@ a {
 .docs-shell {
   min-height: 100vh;
   background:
-    radial-gradient(circle at top left, rgb(76 111 255 / 18%), transparent 24rem), #0f1115;
+    radial-gradient(circle at top left, rgb(76 111 255 / 18%), transparent 24rem),
+    var(--color-fd-background);
 }
 
 .site-header {
@@ -45,13 +50,14 @@ a {
   font-size: 1rem;
   font-weight: 800;
   text-decoration: none;
+  color: var(--color-fd-foreground);
 }
 
 nav {
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
-  color: #c9ced8;
+  color: var(--color-fd-muted-foreground);
   font-size: 0.875rem;
 }
 
@@ -80,7 +86,7 @@ nav a {
 
 .eyebrow {
   margin: 0;
-  color: #aab0bd;
+  color: var(--color-fd-muted-foreground);
   font-size: 0.875rem;
   font-weight: 700;
   letter-spacing: 0.08em;
@@ -92,11 +98,13 @@ h1 {
   margin: 0;
   font-size: clamp(3rem, 10vw, 6rem);
   line-height: 0.95;
+  color: var(--color-fd-foreground);
 }
 
 h2 {
   margin: 1rem 0 0;
   font-size: clamp(1.5rem, 3vw, 2rem);
+  color: var(--color-fd-foreground);
 }
 
 .page-heading h1,
@@ -108,7 +116,7 @@ h2 {
 .lede {
   max-width: 40rem;
   margin: 0;
-  color: #c9ced8;
+  color: var(--color-fd-muted-foreground);
   font-size: 1.125rem;
   line-height: 1.7;
 }
@@ -131,34 +139,37 @@ h2 {
 .doc-card {
   display: inline-flex;
   padding: 0.75rem 1rem;
-  border: 1px solid #3a404c;
+  border: 1px solid var(--color-fd-border);
   border-radius: 1rem;
   text-decoration: none;
+  color: var(--color-fd-foreground);
 }
 
 .doc-card {
   flex-direction: column;
   width: min(100%, 21rem);
   min-height: 9rem;
-  background: rgb(255 255 255 / 4%);
+  background: var(--color-fd-card);
 }
 
 .doc-card span {
   font-weight: 800;
+  color: var(--color-fd-card-foreground);
 }
 
 .doc-card p,
 .article p {
-  color: #c9ced8;
+  color: var(--color-fd-muted-foreground);
   line-height: 1.7;
 }
 
 pre {
   overflow-x: auto;
   padding: 1rem;
-  border: 1px solid #303746;
+  border: 1px solid var(--color-fd-border);
   border-radius: 1rem;
-  background: #090b10;
+  background: var(--color-fd-muted);
+  color: var(--color-fd-foreground);
 }
 
 code {
@@ -169,34 +180,34 @@ table {
   width: 100%;
   border-collapse: collapse;
   overflow: hidden;
-  border: 1px solid #303746;
+  border: 1px solid var(--color-fd-border);
   border-radius: 1rem;
 }
 
 th,
 td {
   padding: 0.75rem;
-  border-block-end: 1px solid #303746;
+  border-block-end: 1px solid var(--color-fd-border);
   text-align: start;
   vertical-align: top;
 }
 
 th {
-  background: rgb(255 255 255 / 6%);
-  color: #f8fafc;
+  background: var(--color-fd-muted);
+  color: var(--color-fd-foreground);
 }
 
 td {
-  color: #c9ced8;
+  color: var(--color-fd-muted-foreground);
 }
 
 .component-preview {
   display: grid;
   gap: 1rem;
   padding: 1rem;
-  border: 1px solid #303746;
+  border: 1px solid var(--color-fd-border);
   border-radius: 1rem;
-  background: rgb(255 255 255 / 4%);
+  background: var(--color-fd-card);
 }
 
 .component-preview__toolbar {
@@ -211,7 +222,7 @@ td {
   display: inline-flex;
   gap: 0.5rem;
   align-items: center;
-  color: #c9ced8;
+  color: var(--color-fd-muted-foreground);
   font-weight: 700;
 }
 
@@ -219,10 +230,10 @@ td {
 .component-preview__toolbar button {
   min-height: 2.25rem;
   padding-inline: 0.75rem;
-  border: 1px solid #303746;
+  border: 1px solid var(--color-fd-border);
   border-radius: 0.625rem;
-  background: #111827;
-  color: #f8fafc;
+  background: var(--color-fd-secondary);
+  color: var(--color-fd-secondary-foreground);
   font: inherit;
 }
 
@@ -237,8 +248,8 @@ td {
   place-items: center;
   padding: 1.5rem;
   border-radius: 0.75rem;
-  background: #090b10;
-  color: #f8fafc;
+  background: var(--color-fd-muted);
+  color: var(--color-fd-foreground);
 }
 
 .component-preview pre {

@@ -20,9 +20,9 @@ interface RootLayoutProps {
 
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
-    <html lang="en">
+    <html className="dark" lang="en">
       <body>
-        <RootProvider>
+        <RootProvider theme={{ enabled: false }}>
           <DocsI18nProvider>{children}</DocsI18nProvider>
         </RootProvider>
       </body>
