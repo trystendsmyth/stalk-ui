@@ -34,6 +34,7 @@ coverage/
 .vitest-cache/
 apps/storybook/.lost-pixel/current/
 apps/storybook/.lost-pixel/difference/
+apps/storybook/.lost-pixel/.gitignore
 
 # IDE
 .idea/

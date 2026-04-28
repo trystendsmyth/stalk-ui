@@ -199,7 +199,10 @@ const runNextFixture = async () => {
     await waitForHttp('http://127.0.0.1:3020')
 
     const { default: puppeteer } = await import('puppeteer')
-    const browser = await puppeteer.launch({ headless: true })
+    const browser = await puppeteer.launch({
+      args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage'],
+      headless: true,
+    })
 
     try {
       const page = await browser.newPage()

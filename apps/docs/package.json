@@ -6,10 +6,10 @@
   "license": "MIT",
   "type": "module",
   "scripts": {
-    "prebuild": "pnpm --filter @stalk-ui/preset build && panda codegen && panda cssgen",
+    "prebuild": "pnpm --filter @stalk-ui/i18n build && pnpm --filter @stalk-ui/preset build && panda codegen && panda cssgen",
     "build": "next build",
     "clean": "rimraf .next styled-system",
-    "predev": "pnpm --filter @stalk-ui/preset build && panda codegen && panda cssgen",
+    "predev": "pnpm --filter @stalk-ui/i18n build && pnpm --filter @stalk-ui/preset build && panda codegen && panda cssgen",
     "dev": "next dev --port 3000",
     "lint": "eslint .",
     "start": "next start --port 3000",
