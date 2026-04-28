@@ -20,18 +20,27 @@ export const radio = {
       opacity: 0.5,
     },
     _focusVisible: {
-      boxShadow: '0 0 0 3px {colors.accent.subtle}',
+      focusRingWidth: 'base',
+      focusRingColor: 'accent.subtle',
+      focusRingOffsetWidth: '1',
+      focusRingOffsetColor: 'bg.default',
     },
     _invalid: {
       borderColor: 'danger.solid',
-      boxShadow: '0 0 0 3px {colors.danger.subtle}',
+      focusRingWidth: 'base',
+      focusRingColor: 'danger.subtle',
+      focusRingOffsetWidth: '1',
+      focusRingOffsetColor: 'bg.default',
     },
   },
   variants: {
     invalid: {
       true: {
         borderColor: 'danger.solid',
-        boxShadow: '0 0 0 3px {colors.danger.subtle}',
+        focusRingWidth: 'base',
+        focusRingColor: 'danger.subtle',
+        focusRingOffsetWidth: '1',
+        focusRingOffsetColor: 'bg.default',
       },
     },
     size: {

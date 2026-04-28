@@ -32,6 +32,12 @@ export const dropdownMenu = {
         backgroundColor: 'accent.subtle',
         color: 'accent.fg',
       },
+      _focusVisible: {
+        focusRingWidth: 'base',
+        focusRingColor: 'accent.subtle',
+        focusRingOffsetWidth: '1',
+        focusRingOffsetColor: 'bg.default',
+      },
       _disabled: {
         opacity: 0.5,
         pointerEvents: 'none',

@@ -51,6 +51,18 @@ export const rainbowClassName = css({
   borderColor: 'danger.solid',
   color: 'fg.default',
 })
+
+export const utilityClassName = css({
+  backgroundAlpha: 'accent.solid/15',
+  borderColorAlpha: 'border.default/50',
+  textAlpha: 'fg.muted/80',
+  _focusVisible: {
+    focusRingWidth: 'base',
+    focusRingColor: 'accent.subtle',
+    focusRingOffsetWidth: '1',
+    focusRingOffsetColor: 'bg.default',
+  },
+})
 `,
 )
 

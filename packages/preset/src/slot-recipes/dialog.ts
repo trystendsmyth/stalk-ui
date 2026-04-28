@@ -54,6 +54,13 @@ export const dialog = {
       position: 'absolute',
       insetBlockStart: '4',
       insetInlineEnd: '4',
+      borderRadius: 'sm',
+      _focusVisible: {
+        focusRingWidth: 'base',
+        focusRingColor: 'accent.subtle',
+        focusRingOffsetWidth: '1',
+        focusRingOffsetColor: 'bg.default',
+      },
     },
   },
 } satisfies RecipeConfig

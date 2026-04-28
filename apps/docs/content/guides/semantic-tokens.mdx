@@ -1,0 +1,24 @@
+---
+title: Semantic tokens
+description: Use semantic color tokens in components and recipes instead of raw palette steps.
+---
+
+## Primitives vs semantics
+
+Stalk UI’s preset ships Radix-style **primitive** color scales (for example `gray`, `blue`) as an implementation detail. **Components and recipes should not reference those primitives directly.**
+
+Instead, use **semantic tokens** such as:
+
+- `bg.default`, `bg.subtle`, `bg.muted`, `bg.canvas`
+- `fg.default`, `fg.muted`, `fg.subtle`, `fg.inverse`
+- `border.default`, `border.muted`, `border.strong`
+- `accent.surface`, `accent.subtle`, `accent.solid`, `accent.contrast`, and related accent keys
+- Status groups: `success.*`, `warning.*`, `danger.*`, `info.*`
+
+## Recipes and raw colors
+
+Panda **recipes** and **slot recipes** should use semantic tokens and preset utilities (for example focus ring and alpha helpers). Do not embed raw hex values in component recipes except where the preset intentionally defines a contrast pair.
+
+## Themes
+
+Built-in themes (neutral baseline and optional `rainbow`) remap **semantic** mappings. Copied component source should stay theme-agnostic and rely on semantic token names only.

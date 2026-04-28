@@ -524,4 +524,37 @@
   .c_fg\.default {
     color: var(--colors-fg-default);
 }
+
+  .background-alpha_accent\.solid\/15 {
+    --stalk-background-alpha: color-mix(in srgb, var(--colors-accent-solid) 15%, transparent);
+    background-color: var(--stalk-background-alpha, var(--colors-accent-solid));
+}
+
+  .border-color-alpha_border\.default\/50 {
+    --stalk-border-color-alpha: color-mix(in srgb, var(--colors-border-default) 50%, transparent);
+    border-color: var(--stalk-border-color-alpha, var(--colors-border-default));
+}
+
+  .text-alpha_fg\.muted\/80 {
+    --stalk-text-alpha: color-mix(in srgb, var(--colors-fg-muted) 80%, transparent);
+    color: var(--stalk-text-alpha, var(--colors-fg-muted));
+}
+
+  .focusVisible\:focus-ring-width_base:is(:focus-visible, [data-focus-visible]) {
+    --ring-offset-shadow: var(--ring-inset,) 0 0 0 var(--ring-offset-width, 0rem) var(--ring-offset-color);
+    --ring-shadow: var(--ring-inset,) 0 0 0 calc(0.1875rem + var(--ring-offset-width, 0rem)) var(--ring-color);
+    box-shadow: var(--ring-offset-shadow),var(--ring-shadow),var(--base-shadow,0 0 #0000);
+}
+
+  .focusVisible\:focus-ring-color_accent\.subtle:is(:focus-visible, [data-focus-visible]) {
+    --ring-color: var(--colors-accent-subtle);
+}
+
+  .focusVisible\:focus-ring-offset-width_1:is(:focus-visible, [data-focus-visible]) {
+    --ring-offset-width: 0.0625rem;
+}
+
+  .focusVisible\:focus-ring-offset-color_bg\.default:is(:focus-visible, [data-focus-visible]) {
+    --ring-offset-color: var(--colors-bg-default);
+}
 }

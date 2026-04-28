@@ -14,6 +14,8 @@ execFileSync('pnpm', ['--filter', '@stalk-ui/storybook', 'build'], { stdio: 'inh
 const storyIndex = JSON.parse(readFileSync(storyIndexPath, 'utf8')) as StorybookIndex
 const storyIds = new Set(Object.keys(storyIndex.entries ?? {}))
 const requiredStories = [
+  'foundation-semantic-tokens--light',
+  'foundation-semantic-tokens--dark',
   'components-badge--default',
   'components-badge--variants',
   'components-badge--rtl',

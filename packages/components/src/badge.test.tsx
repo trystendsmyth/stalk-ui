@@ -1,15 +1,9 @@
-import '@testing-library/jest-dom/vitest'
-
-import { cleanup, render, screen } from '@testing-library/react'
+import { render, screen } from '@testing-library/react'
 import { createRef } from 'react'
-import { afterEach, expect, test } from 'vitest'
+import { expect, test } from 'vitest'
 import { axe } from 'vitest-axe'
 
 import { Badge } from './badge'
-
-afterEach(() => {
-  cleanup()
-})
 
 const variants = ['solid', 'subtle', 'outline'] as const
 

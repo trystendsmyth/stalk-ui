@@ -23,6 +23,13 @@ export const popover = {
       position: 'absolute',
       insetBlockStart: '2',
       insetInlineEnd: '2',
+      borderRadius: 'sm',
+      _focusVisible: {
+        focusRingWidth: 'base',
+        focusRingColor: 'accent.subtle',
+        focusRingOffsetWidth: '1',
+        focusRingOffsetColor: 'bg.default',
+      },
     },
   },
 } satisfies RecipeConfig

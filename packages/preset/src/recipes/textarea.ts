@@ -23,11 +23,17 @@ export const textarea = {
     },
     _focusVisible: {
       borderColor: 'accent.solid',
-      boxShadow: '0 0 0 3px {colors.accent.subtle}',
+      focusRingWidth: 'base',
+      focusRingColor: 'accent.subtle',
+      focusRingOffsetWidth: '1',
+      focusRingOffsetColor: 'bg.canvas',
     },
     _invalid: {
       borderColor: 'danger.solid',
-      boxShadow: '0 0 0 3px {colors.danger.subtle}',
+      focusRingWidth: 'base',
+      focusRingColor: 'danger.subtle',
+      focusRingOffsetWidth: '1',
+      focusRingOffsetColor: 'bg.canvas',
     },
     _placeholder: {
       color: 'fg.muted',
@@ -37,7 +43,10 @@ export const textarea = {
     invalid: {
       true: {
         borderColor: 'danger.solid',
-        boxShadow: '0 0 0 3px {colors.danger.subtle}',
+        focusRingWidth: 'base',
+        focusRingColor: 'danger.subtle',
+        focusRingOffsetWidth: '1',
+        focusRingOffsetColor: 'bg.canvas',
       },
     },
     size: {

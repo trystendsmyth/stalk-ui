@@ -73,6 +73,17 @@ export const gettingStartedPages = [
       'Compatibility manifests live under /r/shadcn/*.json for mixed shadcn and Stalk projects.',
     ],
   },
+  {
+    slug: 'semantic-tokens',
+    title: 'Semantic tokens',
+    description:
+      'Use semantic color tokens in components and recipes instead of raw palette steps.',
+    body: [
+      'Primitive Radix-style scales live in the preset as implementation detail; consumers and copied components should use semantic aliases such as bg.default, fg.muted, border.default, and accent.solid.',
+      'Panda recipes should rely on semantic tokens and shared preset utilities; avoid raw hex except where the preset defines intentional contrast pairs.',
+      'Themes such as rainbow remap semantic tokens; component source should not hardcode theme-specific values.',
+    ],
+  },
 ] satisfies GettingStartedPage[]
 
 const contentDirectory = join(process.cwd(), 'content/components')

@@ -1,8 +1,6 @@
-import '@testing-library/jest-dom/vitest'
-
-import { cleanup, render, screen } from '@testing-library/react'
+import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import { afterAll, afterEach, beforeAll, expect, test } from 'vitest'
+import { afterAll, beforeAll, expect, test } from 'vitest'
 import { axe } from 'vitest-axe'
 
 import { Select } from './select'
@@ -41,10 +39,6 @@ afterAll(() => {
   } else {
     Object.defineProperty(Element.prototype, 'releasePointerCapture', originalReleasePointerCapture)
   }
-})
-
-afterEach(() => {
-  cleanup()
 })
 
 const sizes = ['sm', 'md', 'lg'] as const
