@@ -6,15 +6,16 @@
   "license": "MIT",
   "type": "module",
   "scripts": {
-    "prebuild": "pnpm --filter @stalk-ui/i18n build && pnpm --filter @stalk-ui/preset build && panda codegen && panda cssgen",
+    "prebuild": "pnpm run codegen",
     "build": "next build",
     "clean": "rimraf .next styled-system",
-    "predev": "pnpm --filter @stalk-ui/i18n build && pnpm --filter @stalk-ui/preset build && panda codegen && panda cssgen",
+    "codegen": "pnpm --filter @stalk-ui/i18n build && pnpm --filter @stalk-ui/preset build && panda codegen && panda cssgen",
+    "predev": "pnpm run codegen",
     "dev": "next dev --port 3000",
     "lint": "eslint .",
     "start": "next start --port 3000",
     "test": "pnpm --workspace-root test:a11y:docs",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "pnpm run codegen && tsc --noEmit"
   },
   "dependencies": {
     "@stalk-ui/components": "workspace:*",
