@@ -15,16 +15,15 @@ export interface BadgeProps extends HTMLAttributes<HTMLSpanElement> {
   tone?: BadgeTone
 }
 
-export const Badge = forwardRef<HTMLSpanElement, BadgeProps>(
-  ({ className, size = 'md', tone = 'accent', variant = 'subtle', ...props }, ref) => {
-    return (
-      <span
-        ref={ref}
-        className={cx(badgeRecipe({ size, variant }), css({ colorPalette: tone }), className)}
-        {...props}
-      />
-    )
-  },
-)
-
-Badge.displayName = 'Badge'
+export const Badge = /* @__PURE__ */ forwardRef<HTMLSpanElement, BadgeProps>(function Badge(
+  { className, size = 'md', tone = 'accent', variant = 'subtle', ...props },
+  ref,
+) {
+  return (
+    <span
+      ref={ref}
+      className={cx(badgeRecipe({ size, variant }), css({ colorPalette: tone }), className)}
+      {...props}
+    />
+  )
+})

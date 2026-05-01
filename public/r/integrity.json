@@ -12,11 +12,11 @@
     },
     "button": {
       "path": "/r/button.json",
-      "sha256": "68bfa8e97347a42410071cc8c8d58151c7829fc3ad929bf37a8c0ea12c9b09d4"
+      "sha256": "3b15ad6eebd8efc1e92260529aeeadb2882f7ade7afcc99b2a316d6067ada6f2"
     },
     "shadcn/button": {
       "path": "/r/shadcn/button.json",
-      "sha256": "a4b39ce99742041994e2bf76cf879dda9b34223680bda05c62d37cd284840f98"
+      "sha256": "724d496ccf0a561876169fcbf6a029c35c1f0faaaa6d4f4c6f18942a43b3bad8"
     },
     "checkbox": {
       "path": "/r/checkbox.json",
@@ -25,14 +25,6 @@
     "shadcn/checkbox": {
       "path": "/r/shadcn/checkbox.json",
       "sha256": "9972b99a8f1726b925dd69c28e6009f3dc78a95e05e7664ef8a3979a677e3283"
-    },
-    "input": {
-      "path": "/r/input.json",
-      "sha256": "6ad7a228cf0565015cc03b7df7157a1ed5895acbee25a1e9623d790578e855fb"
-    },
-    "shadcn/input": {
-      "path": "/r/shadcn/input.json",
-      "sha256": "4ac07e1e73831892265d3d839a68a750de2f081b6aceee592f0a1e17f2f61546"
     },
     "dialog": {
       "path": "/r/dialog.json",
@@ -49,6 +41,14 @@
     "shadcn/dropdown-menu": {
       "path": "/r/shadcn/dropdown-menu.json",
       "sha256": "bb71f7fd239165f2467a12d0daed2204ca9adfd2c41a78765d559e25d206367f"
+    },
+    "input": {
+      "path": "/r/input.json",
+      "sha256": "6ad7a228cf0565015cc03b7df7157a1ed5895acbee25a1e9623d790578e855fb"
+    },
+    "shadcn/input": {
+      "path": "/r/shadcn/input.json",
+      "sha256": "4ac07e1e73831892265d3d839a68a750de2f081b6aceee592f0a1e17f2f61546"
     },
     "label": {
       "path": "/r/label.json",
@@ -84,19 +84,11 @@
     },
     "switch": {
       "path": "/r/switch.json",
-      "sha256": "082c8597ba749438506764fb674a9837ebc7bcfdb0cba1c99d9fc720e3837ea2"
+      "sha256": "0eee80818ee4cb37e4543baa58ffeca8edf0937c60375cca33ccce18a254b9ef"
     },
     "shadcn/switch": {
       "path": "/r/shadcn/switch.json",
-      "sha256": "c93aee7129db39e9cfcb2deeeb1618dad68022d67b5565c37897b0559d2dbcc2"
-    },
-    "tooltip": {
-      "path": "/r/tooltip.json",
-      "sha256": "75893094a6f085623f9f6758aeb266470b219cc7d58cce0e9bd9dd10579ccaf8"
-    },
-    "shadcn/tooltip": {
-      "path": "/r/shadcn/tooltip.json",
-      "sha256": "34c464ba5e5a5ad431938092a578dfaef42de31c5b72754da51504e91a130fe0"
+      "sha256": "65c68c4ca4ec9b0535116a1a7ba6992e89239e035ffc3d5f5966e24ccbb6a106"
     },
     "textarea": {
       "path": "/r/textarea.json",
@@ -105,6 +97,14 @@
     "shadcn/textarea": {
       "path": "/r/shadcn/textarea.json",
       "sha256": "201ac6c99371608ea88cbe4e9aa941e13612ecb7555c08dadcc768c95e0f6c12"
+    },
+    "tooltip": {
+      "path": "/r/tooltip.json",
+      "sha256": "75893094a6f085623f9f6758aeb266470b219cc7d58cce0e9bd9dd10579ccaf8"
+    },
+    "shadcn/tooltip": {
+      "path": "/r/shadcn/tooltip.json",
+      "sha256": "34c464ba5e5a5ad431938092a578dfaef42de31c5b72754da51504e91a130fe0"
     }
   }
 }

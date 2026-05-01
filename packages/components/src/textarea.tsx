@@ -11,11 +11,11 @@ export interface TextareaProps extends TextareaHTMLAttributes<HTMLTextAreaElemen
   size?: TextareaSize
 }
 
-export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
-  (
+export const Textarea = /* @__PURE__ */ forwardRef<HTMLTextAreaElement, TextareaProps>(
+  function Textarea(
     { 'aria-invalid': ariaInvalid, className, disabled, invalid = false, size = 'md', ...props },
     ref,
-  ) => {
+  ) {
     const isInvalid = invalid || ariaInvalid === true || ariaInvalid === 'true'
 
     return (
@@ -30,5 +30,3 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
     )
   },
 )
-
-Textarea.displayName = 'Textarea'

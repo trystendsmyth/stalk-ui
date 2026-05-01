@@ -2,7 +2,7 @@
   "$schema": "https://stalk-ui.com/schema/v1/registry-item.json",
   "name": "switch",
   "type": "registry:ui",
-  "dependencies": ["@stalk-ui/preset"],
+  "dependencies": ["@radix-ui/react-switch", "@stalk-ui/preset"],
   "registryDependencies": [],
   "files": [
     {

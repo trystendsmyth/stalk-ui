@@ -20,43 +20,38 @@ export interface SelectTriggerProps extends ComponentPropsWithoutRef<
   size?: SelectSize
 }
 
-export const SelectTrigger = forwardRef<
+export const SelectTrigger = /* @__PURE__ */ forwardRef<
   ComponentRef<typeof SelectPrimitive.Trigger>,
   SelectTriggerProps
->(
-  (
-    { 'aria-invalid': ariaInvalid, children, className, invalid = false, size = 'md', ...props },
-    ref,
-  ) => {
-    const isInvalid = invalid || ariaInvalid === true || ariaInvalid === 'true'
-    const styles = selectRecipe({ size })
+>(function SelectTrigger(
+  { 'aria-invalid': ariaInvalid, children, className, invalid = false, size = 'md', ...props },
+  ref,
+) {
+  const isInvalid = invalid || ariaInvalid === true || ariaInvalid === 'true'
+  const styles = selectRecipe({ size })
 
-    return (
-      <SelectPrimitive.Trigger
-        ref={ref}
-        aria-invalid={isInvalid ? true : ariaInvalid}
-        className={cx(styles.trigger, className)}
-        data-invalid={isInvalid ? '' : undefined}
-        {...props}
-      >
-        {children}
-        <SelectPrimitive.Icon asChild>
-          <ChevronDown aria-hidden="true" height={16} width={16} />
-        </SelectPrimitive.Icon>
-      </SelectPrimitive.Trigger>
-    )
-  },
-)
-
-SelectTrigger.displayName = 'SelectTrigger'
-
+  return (
+    <SelectPrimitive.Trigger
+      ref={ref}
+      aria-invalid={isInvalid ? true : ariaInvalid}
+      className={cx(styles.trigger, className)}
+      data-invalid={isInvalid ? '' : undefined}
+      {...props}
+    >
+      {children}
+      <SelectPrimitive.Icon asChild>
+        <ChevronDown aria-hidden="true" height={16} width={16} />
+      </SelectPrimitive.Icon>
+    </SelectPrimitive.Trigger>
+  )
+})
 export type SelectContentProps = ComponentPropsWithoutRef<typeof SelectPrimitive.Content>
 
-export const SelectContent = forwardRef<
+export const SelectContent = /* @__PURE__ */ forwardRef<
   ComponentRef<typeof SelectPrimitive.Content>,
   SelectContentProps
->(({ children, className, position = 'popper', ...props }, ref) => {
-  const styles = selectRecipe()
+>(function SelectContent({ children, className, position = 'popper', ...props }, ref) {
+  const styles = /* @__PURE__ */ selectRecipe()
 
   return (
     <SelectPrimitive.Portal>
@@ -71,14 +66,11 @@ export const SelectContent = forwardRef<
     </SelectPrimitive.Portal>
   )
 })
-
-SelectContent.displayName = 'SelectContent'
-
-export const SelectItem = forwardRef<
+export const SelectItem = /* @__PURE__ */ forwardRef<
   ComponentRef<typeof SelectPrimitive.Item>,
   ComponentPropsWithoutRef<typeof SelectPrimitive.Item>
->(({ children, className, ...props }, ref) => {
-  const styles = selectRecipe()
+>(function SelectItem({ children, className, ...props }, ref) {
+  const styles = /* @__PURE__ */ selectRecipe()
 
   return (
     <SelectPrimitive.Item ref={ref} className={cx(styles.item, className)} {...props}>
@@ -89,32 +81,23 @@ export const SelectItem = forwardRef<
     </SelectPrimitive.Item>
   )
 })
-
-SelectItem.displayName = 'SelectItem'
-
-export const SelectLabel = forwardRef<
+export const SelectLabel = /* @__PURE__ */ forwardRef<
   ComponentRef<typeof SelectPrimitive.Label>,
   ComponentPropsWithoutRef<typeof SelectPrimitive.Label>
->(({ className, ...props }, ref) => {
-  const styles = selectRecipe()
+>(function SelectLabel({ className, ...props }, ref) {
+  const styles = /* @__PURE__ */ selectRecipe()
   return <SelectPrimitive.Label ref={ref} className={cx(styles.label, className)} {...props} />
 })
-
-SelectLabel.displayName = 'SelectLabel'
-
-export const SelectSeparator = forwardRef<
+export const SelectSeparator = /* @__PURE__ */ forwardRef<
   ComponentRef<typeof SelectPrimitive.Separator>,
   ComponentPropsWithoutRef<typeof SelectPrimitive.Separator>
->(({ className, ...props }, ref) => {
-  const styles = selectRecipe()
+>(function SelectSeparator({ className, ...props }, ref) {
+  const styles = /* @__PURE__ */ selectRecipe()
   return (
     <SelectPrimitive.Separator ref={ref} className={cx(styles.separator, className)} {...props} />
   )
 })
-
-SelectSeparator.displayName = 'SelectSeparator'
-
-export const Select = Object.assign(SelectRoot, {
+export const Select = /* @__PURE__ */ Object.assign(SelectRoot, {
   Content: SelectContent,
   Group: SelectGroup,
   Item: SelectItem,

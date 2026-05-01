@@ -11,19 +11,18 @@ export interface LabelProps extends LabelHTMLAttributes<HTMLLabelElement> {
   size?: LabelSize
 }
 
-export const Label = forwardRef<HTMLLabelElement, LabelProps>(
-  ({ children, className, required = false, size = 'md', ...props }, ref) => {
-    return (
-      <label
-        ref={ref}
-        className={cx(labelRecipe({ required, size }), className)}
-        data-required={required ? '' : undefined}
-        {...props}
-      >
-        {children}
-      </label>
-    )
-  },
-)
-
-Label.displayName = 'Label'
+export const Label = /* @__PURE__ */ forwardRef<HTMLLabelElement, LabelProps>(function Label(
+  { children, className, required = false, size = 'md', ...props },
+  ref,
+) {
+  return (
+    <label
+      ref={ref}
+      className={cx(labelRecipe({ required, size }), className)}
+      data-required={required ? '' : undefined}
+      {...props}
+    >
+      {children}
+    </label>
+  )
+})

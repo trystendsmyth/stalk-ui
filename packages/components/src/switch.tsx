@@ -16,29 +16,28 @@ export interface SwitchProps extends Omit<
   size?: SwitchSize
 }
 
-export const Switch = forwardRef<ComponentRef<typeof SwitchPrimitive.Root>, SwitchProps>(
-  (
-    { 'aria-invalid': ariaInvalid, className, id: idProp, invalid = false, size = 'md', ...props },
-    ref,
-  ) => {
-    const isInvalid = invalid || ariaInvalid === true || ariaInvalid === 'true'
-    const generatedId = useId()
-    const id = idProp ?? generatedId
-    const styles = switchRecipe({ size })
+export const Switch = /* @__PURE__ */ forwardRef<
+  ComponentRef<typeof SwitchPrimitive.Root>,
+  SwitchProps
+>(function Switch(
+  { 'aria-invalid': ariaInvalid, className, id: idProp, invalid = false, size = 'md', ...props },
+  ref,
+) {
+  const isInvalid = invalid || ariaInvalid === true || ariaInvalid === 'true'
+  const generatedId = useId()
+  const id = idProp ?? generatedId
+  const styles = switchRecipe({ size })
 
-    return (
-      <SwitchPrimitive.Root
-        ref={ref}
-        id={id}
-        aria-invalid={isInvalid ? true : ariaInvalid}
-        className={cx(styles.root, className)}
-        data-invalid={isInvalid ? '' : undefined}
-        {...props}
-      >
-        <SwitchPrimitive.Thumb className={styles.thumb} />
-      </SwitchPrimitive.Root>
-    )
-  },
-)
-
-Switch.displayName = 'Switch'
+  return (
+    <SwitchPrimitive.Root
+      ref={ref}
+      id={id}
+      aria-invalid={isInvalid ? true : ariaInvalid}
+      className={cx(styles.root, className)}
+      data-invalid={isInvalid ? '' : undefined}
+      {...props}
+    >
+      <SwitchPrimitive.Thumb className={styles.thumb} />
+    </SwitchPrimitive.Root>
+  )
+})

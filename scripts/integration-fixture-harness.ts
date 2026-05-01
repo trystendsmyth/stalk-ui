@@ -256,10 +256,9 @@ const runNextFixture = async (tempDirectory: string, env: TestEnvironment) => {
   exec('pnpm', ['exec', 'panda', 'cssgen'], tempDirectory, env)
   exec('pnpm', ['exec', 'next', 'build'], tempDirectory, env)
 
-  const nextServer = spawn('pnpm', ['exec', 'next', 'start', '--port', '3020'], {
+  const nextServer = spawnServer('pnpm', ['exec', 'next', 'start', '--port', '3020'], {
     cwd: tempDirectory,
     env,
-    stdio: 'pipe',
   })
 
   try {
@@ -301,7 +300,7 @@ const runNextFixture = async (tempDirectory: string, env: TestEnvironment) => {
       await browser.close()
     }
   } finally {
-    await terminateProcess(nextServer)
+    await terminateServer(nextServer)
   }
 }
 
@@ -449,15 +448,55 @@ const runFixture = async (fixture: IntegrationFixture, token: string) => {
   }
 }
 
-const terminateProcess = async (child: ChildProcess) => {
+// Long-running servers (verdaccio, registry, next start) are spawned with
+// `detached: true` so each becomes its own process-group leader, then signaled
+// via `process.kill(-pid, ...)` so grandchildren spawned through `pnpm dlx` /
+// `pnpm exec` wrappers also receive the signal. `stdio: 'inherit'` avoids
+// keeping piped file descriptors alive on Node's event loop after the process
+// is killed (the prior `stdio: 'pipe'` configuration was the root cause of
+// integration jobs hanging in CI after every fixture passed).
+const trackedServers = new Set<ChildProcess>()
+
+const spawnServer = (
+  command: string,
+  args: string[],
+  options: { cwd?: string; env?: TestEnvironment } = {},
+): ChildProcess => {
+  const child = spawn(command, args, {
+    cwd: options.cwd,
+    detached: true,
+    env: options.env ?? process.env,
+    stdio: 'inherit',
+  })
+  trackedServers.add(child)
+  child.once('exit', () => {
+    trackedServers.delete(child)
+  })
+  return child
+}
+
+const terminateServer = async (child: ChildProcess): Promise<void> => {
+  trackedServers.delete(child)
+
   if (child.exitCode !== null || child.signalCode !== null) {
     return
   }
 
+  if (typeof child.pid !== 'number') {
+    return
+  }
+
+  const groupId = -child.pid
+
   await new Promise<void>((resolve) => {
     const timeout = setTimeout(() => {
-      child.kill('SIGKILL')
+      try {
+        process.kill(groupId, 'SIGKILL')
+      } catch {
+        // Group already gone.
+      }
     }, 5000)
+
     const finish = () => {
       clearTimeout(timeout)
       resolve()
@@ -465,30 +504,64 @@ const terminateProcess = async (child: ChildProcess) => {
 
     child.once('exit', finish)
 
-    if (!child.kill('SIGTERM')) {
+    try {
+      process.kill(groupId, 'SIGTERM')
+    } catch {
       child.off('exit', finish)
       finish()
-      return
     }
   })
 }
 
+const terminateAllTrackedServers = async (): Promise<void> => {
+  await Promise.all(Array.from(trackedServers).map((child) => terminateServer(child)))
+}
+
+let signalHandlersRegistered = false
+
+const registerSignalHandlers = () => {
+  if (signalHandlersRegistered) return
+  signalHandlersRegistered = true
+
+  const exitWithCleanup = (code: number) => {
+    void (async () => {
+      await terminateAllTrackedServers()
+      process.exit(code)
+    })()
+  }
+
+  process.once('SIGINT', () => exitWithCleanup(130))
+  process.once('SIGTERM', () => exitWithCleanup(143))
+  process.once('uncaughtException', (error) => {
+    console.error('Integration harness uncaught exception:', error)
+    exitWithCleanup(1)
+  })
+  process.once('unhandledRejection', (reason) => {
+    console.error('Integration harness unhandled rejection:', reason)
+    exitWithCleanup(1)
+  })
+}
+
 export const runIntegrationFixtures = async (fixtures: readonly IntegrationFixture[]) => {
+  registerSignalHandlers()
+
   await rm('.verdaccio/storage', { force: true, recursive: true })
   await rm('.verdaccio/htpasswd', { force: true })
   await rm('storage', { force: true, recursive: true })
   await rm('htpasswd', { force: true })
   execFromRoot(['build:registry'])
 
-  const verdaccio = spawn('pnpm', ['dlx', 'verdaccio', '--config', '.verdaccio/config.yaml'], {
-    stdio: 'pipe',
-  })
-  const registryServer = spawn('pnpm', ['registry:serve'], {
+  const verdaccio = spawnServer('pnpm', [
+    'dlx',
+    'verdaccio',
+    '--config',
+    '.verdaccio/config.yaml',
+  ])
+  const registryServer = spawnServer('pnpm', ['registry:serve'], {
     env: {
       ...process.env,
       STALK_REGISTRY_PORT: registryPort,
     },
-    stdio: 'pipe',
   })
 
   try {
@@ -512,6 +585,6 @@ export const runIntegrationFixtures = async (fixtures: readonly IntegrationFixtu
       await runFixture(fixture, token)
     }
   } finally {
-    await Promise.all([terminateProcess(verdaccio), terminateProcess(registryServer)])
+    await Promise.all([terminateServer(verdaccio), terminateServer(registryServer)])
   }
 }

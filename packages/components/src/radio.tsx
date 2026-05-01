@@ -20,34 +20,32 @@ export interface RadioItemProps extends Omit<
 
 export type RadioProps = RadioItemProps
 
-export const RadioItem = forwardRef<ComponentRef<typeof RadioGroupPrimitive.Item>, RadioItemProps>(
-  (
-    { 'aria-invalid': ariaInvalid, className, id: idProp, invalid = false, size = 'md', ...props },
-    ref,
-  ) => {
-    const isInvalid = invalid || ariaInvalid === true || ariaInvalid === 'true'
-    const generatedId = useId()
-    const id = idProp ?? generatedId
-    const styles = radioRecipe({ size })
+export const RadioItem = /* @__PURE__ */ forwardRef<
+  ComponentRef<typeof RadioGroupPrimitive.Item>,
+  RadioItemProps
+>(function RadioItem(
+  { 'aria-invalid': ariaInvalid, className, id: idProp, invalid = false, size = 'md', ...props },
+  ref,
+) {
+  const isInvalid = invalid || ariaInvalid === true || ariaInvalid === 'true'
+  const generatedId = useId()
+  const id = idProp ?? generatedId
+  const styles = radioRecipe({ size })
 
-    return (
-      <RadioGroupPrimitive.Item
-        ref={ref}
-        id={id}
-        aria-invalid={isInvalid ? true : ariaInvalid}
-        className={cx(styles.root, className)}
-        data-invalid={isInvalid ? '' : undefined}
-        {...props}
-      >
-        <RadioGroupPrimitive.Indicator className={styles.indicator} />
-      </RadioGroupPrimitive.Item>
-    )
-  },
-)
-
-RadioItem.displayName = 'RadioItem'
-
-export const Radio = Object.assign(RadioRoot, {
+  return (
+    <RadioGroupPrimitive.Item
+      ref={ref}
+      id={id}
+      aria-invalid={isInvalid ? true : ariaInvalid}
+      className={cx(styles.root, className)}
+      data-invalid={isInvalid ? '' : undefined}
+      {...props}
+    >
+      <RadioGroupPrimitive.Indicator className={styles.indicator} />
+    </RadioGroupPrimitive.Item>
+  )
+})
+export const Radio = /* @__PURE__ */ Object.assign(RadioRoot, {
   Item: RadioItem,
   Root: RadioRoot,
 })

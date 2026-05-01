@@ -5,79 +5,84 @@ import { dialog as dialogRecipe } from 'styled-system/recipes'
 
 import type { ComponentPropsWithoutRef, ComponentRef, HTMLAttributes } from 'react'
 
-const styles = dialogRecipe()
+const styles = /* @__PURE__ */ dialogRecipe()
 
+// Pattern (per AGENTS.md): each compound part is declared as
+// `/* @__PURE__ */ forwardRef(function DialogX(...) { ... })`. The named
+// function expression supplies React's `displayName` automatically (no
+// `Component.displayName = '...'` mutation, which would be a top-level side
+// effect that pins every part into the consumer's bundle).
 export const DialogRoot = DialogPrimitive.Root
 export const DialogTrigger = DialogPrimitive.Trigger
 export const DialogPortal = DialogPrimitive.Portal
 
-export const DialogClose = forwardRef<
+export const DialogClose = /* @__PURE__ */ forwardRef<
   ComponentRef<typeof DialogPrimitive.Close>,
   ComponentPropsWithoutRef<typeof DialogPrimitive.Close>
->(({ className, ...props }, ref) => (
-  <DialogPrimitive.Close ref={ref} className={cx(styles.close, className)} {...props} />
-))
+>(function DialogClose({ className, ...props }, ref) {
+  return <DialogPrimitive.Close ref={ref} className={cx(styles.close, className)} {...props} />
+})
 
-DialogClose.displayName = 'DialogClose'
-
-export const DialogOverlay = forwardRef<
+export const DialogOverlay = /* @__PURE__ */ forwardRef<
   ComponentRef<typeof DialogPrimitive.Overlay>,
   ComponentPropsWithoutRef<typeof DialogPrimitive.Overlay>
->(({ className, ...props }, ref) => (
-  <DialogPrimitive.Overlay ref={ref} className={cx(styles.overlay, className)} {...props} />
-))
+>(function DialogOverlay({ className, ...props }, ref) {
+  return <DialogPrimitive.Overlay ref={ref} className={cx(styles.overlay, className)} {...props} />
+})
 
-DialogOverlay.displayName = 'DialogOverlay'
-
-export const DialogContent = forwardRef<
+export const DialogContent = /* @__PURE__ */ forwardRef<
   ComponentRef<typeof DialogPrimitive.Content>,
   ComponentPropsWithoutRef<typeof DialogPrimitive.Content>
->(({ children, className, ...props }, ref) => (
-  <DialogPortal>
-    <DialogOverlay />
-    <DialogPrimitive.Content ref={ref} className={cx(styles.content, className)} {...props}>
-      {children}
-    </DialogPrimitive.Content>
-  </DialogPortal>
-))
+>(function DialogContent({ children, className, ...props }, ref) {
+  return (
+    <DialogPortal>
+      <DialogOverlay />
+      <DialogPrimitive.Content ref={ref} className={cx(styles.content, className)} {...props}>
+        {children}
+      </DialogPrimitive.Content>
+    </DialogPortal>
+  )
+})
 
-DialogContent.displayName = 'DialogContent'
+export const DialogHeader = /* @__PURE__ */ forwardRef<
+  HTMLDivElement,
+  HTMLAttributes<HTMLDivElement>
+>(function DialogHeader({ className, ...props }, ref) {
+  return <div ref={ref} className={cx(styles.header, className)} {...props} />
+})
 
-export const DialogHeader = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
-  ({ className, ...props }, ref) => (
-    <div ref={ref} className={cx(styles.header, className)} {...props} />
-  ),
-)
-
-DialogHeader.displayName = 'DialogHeader'
-
-export const DialogTitle = forwardRef<
+export const DialogTitle = /* @__PURE__ */ forwardRef<
   ComponentRef<typeof DialogPrimitive.Title>,
   ComponentPropsWithoutRef<typeof DialogPrimitive.Title>
->(({ className, ...props }, ref) => (
-  <DialogPrimitive.Title ref={ref} className={cx(styles.title, className)} {...props} />
-))
+>(function DialogTitle({ className, ...props }, ref) {
+  return <DialogPrimitive.Title ref={ref} className={cx(styles.title, className)} {...props} />
+})
 
-DialogTitle.displayName = 'DialogTitle'
-
-export const DialogDescription = forwardRef<
+export const DialogDescription = /* @__PURE__ */ forwardRef<
   ComponentRef<typeof DialogPrimitive.Description>,
   ComponentPropsWithoutRef<typeof DialogPrimitive.Description>
->(({ className, ...props }, ref) => (
-  <DialogPrimitive.Description ref={ref} className={cx(styles.description, className)} {...props} />
-))
+>(function DialogDescription({ className, ...props }, ref) {
+  return (
+    <DialogPrimitive.Description
+      ref={ref}
+      className={cx(styles.description, className)}
+      {...props}
+    />
+  )
+})
 
-DialogDescription.displayName = 'DialogDescription'
+export const DialogFooter = /* @__PURE__ */ forwardRef<
+  HTMLDivElement,
+  HTMLAttributes<HTMLDivElement>
+>(function DialogFooter({ className, ...props }, ref) {
+  return <div ref={ref} className={cx(styles.footer, className)} {...props} />
+})
 
-export const DialogFooter = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
-  ({ className, ...props }, ref) => (
-    <div ref={ref} className={cx(styles.footer, className)} {...props} />
-  ),
-)
-
-DialogFooter.displayName = 'DialogFooter'
-
-export const Dialog = Object.assign(DialogRoot, {
+// `/* @__PURE__ */` lets bundlers drop the `Object.assign(...)` call (and the
+// referenced parts) when consumers import only named exports like
+// `import { DialogTrigger } from '...'`. Without it, the assign is treated as
+// side-effecting and pins every compound part into the consumer's bundle.
+export const Dialog = /* @__PURE__ */ Object.assign(DialogRoot, {
   Close: DialogClose,
   Content: DialogContent,
   Description: DialogDescription,

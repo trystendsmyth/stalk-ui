@@ -17,60 +17,56 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: ButtonVariant
 }
 
-export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-  (
-    {
-      asChild = false,
-      children,
-      className,
-      disabled,
-      leadingIcon,
-      loading = false,
-      onClick,
-      size = 'md',
-      trailingIcon,
-      type = 'button',
-      variant = 'solid',
-      ...props
-    },
-    ref,
-  ) => {
-    const isDisabled = disabled === true || loading
-    const Component = asChild ? Slot : 'button'
+export const Button = /* @__PURE__ */ forwardRef<HTMLButtonElement, ButtonProps>(function Button(
+  {
+    asChild = false,
+    children,
+    className,
+    disabled,
+    leadingIcon,
+    loading = false,
+    onClick,
+    size = 'md',
+    trailingIcon,
+    type = 'button',
+    variant = 'solid',
+    ...props
+  },
+  ref,
+) {
+  const isDisabled = disabled === true || loading
+  const Component = asChild ? Slot : 'button'
 
-    const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
-      if (isDisabled) {
-        event.preventDefault()
-        event.stopPropagation()
-        return
-      }
-
-      onClick?.(event)
+  const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
+    if (isDisabled) {
+      event.preventDefault()
+      event.stopPropagation()
+      return
     }
 
-    return (
-      <Component
-        ref={ref}
-        aria-disabled={asChild && isDisabled ? true : undefined}
-        className={cx(buttonRecipe({ size, variant }), className)}
-        data-loading={loading ? '' : undefined}
-        disabled={asChild ? undefined : isDisabled}
-        onClick={handleClick}
-        type={asChild ? undefined : type}
-        {...props}
-      >
-        {asChild ? (
-          children
-        ) : (
-          <>
-            {leadingIcon === undefined ? null : <span aria-hidden="true">{leadingIcon}</span>}
-            <span>{children}</span>
-            {trailingIcon === undefined ? null : <span aria-hidden="true">{trailingIcon}</span>}
-          </>
-        )}
-      </Component>
-    )
-  },
-)
+    onClick?.(event)
+  }
 
-Button.displayName = 'Button'
+  return (
+    <Component
+      ref={ref}
+      aria-disabled={asChild && isDisabled ? true : undefined}
+      className={cx(buttonRecipe({ size, variant }), className)}
+      data-loading={loading ? '' : undefined}
+      disabled={asChild ? undefined : isDisabled}
+      onClick={handleClick}
+      type={asChild ? undefined : type}
+      {...props}
+    >
+      {asChild ? (
+        children
+      ) : (
+        <>
+          {leadingIcon === undefined ? null : <span aria-hidden="true">{leadingIcon}</span>}
+          <span>{children}</span>
+          {trailingIcon === undefined ? null : <span aria-hidden="true">{trailingIcon}</span>}
+        </>
+      )}
+    </Component>
+  )
+})
