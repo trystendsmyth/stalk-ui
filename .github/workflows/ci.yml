@@ -4,6 +4,10 @@ on:
   pull_request:
   push:
     branches: [main]
+  schedule:
+    # Nightly run keeps `pnpm audit` and the integration suite green even
+    # when nobody opened a PR that day.
+    - cron: '23 6 * * *'
 
 concurrency:
   group: ci-${{ github.ref }}
@@ -182,6 +186,45 @@ jobs:
       - run: pnpm install --frozen-lockfile
       - run: pnpm check-registry-deps
 
+  audit-suite:
+    # Multiple lightweight assurance gates collapsed into one job to keep CI
+    # parallelism and runner-minute usage in check.
+    name: audit suite
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: '.nvmrc'
+          cache: 'pnpm'
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm build:registry
+      - run: pnpm check-component-completeness
+      - run: pnpm check-semantic-tokens
+      - run: pnpm check-i18n-coverage
+      - run: pnpm check-no-stray-baselines
+
+  baseline-pr-size:
+    name: baseline PR size
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: '.nvmrc'
+          cache: 'pnpm'
+      - run: pnpm install --frozen-lockfile
+      - name: Check baseline PR size
+        env:
+          STALK_BASE_REF: origin/${{ github.base_ref }}
+          STALK_PR_LABELS: ${{ join(github.event.pull_request.labels.*.name, ',') }}
+        run: pnpm check-baseline-pr-size
+
   i18n-exports-drift:
     runs-on: ubuntu-latest
     steps:
@@ -230,3 +273,19 @@ jobs:
           cache: 'pnpm'
       - run: pnpm install --frozen-lockfile
       - run: pnpm test:publish
+
+  pnpm-audit:
+    name: pnpm audit
+    # Nightly + on PRs that touch dependencies. We do not block merges on
+    # transitive dev-only advisories.
+    if: github.event_name == 'schedule' || github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: '.nvmrc'
+          cache: 'pnpm'
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm audit --prod --audit-level high

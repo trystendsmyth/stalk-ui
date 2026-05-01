@@ -1,0 +1,60 @@
+name: Lost Pixel baseline refresh
+
+# Manually triggered workflow that rebuilds Storybook, regenerates Lost
+# Pixel baselines from scratch, and opens a PR with the refreshed images.
+# Intended for global visual changes (token renames, theme overhauls) that
+# would otherwise blow past `check-baseline-pr-size`.
+
+on:
+  workflow_dispatch:
+    inputs:
+      reason:
+        description: 'Why are baselines being refreshed?'
+        required: true
+        type: string
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: '.nvmrc'
+          cache: 'pnpm'
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm lost-pixel:install
+      - name: Wipe existing baselines
+        run: rm -rf apps/storybook/.lost-pixel/baseline && mkdir -p apps/storybook/.lost-pixel/baseline
+      - name: Build Storybook and capture fresh baselines
+        run: |
+          # `lost-pixel update` rewrites the baseline directory in-place.
+          pnpm --filter @stalk-ui/storybook build
+          npx lost-pixel update --config lostpixel.config.ts
+      - name: Open refresh PR
+        uses: peter-evans/create-pull-request@v7
+        with:
+          branch: chore/baseline-refresh-${{ github.run_id }}
+          base: main
+          title: 'chore(storybook): refresh Lost Pixel baselines'
+          labels: |
+            baseline-only
+          commit-message: |
+            chore(storybook): refresh Lost Pixel baselines
+
+            Reason: ${{ inputs.reason }}
+          body: |
+            Automated baseline refresh.
+
+            **Reason provided by maintainer:** ${{ inputs.reason }}
+
+            This PR is labelled `baseline-only`, which exempts it from the
+            usual `check-baseline-pr-size` cap. Verify the visual changes are
+            intentional before merging.
+          add-paths: |
+            apps/storybook/.lost-pixel/baseline/**

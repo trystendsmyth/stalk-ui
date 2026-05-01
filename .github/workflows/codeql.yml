@@ -1,9 +1,17 @@
 name: CodeQL
 
+# Static application security testing for JavaScript/TypeScript. CodeQL is
+# the SAST scan; CVEs in third-party deps are surfaced separately by
+# Dependabot, the dependency-review action on pull_request, and the nightly
+# `pnpm audit` job in ci.yml.
+
 on:
   pull_request:
+    branches: [main]
   push:
     branches: [main]
+  schedule:
+    - cron: '17 5 * * *'
 
 permissions:
   actions: read
@@ -12,18 +20,20 @@ permissions:
 
 jobs:
   analyze:
-    name: analyze
+    name: analyze (${{ matrix.language }})
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
-        language: ['javascript-typescript']
+        language: [javascript-typescript]
     steps:
       - uses: actions/checkout@v4
-      - uses: github/codeql-action/init@v4
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v3
         with:
           languages: ${{ matrix.language }}
-      - uses: github/codeql-action/autobuild@v4
-      - uses: github/codeql-action/analyze@v4
+          queries: security-extended
+      - name: Perform CodeQL analysis
+        uses: github/codeql-action/analyze@v3
         with:
           category: '/language:${{ matrix.language }}'

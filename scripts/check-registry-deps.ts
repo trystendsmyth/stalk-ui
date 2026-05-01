@@ -49,11 +49,7 @@ const collectExternalPackages = (sourcePath: string): Set<string> => {
 
   for (const declaration of declarations) {
     const specifier = declaration.getModuleSpecifierValue()
-    if (
-      isRelativeSpecifier(specifier) ||
-      isNodeBuiltin(specifier) ||
-      isAllowedNonDep(specifier)
-    ) {
+    if (isRelativeSpecifier(specifier) || isNodeBuiltin(specifier) || isAllowedNonDep(specifier)) {
       continue
     }
     externals.add(packageNameFromSpecifier(specifier))
@@ -65,11 +61,7 @@ const collectExternalPackages = (sourcePath: string): Set<string> => {
     const [argument] = expression.getArguments()
     if (argument?.getKind() !== SyntaxKind.StringLiteral) continue
     const specifier = argument.asKindOrThrow(SyntaxKind.StringLiteral).getLiteralText()
-    if (
-      isRelativeSpecifier(specifier) ||
-      isNodeBuiltin(specifier) ||
-      isAllowedNonDep(specifier)
-    ) {
+    if (isRelativeSpecifier(specifier) || isNodeBuiltin(specifier) || isAllowedNonDep(specifier)) {
       continue
     }
     externals.add(packageNameFromSpecifier(specifier))
@@ -94,9 +86,7 @@ for (const item of registryItems) {
     try {
       externals = collectExternalPackages(absoluteSource)
     } catch (error) {
-      failures.push(
-        `${item.name}: failed to parse ${file.sourcePath}: ${(error as Error).message}`,
-      )
+      failures.push(`${item.name}: failed to parse ${file.sourcePath}: ${(error as Error).message}`)
       continue
     }
 
@@ -154,8 +144,7 @@ if (failures.length > 0) {
 }
 
 const sourceFileCount = registryItems.reduce(
-  (count, item) =>
-    count + item.files.filter((file) => Boolean(file.sourcePath)).length,
+  (count, item) => count + item.files.filter((file) => Boolean(file.sourcePath)).length,
   0,
 )
 

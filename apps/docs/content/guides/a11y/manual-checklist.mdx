@@ -1,0 +1,84 @@
+---
+title: Manual accessibility checklist
+description: What to verify by hand for every Stalk UI component before tagging a release.
+---
+
+Axe and ESLint catch most regressions, but they cannot evaluate screen-reader
+output, focus restoration timing, or platform-specific gestures. Run this
+checklist on every component touched in a release branch before cutting a
+tagged release.
+
+## Tools
+
+Verify each component on:
+
+- **NVDA + Firefox** (Windows) — the most common screen-reader/browser combo for accessibility audits.
+- **VoiceOver + Safari** (macOS) — cross-checks Safari's heuristics, which differ from Chromium.
+- **VoiceOver + Safari** (iOS) — touch + rotor gestures only; do not rely on a hardware keyboard.
+- **TalkBack + Chrome** (Android) — confirms `aria-*` overrides land correctly on Android's WebView.
+- **Keyboard only** in Chrome — no pointer, no screen reader; ensure every interaction is reachable.
+- **System reduced motion** — toggled on; transitions should shrink or disable, not run faster.
+- **System high contrast** — Windows High Contrast Mode (WHCM); borders and focus rings must remain visible.
+
+## Per-component checklist
+
+### Dialog / AlertDialog / Sheet / Drawer
+
+- [ ] Focus moves into the dialog when it opens (without screen-reader users hearing the previous trigger).
+- [ ] Focus returns to the trigger when the dialog closes (or to a documented alternative if the trigger was removed).
+- [ ] Tab cycles within the dialog; Shift+Tab cycles backward; focus never escapes the dialog.
+- [ ] Esc closes the dialog and returns focus.
+- [ ] Background page is inert (cannot be tab-reached, cannot be announced).
+- [ ] Screen reader announces the dialog title on open ("dialog, &lt;title&gt;").
+
+### DropdownMenu / ContextMenu / Menubar / NavigationMenu
+
+- [ ] First-character typeahead jumps to the matching item.
+- [ ] ↑ / ↓ / Home / End move between items.
+- [ ] → opens a submenu and focuses its first item; ← returns to the parent.
+- [ ] Esc closes the menu and returns focus to the trigger.
+- [ ] Disabled items are skipped by keyboard but still announced.
+- [ ] Screen reader speaks the role ("menu", "menu item", "submenu, &lt;name&gt;") and any state ("checked").
+
+### Select / Combobox / Command
+
+- [ ] Listbox is announced with the option count and selection state.
+- [ ] Type-ahead matches against `<option>` text, not the visible label markup.
+- [ ] Selected option is reflected in the trigger label.
+- [ ] Required state propagates to the assistive tree (`aria-required` on the appropriate element).
+
+### Toast (Sonner)
+
+- [ ] Toasts announce via the live region without stealing focus.
+- [ ] Action buttons in a toast are reachable by keyboard (toast region must be in tab order on focus-trap-friendly platforms).
+- [ ] Time-out is paused on hover/focus so screen-reader users can read longer messages.
+
+### Calendar / DatePicker
+
+- [ ] Arrow keys navigate by day; PageUp / PageDown by month; Shift+PageUp/PageDown by year.
+- [ ] Currently-focused date is in the tab order; other dates are not.
+- [ ] The selected date is announced ("&lt;day-of-week&gt; &lt;month&gt; &lt;day&gt; &lt;year&gt;, selected").
+- [ ] Disabled / out-of-range dates are announced as such, not just visually dimmed.
+
+### Form / Validation
+
+- [ ] Each input has a programmatic label (visible or `aria-labelledby`).
+- [ ] Error messages are wired with `aria-describedby` and announced on validation.
+- [ ] Required fields surface "required" in the assistive tree.
+- [ ] Submit failures move focus to the first invalid input (or to a summary).
+
+## Sign-off
+
+Record the device matrix in the release issue:
+
+```
+- NVDA + Firefox 120 — pass
+- VO + Safari 17 — pass
+- VO + iOS 17 — pass
+- TalkBack + Chrome 121 — pass
+- Keyboard only, Chrome 121 — pass
+- WHCM — pass
+- Reduced motion — pass
+```
+
+Open follow-up issues for any non-blocking findings before tagging the release.

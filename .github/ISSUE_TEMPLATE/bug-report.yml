@@ -1,0 +1,70 @@
+name: Bug report
+description: Report a defect in a Stalk UI component, the CLI, or the preset.
+title: 'bug: '
+labels:
+  - bug
+  - triage
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to file a report. The more detail you can give us, the faster we can fix it.
+  - type: input
+    id: package
+    attributes:
+      label: Package
+      description: Which package or component is affected? (e.g. `@stalk-ui/cli`, `Dialog`, `@stalk-ui/preset`).
+      placeholder: '@stalk-ui/cli'
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Version
+      description: Run `pnpm list @stalk-ui/cli @stalk-ui/preset @stalk-ui/i18n` and paste the relevant lines.
+    validations:
+      required: true
+  - type: dropdown
+    id: framework
+    attributes:
+      label: Framework
+      options:
+        - 'Next.js (App Router)'
+        - 'Next.js (Pages Router)'
+        - Vite + React
+        - Remix / React Router
+        - Astro
+        - Other (please describe in the reproduction)
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: Describe the bug
+      description: What did you expect to happen? What happened instead?
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Reproduction
+      description: Minimal repro (StackBlitz / CodeSandbox link or copy-pasteable snippet). Issues without a repro will be closed.
+      placeholder: |
+        ```tsx
+        // ...
+        ```
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: 'Run `npx envinfo --system --binaries --browsers` (or paste manually).'
+      render: shell
+  - type: checkboxes
+    id: a11y
+    attributes:
+      label: Accessibility check
+      description: Stalk UI treats accessibility regressions as P0. Tick this if applicable.
+      options:
+        - label: This bug affects keyboard navigation, screen-reader output, focus management, or ARIA semantics.

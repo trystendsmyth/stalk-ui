@@ -551,12 +551,7 @@ export const runIntegrationFixtures = async (fixtures: readonly IntegrationFixtu
   await rm('htpasswd', { force: true })
   execFromRoot(['build:registry'])
 
-  const verdaccio = spawnServer('pnpm', [
-    'dlx',
-    'verdaccio',
-    '--config',
-    '.verdaccio/config.yaml',
-  ])
+  const verdaccio = spawnServer('pnpm', ['dlx', 'verdaccio', '--config', '.verdaccio/config.yaml'])
   const registryServer = spawnServer('pnpm', ['registry:serve'], {
     env: {
       ...process.env,

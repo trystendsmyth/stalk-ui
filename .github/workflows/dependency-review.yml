@@ -1,18 +1,21 @@
 name: Dependency Review
 
+# Surfaces known CVEs and license violations in any dependency added or
+# upgraded by a PR. Complementary to CodeQL (SAST on our own code) and the
+# nightly `pnpm audit` job (CVEs across the full install graph).
+
 on:
   pull_request:
 
 permissions:
   contents: read
-  pull-requests: write
 
 jobs:
-  dependency-review:
+  review:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions/dependency-review-action@v4
         with:
-          fail-on-severity: moderate
-          comment-summary-in-pr: true
+          fail-on-severity: high
+          comment-summary-in-pr: on-failure
