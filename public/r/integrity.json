@@ -20,11 +20,11 @@
     },
     "checkbox": {
       "path": "/r/checkbox.json",
-      "sha256": "ee7274e4c395dddbdfb5d636ae8c16337367e2b039db4e258cb7dbfb4be3ae24"
+      "sha256": "a1270820b5806a8e471145445fa102e7a407c08e6ce5e8fff918b4e8b99012aa"
     },
     "shadcn/checkbox": {
       "path": "/r/shadcn/checkbox.json",
-      "sha256": "3d7839342c0a237d00bb14beb1d5b39ce155ec7a2425a01c040c2edfc8f79779"
+      "sha256": "9972b99a8f1726b925dd69c28e6009f3dc78a95e05e7664ef8a3979a677e3283"
     },
     "input": {
       "path": "/r/input.json",
@@ -76,11 +76,11 @@
     },
     "select": {
       "path": "/r/select.json",
-      "sha256": "8c217ee91f269a935eccaf290d96d63390122c7405d19ee29d209ef65c0fcb60"
+      "sha256": "74947fad4570b080b59cd208d581947c3cb9f97e614e8259ab652b4176919643"
     },
     "shadcn/select": {
       "path": "/r/shadcn/select.json",
-      "sha256": "f5a35360736b0bb4e8dea84e553ffa07b8f34a548b591a9b0d59e79c47977e1b"
+      "sha256": "5e849cd30f22254fa3a4356bb18afa2a940c7bc8b8c7afabbc6e09c6133cde81"
     },
     "switch": {
       "path": "/r/switch.json",

@@ -2,7 +2,7 @@ import { createHash } from 'node:crypto'
 import { mkdirSync, readFileSync, writeFileSync } from 'node:fs'
 import { dirname, join } from 'node:path'
 
-import { format } from 'prettier'
+import { format, resolveConfig } from 'prettier'
 import { rimrafSync } from 'rimraf'
 
 import { registryIndexSchema, registryItemSchema, schemaVersion } from '../registry/schema'
@@ -23,7 +23,11 @@ const shadcnCompatibilityHeader =
 
 const writeJson = async (path: string, value: unknown) => {
   mkdirSync(dirname(path), { recursive: true })
-  const content = await format(stableJson(value), { parser: 'json' })
+  // Resolve the repo's .prettierrc config explicitly. `format()` does not load
+  // it from `filepath` alone, which would let printWidth drift between this
+  // script and the lint-staged hook and reintroduce registry JSON drift.
+  const resolved = (await resolveConfig(path)) ?? {}
+  const content = await format(stableJson(value), { ...resolved, filepath: path, parser: 'json' })
   writeFileSync(path, content)
   return content
 }
