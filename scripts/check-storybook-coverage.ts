@@ -1,11 +1,5 @@
-// Builds Storybook and verifies that every expected story (one per named
-// CSF export, plus the foundation tokens MDX docs page) is present in the
-// generated index. This is purely a COVERAGE check — it does NOT run axe-core
-// against the built stories. The Storybook a11y addon (configured in
-// `apps/storybook/.storybook/preview.ts`) runs axe interactively in dev and
-// reports violations through the Storybook test runner pipeline; this gate
-// only ensures we didn't accidentally drop a story file or rename an export
-// in a way that hides it from the index.
+// Builds Storybook and verifies every expected story is present in the
+// generated index. Story coverage only; axe is handled by the a11y addon.
 
 import { execFileSync } from 'node:child_process'
 import { readFileSync, readdirSync } from 'node:fs'

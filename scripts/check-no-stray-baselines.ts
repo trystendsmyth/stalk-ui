@@ -1,6 +1,5 @@
-// Guard against accidentally committing Lost Pixel `current/` or `difference/`
-// artifacts. Only the curated `baseline/` directory should ever be tracked
-// by git. CI exit code is non-zero if any stray PNG slipped into the index.
+// Fails if any Lost Pixel `current/` or `difference/` artifacts are tracked.
+// Only `baseline/` should be committed.
 
 import { execSync } from 'node:child_process'
 

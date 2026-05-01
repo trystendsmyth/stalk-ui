@@ -1,13 +1,5 @@
-// For every entry in `registry/ui/`, assert the full set of artifacts exists:
-//   - Source:   packages/components/src/<name>.tsx
-//   - Test:     packages/components/src/<name>.test.tsx
-//   - Story:    packages/components/src/<name>.stories.tsx
-//   - Manifest: registry/ui/<name>.ts
-//   - Generated registry JSON: public/r/<name>.json + public/r/shadcn/<name>.json
-//   - Recipe:   either packages/preset/src/recipes/<recipe>.ts
-//               or     packages/preset/src/slot-recipes/<recipe>.ts
-// Exits non-zero with a list of every missing artifact so a single CI run
-// reports the full gap, not just the first failure.
+// Verifies every registry item has the full set of artifacts: source, test,
+// story, manifest, generated JSON (native + shadcn), and declared recipe(s).
 
 import { existsSync } from 'node:fs'
 import { dirname, resolve } from 'node:path'

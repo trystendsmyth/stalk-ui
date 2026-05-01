@@ -1,9 +1,5 @@
-// Asserts every v1 target locale exposes the same key-shape as the bundled
-// `en` baseline. Missing keys (untranslated) and extra keys (typo or stale
-// translation) both fail CI.
-//
-// Target locales for v1: en, ar, es, zh-CN. Update `TARGET_LOCALES` if the
-// release scope changes.
+// Asserts every locale matches the `en` key-shape and has non-empty,
+// non-verbatim translations. Update TARGET_LOCALES when scope changes.
 
 import { ar } from '../packages/i18n/src/locales/ar'
 import { en } from '../packages/i18n/src/locales/en'
@@ -64,9 +60,6 @@ for (const [locale, dictionary] of Object.entries(TARGET_LOCALES)) {
     if (value.trim() === '') {
       failures.push(`${locale}: key '${key}' is empty — every key must have a translation`)
     }
-    // Detect untranslated values that accidentally copy the English string
-    // verbatim. Allow proper-noun-only strings that are identical across
-    // locales by design (currently none, but kept as a comment for future).
     if (locale !== 'en' && value === baseline.get(key)) {
       failures.push(
         `${locale}: key '${key}' has the same value as 'en' (likely untranslated): ${JSON.stringify(value)}`,

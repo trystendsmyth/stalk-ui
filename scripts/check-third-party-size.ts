@@ -1,10 +1,5 @@
-// Soft cap on the install-time disk footprint of any single third-party
-// runtime dependency referenced by a registry component. Designed to catch
-// accidental regressions like swapping a 30 KB primitive for a 2 MB
-// alternative — not to enforce a hard byte budget.
-//
-// Cap: 600 KB (uncompressed) per package by default. Override per-package
-// via PACKAGE_SIZE_OVERRIDES if a primitive legitimately exceeds it.
+// Soft cap on the install-time disk footprint of each third-party runtime
+// dep. Default 600 KB; override per-package via PACKAGE_SIZE_OVERRIDES.
 
 import { readdirSync, statSync } from 'node:fs'
 import { dirname, join, resolve } from 'node:path'
@@ -15,15 +10,13 @@ import { registryItems } from '../registry/ui'
 const projectRoot = resolve(dirname(fileURLToPath(import.meta.url)), '..')
 const DEFAULT_CAP_BYTES = 600 * 1024
 
-// Some components are legitimately larger than the default budget. Bump
-// individual caps here with a comment explaining why.
+// Override individual caps here when a primitive legitimately exceeds the
+// default. Add a brief comment explaining why.
 const PACKAGE_SIZE_OVERRIDES: Record<string, number> = {
-  // `@radix-ui/react-dropdown-menu` ships its own copy of focus-scope,
-  // dismissable-layer, and roving-focus utilities. Currently ~700 KB.
+  // Bundle their own focus-scope/dismissable-layer/roving-focus helpers.
   '@radix-ui/react-dropdown-menu': 1 * 1024 * 1024,
   '@radix-ui/react-select': 1 * 1024 * 1024,
-  // `lucide-react` ships ~1500 individual icon modules. The whole package
-  // is large but tree-shakes per-icon at the consumer's bundler.
+  // ~1500 icon modules; tree-shakes per-icon at the consumer's bundler.
   'lucide-react': 30 * 1024 * 1024,
 }
 
@@ -87,7 +80,7 @@ const findPackageDirectory = (packageName: string): string | undefined => {
     try {
       if (statSync(candidate).isDirectory()) return candidate
     } catch {
-      // Try next.
+      continue
     }
   }
   return undefined
@@ -119,9 +112,7 @@ if (failures.length > 0) {
   console.error(
     `\n${String(failures.length)} package${failures.length === 1 ? '' : 's'} exceed their install-size cap.`,
   )
-  console.error(
-    'If the size is justified (a Radix primitive that bundles many helpers, etc.), add an explicit override to PACKAGE_SIZE_OVERRIDES with a comment.',
-  )
+  console.error('Justified bumps go in PACKAGE_SIZE_OVERRIDES with a comment.')
   process.exit(1)
 }
 

@@ -18,18 +18,11 @@ const readMessage = (messages: MessageDictionary, key: string): string | undefin
 }
 
 /**
- * Resolve a localized string with a built-in `en` fallback.
+ * Resolve a localized string. Falls back to the bundled `en` dictionary when
+ * `<StalkI18nProvider>` is not mounted, so component copies can call `t()`
+ * without requiring the provider in the consumer's tree.
  *
- * Unlike `useStalkI18n`, this hook does not require `<StalkI18nProvider>` to
- * be mounted. When no provider is present it falls back to the bundled `en`
- * dictionary, so component copies can call `t()` without forcing a hard
- * dependency on the i18n provider on the consumer's tree.
- *
- * Resolution order:
- *   1. provider messages
- *   2. bundled `en` dictionary
- *   3. caller-supplied fallback
- *   4. the key itself
+ * Resolution: provider → bundled `en` → caller fallback → key.
  */
 export const useStalkTranslation = () => {
   const context = useContext(StalkI18nContext)

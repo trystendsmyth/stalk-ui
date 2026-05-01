@@ -1,8 +1,5 @@
-// Emits a markdown summary of Lost Pixel baseline changes (added/modified/
-// removed) for the current PR vs `origin/main`. The output is intended to be
-// posted as a PR comment by the visual-regression workflow so reviewers can
-// see at a glance which screenshots changed without scrolling through a wall
-// of binary diffs.
+// Writes a markdown summary of Lost Pixel baseline changes (added/modified/
+// removed) for the visual-regression workflow's PR comment.
 
 import { execSync } from 'node:child_process'
 import { writeFileSync } from 'node:fs'

@@ -1,12 +1,5 @@
-// AST audit: every color value used in a recipe, slot recipe, component
-// source, or story must be a semantic-token reference (`{colors.fg.muted}`,
-// `bg.default`, etc.). Raw hex/rgb/hsl literals fail CI.
-//
-// We do NOT use a regex on the file text because that would produce false
-// positives on tokens like "borderRadius": "8px" and false negatives on
-// embedded color literals inside template strings. Instead we walk the AST
-// with ts-morph and inspect every string literal that appears as the value
-// of a CSS-property-like key.
+// AST audit: color values in recipes, slot recipes, and component sources
+// must be semantic-token references. Raw hex/rgb/hsl/named colors fail CI.
 
 import { readdirSync, statSync } from 'node:fs'
 import { dirname, join, resolve } from 'node:path'
@@ -50,8 +43,6 @@ const COLOR_PROPERTY_KEYS = new Set([
   'textDecorationColor',
 ])
 
-// Allow-listed color words that are not themable (used for SVG defaults,
-// transparent overlays, system keywords, etc.).
 const ALLOWED_RAW_COLOR_LITERALS = new Set([
   'currentColor',
   'inherit',
@@ -65,11 +56,9 @@ const isRawColorLiteral = (value: string): boolean => {
   const trimmed = value.trim()
   if (trimmed === '') return false
   if (ALLOWED_RAW_COLOR_LITERALS.has(trimmed)) return false
-  // Token references look like `{colors.fg.muted}` or are bare token paths
-  // like `fg.muted`. PandaCSS resolves both at codegen.
+  // Panda token refs: `{colors.fg.muted}` or bare paths like `fg.muted`.
   if (trimmed.startsWith('{') && trimmed.endsWith('}')) return false
   if (/^[a-z][\w]*(\.[\w]+)+$/i.test(trimmed)) return false
-  // Hex / rgb / hsl / oklch / named CSS colors are all flagged.
   if (/^#([0-9a-f]{3,4}){1,2}$/i.test(trimmed)) return true
   if (/^(rgb|rgba|hsl|hsla|oklch|oklab|lab|lch|color)\s*\(/i.test(trimmed)) return true
   if (/^(red|blue|green|yellow|orange|purple|pink|gray|grey|black|white)$/i.test(trimmed)) {
@@ -89,7 +78,6 @@ const collectFiles = (directory: string): string[] => {
         continue
       }
       if (entry.endsWith('.ts') || entry.endsWith('.tsx') || entry.endsWith('.stories.tsx')) {
-        // Skip generated barrels and the index files which only re-export.
         if (entry === 'index.ts') continue
         out.push(full)
       }

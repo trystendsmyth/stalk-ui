@@ -9,20 +9,11 @@ const projectRoot = resolve(dirname(fileURLToPath(import.meta.url)), '..')
 const componentsRoot = join(projectRoot, 'packages/components/src')
 
 interface ComponentSpec {
-  // The component file (without extension) under packages/components/src/.
   file: string
-  // Named export to import in the fixture (any single named export is fine —
-  // we just need to prove the whole module isn't pulled in).
   importedExport: string
-  // Sibling exports from the same module that MUST NOT appear in the bundled
-  // output (proves they were tree-shaken).
   forbiddenExports: string[]
 }
 
-// One spec per non-trivial compound component. Single-export modules (Badge,
-// Input, Label, Textarea) cannot be tree-shaken at the named-export level so
-// they are not represented here; the dependency on the named-export pattern
-// is still enforced by `verify-tree-shaking-named-exports` below.
 const compoundSpecs: ComponentSpec[] = [
   {
     file: 'dialog',
@@ -40,12 +31,10 @@ const compoundSpecs: ComponentSpec[] = [
   {
     file: 'dropdown-menu',
     importedExport: 'DropdownMenuTrigger',
+    // Omits Item/Label/Shortcut because those suffixes also appear in the
+    // radix stub and the stub-vs-source distinction needs deeper analysis.
     forbiddenExports: [
       'DropdownMenuContent',
-      // We omit `DropdownMenuItem`, `DropdownMenuLabel`, `DropdownMenuShortcut`
-      // because their suffixes (Item, Label, Shortcut) appear in the radix
-      // stub's exports too — distinguishing the source's export from the
-      // bundler's retained stub would require a more invasive analysis.
       'DropdownMenuSeparator',
       'DropdownMenuCheckboxItem',
       'DropdownMenuSubContent',
@@ -74,9 +63,6 @@ const compoundSpecs: ComponentSpec[] = [
   },
 ]
 
-// Components that are simple enough to not have compound parts. We still
-// assert they remain named exports without `export default` so importer
-// bundlers can drop unused symbols at module granularity.
 const namedExportOnlyFiles = [
   'badge.tsx',
   'button.tsx',
@@ -119,10 +105,8 @@ const stubModulesPlugin = (stubs: Record<string, string>): import('esbuild').Plu
   },
 })
 
-// Stubs for modules the components import that pull in heavyweight runtime
-// code unrelated to the tree-shake invariant we are testing. We replace each
-// with a tiny passthrough so the bundler analyses our component code, not its
-// transitive deps, and so the test runs offline without `panda codegen`.
+// Stub heavyweight runtime modules with passthroughs so the bundler analyzes
+// our component code in isolation and the test runs without panda codegen.
 const RUNTIME_STUBS: Record<string, string> = {
   'styled-system/css': `
     export const cx = (...args) => args.filter(Boolean).join(' ');
@@ -147,12 +131,9 @@ const RUNTIME_STUBS: Record<string, string> = {
   `,
 }
 
-// Radix primitives are accessed via `import * as P from '@radix-ui/react-X'`,
-// so the stub must export every short primitive name (Root, Item, Content,
-// etc.) that our components access through `P.<Name>`. The stub names
-// intentionally do NOT overlap with our public component export names like
-// `DialogContent` or `RadioItem` — collisions would survive star-import
-// retention and pollute the bundle assertions.
+// Stub for `import * as P from '@radix-ui/react-X'`. Names must not collide
+// with public component exports (e.g. DialogContent, RadioItem) — collisions
+// would survive star-import retention and pollute the bundle assertions.
 const RADIX_STUB = `
   import { forwardRef } from 'react';
   const stub = (name) => {
@@ -210,8 +191,6 @@ const verifyCompoundTreeShake = async () => {
       await writeFile(
         fixturePath,
         `import { ${spec.importedExport} } from '${sourceImport}';\n` +
-          `// Reference the imported symbol so esbuild does not drop it before\n` +
-          `// running tree-shaking, which would mask the real assertion.\n` +
           `globalThis.__stalkTreeShakeProbe = ${spec.importedExport};\n`,
       )
 
@@ -235,10 +214,6 @@ const verifyCompoundTreeShake = async () => {
       const bundleContents = await readFile(outputFile, 'utf8')
 
       for (const forbidden of spec.forbiddenExports) {
-        // Look for the export's binding identifier in the bundled output.
-        // The bundler renames module-internal bindings but preserves the name
-        // when they survive into the final output, so a word-boundary match
-        // against the original symbol catches retained code paths.
         const wordBoundary = new RegExp(`\\b${forbidden}\\b`)
         if (wordBoundary.test(bundleContents)) {
           throw new Error(
@@ -248,8 +223,8 @@ const verifyCompoundTreeShake = async () => {
         }
       }
 
-      // Also verify the imported export survived (sanity check: a broken
-      // bundler config could trivially "pass" by dropping everything).
+      // Sanity: imported export must survive — otherwise a broken bundler
+      // config trivially "passes" by dropping everything.
       if (!new RegExp(`\\b${spec.importedExport}\\b`).test(bundleContents)) {
         throw new Error(
           `${spec.file}: imported export '${spec.importedExport}' was dropped from the bundle ` +

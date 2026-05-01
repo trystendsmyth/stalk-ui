@@ -7,11 +7,6 @@ import type { ComponentPropsWithoutRef, ComponentRef, HTMLAttributes } from 'rea
 
 const styles = /* @__PURE__ */ dialogRecipe()
 
-// Pattern (per AGENTS.md): each compound part is declared as
-// `/* @__PURE__ */ forwardRef(function DialogX(...) { ... })`. The named
-// function expression supplies React's `displayName` automatically (no
-// `Component.displayName = '...'` mutation, which would be a top-level side
-// effect that pins every part into the consumer's bundle).
 export const DialogRoot = DialogPrimitive.Root
 export const DialogTrigger = DialogPrimitive.Trigger
 export const DialogPortal = DialogPrimitive.Portal
@@ -78,10 +73,6 @@ export const DialogFooter = /* @__PURE__ */ forwardRef<
   return <div ref={ref} className={cx(styles.footer, className)} {...props} />
 })
 
-// `/* @__PURE__ */` lets bundlers drop the `Object.assign(...)` call (and the
-// referenced parts) when consumers import only named exports like
-// `import { DialogTrigger } from '...'`. Without it, the assign is treated as
-// side-effecting and pins every compound part into the consumer's bundle.
 export const Dialog = /* @__PURE__ */ Object.assign(DialogRoot, {
   Close: DialogClose,
   Content: DialogContent,

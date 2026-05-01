@@ -1,10 +1,5 @@
-// Asserts that every third-party package referenced as a runtime
-// dependency by a registry component carries a permissive license. We do
-// not block GPL/AGPL etc. transitively (that's Dependabot + dependency-
-// review's job); we block them at the source — the small allow-list of
-// packages a Stalk UI consumer is told to install.
-//
-// Allow-list: MIT, ISC, Apache-2.0, BSD-2-Clause, BSD-3-Clause, 0BSD, CC0-1.0.
+// Asserts every direct third-party runtime dep of a registry component uses
+// a permissive license. Transitive coverage is delegated to dependency-review.
 
 import { readFileSync } from 'node:fs'
 import { dirname, resolve } from 'node:path'
@@ -24,8 +19,6 @@ const ALLOWED = new Set([
   'MIT',
 ])
 
-// Stalk UI's own packages do not declare a license at install time the same
-// way third-party packages do; skip them.
 const SELF_PACKAGES = new Set([
   '@stalk-ui/components',
   '@stalk-ui/i18n',
@@ -45,9 +38,6 @@ const collectThirdPartyDeps = (): Set<string> => {
 }
 
 const findInstalledPackageJson = (packageName: string): string | undefined => {
-  // Walk a few candidate locations. With pnpm, deps live in
-  // node_modules/<name>/package.json (when hoisted) or
-  // node_modules/.pnpm/<name>@<version>/.../package.json.
   const candidates = [
     resolve(projectRoot, 'node_modules', packageName, 'package.json'),
     resolve(projectRoot, 'packages/components/node_modules', packageName, 'package.json'),
@@ -57,7 +47,7 @@ const findInstalledPackageJson = (packageName: string): string | undefined => {
       readFileSync(candidate, 'utf8')
       return candidate
     } catch {
-      // Try next candidate.
+      continue
     }
   }
   return undefined
@@ -93,8 +83,6 @@ for (const dep of collectThirdPartyDeps()) {
     continue
   }
 
-  // SPDX expressions like "(MIT OR Apache-2.0)" are allowed if every
-  // segment is on the allow-list.
   const segments = license
     .replace(/[()]/g, '')
     .split(/\s+(?:OR|AND|or|and)\s+/)
