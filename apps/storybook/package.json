@@ -13,7 +13,7 @@
     "predev": "pnpm run codegen",
     "dev": "storybook dev --port 6006",
     "lint": "eslint .",
-    "test": "pnpm --workspace-root check-storybook-a11y",
+    "test": "pnpm --workspace-root check-storybook-coverage",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {

@@ -32,5 +32,96 @@
     "path": "packages/cli/dist/bin.js",
     "limit": "40 KB",
     "webpack": false
+  },
+  {
+    "name": "component: badge",
+    "disablePlugins": ["@size-limit/esbuild", "@size-limit/webpack"],
+    "path": "packages/components/dist/badge.js",
+    "limit": "1.5 KB",
+    "webpack": false
+  },
+  {
+    "name": "component: button",
+    "disablePlugins": ["@size-limit/esbuild", "@size-limit/webpack"],
+    "path": "packages/components/dist/button.js",
+    "limit": "3 KB",
+    "webpack": false
+  },
+  {
+    "name": "component: checkbox",
+    "disablePlugins": ["@size-limit/esbuild", "@size-limit/webpack"],
+    "path": "packages/components/dist/checkbox.js",
+    "limit": "3.5 KB",
+    "webpack": false
+  },
+  {
+    "name": "component: dialog",
+    "disablePlugins": ["@size-limit/esbuild", "@size-limit/webpack"],
+    "path": "packages/components/dist/dialog.js",
+    "limit": "4 KB",
+    "webpack": false
+  },
+  {
+    "name": "component: dropdown-menu",
+    "disablePlugins": ["@size-limit/esbuild", "@size-limit/webpack"],
+    "path": "packages/components/dist/dropdown-menu.js",
+    "limit": "6 KB",
+    "webpack": false
+  },
+  {
+    "name": "component: input",
+    "disablePlugins": ["@size-limit/esbuild", "@size-limit/webpack"],
+    "path": "packages/components/dist/input.js",
+    "limit": "1.5 KB",
+    "webpack": false
+  },
+  {
+    "name": "component: label",
+    "disablePlugins": ["@size-limit/esbuild", "@size-limit/webpack"],
+    "path": "packages/components/dist/label.js",
+    "limit": "1.5 KB",
+    "webpack": false
+  },
+  {
+    "name": "component: popover",
+    "disablePlugins": ["@size-limit/esbuild", "@size-limit/webpack"],
+    "path": "packages/components/dist/popover.js",
+    "limit": "3 KB",
+    "webpack": false
+  },
+  {
+    "name": "component: radio",
+    "disablePlugins": ["@size-limit/esbuild", "@size-limit/webpack"],
+    "path": "packages/components/dist/radio.js",
+    "limit": "2 KB",
+    "webpack": false
+  },
+  {
+    "name": "component: select",
+    "disablePlugins": ["@size-limit/esbuild", "@size-limit/webpack"],
+    "path": "packages/components/dist/select.js",
+    "limit": "5 KB",
+    "webpack": false
+  },
+  {
+    "name": "component: switch",
+    "disablePlugins": ["@size-limit/esbuild", "@size-limit/webpack"],
+    "path": "packages/components/dist/switch.js",
+    "limit": "2 KB",
+    "webpack": false
+  },
+  {
+    "name": "component: textarea",
+    "disablePlugins": ["@size-limit/esbuild", "@size-limit/webpack"],
+    "path": "packages/components/dist/textarea.js",
+    "limit": "1.5 KB",
+    "webpack": false
+  },
+  {
+    "name": "component: tooltip",
+    "disablePlugins": ["@size-limit/esbuild", "@size-limit/webpack"],
+    "path": "packages/components/dist/tooltip.js",
+    "limit": "2.5 KB",
+    "webpack": false
   }
 ]

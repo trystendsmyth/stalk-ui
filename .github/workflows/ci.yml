@@ -204,6 +204,8 @@ jobs:
       - run: pnpm check-semantic-tokens
       - run: pnpm check-i18n-coverage
       - run: pnpm check-no-stray-baselines
+      - run: pnpm check-third-party-licenses
+      - run: pnpm check-third-party-size
 
   baseline-pr-size:
     name: baseline PR size

@@ -33,4 +33,4 @@ globs:
 ## Coverage
 
 - Stories should still cover **variants**, **sizes**, **states** (use `data-hover`, `data-active`, `data-focus-visible` where the recipe supports them), and meaningful **interactions** where applicable.
-- After adding or renaming stories, update [scripts/check-storybook-a11y.ts](scripts/check-storybook-a11y.ts) if the story is part of the required a11y build list.
+- The Storybook coverage gate ([scripts/check-storybook-coverage.ts](scripts/check-storybook-coverage.ts)) auto-discovers every named CSF export from `packages/components/src/*.stories.tsx`, so adding or renaming a story does not require updating that script. axe runs are handled separately by the Storybook a11y addon (configured in `apps/storybook/.storybook/preview.ts`).
