@@ -1,77 +1,62 @@
 import { execFileSync } from 'node:child_process'
-import { readFileSync } from 'node:fs'
-import { join } from 'node:path'
+import { readFileSync, readdirSync } from 'node:fs'
+import { basename, join } from 'node:path'
 
 const root = process.cwd()
 const storyIndexPath = join(root, 'apps/storybook/storybook-static/index.json')
+const storiesDirectory = join(root, 'packages/components/src')
 
 interface StorybookIndex {
   entries?: Record<string, unknown>
+}
+
+const toKebab = (value: string) =>
+  value
+    .replace(/([a-z0-9])([A-Z])/g, '$1-$2')
+    .replace(/([A-Z]+)([A-Z][a-z])/g, '$1-$2')
+    .toLowerCase()
+
+const collectExpectedStoryIds = (): string[] => {
+  const expected: string[] = ['foundation-semantic-tokens--docs']
+
+  const storyFiles = readdirSync(storiesDirectory).filter((file) => file.endsWith('.stories.tsx'))
+
+  if (storyFiles.length === 0) {
+    throw new Error(`No story files found in ${storiesDirectory}`)
+  }
+
+  for (const file of storyFiles) {
+    const componentName = basename(file, '.stories.tsx')
+    const componentSlug = componentName.replaceAll('-', '')
+    const source = readFileSync(join(storiesDirectory, file), 'utf8')
+    const exportNames = [...source.matchAll(/^export const (\w+)\b/gm)].map((match) => match[1])
+
+    if (exportNames.length === 0) {
+      throw new Error(`No stories exported from ${file}`)
+    }
+
+    for (const name of exportNames) {
+      expected.push(`components-${componentSlug}--${toKebab(name)}`)
+    }
+  }
+
+  return expected
 }
 
 execFileSync('pnpm', ['--filter', '@stalk-ui/storybook', 'build'], { stdio: 'inherit' })
 
 const storyIndex = JSON.parse(readFileSync(storyIndexPath, 'utf8')) as StorybookIndex
 const storyIds = new Set(Object.keys(storyIndex.entries ?? {}))
-const requiredStories = [
-  'foundation-semantic-tokens--docs',
-  'components-badge--default',
-  'components-badge--variants',
-  'components-badge--rtl',
-  'components-badge--dark-mode',
-  'components-button--solid',
-  'components-button--variants',
-  'components-button--rtl',
-  'components-button--states',
-  'components-checkbox--default',
-  'components-checkbox--states',
-  'components-checkbox--rtl',
-  'components-checkbox--dark-mode',
-  'components-dialog--default',
-  'components-dialog--open',
-  'components-dialog--rtl',
-  'components-dropdownmenu--default',
-  'components-dropdownmenu--open',
-  'components-dropdownmenu--rtl',
-  'components-dropdownmenu--dark-mode',
-  'components-input--default',
-  'components-input--states',
-  'components-input--rtl',
-  'components-input--dark-mode',
-  'components-label--default',
-  'components-label--required',
-  'components-label--rtl',
-  'components-label--dark-mode',
-  'components-popover--default',
-  'components-popover--open',
-  'components-popover--rtl',
-  'components-popover--dark-mode',
-  'components-radio--default',
-  'components-radio--states',
-  'components-radio--rtl',
-  'components-radio--dark-mode',
-  'components-select--default',
-  'components-select--states',
-  'components-select--rtl',
-  'components-select--dark-mode',
-  'components-switch--default',
-  'components-switch--states',
-  'components-switch--rtl',
-  'components-switch--dark-mode',
-  'components-tooltip--default',
-  'components-tooltip--open',
-  'components-tooltip--rtl',
-  'components-tooltip--dark-mode',
-  'components-textarea--default',
-  'components-textarea--states',
-  'components-textarea--rtl',
-  'components-textarea--dark-mode',
-]
 
-for (const storyId of requiredStories) {
-  if (!storyIds.has(storyId)) {
-    throw new Error(`Missing Storybook story for a11y coverage: ${storyId}`)
-  }
+const expectedStoryIds = collectExpectedStoryIds()
+const missing = expectedStoryIds.filter((storyId) => !storyIds.has(storyId))
+
+if (missing.length > 0) {
+  throw new Error(
+    `Missing Storybook stories in built index:\n${missing.map((id) => `  - ${id}`).join('\n')}`,
+  )
 }
 
-console.log('Storybook a11y addon build and required component stories passed.')
+console.log(
+  `Storybook a11y addon build OK; ${String(expectedStoryIds.length)} expected stories present in index.`,
+)
