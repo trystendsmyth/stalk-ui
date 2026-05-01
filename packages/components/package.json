@@ -4,8 +4,8 @@
   "private": true,
   "description": "Private component source workspace for Stalk UI.",
   "license": "MIT",
-  "type": "module",
   "sideEffects": false,
+  "type": "module",
   "exports": {
     "./*": {
       "types": "./src/*.tsx",
