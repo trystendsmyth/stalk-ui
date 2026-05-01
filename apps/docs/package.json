@@ -24,7 +24,7 @@
     "@stalk-ui/preset": "workspace:*",
     "fumadocs-core": "^15.8.5",
     "fumadocs-ui": "^15.8.5",
-    "next": "15",
+    "next": "16",
     "react": "catalog:",
     "react-dom": "catalog:"
   },
