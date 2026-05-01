@@ -29,7 +29,9 @@ const collectExpectedStoryIds = (): string[] => {
     const componentName = basename(file, '.stories.tsx')
     const componentSlug = componentName.replaceAll('-', '')
     const source = readFileSync(join(storiesDirectory, file), 'utf8')
-    const exportNames = [...source.matchAll(/^export const (\w+)\b/gm)].map((match) => match[1])
+    const exportNames = [...source.matchAll(/^export const (\w+)\b/gm)]
+      .map((match) => match[1])
+      .filter((name): name is string => name !== undefined)
 
     if (exportNames.length === 0) {
       throw new Error(`No stories exported from ${file}`)
