@@ -7,11 +7,7 @@ updates:
       day: monday
     open-pull-requests-limit: 5
     ignore:
-      - dependency-name: '@pandacss/dev'
-        versions: ['1.10.x', '1.11.x', '>=1.10.0']
-      - dependency-name: '@pandacss/preset-base'
-        versions: ['>=1.10.0']
-      - dependency-name: '@pandacss/preset-panda'
+      - dependency-name: '@pandacss/*'
         versions: ['>=1.10.0']
     groups:
       react:
@@ -22,12 +18,22 @@ updates:
         patterns: ['@base-ui-components/*']
       panda:
         patterns: ['@pandacss/*']
+      next-stack:
+        patterns:
+          - 'next'
+          - '@next/*'
+          - 'fumadocs-core'
+          - 'fumadocs-ui'
       storybook:
         patterns: ['storybook', '@storybook/*']
       testing:
         patterns: ['vitest', '@testing-library/*', 'vitest-axe']
       dev-dependencies:
         dependency-type: development
+        update-types: ['minor', 'patch']
+      dev-dependencies-major:
+        dependency-type: development
+        update-types: ['major']
     commit-message:
       prefix: chore
       prefix-development: chore
