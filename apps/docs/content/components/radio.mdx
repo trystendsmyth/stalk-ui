@@ -20,54 +20,48 @@ pnpm dlx @stalk-ui/cli add @stalk-ui/radio
 <ComponentPreview
   slug="radio"
   example={0}
-  code={`<Radio.Root name="plan"><Radio.Item label="Basic" value="basic" /></Radio.Root>`}
+  code={`<Radio.Root name="plan"><Radio.Item aria-label="Basic" value="basic" /></Radio.Root>`}
 />
 
 ```tsx
 <Radio.Root name="plan">
-  <Radio.Item label="Basic" value="basic" />
+  <Radio.Item aria-label="Basic" value="basic" />
 </Radio.Root>
 ```
 
 <ComponentPreview
   slug="radio"
   example={1}
-  code={`<Radio.Root name="plan"><Radio.Item description="Best for small teams." id="plan-basic" label="Basic" value="basic" /></Radio.Root>`}
+  code={`<Radio.Root defaultValue="pro" name="plan"><Radio.Item aria-label="Pro" value="pro" /></Radio.Root>`}
 />
 
 ```tsx
-<Radio.Root name="plan">
-  <Radio.Item description="Best for small teams." id="plan-basic" label="Basic" value="basic" />
+<Radio.Root defaultValue="pro" name="plan">
+  <Radio.Item aria-label="Pro" value="pro" />
 </Radio.Root>
 ```
 
 <ComponentPreview
   slug="radio"
   example={2}
-  code={`<Radio.Root name="plan"><Radio.Item invalid label="Required choice" value="required" /></Radio.Root>`}
+  code={`<Radio.Root name="plan"><Radio.Item invalid aria-label="Required choice" value="required" /></Radio.Root>`}
 />
 
 ```tsx
 <Radio.Root name="plan">
-  <Radio.Item invalid label="Required choice" value="required" />
+  <Radio.Item invalid aria-label="Required choice" value="required" />
 </Radio.Root>
 ```
 
 ## Props
 
-| Prop          | Type        | Required | Default | Description |
-| ------------- | ----------- | -------- | ------- | ----------- |
-| `description` | `ReactNode` | No       | -       | -           |
-| `invalid`     | `boolean`   | No       | -       | -           |
-| `label`       | `ReactNode` | No       | -       | -           |
-| `size`        | `RadioSize` | No       | -       | -           |
+No component-specific props are documented yet. Primitive props pass through to the underlying element or Radix part.
 
 ## Variants
 
-| Variant   | Values           |
-| --------- | ---------------- |
-| `invalid` | `true`           |
-| `size`    | `sm`, `md`, `lg` |
+| Variant | Values           |
+| ------- | ---------------- |
+| `size`  | `sm`, `md`, `lg` |
 
 ## Registry
 

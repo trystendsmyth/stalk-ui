@@ -15,6 +15,7 @@ const originalReleasePointerCapture = Object.getOwnPropertyDescriptor(
   Element.prototype,
   'releasePointerCapture',
 )
+const originalScrollIntoView = Object.getOwnPropertyDescriptor(Element.prototype, 'scrollIntoView')
 
 beforeAll(() => {
   Object.defineProperty(Element.prototype, 'hasPointerCapture', {
@@ -22,6 +23,10 @@ beforeAll(() => {
     value: () => false,
   })
   Object.defineProperty(Element.prototype, 'releasePointerCapture', {
+    configurable: true,
+    value: () => undefined,
+  })
+  Object.defineProperty(Element.prototype, 'scrollIntoView', {
     configurable: true,
     value: () => undefined,
   })
@@ -38,6 +43,12 @@ afterAll(() => {
     Reflect.deleteProperty(Element.prototype, 'releasePointerCapture')
   } else {
     Object.defineProperty(Element.prototype, 'releasePointerCapture', originalReleasePointerCapture)
+  }
+
+  if (originalScrollIntoView === undefined) {
+    Reflect.deleteProperty(Element.prototype, 'scrollIntoView')
+  } else {
+    Object.defineProperty(Element.prototype, 'scrollIntoView', originalScrollIntoView)
   }
 })
 

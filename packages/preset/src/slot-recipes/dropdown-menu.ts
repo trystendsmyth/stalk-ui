@@ -6,15 +6,14 @@ export const dropdownMenu = {
   slots: ['content', 'item', 'label', 'separator', 'shortcut'],
   base: {
     content: {
-      minWidth: '12rem',
+      minWidth: '192',
       overflow: 'hidden',
       backgroundColor: 'bg.default',
-      borderColor: 'border.default',
+      border: 'default',
       borderRadius: 'md',
-      borderWidth: '1px',
       boxShadow: 'lg',
       color: 'fg.default',
-      padding: '1',
+      padding: '4',
       zIndex: 'popover',
     },
     item: {
@@ -23,10 +22,10 @@ export const dropdownMenu = {
       cursor: 'default',
       display: 'flex',
       fontSize: 'sm',
-      gap: '2',
-      minHeight: '8',
+      gap: '8',
+      minHeight: '32',
       outline: 'none',
-      paddingInline: '2',
+      paddingInline: '8',
       userSelect: 'none',
       _highlighted: {
         backgroundColor: 'accent.subtle',
@@ -46,14 +45,14 @@ export const dropdownMenu = {
     label: {
       color: 'fg.muted',
       fontSize: 'xs',
-      fontWeight: '600',
-      paddingBlock: '1.5',
-      paddingInline: '2',
+      fontWeight: 'semibold',
+      paddingBlock: '6',
+      paddingInline: '8',
     },
     separator: {
-      height: '1px',
-      backgroundColor: 'border.default',
-      marginBlock: '1',
+      height: 'px',
+      backgroundColor: 'border.muted',
+      marginBlock: '4',
     },
     shortcut: {
       color: 'fg.muted',

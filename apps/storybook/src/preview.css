@@ -1,10 +1,18 @@
-[data-color-mode='light'],
-[data-color-mode='dark'] {
-  min-height: 100vh;
-  padding: 1rem;
+/* Panda's preset provides the reset, tokens, and `font-family` on `html, body` via
+ * styled-system/styles.css. The preset's `fonts.sans` token expands to
+ * `var(--font-sans, ui-sans-serif, …)`, so apps must define `--font-sans` to opt into
+ * a real face — here, the variable Noto Sans registered by `@fontsource-variable/noto-sans`. */
+:root {
+  --font-sans: 'Noto Sans Variable', ui-sans-serif, system-ui, -apple-system, sans-serif;
 }
 
-[data-color-mode='dark'] {
-  background: #0f1115;
-  color: #f6f7f9;
+html,
+body {
+  min-height: 100vh;
+}
+
+body {
+  padding: 1rem;
+  background-color: var(--colors-bg-canvas);
+  color: var(--colors-fg-default);
 }

@@ -6,37 +6,40 @@ export const badge = {
   base: {
     alignItems: 'center',
     borderRadius: 'full',
+    colorPalette: 'accent',
     display: 'inline-flex',
-    fontWeight: '600',
-    gap: '1.5',
+    fontWeight: 'semibold',
+    gap: '6',
     whiteSpace: 'nowrap',
   },
   variants: {
     variant: {
       solid: {
-        backgroundColor: 'accent.solid',
-        color: 'accent.contrast',
+        backgroundColor: 'colorPalette.solid',
+        color: 'colorPalette.contrast',
       },
       subtle: {
-        backgroundColor: 'accent.subtle',
-        color: 'accent.fg',
+        backgroundColor: 'colorPalette.subtle',
+        color: 'colorPalette.fg',
       },
       outline: {
-        borderColor: 'border.default',
-        borderWidth: '1px',
-        color: 'fg.default',
+        backgroundColor: 'transparent',
+        borderColor: 'colorPalette.muted',
+        borderStyle: 'solid',
+        borderWidth: 'xs',
+        color: 'colorPalette.fg',
       },
     },
     size: {
       sm: {
         fontSize: 'xs',
-        minHeight: '5',
-        paddingInline: '2',
+        minHeight: '20',
+        paddingInline: '8',
       },
       md: {
         fontSize: 'sm',
-        minHeight: '6',
-        paddingInline: '2.5',
+        minHeight: '24',
+        paddingInline: '10',
       },
     },
   },

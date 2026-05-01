@@ -38,14 +38,9 @@ const previewBySlug: Record<string, ReactNode[]> = {
     </Button>,
   ],
   checkbox: [
-    <Checkbox key="checkbox" label="Accept terms" />,
-    <Checkbox
-      key="checkbox-description"
-      description="Receive product release notes."
-      id="release-notes-preview"
-      label="Release notes"
-    />,
-    <Checkbox key="checkbox-invalid" invalid label="Required checkbox" />,
+    <Checkbox key="checkbox" aria-label="Accept terms" />,
+    <Checkbox key="checkbox-checked" aria-label="Subscribed" defaultChecked />,
+    <Checkbox key="checkbox-indeterminate" aria-label="Bulk select" checked="indeterminate" />,
   ],
   dialog: [
     <Dialog.Root key="dialog">
@@ -91,7 +86,7 @@ const previewBySlug: Record<string, ReactNode[]> = {
   ],
   radio: [
     <Radio.Root key="radio" name="plan-preview">
-      <Radio.Item label="Basic" value="basic" />
+      <Radio.Item aria-label="Basic" value="basic" />
     </Radio.Root>,
   ],
   select: [
@@ -105,7 +100,7 @@ const previewBySlug: Record<string, ReactNode[]> = {
       </Select.Content>
     </Select.Root>,
   ],
-  switch: [<Switch key="switch" label="Email notifications" />],
+  switch: [<Switch key="switch" aria-label="Email notifications" />],
   textarea: [<Textarea key="textarea" aria-label="Message" placeholder="Write a message..." />],
   tooltip: [
     <Tooltip.Provider key="tooltip">

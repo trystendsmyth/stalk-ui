@@ -1,6 +1,7 @@
 import { notFound } from 'next/navigation'
 
 import { isLocale, locales } from '../../lib/docs'
+import { getFontStackForLocale } from '../../lib/fonts'
 
 import type { ReactNode } from 'react'
 
@@ -20,16 +21,21 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
     notFound()
   }
 
+  const { variableClassNames, sansStackStyle } = getFontStackForLocale(locale)
+  const shellClassName = ['docs-shell', variableClassNames].filter(Boolean).join(' ')
+
   return (
-    <div className="docs-shell">
+    <div className={shellClassName} style={sansStackStyle}>
       <header className="site-header">
         <a className="brand" href={`/${locale}`}>
-          Stalk UI
+          {/* eslint-disable-next-line @next/next/no-img-element -- vector logo, optimization is moot */}
+          <img alt="" aria-hidden="true" className="brand__mark" src="/stalk-ui-logo.svg" />
+          <span>Stalk UI</span>
         </a>
         <nav aria-label="Primary navigation">
           <a href={`/${locale}/docs`}>Docs</a>
           <a href={`/${locale}/components`}>Components</a>
-          <a href="https://stalk-ui.com/r/">Registry</a>
+          <a href="/r/integrity.json">Registry</a>
           <a href="https://trystendsmyth.github.io/stalk-ui">Storybook</a>
         </nav>
       </header>

@@ -17,47 +17,44 @@ pnpm dlx @stalk-ui/cli add @stalk-ui/checkbox
 
 ## Examples
 
-<ComponentPreview slug="checkbox" example={0} code={`<Checkbox label="Accept terms" />`} />
+<ComponentPreview slug="checkbox" example={0} code={`<Checkbox aria-label="Accept terms" />`} />
 
 ```tsx
-<Checkbox label="Accept terms" />
+<Checkbox aria-label="Accept terms" />
 ```
 
 <ComponentPreview
   slug="checkbox"
   example={1}
-  code={`<Checkbox description="Receive product release notes." id="release-notes" label="Release notes" />`}
+  code={`<Checkbox defaultChecked aria-label="Subscribed" />`}
 />
 
 ```tsx
-<Checkbox description="Receive product release notes." id="release-notes" label="Release notes" />
+<Checkbox defaultChecked aria-label="Subscribed" />
 ```
 
 <ComponentPreview
   slug="checkbox"
   example={2}
-  code={`<Checkbox invalid label="Required checkbox" />`}
+  code={`<Checkbox checked="indeterminate" aria-label="Bulk select" />`}
 />
 
 ```tsx
-<Checkbox invalid label="Required checkbox" />
+<Checkbox checked="indeterminate" aria-label="Bulk select" />
 ```
 
 ## Props
 
-| Prop          | Type           | Required | Default | Description |
-| ------------- | -------------- | -------- | ------- | ----------- |
-| `description` | `ReactNode`    | No       | -       | -           |
-| `invalid`     | `boolean`      | No       | -       | -           |
-| `label`       | `ReactNode`    | No       | -       | -           |
-| `size`        | `CheckboxSize` | No       | -       | -           |
+| Prop      | Type           | Required | Default | Description |
+| --------- | -------------- | -------- | ------- | ----------- |
+| `invalid` | `boolean`      | No       | -       | -           |
+| `size`    | `CheckboxSize` | No       | -       | -           |
 
 ## Variants
 
-| Variant   | Values           |
-| --------- | ---------------- |
-| `invalid` | `true`           |
-| `size`    | `sm`, `md`, `lg` |
+| Variant | Values           |
+| ------- | ---------------- |
+| `size`  | `sm`, `md`, `lg` |
 
 ## Registry
 

@@ -1,0 +1,141 @@
+import { ColorItem, ColorPalette, Meta } from '@storybook/addon-docs/blocks'
+
+import { token } from 'styled-system/tokens'
+
+<Meta title="Foundation/Semantic tokens" />
+
+<div className="sb-container">
+  <div className="sb-section-title">
+    # Semantic color tokens
+
+    Stalk UI semantic colors use Panda’s `base` / `_dark` pairs, which compile to CSS variables under **`.dark`** on the document root. Storybook’s **mode** toolbar sets `data-color-mode` and toggles the **`dark`** class on the root element so variables match the toolbar. Values below resolve through the Panda `token()` helper for the active mode.
+
+    ## Background
+
+    Surfaces and canvas fills.
+
+  </div>
+  <div className="sb-section">
+    <ColorPalette>
+      <ColorItem
+        title="Background"
+        subtitle="Surface and canvas"
+        colors={{
+          canvas: token('colors.bg.canvas'),
+          default: token('colors.bg.default'),
+          subtle: token('colors.bg.subtle'),
+          muted: token('colors.bg.muted'),
+        }}
+      />
+    </ColorPalette>
+
+    ## Foreground
+
+    Text and icon fills on semantic surfaces.
+
+    <ColorPalette>
+      <ColorItem
+        title="Foreground"
+        subtitle="Body and muted text"
+        colors={{
+          default: token('colors.fg.default'),
+          muted: token('colors.fg.muted'),
+          subtle: token('colors.fg.subtle'),
+          inverse: token('colors.fg.inverse'),
+        }}
+      />
+    </ColorPalette>
+
+    ## Border
+
+    Dividers and control outlines.
+
+    <ColorPalette>
+      <ColorItem
+        title="Border"
+        subtitle="Neutral strokes"
+        colors={{
+          muted: token('colors.border.muted'),
+          default: token('colors.border.default'),
+          strong: token('colors.border.strong'),
+        }}
+      />
+    </ColorPalette>
+
+    ## Accent (brand)
+
+    Primary accent ramp from the configured accent scale.
+
+    <ColorPalette>
+      <ColorItem
+        title="Accent"
+        subtitle="Brand semantic ramp"
+        colors={{
+          surface: token('colors.accent.surface'),
+          subtle: token('colors.accent.subtle'),
+          muted: token('colors.accent.muted'),
+          solid: token('colors.accent.solid'),
+          emphasis: token('colors.accent.emphasis'),
+          fg: token('colors.accent.fg'),
+          contrast: token('colors.accent.contrast'),
+        }}
+      />
+    </ColorPalette>
+
+    ## Status ramps
+
+    Success, warning, danger, and info use the same structural ramp as accent.
+
+    <ColorPalette>
+      <ColorItem
+        title="Success"
+        colors={{
+          surface: token('colors.success.surface'),
+          subtle: token('colors.success.subtle'),
+          muted: token('colors.success.muted'),
+          solid: token('colors.success.solid'),
+          emphasis: token('colors.success.emphasis'),
+          fg: token('colors.success.fg'),
+          contrast: token('colors.success.contrast'),
+        }}
+      />
+      <ColorItem
+        title="Warning"
+        colors={{
+          surface: token('colors.warning.surface'),
+          subtle: token('colors.warning.subtle'),
+          muted: token('colors.warning.muted'),
+          solid: token('colors.warning.solid'),
+          emphasis: token('colors.warning.emphasis'),
+          fg: token('colors.warning.fg'),
+          contrast: token('colors.warning.contrast'),
+        }}
+      />
+      <ColorItem
+        title="Danger"
+        colors={{
+          surface: token('colors.danger.surface'),
+          subtle: token('colors.danger.subtle'),
+          muted: token('colors.danger.muted'),
+          solid: token('colors.danger.solid'),
+          emphasis: token('colors.danger.emphasis'),
+          fg: token('colors.danger.fg'),
+          contrast: token('colors.danger.contrast'),
+        }}
+      />
+      <ColorItem
+        title="Info"
+        colors={{
+          surface: token('colors.info.surface'),
+          subtle: token('colors.info.subtle'),
+          muted: token('colors.info.muted'),
+          solid: token('colors.info.solid'),
+          emphasis: token('colors.info.emphasis'),
+          fg: token('colors.info.fg'),
+          contrast: token('colors.info.contrast'),
+        }}
+      />
+    </ColorPalette>
+
+  </div>
+</div>

@@ -1,19 +1,31 @@
-/* Align with fumadocs-ui dark tokens (see .dark in fumadocs dist/style.css). */
+/*
+ * Page chrome for the docs site.
+ *
+ * Authored against Panda-emitted CSS variables (see styled-system/styles.css):
+ *  - colors:  --colors-{bg|fg|border|accent}-* (Stalk semantic tokens)
+ *  - fonts:   --fonts-{sans|mono}              (CSS-var indirection -> --font-sans)
+ *
+ * Kept unlayered on purpose: fumadocs-ui ships Tailwind v4 with its own
+ * @layer theme/base/components/utilities order, which would beat anything
+ * Panda emits inside @layer base. Plain (unlayered) rules win the cascade.
+ */
+
 :root {
   color-scheme: dark;
-  font-family:
-    Inter,
-    ui-sans-serif,
-    system-ui,
-    -apple-system,
-    BlinkMacSystemFont,
-    'Segoe UI',
-    sans-serif;
+  font-family: var(--fonts-sans);
+  font-feature-settings:
+    'kern' 1,
+    'liga' 1,
+    'calt' 1;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 html {
-  background-color: var(--color-fd-background);
-  color: var(--color-fd-foreground);
+  background-color: var(--colors-bg-canvas);
+  color: var(--colors-fg-default);
+  line-height: 1.6;
 }
 
 * {
@@ -32,8 +44,8 @@ a {
 .docs-shell {
   min-height: 100vh;
   background:
-    radial-gradient(circle at top left, rgb(76 111 255 / 18%), transparent 24rem),
-    var(--color-fd-background);
+    radial-gradient(circle at top left, var(--colors-accent-muted) 0%, transparent 24rem),
+    var(--colors-bg-canvas);
 }
 
 .site-header {
@@ -47,17 +59,27 @@ a {
 }
 
 .brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
   font-size: 1rem;
-  font-weight: 800;
+  font-weight: 700;
+  letter-spacing: -0.01em;
   text-decoration: none;
-  color: var(--color-fd-foreground);
+  color: var(--colors-fg-default);
+}
+
+.brand__mark {
+  width: 1.5rem;
+  height: 1.5rem;
+  display: block;
 }
 
 nav {
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
-  color: var(--color-fd-muted-foreground);
+  color: var(--colors-fg-muted);
   font-size: 0.875rem;
 }
 
@@ -77,6 +99,11 @@ nav a {
 .hero {
   min-height: calc(100vh - 5rem);
   align-content: center;
+  gap: 1.25rem;
+}
+
+.hero .lede {
+  margin-block-start: 0.25rem;
 }
 
 .content-grid,
@@ -86,39 +113,50 @@ nav a {
 
 .eyebrow {
   margin: 0;
-  color: var(--color-fd-muted-foreground);
-  font-size: 0.875rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
+  color: var(--colors-fg-muted);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
 }
 
 h1 {
-  max-width: 14ch;
+  max-width: 22ch;
   margin: 0;
-  font-size: clamp(3rem, 10vw, 6rem);
-  line-height: 0.95;
-  color: var(--color-fd-foreground);
+  font-size: clamp(2.5rem, 6.5vw, 4.5rem);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -0.025em;
+  text-wrap: balance;
+  color: var(--colors-fg-default);
 }
 
 h2 {
   margin: 1rem 0 0;
   font-size: clamp(1.5rem, 3vw, 2rem);
-  color: var(--color-fd-foreground);
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+  color: var(--colors-fg-default);
 }
 
 .page-heading h1,
 .article h1 {
-  max-width: 18ch;
-  font-size: clamp(2.5rem, 7vw, 4.75rem);
+  max-width: 20ch;
+  font-size: clamp(2.25rem, 5.5vw, 3.5rem);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
 }
 
 .lede {
-  max-width: 40rem;
+  max-width: 44rem;
   margin: 0;
-  color: var(--color-fd-muted-foreground);
+  color: var(--colors-fg-muted);
   font-size: 1.125rem;
-  line-height: 1.7;
+  line-height: 1.55;
+  letter-spacing: -0.005em;
+  text-wrap: pretty;
 }
 
 .action-list,
@@ -139,75 +177,77 @@ h2 {
 .doc-card {
   display: inline-flex;
   padding: 0.75rem 1rem;
-  border: 1px solid var(--color-fd-border);
+  border: 1px solid var(--colors-border-default);
   border-radius: 1rem;
   text-decoration: none;
-  color: var(--color-fd-foreground);
+  color: var(--colors-fg-default);
 }
 
 .doc-card {
   flex-direction: column;
   width: min(100%, 21rem);
   min-height: 9rem;
-  background: var(--color-fd-card);
+  background: var(--colors-bg-subtle);
 }
 
 .doc-card span {
-  font-weight: 800;
-  color: var(--color-fd-card-foreground);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--colors-fg-default);
 }
 
 .doc-card p,
 .article p {
-  color: var(--color-fd-muted-foreground);
-  line-height: 1.7;
+  color: var(--colors-fg-muted);
+  line-height: 1.65;
+  text-wrap: pretty;
 }
 
 pre {
   overflow-x: auto;
   padding: 1rem;
-  border: 1px solid var(--color-fd-border);
+  border: 1px solid var(--colors-border-default);
   border-radius: 1rem;
-  background: var(--color-fd-muted);
-  color: var(--color-fd-foreground);
+  background: var(--colors-bg-muted);
+  color: var(--colors-fg-default);
 }
 
 code {
-  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', monospace;
+  font-family: var(--fonts-mono);
 }
 
 table {
   width: 100%;
   border-collapse: collapse;
   overflow: hidden;
-  border: 1px solid var(--color-fd-border);
+  border: 1px solid var(--colors-border-default);
   border-radius: 1rem;
 }
 
 th,
 td {
   padding: 0.75rem;
-  border-block-end: 1px solid var(--color-fd-border);
+  border-block-end: 1px solid var(--colors-border-default);
   text-align: start;
   vertical-align: top;
 }
 
 th {
-  background: var(--color-fd-muted);
-  color: var(--color-fd-foreground);
+  background: var(--colors-bg-muted);
+  color: var(--colors-fg-default);
 }
 
 td {
-  color: var(--color-fd-muted-foreground);
+  color: var(--colors-fg-muted);
 }
 
 .component-preview {
   display: grid;
   gap: 1rem;
   padding: 1rem;
-  border: 1px solid var(--color-fd-border);
+  border: 1px solid var(--colors-border-default);
   border-radius: 1rem;
-  background: var(--color-fd-card);
+  background: var(--colors-bg-subtle);
 }
 
 .component-preview__toolbar {
@@ -222,24 +262,24 @@ td {
   display: inline-flex;
   gap: 0.5rem;
   align-items: center;
-  color: var(--color-fd-muted-foreground);
-  font-weight: 700;
+  color: var(--colors-fg-muted);
+  font-weight: 600;
 }
 
 .component-preview__toolbar select,
 .component-preview__toolbar button {
   min-height: 2.25rem;
   padding-inline: 0.75rem;
-  border: 1px solid var(--color-fd-border);
+  border: 1px solid var(--colors-border-default);
   border-radius: 0.625rem;
-  background: var(--color-fd-secondary);
-  color: var(--color-fd-secondary-foreground);
+  background: var(--colors-bg-muted);
+  color: var(--colors-fg-default);
   font: inherit;
 }
 
 .component-preview__toolbar button {
   cursor: pointer;
-  font-weight: 700;
+  font-weight: 600;
 }
 
 .component-preview__rendered {
@@ -248,8 +288,8 @@ td {
   place-items: center;
   padding: 1.5rem;
   border-radius: 0.75rem;
-  background: var(--color-fd-muted);
-  color: var(--color-fd-foreground);
+  background: var(--colors-bg-muted);
+  color: var(--colors-fg-default);
 }
 
 .component-preview pre {

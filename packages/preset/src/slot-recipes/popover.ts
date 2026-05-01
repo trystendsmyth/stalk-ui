@@ -8,12 +8,11 @@ export const popover = {
     content: {
       width: 'min(calc(100vw - 2rem), 20rem)',
       backgroundColor: 'bg.default',
-      borderColor: 'border.default',
+      border: 'default',
       borderRadius: 'md',
-      borderWidth: '1px',
       boxShadow: 'lg',
       color: 'fg.default',
-      padding: '4',
+      padding: 'base',
       zIndex: 'popover',
     },
     arrow: {
@@ -21,8 +20,8 @@ export const popover = {
     },
     close: {
       position: 'absolute',
-      insetBlockStart: '2',
-      insetInlineEnd: '2',
+      insetBlockStart: '8',
+      insetInlineEnd: '8',
       borderRadius: 'sm',
       _focusVisible: {
         focusRingWidth: 'base',

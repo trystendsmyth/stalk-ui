@@ -8,11 +8,11 @@ export const button = {
     borderRadius: 'md',
     cursor: 'pointer',
     display: 'inline-flex',
-    fontWeight: '600',
-    gap: '2',
+    fontWeight: 'semibold',
+    gap: '8',
     justifyContent: 'center',
     outline: 'none',
-    transitionDuration: '150ms',
+    transitionDuration: 'fast',
     transitionProperty: 'background-color, border-color, color, box-shadow',
     _disabled: {
       cursor: 'not-allowed',
@@ -33,14 +33,16 @@ export const button = {
         _hover: { backgroundColor: 'accent.emphasis' },
       },
       outline: {
-        borderColor: 'border.default',
-        borderWidth: '1px',
+        border: 'default',
         color: 'fg.default',
-        _hover: { backgroundColor: 'bg.muted' },
+        _hover: {
+          backgroundColor: 'bg.subtle',
+          border: 'hover',
+        },
       },
       ghost: {
         color: 'fg.default',
-        _hover: { backgroundColor: 'bg.muted' },
+        _hover: { backgroundColor: 'bg.subtle' },
       },
       subtle: {
         backgroundColor: 'accent.subtle',
@@ -51,18 +53,18 @@ export const button = {
     size: {
       sm: {
         fontSize: 'sm',
-        minHeight: '8',
-        paddingInline: '3',
+        minHeight: '32',
+        paddingInline: '12',
       },
       md: {
         fontSize: 'sm',
-        minHeight: '10',
-        paddingInline: '4',
+        minHeight: '40',
+        paddingInline: 'base',
       },
       lg: {
-        fontSize: 'md',
-        minHeight: '12',
-        paddingInline: '5',
+        fontSize: 'base',
+        minHeight: '48',
+        paddingInline: '20',
       },
     },
   },

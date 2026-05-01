@@ -84,6 +84,17 @@ export const gettingStartedPages = [
       'Themes such as rainbow remap semantic tokens; component source should not hardcode theme-specific values.',
     ],
   },
+  {
+    slug: 'typography',
+    title: 'Typography',
+    description:
+      'Default UI font is Noto Sans (variable) in Stalk docs; the preset stays font-agnostic via CSS variables.',
+    body: [
+      '@stalk-ui/preset defines fonts.sans as var(--font-sans, system stack). Set --font-sans on :root (for example with next/font/google and Noto_Sans) so headings, body text, and components inherit your choice.',
+      'Copied registry components never hardcode a font name; override --font-sans or replace the fonts.sans token in your Panda theme to use a different family.',
+      'For multilingual apps, load a script-specific Noto Sans family first in the stack (Noto_Sans_Arabic, Noto_Sans_JP, etc.) and map locales to those loaders so only the glyphs you need are downloaded.',
+    ],
+  },
 ] satisfies GettingStartedPage[]
 
 const contentDirectory = join(process.cwd(), 'content/components')

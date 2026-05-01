@@ -6,14 +6,14 @@ export const tooltip = {
   slots: ['content', 'arrow'],
   base: {
     content: {
-      maxWidth: '18rem',
+      maxWidth: '288',
       backgroundColor: 'fg.default',
       borderRadius: 'md',
       color: 'bg.default',
       fontSize: 'xs',
-      lineHeight: '1.5',
-      paddingBlock: '1.5',
-      paddingInline: '2',
+      lineHeight: 'normal',
+      paddingBlock: '6',
+      paddingInline: '8',
       zIndex: 'tooltip',
     },
     arrow: {

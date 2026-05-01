@@ -8,7 +8,7 @@ Every component must:
 1. Live in `packages/components/src/<kebab-case-name>.tsx`.
 2. Have a matching manifest in `registry/ui/<kebab-case-name>.ts`.
 3. Export named React symbols and compose the public API via `Object.assign` dot notation.
-4. Have stories covering variants, states, RTL, and dark mode.
+4. Have stories covering variants, states, RTL, and color mode (Storybook toolbar globals; see `15-stories-authoring.mdc`).
 5. Have tests covering axe, interactions, and screen reader labels.
 6. Support `asChild` where applicable through `@radix-ui/react-slot`.
 7. Forward refs via `React.forwardRef`.

@@ -7,6 +7,7 @@ import reactHooks from 'eslint-plugin-react-hooks'
 import storybook from 'eslint-plugin-storybook'
 import unicorn from 'eslint-plugin-unicorn'
 import prettier from 'eslint-config-prettier'
+import globals from 'globals'
 import tseslint from 'typescript-eslint'
 
 export default tseslint.config(
@@ -108,6 +109,14 @@ export default tseslint.config(
     files: ['**/*.test.{ts,tsx}', '**/*.stories.{ts,tsx}'],
     rules: {
       '@typescript-eslint/no-explicit-any': 'off',
+    },
+  },
+  {
+    files: ['**/*.{js,mjs,cjs}', 'scripts/**/*.ts', '**/scripts/**/*.{js,mjs,cjs,ts}'],
+    languageOptions: {
+      globals: {
+        ...globals.node,
+      },
     },
   },
   ...storybook.configs['flat/recommended'],

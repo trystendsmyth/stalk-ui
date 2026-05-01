@@ -9,7 +9,9 @@
   },
   "include": [
     ".storybook/**/*.ts",
+    ".storybook/**/*.tsx",
     "panda.config.ts",
+    "src/**/*.mdx",
     "src/**/*.ts",
     "src/**/*.tsx",
     "../../packages/components/src/**/*.ts",

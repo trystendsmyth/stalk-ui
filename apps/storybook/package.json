@@ -17,6 +17,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@fontsource-variable/noto-sans": "^5.2.5",
     "@stalk-ui/i18n": "workspace:^",
     "react": "catalog:",
     "react-dom": "catalog:"
@@ -24,8 +25,9 @@
   "devDependencies": {
     "@pandacss/dev": "catalog:",
     "@stalk-ui/preset": "workspace:*",
+    "@storybook-community/storybook-dark-mode": "^7.1.2",
     "@storybook/addon-a11y": "^10.3.5",
-    "@storybook/addon-themes": "^10.3.5",
+    "@storybook/addon-docs": "10.3.5",
     "@storybook/addon-vitest": "^10.3.5",
     "@storybook/react-vite": "^10.3.5",
     "@types/react": "catalog:",

@@ -17,36 +17,38 @@ pnpm dlx @stalk-ui/cli add @stalk-ui/switch
 
 ## Examples
 
-<ComponentPreview slug="switch" example={0} code={`<Switch label="Email notifications" />`} />
+<ComponentPreview slug="switch" example={0} code={`<Switch aria-label="Email notifications" />`} />
 
 ```tsx
-<Switch label="Email notifications" />
+<Switch aria-label="Email notifications" />
 ```
 
 <ComponentPreview
   slug="switch"
   example={1}
-  code={`<Switch description="Send product updates." id="product-updates" label="Product updates" />`}
+  code={`<Switch defaultChecked aria-label="Push notifications" />`}
 />
 
 ```tsx
-<Switch description="Send product updates." id="product-updates" label="Product updates" />
+<Switch defaultChecked aria-label="Push notifications" />
 ```
 
-<ComponentPreview slug="switch" example={2} code={`<Switch invalid label="Required setting" />`} />
+<ComponentPreview
+  slug="switch"
+  example={2}
+  code={`<Switch invalid aria-label="Required setting" />`}
+/>
 
 ```tsx
-<Switch invalid label="Required setting" />
+<Switch invalid aria-label="Required setting" />
 ```
 
 ## Props
 
-| Prop          | Type         | Required | Default | Description |
-| ------------- | ------------ | -------- | ------- | ----------- |
-| `description` | `ReactNode`  | No       | -       | -           |
-| `invalid`     | `boolean`    | No       | -       | -           |
-| `label`       | `ReactNode`  | No       | -       | -           |
-| `size`        | `SwitchSize` | No       | -       | -           |
+| Prop      | Type         | Required | Default | Description                                                                     |
+| --------- | ------------ | -------- | ------- | ------------------------------------------------------------------------------- |
+| `invalid` | `boolean`    | No       | -       | Marks the switch as invalid; sets \`aria-invalid\` and applies invalid styling. |
+| `size`    | `SwitchSize` | No       | -       | -                                                                               |
 
 ## Variants
 

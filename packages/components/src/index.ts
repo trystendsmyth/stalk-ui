@@ -50,8 +50,15 @@ export {
 } from './popover'
 export { Radio } from './radio'
 export type { RadioProps, RadioSize } from './radio'
-export { Select } from './select'
-export type { SelectProps, SelectSize } from './select'
+export {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectLabel,
+  SelectSeparator,
+  SelectTrigger,
+} from './select'
+export type { SelectContentProps, SelectSize, SelectTriggerProps } from './select'
 export { Switch } from './switch'
 export type { SwitchProps, SwitchSize } from './switch'
 export { Textarea } from './textarea'

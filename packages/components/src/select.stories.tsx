@@ -1,7 +1,12 @@
+import { Box, VStack } from 'styled-system/jsx'
+import { select as selectRecipe } from 'styled-system/recipes'
+
 import { Select } from './select'
 
 import type { SelectTriggerProps } from './select'
 import type { Meta, StoryObj } from '@storybook/react-vite'
+
+const { size: SIZES } = selectRecipe.variantMap
 
 const SelectExample = ({
   'aria-label': ariaLabel = 'Status',
@@ -24,14 +29,21 @@ const SelectExample = ({
 const meta = {
   title: 'Components/Select',
   component: Select.Trigger,
+  tags: ['autodocs', 'stable'],
   args: {
     'aria-label': 'Status',
+    disabled: false,
+    invalid: false,
+    size: 'md',
   },
   argTypes: {
     size: {
-      control: 'inline-radio',
-      options: ['sm', 'md', 'lg'],
+      control: 'select',
+      options: SIZES,
     },
+    invalid: { control: 'boolean' },
+    disabled: { control: 'boolean' },
+    asChild: { table: { disable: true } },
   },
 } satisfies Meta<typeof Select.Trigger>
 
@@ -40,57 +52,58 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
-  render: (args) => <SelectExample {...args} />,
+  render: (args) => (
+    <Box maxWidth="320">
+      <SelectExample {...args} />
+    </Box>
+  ),
 }
 
 export const Sizes: Story = {
+  parameters: { controls: { disable: true } },
   render: () => (
-    <div style={{ display: 'grid', gap: 12, maxWidth: 320 }}>
-      <SelectExample aria-label="Small select" size="sm" />
-      <SelectExample aria-label="Medium select" size="md" />
-      <SelectExample aria-label="Large select" size="lg" />
-    </div>
+    <VStack alignItems="stretch" gap="12" maxWidth="320">
+      {SIZES.map((size) => (
+        <SelectExample key={size} aria-label={`${size} select`} size={size} />
+      ))}
+    </VStack>
   ),
 }
 
 export const States: Story = {
+  parameters: { controls: { disable: true } },
   render: () => (
-    <div style={{ display: 'grid', gap: 12, maxWidth: 320 }}>
+    <VStack alignItems="stretch" gap="12" maxWidth="320">
       <SelectExample aria-label="Default select" />
-      <SelectExample invalid aria-label="Invalid select" />
-      <SelectExample disabled aria-label="Disabled select" />
-    </div>
+      <SelectExample aria-label="Invalid select" invalid />
+      <SelectExample aria-label="Disabled select" disabled />
+    </VStack>
   ),
 }
 
-export const RainbowTheme: Story = {
+export const Grouped: Story = {
+  parameters: { controls: { disable: true } },
   render: () => (
-    <div data-panda-theme="rainbow" style={{ maxWidth: 320 }}>
-      <SelectExample aria-label="Rainbow themed select" />
-    </div>
-  ),
-}
-
-export const Rtl: Story = {
-  render: () => (
-    <div dir="rtl" style={{ maxWidth: 320 }}>
+    <Box maxWidth="320">
       <Select.Root>
-        <Select.Trigger aria-label="الحالة">
-          <Select.Value placeholder="اختر الحالة" />
+        <Select.Trigger aria-label="Timezone">
+          <Select.Value placeholder="Select a timezone" />
         </Select.Trigger>
         <Select.Content>
-          <Select.Item value="draft">مسودة</Select.Item>
-          <Select.Item value="published">منشور</Select.Item>
+          <Select.Group>
+            <Select.Label>North America</Select.Label>
+            <Select.Item value="est">Eastern (EST)</Select.Item>
+            <Select.Item value="cst">Central (CST)</Select.Item>
+            <Select.Item value="pst">Pacific (PST)</Select.Item>
+          </Select.Group>
+          <Select.Separator />
+          <Select.Group>
+            <Select.Label>Europe</Select.Label>
+            <Select.Item value="gmt">Greenwich (GMT)</Select.Item>
+            <Select.Item value="cet">Central European (CET)</Select.Item>
+          </Select.Group>
         </Select.Content>
       </Select.Root>
-    </div>
-  ),
-}
-
-export const DarkMode: Story = {
-  render: () => (
-    <div data-color-mode="dark" style={{ background: '#111', maxWidth: 320, padding: 24 }}>
-      <SelectExample aria-label="Dark select" />
-    </div>
+    </Box>
   ),
 }

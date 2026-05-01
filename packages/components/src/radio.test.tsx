@@ -19,22 +19,14 @@ test.each(sizes)('renders %s size without axe violations', async (size) => {
   expect(screen.getByRole('radio', { name: `${size} radio` })).toBeInTheDocument()
 })
 
-test('supports label, description, and group selection', async () => {
+test('selects a value when clicked within a group', async () => {
   const user = userEvent.setup()
 
   render(
-    <fieldset>
-      <legend>Plan</legend>
-      <Radio.Root name="plan">
-        <Radio.Item
-          description="Best for small teams."
-          id="plan-basic"
-          label="Basic"
-          value="basic"
-        />
-        <Radio.Item id="plan-pro" label="Pro" value="pro" />
-      </Radio.Root>
-    </fieldset>,
+    <Radio.Root name="plan">
+      <Radio.Item aria-label="Basic" id="plan-basic" value="basic" />
+      <Radio.Item aria-label="Pro" id="plan-pro" value="pro" />
+    </Radio.Root>,
   )
 
   const basic = screen.getByRole('radio', { name: 'Basic' })
@@ -42,19 +34,19 @@ test('supports label, description, and group selection', async () => {
   await user.click(basic)
   await user.click(pro)
 
-  expect(basic).toHaveAccessibleDescription('Best for small teams.')
   expect(basic).not.toBeChecked()
   expect(pro).toBeChecked()
 })
 
-test('marks invalid fields for styling hooks', () => {
+test('marks invalid fields for assistive technology', () => {
   render(
     <Radio.Root name="choice">
-      <Radio.Item invalid aria-label="Required choice" value="required" />
+      <Radio.Item aria-label="Required choice" invalid value="required" />
     </Radio.Root>,
   )
 
   const radio = screen.getByRole('radio', { name: 'Required choice' })
+  expect(radio).toBeInvalid()
   expect(radio).toHaveAttribute('data-invalid', '')
 })
 
@@ -63,7 +55,7 @@ test('does not toggle while disabled', async () => {
 
   render(
     <Radio.Root name="disabled">
-      <Radio.Item disabled aria-label="Disabled radio" value="disabled" />
+      <Radio.Item aria-label="Disabled radio" disabled value="disabled" />
     </Radio.Root>,
   )
 

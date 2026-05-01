@@ -7,7 +7,7 @@ export const label = {
     color: 'fg.default',
     cursor: 'default',
     fontWeight: 'medium',
-    lineHeight: '1.25',
+    lineHeight: 'tight',
     _disabled: {
       cursor: 'not-allowed',
       opacity: 0.5,
@@ -30,7 +30,7 @@ export const label = {
         fontSize: 'sm',
       },
       lg: {
-        fontSize: 'md',
+        fontSize: 'base',
       },
     },
   },

@@ -1,0 +1,36 @@
+---
+description: Storybook CSF stories for Stalk UI components
+globs:
+  - 'packages/components/**/*.stories.tsx'
+  - 'apps/storybook/**/*.tsx'
+  - 'apps/storybook/**/*.mdx'
+---
+
+## Token documentation (MDX)
+
+- Author **semantic token docs** as MDX under [apps/storybook/src/](apps/storybook/src/) (not under `packages/components/`) so `@storybook/addon-docs/blocks` and `styled-system/tokens` resolve in the Storybook Vite build.
+- Use `ColorPalette` / `ColorItem` and optional disclosure tables like Planera’s `semantic.mdx` pattern: import `semanticTokens` from the preset source, flatten leaves for reference tables, and use `token('colors…')` for previews.
+- If a CSF file shares the same `title` as an MDX `Meta`, **do not** tag the CSF with `autodocs` (Storybook treats that as a duplicate docs page).
+
+---
+
+## Layout and styling
+
+- Prefer **Panda JSX** from `styled-system/jsx` (`Box`, `HStack`, `VStack`, `Flex`, `Grid`) with **shorthand** props (`gap`, `px`, `py`, `bg`, `rounded`, `alignItems`, etc.) for story layout and chrome.
+- Do **not** use inline `style={{ ... }}` for visual styling in stories.
+- Use **semantic tokens** only (`bg.canvas`, `fg.muted`, `border.default`, etc.). Never hardcode hex/rgb colors in stories.
+
+## Globals (toolbar)
+
+- **Preview color mode** and **RTL** use globals `mode` and `direction` in [apps/storybook/.storybook/preview.ts](apps/storybook/.storybook/preview.ts) (same names as Planera). Do not use `theme` for preview mode — that key is reserved by `@storybook/addon-themes` if enabled.
+- **Rainbow Panda theme** uses the `pandaTheme` global (`rainbow` vs `neutral`). Do not duplicate “Rainbow theme” wrapper stories unless documenting theme-specific edge cases.
+
+## CSF metadata
+
+- Add `tags: ['autodocs', '<lifecycle>']` where lifecycle is one of: `stable`, `beta`, `draft`.
+- For recipe-driven components, derive control options from generated recipe types (e.g. `ButtonVariantProps` from `styled-system/recipes`) instead of duplicating string unions by hand.
+
+## Coverage
+
+- Stories should still cover **variants**, **sizes**, **states** (use `data-hover`, `data-active`, `data-focus-visible` where the recipe supports them), and meaningful **interactions** where applicable.
+- After adding or renaming stories, update [scripts/check-storybook-a11y.ts](scripts/check-storybook-a11y.ts) if the story is part of the required a11y build list.

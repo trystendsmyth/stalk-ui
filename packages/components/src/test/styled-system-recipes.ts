@@ -15,14 +15,13 @@ export const button = ({ size = 'md', variant = 'solid' }: ButtonRecipeOptions =
   `stalk-button stalk-button--${variant} stalk-button--${size}`
 
 interface CheckboxRecipeOptions {
-  invalid?: boolean
   size?: 'sm' | 'md' | 'lg'
 }
 
-export const checkbox = ({ invalid = false, size = 'md' }: CheckboxRecipeOptions = {}) =>
-  ['stalk-checkbox', `stalk-checkbox--${size}`, invalid ? 'stalk-checkbox--invalid' : undefined]
-    .filter(Boolean)
-    .join(' ')
+export const checkbox = ({ size = 'md' }: CheckboxRecipeOptions = {}) => ({
+  root: `stalk-checkbox__root stalk-checkbox__root--${size}`,
+  indicator: 'stalk-checkbox__indicator',
+})
 
 export const dialog = () => ({
   close: 'stalk-dialog__close',
@@ -69,34 +68,36 @@ export const popover = () => ({
 })
 
 interface RadioRecipeOptions {
-  invalid?: boolean
   size?: 'sm' | 'md' | 'lg'
 }
 
-export const radio = ({ invalid = false, size = 'md' }: RadioRecipeOptions = {}) =>
-  ['stalk-radio', `stalk-radio--${size}`, invalid ? 'stalk-radio--invalid' : undefined]
-    .filter(Boolean)
-    .join(' ')
+export const radio = ({ size = 'md' }: RadioRecipeOptions = {}) => ({
+  root: `stalk-radio__root stalk-radio__root--${size}`,
+  indicator: 'stalk-radio__indicator',
+})
 
 interface SelectRecipeOptions {
-  invalid?: boolean
   size?: 'sm' | 'md' | 'lg'
 }
 
-export const select = ({ invalid = false, size = 'md' }: SelectRecipeOptions = {}) =>
-  ['stalk-select', `stalk-select--${size}`, invalid ? 'stalk-select--invalid' : undefined]
-    .filter(Boolean)
-    .join(' ')
+export const select = ({ size = 'md' }: SelectRecipeOptions = {}) => ({
+  trigger: `stalk-select__trigger stalk-select__trigger--${size}`,
+  content: 'stalk-select__content',
+  viewport: 'stalk-select__viewport',
+  item: 'stalk-select__item',
+  itemIndicator: 'stalk-select__item-indicator',
+  label: 'stalk-select__label',
+  separator: 'stalk-select__separator',
+})
 
 interface SwitchRecipeOptions {
-  invalid?: boolean
   size?: 'sm' | 'md' | 'lg'
 }
 
-export const switchRecipe = ({ invalid = false, size = 'md' }: SwitchRecipeOptions = {}) =>
-  ['stalk-switch', `stalk-switch--${size}`, invalid ? 'stalk-switch--invalid' : undefined]
-    .filter(Boolean)
-    .join(' ')
+export const switchRecipe = ({ size = 'md' }: SwitchRecipeOptions = {}) => ({
+  root: `stalk-switch__root stalk-switch__root--${size}`,
+  thumb: 'stalk-switch__thumb',
+})
 
 export const tooltip = () => ({
   arrow: 'stalk-tooltip__arrow',

@@ -13,6 +13,10 @@ storybook-static/
 *.tsbuildinfo
 .size-limit-fixtures/*/dist/
 
+# Synced registry artifacts (canonical copy lives at <repo-root>/public/r)
+apps/docs/public/r/
+apps/docs/public/_headers
+
 # Env
 .env
 .env.local

@@ -15,35 +15,29 @@ test.each(sizes)('renders %s size without axe violations', async (size) => {
   expect(screen.getByRole('switch', { name: `${size} switch` })).toBeInTheDocument()
 })
 
-test('supports label, description, and checked state changes', async () => {
+test('toggles checked state when clicked', async () => {
   const user = userEvent.setup()
 
-  render(
-    <Switch
-      description="Send email notifications for product updates."
-      id="email-notifications"
-      label="Email notifications"
-    />,
-  )
+  render(<Switch aria-label="Email notifications" />)
 
   const switchControl = screen.getByRole('switch', { name: 'Email notifications' })
   await user.click(switchControl)
 
-  expect(switchControl).toHaveAccessibleDescription('Send email notifications for product updates.')
   expect(switchControl).toBeChecked()
 })
 
-test('marks invalid fields for styling hooks', () => {
-  render(<Switch invalid aria-label="Required switch" />)
+test('marks invalid fields for assistive technology', () => {
+  render(<Switch aria-label="Required switch" invalid />)
 
   const switchControl = screen.getByRole('switch', { name: 'Required switch' })
+  expect(switchControl).toBeInvalid()
   expect(switchControl).toHaveAttribute('data-invalid', '')
 })
 
 test('does not toggle while disabled', async () => {
   const user = userEvent.setup()
 
-  render(<Switch disabled aria-label="Disabled switch" />)
+  render(<Switch aria-label="Disabled switch" disabled />)
 
   const switchControl = screen.getByRole('switch', { name: 'Disabled switch' })
   await user.click(switchControl)

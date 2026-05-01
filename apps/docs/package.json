@@ -6,14 +6,15 @@
   "license": "MIT",
   "type": "module",
   "scripts": {
-    "prebuild": "pnpm run codegen",
+    "prebuild": "pnpm run codegen && pnpm run sync:registry",
     "build": "next build",
-    "clean": "rimraf .next styled-system",
+    "clean": "rimraf .next styled-system public/r public/_headers",
     "codegen": "pnpm --filter @stalk-ui/i18n build && pnpm --filter @stalk-ui/preset build && panda codegen && panda cssgen",
-    "predev": "pnpm run codegen",
+    "predev": "pnpm run codegen && pnpm run sync:registry",
     "dev": "next dev --port 3000",
     "lint": "eslint .",
     "start": "next start --port 3000",
+    "sync:registry": "pnpm --workspace-root build:registry && node ./scripts/sync-registry.mjs",
     "test": "pnpm --workspace-root test:a11y:docs",
     "typecheck": "pnpm run codegen && tsc --noEmit"
   },

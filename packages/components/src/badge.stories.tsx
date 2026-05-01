@@ -1,21 +1,35 @@
-import { Badge } from './badge'
+import { HStack, VStack } from 'styled-system/jsx'
+import { badge as badgeRecipe } from 'styled-system/recipes'
+
+import { Badge, type BadgeTone } from './badge'
 
 import type { Meta, StoryObj } from '@storybook/react-vite'
+
+const { size: SIZES, variant: VARIANTS } = badgeRecipe.variantMap
+const TONES: BadgeTone[] = ['accent', 'success', 'warning', 'danger', 'info']
 
 const meta = {
   title: 'Components/Badge',
   component: Badge,
+  tags: ['autodocs', 'stable'],
   args: {
     children: 'Published',
+    size: 'md',
+    tone: 'accent',
+    variant: 'subtle',
   },
   argTypes: {
     size: {
       control: 'inline-radio',
-      options: ['sm', 'md'],
+      options: SIZES,
+    },
+    tone: {
+      control: 'select',
+      options: TONES,
     },
     variant: {
-      control: 'inline-radio',
-      options: ['solid', 'subtle', 'outline'],
+      control: 'select',
+      options: VARIANTS,
     },
   },
 } satisfies Meta<typeof Badge>
@@ -27,44 +41,44 @@ type Story = StoryObj<typeof meta>
 export const Default: Story = {}
 
 export const Variants: Story = {
+  parameters: { controls: { disable: true } },
   render: () => (
-    <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
-      <Badge variant="solid">Solid</Badge>
-      <Badge variant="subtle">Subtle</Badge>
-      <Badge variant="outline">Outline</Badge>
-    </div>
+    <HStack gap="8" flexWrap="wrap">
+      {VARIANTS.map((variant) => (
+        <Badge key={variant} variant={variant}>
+          {variant}
+        </Badge>
+      ))}
+    </HStack>
   ),
 }
 
 export const Sizes: Story = {
+  parameters: { controls: { disable: true } },
   render: () => (
-    <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-      <Badge size="sm">Small</Badge>
-      <Badge size="md">Medium</Badge>
-    </div>
+    <HStack alignItems="center" gap="8">
+      {SIZES.map((size) => (
+        <Badge key={size} size={size}>
+          {size}
+        </Badge>
+      ))}
+    </HStack>
   ),
 }
 
-export const RainbowTheme: Story = {
+export const Tones: Story = {
+  parameters: { controls: { disable: true } },
   render: () => (
-    <div data-panda-theme="rainbow">
-      <Badge variant="solid">Rainbow themed badge</Badge>
-    </div>
-  ),
-}
-
-export const Rtl: Story = {
-  render: () => (
-    <div dir="rtl">
-      <Badge>منشور</Badge>
-    </div>
-  ),
-}
-
-export const DarkMode: Story = {
-  render: () => (
-    <div data-color-mode="dark" style={{ background: '#111', padding: 24 }}>
-      <Badge variant="outline">Dark badge</Badge>
-    </div>
+    <VStack alignItems="flex-start" gap="12">
+      {VARIANTS.map((variant) => (
+        <HStack key={variant} gap="8" flexWrap="wrap">
+          {TONES.map((tone) => (
+            <Badge key={tone} tone={tone} variant={variant}>
+              {tone}
+            </Badge>
+          ))}
+        </HStack>
+      ))}
+    </VStack>
   ),
 }

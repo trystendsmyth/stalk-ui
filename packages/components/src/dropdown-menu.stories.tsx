@@ -6,32 +6,32 @@ import type { Meta, StoryObj } from '@storybook/react-vite'
 const meta = {
   title: 'Components/DropdownMenu',
   component: DropdownMenu.Root,
+  tags: ['autodocs', 'stable'],
+  parameters: { controls: { disable: true } },
 } satisfies Meta<typeof DropdownMenu.Root>
 
 export default meta
 
 type Story = StoryObj<typeof meta>
 
-const DropdownExample = () => (
-  <DropdownMenu.Root>
-    <DropdownMenu.Trigger asChild>
-      <Button variant="outline">Open menu</Button>
-    </DropdownMenu.Trigger>
-    <DropdownMenu.Content>
-      <DropdownMenu.Label>Project</DropdownMenu.Label>
-      <DropdownMenu.Item>
-        Rename
-        <DropdownMenu.Shortcut>⌘R</DropdownMenu.Shortcut>
-      </DropdownMenu.Item>
-      <DropdownMenu.Item>Duplicate</DropdownMenu.Item>
-      <DropdownMenu.Separator />
-      <DropdownMenu.Item disabled>Delete</DropdownMenu.Item>
-    </DropdownMenu.Content>
-  </DropdownMenu.Root>
-)
-
 export const Default: Story = {
-  render: () => <DropdownExample />,
+  render: () => (
+    <DropdownMenu.Root>
+      <DropdownMenu.Trigger asChild>
+        <Button variant="outline">Open menu</Button>
+      </DropdownMenu.Trigger>
+      <DropdownMenu.Content>
+        <DropdownMenu.Label>Project</DropdownMenu.Label>
+        <DropdownMenu.Item>
+          Rename
+          <DropdownMenu.Shortcut>⌘R</DropdownMenu.Shortcut>
+        </DropdownMenu.Item>
+        <DropdownMenu.Item>Duplicate</DropdownMenu.Item>
+        <DropdownMenu.Separator />
+        <DropdownMenu.Item disabled>Delete</DropdownMenu.Item>
+      </DropdownMenu.Content>
+    </DropdownMenu.Root>
+  ),
 }
 
 export const Open: Story = {
@@ -70,38 +70,5 @@ export const Complex: Story = {
         </DropdownMenu.Sub>
       </DropdownMenu.Content>
     </DropdownMenu.Root>
-  ),
-}
-
-export const RainbowTheme: Story = {
-  render: () => (
-    <div data-panda-theme="rainbow">
-      <DropdownExample />
-    </div>
-  ),
-}
-
-export const Rtl: Story = {
-  render: () => (
-    <div dir="rtl">
-      <DropdownMenu.Root>
-        <DropdownMenu.Trigger asChild>
-          <Button variant="outline">فتح القائمة</Button>
-        </DropdownMenu.Trigger>
-        <DropdownMenu.Content>
-          <DropdownMenu.Label>المشروع</DropdownMenu.Label>
-          <DropdownMenu.Item>إعادة تسمية</DropdownMenu.Item>
-          <DropdownMenu.Item>نسخ</DropdownMenu.Item>
-        </DropdownMenu.Content>
-      </DropdownMenu.Root>
-    </div>
-  ),
-}
-
-export const DarkMode: Story = {
-  render: () => (
-    <div data-color-mode="dark" style={{ background: '#111', padding: 24 }}>
-      <DropdownExample />
-    </div>
   ),
 }

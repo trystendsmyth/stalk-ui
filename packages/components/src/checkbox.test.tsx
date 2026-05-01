@@ -15,26 +15,26 @@ test.each(sizes)('renders %s size without axe violations', async (size) => {
   expect(screen.getByRole('checkbox', { name: `${size} checkbox` })).toBeInTheDocument()
 })
 
-test('supports label, description, and checked state changes', async () => {
+test('toggles checked state when clicked', async () => {
   const user = userEvent.setup()
 
-  render(
-    <Checkbox
-      description="Receive product release notes."
-      id="release-notes"
-      label="Release notes"
-    />,
-  )
+  render(<Checkbox aria-label="Release notes" id="release-notes" />)
 
   const checkbox = screen.getByRole('checkbox', { name: 'Release notes' })
   await user.click(checkbox)
 
-  expect(checkbox).toHaveAccessibleDescription('Receive product release notes.')
   expect(checkbox).toBeChecked()
 })
 
+test('renders an indeterminate state for assistive technology', () => {
+  render(<Checkbox aria-label="Bulk select" checked="indeterminate" />)
+
+  const checkbox = screen.getByRole('checkbox', { name: 'Bulk select' })
+  expect(checkbox).toHaveAttribute('data-state', 'indeterminate')
+})
+
 test('marks invalid fields for assistive technology', () => {
-  render(<Checkbox invalid aria-label="Terms" />)
+  render(<Checkbox aria-label="Terms" invalid />)
 
   const checkbox = screen.getByRole('checkbox', { name: 'Terms' })
   expect(checkbox).toBeInvalid()
@@ -44,7 +44,7 @@ test('marks invalid fields for assistive technology', () => {
 test('does not toggle while disabled', async () => {
   const user = userEvent.setup()
 
-  render(<Checkbox disabled aria-label="Disabled checkbox" />)
+  render(<Checkbox aria-label="Disabled checkbox" disabled />)
 
   const checkbox = screen.getByRole('checkbox', { name: 'Disabled checkbox' })
   await user.click(checkbox)

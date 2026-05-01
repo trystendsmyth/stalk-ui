@@ -10,9 +10,9 @@ export const componentExamples = {
     '<Button loading>Saving</Button>',
   ],
   checkbox: [
-    '<Checkbox label="Accept terms" />',
-    '<Checkbox description="Receive product release notes." id="release-notes" label="Release notes" />',
-    '<Checkbox invalid label="Required checkbox" />',
+    '<Checkbox aria-label="Accept terms" />',
+    '<Checkbox defaultChecked aria-label="Subscribed" />',
+    '<Checkbox checked="indeterminate" aria-label="Bulk select" />',
   ],
   dialog: [
     '<Dialog.Root><Dialog.Trigger>Open</Dialog.Trigger><Dialog.Content><Dialog.Title>Title</Dialog.Title></Dialog.Content></Dialog.Root>',
@@ -40,9 +40,9 @@ export const componentExamples = {
     '<Popover.Content side="bottom">Positioned below the trigger</Popover.Content>',
   ],
   radio: [
-    '<Radio.Root name="plan"><Radio.Item label="Basic" value="basic" /></Radio.Root>',
-    '<Radio.Root name="plan"><Radio.Item description="Best for small teams." id="plan-basic" label="Basic" value="basic" /></Radio.Root>',
-    '<Radio.Root name="plan"><Radio.Item invalid label="Required choice" value="required" /></Radio.Root>',
+    '<Radio.Root name="plan"><Radio.Item aria-label="Basic" value="basic" /></Radio.Root>',
+    '<Radio.Root defaultValue="pro" name="plan"><Radio.Item aria-label="Pro" value="pro" /></Radio.Root>',
+    '<Radio.Root name="plan"><Radio.Item invalid aria-label="Required choice" value="required" /></Radio.Root>',
   ],
   select: [
     '<Select.Root><Select.Trigger aria-label="Status"><Select.Value placeholder="Choose a status" /></Select.Trigger><Select.Content><Select.Item value="draft">Draft</Select.Item><Select.Item value="published">Published</Select.Item></Select.Content></Select.Root>',
@@ -50,9 +50,9 @@ export const componentExamples = {
     '<Select.Root><Select.Trigger disabled aria-label="Disabled select"><Select.Value placeholder="Disabled" /></Select.Trigger><Select.Content><Select.Item value="disabled">Disabled</Select.Item></Select.Content></Select.Root>',
   ],
   switch: [
-    '<Switch label="Email notifications" />',
-    '<Switch description="Send product updates." id="product-updates" label="Product updates" />',
-    '<Switch invalid label="Required setting" />',
+    '<Switch aria-label="Email notifications" />',
+    '<Switch defaultChecked aria-label="Push notifications" />',
+    '<Switch invalid aria-label="Required setting" />',
   ],
   textarea: [
     '<Textarea aria-label="Message" placeholder="Write a message..." />',

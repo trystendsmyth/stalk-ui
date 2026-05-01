@@ -4,11 +4,11 @@
   "manifests": {
     "badge": {
       "path": "/r/badge.json",
-      "sha256": "7fa50ff83013f4ce45f2cd8a3d6d4222f75e4ddd51cf59cd458130ebdbffe6bd"
+      "sha256": "279741bddae03e993c71a0cfe37f8d33801d09377a66a71bdc1372fffc0a1c01"
     },
     "shadcn/badge": {
       "path": "/r/shadcn/badge.json",
-      "sha256": "3797fa58f2c2224c31f9d61a51a2bf9ae71dfbc04c5258b4c8fa053a284f6751"
+      "sha256": "1b03973f5bae56c61ddf03ae470964fafc2a8343e22ac36cf1e4d0e28a1a95da"
     },
     "button": {
       "path": "/r/button.json",
@@ -20,11 +20,11 @@
     },
     "checkbox": {
       "path": "/r/checkbox.json",
-      "sha256": "4cd23aec2fc876f516d1d03a4a8a84a5abae5bc438d05b771cd7b33247139100"
+      "sha256": "0f0451cfdf550f9fff1c283680c1dacfda3bae566871611be25289fddaa3a756"
     },
     "shadcn/checkbox": {
       "path": "/r/shadcn/checkbox.json",
-      "sha256": "4d5852ed599bbcfd3a551623468da518e772975e4a37046e87f09257ce641059"
+      "sha256": "cc2c47f42aeb2b0b727dea00e86077957a73c2fd6c3f66e210e37737c203224f"
     },
     "input": {
       "path": "/r/input.json",
@@ -68,27 +68,27 @@
     },
     "radio": {
       "path": "/r/radio.json",
-      "sha256": "b11d8840fd4ad1fec4eaa816ae4673afad09a2d617f3eb6a91f1e26c00b32cfe"
+      "sha256": "613ae448e3e6a5cc140cc64179386b54e1afee5d8e5fe926d21db402a8860476"
     },
     "shadcn/radio": {
       "path": "/r/shadcn/radio.json",
-      "sha256": "d775b320d0c908658f5c11f69e25422f7d8517299d7d5d2fe88f034b38657d35"
+      "sha256": "2d8136461a11ffe7c8c1c305953bac77b0c94214922c677ae9ad3760a58b950d"
     },
     "select": {
       "path": "/r/select.json",
-      "sha256": "d9bfb458bb70b5ba698693e9699684f942c73b30a25ce34c655d2d4ba9663b52"
+      "sha256": "8c217ee91f269a935eccaf290d96d63390122c7405d19ee29d209ef65c0fcb60"
     },
     "shadcn/select": {
       "path": "/r/shadcn/select.json",
-      "sha256": "bd10816783be73cd507f1307cd37692cdafc397c53b67895de72fdb3f464d54a"
+      "sha256": "f5a35360736b0bb4e8dea84e553ffa07b8f34a548b591a9b0d59e79c47977e1b"
     },
     "switch": {
       "path": "/r/switch.json",
-      "sha256": "942ffa17c52a234429925757a196594f8fb94832ee53668879db16e177402152"
+      "sha256": "a2ce608bf2e45c75b3159927c0f62090ec75f6023e95493c6766f1f0131b894a"
     },
     "shadcn/switch": {
       "path": "/r/shadcn/switch.json",
-      "sha256": "f1bce195e68d82fb37f3f9bac0f6b44c6d1222f483439a6c0195c841b9b659d9"
+      "sha256": "ad4b94c25a6b31033e3df412f66c19bdcfe184107fb6dae605916450be5c42b7"
     },
     "tooltip": {
       "path": "/r/tooltip.json",

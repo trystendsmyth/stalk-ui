@@ -1,18 +1,48 @@
+import { css } from 'styled-system/css'
+import { HStack, VStack } from 'styled-system/jsx'
+import { radio as radioRecipe } from 'styled-system/recipes'
+
 import { Radio } from './radio'
 
 import type { Meta, StoryObj } from '@storybook/react-vite'
 
+const { size: SIZES } = radioRecipe.variantMap
+
+const disabledLabelStyle = css({ cursor: 'not-allowed', opacity: 0.5 })
+const fieldsetReset = css({ border: 'none', margin: 0, padding: 0 })
+const legendStyle = css({ fontWeight: 'semibold', marginBlockEnd: '8' })
+
 const meta = {
   title: 'Components/Radio',
   component: Radio.Item,
+  tags: ['autodocs', 'stable'],
   args: {
-    label: 'Basic',
+    disabled: false,
+    invalid: false,
+    size: 'md',
     value: 'basic',
   },
   argTypes: {
     size: {
-      control: 'inline-radio',
-      options: ['sm', 'md', 'lg'],
+      control: 'select',
+      options: SIZES,
+      description: 'Visual size of the radio.',
+    },
+    disabled: {
+      control: 'boolean',
+      description: 'Disable the radio.',
+    },
+    invalid: {
+      control: 'boolean',
+      description: 'Mark the radio as invalid.',
+    },
+    asChild: { table: { disable: true } },
+  },
+  parameters: {
+    docs: {
+      description: {
+        component: 'A radio button used inside a Radio.Root group. Built on Radix UI Radio Group.',
+      },
     },
   },
 } satisfies Meta<typeof Radio.Item>
@@ -22,73 +52,87 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
-  render: () => (
-    <Radio.Root name="default-plan">
-      <Radio.Item label="Basic" value="basic" />
+  render: (args) => (
+    <Radio.Root defaultValue="basic" name="default-plan">
+      <HStack gap="8">
+        <Radio.Item {...args} id="default-basic" />
+        <label htmlFor="default-basic">Basic</label>
+      </HStack>
     </Radio.Root>
   ),
 }
 
 export const Sizes: Story = {
+  parameters: { controls: { disable: true } },
   render: () => (
-    <Radio.Root name="sizes" style={{ display: 'grid', gap: 12 }}>
-      <Radio.Item label="Small radio" size="sm" value="sm" />
-      <Radio.Item label="Medium radio" size="md" value="md" />
-      <Radio.Item label="Large radio" size="lg" value="lg" />
+    <Radio.Root defaultValue="md" name="sizes">
+      <VStack alignItems="flex-start" gap="12">
+        {SIZES.map((size) => (
+          <HStack gap="8" key={size}>
+            <Radio.Item id={`size-${size}`} size={size} value={size} />
+            <label htmlFor={`size-${size}`}>{size}</label>
+          </HStack>
+        ))}
+      </VStack>
     </Radio.Root>
   ),
 }
 
 export const States: Story = {
+  parameters: { controls: { disable: true } },
   render: () => (
-    <Radio.Root defaultValue="checked" name="states" style={{ display: 'grid', gap: 12 }}>
-      <Radio.Item label="Default radio" value="default" />
-      <Radio.Item label="Checked radio" value="checked" />
-      <Radio.Item invalid label="Invalid radio" value="invalid" />
-      <Radio.Item disabled label="Disabled radio" value="disabled" />
+    <Radio.Root defaultValue="checked" name="states">
+      <VStack alignItems="flex-start" gap="12">
+        <HStack gap="8">
+          <Radio.Item id="state-default" value="default" />
+          <label htmlFor="state-default">Unchecked</label>
+        </HStack>
+        <HStack gap="8">
+          <Radio.Item id="state-checked" value="checked" />
+          <label htmlFor="state-checked">Checked</label>
+        </HStack>
+        <HStack gap="8">
+          <Radio.Item id="state-invalid" invalid value="invalid" />
+          <label htmlFor="state-invalid">Invalid</label>
+        </HStack>
+        <HStack gap="8">
+          <Radio.Item disabled id="state-disabled" value="disabled" />
+          <label className={disabledLabelStyle} htmlFor="state-disabled">
+            Disabled
+          </label>
+        </HStack>
+        <HStack gap="8">
+          <Radio.Item disabled id="state-disabled-checked" value="disabled-checked" />
+          <label className={disabledLabelStyle} htmlFor="state-disabled-checked">
+            Disabled (unselected)
+          </label>
+        </HStack>
+      </VStack>
     </Radio.Root>
   ),
 }
 
-export const WithDescription: Story = {
+export const Group: Story = {
+  parameters: { controls: { disable: true } },
   render: () => (
-    <Radio.Root name="described-plan">
-      <Radio.Item
-        description="Best for small teams getting started with Stalk UI."
-        id="plan-basic"
-        label="Basic"
-        value="basic"
-      />
-    </Radio.Root>
-  ),
-}
-
-export const RainbowTheme: Story = {
-  render: () => (
-    <div data-panda-theme="rainbow">
-      <Radio.Root defaultValue="rainbow" name="rainbow">
-        <Radio.Item label="Rainbow themed radio" value="rainbow" />
+    <fieldset className={fieldsetReset}>
+      <legend className={legendStyle}>Plan</legend>
+      <Radio.Root defaultValue="pro" name="plan">
+        <VStack alignItems="flex-start" gap="8">
+          <HStack gap="8">
+            <Radio.Item id="plan-basic" value="basic" />
+            <label htmlFor="plan-basic">Basic</label>
+          </HStack>
+          <HStack gap="8">
+            <Radio.Item id="plan-pro" value="pro" />
+            <label htmlFor="plan-pro">Pro</label>
+          </HStack>
+          <HStack gap="8">
+            <Radio.Item id="plan-enterprise" value="enterprise" />
+            <label htmlFor="plan-enterprise">Enterprise</label>
+          </HStack>
+        </VStack>
       </Radio.Root>
-    </div>
-  ),
-}
-
-export const Rtl: Story = {
-  render: () => (
-    <div dir="rtl">
-      <Radio.Root name="rtl-plan">
-        <Radio.Item label="الخطة الأساسية" value="basic" />
-      </Radio.Root>
-    </div>
-  ),
-}
-
-export const DarkMode: Story = {
-  render: () => (
-    <div data-color-mode="dark" style={{ background: '#111', padding: 24 }}>
-      <Radio.Root defaultValue="dark" name="dark-plan">
-        <Radio.Item label="Dark radio" value="dark" />
-      </Radio.Root>
-    </div>
+    </fieldset>
   ),
 }

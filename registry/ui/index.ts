@@ -61,7 +61,7 @@ export const registryItems = [
     $schema: 'https://stalk-ui.com/schema/v1/registry-item.json',
     name: 'checkbox',
     type: 'registry:ui',
-    dependencies: ['@stalk-ui/preset'],
+    dependencies: ['@radix-ui/react-checkbox', '@stalk-ui/preset', 'lucide-react'],
     registryDependencies: [],
     files: [
       {
@@ -229,7 +229,7 @@ export const registryItems = [
     $schema: 'https://stalk-ui.com/schema/v1/registry-item.json',
     name: 'radio',
     type: 'registry:ui',
-    dependencies: ['@stalk-ui/preset'],
+    dependencies: ['@radix-ui/react-radio-group', '@stalk-ui/preset'],
     registryDependencies: [],
     files: [
       {
@@ -257,7 +257,7 @@ export const registryItems = [
     $schema: 'https://stalk-ui.com/schema/v1/registry-item.json',
     name: 'select',
     type: 'registry:ui',
-    dependencies: ['@stalk-ui/preset'],
+    dependencies: ['@radix-ui/react-select', '@stalk-ui/preset', 'lucide-react'],
     registryDependencies: [],
     files: [
       {

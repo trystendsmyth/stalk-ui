@@ -6,8 +6,14 @@ import type { StorybookConfig } from '@storybook/react-vite'
 const storybookDirectory = dirname(fileURLToPath(import.meta.url))
 
 const config: StorybookConfig = {
-  addons: ['@storybook/addon-a11y', '@storybook/addon-themes', '@storybook/addon-vitest'],
+  addons: [
+    '@storybook/addon-a11y',
+    '@storybook/addon-docs',
+    '@storybook-community/storybook-dark-mode',
+    '@storybook/addon-vitest',
+  ],
   stories: [
+    '../src/**/*.mdx',
     '../src/**/*.stories.@(ts|tsx)',
     '../../../packages/components/src/**/*.stories.@(ts|tsx)',
   ],
@@ -24,7 +30,7 @@ const config: StorybookConfig = {
       },
     },
   }),
-  staticDirs: [],
+  staticDirs: ['../public'],
 }
 
 export default config

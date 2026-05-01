@@ -33,7 +33,7 @@ Every component must have:
 1. Source in `packages/components/src/<kebab-case-name>.tsx`.
 2. A matching manifest in `registry/ui/<kebab-case-name>.ts`.
 3. Named React exports and a dot-notation public API composed with `Object.assign`.
-4. Stories covering variants, states, RTL, and dark mode.
+4. Stories covering variants, states, RTL, and color mode (via Storybook globals / toolbar, not one-off dark wrappers).
 5. Tests covering axe, keyboard interactions, and screen reader labels.
 6. `asChild` support where applicable through `@radix-ui/react-slot`.
 7. Forwarded refs, `displayName`, and strict TypeScript types.
@@ -51,8 +51,12 @@ Use `packages/components/src/dialog.tsx` as the canonical compound component ref
 - Compose public compound APIs with named exports plus `Object.assign`, keeping each part independently tree-shakeable.
 - Do not add blanket component JSDoc. Prefer generated docs from source metadata and add comments only when they explain non-obvious behavior.
 - Tests should cover render behavior, axe, keyboard interactions, and role or label queries rather than class-name queries.
-- Stories should cover variants, states, RTL, and dark mode or alternate themes.
+- Stories should cover variants, states, RTL, and color mode or alternate themes (validated with toolbar globals).
 - Components must work across color mode, theme, and RTL combinations.
+
+## Stories (Storybook)
+
+Author CSF stories in `packages/components/src/*.stories.tsx` using Panda JSX and semantic tokens. Token reference docs live as MDX in `apps/storybook/src/` (see `semantic-tokens.mdx`) so `@storybook/addon-docs/blocks` resolves. See `.cursor/rules/15-stories-authoring.mdc` for the full checklist. Canonical story example: `packages/components/src/button.stories.tsx`.
 
 ## Testing And Accessibility
 

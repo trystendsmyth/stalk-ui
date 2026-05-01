@@ -1,18 +1,26 @@
+import { Box, VStack } from 'styled-system/jsx'
+import { label as labelRecipe } from 'styled-system/recipes'
+
 import { Label } from './label'
 
 import type { Meta, StoryObj } from '@storybook/react-vite'
 
+const { size: SIZES } = labelRecipe.variantMap
+
 const meta = {
   title: 'Components/Label',
   component: Label,
+  tags: ['autodocs', 'stable'],
   args: {
     children: 'Email',
     htmlFor: 'email',
+    size: 'md',
+    required: false,
   },
   argTypes: {
     size: {
-      control: 'inline-radio',
-      options: ['sm', 'md', 'lg'],
+      control: 'select',
+      options: SIZES,
     },
   },
 } satisfies Meta<typeof Label>
@@ -23,54 +31,36 @@ type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
   render: (args) => (
-    <div style={{ display: 'grid', gap: 8, maxWidth: 320 }}>
+    <VStack alignItems="stretch" gap="8" maxWidth="320">
       <Label {...args} />
       <input id="email" placeholder="hello@stalk-ui.com" />
-    </div>
+    </VStack>
   ),
 }
 
 export const Sizes: Story = {
+  parameters: { controls: { disable: true } },
   render: () => (
-    <div style={{ display: 'grid', gap: 12 }}>
-      <Label size="sm">Small label</Label>
-      <Label size="md">Medium label</Label>
-      <Label size="lg">Large label</Label>
-    </div>
+    <VStack alignItems="flex-start" gap="12">
+      {SIZES.map((size) => (
+        <Label key={size} size={size}>
+          {`${size} label`}
+        </Label>
+      ))}
+    </VStack>
   ),
 }
 
 export const Required: Story = {
+  parameters: { controls: { disable: true } },
   render: () => (
-    <div style={{ display: 'grid', gap: 8, maxWidth: 320 }}>
-      <Label required htmlFor="required-email">
-        Email
-      </Label>
-      <input id="required-email" required placeholder="hello@stalk-ui.com" />
-    </div>
-  ),
-}
-
-export const RainbowTheme: Story = {
-  render: () => (
-    <div data-panda-theme="rainbow">
-      <Label required>Rainbow themed label</Label>
-    </div>
-  ),
-}
-
-export const Rtl: Story = {
-  render: () => (
-    <div dir="rtl">
-      <Label>البريد الإلكتروني</Label>
-    </div>
-  ),
-}
-
-export const DarkMode: Story = {
-  render: () => (
-    <div data-color-mode="dark" style={{ background: '#111', padding: 24 }}>
-      <Label required>Dark label</Label>
-    </div>
+    <Box maxWidth="320">
+      <VStack alignItems="stretch" gap="8">
+        <Label required htmlFor="required-email">
+          Email
+        </Label>
+        <input id="required-email" placeholder="hello@stalk-ui.com" required />
+      </VStack>
+    </Box>
   ),
 }
