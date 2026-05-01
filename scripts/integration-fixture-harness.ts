@@ -530,8 +530,12 @@ const registerSignalHandlers = () => {
     })()
   }
 
-  process.once('SIGINT', () => exitWithCleanup(130))
-  process.once('SIGTERM', () => exitWithCleanup(143))
+  process.once('SIGINT', () => {
+    exitWithCleanup(130)
+  })
+  process.once('SIGTERM', () => {
+    exitWithCleanup(143)
+  })
   process.once('uncaughtException', (error) => {
     console.error('Integration harness uncaught exception:', error)
     exitWithCleanup(1)

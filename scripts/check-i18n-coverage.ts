@@ -4,7 +4,7 @@
 import { ar } from '../packages/i18n/src/locales/ar'
 import { en } from '../packages/i18n/src/locales/en'
 import { es } from '../packages/i18n/src/locales/es'
-import { zhCN } from '../packages/i18n/src/locales/zh-CN'
+import { zhCN } from '../packages/i18n/src/locales/zh-cn'
 
 import type { MessageDictionary } from '../packages/i18n/src/types'
 

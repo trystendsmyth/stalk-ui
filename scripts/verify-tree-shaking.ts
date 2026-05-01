@@ -5,6 +5,8 @@ import { fileURLToPath } from 'node:url'
 
 import { build } from 'esbuild'
 
+import type { Plugin as EsbuildPlugin } from 'esbuild'
+
 const projectRoot = resolve(dirname(fileURLToPath(import.meta.url)), '..')
 const componentsRoot = join(projectRoot, 'packages/components/src')
 
@@ -87,7 +89,7 @@ const verifyNamedExportPattern = async () => {
   }
 }
 
-const stubModulesPlugin = (stubs: Record<string, string>): import('esbuild').Plugin => ({
+const stubModulesPlugin = (stubs: Record<string, string>): EsbuildPlugin => ({
   name: 'stub-runtime-modules',
   setup(build) {
     for (const [filter, body] of Object.entries(stubs)) {
@@ -171,10 +173,21 @@ const RADIX_STUB = `
   export const Slot = stub('Slot');
 `
 
+// Extra primitives that only `@radix-ui/react-dropdown-menu` exposes via dot
+// access (e.g. `DropdownMenuPrimitive.RadioGroup`). Kept out of the shared
+// `RADIX_STUB` because their bare names would collide with `radio.tsx`'s
+// public `RadioItem` export under star-import retention.
+const DROPDOWN_MENU_STUB =
+  RADIX_STUB +
+  `
+  export const RadioGroup = stub('RadioGroup');
+  export const RadioItem = stub('RadioItem');
+`
+
 const stubsForCompound = (): Record<string, string> => ({
   ...RUNTIME_STUBS,
   '@radix-ui/react-dialog': RADIX_STUB,
-  '@radix-ui/react-dropdown-menu': RADIX_STUB,
+  '@radix-ui/react-dropdown-menu': DROPDOWN_MENU_STUB,
   '@radix-ui/react-popover': RADIX_STUB,
   '@radix-ui/react-select': RADIX_STUB,
   '@radix-ui/react-tooltip': RADIX_STUB,
