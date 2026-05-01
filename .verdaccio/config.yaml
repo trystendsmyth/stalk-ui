@@ -10,7 +10,6 @@ packages:
   '@stalk-ui/*':
     access: $all
     publish: $authenticated
-    proxy: npmjs
   '**':
     access: $all
     publish: $authenticated
