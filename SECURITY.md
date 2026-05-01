@@ -44,6 +44,6 @@ Trusted publishing eliminated the recurring `NPM_TOKEN` rotation chore. No autom
 
 If a publish token is ever introduced (for example to bootstrap a new package that doesn't yet have a trusted-publisher configuration), record it here and revoke it as soon as the trusted-publisher entry is in place:
 
-| Token | Purpose | Created | Revoked |
-| ----- | ------- | ------- | ------- |
-| _none_ | _trusted publishing in use_ | — | — |
+| Token  | Purpose                     | Created | Revoked |
+| ------ | --------------------------- | ------- | ------- |
+| _none_ | _trusted publishing in use_ | —       | —       |
