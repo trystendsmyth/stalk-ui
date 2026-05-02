@@ -40,7 +40,7 @@ const stalkPreset = definePreset({
     css: [
       {
         properties: {
-          colorPalette: ['accent', 'success', 'warning', 'danger', 'info'],
+          colorPalette: ['accent', 'success', 'warning', 'danger', 'info', 'highlight'],
         },
       },
     ],
@@ -54,6 +54,7 @@ export {
   BACKGROUND_COLORS,
   BORDER_COLORS,
   FOREGROUND_COLORS,
+  HIGHLIGHT_COLORS,
   SEMANTIC_COLOR_TOKENS,
   STATUS_COLORS,
 } from './helpers/token-options'

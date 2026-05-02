@@ -8,11 +8,13 @@ export type ScaleName =
   | 'teal'
   | 'emerald'
   | 'amber'
+  | 'yellow'
+  | 'orange'
   | 'red'
 
 export type AccentColor = Extract<
   ScaleName,
-  'blue' | 'violet' | 'teal' | 'emerald' | 'amber' | 'red'
+  'blue' | 'violet' | 'teal' | 'emerald' | 'amber' | 'yellow' | 'orange' | 'red'
 >
 
 export type GrayColor = Extract<ScaleName, 'gray' | 'neutral' | 'slate' | 'mauve'>

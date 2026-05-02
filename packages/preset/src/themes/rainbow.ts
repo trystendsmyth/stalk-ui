@@ -13,10 +13,15 @@ const semanticPair = (light: string, dark: string) => ({
   },
 })
 
+/**
+ * Identity: violet chrome (bg + structural borders), mauve text + hairlines, teal accent.
+ * Mauve frees violet to mean "promotional" instead of being load-bearing for body copy;
+ * teal keeps CTAs distinct from the surface tint.
+ */
 export const rainbowTheme = {
   semanticTokens: {
     colors: {
-      accent: createAccentSemanticTokens('violet'),
+      accent: createAccentSemanticTokens('teal'),
       bg: {
         canvas: semanticPair(scaleToken('violet', 2), darkScaleToken('violet', 2)),
         default: semanticPair(scaleToken('violet', 1), darkScaleToken('violet', 1)),
@@ -25,7 +30,7 @@ export const rainbowTheme = {
       },
       border: {
         default: semanticPair(scaleToken('violet', 7), darkScaleToken('violet', 7)),
-        muted: semanticPair(scaleToken('violet', 4), darkScaleToken('violet', 4)),
+        muted: semanticPair(scaleToken('mauve', 4), darkScaleToken('mauve', 4)),
         strong: semanticPair(scaleToken('violet', 9), darkScaleToken('violet', 9)),
         hover: semanticPair(scaleToken('violet', 8), darkScaleToken('violet', 8)),
         /** Stay blue in rainbow so focus reads as a system signal, not the brand color. */
@@ -35,14 +40,15 @@ export const rainbowTheme = {
       },
       danger: createVibrantAccentSemanticTokens('red'),
       fg: {
-        default: semanticPair(scaleToken('violet', 12), darkScaleToken('violet', 12)),
-        inverse: semanticPair(scaleToken('violet', 1), scaleToken('violet', 12)),
-        muted: semanticPair(scaleToken('violet', 11), darkScaleToken('violet', 11)),
-        subtle: semanticPair(scaleToken('violet', 10), darkScaleToken('violet', 10)),
+        default: semanticPair(scaleToken('mauve', 12), darkScaleToken('mauve', 12)),
+        inverse: semanticPair(scaleToken('mauve', 1), scaleToken('mauve', 12)),
+        muted: semanticPair(scaleToken('mauve', 11), darkScaleToken('mauve', 11)),
+        subtle: semanticPair(scaleToken('mauve', 10), darkScaleToken('mauve', 10)),
       },
       info: createVibrantAccentSemanticTokens('blue'),
       success: createVibrantAccentSemanticTokens('emerald'),
-      warning: createVibrantAccentSemanticTokens('amber'),
+      warning: createVibrantAccentSemanticTokens('yellow'),
+      highlight: createVibrantAccentSemanticTokens('orange'),
     },
   },
 }
