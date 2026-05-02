@@ -48,6 +48,10 @@
     "typecheck": "pnpm --filter @stalk-ui/storybook run codegen && turbo run typecheck",
     "verdaccio:publish": "tsx scripts/verdaccio-publish.ts",
     "verdaccio:start": "pnpm dlx verdaccio --config .verdaccio/config.yaml",
+    "verify": "pnpm verify:fast && pnpm verify:drift && pnpm verify:audit",
+    "verify:audit": "pnpm build:registry && pnpm check-component-completeness && pnpm check-semantic-tokens && pnpm check-i18n-coverage && pnpm check-i18n-exports && pnpm check-no-stray-baselines && pnpm check-third-party-licenses && pnpm check-third-party-size && pnpm check-registry-deps && pnpm check-docs && pnpm verify-tree-shaking && pnpm check-exports",
+    "verify:drift": "pnpm verify-preset && git diff --exit-code packages/preset/__snapshots__/ && pnpm check-registry && git diff --exit-code public/r/",
+    "verify:fast": "pnpm format:check && pnpm syncpack:check && pnpm lint && pnpm typecheck && pnpm test",
     "verify-preset": "tsx scripts/verify-preset.ts",
     "verify-tree-shaking": "tsx scripts/verify-tree-shaking.ts"
   },

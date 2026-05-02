@@ -1193,6 +1193,7 @@
       gap: var(--spacing-6);
       display: grid;
       padding-block-end: var(--spacing-base);
+      padding-inline-end: var(--spacing-32);
 }
 
     .stalk-dialog__title {
@@ -1221,10 +1222,32 @@
 }
 
     .stalk-dialog__close {
+      border: none;
+      font: inherit;
+      margin: var(--spacing-0);
+      padding: var(--spacing-0);
       border-radius: var(--radii-sm);
       position: absolute;
-      inset-block-start: var(--spacing-base);
-      inset-inline-end: var(--spacing-base);
+      inset-block-start: var(--spacing-12);
+      inset-inline-end: var(--spacing-12);
+      align-items: center;
+      appearance: none;
+      -webkit-appearance: none;
+      background-color: transparent;
+      color: var(--colors-fg-muted);
+      cursor: pointer;
+      display: inline-flex;
+      flex-shrink: 0;
+      justify-content: center;
+      line-height: 1;
+      height: var(--sizes-28);
+      width: var(--sizes-28);
+}
+
+    .stalk-dialog__close > svg {
+      flex-shrink: 0;
+      height: 16px;
+      width: 16px;
 }
 
     .stalk-dialog__close:is(:focus-visible, [data-focus-visible]) {
@@ -1234,6 +1257,11 @@
       --ring-color: var(--colors-accent-subtle);
       --ring-offset-width: 0.0625rem;
       --ring-offset-color: var(--colors-bg-default);
+}
+
+    .stalk-dialog__close:is(:hover, [data-hover]) {
+      background-color: var(--colors-bg-subtle);
+      color: var(--colors-fg-default);
 }
 
     .stalk-dropdown-menu__content {
@@ -1318,10 +1346,32 @@
 }
 
     .stalk-popover__close {
+      border: none;
+      font: inherit;
+      margin: var(--spacing-0);
+      padding: var(--spacing-0);
       border-radius: var(--radii-sm);
       position: absolute;
       inset-block-start: var(--spacing-8);
       inset-inline-end: var(--spacing-8);
+      align-items: center;
+      appearance: none;
+      -webkit-appearance: none;
+      background-color: transparent;
+      color: var(--colors-fg-muted);
+      cursor: pointer;
+      display: inline-flex;
+      flex-shrink: 0;
+      justify-content: center;
+      line-height: 1;
+      height: var(--sizes-24);
+      width: var(--sizes-24);
+}
+
+    .stalk-popover__close > svg {
+      flex-shrink: 0;
+      height: var(--sizes-14);
+      width: var(--sizes-14);
 }
 
     .stalk-popover__close:is(:focus-visible, [data-focus-visible]) {
@@ -1331,6 +1381,11 @@
       --ring-color: var(--colors-accent-subtle);
       --ring-offset-width: 0.0625rem;
       --ring-offset-color: var(--colors-bg-default);
+}
+
+    .stalk-popover__close:is(:hover, [data-hover]) {
+      background-color: var(--colors-bg-subtle);
+      color: var(--colors-fg-default);
 }
 
     .stalk-radio__root {
