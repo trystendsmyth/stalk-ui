@@ -1,4 +1,4 @@
-import { RootProvider } from 'fumadocs-ui/provider'
+import { RootProvider } from 'fumadocs-ui/provider/next'
 import 'fumadocs-ui/style.css'
 
 import { DocsI18nProvider } from '../components/i18n-provider'
