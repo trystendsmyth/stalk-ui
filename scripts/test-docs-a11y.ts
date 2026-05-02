@@ -44,9 +44,42 @@ const docs = spawn(
   'pnpm',
   ['--filter', '@stalk-ui/docs', 'exec', 'next', 'start', '--port', port],
   {
+    detached: true,
     stdio: 'inherit',
   },
 )
+
+const terminateDocs = async (): Promise<void> => {
+  if (typeof docs.pid !== 'number' || docs.exitCode !== null || docs.signalCode !== null) {
+    return
+  }
+
+  const groupId = -docs.pid
+
+  await new Promise<void>((resolve) => {
+    const timeout = setTimeout(() => {
+      try {
+        process.kill(groupId, 'SIGKILL')
+      } catch {
+        // Group already gone.
+      }
+    }, 5000)
+
+    const finish = () => {
+      clearTimeout(timeout)
+      resolve()
+    }
+
+    docs.once('exit', finish)
+
+    try {
+      process.kill(groupId, 'SIGTERM')
+    } catch {
+      docs.off('exit', finish)
+      finish()
+    }
+  })
+}
 
 try {
   await waitForHttp(`${baseUrl}/en`)
@@ -54,6 +87,8 @@ try {
     stdio: 'inherit',
   })
 } finally {
-  docs.kill('SIGTERM')
+  await terminateDocs()
   rimrafSync(tempDirectory)
 }
+
+process.exit(0)
