@@ -25,8 +25,45 @@ await rm('storage', { force: true, recursive: true })
 await rm('htpasswd', { force: true })
 
 const verdaccio = spawn('pnpm', ['dlx', 'verdaccio', '--config', '.verdaccio/config.yaml'], {
+  detached: true,
   stdio: 'pipe',
 })
+
+const terminateVerdaccio = async (): Promise<void> => {
+  if (
+    typeof verdaccio.pid !== 'number' ||
+    verdaccio.exitCode !== null ||
+    verdaccio.signalCode !== null
+  ) {
+    return
+  }
+
+  const groupId = -verdaccio.pid
+
+  await new Promise<void>((resolve) => {
+    const timeout = setTimeout(() => {
+      try {
+        process.kill(groupId, 'SIGKILL')
+      } catch {
+        // Group already gone.
+      }
+    }, 5000)
+
+    const finish = () => {
+      clearTimeout(timeout)
+      resolve()
+    }
+
+    verdaccio.once('exit', finish)
+
+    try {
+      process.kill(groupId, 'SIGTERM')
+    } catch {
+      verdaccio.off('exit', finish)
+      finish()
+    }
+  })
+}
 
 const waitForRegistry = async () => {
   for (let attempt = 0; attempt < 60; attempt += 1) {
@@ -138,6 +175,8 @@ try {
     }
   }
 } finally {
-  verdaccio.kill('SIGTERM')
+  await terminateVerdaccio()
   await rm(tempDirectory, { force: true, recursive: true })
 }
+
+process.exit(0)
