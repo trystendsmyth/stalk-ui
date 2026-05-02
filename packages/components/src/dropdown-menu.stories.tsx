@@ -7,7 +7,19 @@ const meta = {
   title: 'Components/DropdownMenu',
   component: DropdownMenu.Root,
   tags: ['autodocs', 'stable'],
-  parameters: { controls: { disable: true } },
+  parameters: {
+    controls: { disable: true },
+    // Radix DropdownMenu implements the WAI-ARIA modal pattern: when open,
+    // sibling content (including the still-focusable Trigger) sits inside an
+    // aria-hidden subtree while focus is trapped inside the portal'd Content.
+    // axe's aria-hidden-focus rule does not model this pattern and reports a
+    // false positive on the open-state stories.
+    a11y: {
+      config: {
+        rules: [{ id: 'aria-hidden-focus', enabled: false }],
+      },
+    },
+  },
 } satisfies Meta<typeof DropdownMenu.Root>
 
 export default meta

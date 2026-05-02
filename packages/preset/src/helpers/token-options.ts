@@ -44,3 +44,8 @@ export const STATUS_COLORS = [
   ...flattenTokenKeys(semanticTokens.colors.danger as Record<string, unknown>, 'danger'),
   ...flattenTokenKeys(semanticTokens.colors.info as Record<string, unknown>, 'info'),
 ]
+
+export const HIGHLIGHT_COLORS = flattenTokenKeys(
+  semanticTokens.colors.highlight as Record<string, unknown>,
+  'highlight',
+)
