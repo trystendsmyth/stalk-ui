@@ -15,8 +15,15 @@ export const PopoverPortal = PopoverPrimitive.Portal
 export const PopoverClose = /* @__PURE__ */ forwardRef<
   ComponentRef<typeof PopoverPrimitive.Close>,
   ComponentPropsWithoutRef<typeof PopoverPrimitive.Close>
->(function PopoverClose({ className, ...props }, ref) {
-  return <PopoverPrimitive.Close ref={ref} className={cx(styles.close, className)} {...props} />
+>(function PopoverClose({ asChild = false, className, ...props }, ref) {
+  return (
+    <PopoverPrimitive.Close
+      ref={ref}
+      asChild={asChild}
+      className={asChild ? className : cx(styles.close, className)}
+      {...props}
+    />
+  )
 })
 export const PopoverContent = /* @__PURE__ */ forwardRef<
   ComponentRef<typeof PopoverPrimitive.Content>,

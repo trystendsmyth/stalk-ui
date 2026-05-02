@@ -14,8 +14,15 @@ export const DialogPortal = DialogPrimitive.Portal
 export const DialogClose = /* @__PURE__ */ forwardRef<
   ComponentRef<typeof DialogPrimitive.Close>,
   ComponentPropsWithoutRef<typeof DialogPrimitive.Close>
->(function DialogClose({ className, ...props }, ref) {
-  return <DialogPrimitive.Close ref={ref} className={cx(styles.close, className)} {...props} />
+>(function DialogClose({ asChild = false, className, ...props }, ref) {
+  return (
+    <DialogPrimitive.Close
+      ref={ref}
+      asChild={asChild}
+      className={asChild ? className : cx(styles.close, className)}
+      {...props}
+    />
+  )
 })
 
 export const DialogOverlay = /* @__PURE__ */ forwardRef<

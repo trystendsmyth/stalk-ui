@@ -1,3 +1,5 @@
+import { X } from 'lucide-react'
+import { css } from 'styled-system/css'
 import { VStack } from 'styled-system/jsx'
 
 import { Button } from './button'
@@ -35,12 +37,11 @@ export const Default: Story = {
           <Input id="dialog-email" placeholder="teammate@stalk-ui.com" type="email" />
         </VStack>
         <Dialog.Footer>
-          <Dialog.Close asChild>
-            <Button variant="outline">Cancel</Button>
-          </Dialog.Close>
           <Button>Send invite</Button>
         </Dialog.Footer>
-        <Dialog.Close aria-label="Close dialog">×</Dialog.Close>
+        <Dialog.Close aria-label="Close dialog">
+          <X aria-hidden size={16} />
+        </Dialog.Close>
       </Dialog.Content>
     </Dialog.Root>
   ),
@@ -54,11 +55,19 @@ export const Open: Story = {
           <Dialog.Title>Open dialog</Dialog.Title>
           <Dialog.Description>This story renders the dialog opened by default.</Dialog.Description>
         </Dialog.Header>
-        <Dialog.Footer>
-          <Dialog.Close asChild>
-            <Button>Close</Button>
-          </Dialog.Close>
-        </Dialog.Footer>
+        <Dialog.Close asChild>
+          <Button
+            className={css({
+              position: 'absolute',
+              insetBlockStart: '12',
+              insetInlineEnd: '12',
+            })}
+            size="sm"
+            variant="outline"
+          >
+            Cancel
+          </Button>
+        </Dialog.Close>
       </Dialog.Content>
     </Dialog.Root>
   ),
