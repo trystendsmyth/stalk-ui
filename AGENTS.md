@@ -61,6 +61,16 @@ Use `packages/components/src/dialog.tsx` as the canonical compound component ref
 
 Author CSF stories in `packages/components/src/*.stories.tsx` using Panda JSX and semantic tokens. Token reference docs live as MDX in `apps/storybook/src/` (see `semantic-tokens.mdx`) so `@storybook/addon-docs/blocks` resolves. See `.cursor/rules/15-stories-authoring.mdc` for the full checklist. Canonical story example: `packages/components/src/button.stories.tsx`.
 
+## Verifying Changes
+
+After any component, recipe, registry, or i18n edit, run `pnpm verify` as the final step before reporting work complete or staging a commit. It chains the same gates CI enforces:
+
+- `pnpm verify:fast` — `format:check`, `syncpack:check`, `lint`, `typecheck`, unit tests.
+- `pnpm verify:drift` — regenerates `packages/preset/__snapshots__/reference.css` and `public/r/*.json`, then fails if either differs from what's checked in. Slot-recipe or component-source edits require committing the regenerated artifacts; do not bypass this step.
+- `pnpm verify:audit` — completeness, semantic tokens, i18n, third-party budgets, registry deps, tree-shaking, docs, exports.
+
+Heavier suites (`pnpm test:integration`, `pnpm lost-pixel`, `pnpm size:check`) are not part of `pnpm verify`; run them on demand when their inputs change (registry/CLI/preset publishing, story visuals, bundle budgets respectively). If a Lost Pixel baseline shifts, refresh it before the commit that introduces the visual change.
+
 ## Testing And Accessibility
 
 Accessibility is a blocking requirement. jsx-a11y strict lint rules, axe tests, Storybook a11y checks, and docs accessibility checks should fail CI when violated.

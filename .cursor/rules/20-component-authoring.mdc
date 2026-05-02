@@ -21,3 +21,5 @@ Every component must:
 14. Keep dot-notation namespaces tree-shakeable by building them from named exports.
 
 Naming: source and manifest files use kebab-case; React exports use PascalCase.
+
+Final step for any component, recipe, or registry edit: run `pnpm verify` (chains `verify:fast`, `verify:drift`, `verify:audit`). `verify:drift` regenerates `packages/preset/__snapshots__/reference.css` and `public/r/*.json` and fails on uncommitted drift — commit the regenerated artifacts alongside the source change; never skip this step.

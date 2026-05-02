@@ -28,11 +28,11 @@
     },
     "dialog": {
       "path": "/r/dialog.json",
-      "sha256": "17836375b6f5656906e419503ef079a4007d2e56a1943114c15bd65698779b4f"
+      "sha256": "38022d3110271c5394ed25bcf0d4147f220c6fe29c149792fa8a8b4e551292dc"
     },
     "shadcn/dialog": {
       "path": "/r/shadcn/dialog.json",
-      "sha256": "7efedbc484c9b27caddd180a6f6d1cd1bc8231223bbafe9b9fbb577a0f7d6353"
+      "sha256": "f2b57ca5f38a0b86370384d95d5b3d3ae9bd4260867d256f06af5b1480505c37"
     },
     "dropdown-menu": {
       "path": "/r/dropdown-menu.json",
@@ -60,11 +60,11 @@
     },
     "popover": {
       "path": "/r/popover.json",
-      "sha256": "fa8c09842bd43bf7f3562415ec80b05d34a8c5ab121b8cebbcd8b3a549c363cc"
+      "sha256": "d6214e4e9899078654f4a2caed87ddc6a424650148f3c7569c741e4a25e725d2"
     },
     "shadcn/popover": {
       "path": "/r/shadcn/popover.json",
-      "sha256": "b090b8f2880bf1bcf8660263e5a13c446f2084ff77d26db351cfe527ca035072"
+      "sha256": "a3a4b89206f4ca9afb7811bd73eacf4c3d2b2c5dc0cd73b0e0c30c2594cf7e1c"
     },
     "radio": {
       "path": "/r/radio.json",
