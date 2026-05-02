@@ -73,7 +73,10 @@ jobs:
       - run: pnpm syncpack:check
 
   changeset-check:
-    if: github.event_name == 'pull_request' && github.head_ref != 'changeset-release/main'
+    if: >-
+      github.event_name == 'pull_request'
+      && github.head_ref != 'changeset-release/main'
+      && github.actor != 'dependabot[bot]'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
