@@ -218,10 +218,11 @@ describe('CLI command golden files', () => {
 
       expect(normalizeOutput(process.cwd(), output)).toMatchInlineSnapshot(`
         [
-          "Stalk UI ships with two themes:
+          "Stalk UI ships with three themes:
 
           neutral (default) - applied automatically
           rainbow           - apply via data-panda-theme="rainbow"
+          monochrome        - apply via data-panda-theme="monochrome"
 
         To use a theme, add the data-panda-theme attribute to the appropriate
         element in your HTML or layout:
@@ -240,7 +241,7 @@ describe('CLI command golden files', () => {
         Runtime switching: https://stalk-ui.com/en/docs/getting-started/theming",
           "Unknown theme: midnight
 
-        Available themes: neutral, rainbow
+        Available themes: neutral, rainbow, monochrome
 
         To add custom themes, see:
         https://stalk-ui.com/en/docs/getting-started/custom-themes",

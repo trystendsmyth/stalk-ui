@@ -138,14 +138,18 @@ const themes = {
   rainbow: {
     description: 'apply via data-panda-theme="rainbow"',
   },
+  monochrome: {
+    description: 'apply via data-panda-theme="monochrome"',
+  },
 } as const
 
 export const themeCommand = (name?: string) => {
   if (name === undefined) {
-    console.log(`Stalk UI ships with two themes:
+    console.log(`Stalk UI ships with three themes:
 
   neutral (default) - ${themes.neutral.description}
   rainbow           - ${themes.rainbow.description}
+  monochrome        - ${themes.monochrome.description}
 
 To use a theme, add the data-panda-theme attribute to the appropriate
 element in your HTML or layout:
