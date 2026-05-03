@@ -20,7 +20,14 @@ pnpm dlx @stalk-ui/cli add @stalk-ui/select
 <ComponentPreview
   slug="select"
   example={0}
-  code={`<Select.Root><Select.Trigger aria-label="Status"><Select.Value placeholder="Choose a status" /></Select.Trigger><Select.Content><Select.Item value="draft">Draft</Select.Item><Select.Item value="published">Published</Select.Item></Select.Content></Select.Root>`}
+  code={`<Select.Root>
+  <Select.Trigger aria-label="Status"><Select.Value placeholder="Choose a status" /></Select.Trigger>
+  <Select.Content>
+    <Select.Item value="draft">Draft</Select.Item>
+    <Select.Item value="published">Published</Select.Item>
+    <Select.Item value="archived">Archived</Select.Item>
+  </Select.Content>
+</Select.Root>`}
 />
 
 ```tsx
@@ -31,6 +38,7 @@ pnpm dlx @stalk-ui/cli add @stalk-ui/select
   <Select.Content>
     <Select.Item value="draft">Draft</Select.Item>
     <Select.Item value="published">Published</Select.Item>
+    <Select.Item value="archived">Archived</Select.Item>
   </Select.Content>
 </Select.Root>
 ```
@@ -38,13 +46,18 @@ pnpm dlx @stalk-ui/cli add @stalk-ui/select
 <ComponentPreview
   slug="select"
   example={1}
-  code={`<Select.Root><Select.Trigger invalid aria-label="Status"><Select.Value placeholder="Choose a status" /></Select.Trigger><Select.Content><Select.Item value="draft">Draft</Select.Item></Select.Content></Select.Root>`}
+  code={`<Select.Root>
+  <Select.Trigger invalid aria-label="Status"><Select.Value placeholder="Required" /></Select.Trigger>
+  <Select.Content>
+    <Select.Item value="draft">Draft</Select.Item>
+  </Select.Content>
+</Select.Root>`}
 />
 
 ```tsx
 <Select.Root>
   <Select.Trigger invalid aria-label="Status">
-    <Select.Value placeholder="Choose a status" />
+    <Select.Value placeholder="Required" />
   </Select.Trigger>
   <Select.Content>
     <Select.Item value="draft">Draft</Select.Item>
@@ -55,16 +68,21 @@ pnpm dlx @stalk-ui/cli add @stalk-ui/select
 <ComponentPreview
   slug="select"
   example={2}
-  code={`<Select.Root><Select.Trigger disabled aria-label="Disabled select"><Select.Value placeholder="Disabled" /></Select.Trigger><Select.Content><Select.Item value="disabled">Disabled</Select.Item></Select.Content></Select.Root>`}
+  code={`<Select.Root disabled>
+  <Select.Trigger aria-label="Locked"><Select.Value placeholder="Locked" /></Select.Trigger>
+  <Select.Content>
+    <Select.Item value="locked">Locked</Select.Item>
+  </Select.Content>
+</Select.Root>`}
 />
 
 ```tsx
-<Select.Root>
-  <Select.Trigger disabled aria-label="Disabled select">
-    <Select.Value placeholder="Disabled" />
+<Select.Root disabled>
+  <Select.Trigger aria-label="Locked">
+    <Select.Value placeholder="Locked" />
   </Select.Trigger>
   <Select.Content>
-    <Select.Item value="disabled">Disabled</Select.Item>
+    <Select.Item value="locked">Locked</Select.Item>
   </Select.Content>
 </Select.Root>
 ```

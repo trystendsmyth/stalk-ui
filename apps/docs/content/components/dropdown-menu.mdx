@@ -20,14 +20,25 @@ pnpm dlx @stalk-ui/cli add @stalk-ui/dropdown-menu
 <ComponentPreview
   slug="dropdown-menu"
   example={0}
-  code={`<DropdownMenu.Root><DropdownMenu.Trigger>Open</DropdownMenu.Trigger><DropdownMenu.Content><DropdownMenu.Item>Edit</DropdownMenu.Item></DropdownMenu.Content></DropdownMenu.Root>`}
+  code={`<DropdownMenu.Root>
+  <DropdownMenu.Trigger>Open menu</DropdownMenu.Trigger>
+  <DropdownMenu.Content>
+    <DropdownMenu.Item>Edit</DropdownMenu.Item>
+    <DropdownMenu.Item>Duplicate</DropdownMenu.Item>
+    <DropdownMenu.Separator />
+    <DropdownMenu.Item>Delete</DropdownMenu.Item>
+  </DropdownMenu.Content>
+</DropdownMenu.Root>`}
 />
 
 ```tsx
 <DropdownMenu.Root>
-  <DropdownMenu.Trigger>Open</DropdownMenu.Trigger>
+  <DropdownMenu.Trigger>Open menu</DropdownMenu.Trigger>
   <DropdownMenu.Content>
     <DropdownMenu.Item>Edit</DropdownMenu.Item>
+    <DropdownMenu.Item>Duplicate</DropdownMenu.Item>
+    <DropdownMenu.Separator />
+    <DropdownMenu.Item>Delete</DropdownMenu.Item>
   </DropdownMenu.Content>
 </DropdownMenu.Root>
 ```
@@ -35,23 +46,51 @@ pnpm dlx @stalk-ui/cli add @stalk-ui/dropdown-menu
 <ComponentPreview
   slug="dropdown-menu"
   example={1}
-  code={`<DropdownMenu.Label>Project</DropdownMenu.Label><DropdownMenu.Separator />`}
+  code={`<DropdownMenu.Root>
+  <DropdownMenu.Trigger>Project</DropdownMenu.Trigger>
+  <DropdownMenu.Content>
+    <DropdownMenu.Label>Project</DropdownMenu.Label>
+    <DropdownMenu.Item>Rename<DropdownMenu.Shortcut>⌘R</DropdownMenu.Shortcut></DropdownMenu.Item>
+    <DropdownMenu.Item>Archive<DropdownMenu.Shortcut>⌘E</DropdownMenu.Shortcut></DropdownMenu.Item>
+  </DropdownMenu.Content>
+</DropdownMenu.Root>`}
 />
 
 ```tsx
-<DropdownMenu.Label>Project</DropdownMenu.Label><DropdownMenu.Separator />
+<DropdownMenu.Root>
+  <DropdownMenu.Trigger>Project</DropdownMenu.Trigger>
+  <DropdownMenu.Content>
+    <DropdownMenu.Label>Project</DropdownMenu.Label>
+    <DropdownMenu.Item>
+      Rename<DropdownMenu.Shortcut>⌘R</DropdownMenu.Shortcut>
+    </DropdownMenu.Item>
+    <DropdownMenu.Item>
+      Archive<DropdownMenu.Shortcut>⌘E</DropdownMenu.Shortcut>
+    </DropdownMenu.Item>
+  </DropdownMenu.Content>
+</DropdownMenu.Root>
 ```
 
 <ComponentPreview
   slug="dropdown-menu"
   example={2}
-  code={`<DropdownMenu.Item>Rename<DropdownMenu.Shortcut>⌘R</DropdownMenu.Shortcut></DropdownMenu.Item>`}
+  code={`<DropdownMenu.Root>
+  <DropdownMenu.Trigger>View</DropdownMenu.Trigger>
+  <DropdownMenu.Content>
+    <DropdownMenu.CheckboxItem defaultChecked>Show toolbar</DropdownMenu.CheckboxItem>
+    <DropdownMenu.CheckboxItem>Show sidebar</DropdownMenu.CheckboxItem>
+  </DropdownMenu.Content>
+</DropdownMenu.Root>`}
 />
 
 ```tsx
-<DropdownMenu.Item>
-  Rename<DropdownMenu.Shortcut>⌘R</DropdownMenu.Shortcut>
-</DropdownMenu.Item>
+<DropdownMenu.Root>
+  <DropdownMenu.Trigger>View</DropdownMenu.Trigger>
+  <DropdownMenu.Content>
+    <DropdownMenu.CheckboxItem defaultChecked>Show toolbar</DropdownMenu.CheckboxItem>
+    <DropdownMenu.CheckboxItem>Show sidebar</DropdownMenu.CheckboxItem>
+  </DropdownMenu.Content>
+</DropdownMenu.Root>
 ```
 
 ## Props

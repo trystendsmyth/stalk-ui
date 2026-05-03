@@ -30,21 +30,21 @@ pnpm dlx @stalk-ui/cli add @stalk-ui/input
 <ComponentPreview
   slug="input"
   example={1}
-  code={`<Input invalid aria-label="Email" placeholder="Invalid email" />`}
+  code={`<Input invalid aria-label="Email" defaultValue="not-an-email" />`}
 />
 
 ```tsx
-<Input invalid aria-label="Email" placeholder="Invalid email" />
+<Input invalid aria-label="Email" defaultValue="not-an-email" />
 ```
 
 <ComponentPreview
   slug="input"
   example={2}
-  code={`<Input disabled aria-label="Disabled input" placeholder="Disabled" />`}
+  code={`<Input disabled aria-label="Read only" defaultValue="acme-corp" />`}
 />
 
 ```tsx
-<Input disabled aria-label="Disabled input" placeholder="Disabled" />
+<Input disabled aria-label="Read only" defaultValue="acme-corp" />
 ```
 
 ## Props

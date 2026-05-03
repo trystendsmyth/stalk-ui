@@ -109,6 +109,7 @@ const componentSlugs = [
   'popover',
   'radio',
   'select',
+  'spinner',
   'switch',
   'tooltip',
   'textarea',

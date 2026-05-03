@@ -22,12 +22,19 @@ export default async function GettingStartedPage({ params }: GettingStartedPageP
 
   return (
     <main className="article">
-      <p className="eyebrow">Getting started</p>
-      <h1>{page.title}</h1>
-      <p className="lede">{page.description}</p>
-      {page.body.map((paragraph) => (
-        <p key={paragraph}>{paragraph}</p>
-      ))}
+      <header className="page-heading">
+        <p className="eyebrow">Getting started</p>
+        <h1>{page.title}</h1>
+        <p className="lede">{page.description}</p>
+      </header>
+      <section className="docs-section">
+        <header className="docs-section__header">
+          <h2 className="docs-section__title">Overview</h2>
+        </header>
+        {page.body.map((paragraph) => (
+          <p key={paragraph}>{paragraph}</p>
+        ))}
+      </section>
     </main>
   )
 }
