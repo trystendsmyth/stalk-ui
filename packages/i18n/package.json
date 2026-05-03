@@ -1,6 +1,6 @@
 {
   "name": "@stalk-ui/i18n",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Internationalization utilities for Stalk UI - provider, Intl wrappers, locale messages.",
   "keywords": [
     "i18n",
