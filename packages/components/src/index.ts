@@ -23,6 +23,7 @@ export {
   DropdownMenuContent,
   DropdownMenuGroup,
   DropdownMenuItem,
+  DropdownMenuItemIndicator,
   DropdownMenuLabel,
   DropdownMenuPortal,
   DropdownMenuRadioGroup,
@@ -34,6 +35,11 @@ export {
   DropdownMenuSubContent,
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
+} from './dropdown-menu'
+export type {
+  DropdownMenuContentProps,
+  DropdownMenuItemProps,
+  DropdownMenuSubTriggerProps,
 } from './dropdown-menu'
 export { Input } from './input'
 export type { InputProps, InputSize } from './input'

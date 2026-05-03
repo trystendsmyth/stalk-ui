@@ -38,9 +38,15 @@ export const dialog = () => ({
   title: 'stalk-dialog__title',
 })
 
-export const dropdownMenu = () => ({
+interface DropdownMenuRecipeOptions {
+  inset?: boolean
+}
+
+export const dropdownMenu = ({ inset = false }: DropdownMenuRecipeOptions = {}) => ({
   content: 'stalk-dropdown-menu__content',
-  item: 'stalk-dropdown-menu__item',
+  subContent: 'stalk-dropdown-menu__sub-content',
+  item: `stalk-dropdown-menu__item${inset ? ' stalk-dropdown-menu__item--inset' : ''}`,
+  itemIndicator: 'stalk-dropdown-menu__item-indicator',
   label: 'stalk-dropdown-menu__label',
   separator: 'stalk-dropdown-menu__separator',
   shortcut: 'stalk-dropdown-menu__shortcut',

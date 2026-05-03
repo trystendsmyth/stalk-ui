@@ -1,7 +1,7 @@
 import { defineRegistryItem } from './_template'
 
 export const dropdownMenu = defineRegistryItem({
-  dependencies: ['@radix-ui/react-dropdown-menu', '@stalk-ui/preset'],
+  dependencies: ['@radix-ui/react-dropdown-menu', '@stalk-ui/preset', 'lucide-react'],
   filePath: 'src/components/ui/dropdown-menu.tsx',
   name: 'dropdown-menu',
   recipes: ['dropdownMenu'],

@@ -67,3 +67,67 @@ test('supports checkbox and radio menu items', () => {
   expect(screen.getByRole('menuitemradio', { name: 'Compact' })).toBeChecked()
   expect(screen.getByRole('menuitemradio', { name: 'Comfortable' })).not.toBeChecked()
 })
+
+test('renders a chevron on sub-triggers and exposes the submenu', async () => {
+  const user = userEvent.setup()
+  render(
+    <DropdownMenu.Root defaultOpen>
+      <DropdownMenu.Trigger>Open menu</DropdownMenu.Trigger>
+      <DropdownMenu.Content>
+        <DropdownMenu.Sub>
+          <DropdownMenu.SubTrigger>Export</DropdownMenu.SubTrigger>
+          <DropdownMenu.SubContent>
+            <DropdownMenu.Item>PDF</DropdownMenu.Item>
+          </DropdownMenu.SubContent>
+        </DropdownMenu.Sub>
+      </DropdownMenu.Content>
+    </DropdownMenu.Root>,
+  )
+
+  const subTrigger = screen.getByRole('menuitem', { name: /export/i })
+  expect(subTrigger.querySelector('svg')).not.toBeNull()
+
+  await user.hover(subTrigger)
+  expect(await screen.findByRole('menuitem', { name: 'PDF' })).toBeInTheDocument()
+})
+
+test('renders default indicators for checked checkbox and radio items', () => {
+  render(
+    <DropdownMenu.Root defaultOpen>
+      <DropdownMenu.Trigger>Open menu</DropdownMenu.Trigger>
+      <DropdownMenu.Content>
+        <DropdownMenu.CheckboxItem checked>Show grid</DropdownMenu.CheckboxItem>
+        <DropdownMenu.RadioGroup value="a">
+          <DropdownMenu.RadioItem value="a">A</DropdownMenu.RadioItem>
+          <DropdownMenu.RadioItem value="b">B</DropdownMenu.RadioItem>
+        </DropdownMenu.RadioGroup>
+      </DropdownMenu.Content>
+    </DropdownMenu.Root>,
+  )
+
+  // Radix only mounts ItemIndicator children when the item is checked, so the
+  // unchecked radio should not project an indicator SVG.
+  expect(
+    screen.getByRole('menuitemcheckbox', { name: 'Show grid' }).querySelector('svg'),
+  ).not.toBeNull()
+  expect(screen.getByRole('menuitemradio', { name: 'A' }).querySelector('svg')).not.toBeNull()
+  expect(screen.getByRole('menuitemradio', { name: 'B' }).querySelector('svg')).toBeNull()
+})
+
+test('threads container into the portal', () => {
+  const portalRoot = document.createElement('div')
+  portalRoot.setAttribute('data-testid', 'menu-portal')
+  document.body.appendChild(portalRoot)
+
+  render(
+    <DropdownMenu.Root defaultOpen>
+      <DropdownMenu.Trigger>Open menu</DropdownMenu.Trigger>
+      <DropdownMenu.Content container={portalRoot}>
+        <DropdownMenu.Item>Item</DropdownMenu.Item>
+      </DropdownMenu.Content>
+    </DropdownMenu.Root>,
+  )
+
+  expect(portalRoot.querySelector('[role="menu"]')).not.toBeNull()
+  document.body.removeChild(portalRoot)
+})
