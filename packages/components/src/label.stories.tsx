@@ -1,6 +1,7 @@
 import { Box, VStack } from 'styled-system/jsx'
 import { label as labelRecipe } from 'styled-system/recipes'
 
+import { Input } from './input'
 import { Label } from './label'
 
 import type { Meta, StoryObj } from '@storybook/react-vite'
@@ -33,7 +34,7 @@ export const Default: Story = {
   render: (args) => (
     <VStack alignItems="stretch" gap="8" maxWidth="320">
       <Label {...args} />
-      <input id="email" placeholder="hello@stalk-ui.com" />
+      <Input id="email" placeholder="hello@stalk-ui.com" />
     </VStack>
   ),
 }
@@ -59,7 +60,7 @@ export const Required: Story = {
         <Label required htmlFor="required-email">
           Email
         </Label>
-        <input id="required-email" placeholder="hello@stalk-ui.com" required />
+        <Input id="required-email" placeholder="hello@stalk-ui.com" required />
       </VStack>
     </Box>
   ),

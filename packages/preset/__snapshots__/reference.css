@@ -924,53 +924,6 @@
       transform: scale(0.96);
 }
 
-    .stalk-input {
-      border: var(--borders-default);
-      border-radius: var(--radii-md);
-      outline: 2px solid transparent;
-      outline-offset: 2px;
-      background-color: var(--colors-bg-default);
-      color: var(--colors-fg-default);
-      --transition-duration: var(--durations-fast);
-      transition-duration: var(--durations-fast);
-      --transition-prop: background-color, border-color, box-shadow;
-      transition-property: background-color, border-color, box-shadow;
-      width: var(--sizes-full);
-}
-
-    .stalk-input:is(:invalid, [data-invalid], [aria-invalid=true]) {
-      border: var(--borders-invalid);
-      --ring-offset-shadow: var(--ring-inset,) 0 0 0 var(--ring-offset-width, 0rem) var(--ring-offset-color);
-      --ring-shadow: var(--ring-inset,) 0 0 0 calc(0.1875rem + var(--ring-offset-width, 0rem)) var(--ring-color);
-      box-shadow: var(--ring-offset-shadow),var(--ring-shadow),var(--base-shadow,0 0 #0000);
-      --ring-color: var(--colors-danger-subtle);
-      --ring-offset-width: 0.0625rem;
-      --ring-offset-color: var(--colors-bg-default);
-}
-
-    .stalk-input:is(:disabled, [disabled], [data-disabled], [aria-disabled=true]) {
-      cursor: not-allowed;
-      opacity: 0.5;
-}
-
-    .stalk-input::placeholder,.stalk-input[data-placeholder] {
-      color: var(--colors-fg-muted);
-}
-
-    .stalk-input:is(:focus-visible, [data-focus-visible]) {
-      border: var(--borders-focus);
-      --ring-offset-shadow: var(--ring-inset,) 0 0 0 var(--ring-offset-width, 0rem) var(--ring-offset-color);
-      --ring-shadow: var(--ring-inset,) 0 0 0 calc(0.1875rem + var(--ring-offset-width, 0rem)) var(--ring-color);
-      box-shadow: var(--ring-offset-shadow),var(--ring-shadow),var(--base-shadow,0 0 #0000);
-      --ring-color: var(--colors-accent-subtle);
-      --ring-offset-width: 0.0625rem;
-      --ring-offset-color: var(--colors-bg-default);
-}
-
-    .stalk-input:is(:hover, [data-hover]) {
-      border: var(--borders-hover);
-}
-
     .stalk-label {
       color: var(--colors-fg-default);
       cursor: default;
@@ -1173,34 +1126,6 @@
   .stalk-button--size_lg > svg {
     height: var(--sizes-18);
     width: var(--sizes-18);
-}
-
-  .stalk-input--size_md {
-    padding-inline: var(--spacing-base);
-    font-size: var(--font-sizes-sm);
-    min-height: var(--sizes-40);
-}
-
-  .stalk-input--invalid_true {
-    border: var(--borders-invalid);
-    --ring-offset-shadow: var(--ring-inset,) 0 0 0 var(--ring-offset-width, 0rem) var(--ring-offset-color);
-    --ring-shadow: var(--ring-inset,) 0 0 0 calc(0.1875rem + var(--ring-offset-width, 0rem)) var(--ring-color);
-    box-shadow: var(--ring-offset-shadow),var(--ring-shadow),var(--base-shadow,0 0 #0000);
-    --ring-color: var(--colors-danger-subtle);
-    --ring-offset-width: 0.0625rem;
-    --ring-offset-color: var(--colors-bg-default);
-}
-
-  .stalk-input--size_sm {
-    padding-inline: var(--spacing-12);
-    font-size: var(--font-sizes-sm);
-    min-height: var(--sizes-32);
-}
-
-  .stalk-input--size_lg {
-    padding-inline: var(--spacing-20);
-    font-size: var(--font-sizes-base);
-    min-height: var(--sizes-48);
 }
 
   .stalk-label--size_md {
@@ -1475,6 +1400,62 @@
       color: var(--colors-fg-muted);
       font-size: var(--font-sizes-xs);
       margin-inline-start: auto;
+}
+
+    .stalk-input__root {
+      border-color: var(--colors-border-default);
+      border-radius: var(--radii-md);
+      border-width: 1px;
+      align-items: stretch;
+      background-color: var(--colors-bg-canvas);
+      color: var(--colors-fg-default);
+      cursor: text;
+      display: inline-flex;
+      --transition-duration: 150ms;
+      transition-duration: 150ms;
+      --transition-prop: background-color, border-color, box-shadow;
+      transition-property: background-color, border-color, box-shadow;
+      width: 100%;
+}
+
+    .stalk-input__root:focus-within {
+      border-color: var(--colors-accent-solid);
+      --ring-offset-shadow: var(--ring-inset,) 0 0 0 var(--ring-offset-width, 0rem) var(--ring-offset-color);
+      --ring-shadow: var(--ring-inset,) 0 0 0 calc(0.1875rem + var(--ring-offset-width, 0rem)) var(--ring-color);
+      box-shadow: var(--ring-offset-shadow),var(--ring-shadow),var(--base-shadow,0 0 #0000);
+      --ring-color: var(--colors-accent-muted);
+      --ring-offset-width: 0.125rem;
+      --ring-offset-color: var(--colors-bg-default);
+}
+
+    .stalk-input__input {
+      border: none;
+      flex: 1 1 auto;
+      outline: 2px solid transparent;
+      outline-offset: 2px;
+      padding-block: var(--spacing-0);
+      appearance: none;
+      -webkit-appearance: none;
+      background-color: transparent;
+      color: inherit;
+      min-width: var(--sizes-0);
+      width: 100%;
+}
+
+    .stalk-input__input:is(:disabled, [disabled], [data-disabled], [aria-disabled=true]) {
+      cursor: not-allowed;
+}
+
+    .stalk-input__input::placeholder,.stalk-input__input[data-placeholder],.stalk-input__slot {
+      color: var(--colors-fg-muted);
+}
+
+    .stalk-input__slot {
+      flex: 0 0 auto;
+      gap: var(--spacing-2);
+      align-items: center;
+      display: inline-flex;
+      justify-content: center;
 }
 
     .stalk-popover__content {
@@ -1835,6 +1816,73 @@
 
   .stalk-dropdown-menu__item--inset_true {
     padding-inline-start: var(--spacing-28);
+}
+
+  .stalk-input__input--align_start {
+    text-align: start;
+}
+
+  .stalk-input__root--size_md {
+    gap: var(--spacing-8);
+    padding-inline: var(--spacing-base);
+    min-height: var(--sizes-40);
+}
+
+  .stalk-input__input--size_md,.stalk-input__slot--size_md {
+    font-size: var(--font-sizes-base);
+    line-height: var(--line-heights-base);
+    letter-spacing: var(--letter-spacings-normal);
+}
+
+  .stalk-input__root--disabled_true {
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+  .stalk-input__root--invalid_true {
+    border-color: var(--colors-danger-solid);
+}
+
+  .stalk-input__root--invalid_true:focus-within {
+    border-color: var(--colors-danger-solid);
+    --ring-offset-shadow: var(--ring-inset,) 0 0 0 var(--ring-offset-width, 0rem) var(--ring-offset-color);
+    --ring-shadow: var(--ring-inset,) 0 0 0 calc(0.1875rem + var(--ring-offset-width, 0rem)) var(--ring-color);
+    box-shadow: var(--ring-offset-shadow),var(--ring-shadow),var(--base-shadow,0 0 #0000);
+    --ring-color: var(--colors-danger-muted);
+    --ring-offset-width: 0.125rem;
+    --ring-offset-color: var(--colors-bg-default);
+}
+
+  .stalk-input__root--size_sm {
+    gap: var(--spacing-8);
+    padding-inline: var(--spacing-12);
+    min-height: var(--sizes-32);
+}
+
+  .stalk-input__input--size_sm,.stalk-input__slot--size_sm {
+    font-size: var(--font-sizes-sm);
+    line-height: var(--line-heights-sm);
+    letter-spacing: var(--letter-spacings-normal);
+}
+
+  .stalk-input__root--size_lg {
+    gap: var(--spacing-12);
+    padding-inline: var(--spacing-20);
+    min-height: var(--sizes-48);
+}
+
+  .stalk-input__input--size_lg,.stalk-input__slot--size_lg {
+    font-size: var(--font-sizes-lg);
+    line-height: var(--line-heights-lg);
+    letter-spacing: var(--letter-spacings-normal);
+}
+
+  .stalk-input__input--align_center {
+    text-align: center;
+}
+
+  .stalk-input__input--align_end {
+    text-align: end;
 }
 
   .stalk-radio__root--size_md {

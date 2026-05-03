@@ -44,19 +44,19 @@
     },
     "input": {
       "path": "/r/input.json",
-      "sha256": "35590aac0671c1bb88a9e729e90cadcde7121a884650bb8c18b07becd1f38a6a"
+      "sha256": "ebffbb2ac55c89bffffea8b1972c75e40e49c0211bfbe30c7850a22f47401ca2"
     },
     "shadcn/input": {
       "path": "/r/shadcn/input.json",
-      "sha256": "e58b927077de84626e375908645331b89ff8ba1d3bbae517b4a25b0523c68bed"
+      "sha256": "5c7f2d723ccb7cf130fd00f6b87f2cb44a17ddbe9190f947d22c61d5e6714b3a"
     },
     "label": {
       "path": "/r/label.json",
-      "sha256": "0139bbaea29848ae6a611f3d7c6d2ed9c5599aba47fdeb8ca5cfe89be54b165d"
+      "sha256": "b24f9161dee8bf7e6aaca939ab7117577277f274f7f1f911852dfa6ee60f3410"
     },
     "shadcn/label": {
       "path": "/r/shadcn/label.json",
-      "sha256": "aec57ac45744c4e6af26f5ae3f8e242407255315f5bf6a9c97534f9fcb674741"
+      "sha256": "879dbd1b15c05896aa71f0efcdd8b392a4df9eca1b7dcaebe7d40bb2a078a409"
     },
     "popover": {
       "path": "/r/popover.json",
