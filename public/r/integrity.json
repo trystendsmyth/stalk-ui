@@ -36,11 +36,11 @@
     },
     "dropdown-menu": {
       "path": "/r/dropdown-menu.json",
-      "sha256": "ca5869bbf87a784a3ed057dabd8a21793b6e253cae1f14e8b735a648149eebc0"
+      "sha256": "4430d57509da86fa52437189fe6da44b68d643d0c5ea820e73b1f05f5bd11e5b"
     },
     "shadcn/dropdown-menu": {
       "path": "/r/shadcn/dropdown-menu.json",
-      "sha256": "8d60b6cb7a9d4a3889e366750c3d12a045b6acf66117d77ea3b09ff452adabd5"
+      "sha256": "93e88eeb25b1d7b77bc563a6d9eaf7fdb1306cf10a525e9b266007fd45fedc97"
     },
     "input": {
       "path": "/r/input.json",

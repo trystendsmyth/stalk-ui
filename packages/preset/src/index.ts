@@ -21,6 +21,11 @@ const stalkPreset = definePreset({
     'html, body': {
       fontFamily: FONT_SANS_STACK,
     },
+    // Reserve the scrollbar gutter so Radix's scroll-lock (Dialog, DropdownMenu,
+    // Popover, Select) doesn't shift page content when triggers open.
+    html: {
+      scrollbarGutter: 'stable',
+    },
   },
   utilities,
   theme: {

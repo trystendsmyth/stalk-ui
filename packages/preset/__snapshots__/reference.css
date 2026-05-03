@@ -9,6 +9,10 @@
     font-family: var(--font-sans, ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif);
 }
 
+  html {
+    scrollbar-gutter: stable;
+}
+
   *,::before,::after,::backdrop {
     --blur: /*-*/ /*-*/;
     --brightness: /*-*/ /*-*/;
@@ -1403,11 +1407,11 @@
       color: var(--colors-fg-default);
 }
 
-    .stalk-dropdown-menu__content {
+    .stalk-dropdown-menu__content,.stalk-dropdown-menu__subContent {
       border: var(--borders-default);
       padding: var(--spacing-4);
-      overflow: hidden;
       border-radius: var(--radii-md);
+      overflow: hidden;
       background-color: var(--colors-bg-default);
       box-shadow: var(--shadows-lg);
       color: var(--colors-fg-default);
@@ -1425,6 +1429,7 @@
       cursor: default;
       display: flex;
       font-size: var(--font-sizes-sm);
+      position: relative;
       -webkit-user-select: none;
       user-select: none;
       min-height: var(--sizes-32);
@@ -1440,13 +1445,16 @@
       pointer-events: none;
 }
 
-    .stalk-dropdown-menu__item:is(:focus-visible, [data-focus-visible]) {
-      --ring-offset-shadow: var(--ring-inset,) 0 0 0 var(--ring-offset-width, 0rem) var(--ring-offset-color);
-      --ring-shadow: var(--ring-inset,) 0 0 0 calc(0.1875rem + var(--ring-offset-width, 0rem)) var(--ring-color);
-      box-shadow: var(--ring-offset-shadow),var(--ring-shadow),var(--base-shadow,0 0 #0000);
-      --ring-color: var(--colors-accent-subtle);
-      --ring-offset-width: 0.0625rem;
-      --ring-offset-color: var(--colors-bg-default);
+    .stalk-dropdown-menu__itemIndicator {
+      align-items: center;
+      display: inline-flex;
+      inset-inline-start: var(--spacing-6);
+      justify-content: center;
+      pointer-events: none;
+      position: absolute;
+      bottom: var(--spacing-0);
+      top: var(--spacing-0);
+      width: 16px;
 }
 
     .stalk-dropdown-menu__label {
@@ -1823,6 +1831,10 @@
   .stalk-checkbox__root--size_lg {
     height: var(--sizes-20);
     width: var(--sizes-20);
+}
+
+  .stalk-dropdown-menu__item--inset_true {
+    padding-inline-start: var(--spacing-28);
 }
 
   .stalk-radio__root--size_md {
