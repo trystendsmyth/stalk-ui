@@ -7,7 +7,10 @@ import type { Decorator } from '@storybook/react-vite'
 
 type PreviewColorMode = 'dark' | 'light'
 type Direction = 'ltr' | 'rtl'
-type PandaTheme = 'neutral' | 'rainbow'
+type PandaTheme = 'monochrome' | 'neutral' | 'rainbow'
+
+const isNamedTheme = (value: PandaTheme | undefined): value is ThemeName =>
+  value === 'monochrome' || value === 'rainbow'
 
 /** Panda emits non-default themes as a separate JSON payload that must be injected as a
  *  `<style>` tag at runtime; once injected, the theme is gated by `[data-panda-theme=…]`
@@ -36,7 +39,9 @@ export const applyPreviewGlobals = (globals: StorybookGlobals) => {
   const html = document.documentElement
   const mode: PreviewColorMode = globals.mode === 'dark' ? 'dark' : 'light'
   const dir: Direction = globals.direction === 'rtl' ? 'rtl' : 'ltr'
-  const pandaTheme = globals.pandaTheme === 'rainbow' ? 'rainbow' : undefined
+  const pandaTheme: ThemeName | undefined = isNamedTheme(globals.pandaTheme)
+    ? globals.pandaTheme
+    : undefined
 
   html.setAttribute('data-color-mode', mode)
   html.classList.toggle('dark', mode === 'dark')

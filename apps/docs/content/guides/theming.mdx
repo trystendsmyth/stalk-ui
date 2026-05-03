@@ -3,10 +3,11 @@ title: Theming
 description: How Stalk UI's themes work and how to apply them.
 ---
 
-Stalk UI ships with two themes:
+Stalk UI ships with three themes:
 
 - **neutral** (default): applied automatically. No configuration is required.
 - **rainbow**: applied with `data-panda-theme="rainbow"`.
+- **monochrome**: applied with `data-panda-theme="monochrome"`.
 
 ## Applying A Theme
 
@@ -36,7 +37,7 @@ runtime, use a small app-level wrapper:
 import { useState, type ReactNode } from 'react'
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
-  const [theme, setTheme] = useState<'neutral' | 'rainbow'>('neutral')
+  const [theme, setTheme] = useState<'monochrome' | 'neutral' | 'rainbow'>('neutral')
 
   return (
     <div data-panda-theme={theme === 'neutral' ? undefined : theme}>

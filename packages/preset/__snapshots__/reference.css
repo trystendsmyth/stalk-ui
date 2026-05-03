@@ -6,7 +6,7 @@
 }
 
   html,body {
-    font-family: var(--font-sans, ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif);
+    font-family: var(--fonts-sans);
 }
 
   html {
@@ -667,6 +667,125 @@
     --colors-highlight-fg: var(--colors-orange-dark-12);
     --colors-highlight-contrast: var(--colors-gray-12)
 }
+
+  [data-panda-theme=monochrome] {
+    --fonts-sans: "Inter Variable", "Inter", var(--font-sans, ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif);
+    --colors-accent-surface: var(--colors-slate-2);
+    --colors-accent-subtle: var(--colors-slate-4);
+    --colors-accent-muted: var(--colors-slate-6);
+    --colors-accent-solid: var(--colors-slate-12);
+    --colors-accent-emphasis: var(--colors-slate-11);
+    --colors-accent-fg: var(--colors-slate-12);
+    --colors-accent-contrast: var(--colors-slate-1);
+    --colors-bg-canvas: var(--colors-slate-2);
+    --colors-bg-default: var(--colors-slate-1);
+    --colors-bg-muted: var(--colors-slate-5);
+    --colors-bg-subtle: var(--colors-slate-3);
+    --colors-border-default: var(--colors-slate-6);
+    --colors-border-muted: var(--colors-slate-4);
+    --colors-border-strong: var(--colors-slate-8);
+    --colors-border-hover: var(--colors-slate-7);
+    --colors-border-focus: var(--colors-slate-9);
+    --colors-border-invalid: var(--colors-red-dark-9);
+    --colors-danger-surface: var(--colors-red-3);
+    --colors-danger-subtle: var(--colors-red-5);
+    --colors-danger-muted: var(--colors-red-8);
+    --colors-danger-solid: var(--colors-red-11);
+    --colors-danger-emphasis: color-mix(in srgb, var(--colors-red-11) 50%, var(--colors-red-12) 50%);
+    --colors-danger-fg: var(--colors-red-12);
+    --colors-danger-contrast: var(--colors-gray-1);
+    --colors-fg-default: var(--colors-slate-12);
+    --colors-fg-inverse: var(--colors-slate-1);
+    --colors-fg-muted: var(--colors-slate-11);
+    --colors-fg-subtle: var(--colors-slate-10);
+    --colors-info-surface: var(--colors-blue-2);
+    --colors-info-subtle: var(--colors-blue-5);
+    --colors-info-muted: var(--colors-blue-7);
+    --colors-info-solid: var(--colors-blue-11);
+    --colors-info-emphasis: color-mix(in srgb, var(--colors-blue-11) 50%, var(--colors-blue-12) 50%);
+    --colors-info-fg: var(--colors-blue-12);
+    --colors-info-contrast: var(--colors-gray-1);
+    --colors-success-surface: var(--colors-emerald-2);
+    --colors-success-subtle: var(--colors-emerald-5);
+    --colors-success-muted: var(--colors-emerald-7);
+    --colors-success-solid: var(--colors-emerald-11);
+    --colors-success-emphasis: color-mix(in srgb, var(--colors-emerald-11) 50%, var(--colors-emerald-12) 50%);
+    --colors-success-fg: var(--colors-emerald-12);
+    --colors-success-contrast: var(--colors-gray-1);
+    --colors-warning-surface: var(--colors-yellow-2);
+    --colors-warning-subtle: var(--colors-yellow-5);
+    --colors-warning-muted: var(--colors-yellow-7);
+    --colors-warning-solid: var(--colors-yellow-10);
+    --colors-warning-emphasis: color-mix(in srgb, var(--colors-yellow-11) 50%, var(--colors-yellow-12) 50%);
+    --colors-warning-fg: var(--colors-yellow-12);
+    --colors-warning-contrast: var(--colors-gray-12);
+    --colors-highlight-surface: var(--colors-orange-2);
+    --colors-highlight-subtle: var(--colors-orange-5);
+    --colors-highlight-muted: var(--colors-orange-7);
+    --colors-highlight-solid: var(--colors-orange-11);
+    --colors-highlight-emphasis: color-mix(in srgb, var(--colors-orange-11) 50%, var(--colors-orange-12) 50%);
+    --colors-highlight-fg: var(--colors-orange-12);
+    --colors-highlight-contrast: var(--colors-gray-1)
+}
+
+  [data-panda-theme=monochrome].dark {
+    --colors-accent-surface: var(--colors-slate-dark-2);
+    --colors-accent-subtle: var(--colors-slate-dark-4);
+    --colors-accent-muted: var(--colors-slate-dark-6);
+    --colors-accent-solid: var(--colors-slate-dark-12);
+    --colors-accent-emphasis: var(--colors-slate-dark-11);
+    --colors-accent-fg: var(--colors-slate-dark-12);
+    --colors-accent-contrast: var(--colors-slate-dark-1);
+    --colors-bg-canvas: var(--colors-slate-dark-1);
+    --colors-bg-default: var(--colors-slate-dark-2);
+    --colors-bg-muted: var(--colors-slate-dark-5);
+    --colors-bg-subtle: var(--colors-slate-dark-3);
+    --colors-border-default: var(--colors-slate-dark-6);
+    --colors-border-muted: var(--colors-slate-dark-4);
+    --colors-border-strong: var(--colors-slate-dark-8);
+    --colors-border-hover: var(--colors-slate-dark-7);
+    --colors-border-focus: var(--colors-slate-dark-9);
+    --colors-border-invalid: var(--colors-red-dark-9);
+    --colors-danger-surface: var(--colors-red-dark-3);
+    --colors-danger-subtle: var(--colors-red-dark-5);
+    --colors-danger-muted: var(--colors-red-dark-8);
+    --colors-danger-solid: var(--colors-red-dark-11);
+    --colors-danger-emphasis: color-mix(in srgb, var(--colors-red-dark-11) 50%, var(--colors-red-dark-12) 50%);
+    --colors-danger-fg: var(--colors-red-dark-12);
+    --colors-danger-contrast: var(--colors-gray-12);
+    --colors-fg-default: var(--colors-slate-dark-12);
+    --colors-fg-inverse: var(--colors-slate-dark-1);
+    --colors-fg-muted: var(--colors-slate-dark-11);
+    --colors-fg-subtle: var(--colors-slate-dark-10);
+    --colors-info-surface: var(--colors-blue-dark-2);
+    --colors-info-subtle: var(--colors-blue-dark-5);
+    --colors-info-muted: var(--colors-blue-dark-7);
+    --colors-info-solid: var(--colors-blue-dark-11);
+    --colors-info-emphasis: color-mix(in srgb, var(--colors-blue-dark-11) 50%, var(--colors-blue-dark-12) 50%);
+    --colors-info-fg: var(--colors-blue-dark-12);
+    --colors-info-contrast: var(--colors-gray-12);
+    --colors-success-surface: var(--colors-emerald-dark-2);
+    --colors-success-subtle: var(--colors-emerald-dark-5);
+    --colors-success-muted: var(--colors-emerald-dark-7);
+    --colors-success-solid: var(--colors-emerald-dark-11);
+    --colors-success-emphasis: color-mix(in srgb, var(--colors-emerald-dark-11) 50%, var(--colors-emerald-dark-12) 50%);
+    --colors-success-fg: var(--colors-emerald-dark-12);
+    --colors-success-contrast: var(--colors-gray-12);
+    --colors-warning-surface: var(--colors-yellow-dark-2);
+    --colors-warning-subtle: var(--colors-yellow-dark-5);
+    --colors-warning-muted: var(--colors-yellow-dark-7);
+    --colors-warning-solid: var(--colors-yellow-dark-10);
+    --colors-warning-emphasis: color-mix(in srgb, var(--colors-yellow-dark-11) 50%, var(--colors-yellow-dark-12) 50%);
+    --colors-warning-fg: var(--colors-yellow-dark-12);
+    --colors-warning-contrast: var(--colors-gray-12);
+    --colors-highlight-surface: var(--colors-orange-dark-2);
+    --colors-highlight-subtle: var(--colors-orange-dark-5);
+    --colors-highlight-muted: var(--colors-orange-dark-7);
+    --colors-highlight-solid: var(--colors-orange-dark-11);
+    --colors-highlight-emphasis: color-mix(in srgb, var(--colors-orange-dark-11) 50%, var(--colors-orange-dark-12) 50%);
+    --colors-highlight-fg: var(--colors-orange-dark-12);
+    --colors-highlight-contrast: var(--colors-gray-12)
+        }
 
   [data-panda-theme=rainbow] {
     --colors-accent-surface: var(--colors-teal-2);

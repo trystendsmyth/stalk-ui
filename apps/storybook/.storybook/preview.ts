@@ -1,3 +1,4 @@
+import '@fontsource-variable/inter'
 import '@fontsource-variable/noto-sans'
 
 import decorators from './decorators'
@@ -34,12 +35,13 @@ const preview: Preview = {
       },
     },
     pandaTheme: {
-      description: 'Stalk Panda theme (neutral vs rainbow)',
+      description: 'Stalk Panda theme (neutral, rainbow, monochrome)',
       toolbar: {
         icon: 'paintbrush',
         items: [
           { title: 'Neutral', value: 'neutral' },
           { title: 'Rainbow', value: 'rainbow' },
+          { title: 'Monochrome', value: 'monochrome' },
         ],
       },
     },

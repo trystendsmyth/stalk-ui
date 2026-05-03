@@ -22,7 +22,7 @@ interface ComponentPreviewProps {
   code: string
 }
 
-type PreviewTheme = 'neutral' | 'rainbow'
+type PreviewTheme = 'monochrome' | 'neutral' | 'rainbow'
 
 /*
  * Scope exposed to live snippets. Snippets reference these names at the top
@@ -71,6 +71,7 @@ export const ComponentPreview = ({ code }: ComponentPreviewProps) => {
               <Select.Content>
                 <Select.Item value="neutral">Neutral</Select.Item>
                 <Select.Item value="rainbow">Rainbow</Select.Item>
+                <Select.Item value="monochrome">Monochrome</Select.Item>
               </Select.Content>
             </Select.Root>
           </div>
@@ -86,7 +87,7 @@ export const ComponentPreview = ({ code }: ComponentPreviewProps) => {
         </div>
         <div
           className="component-preview__rendered"
-          data-panda-theme={theme === 'rainbow' ? 'rainbow' : undefined}
+          data-panda-theme={theme === 'neutral' ? undefined : theme}
         >
           <LivePreview />
         </div>

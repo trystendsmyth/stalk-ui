@@ -8,8 +8,8 @@ import * as recipes from './recipes'
 import { semanticTokens } from './semantic-tokens'
 import * as slotRecipes from './slot-recipes'
 import { textStyles } from './text-styles'
-import { rainbowTheme } from './themes'
-import { FONT_SANS_STACK, tokens } from './tokens'
+import { monochromeTheme, rainbowTheme } from './themes'
+import { tokens } from './tokens'
 import { utilities } from './utilities'
 
 import type { Preset } from '@pandacss/dev'
@@ -18,8 +18,11 @@ const stalkPreset = definePreset({
   name: '@stalk-ui/preset',
   conditions,
   globalCss: {
+    /* Resolve through the `sans` token alias so theme overrides
+     *  (e.g. `monochrome` → Inter) reach inherited body text, not just components
+     *  that opt-in via `fontFamily: 'sans'`. */
     'html, body': {
-      fontFamily: FONT_SANS_STACK,
+      fontFamily: 'sans',
     },
     // Reserve the scrollbar gutter so Radix's scroll-lock (Dialog, DropdownMenu,
     // Popover, Select) doesn't shift page content when triggers open.
@@ -39,6 +42,7 @@ const stalkPreset = definePreset({
     tokens,
   },
   themes: {
+    monochrome: monochromeTheme,
     rainbow: rainbowTheme,
   },
   staticCss: {
@@ -50,7 +54,7 @@ const stalkPreset = definePreset({
       },
     ],
     recipes: '*',
-    themes: ['rainbow'],
+    themes: ['monochrome', 'rainbow'],
   },
 } as Preset)
 
