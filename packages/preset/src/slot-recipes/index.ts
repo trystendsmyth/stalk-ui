@@ -1,6 +1,7 @@
 export { checkbox } from './checkbox'
 export { dialog } from './dialog'
 export { dropdownMenu } from './dropdown-menu'
+export { input } from './input'
 export { popover } from './popover'
 export { radio } from './radio'
 export { select } from './select'

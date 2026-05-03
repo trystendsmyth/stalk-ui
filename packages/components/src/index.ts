@@ -41,8 +41,17 @@ export type {
   DropdownMenuItemProps,
   DropdownMenuSubTriggerProps,
 } from './dropdown-menu'
-export { Input } from './input'
-export type { InputProps, InputSize } from './input'
+export { Input, InputField, InputPrefix, InputRoot, InputSlot, InputSuffix } from './input'
+export type {
+  InputAlign,
+  InputFieldProps,
+  InputProps,
+  InputRootOwnProps,
+  InputRootProps,
+  InputSize,
+  InputSlotProps,
+  InputSlotSide,
+} from './input'
 export { Label } from './label'
 export type { LabelProps, LabelSize } from './label'
 export {

@@ -27,6 +27,22 @@ if (typeof htmlProto.releasePointerCapture !== 'function') {
   }
 }
 
+if (typeof globalThis.ResizeObserver === 'undefined') {
+  class JSDomResizeObserver {
+    observe() {
+      /* Radix expects ResizeObserver in JSDOM; no-op */
+    }
+    unobserve() {
+      /* Radix expects ResizeObserver in JSDOM; no-op */
+    }
+    disconnect() {
+      /* Radix expects ResizeObserver in JSDOM; no-op */
+    }
+  }
+
+  globalThis.ResizeObserver = JSDomResizeObserver
+}
+
 afterEach(() => {
   cleanup()
 })

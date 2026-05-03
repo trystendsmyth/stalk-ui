@@ -53,14 +53,32 @@ export const dropdownMenu = ({ inset = false }: DropdownMenuRecipeOptions = {}) 
 })
 
 interface InputRecipeOptions {
+  align?: 'start' | 'center' | 'end'
+  disabled?: boolean
   invalid?: boolean
   size?: 'sm' | 'md' | 'lg'
 }
 
-export const input = ({ invalid = false, size = 'md' }: InputRecipeOptions = {}) =>
-  ['stalk-input', `stalk-input--${size}`, invalid ? 'stalk-input--invalid' : undefined]
+export const input = ({
+  align = 'start',
+  disabled = false,
+  invalid = false,
+  size = 'md',
+}: InputRecipeOptions = {}) => ({
+  root: [
+    'stalk-input__root',
+    `stalk-input--${size}`,
+    `stalk-input--align-${align}`,
+    disabled ? 'stalk-input--disabled' : undefined,
+    invalid ? 'stalk-input--invalid' : undefined,
+  ]
     .filter(Boolean)
-    .join(' ')
+    .join(' '),
+  input: ['stalk-input__input', `stalk-input__input--${size}`, `stalk-input__input--align-${align}`]
+    .filter(Boolean)
+    .join(' '),
+  slot: ['stalk-input__slot', `stalk-input__slot--${size}`].filter(Boolean).join(' '),
+})
 
 interface LabelRecipeOptions {
   required?: boolean

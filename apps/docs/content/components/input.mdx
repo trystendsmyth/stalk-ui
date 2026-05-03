@@ -49,17 +49,20 @@ pnpm dlx @stalk-ui/cli add @stalk-ui/input
 
 ## Props
 
-| Prop      | Type        | Required | Default | Description |
-| --------- | ----------- | -------- | ------- | ----------- |
-| `invalid` | `boolean`   | No       | -       | -           |
-| `size`    | `InputSize` | No       | -       | -           |
+| Prop        | Type                                                                    | Required | Default | Description |
+| ----------- | ----------------------------------------------------------------------- | -------- | ------- | ----------- |
+| `endSlot`   | `ReactNode`                                                             | No       | -       | -           |
+| `rootProps` | `Omit<InputRootProps, keyof RootOnlyProps \| 'children' \| 'disabled'>` | No       | -       | -           |
+| `startSlot` | `ReactNode`                                                             | No       | -       | -           |
 
 ## Variants
 
-| Variant   | Values           |
-| --------- | ---------------- |
-| `invalid` | `true`           |
-| `size`    | `sm`, `md`, `lg` |
+| Variant    | Values                   |
+| ---------- | ------------------------ |
+| `disabled` | `true`                   |
+| `invalid`  | `true`                   |
+| `size`     | `sm`, `md`, `lg`         |
+| `align`    | `start`, `center`, `end` |
 
 ## Registry
 
