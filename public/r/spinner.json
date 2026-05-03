@@ -1,0 +1,28 @@
+{
+  "$schema": "https://stalk-ui.com/schema/v1/registry-item.json",
+  "name": "spinner",
+  "type": "registry:ui",
+  "dependencies": ["@stalk-ui/preset"],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "src/components/ui/spinner.tsx",
+      "type": "registry:ui",
+      "content": "import { forwardRef } from 'react'\nimport { cx } from 'styled-system/css'\nimport { spinner as spinnerRecipe } from 'styled-system/recipes'\n\nimport type { HTMLAttributes } from 'react'\n\nexport type SpinnerSize = 'sm' | 'md' | 'lg' | 'xl'\n\nexport interface SpinnerProps extends HTMLAttributes<HTMLSpanElement> {\n  size?: SpinnerSize\n  /** Accessible name announced to assistive tech. Defaults to `\"Loading\"`. */\n  'aria-label'?: string\n}\n\n// SVG box + stroke per size variant. CSS sizing stays in the slot recipe; these\n// values drive the SVG geometry (viewBox, circle radius, stroke width) and so\n// must round-trip through the renderer rather than tokens.\nconst SPINNER_METRICS: Record<SpinnerSize, { box: number; stroke: number }> = {\n  sm: { box: 16, stroke: 1.5 },\n  md: { box: 22, stroke: 2.5 },\n  lg: { box: 28, stroke: 3.5 },\n  xl: { box: 34, stroke: 4.5 },\n}\n\n// 40% arc — short enough to read as \"in motion\", long enough to remain visible\n// at small sizes when paused by reduced-motion.\nconst ARC_FRACTION = 0.4\n\nexport const Spinner = /* @__PURE__ */ forwardRef<HTMLSpanElement, SpinnerProps>(function Spinner(\n  { 'aria-label': ariaLabel = 'Loading', className, size = 'md', ...props },\n  ref,\n) {\n  const styles = spinnerRecipe({ size })\n  const { box, stroke } = SPINNER_METRICS[size]\n  const radius = (box - stroke) / 2\n  const circumference = 2 * Math.PI * radius\n  const dashLength = ARC_FRACTION * circumference\n  const center = box / 2\n\n  return (\n    <span\n      ref={ref}\n      role=\"status\"\n      aria-label={ariaLabel}\n      className={cx(styles.root, className)}\n      {...props}\n    >\n      <svg\n        aria-hidden=\"true\"\n        fill=\"none\"\n        height={box}\n        viewBox={`0 0 ${String(box)} ${String(box)}`}\n        width={box}\n      >\n        <circle\n          className={styles.track}\n          cx={center}\n          cy={center}\n          r={radius}\n          stroke=\"currentColor\"\n          strokeWidth={stroke}\n        />\n        <circle\n          className={styles.indicator}\n          cx={center}\n          cy={center}\n          r={radius}\n          stroke=\"currentColor\"\n          strokeDasharray={`${String(dashLength)} ${String(circumference - dashLength)}`}\n          strokeLinecap=\"round\"\n          strokeWidth={stroke}\n        />\n      </svg>\n    </span>\n  )\n})\n"
+    }
+  ],
+  "stalk": {
+    "schemaVersion": "1.0",
+    "preset": {
+      "semanticTokens": {},
+      "recipes": ["spinner"]
+    },
+    "packageDependencies": {
+      "preset": "@stalk-ui/preset"
+    },
+    "pandaCodegen": true,
+    "importAliases": {
+      "styledSystem": "styled-system"
+    }
+  }
+}

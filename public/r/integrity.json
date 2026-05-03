@@ -12,11 +12,11 @@
     },
     "button": {
       "path": "/r/button.json",
-      "sha256": "9b25c898ccb33d5f604813b42f4ff92459c99bc3c356354ee838dd72795dfb8e"
+      "sha256": "56edde68f80b873a29ce7a734895439e796baac057c9728ff1ff5e3fdacfec5b"
     },
     "shadcn/button": {
       "path": "/r/shadcn/button.json",
-      "sha256": "7f954f097fc6848a9e951d5be73da646d77b350339892f7275540401cc668a7f"
+      "sha256": "37c55ba7e0793e95634b6c2df252ce2ef0baf3be8ef2d3293172e446f7794709"
     },
     "checkbox": {
       "path": "/r/checkbox.json",
@@ -81,6 +81,14 @@
     "shadcn/select": {
       "path": "/r/shadcn/select.json",
       "sha256": "b5cfa31ed2211c99cce37bdabeb4a3fce980b6e589ba3543608a819575ae0737"
+    },
+    "spinner": {
+      "path": "/r/spinner.json",
+      "sha256": "00dc566c1eb27d110d9182f61744bb22b81b68e4391f3675d04dc09038a381ac"
+    },
+    "shadcn/spinner": {
+      "path": "/r/shadcn/spinner.json",
+      "sha256": "24f0c4ed14c2bcb77514ed217db77eef7b57d975c026f0f8aebfd1d8e31a43c8"
     },
     "switch": {
       "path": "/r/switch.json",

@@ -59,6 +59,8 @@ export {
   SelectTrigger,
 } from './select'
 export type { SelectContentProps, SelectSize, SelectTriggerProps } from './select'
+export { Spinner } from './spinner'
+export type { SpinnerProps, SpinnerSize } from './spinner'
 export { Switch } from './switch'
 export type { SwitchProps, SwitchSize } from './switch'
 export { Textarea } from './textarea'

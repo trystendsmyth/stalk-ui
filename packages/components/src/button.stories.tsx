@@ -1,4 +1,5 @@
-import { ArrowRight, Plus } from 'lucide-react'
+import { ArrowRight, Plus, Trash2 } from 'lucide-react'
+import { fn } from 'storybook/test'
 import { HStack } from 'styled-system/jsx'
 import { button as buttonRecipe } from 'styled-system/recipes'
 
@@ -14,18 +15,23 @@ const meta = {
   tags: ['autodocs', 'stable'],
   args: {
     children: 'Button',
+    disabled: false,
+    loading: false,
+    loadingLabel: 'Loading',
+    onClick: fn(),
     size: 'md',
     variant: 'solid',
   },
   argTypes: {
-    size: {
-      control: 'select',
-      options: SIZES,
-    },
-    variant: {
-      control: 'select',
-      options: VARIANTS,
-    },
+    asChild: { table: { disable: true } },
+    children: { control: 'text' },
+    disabled: { control: 'boolean' },
+    loading: { control: 'boolean' },
+    loadingLabel: { control: 'text' },
+    onClick: { table: { disable: true } },
+    size: { control: 'select', options: SIZES },
+    type: { table: { disable: true } },
+    variant: { control: 'select', options: VARIANTS },
   },
 } satisfies Meta<typeof Button>
 
@@ -36,11 +42,15 @@ type Story = StoryObj<typeof meta>
 export const Default: Story = {}
 
 export const Variants: Story = {
-  parameters: { controls: { disable: true } },
-  render: () => (
+  args: { children: undefined },
+  argTypes: {
+    children: { table: { disable: true } },
+    variant: { table: { disable: true } },
+  },
+  render: ({ children: _children, variant: _variant, ...args }) => (
     <HStack alignItems="center" flexWrap="wrap" gap="12">
       {VARIANTS.map((variant) => (
-        <Button key={variant} variant={variant}>
+        <Button {...args} key={variant} variant={variant}>
           {variant}
         </Button>
       ))}
@@ -48,52 +58,87 @@ export const Variants: Story = {
   ),
 }
 
-export const States: Story = {
-  parameters: { controls: { disable: true } },
-  render: () => (
-    <HStack alignItems="center" flexWrap="wrap" gap="12">
-      <Button>Default</Button>
-      <Button data-hover>Hover</Button>
-      <Button data-active>Active</Button>
-      <Button data-focus-visible>Focused</Button>
-      <Button data-hover data-focus-visible>
-        Hover + focus
-      </Button>
-      <Button data-active data-focus-visible>
-        Active + focus
-      </Button>
-      <Button disabled>Disabled</Button>
-      <Button loading>Loading</Button>
-    </HStack>
-  ),
-}
-
 export const Sizes: Story = {
-  parameters: { controls: { disable: true } },
-  render: () => (
+  args: { children: undefined },
+  argTypes: {
+    children: { table: { disable: true } },
+    size: { table: { disable: true } },
+  },
+  render: ({ children: _children, size: _size, ...args }) => (
     <HStack alignItems="center" flexWrap="wrap" gap="12">
       {SIZES.map((size) => (
-        <Button key={size} size={size}>
-          {size}
+        <Button {...args} key={size} size={size}>
+          {size.toUpperCase()}
         </Button>
       ))}
     </HStack>
   ),
 }
 
-export const WithIcons: Story = {
-  args: {
-    children: 'Create',
-    leadingIcon: <Plus aria-hidden="true" height={16} width={16} />,
-    trailingIcon: <ArrowRight aria-hidden="true" height={16} width={16} />,
+export const States: Story = {
+  args: { children: undefined, loading: false, disabled: false },
+  argTypes: {
+    children: { table: { disable: true } },
+    disabled: { table: { disable: true } },
+    loading: { table: { disable: true } },
   },
+  render: ({ children: _children, disabled: _disabled, loading: _loading, ...args }) => (
+    <HStack alignItems="center" flexWrap="wrap" gap="12">
+      <Button {...args}>Default</Button>
+      <Button {...args} data-hover>
+        Hover
+      </Button>
+      <Button {...args} data-active>
+        Active
+      </Button>
+      <Button {...args} data-focus-visible>
+        Focused
+      </Button>
+      <Button {...args} disabled>
+        Disabled
+      </Button>
+      <Button {...args} loading>
+        Saving
+      </Button>
+    </HStack>
+  ),
+}
+
+export const WithIcons: Story = {
+  args: { children: undefined },
+  argTypes: { children: { table: { disable: true } } },
+  render: ({ children: _children, ...args }) => (
+    <HStack alignItems="center" flexWrap="wrap" gap="12">
+      <Button {...args}>
+        <Plus aria-hidden="true" />
+        Create
+      </Button>
+      <Button {...args} variant="outline">
+        Continue
+        <ArrowRight aria-hidden="true" />
+      </Button>
+      <Button {...args} variant="ghost">
+        <Trash2 aria-hidden="true" />
+        Delete
+      </Button>
+      <Button {...args} aria-label="Delete">
+        <Trash2 aria-hidden="true" />
+      </Button>
+    </HStack>
+  ),
 }
 
 export const AsChild: Story = {
-  parameters: { controls: { disable: true } },
-  render: () => (
-    <Button asChild variant="outline">
-      <a href="https://stalk-ui.com">Open Stalk UI</a>
+  args: {
+    children: undefined,
+    variant: 'outline',
+  },
+  argTypes: { children: { table: { disable: true } } },
+  render: ({ children: _children, ...args }) => (
+    <Button {...args} asChild>
+      <a href="https://stalk-ui.com" rel="noreferrer" target="_blank">
+        Open Stalk UI
+      </a>
     </Button>
   ),
 }

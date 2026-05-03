@@ -626,14 +626,14 @@
     --colors-accent-solid: var(--colors-blue-dark-11);
     --colors-accent-emphasis: color-mix(in srgb, var(--colors-blue-dark-11) 50%, var(--colors-blue-dark-12) 50%);
     --colors-accent-fg: var(--colors-blue-dark-12);
-    --colors-accent-contrast: var(--colors-gray-1);
+    --colors-accent-contrast: var(--colors-gray-12);
     --colors-success-surface: var(--colors-emerald-dark-2);
     --colors-success-subtle: var(--colors-emerald-dark-5);
     --colors-success-muted: var(--colors-emerald-dark-7);
     --colors-success-solid: var(--colors-emerald-dark-11);
     --colors-success-emphasis: color-mix(in srgb, var(--colors-emerald-dark-11) 50%, var(--colors-emerald-dark-12) 50%);
     --colors-success-fg: var(--colors-emerald-dark-12);
-    --colors-success-contrast: var(--colors-gray-1);
+    --colors-success-contrast: var(--colors-gray-12);
     --colors-warning-surface: var(--colors-yellow-dark-2);
     --colors-warning-subtle: var(--colors-yellow-dark-5);
     --colors-warning-muted: var(--colors-yellow-dark-7);
@@ -647,21 +647,21 @@
     --colors-danger-solid: var(--colors-red-dark-11);
     --colors-danger-emphasis: color-mix(in srgb, var(--colors-red-dark-11) 50%, var(--colors-red-dark-12) 50%);
     --colors-danger-fg: var(--colors-red-dark-12);
-    --colors-danger-contrast: var(--colors-gray-1);
+    --colors-danger-contrast: var(--colors-gray-12);
     --colors-info-surface: var(--colors-blue-dark-2);
     --colors-info-subtle: var(--colors-blue-dark-5);
     --colors-info-muted: var(--colors-blue-dark-7);
     --colors-info-solid: var(--colors-blue-dark-11);
     --colors-info-emphasis: color-mix(in srgb, var(--colors-blue-dark-11) 50%, var(--colors-blue-dark-12) 50%);
     --colors-info-fg: var(--colors-blue-dark-12);
-    --colors-info-contrast: var(--colors-gray-1);
+    --colors-info-contrast: var(--colors-gray-12);
     --colors-highlight-surface: var(--colors-orange-dark-2);
     --colors-highlight-subtle: var(--colors-orange-dark-5);
     --colors-highlight-muted: var(--colors-orange-dark-7);
     --colors-highlight-solid: var(--colors-orange-dark-11);
     --colors-highlight-emphasis: color-mix(in srgb, var(--colors-orange-dark-11) 50%, var(--colors-orange-dark-12) 50%);
     --colors-highlight-fg: var(--colors-orange-dark-12);
-    --colors-highlight-contrast: var(--colors-gray-1)
+    --colors-highlight-contrast: var(--colors-gray-12)
 }
 
   [data-panda-theme=rainbow] {
@@ -730,7 +730,7 @@
     --colors-accent-solid: var(--colors-teal-dark-11);
     --colors-accent-emphasis: color-mix(in srgb, var(--colors-teal-dark-11) 50%, var(--colors-teal-dark-12) 50%);
     --colors-accent-fg: var(--colors-teal-dark-12);
-    --colors-accent-contrast: var(--colors-gray-1);
+    --colors-accent-contrast: var(--colors-gray-12);
     --colors-bg-canvas: var(--colors-violet-dark-2);
     --colors-bg-default: var(--colors-violet-dark-1);
     --colors-bg-muted: var(--colors-violet-dark-6);
@@ -747,7 +747,7 @@
     --colors-danger-solid: var(--colors-red-dark-11);
     --colors-danger-emphasis: color-mix(in srgb, var(--colors-red-dark-11) 50%, var(--colors-red-dark-12) 50%);
     --colors-danger-fg: var(--colors-red-dark-12);
-    --colors-danger-contrast: var(--colors-gray-1);
+    --colors-danger-contrast: var(--colors-gray-12);
     --colors-fg-default: var(--colors-mauve-dark-12);
     --colors-fg-inverse: var(--colors-mauve-12);
     --colors-fg-muted: var(--colors-mauve-dark-11);
@@ -758,14 +758,14 @@
     --colors-info-solid: var(--colors-blue-dark-11);
     --colors-info-emphasis: color-mix(in srgb, var(--colors-blue-dark-11) 50%, var(--colors-blue-dark-12) 50%);
     --colors-info-fg: var(--colors-blue-dark-12);
-    --colors-info-contrast: var(--colors-gray-1);
+    --colors-info-contrast: var(--colors-gray-12);
     --colors-success-surface: var(--colors-emerald-dark-3);
     --colors-success-subtle: var(--colors-emerald-dark-5);
     --colors-success-muted: var(--colors-emerald-dark-8);
     --colors-success-solid: var(--colors-emerald-dark-11);
     --colors-success-emphasis: color-mix(in srgb, var(--colors-emerald-dark-11) 50%, var(--colors-emerald-dark-12) 50%);
     --colors-success-fg: var(--colors-emerald-dark-12);
-    --colors-success-contrast: var(--colors-gray-1);
+    --colors-success-contrast: var(--colors-gray-12);
     --colors-warning-surface: var(--colors-yellow-dark-3);
     --colors-warning-subtle: var(--colors-yellow-dark-5);
     --colors-warning-muted: var(--colors-yellow-dark-8);
@@ -779,7 +779,7 @@
     --colors-highlight-solid: var(--colors-orange-dark-11);
     --colors-highlight-emphasis: color-mix(in srgb, var(--colors-orange-dark-11) 50%, var(--colors-orange-dark-12) 50%);
     --colors-highlight-fg: var(--colors-orange-dark-12);
-    --colors-highlight-contrast: var(--colors-gray-1)
+    --colors-highlight-contrast: var(--colors-gray-12)
         }
 
   @keyframes spin {
@@ -891,13 +891,19 @@
       outline-offset: 2px;
       cursor: pointer;
       justify-content: center;
+      position: relative;
       --transition-duration: var(--durations-fast);
       transition-duration: var(--durations-fast);
       --transition-prop: background-color, border-color, color, box-shadow;
       transition-property: background-color, border-color, color, box-shadow;
 }
 
-    .stalk-button:is(:disabled, [disabled], [data-disabled], [aria-disabled=true]) {
+    .stalk-button > svg {
+      flex-shrink: 0;
+      pointer-events: none;
+}
+
+    .stalk-button:is(:disabled, [disabled], [data-disabled], [aria-disabled=true]),.stalk-button[aria-disabled="true"] {
       cursor: not-allowed;
       opacity: 0.5;
 }
@@ -906,9 +912,13 @@
       --ring-offset-shadow: var(--ring-inset,) 0 0 0 var(--ring-offset-width, 0rem) var(--ring-offset-color);
       --ring-shadow: var(--ring-inset,) 0 0 0 calc(0.1875rem + var(--ring-offset-width, 0rem)) var(--ring-color);
       box-shadow: var(--ring-offset-shadow),var(--ring-shadow),var(--base-shadow,0 0 #0000);
-      --ring-color: var(--colors-accent-subtle);
-      --ring-offset-width: 0.0625rem;
+      --ring-color: var(--colors-accent-muted);
+      --ring-offset-width: 0.125rem;
       --ring-offset-color: var(--colors-bg-default);
+}
+
+    .stalk-button:is(:active, [data-active]) {
+      transform: scale(0.96);
 }
 
     .stalk-input {
@@ -1054,8 +1064,20 @@
 
   .stalk-button--size_md {
     padding-inline: var(--spacing-base);
-    font-size: var(--font-sizes-sm);
-    min-height: var(--sizes-40);
+    font-size: var(--font-sizes-base);
+    line-height: var(--line-heights-base);
+    letter-spacing: var(--letter-spacings-normal);
+    min-height: var(--sizes-36);
+}
+
+  .stalk-button--size_md:has(> svg:only-child) {
+    padding-inline: var(--spacing-0);
+    width: var(--sizes-36);
+}
+
+  .stalk-button--size_md > svg {
+    height: 16px;
+    width: 16px;
 }
 
   .stalk-button--variant_solid {
@@ -1097,13 +1119,37 @@
   .stalk-button--size_sm {
     padding-inline: var(--spacing-12);
     font-size: var(--font-sizes-sm);
+    line-height: var(--line-heights-sm);
+    letter-spacing: var(--letter-spacings-normal);
     min-height: var(--sizes-32);
+}
+
+  .stalk-button--size_sm:has(> svg:only-child) {
+    padding-inline: var(--spacing-0);
+    width: var(--sizes-32);
+}
+
+  .stalk-button--size_sm > svg {
+    height: var(--sizes-14);
+    width: var(--sizes-14);
 }
 
   .stalk-button--size_lg {
     padding-inline: var(--spacing-20);
-    font-size: var(--font-sizes-base);
-    min-height: var(--sizes-48);
+    font-size: var(--font-sizes-lg);
+    line-height: var(--line-heights-lg);
+    letter-spacing: var(--letter-spacings-normal);
+    min-height: 42px;
+}
+
+  .stalk-button--size_lg:has(> svg:only-child) {
+    padding-inline: var(--spacing-0);
+    width: 42px;
+}
+
+  .stalk-button--size_lg > svg {
+    height: var(--sizes-18);
+    width: var(--sizes-18);
 }
 
   .stalk-input--size_md {
@@ -1275,7 +1321,6 @@
     .stalk-dialog__title {
       font-size: var(--font-sizes-lg);
       line-height: var(--line-heights-lg);
-      font-weight: var(--font-weights-semibold);
 }
 
     .stalk-dialog__title,.stalk-dialog__description {
@@ -1286,7 +1331,6 @@
       color: var(--colors-fg-muted);
       font-size: var(--font-sizes-sm);
       line-height: var(--line-heights-sm);
-      font-weight: var(--font-weights-regular);
 }
 
     .stalk-dialog__footer {
@@ -1646,6 +1690,24 @@
       height: var(--sizes-px);
 }
 
+    .stalk-spinner__root {
+      align-items: center;
+      color: currentColor;
+      display: inline-flex;
+      flex-shrink: 0;
+      justify-content: center;
+      line-height: var(--line-heights-none);
+}
+
+    .stalk-spinner__track {
+      opacity: 0.2;
+}
+
+    .stalk-spinner__indicator {
+      animation: var(--animations-spin);
+      transform-origin: center;
+}
+
     .stalk-switch__root {
       padding: var(--spacing-2);
       border-radius: var(--radii-full);
@@ -1720,6 +1782,12 @@
 
     .stalk-tooltip__arrow {
       fill: var(--colors-fg-default);
+}
+
+    @media (prefers-reduced-motion: reduce) {
+      .stalk-spinner__indicator {
+        animation: none;
+}
 }
 }
 

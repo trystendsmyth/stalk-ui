@@ -24,10 +24,16 @@ const isLightSolid = (accentColor: AccentColor) => LIGHT_SOLID_ACCENTS.has(accen
 
 const solidStep = (accentColor: AccentColor) => (isLightSolid(accentColor) ? 10 : 11)
 
+/**
+ * Dark scales invert luminance: step 11 of `blueDark` is light blue, not dark blue. So `solid`
+ * in dark mode is a light surface and contrast must flip to dark text. `gray.12` is `#202020`
+ * in either mode (we reference the light scale by name on purpose) — that's our "always dark
+ * text" token. Light-solid accents already pair with dark text in both modes.
+ */
 const contrastFor = (accentColor: AccentColor) =>
   isLightSolid(accentColor)
     ? semanticPair(scaleToken('gray', 12), scaleToken('gray', 12))
-    : semanticPair(scaleToken('gray', 1), scaleToken('gray', 1))
+    : semanticPair(scaleToken('gray', 1), scaleToken('gray', 12))
 
 const emphasisFor = (accentColor: AccentColor) =>
   semanticPair(

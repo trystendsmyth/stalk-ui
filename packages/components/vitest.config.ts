@@ -4,6 +4,7 @@ export default defineConfig({
   resolve: {
     alias: {
       'styled-system/css': new URL('./src/test/styled-system-css.ts', import.meta.url).pathname,
+      'styled-system/jsx': new URL('./src/test/styled-system-jsx.tsx', import.meta.url).pathname,
       'styled-system/recipes': new URL('./src/test/styled-system-recipes.ts', import.meta.url)
         .pathname,
     },
