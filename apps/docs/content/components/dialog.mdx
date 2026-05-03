@@ -20,14 +20,19 @@ pnpm dlx @stalk-ui/cli add @stalk-ui/dialog
 <ComponentPreview
   slug="dialog"
   example={0}
-  code={`<Dialog.Root><Dialog.Trigger>Open</Dialog.Trigger><Dialog.Content><Dialog.Title>Title</Dialog.Title></Dialog.Content></Dialog.Root>`}
+  code={`<Dialog.Root>
+  <Dialog.Trigger>Open dialog</Dialog.Trigger>
+  <Dialog.Content>
+    <Dialog.Title>Confirm changes</Dialog.Title>
+  </Dialog.Content>
+</Dialog.Root>`}
 />
 
 ```tsx
 <Dialog.Root>
-  <Dialog.Trigger>Open</Dialog.Trigger>
+  <Dialog.Trigger>Open dialog</Dialog.Trigger>
   <Dialog.Content>
-    <Dialog.Title>Title</Dialog.Title>
+    <Dialog.Title>Confirm changes</Dialog.Title>
   </Dialog.Content>
 </Dialog.Root>
 ```
@@ -35,28 +40,33 @@ pnpm dlx @stalk-ui/cli add @stalk-ui/dialog
 <ComponentPreview
   slug="dialog"
   example={1}
-  code={`<Dialog.Content><Dialog.Header><Dialog.Title>Settings</Dialog.Title><Dialog.Description>Manage preferences.</Dialog.Description></Dialog.Header></Dialog.Content>`}
+  code={`<Dialog.Root>
+  <Dialog.Trigger>Settings</Dialog.Trigger>
+  <Dialog.Content>
+    <Dialog.Header>
+      <Dialog.Title>Settings</Dialog.Title>
+      <Dialog.Description>Manage your preferences.</Dialog.Description>
+    </Dialog.Header>
+    <Dialog.Footer>
+      <Dialog.Close>Cancel</Dialog.Close>
+    </Dialog.Footer>
+  </Dialog.Content>
+</Dialog.Root>`}
 />
 
 ```tsx
-<Dialog.Content>
-  <Dialog.Header>
-    <Dialog.Title>Settings</Dialog.Title>
-    <Dialog.Description>Manage preferences.</Dialog.Description>
-  </Dialog.Header>
-</Dialog.Content>
-```
-
-<ComponentPreview
-  slug="dialog"
-  example={2}
-  code={`<Dialog.Footer><Dialog.Close>Cancel</Dialog.Close></Dialog.Footer>`}
-/>
-
-```tsx
-<Dialog.Footer>
-  <Dialog.Close>Cancel</Dialog.Close>
-</Dialog.Footer>
+<Dialog.Root>
+  <Dialog.Trigger>Settings</Dialog.Trigger>
+  <Dialog.Content>
+    <Dialog.Header>
+      <Dialog.Title>Settings</Dialog.Title>
+      <Dialog.Description>Manage your preferences.</Dialog.Description>
+    </Dialog.Header>
+    <Dialog.Footer>
+      <Dialog.Close>Cancel</Dialog.Close>
+    </Dialog.Footer>
+  </Dialog.Content>
+</Dialog.Root>
 ```
 
 ## Props

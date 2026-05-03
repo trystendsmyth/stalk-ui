@@ -43,6 +43,7 @@ const componentDescriptions = {
   popover: 'Displays interactive floating content from a trigger.',
   radio: 'Selects one option from a related set of choices.',
   select: 'Lets a user choose one option from a native menu.',
+  spinner: 'Indicates an indeterminate loading state with an accessible label.',
   switch: 'Toggles a setting on or off.',
   textarea: 'Collects multi-line text from a user.',
   tooltip: 'Provides supplemental context when a control is hovered or focused.',

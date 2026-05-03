@@ -31,10 +31,16 @@ pnpm dlx @stalk-ui/cli add @stalk-ui/label
 </Label>
 ```
 
-<ComponentPreview slug="label" example={2} code={`<Label size="lg">Large label</Label>`} />
+<ComponentPreview
+  slug="label"
+  example={2}
+  code={`<Label size="lg" htmlFor="bio">About you</Label>`}
+/>
 
 ```tsx
-<Label size="lg">Large label</Label>
+<Label size="lg" htmlFor="bio">
+  About you
+</Label>
 ```
 
 ## Props

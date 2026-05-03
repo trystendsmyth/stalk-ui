@@ -20,36 +20,35 @@ pnpm dlx @stalk-ui/cli add @stalk-ui/popover
 <ComponentPreview
   slug="popover"
   example={0}
-  code={`<Popover.Root><Popover.Trigger>Open</Popover.Trigger><Popover.Content>Interactive content</Popover.Content></Popover.Root>`}
+  code={`<Popover.Root>
+  <Popover.Trigger>Open popover</Popover.Trigger>
+  <Popover.Content>Quick actions go here.</Popover.Content>
+</Popover.Root>`}
 />
 
 ```tsx
 <Popover.Root>
-  <Popover.Trigger>Open</Popover.Trigger>
-  <Popover.Content>Interactive content</Popover.Content>
+  <Popover.Trigger>Open popover</Popover.Trigger>
+  <Popover.Content>Quick actions go here.</Popover.Content>
 </Popover.Root>
 ```
 
 <ComponentPreview
   slug="popover"
   example={1}
-  code={`<Popover.Content aria-label="Project settings"><Popover.Close>Close</Popover.Close></Popover.Content>`}
+  code={`<Popover.Root>
+  <Popover.Trigger>Filters</Popover.Trigger>
+  <Popover.Content side="bottom" align="start">Filter controls render below the trigger.</Popover.Content>
+</Popover.Root>`}
 />
 
 ```tsx
-<Popover.Content aria-label="Project settings">
-  <Popover.Close>Close</Popover.Close>
-</Popover.Content>
-```
-
-<ComponentPreview
-  slug="popover"
-  example={2}
-  code={`<Popover.Content side="bottom">Positioned below the trigger</Popover.Content>`}
-/>
-
-```tsx
-<Popover.Content side="bottom">Positioned below the trigger</Popover.Content>
+<Popover.Root>
+  <Popover.Trigger>Filters</Popover.Trigger>
+  <Popover.Content side="bottom" align="start">
+    Filter controls render below the trigger.
+  </Popover.Content>
+</Popover.Root>
 ```
 
 ## Props

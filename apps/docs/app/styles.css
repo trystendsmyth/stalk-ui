@@ -178,7 +178,7 @@ h2 {
   display: inline-flex;
   padding: 0.75rem 1rem;
   border: 1px solid var(--colors-border-default);
-  border-radius: 1rem;
+  border-radius: 0.5rem;
   text-decoration: none;
   color: var(--colors-fg-default);
 }
@@ -207,7 +207,7 @@ pre {
   overflow-x: auto;
   padding: 1rem;
   border: 1px solid var(--colors-border-default);
-  border-radius: 1rem;
+  border-radius: 0.5rem;
   background: var(--colors-bg-muted);
   color: var(--colors-fg-default);
 }
@@ -221,7 +221,7 @@ table {
   border-collapse: collapse;
   overflow: hidden;
   border: 1px solid var(--colors-border-default);
-  border-radius: 1rem;
+  border-radius: 0.5rem;
 }
 
 th,
@@ -246,7 +246,7 @@ td {
   gap: 1rem;
   padding: 1rem;
   border: 1px solid var(--colors-border-default);
-  border-radius: 1rem;
+  border-radius: 0.5rem;
   background: var(--colors-bg-subtle);
 }
 
@@ -255,31 +255,21 @@ td {
   flex-wrap: wrap;
   gap: 0.75rem;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: space-between;
 }
 
-.component-preview__toolbar label {
+.component-preview__theme {
   display: inline-flex;
-  gap: 0.5rem;
   align-items: center;
+  gap: 0.5rem;
+}
+
+.component-preview__label {
   color: var(--colors-fg-muted);
+  font-size: 0.8125rem;
   font-weight: 600;
-}
-
-.component-preview__toolbar select,
-.component-preview__toolbar button {
-  min-height: 2.25rem;
-  padding-inline: 0.75rem;
-  border: 1px solid var(--colors-border-default);
-  border-radius: 0.625rem;
-  background: var(--colors-bg-muted);
-  color: var(--colors-fg-default);
-  font: inherit;
-}
-
-.component-preview__toolbar button {
-  cursor: pointer;
-  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
 }
 
 .component-preview__rendered {
@@ -287,11 +277,205 @@ td {
   display: grid;
   place-items: center;
   padding: 1.5rem;
-  border-radius: 0.75rem;
+  border-radius: 0.5rem;
   background: var(--colors-bg-muted);
   color: var(--colors-fg-default);
 }
 
 .component-preview pre {
   margin-block-end: 0;
+}
+
+/*
+ * react-live editor: the wrapper provides the rounded card chrome and
+ * scroll handling; the inner `prism-code` element renders the actual
+ * tokenized code via prism-react-renderer. We override the inline theme
+ * background so it matches the docs palette.
+ */
+
+.component-preview__code {
+  border: 1px solid var(--colors-border-muted);
+  border-radius: 0.5rem;
+  background: #0b0b10;
+  overflow: hidden;
+}
+
+.component-preview__editor {
+  font-family: var(--fonts-mono) !important;
+  font-size: 0.8125rem !important;
+  line-height: 1.6 !important;
+  caret-color: var(--colors-accent-default);
+}
+
+.component-preview__editor > pre,
+.component-preview__editor > textarea {
+  padding: 1rem !important;
+  background: transparent !important;
+  outline: none !important;
+  tab-size: 2;
+}
+
+.component-preview__editor > textarea {
+  caret-color: var(--colors-accent-default);
+}
+
+.component-preview__editor > textarea:focus-visible {
+  outline: 2px solid var(--colors-accent-muted) !important;
+  outline-offset: -2px;
+  border-radius: 0.5rem;
+}
+
+.component-preview__error {
+  margin: 0;
+  padding: 0.75rem 1rem;
+  border: 1px solid color-mix(in srgb, var(--colors-fg-default) 12%, #c4314b);
+  border-radius: 0.5rem;
+  background: color-mix(in srgb, var(--colors-bg-canvas) 80%, #c4314b 20%);
+  color: var(--colors-fg-default);
+  font-family: var(--fonts-mono);
+  font-size: 0.8125rem;
+  white-space: pre-wrap;
+}
+
+.component-preview__error:empty {
+  display: none;
+}
+
+/*
+ * Install command block: terminal-style code chip with a leading prompt
+ * and a copy-to-clipboard affordance.
+ */
+
+.install-command {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.375rem 0.375rem 0.375rem 0.875rem;
+  border: 1px solid var(--colors-border-muted);
+  border-radius: 0.5rem;
+  background: var(--colors-bg-canvas);
+}
+
+.install-command__pre {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  font-family: var(--fonts-mono);
+  font-size: 0.875rem;
+  line-height: 1.6;
+  overflow-x: auto;
+  white-space: pre;
+}
+
+.install-command__pre code {
+  display: inline-flex;
+  gap: 0.625rem;
+  align-items: center;
+  color: var(--colors-fg-default);
+}
+
+.install-command__prompt {
+  color: var(--colors-accent-default);
+  user-select: none;
+  font-weight: 700;
+}
+
+/*
+ * Docs sections: each top-level subsection on a component or guide page is
+ * wrapped in <section className="docs-section"> with optional eyebrow + hint
+ * text. Provides a consistent rhythm and visual separation between Install,
+ * Examples, Props, Variants, Registry, and similar groupings.
+ */
+
+.docs-section {
+  display: grid;
+  gap: 1rem;
+  padding: 1.5rem;
+  margin-block-start: 1.5rem;
+  border: 1px solid var(--colors-border-muted);
+  border-radius: 0.5rem;
+  background: var(--colors-bg-subtle);
+}
+
+.docs-section__header {
+  display: grid;
+  gap: 0.25rem;
+  border-block-end: 1px solid var(--colors-border-muted);
+  padding-block-end: 0.75rem;
+}
+
+.docs-section__title {
+  margin: 0;
+  font-size: 1.125rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--colors-fg-default);
+}
+
+.docs-section__hint {
+  margin: 0;
+  font-size: 0.875rem;
+  color: var(--colors-fg-muted);
+  text-wrap: pretty;
+}
+
+.docs-section__empty {
+  margin: 0;
+  padding: 0.875rem 1rem;
+  border: 1px dashed var(--colors-border-muted);
+  border-radius: 0.5rem;
+  background: var(--colors-bg-canvas);
+  color: var(--colors-fg-muted);
+  font-size: 0.875rem;
+}
+
+.docs-section pre,
+.docs-section table,
+.docs-section .article-list {
+  margin: 0;
+}
+
+.docs-section table {
+  background: var(--colors-bg-canvas);
+}
+
+.docs-section th {
+  font-weight: 600;
+  font-size: 0.8125rem;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--colors-fg-muted);
+}
+
+.docs-section td:first-child {
+  font-family: var(--fonts-mono);
+  font-size: 0.875rem;
+  color: var(--colors-fg-default);
+}
+
+.docs-section td code,
+.docs-section th code {
+  padding: 0.125rem 0.375rem;
+  border-radius: 0.25rem;
+  background: var(--colors-bg-muted);
+  font-size: 0.8125rem;
+}
+
+.docs-section .article-list {
+  display: grid;
+  gap: 0.375rem;
+  font-family: var(--fonts-mono);
+  font-size: 0.8125rem;
+  color: var(--colors-fg-default);
+}
+
+.docs-section .article-list li {
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--colors-border-muted);
+  border-radius: 0.375rem;
+  background: var(--colors-bg-canvas);
 }
