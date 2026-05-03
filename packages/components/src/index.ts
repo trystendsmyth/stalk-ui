@@ -1,5 +1,5 @@
 export { Badge } from './badge'
-export type { BadgeProps, BadgeSize, BadgeVariant } from './badge'
+export type { BadgeProps, BadgeRadius, BadgeSize, BadgeTone, BadgeVariant } from './badge'
 export { Button } from './button'
 export type { ButtonProps, ButtonSize, ButtonVariant } from './button'
 export { Checkbox } from './checkbox'

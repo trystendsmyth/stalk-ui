@@ -45,16 +45,18 @@ pnpm dlx @stalk-ui/cli add @stalk-ui/badge
 
 | Prop      | Type           | Required | Default | Description                                                                   |
 | --------- | -------------- | -------- | ------- | ----------------------------------------------------------------------------- |
+| `radius`  | `BadgeRadius`  | No       | -       | Border radius. Defaults to \`full\` (pill).                                   |
 | `size`    | `BadgeSize`    | No       | -       | -                                                                             |
-| `variant` | `BadgeVariant` | No       | -       | -                                                                             |
 | `tone`    | `BadgeTone`    | No       | -       | Selects the semantic color palette used by the badge. Defaults to \`accent\`. |
+| `variant` | `BadgeVariant` | No       | -       | -                                                                             |
 
 ## Variants
 
-| Variant   | Values                       |
-| --------- | ---------------------------- |
-| `variant` | `solid`, `subtle`, `outline` |
-| `size`    | `sm`, `md`                   |
+| Variant   | Values                           |
+| --------- | -------------------------------- |
+| `variant` | `solid`, `subtle`, `outline`     |
+| `size`    | `sm`, `md`                       |
+| `radius`  | `none`, `sm`, `md`, `lg`, `full` |
 
 ## Registry
 

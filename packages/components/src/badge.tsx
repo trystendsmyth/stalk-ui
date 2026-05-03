@@ -6,23 +6,26 @@ import type { HTMLAttributes } from 'react'
 
 export type BadgeSize = 'sm' | 'md'
 export type BadgeVariant = 'solid' | 'subtle' | 'outline'
+export type BadgeRadius = 'none' | 'sm' | 'md' | 'lg' | 'full'
 export type BadgeTone = 'accent' | 'success' | 'warning' | 'danger' | 'info'
 
 export interface BadgeProps extends HTMLAttributes<HTMLSpanElement> {
+  /** Border radius. Defaults to `full` (pill). */
+  radius?: BadgeRadius
   size?: BadgeSize
-  variant?: BadgeVariant
   /** Selects the semantic color palette used by the badge. Defaults to `accent`. */
   tone?: BadgeTone
+  variant?: BadgeVariant
 }
 
 export const Badge = /* @__PURE__ */ forwardRef<HTMLSpanElement, BadgeProps>(function Badge(
-  { className, size = 'md', tone = 'accent', variant = 'subtle', ...props },
+  { className, radius = 'full', size = 'md', tone = 'accent', variant = 'subtle', ...props },
   ref,
 ) {
   return (
     <span
       ref={ref}
-      className={cx(badgeRecipe({ size, variant }), css({ colorPalette: tone }), className)}
+      className={cx(badgeRecipe({ radius, size, variant }), css({ colorPalette: tone }), className)}
       {...props}
     />
   )
