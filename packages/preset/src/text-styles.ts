@@ -13,7 +13,6 @@ export const textStyles: TextStyles = {
     value: {
       fontSize: '6xl',
       lineHeight: '6xl',
-      fontWeight: 'semibold',
       letterSpacing: 'tighter',
     },
   },
@@ -22,7 +21,6 @@ export const textStyles: TextStyles = {
     value: {
       fontSize: '5xl',
       lineHeight: '5xl',
-      fontWeight: 'semibold',
       letterSpacing: 'tighter',
     },
   },
@@ -31,7 +29,6 @@ export const textStyles: TextStyles = {
     value: {
       fontSize: '4xl',
       lineHeight: '4xl',
-      fontWeight: 'semibold',
       letterSpacing: 'tight',
     },
   },
@@ -40,7 +37,6 @@ export const textStyles: TextStyles = {
     value: {
       fontSize: '3xl',
       lineHeight: '3xl',
-      fontWeight: 'semibold',
       letterSpacing: 'tight',
     },
   },
@@ -49,7 +45,6 @@ export const textStyles: TextStyles = {
     value: {
       fontSize: '2xl',
       lineHeight: '2xl',
-      fontWeight: 'semibold',
       letterSpacing: 'normal',
     },
   },
@@ -58,7 +53,6 @@ export const textStyles: TextStyles = {
     value: {
       fontSize: 'xl',
       lineHeight: 'xl',
-      fontWeight: 'semibold',
       letterSpacing: 'normal',
     },
   },
@@ -67,7 +61,6 @@ export const textStyles: TextStyles = {
     value: {
       fontSize: 'lg',
       lineHeight: 'lg',
-      fontWeight: 'semibold',
       letterSpacing: 'normal',
     },
   },
@@ -76,7 +69,6 @@ export const textStyles: TextStyles = {
     value: {
       fontSize: 'base',
       lineHeight: 'base',
-      fontWeight: 'semibold',
       letterSpacing: 'normal',
     },
   },
@@ -85,7 +77,6 @@ export const textStyles: TextStyles = {
     value: {
       fontSize: 'lg',
       lineHeight: 'lg',
-      fontWeight: 'regular',
       letterSpacing: 'normal',
     },
   },
@@ -94,7 +85,6 @@ export const textStyles: TextStyles = {
     value: {
       fontSize: 'base',
       lineHeight: 'base',
-      fontWeight: 'regular',
       letterSpacing: 'normal',
     },
   },
@@ -103,7 +93,6 @@ export const textStyles: TextStyles = {
     value: {
       fontSize: 'sm',
       lineHeight: 'sm',
-      fontWeight: 'regular',
       letterSpacing: 'normal',
     },
   },
@@ -112,7 +101,6 @@ export const textStyles: TextStyles = {
     value: {
       fontSize: 'xs',
       lineHeight: 'xs',
-      fontWeight: 'regular',
       letterSpacing: 'normal',
     },
   },
@@ -121,7 +109,6 @@ export const textStyles: TextStyles = {
     value: {
       fontSize: '2xs',
       lineHeight: '2xs',
-      fontWeight: 'medium',
       letterSpacing: 'wide',
     },
   },
@@ -131,7 +118,6 @@ export const textStyles: TextStyles = {
       fontFamily: 'mono',
       fontSize: 'sm',
       lineHeight: 'sm',
-      fontWeight: 'regular',
       letterSpacing: 'normal',
     },
   },

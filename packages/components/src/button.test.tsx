@@ -55,11 +55,38 @@ test('disables interaction while loading', async () => {
     </Button>,
   )
 
-  const button = screen.getByRole('button', { name: 'Saving' })
+  // Default loadingLabel is the announced name; the original "Saving" text
+  // remains in the DOM but is aria-hidden for layout stability.
+  const button = screen.getByRole('button', { name: 'Loading' })
   expect(button).toBeDisabled()
+  expect(button).toHaveAttribute('aria-busy', 'true')
 
   await user.click(button)
   expect(handleClick).not.toHaveBeenCalled()
+})
+
+test('announces a custom loadingLabel while preserving original children', () => {
+  render(
+    <Button loading loadingLabel="Saving changes">
+      Save
+    </Button>,
+  )
+
+  // Original "Save" stays in the DOM (layout-stable) but is aria-hidden, so
+  // the accessible name comes from the VisuallyHidden loadingLabel.
+  expect(screen.getByRole('button', { name: 'Saving changes' })).toBeInTheDocument()
+  expect(screen.getByText('Save')).toBeInTheDocument()
+})
+
+test('renders children unchanged when not loading', () => {
+  render(
+    <Button>
+      <span data-testid="custom">Hello</span>
+    </Button>,
+  )
+
+  expect(screen.getByTestId('custom')).toBeInTheDocument()
+  expect(screen.queryByRole('status')).not.toBeInTheDocument()
 })
 
 test('renders as a child element', async () => {

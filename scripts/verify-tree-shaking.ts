@@ -71,6 +71,7 @@ const namedExportOnlyFiles = [
   'checkbox.tsx',
   'input.tsx',
   'label.tsx',
+  'spinner.tsx',
   'switch.tsx',
   'textarea.tsx',
 ]
@@ -127,6 +128,7 @@ const RUNTIME_STUBS: Record<string, string> = {
     export const popover = recipe;
     export const radio = recipe;
     export const select = recipe;
+    export const spinner = recipe;
     export const switchRecipe = recipe;
     export const textarea = recipe;
     export const tooltip = recipe;

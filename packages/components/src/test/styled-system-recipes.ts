@@ -90,6 +90,16 @@ export const select = ({ size = 'md' }: SelectRecipeOptions = {}) => ({
   separator: 'stalk-select__separator',
 })
 
+interface SpinnerRecipeOptions {
+  size?: 'sm' | 'md' | 'lg' | 'xl'
+}
+
+export const spinner = ({ size = 'md' }: SpinnerRecipeOptions = {}) => ({
+  root: `stalk-spinner__root stalk-spinner__root--${size}`,
+  track: 'stalk-spinner__track',
+  indicator: 'stalk-spinner__indicator',
+})
+
 interface SwitchRecipeOptions {
   size?: 'sm' | 'md' | 'lg'
 }

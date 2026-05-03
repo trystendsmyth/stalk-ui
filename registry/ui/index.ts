@@ -8,6 +8,7 @@ import { label } from './label'
 import { popover } from './popover'
 import { radio } from './radio'
 import { select } from './select'
+import { spinner } from './spinner'
 import { switchItem } from './switch'
 import { textarea } from './textarea'
 import { tooltip } from './tooltip'
@@ -28,6 +29,7 @@ export const registryItems = [
   popover,
   radio,
   select,
+  spinner,
   switchItem,
   textarea,
   tooltip,
