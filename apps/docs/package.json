@@ -22,6 +22,8 @@
     "@stalk-ui/components": "workspace:*",
     "@stalk-ui/i18n": "workspace:*",
     "@stalk-ui/preset": "workspace:*",
+    "@vercel/analytics": "^2.0.1",
+    "@vercel/speed-insights": "^2.0.0",
     "fumadocs-core": "^16.8.5",
     "fumadocs-ui": "^16.8.5",
     "lucide-react": "catalog:",

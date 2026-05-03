@@ -1,3 +1,5 @@
+import { Analytics } from '@vercel/analytics/next'
+import { SpeedInsights } from '@vercel/speed-insights/next'
 import { RootProvider } from 'fumadocs-ui/provider/next'
 import 'fumadocs-ui/style.css'
 
@@ -26,6 +28,8 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <RootProvider theme={{ enabled: false }}>
           <DocsI18nProvider>{children}</DocsI18nProvider>
         </RootProvider>
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   )
