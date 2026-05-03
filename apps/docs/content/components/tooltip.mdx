@@ -20,7 +20,12 @@ pnpm dlx @stalk-ui/cli add @stalk-ui/tooltip
 <ComponentPreview
   slug="tooltip"
   example={0}
-  code={`<Tooltip.Provider><Tooltip.Root><Tooltip.Trigger>Help</Tooltip.Trigger><Tooltip.Content>Helpful context</Tooltip.Content></Tooltip.Root></Tooltip.Provider>`}
+  code={`<Tooltip.Provider>
+  <Tooltip.Root>
+    <Tooltip.Trigger>Help</Tooltip.Trigger>
+    <Tooltip.Content>Helpful context</Tooltip.Content>
+  </Tooltip.Root>
+</Tooltip.Provider>`}
 />
 
 ```tsx
@@ -35,24 +40,21 @@ pnpm dlx @stalk-ui/cli add @stalk-ui/tooltip
 <ComponentPreview
   slug="tooltip"
   example={1}
-  code={`<Tooltip.Root defaultOpen><Tooltip.Trigger>Open</Tooltip.Trigger><Tooltip.Content>Visible by default</Tooltip.Content></Tooltip.Root>`}
+  code={`<Tooltip.Provider>
+  <Tooltip.Root defaultOpen>
+    <Tooltip.Trigger>Pinned</Tooltip.Trigger>
+    <Tooltip.Content side="bottom">Visible by default</Tooltip.Content>
+  </Tooltip.Root>
+</Tooltip.Provider>`}
 />
 
 ```tsx
-<Tooltip.Root defaultOpen>
-  <Tooltip.Trigger>Open</Tooltip.Trigger>
-  <Tooltip.Content>Visible by default</Tooltip.Content>
-</Tooltip.Root>
-```
-
-<ComponentPreview
-  slug="tooltip"
-  example={2}
-  code={`<Tooltip.Content side="bottom">Positioned below the trigger</Tooltip.Content>`}
-/>
-
-```tsx
-<Tooltip.Content side="bottom">Positioned below the trigger</Tooltip.Content>
+<Tooltip.Provider>
+  <Tooltip.Root defaultOpen>
+    <Tooltip.Trigger>Pinned</Tooltip.Trigger>
+    <Tooltip.Content side="bottom">Visible by default</Tooltip.Content>
+  </Tooltip.Root>
+</Tooltip.Provider>
 ```
 
 ## Props

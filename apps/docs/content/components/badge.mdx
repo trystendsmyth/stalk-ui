@@ -23,21 +23,27 @@ pnpm dlx @stalk-ui/cli add @stalk-ui/badge
 <Badge>Published</Badge>
 ```
 
-<ComponentPreview slug="badge" example={1} code={`<Badge variant="solid">Stable</Badge>`} />
+<ComponentPreview
+  slug="badge"
+  example={1}
+  code={`<Badge variant="solid" tone="success">Live</Badge>`}
+/>
 
 ```tsx
-<Badge variant="solid">Stable</Badge>
+<Badge variant="solid" tone="success">
+  Live
+</Badge>
 ```
 
 <ComponentPreview
   slug="badge"
   example={2}
-  code={`<Badge size="sm" variant="outline">Beta</Badge>`}
+  code={`<Badge variant="outline" tone="danger" size="sm" radius="sm">Error</Badge>`}
 />
 
 ```tsx
-<Badge size="sm" variant="outline">
-  Beta
+<Badge variant="outline" tone="danger" size="sm" radius="sm">
+  Error
 </Badge>
 ```
 

@@ -24,9 +24,12 @@
     "@stalk-ui/preset": "workspace:*",
     "fumadocs-core": "^16.8.5",
     "fumadocs-ui": "^16.8.5",
+    "lucide-react": "catalog:",
     "next": "16",
+    "prism-react-renderer": "^2.4.1",
     "react": "catalog:",
-    "react-dom": "catalog:"
+    "react-dom": "catalog:",
+    "react-live": "^4.1.8"
   },
   "devDependencies": {
     "@pandacss/dev": "catalog:",

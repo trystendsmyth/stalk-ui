@@ -20,36 +20,32 @@ pnpm dlx @stalk-ui/cli add @stalk-ui/radio
 <ComponentPreview
   slug="radio"
   example={0}
-  code={`<Radio.Root name="plan"><Radio.Item aria-label="Basic" value="basic" /></Radio.Root>`}
+  code={`<Radio.Root defaultValue="basic" name="plan">
+  <Radio.Item value="basic" aria-label="Basic" />
+  <Radio.Item value="pro" aria-label="Pro" />
+  <Radio.Item value="team" aria-label="Team" />
+</Radio.Root>`}
 />
 
 ```tsx
-<Radio.Root name="plan">
-  <Radio.Item aria-label="Basic" value="basic" />
+<Radio.Root defaultValue="basic" name="plan">
+  <Radio.Item value="basic" aria-label="Basic" />
+  <Radio.Item value="pro" aria-label="Pro" />
+  <Radio.Item value="team" aria-label="Team" />
 </Radio.Root>
 ```
 
 <ComponentPreview
   slug="radio"
   example={1}
-  code={`<Radio.Root defaultValue="pro" name="plan"><Radio.Item aria-label="Pro" value="pro" /></Radio.Root>`}
+  code={`<Radio.Root name="plan-invalid">
+  <Radio.Item invalid value="required" aria-label="Required choice" />
+</Radio.Root>`}
 />
 
 ```tsx
-<Radio.Root defaultValue="pro" name="plan">
-  <Radio.Item aria-label="Pro" value="pro" />
-</Radio.Root>
-```
-
-<ComponentPreview
-  slug="radio"
-  example={2}
-  code={`<Radio.Root name="plan"><Radio.Item invalid aria-label="Required choice" value="required" /></Radio.Root>`}
-/>
-
-```tsx
-<Radio.Root name="plan">
-  <Radio.Item invalid aria-label="Required choice" value="required" />
+<Radio.Root name="plan-invalid">
+  <Radio.Item invalid value="required" aria-label="Required choice" />
 </Radio.Root>
 ```
 

@@ -17,10 +17,10 @@ pnpm dlx @stalk-ui/cli add @stalk-ui/button
 
 ## Examples
 
-<ComponentPreview slug="button" example={0} code={`<Button>Save</Button>`} />
+<ComponentPreview slug="button" example={0} code={`<Button>Save changes</Button>`} />
 
 ```tsx
-<Button>Save</Button>
+<Button>Save changes</Button>
 ```
 
 <ComponentPreview slug="button" example={1} code={`<Button variant="outline">Cancel</Button>`} />
@@ -29,10 +29,22 @@ pnpm dlx @stalk-ui/cli add @stalk-ui/button
 <Button variant="outline">Cancel</Button>
 ```
 
-<ComponentPreview slug="button" example={2} code={`<Button loading>Saving</Button>`} />
+<ComponentPreview
+  slug="button"
+  example={2}
+  code={`<Button variant="ghost" size="sm">Learn more</Button>`}
+/>
 
 ```tsx
-<Button loading>Saving</Button>
+<Button variant="ghost" size="sm">
+  Learn more
+</Button>
+```
+
+<ComponentPreview slug="button" example={3} code={`<Button loading>Saving…</Button>`} />
+
+```tsx
+<Button loading>Saving…</Button>
 ```
 
 ## Props
