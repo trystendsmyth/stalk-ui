@@ -15,7 +15,7 @@ import { Switch } from '@stalk-ui/components/switch'
 import { Textarea } from '@stalk-ui/components/textarea'
 import { Tooltip } from '@stalk-ui/components/tooltip'
 import { themes } from 'prism-react-renderer'
-import { useState } from 'react'
+import { useId, useState } from 'react'
 import { LiveEditor, LiveError, LivePreview, LiveProvider } from 'react-live'
 
 interface ComponentPreviewProps {
@@ -49,13 +49,14 @@ const liveScope = {
 export const ComponentPreview = ({ code }: ComponentPreviewProps) => {
   const [showCode, setShowCode] = useState(true)
   const [theme, setTheme] = useState<PreviewTheme>('neutral')
+  const themeLabelId = useId()
 
   return (
     <LiveProvider code={code} scope={liveScope} theme={themes.nightOwl}>
       <section className="component-preview">
         <div className="component-preview__toolbar">
           <div className="component-preview__theme">
-            <span className="component-preview__label" id="component-preview-theme-label">
+            <span className="component-preview__label" id={themeLabelId}>
               Theme
             </span>
             <Select.Root
@@ -64,7 +65,7 @@ export const ComponentPreview = ({ code }: ComponentPreviewProps) => {
                 setTheme(value as PreviewTheme)
               }}
             >
-              <Select.Trigger aria-labelledby="component-preview-theme-label" size="sm">
+              <Select.Trigger aria-labelledby={themeLabelId} size="sm">
                 <Select.Value />
               </Select.Trigger>
               <Select.Content>
