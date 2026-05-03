@@ -5,7 +5,7 @@ import { Badge, type BadgeTone } from './badge'
 
 import type { Meta, StoryObj } from '@storybook/react-vite'
 
-const { size: SIZES, variant: VARIANTS } = badgeRecipe.variantMap
+const { radius: RADII, size: SIZES, variant: VARIANTS } = badgeRecipe.variantMap
 const TONES: BadgeTone[] = ['accent', 'success', 'warning', 'danger', 'info']
 
 const meta = {
@@ -14,11 +14,16 @@ const meta = {
   tags: ['autodocs', 'stable'],
   args: {
     children: 'Published',
+    radius: 'full',
     size: 'md',
     tone: 'accent',
     variant: 'subtle',
   },
   argTypes: {
+    radius: {
+      control: 'select',
+      options: RADII,
+    },
     size: {
       control: 'inline-radio',
       options: SIZES,
@@ -60,6 +65,19 @@ export const Sizes: Story = {
       {SIZES.map((size) => (
         <Badge key={size} size={size}>
           {size}
+        </Badge>
+      ))}
+    </HStack>
+  ),
+}
+
+export const Radii: Story = {
+  parameters: { controls: { disable: true } },
+  render: () => (
+    <HStack alignItems="center" gap="8" flexWrap="wrap">
+      {RADII.map((radius) => (
+        <Badge key={radius} radius={radius}>
+          {radius}
         </Badge>
       ))}
     </HStack>

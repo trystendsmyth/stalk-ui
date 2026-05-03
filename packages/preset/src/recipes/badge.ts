@@ -5,7 +5,6 @@ export const badge = {
   description: 'Badge styles for compact status and metadata labels.',
   base: {
     alignItems: 'center',
-    borderRadius: 'full',
     colorPalette: 'accent',
     display: 'inline-flex',
     fontWeight: 'semibold',
@@ -42,8 +41,16 @@ export const badge = {
         paddingInline: '10',
       },
     },
+    radius: {
+      none: { borderRadius: 'none' },
+      sm: { borderRadius: 'sm' },
+      md: { borderRadius: 'md' },
+      lg: { borderRadius: 'lg' },
+      full: { borderRadius: 'full' },
+    },
   },
   defaultVariants: {
+    radius: 'full',
     size: 'md',
     variant: 'subtle',
   },

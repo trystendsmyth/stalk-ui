@@ -866,7 +866,6 @@
   @layer _base{
 
     .stalk-badge {
-      border-radius: var(--radii-full);
       gap: var(--spacing-6);
       --colors-color-palette-surface: var(--colors-accent-surface);
       --colors-color-palette-subtle: var(--colors-accent-subtle);
@@ -1032,6 +1031,10 @@
 }
 }
 
+  .stalk-badge--radius_full {
+    border-radius: var(--radii-full);
+}
+
   .stalk-badge--size_md {
     padding-inline: var(--spacing-10);
     font-size: var(--font-sizes-sm);
@@ -1060,6 +1063,22 @@
     padding-inline: var(--spacing-8);
     font-size: var(--font-sizes-xs);
     min-height: var(--sizes-20);
+}
+
+  .stalk-badge--radius_none {
+    border-radius: var(--radii-none);
+}
+
+  .stalk-badge--radius_sm {
+    border-radius: var(--radii-sm);
+}
+
+  .stalk-badge--radius_md {
+    border-radius: var(--radii-md);
+}
+
+  .stalk-badge--radius_lg {
+    border-radius: var(--radii-lg);
 }
 
   .stalk-button--size_md {

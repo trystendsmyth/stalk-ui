@@ -1,10 +1,15 @@
 interface BadgeRecipeOptions {
+  radius?: 'none' | 'sm' | 'md' | 'lg' | 'full'
   size?: 'sm' | 'md'
   variant?: 'solid' | 'subtle' | 'outline'
 }
 
-export const badge = ({ size = 'md', variant = 'subtle' }: BadgeRecipeOptions = {}) =>
-  `stalk-badge stalk-badge--${variant} stalk-badge--${size}`
+export const badge = ({
+  radius = 'full',
+  size = 'md',
+  variant = 'subtle',
+}: BadgeRecipeOptions = {}) =>
+  `stalk-badge stalk-badge--${variant} stalk-badge--${size} stalk-badge--radius-${radius}`
 
 interface ButtonRecipeOptions {
   size?: 'sm' | 'md' | 'lg'

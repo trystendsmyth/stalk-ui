@@ -4,11 +4,11 @@
   "manifests": {
     "badge": {
       "path": "/r/badge.json",
-      "sha256": "d67fac7bd047428719e87f333c339f3ed7f6b56c50b645b651c56f82a2bceb8a"
+      "sha256": "d5c46ceb0886e5704bb957894148c021fdc495e6728c70f21a06649370875037"
     },
     "shadcn/badge": {
       "path": "/r/shadcn/badge.json",
-      "sha256": "a54199b66b4eaf0f8205d4ed9bc965cef75b225c3ba953e8cb34fb59d962af8d"
+      "sha256": "30da0db2e4de792cc9d02dd8feb0f3d5081e1373786db1f326e98150e030d020"
     },
     "button": {
       "path": "/r/button.json",
