@@ -9,11 +9,11 @@ export default async function LocaleHomePage({ params }: LocaleHomePageProps) {
 
   return (
     <main className="hero">
-      <p className="eyebrow">PandaCSS-native components</p>
+      <p className="eyebrow">Radix & PandaCSS-native components</p>
       <h1>Accessible source components, distributed through a first-party registry.</h1>
       <p className="lede">
-        Stalk UI gives teams a PandaCSS preset, installable source components, and compatibility
-        manifests for projects that already use the shadcn CLI.
+        Stalk UI provides a Radix compatible PandaCSS preset, installable source components, and
+        familiar shadcn/ui type registry manifests.
       </p>
       <div className="action-list" aria-label="Documentation entry points">
         <a href={`/${locale}/docs`}>Get started</a>
