@@ -7,9 +7,9 @@ export const checkbox = {
   base: {
     root: {
       alignItems: 'center',
-      backgroundColor: 'bg.default',
+      bgColor: 'bg.default',
       border: 'default',
-      borderRadius: 'sm',
+      rounded: 'sm',
       color: 'accent.contrast',
       cursor: 'pointer',
       display: 'inline-flex',
@@ -32,7 +32,7 @@ export const checkbox = {
         opacity: 0.5,
       },
       '&[data-state="checked"], &[data-state="indeterminate"]': {
-        backgroundColor: 'accent.solid',
+        bgColor: 'accent.solid',
         borderColor: 'accent.solid',
       },
       '&[data-invalid], &[aria-invalid="true"]': {
@@ -51,13 +51,13 @@ export const checkbox = {
   variants: {
     size: {
       sm: {
-        root: { height: '14', width: '14' },
+        root: { h: '14', w: '14' },
       },
       md: {
-        root: { height: 'base', width: 'base' },
+        root: { h: 'base', w: 'base' },
       },
       lg: {
-        root: { height: '20', width: '20' },
+        root: { h: '20', w: '20' },
       },
     },
   },

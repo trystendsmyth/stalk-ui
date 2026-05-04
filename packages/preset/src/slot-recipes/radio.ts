@@ -7,9 +7,9 @@ export const radio = {
   base: {
     root: {
       alignItems: 'center',
-      backgroundColor: 'bg.default',
+      bgColor: 'bg.default',
       border: 'default',
-      borderRadius: 'full',
+      rounded: 'full',
       cursor: 'pointer',
       display: 'inline-flex',
       flexShrink: 0,
@@ -41,13 +41,13 @@ export const radio = {
     indicator: {
       alignItems: 'center',
       display: 'inline-flex',
-      height: 'full',
+      h: 'full',
       justifyContent: 'center',
       pointerEvents: 'none',
-      width: 'full',
+      w: 'full',
       _before: {
-        backgroundColor: 'accent.solid',
-        borderRadius: 'full',
+        bgColor: 'accent.solid',
+        rounded: 'full',
         content: '""',
         display: 'block',
       },
@@ -56,16 +56,16 @@ export const radio = {
   variants: {
     size: {
       sm: {
-        root: { height: '14', width: '14' },
-        indicator: { _before: { height: '6', width: '6' } },
+        root: { h: '14', w: '14' },
+        indicator: { _before: { h: '6', w: '6' } },
       },
       md: {
-        root: { height: 'base', width: 'base' },
-        indicator: { _before: { height: '8', width: '8' } },
+        root: { h: 'base', w: 'base' },
+        indicator: { _before: { h: '8', w: '8' } },
       },
       lg: {
-        root: { height: '20', width: '20' },
-        indicator: { _before: { height: '10', width: '10' } },
+        root: { h: '20', w: '20' },
+        indicator: { _before: { h: '10', w: '10' } },
       },
     },
   },

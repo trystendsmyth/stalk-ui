@@ -58,7 +58,7 @@ export const Open: Story = {
         <Dialog.Close asChild>
           <Button
             className={css({
-              position: 'absolute',
+              pos: 'absolute',
               insetBlockStart: '12',
               insetInlineEnd: '12',
             })}

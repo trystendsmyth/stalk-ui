@@ -12,11 +12,11 @@
     },
     "button": {
       "path": "/r/button.json",
-      "sha256": "56edde68f80b873a29ce7a734895439e796baac057c9728ff1ff5e3fdacfec5b"
+      "sha256": "3bb388238087f91dee21db9f52864da3e360a5a9aca83832813eb988e8d96b30"
     },
     "shadcn/button": {
       "path": "/r/shadcn/button.json",
-      "sha256": "37c55ba7e0793e95634b6c2df252ce2ef0baf3be8ef2d3293172e446f7794709"
+      "sha256": "5646e140391cca7354799114130318f6fb84180dbc35d8bd6df10b7ab2ae733c"
     },
     "checkbox": {
       "path": "/r/checkbox.json",

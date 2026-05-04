@@ -38,16 +38,16 @@ writeFileSync(
   `import { css } from '../styled-system/css'
 
 export const referenceClassName = css({
-  backgroundColor: 'accent.solid',
+  bgColor: 'accent.solid',
   borderColor: 'border.default',
-  borderRadius: 'md',
+  rounded: 'md',
   color: 'accent.contrast',
-  paddingInline: '4',
-  paddingBlock: '2',
+  px: '4',
+  py: '2',
 })
 
 export const rainbowClassName = css({
-  backgroundColor: 'bg.default',
+  bgColor: 'bg.default',
   borderColor: 'danger.solid',
   color: 'fg.default',
 })

@@ -9,12 +9,12 @@ import { DropdownMenu } from './dropdown-menu'
 import type { Meta, StoryObj } from '@storybook/react-vite'
 
 const statusBox = css({
-  backgroundColor: 'bg.subtle',
-  borderRadius: 'sm',
+  bgColor: 'bg.subtle',
+  rounded: 'sm',
   color: 'fg.muted',
   fontSize: 'sm',
-  paddingBlock: '8',
-  paddingInline: '12',
+  py: '8',
+  px: '12',
 })
 
 const useSelection = (initial: string | null = null) => {

@@ -1128,9 +1128,8 @@
 }
 
   .stalk-badge--variant_outline {
+    border: var(--borders-default);
     border-color: var(--colors-color-palette-muted);
-    border-style: solid;
-    border-width: var(--border-widths-xs);
     background-color: transparent;
     color: var(--colors-color-palette-fg);
 }
@@ -1381,8 +1380,8 @@
     .stalk-dialog__header {
       gap: var(--spacing-6);
       display: grid;
-      padding-block-end: var(--spacing-base);
       padding-inline-end: var(--spacing-32);
+      padding-bottom: var(--spacing-base);
 }
 
     .stalk-dialog__title {
@@ -1405,7 +1404,7 @@
       align-items: center;
       display: flex;
       justify-content: flex-end;
-      padding-block-start: var(--spacing-base);
+      padding-top: var(--spacing-base);
 }
 
     .stalk-dialog__close {
@@ -1522,19 +1521,18 @@
 }
 
     .stalk-input__root {
-      border-color: var(--colors-border-default);
+      border: var(--borders-default);
       border-radius: var(--radii-md);
-      border-width: 1px;
       align-items: stretch;
       background-color: var(--colors-bg-canvas);
       color: var(--colors-fg-default);
       cursor: text;
       display: inline-flex;
-      --transition-duration: 150ms;
-      transition-duration: 150ms;
+      --transition-duration: var(--durations-fast);
+      transition-duration: var(--durations-fast);
       --transition-prop: background-color, border-color, box-shadow;
       transition-property: background-color, border-color, box-shadow;
-      width: 100%;
+      width: var(--sizes-full);
 }
 
     .stalk-input__root:focus-within {
@@ -1558,7 +1556,7 @@
       background-color: transparent;
       color: inherit;
       min-width: var(--sizes-0);
-      width: 100%;
+      width: var(--sizes-full);
 }
 
     .stalk-input__input:is(:disabled, [disabled], [data-disabled], [aria-disabled=true]) {

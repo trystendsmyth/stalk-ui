@@ -3,9 +3,9 @@ import { css } from 'styled-system/css'
 import type { Meta, StoryObj } from '@storybook/react-vite'
 
 const page = css({
-  maxWidth: '52rem',
-  marginInline: 'auto',
-  padding: '2rem',
+  maxW: '52rem',
+  mx: 'auto',
+  p: '32',
   display: 'grid',
   gap: '2rem',
   fontFamily: 'sans',
@@ -19,8 +19,8 @@ const header = css({
 })
 
 const mark = css({
-  width: '2.5rem',
-  height: '2.5rem',
+  w: '40',
+  h: '40',
   display: 'block',
 })
 
@@ -31,7 +31,7 @@ const wordmark = css({
 })
 
 const eyebrow = css({
-  margin: 0,
+  m: 0,
   fontSize: '0.8125rem',
   fontWeight: 600,
   letterSpacing: '0.1em',
@@ -40,7 +40,7 @@ const eyebrow = css({
 })
 
 const headline = css({
-  margin: 0,
+  m: 0,
   fontSize: 'clamp(2rem, 4.5vw, 2.75rem)',
   fontWeight: 700,
   lineHeight: 1.1,
@@ -49,16 +49,17 @@ const headline = css({
 })
 
 const lede = css({
-  margin: 0,
+  m: 0,
   fontSize: '1.0625rem',
   lineHeight: 1.6,
   color: 'fg.muted',
   textWrap: 'pretty',
-  maxWidth: '40rem',
+  maxW: '40rem',
 })
 
 const sectionTitle = css({
-  margin: '0 0 0.75rem',
+  m: '0',
+  mb: '0.75rem',
   fontSize: '0.9375rem',
   fontWeight: 700,
   textTransform: 'uppercase',
@@ -75,23 +76,22 @@ const grid = css({
 const card = css({
   display: 'grid',
   gap: '0.375rem',
-  padding: '1rem 1.125rem',
-  borderRadius: 'lg',
-  borderWidth: '1px',
-  borderStyle: 'solid',
-  borderColor: 'border.default',
-  background: 'bg.subtle',
+  py: 'base',
+  px: '18',
+  rounded: 'lg',
+  border: 'default',
+  bgColor: 'bg.subtle',
 })
 
 const cardTitle = css({
-  margin: 0,
+  m: 0,
   fontSize: '0.9375rem',
   fontWeight: 700,
   letterSpacing: '-0.005em',
 })
 
 const cardBody = css({
-  margin: 0,
+  m: 0,
   fontSize: '0.875rem',
   lineHeight: 1.55,
   color: 'fg.muted',
@@ -117,12 +117,11 @@ const link = css({
 
 const kbd = css({
   display: 'inline-block',
-  padding: '0.125rem 0.375rem',
-  borderRadius: 'sm',
-  borderWidth: '1px',
-  borderStyle: 'solid',
-  borderColor: 'border.default',
-  background: 'bg.muted',
+  py: '2',
+  px: '6',
+  rounded: 'sm',
+  border: 'default',
+  bgColor: 'bg.muted',
   fontFamily: 'mono',
   fontSize: '0.75rem',
   lineHeight: 1,
@@ -130,7 +129,7 @@ const kbd = css({
 })
 
 const hint = css({
-  margin: 0,
+  m: 0,
   fontSize: '0.875rem',
   color: 'fg.muted',
   lineHeight: 1.55,

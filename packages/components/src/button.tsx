@@ -93,7 +93,7 @@ export const Button = /* @__PURE__ */ forwardRef<HTMLButtonElement, ButtonProps>
             inset: '0',
             justifyContent: 'center',
             pointerEvents: 'none',
-            position: 'absolute',
+            pos: 'absolute',
           })}
         >
           <Spinner size={SPINNER_SIZE_BY_BUTTON[size]} />

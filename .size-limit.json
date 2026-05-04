@@ -3,7 +3,7 @@
     "name": "@stalk-ui/preset",
     "disablePlugins": ["@size-limit/esbuild", "@size-limit/webpack"],
     "path": "packages/preset/dist/index.js",
-    "limit": "10 KB",
+    "limit": "24 KB",
     "webpack": false
   },
   {

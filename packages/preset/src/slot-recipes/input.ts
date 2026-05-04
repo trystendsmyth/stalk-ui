@@ -7,16 +7,15 @@ export const input = {
   base: {
     root: {
       alignItems: 'stretch',
-      backgroundColor: 'bg.canvas',
-      borderColor: 'border.default',
-      borderRadius: 'md',
-      borderWidth: '1px',
+      bgColor: 'bg.canvas',
+      border: 'default',
+      rounded: 'md',
       color: 'fg.default',
       cursor: 'text',
       display: 'inline-flex',
-      transitionDuration: '150ms',
+      transitionDuration: 'fast',
       transitionProperty: 'background-color, border-color, box-shadow',
-      width: '100%',
+      w: 'full',
       _focusWithin: {
         borderColor: 'accent.solid',
         focusRingWidth: 'base',
@@ -27,14 +26,14 @@ export const input = {
     },
     input: {
       appearance: 'none',
-      backgroundColor: 'transparent',
+      bgColor: 'transparent',
       border: 'none',
       color: 'inherit',
       flex: '1 1 auto',
-      minWidth: '0',
+      minW: '0',
       outline: 'none',
-      paddingBlock: '0',
-      width: '100%',
+      py: '0',
+      w: 'full',
       _disabled: {
         cursor: 'not-allowed',
       },
@@ -78,8 +77,8 @@ export const input = {
       sm: {
         root: {
           gap: '8',
-          minHeight: '32',
-          paddingInline: '12',
+          minH: '32',
+          px: '12',
         },
         input: { textStyle: 'bodySm' },
         slot: { textStyle: 'bodySm' },
@@ -87,8 +86,8 @@ export const input = {
       md: {
         root: {
           gap: '8',
-          minHeight: '40',
-          paddingInline: 'base',
+          minH: '40',
+          px: 'base',
         },
         input: { textStyle: 'body' },
         slot: { textStyle: 'body' },
@@ -96,8 +95,8 @@ export const input = {
       lg: {
         root: {
           gap: '12',
-          minHeight: '48',
-          paddingInline: '20',
+          minH: '48',
+          px: '20',
         },
         input: { textStyle: 'bodyLg' },
         slot: { textStyle: 'bodyLg' },

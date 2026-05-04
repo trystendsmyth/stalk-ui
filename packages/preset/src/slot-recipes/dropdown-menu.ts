@@ -1,14 +1,14 @@
 import type { RecipeConfig } from '../types'
 
 const surface = {
-  backgroundColor: 'bg.default',
+  bgColor: 'bg.default',
   border: 'default',
-  borderRadius: 'md',
-  boxShadow: 'lg',
+  rounded: 'md',
+  shadow: 'lg',
   color: 'fg.default',
-  minWidth: '192',
+  minW: '192',
   overflow: 'hidden',
-  padding: '4',
+  p: '4',
   zIndex: 'popover',
 } as const
 
@@ -21,18 +21,18 @@ export const dropdownMenu = {
     subContent: surface,
     item: {
       alignItems: 'center',
-      borderRadius: 'sm',
+      rounded: 'sm',
       cursor: 'default',
       display: 'flex',
       fontSize: 'sm',
       gap: '8',
-      minHeight: '32',
+      minH: '32',
       outline: 'none',
-      paddingInline: '8',
-      position: 'relative',
+      px: '8',
+      pos: 'relative',
       userSelect: 'none',
       _highlighted: {
-        backgroundColor: 'accent.subtle',
+        bgColor: 'accent.subtle',
         color: 'accent.fg',
       },
       _disabled: {
@@ -47,26 +47,26 @@ export const dropdownMenu = {
       insetInlineStart: '6',
       justifyContent: 'center',
       pointerEvents: 'none',
-      position: 'absolute',
+      pos: 'absolute',
       top: '0',
-      width: '16',
+      w: '16',
     },
     label: {
       color: 'fg.muted',
       fontSize: 'xs',
       fontWeight: 'semibold',
-      paddingBlock: '6',
-      paddingInline: '8',
+      py: '6',
+      px: '8',
     },
     separator: {
-      height: 'px',
-      backgroundColor: 'border.muted',
-      marginBlock: '4',
+      h: 'px',
+      bgColor: 'border.muted',
+      my: '4',
     },
     shortcut: {
       color: 'fg.muted',
       fontSize: 'xs',
-      marginInlineStart: 'auto',
+      ms: 'auto',
     },
   },
   variants: {
@@ -74,7 +74,7 @@ export const dropdownMenu = {
     // mixed plain + checkbox/radio items align on a single inline axis.
     inset: {
       true: {
-        item: { paddingInlineStart: '28' },
+        item: { ps: '28' },
       },
       false: {},
     },

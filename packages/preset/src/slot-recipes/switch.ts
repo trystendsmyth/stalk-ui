@@ -7,18 +7,18 @@ export const switchRecipe = {
   base: {
     root: {
       alignItems: 'center',
-      backgroundColor: 'border.default',
-      borderRadius: 'full',
+      bgColor: 'border.default',
+      rounded: 'full',
       cursor: 'pointer',
       display: 'inline-flex',
       flexShrink: 0,
       outline: 'none',
-      padding: '2',
-      position: 'relative',
+      p: '2',
+      pos: 'relative',
       transitionDuration: 'fast',
       transitionProperty: 'background-color, border-color, box-shadow',
       _hover: {
-        backgroundColor: 'border.hover',
+        bgColor: 'border.hover',
       },
       _focusVisible: {
         focusRingWidth: 'base',
@@ -31,7 +31,7 @@ export const switchRecipe = {
         opacity: 0.5,
       },
       '&[data-state="checked"]': {
-        backgroundColor: 'accent.solid',
+        bgColor: 'accent.solid',
       },
       '&[data-invalid], &[aria-invalid="true"]': {
         border: 'invalid',
@@ -39,9 +39,9 @@ export const switchRecipe = {
       },
     },
     thumb: {
-      backgroundColor: 'bg.default',
-      borderRadius: 'full',
-      boxShadow: 'sm',
+      bgColor: 'bg.default',
+      rounded: 'full',
+      shadow: 'sm',
       display: 'block',
       pointerEvents: 'none',
       transform: 'translateX(0)',
@@ -54,26 +54,26 @@ export const switchRecipe = {
   variants: {
     size: {
       sm: {
-        root: { height: 'base', width: '28' },
+        root: { h: 'base', w: '28' },
         thumb: {
-          height: '12',
-          width: '12',
+          h: '12',
+          w: '12',
           '[data-state="checked"] &': { transform: 'translateX(token(spacing.12))' },
         },
       },
       md: {
-        root: { height: '20', width: '36' },
+        root: { h: '20', w: '36' },
         thumb: {
-          height: 'base',
-          width: 'base',
+          h: 'base',
+          w: 'base',
           '[data-state="checked"] &': { transform: 'translateX(token(spacing.base))' },
         },
       },
       lg: {
-        root: { height: '24', width: '44' },
+        root: { h: '24', w: '44' },
         thumb: {
-          height: '20',
-          width: '20',
+          h: '20',
+          w: '20',
           '[data-state="checked"] &': { transform: 'translateX(token(spacing.20))' },
         },
       },

@@ -9,8 +9,8 @@ import type { Meta, StoryObj } from '@storybook/react-vite'
 const { size: SIZES } = radioRecipe.variantMap
 
 const disabledLabelStyle = css({ cursor: 'not-allowed', opacity: 0.5 })
-const fieldsetReset = css({ border: 'none', margin: 0, padding: 0 })
-const legendStyle = css({ fontWeight: 'semibold', marginBlockEnd: '8' })
+const fieldsetReset = css({ border: 'none', m: 0, p: 0 })
+const legendStyle = css({ fontWeight: 'semibold', mb: '8' })
 
 const meta = {
   title: 'Components/Radio',
