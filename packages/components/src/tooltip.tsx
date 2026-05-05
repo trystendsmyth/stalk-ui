@@ -1,3 +1,5 @@
+'use client'
+
 import * as TooltipPrimitive from '@radix-ui/react-tooltip'
 import { forwardRef } from 'react'
 import { cx } from 'styled-system/css'

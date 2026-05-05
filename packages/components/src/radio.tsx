@@ -1,3 +1,5 @@
+'use client'
+
 import * as RadioGroupPrimitive from '@radix-ui/react-radio-group'
 import { forwardRef, useId } from 'react'
 import { cx } from 'styled-system/css'
