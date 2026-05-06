@@ -1,5 +1,3 @@
-'use client'
-
 import { createContext, forwardRef, useCallback, useContext, useMemo, useRef } from 'react'
 import { cx } from 'styled-system/css'
 import { input as inputRecipe } from 'styled-system/recipes'

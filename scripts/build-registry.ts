@@ -35,6 +35,16 @@ const sha256 = (value: string) => createHash('sha256').update(value).digest('hex
 const shadcnCompatibilityHeader =
   '// Stalk UI component - requires PandaCSS setup and @stalk-ui/preset.'
 
+// Components that import from `@radix-ui/*` or use a React state/effect/ref/
+// context hook must render on the client. The directive is injected only into
+// registry-served output so internal Storybook/vitest/tsup builds (which read
+// source) stay free of bundler warnings about module-level directives.
+const clientHookPattern =
+  /\b(useState|useEffect|useLayoutEffect|useRef|useImperativeHandle|useReducer|useCallback|useMemo|useContext|useId|useTransition|useDeferredValue|useSyncExternalStore|createContext)\b/
+const sourceNeedsUseClient = (source: string): boolean =>
+  source.includes("from '@radix-ui/") || clientHookPattern.test(source)
+const useClientDirective = "'use client'\n\n"
+
 const writeJson = async (path: string, value: unknown) => {
   mkdirSync(dirname(path), { recursive: true })
   // Resolve the repo's .prettierrc config explicitly. `format()` does not load
@@ -47,7 +57,8 @@ const writeJson = async (path: string, value: unknown) => {
 }
 
 const inlineFile = (file: RegistryFile, sourcePath: string): RegistryFile => {
-  const content = readFileSync(join(rootDirectory, sourcePath), 'utf8')
+  const raw = readFileSync(join(rootDirectory, sourcePath), 'utf8')
+  const content = sourceNeedsUseClient(raw) ? `${useClientDirective}${raw}` : raw
   const { sourcePath: _sourcePath, ...serializableFile } = file
 
   return {

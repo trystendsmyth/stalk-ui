@@ -1,5 +1,3 @@
-'use client'
-
 import { Slot } from '@radix-ui/react-slot'
 import { Children, forwardRef } from 'react'
 import { css, cx } from 'styled-system/css'

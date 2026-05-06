@@ -1,5 +1,3 @@
-'use client'
-
 import * as SwitchPrimitive from '@radix-ui/react-switch'
 import { forwardRef, useId } from 'react'
 import { cx } from 'styled-system/css'
