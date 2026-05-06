@@ -21,6 +21,7 @@ export default tseslint.config(
       '**/.turbo/**',
       '**/coverage/**',
       '**/.size-limit-fixtures/**',
+      '**/*.bundled_*.mjs',
     ],
   },
   js.configs.recommended,
