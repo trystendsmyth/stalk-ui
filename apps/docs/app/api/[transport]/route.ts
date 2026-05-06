@@ -110,4 +110,17 @@ const handler = createMcpHandler(
   },
 )
 
-export { handler as DELETE, handler as GET, handler as POST }
+// Next rewrites `/mcp` and `/sse` to this route file but `request.url`
+// still reflects the public path. mcp-handler matches request.url against
+// its configured `basePath: '/api'` endpoints, so prepend `/api` when the
+// request arrived through the rewrite.
+const proxiedHandler = (request: Request) => {
+  const url = new URL(request.url)
+  if (url.pathname.startsWith('/api/')) {
+    return handler(request)
+  }
+  url.pathname = `/api${url.pathname}`
+  return handler(new Request(url.toString(), request))
+}
+
+export { proxiedHandler as DELETE, proxiedHandler as GET, proxiedHandler as POST }
