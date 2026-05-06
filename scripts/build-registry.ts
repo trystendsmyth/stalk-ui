@@ -5,10 +5,24 @@ import { dirname, join } from 'node:path'
 import { format, resolveConfig } from 'prettier'
 import { rimrafSync } from 'rimraf'
 
-import { registryIndexSchema, registryItemSchema, schemaVersion } from '../registry/schema'
+import {
+  DEFAULT_VARIANT,
+  registryIndexSchema,
+  registryItemSchema,
+  schemaVersion,
+  VARIANTS,
+  variantManifestSegment,
+} from '../registry/schema'
 import { registryItems } from '../registry/ui'
 
-import type { RegistryFile, RegistryIndex, RegistryItem } from '../registry/schema'
+import type {
+  NonDefaultVariant,
+  RegistryFile,
+  RegistryIndex,
+  RegistryItem,
+  Variant,
+} from '../registry/schema'
+import type { RegistrySource } from '../registry/ui/_template'
 
 const rootDirectory = process.cwd()
 const publicDirectory = join(rootDirectory, 'public')
@@ -32,12 +46,8 @@ const writeJson = async (path: string, value: unknown) => {
   return content
 }
 
-const inlineFile = (file: RegistryFile): RegistryFile => {
-  if (file.sourcePath === undefined) {
-    return file
-  }
-
-  const content = readFileSync(join(rootDirectory, file.sourcePath), 'utf8')
+const inlineFile = (file: RegistryFile, sourcePath: string): RegistryFile => {
+  const content = readFileSync(join(rootDirectory, sourcePath), 'utf8')
   const { sourcePath: _sourcePath, ...serializableFile } = file
 
   return {
@@ -46,12 +56,27 @@ const inlineFile = (file: RegistryFile): RegistryFile => {
   }
 }
 
-const toSerializableItem = (item: RegistryItem): RegistryItem => {
-  const parsed = registryItemSchema.parse(item)
+const sourceForVariant = (item: RegistrySource, variant: Variant): string | undefined => {
+  if (variant === DEFAULT_VARIANT) {
+    return item.files[0]?.sourcePath
+  }
+  return item.variantSources?.[variant as NonDefaultVariant]
+}
+
+const toSerializableItem = (item: RegistrySource, variant: Variant): RegistryItem | undefined => {
+  const sourcePath = sourceForVariant(item, variant)
+  if (sourcePath === undefined) {
+    return undefined
+  }
+
+  // Strip the in-memory-only `variantSources` field before zod parsing so the
+  // serialized JSON stays a single-variant `RegistryItem`.
+  const { variantSources: _variantSources, ...rest } = item
+  const parsed = registryItemSchema.parse(rest)
 
   return {
     ...parsed,
-    files: parsed.files.map(inlineFile),
+    files: parsed.files.map((file) => inlineFile(file, sourcePath)),
   }
 }
 
@@ -81,20 +106,33 @@ mkdirSync(shadcnDirectory, { recursive: true })
 const manifests: RegistryIndex['manifests'] = {}
 
 for (const item of registryItems) {
-  const nativeItem = toSerializableItem(item)
-  const shadcnItem = registryItemSchema.parse(toShadcnItem(nativeItem))
-  const nativePath = join(registryDirectory, `${nativeItem.name}.json`)
-  const shadcnPath = join(shadcnDirectory, `${nativeItem.name}.json`)
-  const nativeContent = await writeJson(nativePath, nativeItem)
-  const shadcnContent = await writeJson(shadcnPath, shadcnItem)
+  for (const variant of VARIANTS) {
+    const nativeItem = toSerializableItem(item, variant)
+    if (nativeItem === undefined) {
+      continue
+    }
+    const shadcnItem = registryItemSchema.parse(toShadcnItem(nativeItem))
+    const segment = variantManifestSegment(variant, nativeItem.name)
+    const nativePath = join(registryDirectory, segment)
+    const shadcnPath = join(shadcnDirectory, segment)
+    const nativeContent = await writeJson(nativePath, nativeItem)
+    const shadcnContent = await writeJson(shadcnPath, shadcnItem)
 
-  manifests[nativeItem.name] = {
-    path: `/r/${nativeItem.name}.json`,
-    sha256: sha256(nativeContent),
-  }
-  manifests[`shadcn/${nativeItem.name}`] = {
-    path: `/r/shadcn/${nativeItem.name}.json`,
-    sha256: sha256(shadcnContent),
+    const nativeKey =
+      variant === DEFAULT_VARIANT ? nativeItem.name : `${variant}/${nativeItem.name}`
+    const shadcnKey =
+      variant === DEFAULT_VARIANT
+        ? `shadcn/${nativeItem.name}`
+        : `shadcn/${variant}/${nativeItem.name}`
+
+    manifests[nativeKey] = {
+      path: `/r/${segment}`,
+      sha256: sha256(nativeContent),
+    }
+    manifests[shadcnKey] = {
+      path: `/r/shadcn/${segment}`,
+      sha256: sha256(shadcnContent),
+    }
   }
 }
 

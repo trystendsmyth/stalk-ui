@@ -3,6 +3,17 @@ import { z } from 'zod'
 export const schemaVersion = '1.0'
 export const registryItemSchemaUrl = 'https://stalk-ui.com/schema/v1/registry-item.json'
 
+export const VARIANTS = ['radix', 'base'] as const
+export type Variant = (typeof VARIANTS)[number]
+export const DEFAULT_VARIANT = 'radix' as const satisfies Variant
+export type NonDefaultVariant = Exclude<Variant, typeof DEFAULT_VARIANT>
+
+// Manifest path within `public/r/` (and within `public/r/shadcn/`). The default
+// variant lives at `<name>.json` for back-compat with the original single-variant
+// layout; non-default variants are namespaced under `<variant>/<name>.json`.
+export const variantManifestSegment = (variant: Variant, name: string): string =>
+  variant === DEFAULT_VARIANT ? `${name}.json` : `${variant}/${name}.json`
+
 export const registryFileSchema = z.object({
   path: z.string().min(1),
   type: z.enum(['registry:ui', 'registry:lib', 'registry:hook']),

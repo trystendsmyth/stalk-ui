@@ -1,9 +1,19 @@
 import { z } from 'zod'
 
-import { supportedSchemaVersion } from './constants'
+import { DEFAULT_VARIANT, supportedSchemaVersion } from './constants'
 import { CliError } from './errors'
 
 import type { RegistryItem, StalkConfig } from './types'
+
+// `{name}`-templated registries follow the convention `<root>/r/{name}.json`,
+// where the default variant lives at `<root>/r/<name>.json` and non-default
+// variants at `<root>/r/<variant>/<name>.json`. We expand variant routing by
+// rewriting the substituted name segment, so non-templated overrides are
+// passed through unchanged.
+const variantSegment = (config: StalkConfig): string => {
+  const variant = config.primitives ?? DEFAULT_VARIANT
+  return variant === DEFAULT_VARIANT ? '' : `${variant}/`
+}
 
 const registryFileSchema = z.object({
   path: z.string().min(1),
@@ -58,9 +68,11 @@ export const resolveManifestUrl = (
   config: StalkConfig,
   registryOverride?: string,
 ) => {
+  const segment = variantSegment(config)
+
   if (registryOverride !== undefined) {
     return registryOverride.includes('{name}')
-      ? registryOverride.replace('{name}', name.replace(/^@[^/]+\//, ''))
+      ? registryOverride.replace('{name}', `${segment}${name.replace(/^@[^/]+\//, '')}`)
       : registryOverride
   }
 
@@ -73,7 +85,7 @@ export const resolveManifestUrl = (
     throw new CliError(`No registry configured for namespace ${namespace}.`)
   }
 
-  return template.replace('{name}', componentName)
+  return template.replace('{name}', `${segment}${componentName}`)
 }
 
 export const fetchManifest = async (url: string, verbose = false): Promise<RegistryItem> => {
