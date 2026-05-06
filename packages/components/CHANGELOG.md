@@ -4,6 +4,18 @@
 
 ### Minor Changes
 
+- [#29](https://github.com/trystendsmyth/stalk-ui/pull/29) [`df5516f`](https://github.com/trystendsmyth/stalk-ui/commit/df5516f004616dbc443d7ddb06a5ec6353a52229) Thanks [@trystendsmyth](https://github.com/trystendsmyth)! - add variant plumbing, update theming
+
+### Patch Changes
+
+- Updated dependencies [[`df5516f`](https://github.com/trystendsmyth/stalk-ui/commit/df5516f004616dbc443d7ddb06a5ec6353a52229)]:
+  - @stalk-ui/i18n@0.3.0
+  - @stalk-ui/preset@0.3.0
+
+## 1.0.0
+
+### Minor Changes
+
 - [#22](https://github.com/trystendsmyth/stalk-ui/pull/22) [`c691911`](https://github.com/trystendsmyth/stalk-ui/commit/c691911d6f43b4ca7bdf3297e6fef98299d589c7) Thanks [@trystendsmyth](https://github.com/trystendsmyth)! - Component, Storybook, and docs cleanup pass.
 
   **Components**

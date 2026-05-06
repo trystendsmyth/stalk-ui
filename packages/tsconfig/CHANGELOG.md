@@ -1,5 +1,11 @@
 # @stalk-ui/tsconfig
 
+## 0.3.0
+
+### Minor Changes
+
+- [#29](https://github.com/trystendsmyth/stalk-ui/pull/29) [`df5516f`](https://github.com/trystendsmyth/stalk-ui/commit/df5516f004616dbc443d7ddb06a5ec6353a52229) Thanks [@trystendsmyth](https://github.com/trystendsmyth)! - add variant plumbing, update theming
+
 ## 0.2.0
 
 ### Minor Changes
