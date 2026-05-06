@@ -1,5 +1,11 @@
 # @stalk-ui/cli
 
+## 0.3.0
+
+### Minor Changes
+
+- [#38](https://github.com/trystendsmyth/stalk-ui/pull/38) [`debdc2a`](https://github.com/trystendsmyth/stalk-ui/commit/debdc2a277c81bf977403bb5725fe561bfe80f56) Thanks [@trystendsmyth](https://github.com/trystendsmyth)! - Add Stalk UI MCP server (remote + local) and skills
+
 ## 0.2.0
 
 ### Minor Changes
