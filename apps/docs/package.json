@@ -9,7 +9,7 @@
     "prebuild": "pnpm run codegen && pnpm run sync:registry",
     "build": "next build",
     "clean": "rimraf .next styled-system public/r public/_headers",
-    "codegen": "pnpm --filter @stalk-ui/i18n build && pnpm --filter @stalk-ui/preset build && panda codegen && panda cssgen",
+    "codegen": "pnpm --filter @stalk-ui/i18n build && pnpm --filter @stalk-ui/preset build && pnpm --filter @stalk-ui/cli build && panda codegen && panda cssgen",
     "predev": "pnpm run codegen && pnpm run sync:registry",
     "dev": "next dev --port 3000",
     "lint": "eslint .",
@@ -19,6 +19,8 @@
     "typecheck": "pnpm run codegen && tsc --noEmit"
   },
   "dependencies": {
+    "@modelcontextprotocol/sdk": "1.26.0",
+    "@stalk-ui/cli": "workspace:*",
     "@stalk-ui/components": "workspace:*",
     "@stalk-ui/i18n": "workspace:*",
     "@stalk-ui/preset": "workspace:*",
@@ -27,11 +29,13 @@
     "fumadocs-core": "^16.8.7",
     "fumadocs-ui": "^16.8.7",
     "lucide-react": "catalog:",
+    "mcp-handler": "^1.1.0",
     "next": "16",
     "prism-react-renderer": "^2.4.1",
     "react": "catalog:",
     "react-dom": "catalog:",
-    "react-live": "^4.1.8"
+    "react-live": "^4.1.8",
+    "zod": "^4.4.3"
   },
   "devDependencies": {
     "@pandacss/dev": "catalog:",

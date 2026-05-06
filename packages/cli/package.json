@@ -20,7 +20,37 @@
   "sideEffects": false,
   "type": "module",
   "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/mcp.d.ts",
+        "default": "./dist/mcp.js"
+      },
+      "require": {
+        "types": "./dist/mcp.d.cts",
+        "default": "./dist/mcp.cjs"
+      }
+    },
+    "./mcp": {
+      "import": {
+        "types": "./dist/mcp.d.ts",
+        "default": "./dist/mcp.js"
+      },
+      "require": {
+        "types": "./dist/mcp.d.cts",
+        "default": "./dist/mcp.cjs"
+      }
+    },
     "./package.json": "./package.json"
+  },
+  "main": "./dist/mcp.cjs",
+  "module": "./dist/mcp.js",
+  "types": "./dist/mcp.d.cts",
+  "typesVersions": {
+    "*": {
+      "mcp": [
+        "./dist/mcp.d.ts"
+      ]
+    }
   },
   "bin": {
     "stalk-ui": "./dist/bin.js"
@@ -39,6 +69,7 @@
   },
   "dependencies": {
     "@clack/prompts": "^1.3.0",
+    "@modelcontextprotocol/sdk": "1.26.0",
     "commander": "^14.0.3",
     "execa": "^9.6.1",
     "ts-morph": "^28.0.0",

@@ -23,6 +23,17 @@ const nextConfig = {
 
     return config
   },
+  async rewrites() {
+    return {
+      beforeFiles: [
+        { source: '/mcp', destination: '/api/mcp' },
+        { source: '/sse', destination: '/api/sse' },
+        { source: '/sse/message', destination: '/api/sse/message' },
+      ],
+      afterFiles: [],
+      fallback: [],
+    }
+  },
 }
 
 export default nextConfig
