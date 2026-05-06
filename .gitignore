@@ -44,6 +44,7 @@ apps/storybook/.lost-pixel/.gitignore
 # IDE
 .idea/
 *.sublime-*
+.claude/
 
 # Misc
 .eslintcache
