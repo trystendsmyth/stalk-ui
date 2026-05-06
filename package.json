@@ -28,7 +28,7 @@
     "format": "prettier --write . --cache",
     "format:check": "prettier --check . --cache",
     "generate-docs": "tsx scripts/generate-docs.ts",
-    "lint": "pnpm --filter @stalk-ui/storybook run prebuild && eslint . --cache && tsx scripts/check-package-contracts.ts && turbo run lint",
+    "lint": "pnpm --filter @stalk-ui/storybook run prebuild && pnpm --filter @stalk-ui/cli build && eslint . --cache && tsx scripts/check-package-contracts.ts && turbo run lint",
     "lost-pixel": "pnpm --filter @stalk-ui/storybook build && lost-pixel",
     "lost-pixel:install": "pnpm exec playwright-core install chromium",
     "prepare": "husky",
