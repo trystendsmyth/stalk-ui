@@ -1,5 +1,7 @@
 export type PackageManager = 'pnpm' | 'yarn' | 'npm' | 'bun'
 
+export type Variant = 'radix' | 'base'
+
 export interface GlobalOptions {
   codegen?: boolean
   config?: string
@@ -18,6 +20,9 @@ export interface StalkConfig {
   styledSystem: string
   registries: Record<string, string>
   packageManager?: PackageManager
+  // Primitive backend used to resolve component manifests. Defaults to `radix`
+  // when omitted; non-default variants resolve to `<registry>/<variant>/<name>`.
+  primitives?: Variant
 }
 
 export interface RegistryFile {

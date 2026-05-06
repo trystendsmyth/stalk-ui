@@ -13,7 +13,7 @@ import { switchItem } from './switch'
 import { textarea } from './textarea'
 import { tooltip } from './tooltip'
 
-import type { RegistryItem } from '../schema'
+import type { RegistrySource } from './_template'
 
 // Each registry item lives in its own `registry/ui/<name>.ts` file (per
 // AGENTS.md). Adding a new component is a single new file plus one entry here;
@@ -33,4 +33,4 @@ export const registryItems = [
   switchItem,
   textarea,
   tooltip,
-] satisfies RegistryItem[]
+] satisfies RegistrySource[]
