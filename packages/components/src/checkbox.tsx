@@ -1,5 +1,3 @@
-'use client'
-
 import * as CheckboxPrimitive from '@radix-ui/react-checkbox'
 import { Check, Minus } from 'lucide-react'
 import { forwardRef, useId, useState } from 'react'

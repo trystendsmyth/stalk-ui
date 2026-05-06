@@ -1,5 +1,3 @@
-'use client'
-
 import * as LabelPrimitive from '@radix-ui/react-label'
 import { forwardRef } from 'react'
 import { cx } from 'styled-system/css'

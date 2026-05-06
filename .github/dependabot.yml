@@ -9,6 +9,18 @@ updates:
     ignore:
       - dependency-name: '@pandacss/*'
         versions: ['>=1.10.0']
+      # ESLint 10 dropped context.getFilename(); eslint-plugin-react,
+      # eslint-plugin-import, and eslint-plugin-jsx-a11y still call the old API.
+      # Hold the ESLint major until the plugin ecosystem ships v10 support.
+      - dependency-name: 'eslint'
+        update-types: ['version-update:semver-major']
+      - dependency-name: '@eslint/js'
+        update-types: ['version-update:semver-major']
+      # `@types/node` must track the runtime pinned by `engines.node` and
+      # `.nvmrc` (Node 24 today). Major bumps are coordinated with the runtime
+      # upgrade, not driven by Dependabot.
+      - dependency-name: '@types/node'
+        update-types: ['version-update:semver-major']
     groups:
       react:
         patterns: ['react', 'react-dom', '@types/react*']

@@ -1,5 +1,3 @@
-'use client'
-
 import * as PopoverPrimitive from '@radix-ui/react-popover'
 import { forwardRef } from 'react'
 import { cx } from 'styled-system/css'
