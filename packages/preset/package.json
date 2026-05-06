@@ -30,11 +30,28 @@
         "default": "./dist/index.cjs"
       }
     },
+    "./tokens": {
+      "import": {
+        "types": "./dist/tokens.d.ts",
+        "default": "./dist/tokens.js"
+      },
+      "require": {
+        "types": "./dist/tokens.d.cts",
+        "default": "./dist/tokens.cjs"
+      }
+    },
     "./package.json": "./package.json"
   },
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
   "types": "./dist/index.d.cts",
+  "typesVersions": {
+    "*": {
+      "tokens": [
+        "./dist/tokens.d.ts"
+      ]
+    }
+  },
   "files": [
     "dist",
     "README.md",

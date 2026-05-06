@@ -58,14 +58,4 @@ const stalkPreset = definePreset({
   },
 } as Preset)
 
-export {
-  ACCENT_COLORS,
-  BACKGROUND_COLORS,
-  BORDER_COLORS,
-  FOREGROUND_COLORS,
-  HIGHLIGHT_COLORS,
-  SEMANTIC_COLOR_TOKENS,
-  STATUS_COLORS,
-} from './helpers/token-options'
-
 export default stalkPreset

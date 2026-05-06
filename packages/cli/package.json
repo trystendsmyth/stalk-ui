@@ -64,6 +64,7 @@
     "build": "tsup",
     "clean": "rimraf dist",
     "lint": "eslint .",
+    "prepare": "pnpm run build",
     "test": "vitest run",
     "typecheck": "tsc --noEmit"
   },
