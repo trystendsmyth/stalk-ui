@@ -81,14 +81,19 @@ const toSerializableItem = (item: RegistrySource, variant: Variant): RegistryIte
 }
 
 const withShadcnCompatibilityHeader = (content: string) => {
-  const firstNewline = content.indexOf('\n')
+  // Anchor the header to the first import statement so it survives the shadcn
+  // CLI's import-rewriting pass. Comments inside the directive prologue (above
+  // the imports) are stripped when the CLI re-emits the file; comments adjacent
+  // to imports are preserved.
+  const importMatch = /^import [^\n]*\n/m.exec(content)
 
-  if (firstNewline === -1) {
+  if (importMatch === null) {
     return `${shadcnCompatibilityHeader}\n${content}`
   }
 
-  return `${content.slice(0, firstNewline + 1)}${shadcnCompatibilityHeader}\n${content.slice(
-    firstNewline + 1,
+  const insertionPoint = importMatch.index + importMatch[0].length
+  return `${content.slice(0, insertionPoint)}${shadcnCompatibilityHeader}\n${content.slice(
+    insertionPoint,
   )}`
 }
 
