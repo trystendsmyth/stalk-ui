@@ -1,15 +1,30 @@
 import { defineConfig } from 'tsup'
 
-export default defineConfig({
-  entry: ['src/bin.ts'],
-  format: ['esm'],
-  dts: false,
-  clean: true,
+const shared = {
+  clean: false,
   sourcemap: true,
   treeshake: true,
   splitting: false,
   minify: false,
-  target: 'es2022',
+  target: 'es2022' as const,
   bundle: true,
-  banner: { js: '#!/usr/bin/env node' },
-})
+  external: ['@modelcontextprotocol/sdk', 'zod'],
+}
+
+export default defineConfig([
+  {
+    ...shared,
+    clean: true,
+    entry: { bin: 'src/bin.ts' },
+    format: ['esm'],
+    dts: false,
+    banner: { js: '#!/usr/bin/env node' },
+  },
+  {
+    ...shared,
+    entry: { mcp: 'src/mcp/index.ts' },
+    format: ['esm', 'cjs'],
+    dts: true,
+    outExtension: ({ format }) => ({ js: format === 'cjs' ? '.cjs' : '.js' }),
+  },
+])

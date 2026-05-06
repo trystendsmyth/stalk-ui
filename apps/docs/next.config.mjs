@@ -23,6 +23,13 @@ const nextConfig = {
 
     return config
   },
+  async rewrites() {
+    return [
+      { source: '/mcp', destination: '/api/mcp' },
+      { source: '/sse', destination: '/api/sse' },
+      { source: '/sse/message', destination: '/api/sse/message' },
+    ]
+  },
 }
 
 export default nextConfig

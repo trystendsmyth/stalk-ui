@@ -1,4 +1,4 @@
-import { mkdir, readFile, writeFile } from 'node:fs/promises'
+import { mkdir, readdir, readFile, writeFile } from 'node:fs/promises'
 import { join } from 'node:path'
 
 import { note } from '@clack/prompts'
@@ -12,6 +12,10 @@ import { patchPandaConfig } from './panda-config'
 import { describeProject, resolveProject, writeProjectConfig } from './project'
 
 import type { GlobalOptions, RegistryItem, StalkConfig } from './types'
+
+interface InfoOptions extends GlobalOptions {
+  json?: boolean
+}
 
 interface InitOptions extends GlobalOptions {
   accentColor?: string
@@ -211,6 +215,50 @@ export const upgradeCommand = async (options: GlobalOptions) => {
   )
   await runPandaCodegen(context.packageManager, options)
   note('Updated shared Stalk UI runtime packages.', 'Upgrade complete')
+}
+
+const listInstalledComponents = async (root: string, components: string): Promise<string[]> => {
+  const directory = toProjectPath(root, components)
+  if (!(await pathExists(directory))) {
+    return []
+  }
+  const entries = await readdir(directory)
+  return entries
+    .filter((entry) => entry.endsWith('.tsx') || entry.endsWith('.ts'))
+    .map((entry) => entry.replace(/\.(tsx|ts)$/, ''))
+    .sort()
+}
+
+export const infoCommand = async (options: InfoOptions) => {
+  const context = await resolveProject(options)
+  const installed = await listInstalledComponents(context.root, context.config.components)
+  const payload = {
+    name: describeProject(context),
+    root: context.root,
+    packageManager: context.packageManager,
+    config: context.config,
+    installed,
+  }
+
+  if (options.json === true) {
+    console.log(JSON.stringify(payload, null, 2))
+    return
+  }
+
+  console.log(`Project:        ${payload.name}`)
+  console.log(`Root:           ${payload.root}`)
+  console.log(`Package mgr:    ${payload.packageManager}`)
+  console.log(`Components dir: ${payload.config.components}`)
+  console.log(`Styled-system:  ${payload.config.styledSystem}`)
+  console.log(`Variant:        ${payload.config.primitives ?? 'radix'}`)
+  console.log(`Registries:`)
+  for (const [name, template] of Object.entries(payload.config.registries)) {
+    console.log(`  ${name} → ${template}`)
+  }
+  console.log(`Installed (${String(installed.length)}):${installed.length === 0 ? ' none' : ''}`)
+  for (const component of installed) {
+    console.log(`  - ${component}`)
+  }
 }
 
 export const readCliVersion = async () => {

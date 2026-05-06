@@ -4,12 +4,15 @@ import { Command } from 'commander'
 import {
   addCommand,
   diffCommand,
+  infoCommand,
   initCommand,
   readCliVersion,
   themeCommand,
   upgradeCommand,
 } from './commands'
 import { CliError } from './errors'
+import { initMcpCommand, type McpClient } from './mcp/init'
+import { runStdioMcpServer } from './mcp/stdio'
 
 import type { GlobalOptions } from './types'
 
@@ -73,6 +76,37 @@ const main = async () => {
     await upgradeCommand(options)
     outro('Done')
   })
+
+  withGlobalOptions(program.command('info').description('print project context'))
+    .option('--json', 'emit JSON')
+    .action(async (options: GlobalOptions & { json?: boolean }) => {
+      await infoCommand(options)
+    })
+
+  const mcp = program.command('mcp').description('Stalk UI MCP server')
+
+  mcp
+    .command('start', { isDefault: true })
+    .description('start the stdio MCP server')
+    .option('--verbose', 'log connection diagnostics to stderr')
+    .action(async (options: GlobalOptions) => {
+      await runStdioMcpServer(options)
+    })
+
+  mcp
+    .command('init')
+    .description('write MCP config for an editor (defaults to remote https://stalk-ui.com/mcp)')
+    .option('--client <client>', 'editor (claude | cursor | vscode | opencode | codex)', 'claude')
+    .option('--local', 'configure the stdio server instead of the remote URL')
+    .option('--url <url>', 'override the remote MCP URL')
+    .option('--dry-run', 'print intended writes without modifying files')
+    .action(
+      async (options: { client: McpClient; local?: boolean; url?: string; dryRun?: boolean }) => {
+        intro('Stalk UI MCP init')
+        await initMcpCommand(process.cwd(), options)
+        outro('Done')
+      },
+    )
 
   await program.parseAsync()
 }
