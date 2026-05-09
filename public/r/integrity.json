@@ -12,11 +12,11 @@
     },
     "button": {
       "path": "/r/button.json",
-      "sha256": "0554893ca9549b4fd5df399b46451e34ab6331d25e9c6dd0285917d523079f40"
+      "sha256": "fd7a10e2cab77873f375f65bc168c4ae7ce4e28f62bfa080e01a5bebfbd68d8e"
     },
     "shadcn/button": {
       "path": "/r/shadcn/button.json",
-      "sha256": "56fdc7a02efef4a4b833494e16221575a25d40b8ccb157277537e31c8c320147"
+      "sha256": "9b987a1794b2cbf6c7f5968ecd6c4487b5437c22f0f31987536d5735e31591c2"
     },
     "checkbox": {
       "path": "/r/checkbox.json",
@@ -105,6 +105,14 @@
     "shadcn/textarea": {
       "path": "/r/shadcn/textarea.json",
       "sha256": "4d152176f99fed45efd608c2bda77c6d4b89e93c815df960c7394b8ee66815be"
+    },
+    "toast": {
+      "path": "/r/toast.json",
+      "sha256": "6c82880db0849c7fa36c0180caaa69490fb57e64097c17ca6ffd292931725351"
+    },
+    "shadcn/toast": {
+      "path": "/r/shadcn/toast.json",
+      "sha256": "510174e5f11131318c6069123c44927c776e09f20dd6f38ea5ab4183a87047b2"
     },
     "tooltip": {
       "path": "/r/tooltip.json",

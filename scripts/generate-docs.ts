@@ -46,6 +46,7 @@ const componentDescriptions = {
   spinner: 'Indicates an indeterminate loading state with an accessible label.',
   switch: 'Toggles a setting on or off.',
   textarea: 'Collects multi-line text from a user.',
+  toast: 'Surfaces transient notifications via a Sonner-backed toaster region.',
   tooltip: 'Provides supplemental context when a control is hovered or focused.',
 } as const satisfies Record<ComponentName, string>
 

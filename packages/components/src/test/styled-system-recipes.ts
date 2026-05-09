@@ -119,6 +119,18 @@ export const select = ({ size = 'md' }: SelectRecipeOptions = {}) => ({
   separator: 'stalk-select__separator',
 })
 
+export const toast = () => ({
+  toaster: 'stalk-toast__toaster',
+  toast: 'stalk-toast__toast',
+  title: 'stalk-toast__title',
+  description: 'stalk-toast__description',
+  actionButton: 'stalk-toast__action-button',
+  cancelButton: 'stalk-toast__cancel-button',
+  closeButton: 'stalk-toast__close-button',
+  icon: 'stalk-toast__icon',
+  loader: 'stalk-toast__loader',
+})
+
 interface SpinnerRecipeOptions {
   size?: 'sm' | 'md' | 'lg' | 'xl'
 }

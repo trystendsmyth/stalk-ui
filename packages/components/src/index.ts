@@ -1,7 +1,7 @@
 export { Badge } from './badge'
 export type { BadgeProps, BadgeRadius, BadgeSize, BadgeTone, BadgeVariant } from './badge'
 export { Button } from './button'
-export type { ButtonProps, ButtonSize, ButtonVariant } from './button'
+export type { ButtonProps, ButtonSize, ButtonTone, ButtonVariant } from './button'
 export { Checkbox } from './checkbox'
 export type { CheckboxProps, CheckboxSize } from './checkbox'
 export {
@@ -76,6 +76,8 @@ export {
 export type { SelectContentProps, SelectSize, SelectTriggerProps } from './select'
 export { Spinner } from './spinner'
 export type { SpinnerProps, SpinnerSize } from './spinner'
+export { Toaster, toast } from './toast'
+export type { ToasterProps, ToasterRef } from './toast'
 export { Switch } from './switch'
 export type { SwitchProps, SwitchSize } from './switch'
 export { Textarea } from './textarea'

@@ -1,0 +1,28 @@
+{
+  "$schema": "https://stalk-ui.com/schema/v1/registry-item.json",
+  "name": "toast",
+  "type": "registry:ui",
+  "dependencies": ["sonner", "@stalk-ui/preset"],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "src/components/ui/toast.tsx",
+      "type": "registry:ui",
+      "content": "'use client'\n\nimport { forwardRef, useEffect, useState } from 'react'\nimport { Toaster as SonnerToaster, toast } from 'sonner'\nimport { cx } from 'styled-system/css'\nimport { toast as toastRecipe } from 'styled-system/recipes'\n\nimport type { ComponentPropsWithoutRef, ComponentRef } from 'react'\n\nexport type ToasterProps = ComponentPropsWithoutRef<typeof SonnerToaster>\nexport type ToasterRef = ComponentRef<typeof SonnerToaster>\n\nconst styles = /* @__PURE__ */ toastRecipe()\n\nconst useDocumentColorMode = (): 'light' | 'dark' => {\n  const [mode, setMode] = useState<'light' | 'dark'>('light')\n\n  useEffect(() => {\n    const root = document.documentElement\n    const sync = () => {\n      setMode(root.classList.contains('dark') ? 'dark' : 'light')\n    }\n    sync()\n    const observer = new MutationObserver(sync)\n    observer.observe(root, { attributes: true, attributeFilter: ['class'] })\n    return () => {\n      observer.disconnect()\n    }\n  }, [])\n\n  return mode\n}\n\nexport const Toaster = /* @__PURE__ */ forwardRef<ToasterRef, ToasterProps>(function Toaster(\n  { className, theme, toastOptions, ...props },\n  ref,\n) {\n  const documentMode = useDocumentColorMode()\n  const resolvedTheme = theme ?? documentMode\n\n  return (\n    <SonnerToaster\n      ref={ref}\n      theme={resolvedTheme}\n      className={cx(styles.toaster, className)}\n      toastOptions={{\n        ...toastOptions,\n        classNames: {\n          toast: styles.toast,\n          title: styles.title,\n          description: styles.description,\n          actionButton: styles.actionButton,\n          cancelButton: styles.cancelButton,\n          closeButton: styles.closeButton,\n          icon: styles.icon,\n          loader: styles.loader,\n          ...toastOptions?.classNames,\n        },\n      }}\n      {...props}\n    />\n  )\n})\n\nexport { toast }\n"
+    }
+  ],
+  "stalk": {
+    "schemaVersion": "1.0",
+    "preset": {
+      "semanticTokens": {},
+      "recipes": ["toast"]
+    },
+    "packageDependencies": {
+      "preset": "@stalk-ui/preset"
+    },
+    "pandaCodegen": true,
+    "importAliases": {
+      "styledSystem": "styled-system"
+    }
+  }
+}

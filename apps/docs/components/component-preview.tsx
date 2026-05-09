@@ -13,6 +13,7 @@ import { Select } from '@stalk-ui/components/select'
 import { Spinner } from '@stalk-ui/components/spinner'
 import { Switch } from '@stalk-ui/components/switch'
 import { Textarea } from '@stalk-ui/components/textarea'
+import { Toaster, toast } from '@stalk-ui/components/toast'
 import { Tooltip } from '@stalk-ui/components/tooltip'
 import { themes } from 'prism-react-renderer'
 import { useId, useState } from 'react'
@@ -43,7 +44,9 @@ const liveScope = {
   Spinner,
   Switch,
   Textarea,
+  Toaster,
   Tooltip,
+  toast,
 }
 
 export const ComponentPreview = ({ code }: ComponentPreviewProps) => {

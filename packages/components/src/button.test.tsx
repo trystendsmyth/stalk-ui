@@ -6,6 +6,7 @@ import { axe } from 'vitest-axe'
 import { Button } from './button'
 
 const variants = ['solid', 'outline', 'ghost', 'subtle'] as const
+const tones = ['accent', 'info', 'success', 'warning', 'danger'] as const
 
 test.each(variants)('renders %s variant without axe violations', async (variant) => {
   const { container } = render(<Button variant={variant}>{variant}</Button>)
@@ -13,6 +14,11 @@ test.each(variants)('renders %s variant without axe violations', async (variant)
 
   expect(results.violations).toHaveLength(0)
   expect(screen.getByRole('button', { name: variant })).toBeInTheDocument()
+})
+
+test.each(tones)('applies the %s tone color palette', (tone) => {
+  render(<Button tone={tone}>{tone}</Button>)
+  expect(screen.getByRole('button', { name: tone })).toHaveClass(`color-palette_${tone}`)
 })
 
 test('supports keyboard activation with enter and space', async () => {

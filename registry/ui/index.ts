@@ -11,6 +11,7 @@ import { select } from './select'
 import { spinner } from './spinner'
 import { switchItem } from './switch'
 import { textarea } from './textarea'
+import { toast } from './toast'
 import { tooltip } from './tooltip'
 
 import type { RegistrySource } from './_template'
@@ -32,5 +33,6 @@ export const registryItems = [
   spinner,
   switchItem,
   textarea,
+  toast,
   tooltip,
 ] satisfies RegistrySource[]

@@ -5,6 +5,7 @@ export const button = {
   description: 'Button styles shared by copied Stalk UI button components.',
   base: {
     alignItems: 'center',
+    colorPalette: 'accent',
     rounded: 'md',
     cursor: 'pointer',
     display: 'inline-flex',
@@ -34,7 +35,7 @@ export const button = {
     },
     _focusVisible: {
       focusRingWidth: 'base',
-      focusRingColor: 'accent.muted',
+      focusRingColor: 'colorPalette.muted',
       focusRingOffsetWidth: '2',
       focusRingOffsetColor: 'bg.default',
     },
@@ -42,26 +43,27 @@ export const button = {
   variants: {
     variant: {
       solid: {
-        bgColor: 'accent.solid',
-        color: 'accent.contrast',
-        _hover: { bgColor: 'accent.emphasis' },
+        bgColor: 'colorPalette.solid',
+        color: 'colorPalette.contrast',
+        _hover: { bgColor: 'colorPalette.emphasis' },
       },
       outline: {
         border: 'default',
+        borderColor: 'colorPalette.muted',
         color: 'fg.default',
         _hover: {
-          bgColor: 'bg.subtle',
-          border: 'hover',
+          bgColor: 'colorPalette.subtle',
+          borderColor: 'colorPalette.solid',
         },
       },
       ghost: {
         color: 'fg.default',
-        _hover: { bgColor: 'bg.subtle' },
+        _hover: { bgColor: 'colorPalette.subtle' },
       },
       subtle: {
-        bgColor: 'accent.subtle',
-        color: 'accent.fg',
-        _hover: { bgColor: 'accent.muted' },
+        bgColor: 'colorPalette.subtle',
+        color: 'colorPalette.fg',
+        _hover: { bgColor: 'colorPalette.muted' },
       },
     },
     size: {

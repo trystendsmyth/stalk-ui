@@ -1815,6 +1815,84 @@
       height: var(--sizes-px);
 }
 
+    .stalk-sonner__toaster {
+      --normal-bg: var(--colors-bg-default);
+      --normal-text: var(--colors-fg-default);
+      --normal-border: var(--colors-border-default);
+      --success-bg: var(--colors-success-surface);
+      --success-text: var(--colors-success-fg);
+      --success-border: var(--colors-success-muted);
+      --error-bg: var(--colors-danger-surface);
+      --error-text: var(--colors-danger-fg);
+      --error-border: var(--colors-danger-muted);
+      --info-bg: var(--colors-info-surface);
+      --info-text: var(--colors-info-fg);
+      --info-border: var(--colors-info-muted);
+      --warning-bg: var(--colors-warning-surface);
+      --warning-text: var(--colors-warning-fg);
+      --warning-border: var(--colors-warning-muted);
+      font-family: var(--fonts-sans);
+}
+
+    .stalk-sonner__toast {
+      border-radius: var(--radii-lg);
+      box-shadow: var(--shadows-lg);
+}
+
+    .stalk-sonner__title {
+      font-weight: var(--font-weights-medium);
+}
+
+    .stalk-sonner__title,.stalk-sonner__description {
+      font-size: var(--font-sizes-sm);
+      line-height: var(--line-heights-sm);
+      letter-spacing: var(--letter-spacings-normal);
+}
+
+    .stalk-sonner__description {
+      color: var(--colors-fg-muted);
+}
+
+    .stalk-sonner__actionButton {
+      border-radius: var(--radii-sm);
+      background-color: var(--colors-accent-solid);
+      color: var(--colors-accent-contrast);
+}
+
+    .stalk-sonner__cancelButton {
+      border-radius: var(--radii-sm);
+      background-color: var(--colors-bg-subtle);
+      color: var(--colors-fg-default);
+}
+
+    .stalk-sonner__closeButton {
+      border-color: var(--colors-border-default);
+      background-color: var(--colors-bg-default);
+      color: var(--colors-fg-muted);
+}
+
+    .stalk-sonner__closeButton:is(:focus-visible, [data-focus-visible]) {
+      --ring-offset-shadow: var(--ring-inset,) 0 0 0 var(--ring-offset-width, 0rem) var(--ring-offset-color);
+      --ring-shadow: var(--ring-inset,) 0 0 0 calc(0.1875rem + var(--ring-offset-width, 0rem)) var(--ring-color);
+      box-shadow: var(--ring-offset-shadow),var(--ring-shadow),var(--base-shadow,0 0 #0000);
+      --ring-color: var(--colors-accent-subtle);
+      --ring-offset-width: 0.0625rem;
+      --ring-offset-color: var(--colors-bg-default);
+}
+
+    .stalk-sonner__closeButton:is(:hover, [data-hover]) {
+      background-color: var(--colors-bg-subtle);
+      color: var(--colors-fg-default);
+}
+
+    .stalk-sonner__icon {
+      flex-shrink: 0;
+}
+
+    .stalk-sonner__loader {
+      color: var(--colors-fg-muted);
+}
+
     .stalk-spinner__root {
       align-items: center;
       color: currentColor;

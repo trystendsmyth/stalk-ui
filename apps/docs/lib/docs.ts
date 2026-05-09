@@ -111,8 +111,9 @@ const componentSlugs = [
   'select',
   'spinner',
   'switch',
-  'tooltip',
   'textarea',
+  'toast',
+  'tooltip',
 ] as const
 
 const frontmatterValue = (source: string, key: string) => {

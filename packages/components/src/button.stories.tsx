@@ -20,6 +20,7 @@ const meta = {
     loadingLabel: 'Loading',
     onClick: fn(),
     size: 'md',
+    tone: 'accent',
     variant: 'solid',
   },
   argTypes: {
@@ -30,6 +31,7 @@ const meta = {
     loadingLabel: { control: 'text' },
     onClick: { table: { disable: true } },
     size: { control: 'select', options: SIZES },
+    tone: { control: 'select', options: ['accent', 'info', 'success', 'warning', 'danger'] },
     type: { table: { disable: true } },
     variant: { control: 'select', options: VARIANTS },
   },
@@ -52,6 +54,25 @@ export const Variants: Story = {
       {VARIANTS.map((variant) => (
         <Button {...args} key={variant} variant={variant}>
           {variant}
+        </Button>
+      ))}
+    </HStack>
+  ),
+}
+
+const TONES = ['accent', 'info', 'success', 'warning', 'danger'] as const
+
+export const Tones: Story = {
+  args: { children: undefined },
+  argTypes: {
+    children: { table: { disable: true } },
+    tone: { table: { disable: true } },
+  },
+  render: ({ children: _children, tone: _tone, ...args }) => (
+    <HStack alignItems="center" flexWrap="wrap" gap="12">
+      {TONES.map((tone) => (
+        <Button {...args} key={tone} tone={tone}>
+          {tone}
         </Button>
       ))}
     </HStack>

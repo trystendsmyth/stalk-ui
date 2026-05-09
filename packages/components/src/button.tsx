@@ -10,6 +10,7 @@ import type { ButtonHTMLAttributes, MouseEvent, ReactNode } from 'react'
 
 export type ButtonVariant = 'solid' | 'outline' | 'ghost' | 'subtle'
 export type ButtonSize = 'sm' | 'md' | 'lg'
+export type ButtonTone = 'accent' | 'info' | 'success' | 'warning' | 'danger'
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   asChild?: boolean
@@ -20,6 +21,7 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
    */
   loadingLabel?: string
   size?: ButtonSize
+  tone?: ButtonTone
   variant?: ButtonVariant
 }
 
@@ -48,6 +50,7 @@ export const Button = /* @__PURE__ */ forwardRef<HTMLButtonElement, ButtonProps>
     loadingLabel = 'Loading',
     onClick,
     size = 'md',
+    tone = 'accent',
     type = 'button',
     variant = 'solid',
     ...props
@@ -108,7 +111,7 @@ export const Button = /* @__PURE__ */ forwardRef<HTMLButtonElement, ButtonProps>
       ref={ref}
       aria-busy={loading || undefined}
       aria-disabled={asChild && isDisabled ? true : undefined}
-      className={cx(buttonRecipe({ size, variant }), className)}
+      className={cx(buttonRecipe({ size, variant }), css({ colorPalette: tone }), className)}
       data-loading={loading ? '' : undefined}
       disabled={asChild ? undefined : isDisabled}
       onClick={handleClick}

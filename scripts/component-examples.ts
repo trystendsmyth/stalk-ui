@@ -63,6 +63,11 @@ export const componentExamples = {
     '<Textarea invalid aria-label="Message" defaultValue="too short" />',
     '<Textarea disabled aria-label="Read only" defaultValue="This textarea is disabled." />',
   ],
+  toast: [
+    "<>\n  <Button onClick={() => toast('Project saved')}>Show toast</Button>\n  <Toaster />\n</>",
+    "<>\n  <Button onClick={() => toast.success('Invite sent', { description: 'teammate@stalk-ui.com will receive an email shortly.' })}>Success</Button>\n  <Toaster richColors />\n</>",
+    "<>\n  <Button onClick={() => toast('Message archived', { description: 'Removed from your inbox.', action: { label: 'Undo', onClick: () => toast('Restored') } })}>Archive</Button>\n  <Toaster />\n</>",
+  ],
   tooltip: [
     '<Tooltip.Provider>\n  <Tooltip.Root>\n    <Tooltip.Trigger>Help</Tooltip.Trigger>\n    <Tooltip.Content>Helpful context</Tooltip.Content>\n  </Tooltip.Root>\n</Tooltip.Provider>',
     '<Tooltip.Provider>\n  <Tooltip.Root defaultOpen>\n    <Tooltip.Trigger>Pinned</Tooltip.Trigger>\n    <Tooltip.Content side="bottom">Visible by default</Tooltip.Content>\n  </Tooltip.Root>\n</Tooltip.Provider>',
