@@ -45,7 +45,7 @@
     "react": "catalog:",
     "react-dom": "catalog:",
     "storybook": "catalog:",
-    "vite": "^8.0.10",
+    "vite": "^8.0.12",
     "vitest": "catalog:",
     "vitest-axe": "^0.1.0"
   },
