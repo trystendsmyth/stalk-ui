@@ -1,0 +1,28 @@
+{
+  "$schema": "https://stalk-ui.com/schema/v1/registry-item.json",
+  "name": "avatar",
+  "type": "registry:ui",
+  "dependencies": ["@radix-ui/react-avatar", "@stalk-ui/preset"],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "src/components/ui/avatar.tsx",
+      "type": "registry:ui",
+      "content": "'use client'\n\nimport * as AvatarPrimitive from '@radix-ui/react-avatar'\nimport { forwardRef } from 'react'\nimport { css, cx } from 'styled-system/css'\nimport { avatar as avatarRecipe } from 'styled-system/recipes'\n\nimport type { Tone } from './tones'\nimport type { ComponentPropsWithoutRef, ComponentRef, ReactNode } from 'react'\n\nexport type AvatarSize = (typeof avatarRecipe.variantMap.size)[number]\nexport type AvatarRadius = (typeof avatarRecipe.variantMap.radius)[number]\nexport type AvatarTone = Tone\n\nexport interface AvatarRootProps\n  extends Omit<ComponentPropsWithoutRef<typeof AvatarPrimitive.Root>, 'color'> {\n  radius?: AvatarRadius\n  size?: AvatarSize\n  /** Selects the semantic color palette used as the fallback background. */\n  tone?: AvatarTone\n}\n\nexport const AvatarRoot = /* @__PURE__ */ forwardRef<\n  ComponentRef<typeof AvatarPrimitive.Root>,\n  AvatarRootProps\n>(function AvatarRoot(\n  { className, radius = 'full', size = 'md', tone = 'accent', ...props },\n  ref,\n) {\n  const styles = avatarRecipe({ radius, size })\n  return (\n    <AvatarPrimitive.Root\n      ref={ref}\n      className={cx(styles.root, css({ colorPalette: tone }), className)}\n      {...props}\n    />\n  )\n})\n\nexport type AvatarImageProps = ComponentPropsWithoutRef<typeof AvatarPrimitive.Image>\n\nexport const AvatarImage = /* @__PURE__ */ forwardRef<\n  ComponentRef<typeof AvatarPrimitive.Image>,\n  AvatarImageProps\n>(function AvatarImage({ className, ...props }, ref) {\n  const styles = avatarRecipe()\n  return <AvatarPrimitive.Image ref={ref} className={cx(styles.image, className)} {...props} />\n})\n\nexport interface AvatarFallbackProps\n  extends ComponentPropsWithoutRef<typeof AvatarPrimitive.Fallback> {\n  /** Match the size on the parent `AvatarRoot` so fallback text scales correctly. */\n  size?: AvatarSize\n}\n\nexport const AvatarFallback = /* @__PURE__ */ forwardRef<\n  ComponentRef<typeof AvatarPrimitive.Fallback>,\n  AvatarFallbackProps\n>(function AvatarFallback({ className, size = 'md', ...props }, ref) {\n  const styles = avatarRecipe({ size })\n  return (\n    <AvatarPrimitive.Fallback ref={ref} className={cx(styles.fallback, className)} {...props} />\n  )\n})\n\nconst getInitials = (name: string): string => {\n  const parts = name.trim().split(/\\s+/).filter(Boolean)\n  if (parts.length === 0) return ''\n  const first = parts[0] ?? ''\n  const last = parts[parts.length - 1] ?? ''\n  if (parts.length === 1) return first.slice(0, 2)\n  return `${first[0] ?? ''}${last[0] ?? ''}`\n}\n\nexport interface AvatarProps extends AvatarRootProps {\n  /** Image source. When omitted or fails to load, falls back to initials / `fallback`. */\n  src?: string\n  /** Alt text for the image; also used to derive initials when `name` is not set. */\n  alt?: string\n  /** Name used to derive 2-letter initials. Falls back to `alt`. */\n  name?: string\n  /** Custom fallback content (icon, custom initials, etc.). Overrides derived initials. */\n  fallback?: ReactNode\n  /** Delay (ms) before showing the fallback while the image loads. Defaults to 600. */\n  fallbackDelay?: number\n  /** Native `loading` attribute on the underlying image. */\n  loading?: 'eager' | 'lazy'\n  /** Called when the image's loading state changes. */\n  onLoadingStatusChange?: AvatarImageProps['onLoadingStatusChange']\n}\n\nexport const Avatar = /* @__PURE__ */ forwardRef<\n  ComponentRef<typeof AvatarPrimitive.Root>,\n  AvatarProps\n>(function Avatar(\n  {\n    alt,\n    className,\n    fallback,\n    fallbackDelay = 600,\n    loading,\n    name,\n    onLoadingStatusChange,\n    radius = 'full',\n    size = 'md',\n    src,\n    tone = 'accent',\n    ...rootProps\n  },\n  ref,\n) {\n  const styles = avatarRecipe({ radius, size })\n  const initialsSource = name ?? alt ?? ''\n  const derivedInitials = initialsSource ? getInitials(initialsSource) : ''\n  const fallbackContent = fallback ?? derivedInitials\n\n  return (\n    <AvatarPrimitive.Root\n      ref={ref}\n      className={cx(styles.root, css({ colorPalette: tone }), className)}\n      {...rootProps}\n    >\n      {src ? (\n        <>\n          <AvatarPrimitive.Image\n            alt={alt ?? name ?? ''}\n            className={styles.image}\n            src={src}\n            {...(loading !== undefined ? { loading } : {})}\n            {...(onLoadingStatusChange ? { onLoadingStatusChange } : {})}\n          />\n          <AvatarPrimitive.Fallback className={styles.fallback} delayMs={fallbackDelay}>\n            {fallbackContent}\n          </AvatarPrimitive.Fallback>\n        </>\n      ) : (\n        <span className={styles.fallback}>{fallbackContent}</span>\n      )}\n    </AvatarPrimitive.Root>\n  )\n})\n"
+    }
+  ],
+  "stalk": {
+    "schemaVersion": "1.0",
+    "preset": {
+      "semanticTokens": {},
+      "recipes": ["avatar"]
+    },
+    "packageDependencies": {
+      "preset": "@stalk-ui/preset"
+    },
+    "pandaCodegen": true,
+    "importAliases": {
+      "styledSystem": "styled-system"
+    }
+  }
+}

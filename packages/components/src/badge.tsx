@@ -2,12 +2,13 @@ import { forwardRef } from 'react'
 import { css, cx } from 'styled-system/css'
 import { badge as badgeRecipe } from 'styled-system/recipes'
 
+import type { Tone } from './tones'
 import type { HTMLAttributes } from 'react'
 
-export type BadgeSize = 'sm' | 'md'
-export type BadgeVariant = 'solid' | 'subtle' | 'outline'
-export type BadgeRadius = 'none' | 'sm' | 'md' | 'lg' | 'full'
-export type BadgeTone = 'accent' | 'success' | 'warning' | 'danger' | 'info'
+export type BadgeSize = (typeof badgeRecipe.variantMap.size)[number]
+export type BadgeVariant = (typeof badgeRecipe.variantMap.variant)[number]
+export type BadgeRadius = (typeof badgeRecipe.variantMap.radius)[number]
+export type BadgeTone = Tone
 
 export interface BadgeProps extends HTMLAttributes<HTMLSpanElement> {
   /** Border radius. Defaults to `full` (pill). */

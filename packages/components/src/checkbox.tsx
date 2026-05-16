@@ -6,7 +6,7 @@ import { checkbox as checkboxRecipe } from 'styled-system/recipes'
 
 import type { ComponentPropsWithoutRef, ComponentRef } from 'react'
 
-export type CheckboxSize = 'sm' | 'md' | 'lg'
+export type CheckboxSize = (typeof checkboxRecipe.variantMap.size)[number]
 type CheckedState = boolean | 'indeterminate'
 
 export interface CheckboxProps extends Omit<

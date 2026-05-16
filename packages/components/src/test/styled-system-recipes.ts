@@ -155,6 +155,110 @@ export const tooltip = () => ({
   content: 'stalk-tooltip__content',
 })
 
+interface AvatarRecipeOptions {
+  radius?: 'none' | 'sm' | 'md' | 'lg' | 'full'
+  size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl'
+}
+
+export const avatar = ({ radius = 'full', size = 'md' }: AvatarRecipeOptions = {}) => ({
+  root: `stalk-avatar__root stalk-avatar__root--${size} stalk-avatar__root--radius-${radius}`,
+  image: 'stalk-avatar__image',
+  fallback: `stalk-avatar__fallback stalk-avatar__fallback--${size}`,
+})
+
+interface TagRecipeOptions {
+  dot?: boolean
+  interactive?: boolean
+  radius?: 'none' | 'sm' | 'md' | 'lg' | 'full'
+  size?: 'sm' | 'md' | 'lg'
+  variant?: 'solid' | 'subtle' | 'outline'
+}
+
+export const tag = ({
+  dot = false,
+  interactive = false,
+  radius = 'full',
+  size = 'md',
+  variant = 'subtle',
+}: TagRecipeOptions = {}) => ({
+  root: [
+    'stalk-tag__root',
+    `stalk-tag--${variant}`,
+    `stalk-tag--${size}`,
+    `stalk-tag--radius-${radius}`,
+    dot ? 'stalk-tag--dot' : undefined,
+    interactive ? 'stalk-tag--interactive' : undefined,
+  ]
+    .filter(Boolean)
+    .join(' '),
+  label: 'stalk-tag__label',
+  count: 'stalk-tag__count',
+  close: 'stalk-tag__close',
+})
+
+interface AlertRecipeOptions {
+  size?: 'sm' | 'md' | 'lg'
+  variant?: 'subtle' | 'solid' | 'outline'
+}
+
+export const alert = ({ size = 'md', variant = 'subtle' }: AlertRecipeOptions = {}) => ({
+  root: `stalk-alert__root stalk-alert--${variant} stalk-alert--${size}`,
+  icon: 'stalk-alert__icon',
+  body: 'stalk-alert__body',
+  title: 'stalk-alert__title',
+  description: 'stalk-alert__description',
+  actions: 'stalk-alert__actions',
+  close: 'stalk-alert__close',
+})
+
+interface TabsRecipeOptions {
+  fitted?: boolean
+  size?: 'sm' | 'md' | 'lg'
+  variant?: 'line' | 'segmented' | 'pills'
+}
+
+export const tabs = ({
+  fitted = false,
+  size = 'md',
+  variant = 'line',
+}: TabsRecipeOptions = {}) => ({
+  root: `stalk-tabs__root stalk-tabs--${variant}`,
+  list: [
+    `stalk-tabs__list`,
+    `stalk-tabs__list--${size}`,
+    fitted ? 'stalk-tabs__list--fitted' : undefined,
+  ]
+    .filter(Boolean)
+    .join(' '),
+  trigger: `stalk-tabs__trigger stalk-tabs__trigger--${size}`,
+  content: 'stalk-tabs__content',
+  indicator: `stalk-tabs__indicator stalk-tabs__indicator--${variant}`,
+})
+
+interface ToggleRecipeOptions {
+  attached?: boolean
+  radius?: 'none' | 'sm' | 'md' | 'lg' | 'full'
+  size?: 'sm' | 'md' | 'lg'
+  variant?: 'outline' | 'ghost' | 'solid'
+}
+
+export const toggle = ({
+  attached = false,
+  radius = 'md',
+  size = 'md',
+  variant = 'outline',
+}: ToggleRecipeOptions = {}) => ({
+  root: ['stalk-toggle__root', attached ? 'stalk-toggle__root--attached' : undefined]
+    .filter(Boolean)
+    .join(' '),
+  item: [
+    'stalk-toggle__item',
+    `stalk-toggle__item--${variant}`,
+    `stalk-toggle__item--${size}`,
+    `stalk-toggle__item--radius-${radius}`,
+  ].join(' '),
+})
+
 interface TextareaRecipeOptions {
   invalid?: boolean
   size?: 'sm' | 'md' | 'lg'

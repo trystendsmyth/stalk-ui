@@ -1,0 +1,28 @@
+{
+  "$schema": "https://stalk-ui.com/schema/v1/registry-item.json",
+  "name": "tag",
+  "type": "registry:ui",
+  "dependencies": ["@stalk-ui/preset", "lucide-react"],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "src/components/ui/tag.tsx",
+      "type": "registry:ui",
+      "content": "import { X } from 'lucide-react'\nimport { forwardRef } from 'react'\nimport { css, cx } from 'styled-system/css'\nimport { tag as tagRecipe } from 'styled-system/recipes'\n\nimport type { Tone } from './tones'\nimport type { HTMLAttributes, MouseEvent, ReactNode } from 'react'\n\nexport type TagSize = (typeof tagRecipe.variantMap.size)[number]\nexport type TagVariant = (typeof tagRecipe.variantMap.variant)[number]\nexport type TagRadius = (typeof tagRecipe.variantMap.radius)[number]\nexport type TagTone = Tone\n\nexport interface TagProps extends Omit<HTMLAttributes<HTMLSpanElement>, 'onClick'> {\n  /** Optional leading icon or content rendered before the label. */\n  leadingIcon?: ReactNode\n  /** Optional trailing content rendered after the label (before the count/close). */\n  trailingIcon?: ReactNode\n  /** Numeric/text badge rendered after the label (e.g. for resource counts). */\n  count?: number | string\n  /** Render a small leading dot in the palette's solid color. */\n  dot?: boolean\n  /** Make the tag focusable/clickable. Adds keyboard activation. */\n  onClick?: (event: MouseEvent<HTMLSpanElement>) => void\n  /** Show a close button. Called when the user clicks it. */\n  onClose?: (event: MouseEvent<HTMLButtonElement>) => void\n  /** Accessible label for the close button. */\n  closeAriaLabel?: string\n  radius?: TagRadius\n  size?: TagSize\n  /** Selects the semantic color palette. Defaults to `accent`. */\n  tone?: TagTone\n  variant?: TagVariant\n}\n\nexport const Tag = /* @__PURE__ */ forwardRef<HTMLSpanElement, TagProps>(function Tag(\n  {\n    children,\n    className,\n    closeAriaLabel = 'Remove',\n    count,\n    dot = false,\n    leadingIcon,\n    onClick,\n    onClose,\n    onKeyDown,\n    radius = 'full',\n    size = 'md',\n    tone = 'accent',\n    trailingIcon,\n    variant = 'subtle',\n    ...props\n  },\n  ref,\n) {\n  const interactive = onClick !== undefined\n  const styles = tagRecipe({ dot, interactive, radius, size, variant })\n  const hasCount = count !== undefined && count !== ''\n\n  const handleKeyDown = (event: React.KeyboardEvent<HTMLSpanElement>) => {\n    onKeyDown?.(event)\n    if (!onClick || event.defaultPrevented) return\n    if (event.key === 'Enter' || event.key === ' ') {\n      event.preventDefault()\n      onClick(event as unknown as MouseEvent<HTMLSpanElement>)\n    }\n  }\n\n  const interactiveProps = interactive\n    ? ({\n        role: 'button',\n        tabIndex: 0,\n        onClick,\n        onKeyDown: handleKeyDown,\n      } as const)\n    : {}\n\n  return (\n    <span\n      ref={ref}\n      className={cx(styles.root, css({ colorPalette: tone }), className)}\n      {...interactiveProps}\n      {...props}\n    >\n      <span className={styles.label}>\n        {leadingIcon}\n        {children}\n        {trailingIcon}\n      </span>\n      {hasCount ? <span className={styles.count}>{count}</span> : null}\n      {onClose ? (\n        <button\n          type=\"button\"\n          aria-label={closeAriaLabel}\n          className={styles.close}\n          onClick={(event) => {\n            event.stopPropagation()\n            onClose(event)\n          }}\n        >\n          <X aria-hidden=\"true\" />\n        </button>\n      ) : null}\n    </span>\n  )\n})\n"
+    }
+  ],
+  "stalk": {
+    "schemaVersion": "1.0",
+    "preset": {
+      "semanticTokens": {},
+      "recipes": ["tag"]
+    },
+    "packageDependencies": {
+      "preset": "@stalk-ui/preset"
+    },
+    "pandaCodegen": true,
+    "importAliases": {
+      "styledSystem": "styled-system"
+    }
+  }
+}

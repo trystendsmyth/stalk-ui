@@ -6,11 +6,12 @@ import { button as buttonRecipe } from 'styled-system/recipes'
 
 import { Spinner, type SpinnerSize } from './spinner'
 
+import type { Tone } from './tones'
 import type { ButtonHTMLAttributes, MouseEvent, ReactNode } from 'react'
 
-export type ButtonVariant = 'solid' | 'outline' | 'ghost' | 'subtle'
-export type ButtonSize = 'sm' | 'md' | 'lg'
-export type ButtonTone = 'accent' | 'info' | 'success' | 'warning' | 'danger'
+export type ButtonVariant = (typeof buttonRecipe.variantMap.variant)[number]
+export type ButtonSize = (typeof buttonRecipe.variantMap.size)[number]
+export type ButtonTone = Tone
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   asChild?: boolean

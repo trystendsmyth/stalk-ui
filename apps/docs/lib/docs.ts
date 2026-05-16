@@ -99,6 +99,8 @@ export const gettingStartedPages = [
 
 const contentDirectory = join(process.cwd(), 'content/components')
 const componentSlugs = [
+  'alert',
+  'avatar',
   'badge',
   'button',
   'checkbox',
@@ -111,8 +113,11 @@ const componentSlugs = [
   'select',
   'spinner',
   'switch',
+  'tabs',
+  'tag',
   'textarea',
   'toast',
+  'toggle',
   'tooltip',
 ] as const
 

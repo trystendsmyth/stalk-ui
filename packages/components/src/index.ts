@@ -1,3 +1,24 @@
+export {
+  Alert,
+  AlertActions,
+  AlertBody,
+  AlertClose,
+  AlertDescription,
+  AlertIcon,
+  AlertRoot,
+  AlertTitle,
+} from './alert'
+export type { AlertCloseProps, AlertRootProps, AlertSize, AlertTone, AlertVariant } from './alert'
+export { Avatar, AvatarFallback, AvatarImage, AvatarRoot } from './avatar'
+export type {
+  AvatarFallbackProps,
+  AvatarImageProps,
+  AvatarProps,
+  AvatarRadius,
+  AvatarRootProps,
+  AvatarSize,
+  AvatarTone,
+} from './avatar'
 export { Badge } from './badge'
 export type { BadgeProps, BadgeRadius, BadgeSize, BadgeTone, BadgeVariant } from './badge'
 export { Button } from './button'
@@ -76,12 +97,36 @@ export {
 export type { SelectContentProps, SelectSize, SelectTriggerProps } from './select'
 export { Spinner } from './spinner'
 export type { SpinnerProps, SpinnerSize } from './spinner'
-export { Toaster, toast } from './toast'
-export type { ToasterProps, ToasterRef } from './toast'
 export { Switch } from './switch'
 export type { SwitchProps, SwitchSize } from './switch'
+export { Tabs, TabsContent, TabsList, TabsRoot, TabsTrigger } from './tabs'
+export type {
+  TabsContentProps,
+  TabsListProps,
+  TabsRootProps,
+  TabsSize,
+  TabsTone,
+  TabsTriggerProps,
+  TabsVariant,
+} from './tabs'
+export { Tag } from './tag'
+export type { TagProps, TagRadius, TagSize, TagTone, TagVariant } from './tag'
 export { Textarea } from './textarea'
 export type { TextareaProps, TextareaSize } from './textarea'
+export { Toaster, toast } from './toast'
+export type { ToasterProps, ToasterRef } from './toast'
+export { TONES } from './tones'
+export type { Tone } from './tones'
+export { Toggle, ToggleGroup, ToggleGroupItem } from './toggle'
+export type {
+  ToggleGroupItemProps,
+  ToggleGroupProps,
+  ToggleProps,
+  ToggleRadius,
+  ToggleSize,
+  ToggleTone,
+  ToggleVariant,
+} from './toggle'
 export {
   Tooltip,
   TooltipContent,

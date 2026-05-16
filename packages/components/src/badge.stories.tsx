@@ -1,12 +1,12 @@
 import { HStack, VStack } from 'styled-system/jsx'
 import { badge as badgeRecipe } from 'styled-system/recipes'
 
-import { Badge, type BadgeTone } from './badge'
+import { Badge } from './badge'
+import { TONES } from './tones'
 
 import type { Meta, StoryObj } from '@storybook/react-vite'
 
 const { radius: RADII, size: SIZES, variant: VARIANTS } = badgeRecipe.variantMap
-const TONES: BadgeTone[] = ['accent', 'success', 'warning', 'danger', 'info']
 
 const meta = {
   title: 'Components/Badge',

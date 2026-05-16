@@ -1,3 +1,5 @@
+import { alert } from './alert'
+import { avatar } from './avatar'
 import { badge } from './badge'
 import { button } from './button'
 import { checkbox } from './checkbox'
@@ -10,8 +12,11 @@ import { radio } from './radio'
 import { select } from './select'
 import { spinner } from './spinner'
 import { switchItem } from './switch'
+import { tabs } from './tabs'
+import { tag } from './tag'
 import { textarea } from './textarea'
 import { toast } from './toast'
+import { toggle } from './toggle'
 import { tooltip } from './tooltip'
 
 import type { RegistrySource } from './_template'
@@ -20,6 +25,8 @@ import type { RegistrySource } from './_template'
 // AGENTS.md). Adding a new component is a single new file plus one entry here;
 // per-component PRs do not collide on a shared array.
 export const registryItems = [
+  alert,
+  avatar,
   badge,
   button,
   checkbox,
@@ -32,7 +39,10 @@ export const registryItems = [
   select,
   spinner,
   switchItem,
+  tabs,
+  tag,
   textarea,
   toast,
+  toggle,
   tooltip,
 ] satisfies RegistrySource[]

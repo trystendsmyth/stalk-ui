@@ -33,6 +33,8 @@ interface ExtractedVariant {
 type ComponentName = keyof typeof componentExamples
 
 const componentDescriptions = {
+  alert: 'Surfaces an inline, persistent status message.',
+  avatar: 'Represents a user or entity with an image, initials, or fallback content.',
   badge: 'Displays compact status or metadata.',
   button: 'Triggers an action or submits a form.',
   checkbox: 'Toggles a binary option in a form or settings surface.',
@@ -45,8 +47,11 @@ const componentDescriptions = {
   select: 'Lets a user choose one option from a native menu.',
   spinner: 'Indicates an indeterminate loading state with an accessible label.',
   switch: 'Toggles a setting on or off.',
+  tabs: 'Organizes related content into selectable panels.',
+  tag: 'Labels content with a compact, optionally interactive chip.',
   textarea: 'Collects multi-line text from a user.',
   toast: 'Surfaces transient notifications via a Sonner-backed toaster region.',
+  toggle: 'A two-state button for inline preferences and toolbar controls.',
   tooltip: 'Provides supplemental context when a control is hovered or focused.',
 } as const satisfies Record<ComponentName, string>
 

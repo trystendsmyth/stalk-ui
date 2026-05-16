@@ -4,6 +4,7 @@ import { HStack } from 'styled-system/jsx'
 import { button as buttonRecipe } from 'styled-system/recipes'
 
 import { Button } from './button'
+import { TONES } from './tones'
 
 import type { Meta, StoryObj } from '@storybook/react-vite'
 
@@ -59,8 +60,6 @@ export const Variants: Story = {
     </HStack>
   ),
 }
-
-const TONES = ['accent', 'info', 'success', 'warning', 'danger'] as const
 
 export const Tones: Story = {
   args: { children: undefined },

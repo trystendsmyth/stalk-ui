@@ -5,7 +5,7 @@ import { radio as radioRecipe } from 'styled-system/recipes'
 
 import type { ComponentPropsWithoutRef, ComponentRef } from 'react'
 
-export type RadioSize = 'sm' | 'md' | 'lg'
+export type RadioSize = (typeof radioRecipe.variantMap.size)[number]
 
 export const RadioRoot = RadioGroupPrimitive.Root
 

@@ -5,7 +5,7 @@ import { switchRecipe } from 'styled-system/recipes'
 
 import type { ComponentPropsWithoutRef, ComponentRef } from 'react'
 
-export type SwitchSize = 'sm' | 'md' | 'lg'
+export type SwitchSize = (typeof switchRecipe.variantMap.size)[number]
 
 export interface SwitchProps extends Omit<
   ComponentPropsWithoutRef<typeof SwitchPrimitive.Root>,

@@ -1,5 +1,7 @@
 'use client'
 
+import { Alert } from '@stalk-ui/components/alert'
+import { Avatar } from '@stalk-ui/components/avatar'
 import { Badge } from '@stalk-ui/components/badge'
 import { Button } from '@stalk-ui/components/button'
 import { Checkbox } from '@stalk-ui/components/checkbox'
@@ -12,9 +14,13 @@ import { Radio } from '@stalk-ui/components/radio'
 import { Select } from '@stalk-ui/components/select'
 import { Spinner } from '@stalk-ui/components/spinner'
 import { Switch } from '@stalk-ui/components/switch'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@stalk-ui/components/tabs'
+import { Tag } from '@stalk-ui/components/tag'
 import { Textarea } from '@stalk-ui/components/textarea'
 import { Toaster, toast } from '@stalk-ui/components/toast'
+import { Toggle, ToggleGroup, ToggleGroupItem } from '@stalk-ui/components/toggle'
 import { Tooltip } from '@stalk-ui/components/tooltip'
+import { AlertCircle, AlertTriangle, Info, X } from 'lucide-react'
 import { themes } from 'prism-react-renderer'
 import { useId, useState } from 'react'
 import { LiveEditor, LiveError, LivePreview, LiveProvider } from 'react-live'
@@ -31,11 +37,16 @@ type PreviewTheme = 'monochrome' | 'neutral' | 'rainbow'
  * in the registry so docs examples stay editable end-to-end.
  */
 const liveScope = {
+  Alert,
+  AlertCircle,
+  AlertTriangle,
+  Avatar,
   Badge,
   Button,
   Checkbox,
   Dialog,
   DropdownMenu,
+  Info,
   Input,
   Label,
   Popover,
@@ -43,9 +54,18 @@ const liveScope = {
   Select,
   Spinner,
   Switch,
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+  Tag,
   Textarea,
   Toaster,
+  Toggle,
+  ToggleGroup,
+  ToggleGroupItem,
   Tooltip,
+  X,
   toast,
 }
 

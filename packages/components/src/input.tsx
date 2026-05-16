@@ -11,8 +11,8 @@ import type {
   RefObject,
 } from 'react'
 
-export type InputSize = 'sm' | 'md' | 'lg'
-export type InputAlign = 'start' | 'center' | 'end'
+export type InputSize = (typeof inputRecipe.variantMap.size)[number]
+export type InputAlign = (typeof inputRecipe.variantMap.align)[number]
 export type InputSlotSide = 'start' | 'end'
 
 interface InputRootContextValue {

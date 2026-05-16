@@ -1,5 +1,6 @@
 import { StalkI18nProvider } from '@stalk-ui/i18n'
 import { en } from '@stalk-ui/i18n/locales/en'
+import { useEffect } from 'react'
 
 import { getTheme, injectTheme, type ThemeName } from '../styled-system/themes'
 
@@ -56,16 +57,27 @@ export const applyPreviewGlobals = (globals: StorybookGlobals) => {
   }
 }
 
-const decorators: Decorator[] = [
-  (Story, context) => {
-    applyPreviewGlobals(context.globals)
+/** Side-effects (DOM mutations, async theme injection) belong in `useEffect`, not in the
+ *  render path. Running them during render lets Promise resolutions land after Storybook's
+ *  render phase is closed and emits "received storyRenderPhaseChanged but was unable to
+ *  determine the source of the event" warnings to the manager. */
+const PreviewGlobalsBridge = ({ globals }: { globals: StorybookGlobals }) => {
+  const { direction, mode, pandaTheme } = globals
+  useEffect(() => {
+    applyPreviewGlobals({ direction, mode, pandaTheme })
+  }, [direction, mode, pandaTheme])
+  return null
+}
 
-    return (
+const decorators: Decorator[] = [
+  (Story, context) => (
+    <>
+      <PreviewGlobalsBridge globals={context.globals} />
       <StalkI18nProvider locale="en" messages={en}>
         <Story />
       </StalkI18nProvider>
-    )
-  },
+    </>
+  ),
 ]
 
 export default decorators

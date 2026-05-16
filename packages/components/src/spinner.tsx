@@ -4,7 +4,7 @@ import { spinner as spinnerRecipe } from 'styled-system/recipes'
 
 import type { HTMLAttributes } from 'react'
 
-export type SpinnerSize = 'sm' | 'md' | 'lg' | 'xl'
+export type SpinnerSize = (typeof spinnerRecipe.variantMap.size)[number]
 
 export interface SpinnerProps extends HTMLAttributes<HTMLSpanElement> {
   size?: SpinnerSize

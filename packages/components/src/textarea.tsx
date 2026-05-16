@@ -4,7 +4,7 @@ import { textarea as textareaRecipe } from 'styled-system/recipes'
 
 import type { TextareaHTMLAttributes } from 'react'
 
-export type TextareaSize = 'sm' | 'md' | 'lg'
+export type TextareaSize = (typeof textareaRecipe.variantMap.size)[number]
 
 export interface TextareaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   invalid?: boolean

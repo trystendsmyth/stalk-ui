@@ -6,7 +6,7 @@ import { select as selectRecipe } from 'styled-system/recipes'
 
 import type { ComponentPropsWithoutRef, ComponentRef } from 'react'
 
-export type SelectSize = 'sm' | 'md' | 'lg'
+export type SelectSize = (typeof selectRecipe.variantMap.size)[number]
 
 export const SelectRoot = SelectPrimitive.Root
 export const SelectGroup = SelectPrimitive.Group

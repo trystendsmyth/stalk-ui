@@ -5,7 +5,7 @@ import { label as labelRecipe } from 'styled-system/recipes'
 
 import type { ComponentPropsWithoutRef, ComponentRef } from 'react'
 
-export type LabelSize = 'sm' | 'md' | 'lg'
+export type LabelSize = (typeof labelRecipe.variantMap.size)[number]
 
 export interface LabelProps extends ComponentPropsWithoutRef<typeof LabelPrimitive.Root> {
   required?: boolean
