@@ -1,0 +1,28 @@
+{
+  "$schema": "https://stalk-ui.com/schema/v1/registry-item.json",
+  "name": "skeleton",
+  "type": "registry:ui",
+  "dependencies": ["@stalk-ui/preset"],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "src/components/ui/skeleton.tsx",
+      "type": "registry:ui",
+      "content": "import { forwardRef } from 'react'\nimport { cx } from 'styled-system/css'\nimport { skeleton as skeletonRecipe } from 'styled-system/recipes'\n\nimport type { HTMLAttributes } from 'react'\n\nexport type SkeletonRadius = (typeof skeletonRecipe.variantMap.radius)[number]\n\nexport interface SkeletonProps extends HTMLAttributes<HTMLSpanElement> {\n  radius?: SkeletonRadius\n}\n\nexport const Skeleton = /* @__PURE__ */ forwardRef<HTMLSpanElement, SkeletonProps>(\n  function Skeleton({ className, radius = 'md', ...props }, ref) {\n    return (\n      <span\n        ref={ref}\n        aria-hidden=\"true\"\n        data-stalk-skeleton=\"\"\n        className={cx(skeletonRecipe({ radius }), className)}\n        {...props}\n      />\n    )\n  },\n)\n"
+    }
+  ],
+  "stalk": {
+    "schemaVersion": "1.0",
+    "preset": {
+      "semanticTokens": {},
+      "recipes": ["skeleton"]
+    },
+    "packageDependencies": {
+      "preset": "@stalk-ui/preset"
+    },
+    "pandaCodegen": true,
+    "importAliases": {
+      "styledSystem": "styled-system"
+    }
+  }
+}

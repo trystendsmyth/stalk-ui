@@ -95,7 +95,23 @@ pnpm dlx @stalk-ui/cli add @stalk-ui/dropdown-menu
 
 ## Props
 
-No component-specific props are documented yet. Primitive props pass through to the underlying element or Radix part.
+### `<DropdownMenu.Content>`
+
+| Prop        | Type                  | Required | Default | Description                                                   |
+| ----------- | --------------------- | -------- | ------- | ------------------------------------------------------------- |
+| `container` | `HTMLElement \| null` | No       | -       | Override the portal container. Defaults to \`document.body\`. |
+
+### `<DropdownMenu.Item>`
+
+| Prop    | Type      | Required | Default | Description                                                            |
+| ------- | --------- | -------- | ------- | ---------------------------------------------------------------------- |
+| `inset` | `boolean` | No       | -       | Reserves indicator space so the item aligns with checkbox/radio items. |
+
+### `<DropdownMenu.SubTrigger>`
+
+| Prop    | Type      | Required | Default | Description |
+| ------- | --------- | -------- | ------- | ----------- |
+| `inset` | `boolean` | No       | -       | -           |
 
 ## Variants
 

@@ -1,7 +1,7 @@
 import { defineRegistryItem } from './_template'
 
 export const alert = defineRegistryItem({
-  dependencies: ['@stalk-ui/preset', 'lucide-react'],
+  dependencies: ['@stalk-ui/preset'],
   filePath: 'src/components/ui/alert.tsx',
   name: 'alert',
   recipes: ['alert'],

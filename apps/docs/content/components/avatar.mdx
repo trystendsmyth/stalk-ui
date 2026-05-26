@@ -49,6 +49,8 @@ pnpm dlx @stalk-ui/cli add @stalk-ui/avatar
 
 ## Props
 
+### `<Avatar>`
+
 | Prop                    | Type                                        | Required | Default | Description                                                                         |
 | ----------------------- | ------------------------------------------- | -------- | ------- | ----------------------------------------------------------------------------------- |
 | `src`                   | `string`                                    | No       | -       | Image source. When omitted or fails to load, falls back to initials / \`fallback\`. |
@@ -58,6 +60,20 @@ pnpm dlx @stalk-ui/cli add @stalk-ui/avatar
 | `fallbackDelay`         | `number`                                    | No       | -       | Delay (ms) before showing the fallback while the image loads. Defaults to 600.      |
 | `loading`               | `'eager' \| 'lazy'`                         | No       | -       | Native \`loading\` attribute on the underlying image.                               |
 | `onLoadingStatusChange` | `AvatarImageProps['onLoadingStatusChange']` | No       | -       | Called when the image's loading state changes.                                      |
+
+### `<Avatar.Fallback>`
+
+| Prop   | Type         | Required | Default | Description                                                                    |
+| ------ | ------------ | -------- | ------- | ------------------------------------------------------------------------------ |
+| `size` | `AvatarSize` | No       | -       | Match the size on the parent \`AvatarRoot\` so fallback text scales correctly. |
+
+### `<Avatar.Root>`
+
+| Prop     | Type           | Required | Default | Description                                                         |
+| -------- | -------------- | -------- | ------- | ------------------------------------------------------------------- |
+| `radius` | `AvatarRadius` | No       | -       | -                                                                   |
+| `size`   | `AvatarSize`   | No       | -       | -                                                                   |
+| `tone`   | `AvatarTone`   | No       | -       | Selects the semantic color palette used as the fallback background. |
 
 ## Variants
 

@@ -1,4 +1,8 @@
 export const componentExamples = {
+  accordion: [
+    '<Accordion type="single" collapsible defaultValue="item-1">\n  <Accordion.Item value="item-1">\n    <Accordion.Trigger>Is it accessible?</Accordion.Trigger>\n    <Accordion.Content>Yes. It adheres to the WAI-ARIA design pattern.</Accordion.Content>\n  </Accordion.Item>\n  <Accordion.Item value="item-2">\n    <Accordion.Trigger>Is it styled?</Accordion.Trigger>\n    <Accordion.Content>Yes. Defaults use semantic tokens from the preset.</Accordion.Content>\n  </Accordion.Item>\n</Accordion>',
+    '<Accordion type="multiple" defaultValue={["a", "b"]}>\n  <Accordion.Item value="a">\n    <Accordion.Trigger>First section</Accordion.Trigger>\n    <Accordion.Content>Multiple sections can be open at once.</Accordion.Content>\n  </Accordion.Item>\n  <Accordion.Item value="b">\n    <Accordion.Trigger>Second section</Accordion.Trigger>\n    <Accordion.Content>Pass type=&quot;multiple&quot; to enable this.</Accordion.Content>\n  </Accordion.Item>\n</Accordion>',
+  ],
   alert: [
     '<Alert.Root tone="info">\n  <Alert.Icon><Info /></Alert.Icon>\n  <Alert.Body>\n    <Alert.Title>Heads up</Alert.Title>\n    <Alert.Description>You can add components using the CLI.</Alert.Description>\n  </Alert.Body>\n</Alert.Root>',
     '<Alert.Root tone="warning">\n  <Alert.Icon><AlertTriangle /></Alert.Icon>\n  <Alert.Body>\n    <Alert.Title>Storage almost full</Alert.Title>\n    <Alert.Description>You\'re using 92% of your storage.</Alert.Description>\n  </Alert.Body>\n  <Alert.Close aria-label="Dismiss"><X /></Alert.Close>\n</Alert.Root>',
@@ -26,6 +30,13 @@ export const componentExamples = {
     '<Checkbox checked="indeterminate" aria-label="Bulk select" />',
     '<Checkbox disabled aria-label="Locked" />',
   ],
+  collapsible: [
+    '<Collapsible>\n  <Collapsible.Trigger>Show details</Collapsible.Trigger>\n  <Collapsible.Content>Hidden content that toggles open.</Collapsible.Content>\n</Collapsible>',
+    '<Collapsible defaultOpen>\n  <Collapsible.Trigger>Toggle</Collapsible.Trigger>\n  <Collapsible.Content>Visible from the start.</Collapsible.Content>\n</Collapsible>',
+  ],
+  'context-menu': [
+    '<ContextMenu>\n  <ContextMenu.Trigger>Right click here</ContextMenu.Trigger>\n  <ContextMenu.Content>\n    <ContextMenu.Item>Cut</ContextMenu.Item>\n    <ContextMenu.Item>Copy</ContextMenu.Item>\n    <ContextMenu.Separator />\n    <ContextMenu.Item>Paste</ContextMenu.Item>\n  </ContextMenu.Content>\n</ContextMenu>',
+  ],
   dialog: [
     '<Dialog.Root>\n  <Dialog.Trigger>Open dialog</Dialog.Trigger>\n  <Dialog.Content>\n    <Dialog.Title>Confirm changes</Dialog.Title>\n  </Dialog.Content>\n</Dialog.Root>',
     '<Dialog.Root>\n  <Dialog.Trigger>Settings</Dialog.Trigger>\n  <Dialog.Content>\n    <Dialog.Header>\n      <Dialog.Title>Settings</Dialog.Title>\n      <Dialog.Description>Manage your preferences.</Dialog.Description>\n    </Dialog.Header>\n    <Dialog.Footer>\n      <Dialog.Close>Cancel</Dialog.Close>\n    </Dialog.Footer>\n  </Dialog.Content>\n</Dialog.Root>',
@@ -45,9 +56,17 @@ export const componentExamples = {
     '<Label required htmlFor="name">Name</Label>',
     '<Label size="lg" htmlFor="bio">About you</Label>',
   ],
+  menubar: [
+    '<Menubar>\n  <Menubar.Menu>\n    <Menubar.Trigger>File</Menubar.Trigger>\n    <Menubar.Content>\n      <Menubar.Item>New tab<Menubar.Shortcut>⌘T</Menubar.Shortcut></Menubar.Item>\n      <Menubar.Item>New window<Menubar.Shortcut>⌘N</Menubar.Shortcut></Menubar.Item>\n    </Menubar.Content>\n  </Menubar.Menu>\n  <Menubar.Menu>\n    <Menubar.Trigger>Edit</Menubar.Trigger>\n    <Menubar.Content>\n      <Menubar.Item>Undo</Menubar.Item>\n      <Menubar.Item>Redo</Menubar.Item>\n    </Menubar.Content>\n  </Menubar.Menu>\n</Menubar>',
+  ],
   popover: [
     '<Popover.Root>\n  <Popover.Trigger>Open popover</Popover.Trigger>\n  <Popover.Content>Quick actions go here.</Popover.Content>\n</Popover.Root>',
     '<Popover.Root>\n  <Popover.Trigger>Filters</Popover.Trigger>\n  <Popover.Content side="bottom" align="start">Filter controls render below the trigger.</Popover.Content>\n</Popover.Root>',
+  ],
+  progress: [
+    '<Progress aria-label="Upload" value={42} />',
+    '<Progress aria-label="Sync" max={200} value={120} size="lg" />',
+    '<Progress aria-label="Loading" />',
   ],
   radio: [
     '<Radio.Root defaultValue="basic" name="plan">\n  <Radio.Item value="basic" aria-label="Basic" />\n  <Radio.Item value="pro" aria-label="Pro" />\n  <Radio.Item value="team" aria-label="Team" />\n</Radio.Root>',
@@ -57,6 +76,15 @@ export const componentExamples = {
     '<Select.Root>\n  <Select.Trigger aria-label="Status"><Select.Value placeholder="Choose a status" /></Select.Trigger>\n  <Select.Content>\n    <Select.Item value="draft">Draft</Select.Item>\n    <Select.Item value="published">Published</Select.Item>\n    <Select.Item value="archived">Archived</Select.Item>\n  </Select.Content>\n</Select.Root>',
     '<Select.Root>\n  <Select.Trigger invalid aria-label="Status"><Select.Value placeholder="Required" /></Select.Trigger>\n  <Select.Content>\n    <Select.Item value="draft">Draft</Select.Item>\n  </Select.Content>\n</Select.Root>',
     '<Select.Root disabled>\n  <Select.Trigger aria-label="Locked"><Select.Value placeholder="Locked" /></Select.Trigger>\n  <Select.Content>\n    <Select.Item value="locked">Locked</Select.Item>\n  </Select.Content>\n</Select.Root>',
+  ],
+  skeleton: [
+    '<Skeleton style={{ height: 14, width: 240 }} />',
+    '<Skeleton radius="full" style={{ height: 48, width: 48 }} />',
+  ],
+  slider: [
+    '<Slider aria-label="Volume" defaultValue={[40]} />',
+    '<Slider aria-label="Price range" defaultValue={[20, 80]} />',
+    '<Slider aria-label="Locked" defaultValue={[60]} disabled />',
   ],
   spinner: [
     '<Spinner aria-label="Loading" />',

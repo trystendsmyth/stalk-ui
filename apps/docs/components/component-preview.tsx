@@ -1,17 +1,24 @@
 'use client'
 
+import { Accordion } from '@stalk-ui/components/accordion'
 import { Alert } from '@stalk-ui/components/alert'
 import { Avatar } from '@stalk-ui/components/avatar'
 import { Badge } from '@stalk-ui/components/badge'
 import { Button } from '@stalk-ui/components/button'
 import { Checkbox } from '@stalk-ui/components/checkbox'
+import { Collapsible } from '@stalk-ui/components/collapsible'
+import { ContextMenu } from '@stalk-ui/components/context-menu'
 import { Dialog } from '@stalk-ui/components/dialog'
 import { DropdownMenu } from '@stalk-ui/components/dropdown-menu'
 import { Input } from '@stalk-ui/components/input'
 import { Label } from '@stalk-ui/components/label'
+import { Menubar } from '@stalk-ui/components/menubar'
 import { Popover } from '@stalk-ui/components/popover'
+import { Progress } from '@stalk-ui/components/progress'
 import { Radio } from '@stalk-ui/components/radio'
 import { Select } from '@stalk-ui/components/select'
+import { Skeleton } from '@stalk-ui/components/skeleton'
+import { Slider } from '@stalk-ui/components/slider'
 import { Spinner } from '@stalk-ui/components/spinner'
 import { Switch } from '@stalk-ui/components/switch'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@stalk-ui/components/tabs'
@@ -37,6 +44,7 @@ type PreviewTheme = 'monochrome' | 'neutral' | 'rainbow'
  * in the registry so docs examples stay editable end-to-end.
  */
 const liveScope = {
+  Accordion,
   Alert,
   AlertCircle,
   AlertTriangle,
@@ -44,14 +52,20 @@ const liveScope = {
   Badge,
   Button,
   Checkbox,
+  Collapsible,
+  ContextMenu,
   Dialog,
   DropdownMenu,
   Info,
   Input,
   Label,
+  Menubar,
   Popover,
+  Progress,
   Radio,
   Select,
+  Skeleton,
+  Slider,
   Spinner,
   Switch,
   Tabs,

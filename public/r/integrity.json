@@ -2,21 +2,29 @@
   "schemaVersion": "1.0",
   "generatedAt": "1970-01-01T00:00:00.000Z",
   "manifests": {
+    "accordion": {
+      "path": "/r/accordion.json",
+      "sha256": "bca5e21797fa506f7a29e8d5015753e9e54274dec48613b9551dad28ee4b8448"
+    },
+    "shadcn/accordion": {
+      "path": "/r/shadcn/accordion.json",
+      "sha256": "59c5de094a87ed7e2dbdc3285ca0d4e71009916deecfc815d1c25cd0ea3c4be8"
+    },
     "alert": {
       "path": "/r/alert.json",
-      "sha256": "9ce13559079234ccd18167645a2febb281c25aa66f5b2780072f7153262a10c3"
+      "sha256": "fd809838eed898ab0b76723ca69c9a8830fd7de08899419ce7c9ad87cbc83415"
     },
     "shadcn/alert": {
       "path": "/r/shadcn/alert.json",
-      "sha256": "4388664ac92221575f9993aaa823f4ef7b923193b1570734e358a86647c8b5c2"
+      "sha256": "c068fe63ddfa7b3e510316188e97e54e52353d7973a2a52125249e29fc00b438"
     },
     "avatar": {
       "path": "/r/avatar.json",
-      "sha256": "3adbcde1a472d0daf556297254d13ce3d4822e349994e5f74a4a85cd66a585f8"
+      "sha256": "d00b4aa0c7631c6ff7a14d6816c14853a7a228be1e2b119600547d4f585c5034"
     },
     "shadcn/avatar": {
       "path": "/r/shadcn/avatar.json",
-      "sha256": "88d5cf35d30d67ec766496d92841abe8c822c4bfc6973239470a3e92149e992c"
+      "sha256": "f2f9e82476c1a01b0f71b482cd6bf6b10b05dec1339279b42932c5b7df742ee9"
     },
     "badge": {
       "path": "/r/badge.json",
@@ -41,6 +49,22 @@
     "shadcn/checkbox": {
       "path": "/r/shadcn/checkbox.json",
       "sha256": "166df0ca399a627f63742ac7cc5be886440cf46c22d8222667be4ce1819809d4"
+    },
+    "collapsible": {
+      "path": "/r/collapsible.json",
+      "sha256": "5b7a068a72caa2e770753b8fce59003a0cf5f67c3c2c7f01b6fa8f22546f5be7"
+    },
+    "shadcn/collapsible": {
+      "path": "/r/shadcn/collapsible.json",
+      "sha256": "d9cfdc1ce408966aa01171e6c037c6a6894c8ea3fa01e4b74b874e0ae62f8187"
+    },
+    "context-menu": {
+      "path": "/r/context-menu.json",
+      "sha256": "ca05d9d9b4f1f8f9a3c65dc9ab94737766ed6f0a299eb1f8a4d7c6adb9b5fdf2"
+    },
+    "shadcn/context-menu": {
+      "path": "/r/shadcn/context-menu.json",
+      "sha256": "85dcc5e1d677f9287e8a31c77539142e20c92d15ccd201a69d54fe5b900c8916"
     },
     "dialog": {
       "path": "/r/dialog.json",
@@ -74,6 +98,14 @@
       "path": "/r/shadcn/label.json",
       "sha256": "2d67fd60862da5b67f4b7bd8caa69cf06dbea7935a563d956ba282a880bf6419"
     },
+    "menubar": {
+      "path": "/r/menubar.json",
+      "sha256": "288369267c8cfeabda6a01dc69c2a786ff772f75a487e57accfa635a28cd987f"
+    },
+    "shadcn/menubar": {
+      "path": "/r/shadcn/menubar.json",
+      "sha256": "524a5d763f813e4b8eb253dc0fe45fe6d2772264d60a23b9ef47f0404962e8c3"
+    },
     "popover": {
       "path": "/r/popover.json",
       "sha256": "8dba3e50230d23dbc69a793a703597e0f97bb328fbd0bd56c556233cad42c875"
@@ -81,6 +113,14 @@
     "shadcn/popover": {
       "path": "/r/shadcn/popover.json",
       "sha256": "c8395b23147a1a57947980ace11c85387359b24b030ac320aa2907083e927e76"
+    },
+    "progress": {
+      "path": "/r/progress.json",
+      "sha256": "9e4c8f9271bccced518033c79ab3492258473e3155416ad6b283e473f8a7ed4f"
+    },
+    "shadcn/progress": {
+      "path": "/r/shadcn/progress.json",
+      "sha256": "e52927a4c8291cb92d18839684b8198c8e475b70ee72d8bbf37da78d91918d55"
     },
     "radio": {
       "path": "/r/radio.json",
@@ -97,6 +137,22 @@
     "shadcn/select": {
       "path": "/r/shadcn/select.json",
       "sha256": "ed6f2b26d894bae06fbce155daa7a71b4853f36a00614c23cd0357a233dce075"
+    },
+    "skeleton": {
+      "path": "/r/skeleton.json",
+      "sha256": "261495214262f8040c1fe0d4242763042dfa5b470513050d40213b78a2fe12ba"
+    },
+    "shadcn/skeleton": {
+      "path": "/r/shadcn/skeleton.json",
+      "sha256": "d11c9ed2911a24bb3e44bd6cd0a58cc5f345bc68e5a7e8fd4704f7884b94a2e4"
+    },
+    "slider": {
+      "path": "/r/slider.json",
+      "sha256": "5e1af73b7d86d472fee9e15439ebf1b1a1370eb77d4ab3d2f7f532f64b76fb6b"
+    },
+    "shadcn/slider": {
+      "path": "/r/shadcn/slider.json",
+      "sha256": "30da01750a0d1c23442101c55589cec8e80f10bb71293468e7e735b3d3ce53f8"
     },
     "spinner": {
       "path": "/r/spinner.json",
@@ -116,11 +172,11 @@
     },
     "tabs": {
       "path": "/r/tabs.json",
-      "sha256": "556ebad1db769f2b8a3e9f95096832fa96ce78ad97d3d404303ad0c9d190d738"
+      "sha256": "89150ec15c2a2b368a88d7220832b4a7729b7c38a6ef140220ca3066fa4f67cb"
     },
     "shadcn/tabs": {
       "path": "/r/shadcn/tabs.json",
-      "sha256": "a6d54affe2eea586c8da0a7e4c6639472228859508cf772951220f4c8057d8b9"
+      "sha256": "bc0a133c4d8d2ceb1ce82de428e1781956427c65e5d5e4c4c82681f5534c82c2"
     },
     "tag": {
       "path": "/r/tag.json",
@@ -148,11 +204,11 @@
     },
     "toggle": {
       "path": "/r/toggle.json",
-      "sha256": "a40051169608fd58c09977d54f6516ab4e54a935e4a915d68c67cc231996cd3b"
+      "sha256": "d33e999357b220e20c9f8bc49a199d6b4a49a8c97a17e37cfd07e99051ff875c"
     },
     "shadcn/toggle": {
       "path": "/r/shadcn/toggle.json",
-      "sha256": "e8ea16b581aa6aed5932b67d418adece6f89c306f7a3099d3bf299e2dad28a23"
+      "sha256": "4d7295d38fb87eb76adda1c2e8c4a5f06c3f4394282355eae752df9e6bde3512"
     },
     "tooltip": {
       "path": "/r/tooltip.json",

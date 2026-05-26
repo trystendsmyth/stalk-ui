@@ -1,0 +1,28 @@
+{
+  "$schema": "https://stalk-ui.com/schema/v1/registry-item.json",
+  "name": "progress",
+  "type": "registry:ui",
+  "dependencies": ["@radix-ui/react-progress", "@stalk-ui/preset"],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "src/components/ui/progress.tsx",
+      "type": "registry:ui",
+      "content": "'use client'\n\nimport * as ProgressPrimitive from '@radix-ui/react-progress'\nimport { forwardRef } from 'react'\nimport { cx } from 'styled-system/css'\nimport { progress as progressRecipe } from 'styled-system/recipes'\n\nimport type { ComponentPropsWithoutRef, ComponentRef } from 'react'\n\nexport type ProgressSize = (typeof progressRecipe.variantMap.size)[number]\n\nexport interface ProgressProps extends ComponentPropsWithoutRef<typeof ProgressPrimitive.Root> {\n  size?: ProgressSize\n}\n\nexport const Progress = /* @__PURE__ */ forwardRef<\n  ComponentRef<typeof ProgressPrimitive.Root>,\n  ProgressProps\n>(function Progress({ className, max = 100, size = 'md', value, ...props }, ref) {\n  const styles = progressRecipe({ size })\n  const resolved = value ?? 0\n  const percentage = max > 0 ? (resolved / max) * 100 : 0\n\n  return (\n    <ProgressPrimitive.Root\n      ref={ref}\n      className={cx(styles.root, className)}\n      max={max}\n      value={value}\n      {...props}\n    >\n      <ProgressPrimitive.Indicator\n        className={styles.indicator}\n        style={{ inlineSize: `${String(percentage)}%` }}\n      />\n    </ProgressPrimitive.Root>\n  )\n})\n"
+    }
+  ],
+  "stalk": {
+    "schemaVersion": "1.0",
+    "preset": {
+      "semanticTokens": {},
+      "recipes": ["progress"]
+    },
+    "packageDependencies": {
+      "preset": "@stalk-ui/preset"
+    },
+    "pandaCodegen": true,
+    "importAliases": {
+      "styledSystem": "styled-system"
+    }
+  }
+}

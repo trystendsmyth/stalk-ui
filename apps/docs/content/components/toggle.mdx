@@ -73,12 +73,50 @@ pnpm dlx @stalk-ui/cli add @stalk-ui/toggle
 
 ## Props
 
+### `<Toggle>`
+
 | Prop      | Type            | Required | Default | Description                                                    |
 | --------- | --------------- | -------- | ------- | -------------------------------------------------------------- |
 | `radius`  | `ToggleRadius`  | No       | -       | -                                                              |
 | `size`    | `ToggleSize`    | No       | -       | -                                                              |
 | `tone`    | `ToggleTone`    | No       | -       | Selects the semantic color palette used when the toggle is on. |
 | `variant` | `ToggleVariant` | No       | -       | -                                                              |
+
+### `<Toggle.GroupItem>`
+
+| Prop      | Type            | Required | Default | Description                                            |
+| --------- | --------------- | -------- | ------- | ------------------------------------------------------ |
+| `radius`  | `ToggleRadius`  | No       | -       | Override inherited group settings on a per-item basis. |
+| `size`    | `ToggleSize`    | No       | -       | -                                                      |
+| `variant` | `ToggleVariant` | No       | -       | -                                                      |
+
+### `<Toggle.GroupMultiple>`
+
+| Prop            | Type                        | Required | Default | Description |
+| --------------- | --------------------------- | -------- | ------- | ----------- |
+| `type`          | `'multiple'`                | Yes      | -       | -           |
+| `value`         | `string[]`                  | No       | -       | -           |
+| `defaultValue`  | `string[]`                  | No       | -       | -           |
+| `onValueChange` | `(value: string[]) => void` | No       | -       | -           |
+
+### `<Toggle.Group>`
+
+| Prop       | Type            | Required | Default | Description                                                                |
+| ---------- | --------------- | -------- | ------- | -------------------------------------------------------------------------- |
+| `attached` | `boolean`       | No       | -       | When true, items sit flush against each other forming a segmented control. |
+| `radius`   | `ToggleRadius`  | No       | -       | -                                                                          |
+| `size`     | `ToggleSize`    | No       | -       | -                                                                          |
+| `tone`     | `ToggleTone`    | No       | -       | Selects the semantic color palette used when an item is on.                |
+| `variant`  | `ToggleVariant` | No       | -       | -                                                                          |
+
+### `<Toggle.GroupSingle>`
+
+| Prop            | Type                      | Required | Default | Description |
+| --------------- | ------------------------- | -------- | ------- | ----------- |
+| `type`          | `'single'`                | Yes      | -       | -           |
+| `value`         | `string`                  | No       | -       | -           |
+| `defaultValue`  | `string`                  | No       | -       | -           |
+| `onValueChange` | `(value: string) => void` | No       | -       | -           |
 
 ## Variants
 

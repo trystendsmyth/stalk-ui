@@ -36,4 +36,24 @@ export const keyframes = {
     from: { opacity: '1', transform: 'scale(1)' },
     to: { opacity: '0', transform: 'scale(0.96)' },
   },
+  // Radix exposes the measured content size via `--radix-accordion-content-height`
+  // / `--radix-collapsible-content-height` so we can animate from 0 to the
+  // intrinsic height without measuring it ourselves. The trigger stays anchored
+  // because the content holds `height: 0` until the open animation runs.
+  'accordion-down': {
+    from: { height: '0' },
+    to: { height: 'var(--radix-accordion-content-height)' },
+  },
+  'accordion-up': {
+    from: { height: 'var(--radix-accordion-content-height)' },
+    to: { height: '0' },
+  },
+  'collapsible-down': {
+    from: { height: '0' },
+    to: { height: 'var(--radix-collapsible-content-height)' },
+  },
+  'collapsible-up': {
+    from: { height: 'var(--radix-collapsible-content-height)' },
+    to: { height: '0' },
+  },
 }

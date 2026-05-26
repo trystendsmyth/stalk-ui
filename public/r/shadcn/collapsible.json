@@ -1,0 +1,28 @@
+{
+  "$schema": "https://stalk-ui.com/schema/v1/registry-item.json",
+  "name": "collapsible",
+  "type": "registry:ui",
+  "dependencies": ["@radix-ui/react-collapsible", "@stalk-ui/preset"],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "src/components/ui/collapsible.tsx",
+      "type": "registry:ui",
+      "content": "'use client'\n\nimport * as CollapsiblePrimitive from '@radix-ui/react-collapsible'\n// Stalk UI component - requires PandaCSS setup and @stalk-ui/preset.\nimport { createContext, forwardRef, useContext, useMemo } from 'react'\nimport { cx } from 'styled-system/css'\nimport { collapsible as collapsibleRecipe } from 'styled-system/recipes'\n\nimport type { ComponentPropsWithoutRef, ComponentRef } from 'react'\n\nexport type CollapsibleVariant = (typeof collapsibleRecipe.variantMap.variant)[number]\n\ntype CollapsibleStyles = ReturnType<typeof collapsibleRecipe>\n\nconst CollapsibleContext = /* @__PURE__ */ createContext<CollapsibleStyles | null>(null)\n\nconst useCollapsibleStyles = () => {\n  const styles = useContext(CollapsibleContext)\n  if (!styles) {\n    throw new Error('Collapsible subcomponents must be rendered inside <Collapsible.Root>.')\n  }\n  return styles\n}\n\nexport type CollapsibleRootProps = ComponentPropsWithoutRef<typeof CollapsiblePrimitive.Root> & {\n  /** Visual treatment for the root container. `card` adds a bordered, padded surface;\n   *  `inline` is unstyled chrome for embedding in arbitrary surfaces. */\n  variant?: CollapsibleVariant\n}\n\nexport const CollapsibleRoot = /* @__PURE__ */ forwardRef<\n  ComponentRef<typeof CollapsiblePrimitive.Root>,\n  CollapsibleRootProps\n>(function CollapsibleRoot({ className, variant = 'inline', ...props }, ref) {\n  const styles = useMemo(() => collapsibleRecipe({ variant }), [variant])\n\n  return (\n    <CollapsibleContext.Provider value={styles}>\n      <CollapsiblePrimitive.Root ref={ref} className={cx(styles.root, className)} {...props} />\n    </CollapsibleContext.Provider>\n  )\n})\n\nexport const CollapsibleTrigger = /* @__PURE__ */ forwardRef<\n  ComponentRef<typeof CollapsiblePrimitive.Trigger>,\n  ComponentPropsWithoutRef<typeof CollapsiblePrimitive.Trigger>\n>(function CollapsibleTrigger({ asChild = false, className, ...props }, ref) {\n  const styles = useCollapsibleStyles()\n  return (\n    <CollapsiblePrimitive.Trigger\n      ref={ref}\n      asChild={asChild}\n      className={asChild ? className : cx(styles.trigger, className)}\n      {...props}\n    />\n  )\n})\n\nexport const CollapsibleContent = /* @__PURE__ */ forwardRef<\n  ComponentRef<typeof CollapsiblePrimitive.Content>,\n  ComponentPropsWithoutRef<typeof CollapsiblePrimitive.Content>\n>(function CollapsibleContent({ className, ...props }, ref) {\n  const styles = useCollapsibleStyles()\n  return (\n    <CollapsiblePrimitive.Content ref={ref} className={cx(styles.content, className)} {...props} />\n  )\n})\n\nexport const Collapsible = /* @__PURE__ */ Object.assign(CollapsibleRoot, {\n  Content: CollapsibleContent,\n  Root: CollapsibleRoot,\n  Trigger: CollapsibleTrigger,\n})\n"
+    }
+  ],
+  "stalk": {
+    "schemaVersion": "1.0",
+    "preset": {
+      "semanticTokens": {},
+      "recipes": ["collapsible"]
+    },
+    "packageDependencies": {
+      "preset": "@stalk-ui/preset"
+    },
+    "pandaCodegen": true,
+    "importAliases": {
+      "styledSystem": "styled-system"
+    }
+  }
+}

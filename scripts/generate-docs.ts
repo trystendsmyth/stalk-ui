@@ -8,13 +8,22 @@ import { registryItems } from '../registry/ui'
 
 import { componentExamples } from './component-examples'
 
+import type { InterfaceDeclaration, SourceFile, TypeLiteralNode, TypeNode } from 'ts-morph'
+
+type PropSource = InterfaceDeclaration | TypeLiteralNode
+
 interface ExtractedComponent {
   description: string
   displayName: string
   examples: string[]
   name: ComponentName
-  props: ExtractedProp[]
+  propGroups: ExtractedPropGroup[]
   variants: ExtractedVariant[]
+}
+
+interface ExtractedPropGroup {
+  label: string
+  props: ExtractedProp[]
 }
 
 interface ExtractedProp {
@@ -33,18 +42,25 @@ interface ExtractedVariant {
 type ComponentName = keyof typeof componentExamples
 
 const componentDescriptions = {
+  accordion: 'Reveals related content in vertically stacked, expandable sections.',
   alert: 'Surfaces an inline, persistent status message.',
   avatar: 'Represents a user or entity with an image, initials, or fallback content.',
   badge: 'Displays compact status or metadata.',
   button: 'Triggers an action or submits a form.',
   checkbox: 'Toggles a binary option in a form or settings surface.',
+  collapsible: 'Toggles the visibility of a single content region.',
+  'context-menu': 'Reveals a menu of actions on right-click or long-press.',
   dialog: 'Displays modal content in a focus-trapped overlay.',
   'dropdown-menu': 'Displays a keyboard-accessible menu of actions from a trigger.',
   input: 'Collects short-form text from a user.',
   label: 'Associates text with a form control.',
+  menubar: 'Provides a persistent menu surface for top-level application commands.',
   popover: 'Displays interactive floating content from a trigger.',
+  progress: 'Shows the completion progress of a task.',
   radio: 'Selects one option from a related set of choices.',
   select: 'Lets a user choose one option from a native menu.',
+  skeleton: 'Reserves layout space with a shimmering placeholder while content loads.',
+  slider: 'Selects a numeric value or range along a track.',
   spinner: 'Indicates an indeterminate loading state with an accessible label.',
   switch: 'Toggles a setting on or off.',
   tabs: 'Organizes related content into selectable panels.',
@@ -120,15 +136,8 @@ const objectKeys = (node: Node | undefined) => {
   })
 }
 
-const extractProps = (name: ComponentName) => {
-  const sourceFile = project.getSourceFileOrThrow(`packages/components/src/${name}.tsx`)
-  const propsInterface = sourceFile.getInterface(`${pascalCase(name)}Props`)
-
-  if (propsInterface === undefined) {
-    return []
-  }
-
-  return propsInterface.getProperties().map((property) => {
+const extractMemberProps = (source: PropSource): ExtractedProp[] =>
+  source.getProperties().map((property) => {
     const defaultValue = jsDocDefault(property)
 
     return {
@@ -139,6 +148,114 @@ const extractProps = (name: ComponentName) => {
       type: property.getTypeNode()?.getText() ?? property.getType().getText(property),
     }
   })
+
+const resolvePropSources = (
+  sourceFile: SourceFile,
+  name: string,
+  seen: Set<string> = new Set(),
+): PropSource[] => {
+  if (seen.has(name)) {
+    return []
+  }
+
+  seen.add(name)
+
+  const directInterface = sourceFile.getInterface(name)
+
+  if (directInterface !== undefined) {
+    return [directInterface]
+  }
+
+  const alias = sourceFile.getTypeAlias(name)
+  const typeNode = alias?.getTypeNode()
+
+  if (typeNode === undefined) {
+    return []
+  }
+
+  return resolveTypeNodeSources(sourceFile, typeNode, seen)
+}
+
+const resolveTypeNodeSources = (
+  sourceFile: SourceFile,
+  typeNode: TypeNode,
+  seen: Set<string>,
+): PropSource[] => {
+  if (Node.isTypeLiteral(typeNode)) {
+    return [typeNode]
+  }
+
+  if (Node.isTypeReference(typeNode)) {
+    return resolvePropSources(sourceFile, typeNode.getTypeName().getText(), seen)
+  }
+
+  if (Node.isIntersectionTypeNode(typeNode)) {
+    return typeNode.getTypeNodes().flatMap((node) => resolveTypeNodeSources(sourceFile, node, seen))
+  }
+
+  return []
+}
+
+const slotLabel = (displayName: string, candidateName: string) => {
+  const slot = candidateName.replace(/Props$/, '').slice(displayName.length)
+
+  if (slot.length === 0) {
+    return `<${displayName}>`
+  }
+
+  return `<${displayName}.${slot}>`
+}
+
+const extractPropGroups = (name: ComponentName): ExtractedPropGroup[] => {
+  const sourceFile = project.getSourceFileOrThrow(`packages/components/src/${name}.tsx`)
+  const displayName = pascalCase(name)
+  const pattern = new RegExp(`^${displayName}.*Props$`)
+
+  const candidateNames = [
+    ...sourceFile.getInterfaces().map((decl) => decl.getName()),
+    ...sourceFile.getTypeAliases().map((decl) => decl.getName()),
+  ].filter((candidate) => pattern.test(candidate))
+
+  // Stable order: bare `${DisplayName}Props` first (top-level), then alphabetical.
+  candidateNames.sort((a, b) => {
+    const aBare = a === `${displayName}Props`
+    const bBare = b === `${displayName}Props`
+    if (aBare !== bBare) return aBare ? -1 : 1
+    return a.localeCompare(b)
+  })
+
+  const seenSources = new Set<PropSource>()
+  const groups: ExtractedPropGroup[] = []
+
+  for (const candidateName of candidateNames) {
+    const sources = resolvePropSources(sourceFile, candidateName)
+    const props: ExtractedProp[] = []
+    const seenProps = new Set<string>()
+
+    for (const source of sources) {
+      if (seenSources.has(source)) {
+        continue
+      }
+
+      seenSources.add(source)
+
+      for (const prop of extractMemberProps(source)) {
+        if (seenProps.has(prop.name)) {
+          continue
+        }
+        seenProps.add(prop.name)
+        props.push(prop)
+      }
+    }
+
+    if (props.length === 0) {
+      continue
+    }
+
+    groups.push({ label: slotLabel(displayName, candidateName), props })
+  }
+
+  return groups
 }
 
 const extractVariantsFromRecipe = (recipeName: string) => {
@@ -163,8 +280,11 @@ const extractVariantsFromRecipe = (recipeName: string) => {
   }
 
   const sourceFile = project.getSourceFile(path) ?? project.addSourceFileAtPath(path)
+  // Recipe variable usually matches the recipe name, but JS-reserved words
+  // (e.g. `switch`) are exported as `${name}Recipe` instead.
   const declaration =
     sourceFile.getVariableDeclaration(recipeName) ??
+    sourceFile.getVariableDeclaration(`${recipeName}Recipe`) ??
     sourceFile.getVariableDeclarations().find((variable) => variable.getName() === recipeName)
   const initializer = declaration?.getInitializer()
   const recipeObject = Node.isSatisfiesExpression(initializer)
@@ -206,18 +326,14 @@ const extractComponent = (name: ComponentName): ExtractedComponent => {
     name,
     displayName: pascalCase(name),
     description: extractDescription(name),
-    props: extractProps(name),
+    propGroups: extractPropGroups(name),
     variants: item.stalk.preset.recipes.flatMap(extractVariantsFromRecipe),
     examples: [...componentExamples[name]],
   }
 }
 
-const propsTable = (props: ExtractedProp[]) => {
-  if (props.length === 0) {
-    return 'No component-specific props are documented yet. Primitive props pass through to the underlying element or Radix part.'
-  }
-
-  return `| Prop | Type | Required | Default | Description |
+const propsTable = (props: ExtractedProp[]) =>
+  `| Prop | Type | Required | Default | Description |
 | --- | --- | --- | --- | --- |
 ${props
   .map(
@@ -229,6 +345,17 @@ ${props
       } |`,
   )
   .join('\n')}`
+
+const propsSection = (groups: ExtractedPropGroup[]) => {
+  if (groups.length === 0) {
+    return 'No component-specific props are documented yet. Primitive props pass through to the underlying element or Radix part.'
+  }
+
+  if (groups.length === 1 && groups[0] !== undefined) {
+    return propsTable(groups[0].props)
+  }
+
+  return groups.map((group) => `### \`${group.label}\`\n\n${propsTable(group.props)}`).join('\n\n')
 }
 
 const variantsTable = (variants: ExtractedVariant[]) => {
@@ -289,7 +416,7 @@ ${example}
 
 ## Props
 
-${propsTable(component.props)}
+${propsSection(component.propGroups)}
 
 ## Variants
 

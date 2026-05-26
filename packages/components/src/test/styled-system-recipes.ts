@@ -268,3 +268,83 @@ export const textarea = ({ invalid = false, size = 'md' }: TextareaRecipeOptions
   ['stalk-textarea', `stalk-textarea--${size}`, invalid ? 'stalk-textarea--invalid' : undefined]
     .filter(Boolean)
     .join(' ')
+
+interface AccordionRecipeOptions {
+  variant?: 'inline' | 'card'
+}
+
+export const accordion = ({ variant = 'inline' }: AccordionRecipeOptions = {}) => ({
+  root: `stalk-accordion__root stalk-accordion--${variant}`,
+  item: 'stalk-accordion__item',
+  header: 'stalk-accordion__header',
+  trigger: 'stalk-accordion__trigger',
+  content: 'stalk-accordion__content',
+  icon: 'stalk-accordion__icon',
+})
+
+accordion.variantMap = { variant: ['inline', 'card'] as const }
+
+interface CollapsibleRecipeOptions {
+  variant?: 'inline' | 'card'
+}
+
+export const collapsible = ({ variant = 'inline' }: CollapsibleRecipeOptions = {}) => ({
+  root: `stalk-collapsible__root stalk-collapsible--${variant}`,
+  trigger: 'stalk-collapsible__trigger',
+  content: 'stalk-collapsible__content',
+})
+
+collapsible.variantMap = { variant: ['inline', 'card'] as const }
+
+interface ContextMenuRecipeOptions {
+  inset?: boolean
+}
+
+export const contextMenu = ({ inset = false }: ContextMenuRecipeOptions = {}) => ({
+  content: 'stalk-context-menu__content',
+  subContent: 'stalk-context-menu__sub-content',
+  item: `stalk-context-menu__item${inset ? ' stalk-context-menu__item--inset' : ''}`,
+  itemIndicator: 'stalk-context-menu__item-indicator',
+  label: 'stalk-context-menu__label',
+  separator: 'stalk-context-menu__separator',
+  shortcut: 'stalk-context-menu__shortcut',
+})
+
+interface MenubarRecipeOptions {
+  inset?: boolean
+}
+
+export const menubar = ({ inset = false }: MenubarRecipeOptions = {}) => ({
+  root: 'stalk-menubar__root',
+  trigger: 'stalk-menubar__trigger',
+  content: 'stalk-menubar__content',
+  subContent: 'stalk-menubar__sub-content',
+  item: `stalk-menubar__item${inset ? ' stalk-menubar__item--inset' : ''}`,
+  itemIndicator: 'stalk-menubar__item-indicator',
+  label: 'stalk-menubar__label',
+  separator: 'stalk-menubar__separator',
+  shortcut: 'stalk-menubar__shortcut',
+})
+
+interface ProgressRecipeOptions {
+  size?: 'sm' | 'md' | 'lg'
+}
+
+export const progress = ({ size = 'md' }: ProgressRecipeOptions = {}) => ({
+  root: `stalk-progress__root stalk-progress__root--${size}`,
+  indicator: 'stalk-progress__indicator',
+})
+
+interface SkeletonRecipeOptions {
+  radius?: 'none' | 'sm' | 'md' | 'lg' | 'full'
+}
+
+export const skeleton = ({ radius = 'md' }: SkeletonRecipeOptions = {}) =>
+  `stalk-skeleton stalk-skeleton--radius-${radius}`
+
+export const slider = () => ({
+  root: 'stalk-slider__root',
+  track: 'stalk-slider__track',
+  range: 'stalk-slider__range',
+  thumb: 'stalk-slider__thumb',
+})

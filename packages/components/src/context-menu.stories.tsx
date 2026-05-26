@@ -1,0 +1,100 @@
+import { useState } from 'react'
+import { Center } from 'styled-system/jsx'
+
+import { ContextMenu } from './context-menu'
+
+import type { Meta, StoryObj } from '@storybook/react-vite'
+
+const meta = {
+  title: 'Components/ContextMenu',
+  component: ContextMenu.Root,
+  tags: ['autodocs', 'stable'],
+  parameters: {
+    controls: { disable: true },
+    layout: 'padded',
+    docs: { story: { inline: false, iframeHeight: '360px' } },
+  },
+} satisfies Meta<typeof ContextMenu.Root>
+
+export default meta
+
+type Story = StoryObj<typeof meta>
+
+// Centered, dashed drop-target for the right-click trigger. Used by every
+// story below via `<ContextMenu.Trigger asChild>` so the radix span renders
+// directly as this element (no wrapper layer).
+const Target = (
+  <Center
+    border="2px dashed"
+    borderColor="border"
+    color="fg.subtle"
+    fontSize="sm"
+    h="120"
+    rounded="md"
+    userSelect="none"
+    w="320"
+  >
+    Right click here
+  </Center>
+)
+
+export const Default: Story = {
+  render: () => (
+    <Center minH="calc(100vh - 2rem)" w="full">
+      <ContextMenu>
+        <ContextMenu.Trigger asChild>{Target}</ContextMenu.Trigger>
+        <ContextMenu.Content>
+          <ContextMenu.Item>
+            Back
+            <ContextMenu.Shortcut>⌘[</ContextMenu.Shortcut>
+          </ContextMenu.Item>
+          <ContextMenu.Item disabled>
+            Forward
+            <ContextMenu.Shortcut>⌘]</ContextMenu.Shortcut>
+          </ContextMenu.Item>
+          <ContextMenu.Item>
+            Reload
+            <ContextMenu.Shortcut>⌘R</ContextMenu.Shortcut>
+          </ContextMenu.Item>
+          <ContextMenu.Separator />
+          <ContextMenu.Sub>
+            <ContextMenu.SubTrigger>More tools</ContextMenu.SubTrigger>
+            <ContextMenu.Portal>
+              <ContextMenu.SubContent>
+                <ContextMenu.Item>Save page as…</ContextMenu.Item>
+                <ContextMenu.Item>Create shortcut…</ContextMenu.Item>
+                <ContextMenu.Item>Name window…</ContextMenu.Item>
+              </ContextMenu.SubContent>
+            </ContextMenu.Portal>
+          </ContextMenu.Sub>
+        </ContextMenu.Content>
+      </ContextMenu>
+    </Center>
+  ),
+}
+
+export const WithCheckboxAndRadio: Story = {
+  render: function Render() {
+    const [showBookmarks, setShowBookmarks] = useState(true)
+    const [position, setPosition] = useState('bottom')
+    return (
+      <Center minH="calc(100vh - 2rem)" w="full">
+        <ContextMenu>
+          <ContextMenu.Trigger asChild>{Target}</ContextMenu.Trigger>
+          <ContextMenu.Content>
+            <ContextMenu.Label>View</ContextMenu.Label>
+            <ContextMenu.CheckboxItem checked={showBookmarks} onCheckedChange={setShowBookmarks}>
+              Show bookmarks bar
+            </ContextMenu.CheckboxItem>
+            <ContextMenu.Separator />
+            <ContextMenu.Label>Position</ContextMenu.Label>
+            <ContextMenu.RadioGroup value={position} onValueChange={setPosition}>
+              <ContextMenu.RadioItem value="top">Top</ContextMenu.RadioItem>
+              <ContextMenu.RadioItem value="bottom">Bottom</ContextMenu.RadioItem>
+            </ContextMenu.RadioGroup>
+          </ContextMenu.Content>
+        </ContextMenu>
+      </Center>
+    )
+  },
+}

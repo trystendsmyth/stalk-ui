@@ -1,0 +1,28 @@
+{
+  "$schema": "https://stalk-ui.com/schema/v1/registry-item.json",
+  "name": "accordion",
+  "type": "registry:ui",
+  "dependencies": ["@radix-ui/react-accordion", "@stalk-ui/preset", "lucide-react"],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "src/components/ui/accordion.tsx",
+      "type": "registry:ui",
+      "content": "'use client'\n\nimport * as AccordionPrimitive from '@radix-ui/react-accordion'\nimport { ChevronDown } from 'lucide-react'\nimport { createContext, forwardRef, useContext, useMemo } from 'react'\nimport { cx } from 'styled-system/css'\nimport { accordion as accordionRecipe } from 'styled-system/recipes'\n\nimport type { ComponentPropsWithoutRef, ComponentRef } from 'react'\n\nexport type AccordionVariant = (typeof accordionRecipe.variantMap.variant)[number]\n\ntype AccordionStyles = ReturnType<typeof accordionRecipe>\n\nconst AccordionContext = /* @__PURE__ */ createContext<AccordionStyles | null>(null)\n\nconst useAccordionStyles = () => {\n  const styles = useContext(AccordionContext)\n  if (!styles) {\n    throw new Error('Accordion subcomponents must be rendered inside <Accordion.Root>.')\n  }\n  return styles\n}\n\nexport type AccordionRootProps = ComponentPropsWithoutRef<typeof AccordionPrimitive.Root> & {\n  /** Visual treatment for the root container. `card` adds a bordered surface and inset\n   *  trigger padding; `inline` is unstyled chrome for embedding in arbitrary surfaces. */\n  variant?: AccordionVariant\n}\n\nexport const AccordionRoot = /* @__PURE__ */ forwardRef<\n  ComponentRef<typeof AccordionPrimitive.Root>,\n  AccordionRootProps\n>(function AccordionRoot({ className, variant = 'inline', ...props }, ref) {\n  const styles = useMemo(() => accordionRecipe({ variant }), [variant])\n\n  return (\n    <AccordionContext.Provider value={styles}>\n      <AccordionPrimitive.Root ref={ref} className={cx(styles.root, className)} {...props} />\n    </AccordionContext.Provider>\n  )\n})\n\nexport const AccordionItem = /* @__PURE__ */ forwardRef<\n  ComponentRef<typeof AccordionPrimitive.Item>,\n  ComponentPropsWithoutRef<typeof AccordionPrimitive.Item>\n>(function AccordionItem({ className, ...props }, ref) {\n  const styles = useAccordionStyles()\n  return <AccordionPrimitive.Item ref={ref} className={cx(styles.item, className)} {...props} />\n})\n\nexport const AccordionHeader = /* @__PURE__ */ forwardRef<\n  ComponentRef<typeof AccordionPrimitive.Header>,\n  ComponentPropsWithoutRef<typeof AccordionPrimitive.Header>\n>(function AccordionHeader({ className, ...props }, ref) {\n  const styles = useAccordionStyles()\n  return <AccordionPrimitive.Header ref={ref} className={cx(styles.header, className)} {...props} />\n})\n\nexport const AccordionTrigger = /* @__PURE__ */ forwardRef<\n  ComponentRef<typeof AccordionPrimitive.Trigger>,\n  ComponentPropsWithoutRef<typeof AccordionPrimitive.Trigger>\n>(function AccordionTrigger({ children, className, ...props }, ref) {\n  const styles = useAccordionStyles()\n  return (\n    <AccordionPrimitive.Header className={styles.header}>\n      <AccordionPrimitive.Trigger ref={ref} className={cx(styles.trigger, className)} {...props}>\n        {children}\n        <ChevronDown aria-hidden=\"true\" className={styles.icon} height={16} width={16} />\n      </AccordionPrimitive.Trigger>\n    </AccordionPrimitive.Header>\n  )\n})\n\nexport const AccordionContent = /* @__PURE__ */ forwardRef<\n  ComponentRef<typeof AccordionPrimitive.Content>,\n  ComponentPropsWithoutRef<typeof AccordionPrimitive.Content>\n>(function AccordionContent({ className, ...props }, ref) {\n  const styles = useAccordionStyles()\n  return (\n    <AccordionPrimitive.Content ref={ref} className={cx(styles.content, className)} {...props} />\n  )\n})\n\nexport const Accordion = /* @__PURE__ */ Object.assign(AccordionRoot, {\n  Content: AccordionContent,\n  Header: AccordionHeader,\n  Item: AccordionItem,\n  Root: AccordionRoot,\n  Trigger: AccordionTrigger,\n})\n"
+    }
+  ],
+  "stalk": {
+    "schemaVersion": "1.0",
+    "preset": {
+      "semanticTokens": {},
+      "recipes": ["accordion"]
+    },
+    "packageDependencies": {
+      "preset": "@stalk-ui/preset"
+    },
+    "pandaCodegen": true,
+    "importAliases": {
+      "styledSystem": "styled-system"
+    }
+  }
+}

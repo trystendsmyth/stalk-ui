@@ -1,0 +1,28 @@
+{
+  "$schema": "https://stalk-ui.com/schema/v1/registry-item.json",
+  "name": "slider",
+  "type": "registry:ui",
+  "dependencies": ["@radix-ui/react-slider", "@stalk-ui/preset"],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "src/components/ui/slider.tsx",
+      "type": "registry:ui",
+      "content": "'use client'\n\nimport * as SliderPrimitive from '@radix-ui/react-slider'\n// Stalk UI component - requires PandaCSS setup and @stalk-ui/preset.\nimport { forwardRef } from 'react'\nimport { cx } from 'styled-system/css'\nimport { slider as sliderRecipe } from 'styled-system/recipes'\n\nimport type { ComponentPropsWithoutRef, ComponentRef } from 'react'\n\nexport type SliderProps = ComponentPropsWithoutRef<typeof SliderPrimitive.Root>\n\nexport const Slider = /* @__PURE__ */ forwardRef<\n  ComponentRef<typeof SliderPrimitive.Root>,\n  SliderProps\n>(function Slider(\n  {\n    'aria-label': ariaLabel,\n    'aria-labelledby': ariaLabelledBy,\n    className,\n    max = 100,\n    min = 0,\n    step = 1,\n    ...props\n  },\n  ref,\n) {\n  const styles = sliderRecipe()\n  const resolved = props.value ?? props.defaultValue ?? [min]\n  const thumbCount = Math.max(resolved.length, 1)\n\n  return (\n    <SliderPrimitive.Root\n      ref={ref}\n      className={cx(styles.root, className)}\n      max={max}\n      min={min}\n      step={step}\n      {...props}\n    >\n      <SliderPrimitive.Track className={styles.track}>\n        <SliderPrimitive.Range className={styles.range} />\n      </SliderPrimitive.Track>\n      {Array.from({ length: thumbCount }, (_, index) => (\n        <SliderPrimitive.Thumb\n          key={index}\n          aria-label={thumbCount === 1 ? ariaLabel : undefined}\n          aria-labelledby={thumbCount === 1 ? ariaLabelledBy : undefined}\n          className={styles.thumb}\n        />\n      ))}\n    </SliderPrimitive.Root>\n  )\n})\n"
+    }
+  ],
+  "stalk": {
+    "schemaVersion": "1.0",
+    "preset": {
+      "semanticTokens": {},
+      "recipes": ["slider"]
+    },
+    "packageDependencies": {
+      "preset": "@stalk-ui/preset"
+    },
+    "pandaCodegen": true,
+    "importAliases": {
+      "styledSystem": "styled-system"
+    }
+  }
+}
