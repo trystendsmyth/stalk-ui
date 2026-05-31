@@ -110,13 +110,22 @@ const writeJson = async (path: string, value: Record<string, unknown>) => {
 const readJson = async (path: string) =>
   JSON.parse(await readFile(path, 'utf8')) as Record<string, unknown>
 
+// pnpm 11 treats an ignored dependency build script as a fatal error by default
+// (strictDepBuilds). These throwaway fixtures only smoke-test install + compat,
+// so downgrade it to a warning; otherwise the install aborts on transitive build
+// scripts the fixture never needs (sharp via next, msw via shadcn's deps, etc.).
+const writePnpmWorkspaceSettings = async (tempDirectory: string) => {
+  await writeFile(join(tempDirectory, 'pnpm-workspace.yaml'), 'strictDepBuilds: false\n')
+}
+
 const writeBasePackageJson = async (tempDirectory: string, fixture: IntegrationFixture) => {
   await writeJson(join(tempDirectory, 'package.json'), {
     name: `stalk-${fixture}-integration`,
-    packageManager: 'pnpm@10.0.0',
+    packageManager: 'pnpm@11.5.0',
     private: true,
     type: 'module',
   })
+  await writePnpmWorkspaceSettings(tempDirectory)
 }
 
 const writeNextFixtureFiles = async (tempDirectory: string) => {
@@ -347,7 +356,8 @@ const runShadcnCompatFixture = async (tempDirectory: string, env: TestEnvironmen
   exec('npx', ['--yes', 'create-vite@latest', '.', '--template', 'react-ts'], tempDirectory, env)
   const packageJsonPath = join(tempDirectory, 'package.json')
   const initialPackageJson = await readJson(packageJsonPath)
-  await writeJson(packageJsonPath, { ...initialPackageJson, packageManager: 'pnpm@10.0.0' })
+  await writeJson(packageJsonPath, { ...initialPackageJson, packageManager: 'pnpm@11.5.0' })
+  await writePnpmWorkspaceSettings(tempDirectory)
   await writeJson(join(tempDirectory, 'tsconfig.json'), {
     compilerOptions: {
       baseUrl: '.',

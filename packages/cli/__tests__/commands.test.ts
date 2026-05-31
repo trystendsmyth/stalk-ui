@@ -19,7 +19,7 @@ const createFixture = async () => {
   await writeFile(
     join(root, 'package.json'),
     JSON.stringify(
-      { name: 'fixture', private: true, packageManager: 'pnpm@10.0.0', type: 'module' },
+      { name: 'fixture', private: true, packageManager: 'pnpm@11.5.0', type: 'module' },
       null,
       2,
     ),
@@ -134,6 +134,87 @@ const createRegistryServer = async () => {
   }
 }
 
+const createRegistryServerWithDependency = async () => {
+  const baseStalk = {
+    schemaVersion: '1.0',
+    preset: { semanticTokens: {}, recipes: [] as string[] },
+    packageDependencies: { preset: '@stalk-ui/preset' },
+    pandaCodegen: false,
+    importAliases: { styledSystem: 'styled-system' },
+  }
+
+  const manifests: Record<string, unknown> = {
+    '/accordion.json': {
+      $schema: 'https://stalk-ui.com/schema/v1/registry-item.json',
+      name: 'accordion',
+      type: 'registry:ui',
+      dependencies: ['@radix-ui/react-accordion'],
+      registryDependencies: ['create-style-context'],
+      files: [
+        {
+          path: 'src/components/ui/accordion.tsx',
+          type: 'registry:ui',
+          content:
+            "import { createStyleContext } from '../../lib/stalk-ui/create-style-context'\nexport const Accordion = () => null\n",
+        },
+      ],
+      stalk: { ...baseStalk, preset: { semanticTokens: {}, recipes: ['accordion'] } },
+    },
+    '/create-style-context.json': {
+      $schema: 'https://stalk-ui.com/schema/v1/registry-item.json',
+      name: 'create-style-context',
+      type: 'registry:lib',
+      dependencies: [],
+      registryDependencies: [],
+      files: [
+        {
+          path: 'src/lib/stalk-ui/create-style-context.tsx',
+          type: 'registry:lib',
+          content: 'export const createStyleContext = () => ({})\n',
+        },
+      ],
+      stalk: baseStalk,
+    },
+  }
+
+  const server = createServer((request, response) => {
+    const manifest = request.url === undefined ? undefined : manifests[request.url]
+    if (manifest !== undefined) {
+      response.writeHead(200, { 'Content-Type': 'application/json' })
+      response.end(JSON.stringify(manifest))
+      return
+    }
+
+    response.writeHead(404)
+    response.end()
+  })
+
+  await new Promise<void>((resolve) => {
+    server.listen(0, resolve)
+  })
+
+  const address = server.address()
+
+  if (address === null || typeof address === 'string') {
+    throw new Error('Could not start registry fixture.')
+  }
+
+  return {
+    close: async () => {
+      await new Promise<void>((resolve, reject) => {
+        server.close((error) => {
+          if (error === undefined) {
+            resolve()
+          } else {
+            reject(error)
+          }
+        })
+      })
+    },
+    url: `http://127.0.0.1:${String(address.port)}/{name}.json`,
+  }
+}
+
 afterEach(async () => {
   await Promise.all(fixtures.splice(0).map((fixture) => fixture.cleanup()))
 })
@@ -174,6 +255,35 @@ describe('CLI command golden files', () => {
           [
             "[dry-run] write $ROOT/src/components/ui/button.tsx",
             "[dry-run] pnpm add @stalk-ui/preset",
+          ]
+        `)
+      })
+    } finally {
+      await registry.close()
+    }
+  })
+
+  test('add installs registry dependencies before the requested component', async () => {
+    const registry = await createRegistryServerWithDependency()
+
+    try {
+      await withFixture(async () => {
+        const output = await captureOutput(async () => {
+          await addCommand('accordion', {
+            codegen: false,
+            dryRun: true,
+            force: true,
+            registry: registry.url,
+          })
+        })
+
+        // The lib helper is written before the component that imports it, and
+        // the dependency's package deps are unioned into a single install.
+        expect(normalizeOutput(process.cwd(), output)).toMatchInlineSnapshot(`
+          [
+            "[dry-run] write $ROOT/src/lib/stalk-ui/create-style-context.tsx",
+            "[dry-run] write $ROOT/src/components/ui/accordion.tsx",
+            "[dry-run] pnpm add @stalk-ui/preset @radix-ui/react-accordion",
           ]
         `)
       })

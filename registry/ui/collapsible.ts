@@ -5,5 +5,6 @@ export const collapsible = defineRegistryItem({
   filePath: 'src/components/ui/collapsible.tsx',
   name: 'collapsible',
   recipes: ['collapsible'],
+  registryDependencies: ['create-style-context'],
   sourcePath: 'packages/components/src/collapsible.tsx',
 })

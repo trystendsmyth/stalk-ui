@@ -146,7 +146,11 @@ try {
   exec('npx', ['--yes', 'create-vite@latest', '.', '--template', 'react-ts'])
   const packageJsonPath = join(tempDirectory, 'package.json')
   const initialPackageJson = await readJson(packageJsonPath)
-  await writeJson(packageJsonPath, { ...initialPackageJson, packageManager: 'pnpm@10.0.0' })
+  await writeJson(packageJsonPath, { ...initialPackageJson, packageManager: 'pnpm@11.5.0' })
+  // pnpm 11 treats an ignored dependency build script as a fatal error by default
+  // (strictDepBuilds); downgrade to a warning so shadcn's internal `pnpm add`
+  // doesn't abort on transitive build scripts (e.g. msw) this fixture never needs.
+  await writeFile(join(tempDirectory, 'pnpm-workspace.yaml'), 'strictDepBuilds: false\n')
   await writeJson(join(tempDirectory, 'tsconfig.json'), {
     compilerOptions: {
       baseUrl: '.',

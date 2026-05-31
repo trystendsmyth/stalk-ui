@@ -267,13 +267,18 @@ try {
       {
         name: `stalk-${fixtureName}-integration`,
         private: true,
-        packageManager: 'pnpm@10.0.0',
+        packageManager: 'pnpm@11.5.0',
         type: 'module',
       },
       null,
       2,
     ),
   )
+
+  // pnpm 11 fails the install when a dependency build script is ignored
+  // (strictDepBuilds defaults to fatal); downgrade to a warning for this
+  // throwaway fixture so it doesn't abort on builds it never needs.
+  await writeFile(join(tempDirectory, 'pnpm-workspace.yaml'), 'strictDepBuilds: false\n')
 
   if (fixtureName === 'next') {
     await runNextFixture()

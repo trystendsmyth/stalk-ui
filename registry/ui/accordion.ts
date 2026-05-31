@@ -5,5 +5,6 @@ export const accordion = defineRegistryItem({
   filePath: 'src/components/ui/accordion.tsx',
   name: 'accordion',
   recipes: ['accordion'],
+  registryDependencies: ['create-style-context'],
   sourcePath: 'packages/components/src/accordion.tsx',
 })

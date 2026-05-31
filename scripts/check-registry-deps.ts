@@ -3,11 +3,26 @@ import { fileURLToPath } from 'node:url'
 
 import { Project, SyntaxKind } from 'ts-morph'
 
+import { stalkUtilLibByExport, stalkUtilLibNames } from '../registry/lib/utils-exports'
 import { registryItems } from '../registry/ui'
 
-import type { ImportDeclaration } from 'ts-morph'
+import type { ImportDeclaration, SourceFile } from 'ts-morph'
 
 const projectRoot = resolve(dirname(fileURLToPath(import.meta.url)), '..')
+
+// One project, parsed once per file: each source is inspected by both collectors
+// and across the forward/inverse drift loops, so a fresh Project per call would
+// re-read and re-parse the same files several times over.
+const project = new Project({ useInMemoryFileSystem: false })
+const sourceFileCache = new Map<string, SourceFile>()
+
+const getSourceFile = (absolutePath: string): SourceFile => {
+  const cached = sourceFileCache.get(absolutePath)
+  if (cached !== undefined) return cached
+  const source = project.addSourceFileAtPath(absolutePath)
+  sourceFileCache.set(absolutePath, source)
+  return source
+}
 
 // Specifiers that are not declared dependencies because the consumer
 // provides them (React, Panda codegen output, or copied registry deps).
@@ -33,10 +48,7 @@ const packageNameFromSpecifier = (specifier: string): string => {
   return specifier.split('/')[0] ?? specifier
 }
 
-const collectExternalPackages = (sourcePath: string): Set<string> => {
-  const project = new Project({ useInMemoryFileSystem: false })
-  const source = project.addSourceFileAtPath(sourcePath)
-
+const collectExternalPackages = (source: SourceFile): Set<string> => {
   const declarations: ImportDeclaration[] = source.getImportDeclarations()
   const externals = new Set<string>()
 
@@ -62,7 +74,69 @@ const collectExternalPackages = (sourcePath: string): Set<string> => {
   return externals
 }
 
+// Named imports a source pulls from the `@stalk-ui/utils` workspace package.
+// These map to copyable lib files; each must be declared in the manifest's
+// `registryDependencies` so the CLI installs the helper alongside the component.
+const collectStalkUtilsImports = (source: SourceFile): Set<string> => {
+  const names = new Set<string>()
+
+  for (const declaration of source.getImportDeclarations()) {
+    if (declaration.getModuleSpecifierValue() !== '@stalk-ui/utils') continue
+    for (const namedImport of declaration.getNamedImports()) {
+      names.add(namedImport.getName())
+    }
+  }
+
+  return names
+}
+
 const failures: string[] = []
+
+// `@stalk-ui/utils` imports must each resolve to a declared lib dependency, and
+// declared lib dependencies must each be backed by a real import (no stale ones).
+for (const item of registryItems) {
+  const declaredRegistryDependencies = new Set(item.registryDependencies)
+  const requiredLibs = new Set<string>()
+
+  for (const file of item.files) {
+    if (!file.sourcePath) continue
+    const absoluteSource = resolve(projectRoot, file.sourcePath)
+
+    let importedNames: Set<string>
+    try {
+      importedNames = collectStalkUtilsImports(getSourceFile(absoluteSource))
+    } catch (error) {
+      failures.push(`${item.name}: failed to parse ${file.sourcePath}: ${(error as Error).message}`)
+      continue
+    }
+
+    for (const importedName of importedNames) {
+      const lib = stalkUtilLibByExport.get(importedName)
+      if (lib === undefined) {
+        failures.push(
+          `${item.name}: imports '${importedName}' from '@stalk-ui/utils' but no lib provides it. ` +
+            `Add it to registry/lib/utils-exports.ts.`,
+        )
+        continue
+      }
+      requiredLibs.add(lib.name)
+      if (!declaredRegistryDependencies.has(lib.name)) {
+        failures.push(
+          `${item.name}: imports '${importedName}' from '@stalk-ui/utils' but manifest does not ` +
+            `declare lib dependency '${lib.name}' in 'registryDependencies'.`,
+        )
+      }
+    }
+  }
+
+  for (const declared of declaredRegistryDependencies) {
+    if (stalkUtilLibNames.has(declared) && !requiredLibs.has(declared)) {
+      failures.push(
+        `${item.name}: declares lib dependency '${declared}' but no source file imports it from '@stalk-ui/utils'.`,
+      )
+    }
+  }
+}
 
 for (const item of registryItems) {
   const declaredDependencies = new Set(item.dependencies)
@@ -75,7 +149,7 @@ for (const item of registryItems) {
 
     let externals: Set<string>
     try {
-      externals = collectExternalPackages(absoluteSource)
+      externals = collectExternalPackages(getSourceFile(absoluteSource))
     } catch (error) {
       failures.push(`${item.name}: failed to parse ${file.sourcePath}: ${(error as Error).message}`)
       continue
@@ -102,7 +176,7 @@ for (const item of registryItems) {
   for (const sourcePath of sourcePaths) {
     const absoluteSource = resolve(projectRoot, sourcePath)
     try {
-      for (const external of collectExternalPackages(absoluteSource)) {
+      for (const external of collectExternalPackages(getSourceFile(absoluteSource))) {
         allExternals.add(external)
       }
     } catch {
