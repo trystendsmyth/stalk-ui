@@ -1,10 +1,12 @@
 import { createHash } from 'node:crypto'
 import { mkdirSync, readFileSync, writeFileSync } from 'node:fs'
-import { dirname, join } from 'node:path'
+import { dirname, join, posix } from 'node:path'
 
 import { format, resolveConfig } from 'prettier'
 import { rimrafSync } from 'rimraf'
 
+import { registryLibs } from '../registry/lib'
+import { stalkUtilLibByExport } from '../registry/lib/utils-exports'
 import {
   DEFAULT_VARIANT,
   registryIndexSchema,
@@ -56,9 +58,60 @@ const writeJson = async (path: string, value: unknown) => {
   return content
 }
 
+// Components import shared helpers from the `@stalk-ui/utils` workspace package
+// so local dev (Storybook/vitest/tsup) resolves them via node_modules. For the
+// copied-in registry output we rewrite that bare specifier to a relative path
+// pointing at the lib file the CLI installs alongside the component. Without
+// this the installed component would import a package the consumer never gets.
+const stalkUtilsImportPattern =
+  /import\s+(?<typeKeyword>type\s+)?\{(?<names>[^}]*)\}\s+from\s+['"]@stalk-ui\/utils['"];?/g
+
+const stripExtension = (path: string): string => path.replace(/\.[^/.]+$/, '')
+
+const relativeSpecifier = (fromFilePath: string, toFilePath: string): string => {
+  const specifier = posix.relative(posix.dirname(fromFilePath), stripExtension(toFilePath))
+  return specifier.startsWith('.') ? specifier : `./${specifier}`
+}
+
+const rewriteStalkUtilsImports = (source: string, componentPath: string): string =>
+  source.replace(stalkUtilsImportPattern, (match, ...args) => {
+    const groups = args.at(-1) as { typeKeyword?: string; names?: string }
+    const typeKeyword = groups.typeKeyword ?? ''
+    const importedNames = (groups.names ?? '')
+      .split(',')
+      .map((name) => name.trim())
+      .filter((name) => name.length > 0)
+
+    const byLib = new Map<string, { targetPath: string; names: string[] }>()
+    for (const importName of importedNames) {
+      const localBinding = importName.split(/\s+as\s+/)[0]?.trim() ?? importName
+      const lib = stalkUtilLibByExport.get(localBinding)
+      if (lib === undefined) {
+        throw new Error(
+          `build-registry: '${componentPath}' imports '${localBinding}' from '@stalk-ui/utils' ` +
+            `but no lib provides it. Add it to registry/lib/utils-exports.ts.`,
+        )
+      }
+      const entry = byLib.get(lib.name) ?? { targetPath: lib.filePath, names: [] }
+      entry.names.push(importName)
+      byLib.set(lib.name, entry)
+    }
+
+    return [...byLib.values()]
+      .map(
+        ({ targetPath, names }) =>
+          `import ${typeKeyword}{ ${names.join(', ')} } from '${relativeSpecifier(
+            componentPath,
+            targetPath,
+          )}'`,
+      )
+      .join('\n')
+  })
+
 const inlineFile = (file: RegistryFile, sourcePath: string): RegistryFile => {
   const raw = readFileSync(join(rootDirectory, sourcePath), 'utf8')
-  const content = sourceNeedsUseClient(raw) ? `${useClientDirective}${raw}` : raw
+  const rewritten = rewriteStalkUtilsImports(raw, file.path)
+  const content = sourceNeedsUseClient(rewritten) ? `${useClientDirective}${rewritten}` : rewritten
   const { sourcePath: _sourcePath, ...serializableFile } = file
 
   return {
@@ -92,11 +145,16 @@ const toSerializableItem = (item: RegistrySource, variant: Variant): RegistryIte
 }
 
 const withShadcnCompatibilityHeader = (content: string) => {
-  // Anchor the header to the first import statement so it survives the shadcn
-  // CLI's import-rewriting pass. Comments inside the directive prologue (above
-  // the imports) are stripped when the CLI re-emits the file; comments adjacent
-  // to imports are preserved.
-  const importMatch = /^import [^\n]*\n/m.exec(content)
+  // Anchor the header immediately after the first complete import statement so it
+  // survives the shadcn CLI's import-rewriting pass — comments in the directive
+  // prologue (above the imports) are stripped when the CLI re-emits the file,
+  // while comments adjacent to imports are preserved. The statement may span
+  // multiple lines (e.g. a multiline named import), so match through its
+  // terminating `from '...'` rather than a single physical line; fall back to a
+  // single line for bare side-effect imports that have no `from` clause.
+  const importMatch =
+    /^import\b[\s\S]*?from\s+['"][^'"]+['"];?\n/m.exec(content) ??
+    /^import\b[^\n]*\n/m.exec(content)
 
   if (importMatch === null) {
     return `${shadcnCompatibilityHeader}\n${content}`
@@ -121,7 +179,10 @@ mkdirSync(shadcnDirectory, { recursive: true })
 
 const manifests: RegistryIndex['manifests'] = {}
 
-for (const item of registryItems) {
+// Lib items (shared helpers) are emitted alongside components. They carry the
+// same per-variant fan-out so `registryDependencies` resolve for every
+// `primitives` setting, and a shadcn-compat copy so mixed registries work.
+for (const item of [...registryItems, ...registryLibs]) {
   for (const variant of VARIANTS) {
     const nativeItem = toSerializableItem(item, variant)
     if (nativeItem === undefined) {

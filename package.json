@@ -30,7 +30,6 @@
     "generate-docs": "tsx scripts/generate-docs.ts",
     "lint": "pnpm --filter @stalk-ui/storybook run prebuild && pnpm --filter @stalk-ui/cli build && eslint . --cache && tsx scripts/check-package-contracts.ts && turbo run lint",
     "lost-pixel": "pnpm --filter @stalk-ui/storybook build && lost-pixel",
-    "lost-pixel:install": "pnpm exec playwright-core install chromium",
     "prepare": "husky",
     "registry:serve": "tsx scripts/serve-registry.ts",
     "registry:watch": "tsx scripts/watch-registry.ts",
@@ -113,9 +112,9 @@
     "typescript-eslint": "^8.59.2",
     "zod": "^4.4.3"
   },
-  "packageManager": "pnpm@10.0.0",
+  "packageManager": "pnpm@11.5.0",
   "engines": {
     "node": ">=24.0.0",
-    "pnpm": ">=10.0.0"
+    "pnpm": ">=11.0.0"
   }
 }

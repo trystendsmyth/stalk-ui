@@ -7,6 +7,7 @@ import { rimrafSync } from 'rimraf'
 
 interface Pa11yConfig {
   urls: string[]
+  defaults?: { chromeLaunchConfig?: Record<string, unknown> } & Record<string, unknown>
   [key: string]: unknown
 }
 
@@ -34,10 +35,19 @@ const waitForHttp = async (url: string) => {
 }
 
 execFileSync('pnpm', ['--filter', '@stalk-ui/docs', 'build'], { stdio: 'inherit' })
-execFileSync('pnpm', ['exec', 'puppeteer', 'browsers', 'install', 'chrome'], { stdio: 'inherit' })
 
 const pa11yConfig = JSON.parse(readFileSync('.pa11yci.docs.json', 'utf8')) as Pa11yConfig
 pa11yConfig.urls = pa11yConfig.urls.map((url) => url.replace('http://127.0.0.1:3000', baseUrl))
+// Use the runner's system Chrome instead of downloading one: CI sets
+// PUPPETEER_EXECUTABLE_PATH to the installed binary; locally we fall back to the
+// `chrome` channel. pa11y-ci forwards this to puppeteer-core's launch.
+pa11yConfig.defaults ??= {}
+pa11yConfig.defaults.chromeLaunchConfig ??= {}
+if (process.env.PUPPETEER_EXECUTABLE_PATH) {
+  pa11yConfig.defaults.chromeLaunchConfig.executablePath = process.env.PUPPETEER_EXECUTABLE_PATH
+} else {
+  pa11yConfig.defaults.chromeLaunchConfig.channel = 'chrome'
+}
 writeFileSync(tempConfigPath, `${JSON.stringify(pa11yConfig, null, 2)}\n`)
 
 const docs = spawn(

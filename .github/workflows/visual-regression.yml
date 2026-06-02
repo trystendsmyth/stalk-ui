@@ -24,7 +24,7 @@ jobs:
           node-version-file: '.nvmrc'
           cache: 'pnpm'
       - run: pnpm install --frozen-lockfile
-      - run: pnpm lost-pixel:install
+      - run: echo "PUPPETEER_EXECUTABLE_PATH=$(command -v google-chrome || command -v google-chrome-stable)" >> "$GITHUB_ENV"
       - run: pnpm lost-pixel
       - if: always()
         uses: actions/upload-artifact@v7

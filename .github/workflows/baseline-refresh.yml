@@ -28,7 +28,7 @@ jobs:
           node-version-file: '.nvmrc'
           cache: 'pnpm'
       - run: pnpm install --frozen-lockfile
-      - run: pnpm lost-pixel:install
+      - run: echo "PUPPETEER_EXECUTABLE_PATH=$(command -v google-chrome || command -v google-chrome-stable)" >> "$GITHUB_ENV"
       - name: Wipe existing baselines
         run: rm -rf apps/storybook/.lost-pixel/baseline && mkdir -p apps/storybook/.lost-pixel/baseline
       - name: Build Storybook and capture fresh baselines

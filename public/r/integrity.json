@@ -4,19 +4,19 @@
   "manifests": {
     "accordion": {
       "path": "/r/accordion.json",
-      "sha256": "bca5e21797fa506f7a29e8d5015753e9e54274dec48613b9551dad28ee4b8448"
+      "sha256": "3c8bcac381b177a91ba38d1a1cfcd45c871c56b35845bcc52baa82a94feceff3"
     },
     "shadcn/accordion": {
       "path": "/r/shadcn/accordion.json",
-      "sha256": "59c5de094a87ed7e2dbdc3285ca0d4e71009916deecfc815d1c25cd0ea3c4be8"
+      "sha256": "555ff7690b0f3554839b068a18556197ce7bef7c3bf62e930bedc1a61f3a0485"
     },
     "alert": {
       "path": "/r/alert.json",
-      "sha256": "fd809838eed898ab0b76723ca69c9a8830fd7de08899419ce7c9ad87cbc83415"
+      "sha256": "4150594dd3743095f5f08dec2d3d9fd7e41d572e0c77629a4b7bd6dad11fe4a0"
     },
     "shadcn/alert": {
       "path": "/r/shadcn/alert.json",
-      "sha256": "c068fe63ddfa7b3e510316188e97e54e52353d7973a2a52125249e29fc00b438"
+      "sha256": "1ca4eda25fb12d829964dfe6d2e9034152b98e8511e72c10975e6c297b822267"
     },
     "avatar": {
       "path": "/r/avatar.json",
@@ -52,11 +52,11 @@
     },
     "collapsible": {
       "path": "/r/collapsible.json",
-      "sha256": "5b7a068a72caa2e770753b8fce59003a0cf5f67c3c2c7f01b6fa8f22546f5be7"
+      "sha256": "6af17eb1d23fa07b3587967878cc4c7455f1363d0708b597d1369185a6c57e17"
     },
     "shadcn/collapsible": {
       "path": "/r/shadcn/collapsible.json",
-      "sha256": "d9cfdc1ce408966aa01171e6c037c6a6894c8ea3fa01e4b74b874e0ae62f8187"
+      "sha256": "7d5868a5f7c17f9d209ffdeba20230226918d73fda0e5a39d3620868d76f4e76"
     },
     "context-menu": {
       "path": "/r/context-menu.json",
@@ -217,6 +217,22 @@
     "shadcn/tooltip": {
       "path": "/r/shadcn/tooltip.json",
       "sha256": "c85683220d38134ea83efd1fe0204732bba7b3342828bc786e25f5a78be3a28b"
+    },
+    "create-style-context": {
+      "path": "/r/create-style-context.json",
+      "sha256": "57ebf8e34a49bd395fe376141eca7a9649f0afac0f202da46d615fce44ecd43f"
+    },
+    "shadcn/create-style-context": {
+      "path": "/r/shadcn/create-style-context.json",
+      "sha256": "8f830b3cb58c505c78140e9431452596f45c81fbda48c35205151bedf1ffc5d5"
+    },
+    "base/create-style-context": {
+      "path": "/r/base/create-style-context.json",
+      "sha256": "57ebf8e34a49bd395fe376141eca7a9649f0afac0f202da46d615fce44ecd43f"
+    },
+    "shadcn/base/create-style-context": {
+      "path": "/r/shadcn/base/create-style-context.json",
+      "sha256": "8f830b3cb58c505c78140e9431452596f45c81fbda48c35205151bedf1ffc5d5"
     }
   }
 }

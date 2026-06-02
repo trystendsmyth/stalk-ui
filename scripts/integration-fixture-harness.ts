@@ -28,7 +28,7 @@ export const parseIntegrationFixtures = (fixture: string | undefined): Integrati
   }
 
   throw new Error(
-    `Usage: tsx scripts/test-integration-fixture.ts <${integrationFixtures.join('|')}|all>`,
+    `Usage: tsx scripts/test-integration-suite.ts <${integrationFixtures.join('|')}|all>`,
   )
 }
 
@@ -110,13 +110,22 @@ const writeJson = async (path: string, value: Record<string, unknown>) => {
 const readJson = async (path: string) =>
   JSON.parse(await readFile(path, 'utf8')) as Record<string, unknown>
 
+// pnpm 11 treats an ignored dependency build script as a fatal error by default
+// (strictDepBuilds). These throwaway fixtures only smoke-test install + compat,
+// so downgrade it to a warning; otherwise the install aborts on transitive build
+// scripts the fixture never needs (sharp via next, msw via shadcn's deps, etc.).
+const writePnpmWorkspaceSettings = async (tempDirectory: string) => {
+  await writeFile(join(tempDirectory, 'pnpm-workspace.yaml'), 'strictDepBuilds: false\n')
+}
+
 const writeBasePackageJson = async (tempDirectory: string, fixture: IntegrationFixture) => {
   await writeJson(join(tempDirectory, 'package.json'), {
     name: `stalk-${fixture}-integration`,
-    packageManager: 'pnpm@10.0.0',
+    packageManager: 'pnpm@11.5.0',
     private: true,
     type: 'module',
   })
+  await writePnpmWorkspaceSettings(tempDirectory)
 }
 
 const writeNextFixtureFiles = async (tempDirectory: string) => {
@@ -217,7 +226,6 @@ const assertShadcnManifest = async () => {
 }
 
 const runNextFixture = async (tempDirectory: string, env: TestEnvironment) => {
-  execFromRoot(['exec', 'puppeteer', 'browsers', 'install', 'chrome'])
   exec(
     'pnpm',
     [
@@ -264,10 +272,15 @@ const runNextFixture = async (tempDirectory: string, env: TestEnvironment) => {
   try {
     await waitForHttp('http://127.0.0.1:3020')
 
+    // Use the runner's system Chrome instead of downloading one: CI sets
+    // PUPPETEER_EXECUTABLE_PATH; locally fall back to the `chrome` channel.
     const { default: puppeteer } = await import('puppeteer')
     const browser = await puppeteer.launch({
       args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage'],
       headless: true,
+      ...(process.env.PUPPETEER_EXECUTABLE_PATH
+        ? { executablePath: process.env.PUPPETEER_EXECUTABLE_PATH }
+        : { channel: 'chrome' as const }),
     })
 
     try {
@@ -347,7 +360,8 @@ const runShadcnCompatFixture = async (tempDirectory: string, env: TestEnvironmen
   exec('npx', ['--yes', 'create-vite@latest', '.', '--template', 'react-ts'], tempDirectory, env)
   const packageJsonPath = join(tempDirectory, 'package.json')
   const initialPackageJson = await readJson(packageJsonPath)
-  await writeJson(packageJsonPath, { ...initialPackageJson, packageManager: 'pnpm@10.0.0' })
+  await writeJson(packageJsonPath, { ...initialPackageJson, packageManager: 'pnpm@11.5.0' })
+  await writePnpmWorkspaceSettings(tempDirectory)
   await writeJson(join(tempDirectory, 'tsconfig.json'), {
     compilerOptions: {
       baseUrl: '.',

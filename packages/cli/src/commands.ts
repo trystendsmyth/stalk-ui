@@ -17,6 +17,45 @@ interface InfoOptions extends GlobalOptions {
   json?: boolean
 }
 
+interface ResolvedManifest {
+  manifest: RegistryItem
+  url: string
+}
+
+// Resolve a component and the transitive closure of its `registryDependencies`
+// (sibling components and shared lib helpers), de-duplicated and ordered
+// dependencies-first so a helper is written before the component that imports
+// it. A `{name}`-templated registry override propagates to dependencies so a
+// custom registry resolves its own closure; a fixed-URL override targets a
+// single item, so dependencies fall back to the configured registries.
+const collectManifests = async (
+  name: string,
+  context: { config: StalkConfig },
+  options: GlobalOptions,
+  seen: Set<string>,
+  registryOverride?: string,
+): Promise<ResolvedManifest[]> => {
+  if (seen.has(name)) {
+    return []
+  }
+  seen.add(name)
+
+  const url = resolveManifestUrl(name, context.config, registryOverride)
+  const manifest = await fetchManifest(url, options.verbose)
+
+  const dependencyOverride =
+    registryOverride?.includes('{name}') === true ? registryOverride : undefined
+
+  const resolved: ResolvedManifest[] = []
+  for (const dependency of manifest.registryDependencies) {
+    resolved.push(
+      ...(await collectManifests(dependency, context, options, seen, dependencyOverride)),
+    )
+  }
+  resolved.push({ manifest, url })
+  return resolved
+}
+
 interface InitOptions extends GlobalOptions {
   accentColor?: string
   borderRadius?: string
@@ -107,32 +146,52 @@ export const initCommand = async (options: InitOptions) => {
 
 export const addCommand = async (name: string, options: GlobalOptions) => {
   const context = await resolveProject(options)
-  const manifestUrl = resolveManifestUrl(name, context.config, options.registry)
-  const manifest = await fetchManifest(manifestUrl, options.verbose)
+  const resolved = await collectManifests(name, context, options, new Set(), options.registry)
   const backupDirectory = backupRoot(context.root)
 
   if (options.dryRun !== true) {
     await mkdir(backupDirectory, { recursive: true })
   }
 
-  for (const file of manifest.files) {
-    const targetPath = toProjectPath(context.root, file.path)
-    const existing = await readTextIfExists(targetPath)
+  // Write every file across the dependency closure first, de-duplicating shared
+  // files (e.g. a lib helper pulled in by multiple components) by target path.
+  const writtenPaths = new Set<string>()
+  for (const { manifest } of resolved) {
+    for (const file of manifest.files) {
+      if (writtenPaths.has(file.path)) {
+        continue
+      }
+      writtenPaths.add(file.path)
 
-    if (existing === file.content) {
-      continue
+      const targetPath = toProjectPath(context.root, file.path)
+      const existing = await readTextIfExists(targetPath)
+
+      if (existing === file.content) {
+        continue
+      }
+
+      if (existing !== undefined && options.force !== true && options.dryRun !== true) {
+        throw new CliError(`${file.path} already exists. Re-run with --force to overwrite.`)
+      }
+
+      await writeFileWithBackup(context.root, backupDirectory, targetPath, file.content, options)
     }
-
-    if (existing !== undefined && options.force !== true && options.dryRun !== true) {
-      throw new CliError(`${file.path} already exists. Re-run with --force to overwrite.`)
-    }
-
-    await writeFileWithBackup(context.root, backupDirectory, targetPath, file.content, options)
   }
 
-  await installPackages(context.packageManager, packageDependenciesForManifest(manifest), options)
+  const packageDependencies = [
+    ...new Set(resolved.flatMap(({ manifest }) => packageDependenciesForManifest(manifest))),
+  ]
+  await installPackages(context.packageManager, packageDependencies, options)
   await runPandaCodegen(context.packageManager, options)
-  note(`Installed ${manifest.name} from ${manifestUrl}.`, 'Added component')
+
+  const installed = resolved.map(({ manifest }) => manifest.name)
+  const requested = resolved.at(-1)?.manifest.name ?? name
+  const dependencyNames = installed.filter((installedName) => installedName !== requested)
+  const summary =
+    dependencyNames.length > 0
+      ? `Installed ${requested} (with ${dependencyNames.join(', ')}).`
+      : `Installed ${requested}.`
+  note(summary, 'Added component')
 }
 
 const themes = {
@@ -187,22 +246,30 @@ https://stalk-ui.com/en/docs/getting-started/custom-themes`)
 
 export const diffCommand = async (name: string, options: GlobalOptions) => {
   const context = await resolveProject(options)
-  const manifestUrl = resolveManifestUrl(name, context.config, options.registry)
-  const manifest = await fetchManifest(manifestUrl, options.verbose)
+  const resolved = await collectManifests(name, context, options, new Set(), options.registry)
+  const requested = resolved.at(-1)?.manifest.name ?? name
   let differences = 0
 
-  for (const file of manifest.files) {
-    const targetPath = toProjectPath(context.root, file.path)
-    const existing = await readTextIfExists(targetPath)
+  const checkedPaths = new Set<string>()
+  for (const { manifest } of resolved) {
+    for (const file of manifest.files) {
+      if (checkedPaths.has(file.path)) {
+        continue
+      }
+      checkedPaths.add(file.path)
 
-    if (existing !== file.content) {
-      differences += 1
-      console.log(`${file.path}: ${existing === undefined ? 'missing' : 'differs'}`)
+      const targetPath = toProjectPath(context.root, file.path)
+      const existing = await readTextIfExists(targetPath)
+
+      if (existing !== file.content) {
+        differences += 1
+        console.log(`${file.path}: ${existing === undefined ? 'missing' : 'differs'}`)
+      }
     }
   }
 
   if (differences === 0) {
-    console.log(`${manifest.name}: no differences`)
+    console.log(`${requested}: no differences`)
   }
 }
 

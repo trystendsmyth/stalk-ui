@@ -111,6 +111,9 @@ jobs:
         with:
           node-version-file: '.nvmrc'
           cache: 'pnpm'
+      # Point puppeteer/pa11y at the runner's pre-installed Chrome (the docs a11y
+      # check needs a browser) instead of downloading one.
+      - run: echo "PUPPETEER_EXECUTABLE_PATH=$(command -v google-chrome || command -v google-chrome-stable)" >> "$GITHUB_ENV"
       - run: pnpm install --frozen-lockfile
       - run: pnpm test
 
@@ -264,6 +267,9 @@ jobs:
         with:
           node-version-file: '.nvmrc'
           cache: 'pnpm'
+      # Point puppeteer at the runner's pre-installed Chrome (the next fixture
+      # launches a browser) instead of downloading one.
+      - run: echo "PUPPETEER_EXECUTABLE_PATH=$(command -v google-chrome || command -v google-chrome-stable)" >> "$GITHUB_ENV"
       - run: pnpm install --frozen-lockfile
       - run: pnpm test:integration
 

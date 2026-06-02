@@ -137,6 +137,9 @@ try {
       '--registry',
       registry,
       '--strict-peer-dependencies',
+      // pnpm 11 fatally errors on ignored build scripts; this smoke test only
+      // checks install + the CLI bin, so skip them (e.g. esbuild via PandaCSS).
+      '--ignore-scripts',
     ],
     {
       cwd: tempDirectory,

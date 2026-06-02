@@ -1,6 +1,6 @@
 # Contributing
 
-Stalk UI is built with Node 24, pnpm 10, TypeScript 5.x, React 19, and PandaCSS 1.9.1. PandaCSS is pinned at 1.9.1; do not upgrade it to 1.10+ without explicit maintainer approval.
+Stalk UI is built with Node 24, pnpm 11, TypeScript 5.x, React 19, and PandaCSS 1.9.1. PandaCSS is pinned at 1.9.1; do not upgrade it to 1.10+ without explicit maintainer approval.
 
 ## Port Allocations
 
@@ -14,7 +14,7 @@ Stalk UI is built with Node 24, pnpm 10, TypeScript 5.x, React 19, and PandaCSS 
 ## Development Setup
 
 1. Use Node 24 from `.nvmrc` or `.node-version`.
-2. Use pnpm 10. The root `packageManager` field pins `pnpm@10.0.0`.
+2. Use pnpm 11 or newer. The root `packageManager` field pins `pnpm@11.5.0`.
 3. Run installs with pnpm only.
 4. Do not add npm, Yarn, Tailwind tooling, `prettier-plugin-tailwindcss`, or `bradlc.vscode-tailwindcss`.
 
@@ -75,7 +75,7 @@ Stalk UI uses Lost Pixel in OSS mode. Baseline screenshots live in `apps/storybo
 ### When You Intentionally Change Appearance
 
 1. Make your code change.
-2. Run `pnpm lost-pixel:install` once on a fresh machine if Chromium is missing.
+2. Ensure Google Chrome is installed locally — lost-pixel drives your system Chrome (via the `chrome` channel), so no separate browser download is needed.
 3. Run `pnpm lost-pixel`.
 4. Review PNGs in `apps/storybook/.lost-pixel/difference/`.
 5. Copy reviewed `current/*.png` files into `apps/storybook/.lost-pixel/baseline/`.

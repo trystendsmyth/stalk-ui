@@ -18,6 +18,21 @@ interface ComponentSpec {
 
 const compoundSpecs: ComponentSpec[] = [
   {
+    file: 'accordion',
+    importedExport: 'AccordionTrigger',
+    forbiddenExports: ['AccordionItem', 'AccordionContent', 'AccordionHeader', 'AccordionRoot'],
+  },
+  {
+    file: 'collapsible',
+    importedExport: 'CollapsibleContent',
+    forbiddenExports: ['CollapsibleTrigger', 'CollapsibleRoot'],
+  },
+  {
+    file: 'alert',
+    importedExport: 'AlertTitle',
+    forbiddenExports: ['AlertRoot', 'AlertIcon', 'AlertClose', 'AlertActions'],
+  },
+  {
     file: 'dialog',
     importedExport: 'DialogTrigger',
     forbiddenExports: [
@@ -118,9 +133,12 @@ const RUNTIME_STUBS: Record<string, string> = {
   'styled-system/recipes': `
     const recipe = () => new Proxy({}, { get: () => '' });
     recipe.raw = () => ({});
+    export const accordion = recipe;
+    export const alert = recipe;
     export const badge = recipe;
     export const button = recipe;
     export const checkbox = recipe;
+    export const collapsible = recipe;
     export const dialog = recipe;
     export const dropdownMenu = recipe;
     export const input = recipe;
@@ -173,6 +191,7 @@ const RADIX_STUB = `
   export const ScrollDownButton = stub('ScrollDownButton');
   export const CheckboxItem = stub('CheckboxItem');
   export const Slot = stub('Slot');
+  export const Header = stub('Header');
 `
 
 // Extra primitives that only `@radix-ui/react-dropdown-menu` exposes via dot
@@ -186,8 +205,28 @@ const DROPDOWN_MENU_STUB =
   export const RadioItem = stub('RadioItem');
 `
 
+const STALK_UTILS_STUB = `
+  import { createContext, forwardRef, useContext } from 'react';
+  const noop = () => null;
+  export const createStyleContext = () => ({
+    StyleProvider: ({ children }) => children,
+    useSlotStyles: () => ({}),
+    withContext: (Component) => Component,
+    withRootProvider: (Component) => Component,
+  });
+  export const mergeRefs = () => noop;
+  export const createDataAttribute = () => ({});
+  // Reference imports so esbuild keeps them resolvable.
+  void createContext;
+  void forwardRef;
+  void useContext;
+`
+
 const stubsForCompound = (): Record<string, string> => ({
   ...RUNTIME_STUBS,
+  '@stalk-ui/utils': STALK_UTILS_STUB,
+  '@radix-ui/react-accordion': RADIX_STUB,
+  '@radix-ui/react-collapsible': RADIX_STUB,
   '@radix-ui/react-dialog': RADIX_STUB,
   '@radix-ui/react-dropdown-menu': DROPDOWN_MENU_STUB,
   '@radix-ui/react-popover': RADIX_STUB,

@@ -4,7 +4,7 @@ Stalk UI is a PandaCSS-native component library distributed through `@stalk-ui/c
 
 ## Critical Rules
 
-- Use Node 24, pnpm 10, TypeScript 5.x, React 19, and PandaCSS 1.9.1.
+- Use Node 24, pnpm 11, TypeScript 5.x, React 19, and PandaCSS 1.9.1.
 - PandaCSS is pinned at 1.9.1 until TypeScript 6.x has matured enough for us to move to it. Do not suggest or apply 1.10+ upgrades without explicit maintainer approval.
 - Do not add Tailwind tooling, `prettier-plugin-tailwindcss`, or `bradlc.vscode-tailwindcss`.
 - Components are distributed as copied source files, not through a component npm package.

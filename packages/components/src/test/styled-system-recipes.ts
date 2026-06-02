@@ -1,3 +1,16 @@
+// Mirrors Panda's generated `splitVariantProps`: partition props into variant
+// keys vs the rest. Used by recipe stubs that back `createStyleContext` roots.
+const makeSplitVariantProps =
+  (keys: readonly string[]) =>
+  (props: Record<string, unknown>): [Record<string, unknown>, Record<string, unknown>] => {
+    const variantProps: Record<string, unknown> = {}
+    const rest: Record<string, unknown> = {}
+    for (const [key, value] of Object.entries(props)) {
+      ;(keys.includes(key) ? variantProps : rest)[key] = value
+    }
+    return [variantProps, rest]
+  }
+
 interface BadgeRecipeOptions {
   radius?: 'none' | 'sm' | 'md' | 'lg' | 'full'
   size?: 'sm' | 'md'
@@ -273,6 +286,8 @@ interface AccordionRecipeOptions {
   variant?: 'inline' | 'card'
 }
 
+const accordionVariantKeys = ['variant'] as const
+
 export const accordion = ({ variant = 'inline' }: AccordionRecipeOptions = {}) => ({
   root: `stalk-accordion__root stalk-accordion--${variant}`,
   item: 'stalk-accordion__item',
@@ -283,10 +298,14 @@ export const accordion = ({ variant = 'inline' }: AccordionRecipeOptions = {}) =
 })
 
 accordion.variantMap = { variant: ['inline', 'card'] as const }
+accordion.variantKeys = accordionVariantKeys
+accordion.splitVariantProps = makeSplitVariantProps(accordionVariantKeys)
 
 interface CollapsibleRecipeOptions {
   variant?: 'inline' | 'card'
 }
+
+const collapsibleVariantKeys = ['variant'] as const
 
 export const collapsible = ({ variant = 'inline' }: CollapsibleRecipeOptions = {}) => ({
   root: `stalk-collapsible__root stalk-collapsible--${variant}`,
@@ -295,6 +314,8 @@ export const collapsible = ({ variant = 'inline' }: CollapsibleRecipeOptions = {
 })
 
 collapsible.variantMap = { variant: ['inline', 'card'] as const }
+collapsible.variantKeys = collapsibleVariantKeys
+collapsible.splitVariantProps = makeSplitVariantProps(collapsibleVariantKeys)
 
 interface ContextMenuRecipeOptions {
   inset?: boolean
