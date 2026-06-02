@@ -21,6 +21,12 @@ updates:
       # upgrade, not driven by Dependabot.
       - dependency-name: '@types/node'
         update-types: ['version-update:semver-major']
+      # We drive the runner's system Chrome (see lostpixel.config.ts / ci.yml), so
+      # puppeteer's bundled-Chrome version is irrelevant and a major (v25+) only
+      # risks pa11y-ci/puppeteer-core compatibility on the a11y/integration jobs.
+      # Pinned in package.json; hold majors until that's deliberately verified.
+      - dependency-name: 'puppeteer'
+        update-types: ['version-update:semver-major']
     groups:
       react:
         patterns: ['react', 'react-dom', '@types/react*']
