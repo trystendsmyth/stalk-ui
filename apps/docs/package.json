@@ -19,7 +19,7 @@
     "typecheck": "pnpm run codegen && tsc --noEmit"
   },
   "dependencies": {
-    "@modelcontextprotocol/sdk": "1.26.0",
+    "@modelcontextprotocol/sdk": "1.29.0",
     "@stalk-ui/cli": "workspace:*",
     "@stalk-ui/components": "workspace:*",
     "@stalk-ui/i18n": "workspace:*",
