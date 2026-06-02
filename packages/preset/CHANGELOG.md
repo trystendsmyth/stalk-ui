@@ -1,5 +1,11 @@
 # @stalk-ui/preset
 
+## 0.4.0
+
+### Minor Changes
+
+- [#50](https://github.com/trystendsmyth/stalk-ui/pull/50) [`a910520`](https://github.com/trystendsmyth/stalk-ui/commit/a9105202f22985206944a751dadabcefb7aa1892) Thanks [@trystendsmyth](https://github.com/trystendsmyth)! - Add 13 new components and button tones, introduce a registry-distributed createStyleContext helper, and migrate to pnpm 11.
+
 ## 0.3.0
 
 ### Minor Changes

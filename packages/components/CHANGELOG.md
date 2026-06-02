@@ -4,6 +4,19 @@
 
 ### Minor Changes
 
+- [#50](https://github.com/trystendsmyth/stalk-ui/pull/50) [`a910520`](https://github.com/trystendsmyth/stalk-ui/commit/a9105202f22985206944a751dadabcefb7aa1892) Thanks [@trystendsmyth](https://github.com/trystendsmyth)! - Add 13 new components and button tones, introduce a registry-distributed createStyleContext helper, and migrate to pnpm 11.
+
+### Patch Changes
+
+- Updated dependencies [[`a910520`](https://github.com/trystendsmyth/stalk-ui/commit/a9105202f22985206944a751dadabcefb7aa1892)]:
+  - @stalk-ui/preset@0.4.0
+  - @stalk-ui/utils@0.4.0
+  - @stalk-ui/i18n@0.4.0
+
+## 1.0.0
+
+### Minor Changes
+
 - [#29](https://github.com/trystendsmyth/stalk-ui/pull/29) [`df5516f`](https://github.com/trystendsmyth/stalk-ui/commit/df5516f004616dbc443d7ddb06a5ec6353a52229) Thanks [@trystendsmyth](https://github.com/trystendsmyth)! - add variant plumbing, update theming
 
 ### Patch Changes
