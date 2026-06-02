@@ -28,7 +28,7 @@ export const parseIntegrationFixtures = (fixture: string | undefined): Integrati
   }
 
   throw new Error(
-    `Usage: tsx scripts/test-integration-fixture.ts <${integrationFixtures.join('|')}|all>`,
+    `Usage: tsx scripts/test-integration-suite.ts <${integrationFixtures.join('|')}|all>`,
   )
 }
 
@@ -226,7 +226,6 @@ const assertShadcnManifest = async () => {
 }
 
 const runNextFixture = async (tempDirectory: string, env: TestEnvironment) => {
-  execFromRoot(['exec', 'puppeteer', 'browsers', 'install', 'chrome'])
   exec(
     'pnpm',
     [
@@ -273,10 +272,15 @@ const runNextFixture = async (tempDirectory: string, env: TestEnvironment) => {
   try {
     await waitForHttp('http://127.0.0.1:3020')
 
+    // Use the runner's system Chrome instead of downloading one: CI sets
+    // PUPPETEER_EXECUTABLE_PATH; locally fall back to the `chrome` channel.
     const { default: puppeteer } = await import('puppeteer')
     const browser = await puppeteer.launch({
       args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage'],
       headless: true,
+      ...(process.env.PUPPETEER_EXECUTABLE_PATH
+        ? { executablePath: process.env.PUPPETEER_EXECUTABLE_PATH }
+        : { channel: 'chrome' as const }),
     })
 
     try {

@@ -75,7 +75,7 @@ Stalk UI uses Lost Pixel in OSS mode. Baseline screenshots live in `apps/storybo
 ### When You Intentionally Change Appearance
 
 1. Make your code change.
-2. Run `pnpm lost-pixel:install` once on a fresh machine if Chromium is missing.
+2. Ensure Google Chrome is installed locally — lost-pixel drives your system Chrome (via the `chrome` channel), so no separate browser download is needed.
 3. Run `pnpm lost-pixel`.
 4. Review PNGs in `apps/storybook/.lost-pixel/difference/`.
 5. Copy reviewed `current/*.png` files into `apps/storybook/.lost-pixel/baseline/`.
