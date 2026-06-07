@@ -1,7 +1,4 @@
-import {
-  createAccentSemanticTokens,
-  createVibrantAccentSemanticTokens,
-} from '../tokens/semantic-colors'
+import { createVibrantAccentSemanticTokens } from '../tokens/semantic-colors'
 
 const scaleToken = (scale: string, step: number) => `{colors.${scale}.${String(step)}}`
 const darkScaleToken = (scale: string, step: number) => `{colors.${scale}Dark.${String(step)}}`
@@ -21,7 +18,7 @@ const semanticPair = (light: string, dark: string) => ({
 export const rainbowTheme = {
   semanticTokens: {
     colors: {
-      accent: createAccentSemanticTokens('teal'),
+      accent: createVibrantAccentSemanticTokens('teal'),
       bg: {
         canvas: semanticPair(scaleToken('violet', 2), darkScaleToken('violet', 2)),
         default: semanticPair(scaleToken('violet', 1), darkScaleToken('violet', 1)),

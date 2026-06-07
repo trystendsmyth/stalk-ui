@@ -3,7 +3,7 @@
 
 import { execFileSync } from 'node:child_process'
 import { readFileSync, readdirSync } from 'node:fs'
-import { basename, join } from 'node:path'
+import { join } from 'node:path'
 
 const root = process.cwd()
 const storyIndexPath = join(root, 'apps/storybook/storybook-static/index.json')
@@ -19,6 +19,16 @@ const toKebab = (value: string) =>
     .replace(/([A-Z]+)([A-Z][a-z])/g, '$1-$2')
     .toLowerCase()
 
+// Mirror Storybook's `sanitize`/`toId`: lowercase, collapse any run of
+// non-alphanumerics (slashes, spaces) to a single dash, trim dashes. This makes
+// the expected id track the story `title` so components can be grouped into
+// nested folders (e.g. `Components/Typography/Text`) without breaking coverage.
+const toId = (value: string) =>
+  value
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '')
+
 const collectExpectedStoryIds = (): string[] => {
   const expected: string[] = ['foundation-semantic-tokens--docs']
 
@@ -29,9 +39,14 @@ const collectExpectedStoryIds = (): string[] => {
   }
 
   for (const file of storyFiles) {
-    const componentName = basename(file, '.stories.tsx')
-    const componentSlug = componentName.replaceAll('-', '')
     const source = readFileSync(join(storiesDirectory, file), 'utf8')
+
+    const titleMatch = /title:\s*'([^']+)'/.exec(source)
+    if (titleMatch?.[1] === undefined) {
+      throw new Error(`No story title found in ${file}`)
+    }
+    const titleSlug = toId(titleMatch[1])
+
     const exportNames = [...source.matchAll(/^export const (\w+)\b/gm)]
       .map((match) => match[1])
       .filter((name): name is string => name !== undefined)
@@ -41,7 +56,7 @@ const collectExpectedStoryIds = (): string[] => {
     }
 
     for (const name of exportNames) {
-      expected.push(`components-${componentSlug}--${toKebab(name)}`)
+      expected.push(`${titleSlug}--${toKebab(name)}`)
     }
   }
 

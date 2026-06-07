@@ -30,7 +30,7 @@ const repoHeader = css({
 })
 
 const meta = {
-  title: 'Components/Collapsible',
+  title: 'Components/Disclosure/Collapsible',
   component: Collapsible.Root,
   tags: ['autodocs', 'stable'],
   parameters: { controls: { disable: true } },

@@ -49,6 +49,7 @@ export const monochromeTheme = {
         muted: semanticPair(scaleToken('slate', 6), darkScaleToken('slate', 6)),
         solid: semanticPair(scaleToken('slate', 12), darkScaleToken('slate', 12)),
         emphasis: semanticPair(scaleToken('slate', 11), darkScaleToken('slate', 11)),
+        text: semanticPair(scaleToken('slate', 11), darkScaleToken('slate', 11)),
         fg: semanticPair(scaleToken('slate', 12), darkScaleToken('slate', 12)),
         contrast: semanticPair(scaleToken('slate', 1), darkScaleToken('slate', 1)),
       },

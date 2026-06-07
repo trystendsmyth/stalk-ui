@@ -7,7 +7,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite'
 const frame = css({ w: '480px' })
 
 const meta = {
-  title: 'Components/Accordion',
+  title: 'Components/Disclosure/Accordion',
   component: Accordion.Root,
   tags: ['autodocs', 'stable'],
   args: { type: 'single' },

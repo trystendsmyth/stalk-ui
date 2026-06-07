@@ -30,7 +30,7 @@ const TONE_ICONS: Record<AlertTone, ReactNode> = {
 }
 
 const meta = {
-  title: 'Components/Alert',
+  title: 'Components/Feedback/Alert',
   component: AlertRoot,
   tags: ['autodocs', 'stable'],
   args: {

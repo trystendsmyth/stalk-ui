@@ -27,7 +27,7 @@ const SelectExample = ({
 )
 
 const meta = {
-  title: 'Components/Select',
+  title: 'Components/Forms/Select',
   component: Select.Trigger,
   tags: ['autodocs', 'stable'],
   args: {

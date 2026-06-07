@@ -26,7 +26,7 @@ const useSelection = (initial: string | null = null) => {
 }
 
 const meta = {
-  title: 'Components/DropdownMenu',
+  title: 'Components/Navigation/DropdownMenu',
   component: DropdownMenu.Root,
   tags: ['autodocs', 'stable'],
   parameters: {

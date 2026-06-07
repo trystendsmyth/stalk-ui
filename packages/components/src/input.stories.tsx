@@ -4,7 +4,7 @@ import { Label } from './label'
 import type { Meta, StoryObj } from '@storybook/react-vite'
 
 const meta = {
-  title: 'Components/Input',
+  title: 'Components/Forms/Input',
   component: Input,
   args: {
     'aria-label': 'Email',

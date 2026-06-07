@@ -19,7 +19,7 @@ const panel = css({ color: 'fg.muted', textAlign: 'center' })
 const Panel = ({ children }: { children: ReactNode }) => <div className={panel}>{children}</div>
 
 const meta = {
-  title: 'Components/Tabs',
+  title: 'Components/Navigation/Tabs',
   component: TabsRoot,
   tags: ['autodocs', 'stable'],
   args: {

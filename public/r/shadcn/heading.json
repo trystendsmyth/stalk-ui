@@ -1,0 +1,28 @@
+{
+  "$schema": "https://stalk-ui.com/schema/v1/registry-item.json",
+  "name": "heading",
+  "type": "registry:ui",
+  "dependencies": ["@stalk-ui/preset"],
+  "registryDependencies": ["text"],
+  "files": [
+    {
+      "path": "src/components/ui/heading.tsx",
+      "type": "registry:ui",
+      "content": "import { forwardRef } from 'react'\n// Stalk UI component - requires PandaCSS setup and @stalk-ui/preset.\nimport { css, cx } from 'styled-system/css'\nimport { text as textRecipe } from 'styled-system/recipes'\n\nimport type { TextAlign, TextColor, TextSize, TextWeight } from './text'\nimport type { Tone } from './tones'\nimport type { HTMLAttributes } from 'react'\n\n/** Heading levels. The level sets both the rendered element and the default visual size. */\nexport type HeadingLevel = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'\n\nexport interface HeadingProps extends HTMLAttributes<HTMLHeadingElement> {\n  /** Heading level. Renders the matching `<hN>` and picks its textStyle by default. Defaults to `h2`. */\n  as?: HeadingLevel\n  /** Neutral foreground colour. Ignored when `tone` is set. Defaults to `default`. */\n  color?: TextColor\n  lineClamp?: number\n  /** Visual size, decoupled from the semantic level. Defaults to match `as`. */\n  size?: TextSize\n  /** Selects a semantic status palette, overriding `color`. */\n  tone?: Tone\n  truncate?: boolean\n  align?: TextAlign\n  /** Defaults to `semibold`. */\n  weight?: TextWeight\n}\n\nconst resolveColor = (color: TextColor, tone: Tone | undefined): string | undefined => {\n  if (tone !== undefined) return css({ colorPalette: tone, color: 'colorPalette.text' })\n  if (color === 'default') return undefined\n  return css({ color: `fg.${color}` })\n}\n\nexport const Heading = /* @__PURE__ */ forwardRef<HTMLHeadingElement, HeadingProps>(\n  function Heading(\n    {\n      align,\n      as: Component = 'h2',\n      className,\n      color = 'default',\n      lineClamp,\n      size,\n      tone,\n      truncate = false,\n      weight = 'semibold',\n      ...props\n    },\n    ref,\n  ) {\n    return (\n      <Component\n        ref={ref}\n        className={cx(\n          textRecipe({ align, size: size ?? Component, truncate, weight }),\n          resolveColor(color, tone),\n          lineClamp !== undefined ? css({ lineClamp: String(lineClamp) }) : undefined,\n          className,\n        )}\n        {...props}\n      />\n    )\n  },\n)\n"
+    }
+  ],
+  "stalk": {
+    "schemaVersion": "1.0",
+    "preset": {
+      "semanticTokens": {},
+      "recipes": ["text"]
+    },
+    "packageDependencies": {
+      "preset": "@stalk-ui/preset"
+    },
+    "pandaCodegen": true,
+    "importAliases": {
+      "styledSystem": "styled-system"
+    }
+  }
+}
