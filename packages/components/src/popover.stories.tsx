@@ -24,7 +24,7 @@ const CloseIcon = () => (
 )
 
 const meta = {
-  title: 'Components/Popover',
+  title: 'Components/Overlay/Popover',
   component: Popover.Root,
   tags: ['autodocs', 'stable'],
   parameters: { controls: { disable: true } },

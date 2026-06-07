@@ -13,7 +13,7 @@ const labelStyle = css({ cursor: 'pointer' })
 const disabledLabelStyle = css({ cursor: 'not-allowed', opacity: 0.5 })
 
 const meta = {
-  title: 'Components/Checkbox',
+  title: 'Components/Forms/Checkbox',
   component: Checkbox,
   tags: ['autodocs', 'stable'],
   args: {

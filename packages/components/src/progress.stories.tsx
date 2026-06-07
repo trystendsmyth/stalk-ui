@@ -12,7 +12,7 @@ const { size: SIZES } = progressRecipe.variantMap
 const frame = css({ width: '320px' })
 
 const meta = {
-  title: 'Components/Progress',
+  title: 'Components/Feedback/Progress',
   component: Progress,
   tags: ['autodocs', 'stable'],
   args: {

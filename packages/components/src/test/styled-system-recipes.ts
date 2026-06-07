@@ -369,3 +369,53 @@ export const slider = () => ({
   range: 'stalk-slider__range',
   thumb: 'stalk-slider__thumb',
 })
+
+interface TextRecipeOptions {
+  align?: string
+  size?: string
+  truncate?: boolean
+  weight?: string
+}
+
+export const text = ({
+  align,
+  size = 'body',
+  truncate = false,
+  weight = 'regular',
+}: TextRecipeOptions = {}) =>
+  [
+    'stalk-text',
+    `stalk-text--${size}`,
+    `stalk-text--weight-${weight}`,
+    align ? `stalk-text--align-${align}` : undefined,
+    truncate ? 'stalk-text--truncate' : undefined,
+  ]
+    .filter(Boolean)
+    .join(' ')
+
+interface CodeRecipeOptions {
+  variant?: 'soft' | 'outline' | 'ghost'
+}
+
+export const code = ({ variant = 'soft' }: CodeRecipeOptions = {}) =>
+  `stalk-code stalk-code--${variant}`
+
+interface KbdRecipeOptions {
+  size?: 'sm' | 'md' | 'lg'
+}
+
+export const kbd = ({ size = 'md' }: KbdRecipeOptions = {}) => `stalk-kbd stalk-kbd--${size}`
+
+interface LinkRecipeOptions {
+  underline?: 'none' | 'hover' | 'always'
+}
+
+export const link = ({ underline = 'hover' }: LinkRecipeOptions = {}) =>
+  `stalk-link stalk-link--underline-${underline}`
+
+interface BlockquoteRecipeOptions {
+  size?: 'sm' | 'md' | 'lg'
+}
+
+export const blockquote = ({ size = 'md' }: BlockquoteRecipeOptions = {}) =>
+  `stalk-blockquote stalk-blockquote--${size}`

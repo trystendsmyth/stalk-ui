@@ -12,7 +12,7 @@ const labelStyle = css({ cursor: 'pointer' })
 const disabledLabelStyle = css({ cursor: 'not-allowed', opacity: 0.5 })
 
 const meta = {
-  title: 'Components/Switch',
+  title: 'Components/Forms/Switch',
   component: Switch,
   tags: ['autodocs', 'stable'],
   args: {

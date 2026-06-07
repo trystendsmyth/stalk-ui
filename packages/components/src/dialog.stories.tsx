@@ -9,7 +9,7 @@ import { Input } from './input'
 import type { Meta, StoryObj } from '@storybook/react-vite'
 
 const meta = {
-  title: 'Components/Dialog',
+  title: 'Components/Overlay/Dialog',
   component: Dialog.Root,
   tags: ['autodocs', 'stable'],
   parameters: { controls: { disable: true } },

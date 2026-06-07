@@ -2,14 +2,19 @@ import { accordion } from './accordion'
 import { alert } from './alert'
 import { avatar } from './avatar'
 import { badge } from './badge'
+import { blockquote } from './blockquote'
 import { button } from './button'
 import { checkbox } from './checkbox'
+import { code } from './code'
 import { collapsible } from './collapsible'
 import { contextMenu } from './context-menu'
 import { dialog } from './dialog'
 import { dropdownMenu } from './dropdown-menu'
+import { heading } from './heading'
 import { input } from './input'
+import { kbd } from './kbd'
 import { label } from './label'
+import { link } from './link'
 import { menubar } from './menubar'
 import { popover } from './popover'
 import { progress } from './progress'
@@ -21,6 +26,7 @@ import { spinner } from './spinner'
 import { switchItem } from './switch'
 import { tabs } from './tabs'
 import { tag } from './tag'
+import { text } from './text'
 import { textarea } from './textarea'
 import { toast } from './toast'
 import { toggle } from './toggle'
@@ -36,14 +42,19 @@ export const registryItems = [
   alert,
   avatar,
   badge,
+  blockquote,
   button,
   checkbox,
+  code,
   collapsible,
   contextMenu,
   dialog,
   dropdownMenu,
+  heading,
   input,
+  kbd,
   label,
+  link,
   menubar,
   popover,
   progress,
@@ -55,6 +66,7 @@ export const registryItems = [
   switchItem,
   tabs,
   tag,
+  text,
   textarea,
   toast,
   toggle,

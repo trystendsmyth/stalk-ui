@@ -16,7 +16,7 @@ const status = css({
 })
 
 const meta = {
-  title: 'Components/Menubar',
+  title: 'Components/Navigation/Menubar',
   component: Menubar.Root,
   tags: ['autodocs', 'stable'],
   parameters: { controls: { disable: true } },

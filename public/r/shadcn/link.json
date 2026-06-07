@@ -1,0 +1,28 @@
+{
+  "$schema": "https://stalk-ui.com/schema/v1/registry-item.json",
+  "name": "link",
+  "type": "registry:ui",
+  "dependencies": ["@radix-ui/react-slot", "@stalk-ui/preset"],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "src/components/ui/link.tsx",
+      "type": "registry:ui",
+      "content": "'use client'\n\nimport { Slot } from '@radix-ui/react-slot'\n// Stalk UI component - requires PandaCSS setup and @stalk-ui/preset.\nimport { forwardRef } from 'react'\nimport { css, cx } from 'styled-system/css'\nimport { link as linkRecipe } from 'styled-system/recipes'\n\nimport type { Tone } from './tones'\nimport type { AnchorHTMLAttributes } from 'react'\n\nexport type LinkUnderline = (typeof linkRecipe.variantMap.underline)[number]\n\nexport interface LinkProps extends AnchorHTMLAttributes<HTMLAnchorElement> {\n  /** Render the child element instead of an `<a>` (e.g. a router Link). */\n  asChild?: boolean\n  /** Selects the semantic color palette. Defaults to `accent`. */\n  tone?: Tone\n  /** Underline behaviour. Defaults to `hover`. */\n  underline?: LinkUnderline\n}\n\nexport const Link = /* @__PURE__ */ forwardRef<HTMLAnchorElement, LinkProps>(function Link(\n  { asChild = false, className, tone = 'accent', underline = 'hover', ...props },\n  ref,\n) {\n  const Component = asChild ? Slot : 'a'\n\n  return (\n    <Component\n      ref={ref}\n      className={cx(linkRecipe({ underline }), css({ colorPalette: tone }), className)}\n      {...props}\n    />\n  )\n})\n"
+    }
+  ],
+  "stalk": {
+    "schemaVersion": "1.0",
+    "preset": {
+      "semanticTokens": {},
+      "recipes": ["link"]
+    },
+    "packageDependencies": {
+      "preset": "@stalk-ui/preset"
+    },
+    "pandaCodegen": true,
+    "importAliases": {
+      "styledSystem": "styled-system"
+    }
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "$schema": "https://stalk-ui.com/schema/v1/registry-item.json",
+  "name": "blockquote",
+  "type": "registry:ui",
+  "dependencies": ["@stalk-ui/preset"],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "src/components/ui/blockquote.tsx",
+      "type": "registry:ui",
+      "content": "import { forwardRef } from 'react'\n// Stalk UI component - requires PandaCSS setup and @stalk-ui/preset.\nimport { css, cx } from 'styled-system/css'\nimport { blockquote as blockquoteRecipe } from 'styled-system/recipes'\n\nimport type { Tone } from './tones'\nimport type { BlockquoteHTMLAttributes } from 'react'\n\nexport type BlockquoteSize = (typeof blockquoteRecipe.variantMap.size)[number]\n\nexport interface BlockquoteProps extends BlockquoteHTMLAttributes<HTMLQuoteElement> {\n  size?: BlockquoteSize\n  /** Tints the inline-start rule with a semantic palette. Defaults to a neutral border. */\n  tone?: Tone\n}\n\nexport const Blockquote = /* @__PURE__ */ forwardRef<HTMLQuoteElement, BlockquoteProps>(\n  function Blockquote({ className, size = 'md', tone, ...props }, ref) {\n    return (\n      <blockquote\n        ref={ref}\n        className={cx(\n          blockquoteRecipe({ size }),\n          tone !== undefined\n            ? css({ colorPalette: tone, borderColor: 'colorPalette.muted' })\n            : undefined,\n          className,\n        )}\n        {...props}\n      />\n    )\n  },\n)\n"
+    }
+  ],
+  "stalk": {
+    "schemaVersion": "1.0",
+    "preset": {
+      "semanticTokens": {},
+      "recipes": ["blockquote"]
+    },
+    "packageDependencies": {
+      "preset": "@stalk-ui/preset"
+    },
+    "pandaCodegen": true,
+    "importAliases": {
+      "styledSystem": "styled-system"
+    }
+  }
+}

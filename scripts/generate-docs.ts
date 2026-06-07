@@ -46,14 +46,19 @@ const componentDescriptions = {
   alert: 'Surfaces an inline, persistent status message.',
   avatar: 'Represents a user or entity with an image, initials, or fallback content.',
   badge: 'Displays compact status or metadata.',
+  blockquote: 'Sets apart a quotation as a distinct block.',
   button: 'Triggers an action or submits a form.',
   checkbox: 'Toggles a binary option in a form or settings surface.',
+  code: 'Marks inline code or a short command within running text.',
   collapsible: 'Toggles the visibility of a single content region.',
   'context-menu': 'Reveals a menu of actions on right-click or long-press.',
   dialog: 'Displays modal content in a focus-trapped overlay.',
   'dropdown-menu': 'Displays a keyboard-accessible menu of actions from a trigger.',
+  heading: 'Titles a section with a semantic heading level.',
   input: 'Collects short-form text from a user.',
+  kbd: 'Marks a keyboard key or shortcut.',
   label: 'Associates text with a form control.',
+  link: 'Navigates to another page or resource.',
   menubar: 'Provides a persistent menu surface for top-level application commands.',
   popover: 'Displays interactive floating content from a trigger.',
   progress: 'Shows the completion progress of a task.',
@@ -65,6 +70,7 @@ const componentDescriptions = {
   switch: 'Toggles a setting on or off.',
   tabs: 'Organizes related content into selectable panels.',
   tag: 'Labels content with a compact, optionally interactive chip.',
+  text: 'Renders body text with consistent size, weight, and tone.',
   textarea: 'Collects multi-line text from a user.',
   toast: 'Surfaces transient notifications via a Sonner-backed toaster region.',
   toggle: 'A two-state button for inline preferences and toolbar controls.',
@@ -431,6 +437,28 @@ ${variantsTable(component.variants)}
 
   mkdirSync(dirname(path), { recursive: true })
   writeFileSync(path, await format(content, { ...prettierConfig, filepath: path, parser: 'mdx' }))
+}
+
+// Docs are driven by `componentExamples`, but the source of truth for what
+// exists is the registry. Fail loudly if they diverge so a new component can't
+// be shipped without docs (and a stale example can't outlive its component).
+const exampleNames = new Set(Object.keys(componentExamples))
+const registryNames = new Set(registryItems.map((item) => item.name))
+const missingExamples = [...registryNames].filter((name) => !exampleNames.has(name)).sort()
+const orphanExamples = [...exampleNames].filter((name) => !registryNames.has(name)).sort()
+
+if (missingExamples.length > 0 || orphanExamples.length > 0) {
+  const problems = [
+    ...missingExamples.map(
+      (name) => `  - ${name}: registry component has no entry in scripts/component-examples.ts`,
+    ),
+    ...orphanExamples.map(
+      (name) => `  - ${name}: component-examples entry has no matching registry item`,
+    ),
+  ]
+  throw new Error(
+    `Docs/registry parity check failed (every component needs docs examples):\n${problems.join('\n')}`,
+  )
 }
 
 for (const name of Object.keys(componentExamples) as ComponentName[]) {

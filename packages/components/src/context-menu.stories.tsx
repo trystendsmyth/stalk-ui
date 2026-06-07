@@ -6,7 +6,7 @@ import { ContextMenu } from './context-menu'
 import type { Meta, StoryObj } from '@storybook/react-vite'
 
 const meta = {
-  title: 'Components/ContextMenu',
+  title: 'Components/Navigation/ContextMenu',
   component: ContextMenu.Root,
   tags: ['autodocs', 'stable'],
   parameters: {

@@ -1,4 +1,4 @@
-import { readFileSync } from 'node:fs'
+import { readFileSync, readdirSync } from 'node:fs'
 import { join } from 'node:path'
 
 export const locales = ['en'] as const
@@ -98,35 +98,85 @@ export const gettingStartedPages = [
 ] satisfies GettingStartedPage[]
 
 const contentDirectory = join(process.cwd(), 'content/components')
-const componentSlugs = [
-  'accordion',
-  'alert',
-  'avatar',
-  'badge',
-  'button',
-  'checkbox',
-  'collapsible',
-  'context-menu',
-  'dialog',
-  'dropdown-menu',
-  'input',
-  'label',
-  'menubar',
-  'popover',
-  'progress',
-  'radio',
-  'select',
-  'skeleton',
-  'slider',
-  'spinner',
-  'switch',
-  'tabs',
-  'tag',
-  'textarea',
-  'toast',
-  'toggle',
-  'tooltip',
-] as const
+
+export interface ComponentGroup {
+  slugs: string[]
+  title: string
+}
+
+/**
+ * Mirrors the Storybook `Components/<category>` grouping so the docs index and
+ * Storybook stay in lockstep. Every generated component doc must belong to
+ * exactly one group; `getComponentDocs` throws if the on-disk docs and these
+ * groups drift apart.
+ */
+export const componentGroups = [
+  {
+    title: 'Typography',
+    slugs: ['text', 'heading', 'blockquote', 'code', 'kbd', 'link'],
+  },
+  {
+    title: 'Forms',
+    slugs: [
+      'button',
+      'checkbox',
+      'input',
+      'label',
+      'radio',
+      'select',
+      'slider',
+      'switch',
+      'textarea',
+      'toggle',
+    ],
+  },
+  {
+    title: 'Data Display',
+    slugs: ['avatar', 'badge', 'tag'],
+  },
+  {
+    title: 'Feedback',
+    slugs: ['alert', 'progress', 'skeleton', 'spinner', 'toast'],
+  },
+  {
+    title: 'Overlay',
+    slugs: ['dialog', 'popover', 'tooltip'],
+  },
+  {
+    title: 'Navigation',
+    slugs: ['context-menu', 'dropdown-menu', 'menubar', 'tabs'],
+  },
+  {
+    title: 'Disclosure',
+    slugs: ['accordion', 'collapsible'],
+  },
+] satisfies ComponentGroup[]
+
+const componentSlugs = componentGroups.flatMap((group) => group.slugs)
+
+// Guard against drift between the generated docs on disk and the grouped slug
+// list: a component with a doc but no group (or vice versa) would silently fall
+// out of the explorer. Fail the build instead.
+const assertDocsGrouped = () => {
+  const generated = readdirSync(contentDirectory)
+    .filter((file) => file.endsWith('.mdx'))
+    .map((file) => file.slice(0, -'.mdx'.length))
+  const grouped = new Set(componentSlugs)
+  const ungrouped = generated.filter((slug) => !grouped.has(slug)).sort()
+  const missingDocs = componentSlugs.filter((slug) => !generated.includes(slug)).sort()
+
+  if (ungrouped.length > 0 || missingDocs.length > 0) {
+    const problems = [
+      ...ungrouped.map(
+        (slug) => `  - ${slug}: has a generated doc but is not in any componentGroups entry`,
+      ),
+      ...missingDocs.map(
+        (slug) => `  - ${slug}: listed in componentGroups but has no generated doc`,
+      ),
+    ]
+    throw new Error(`Component docs grouping is out of sync:\n${problems.join('\n')}`)
+  }
+}
 
 const frontmatterValue = (source: string, key: string) => {
   const match = new RegExp(`^${key}:\\s*(.+)$`, 'm').exec(source)
@@ -184,6 +234,8 @@ const variantRows = (source: string) =>
   }))
 
 export const getComponentDocs = () => {
+  assertDocsGrouped()
+
   return componentSlugs.map((slug) => {
     const source = readFileSync(join(contentDirectory, `${slug}.mdx`), 'utf8')
     const blocks = fencedBlocks(source)
@@ -202,6 +254,23 @@ export const getComponentDocs = () => {
 }
 
 export const getComponentDoc = (slug: string) => getComponentDocs().find((doc) => doc.slug === slug)
+
+export interface ComponentDocGroup {
+  components: ComponentDoc[]
+  title: string
+}
+
+/** Component docs bucketed into their Storybook-matching categories, in order. */
+export const getComponentDocsByGroup = (): ComponentDocGroup[] => {
+  const docs = getComponentDocs()
+
+  return componentGroups.map((group) => ({
+    title: group.title,
+    components: group.slugs
+      .map((slug) => docs.find((doc) => doc.slug === slug))
+      .filter((doc): doc is ComponentDoc => doc !== undefined),
+  }))
+}
 
 export const getGettingStartedPage = (slug: string) =>
   gettingStartedPages.find((page) => page.slug === slug)

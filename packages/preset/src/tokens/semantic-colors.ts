@@ -50,6 +50,10 @@ export const createAccentSemanticTokens = (accentColor: AccentColor): TokenGroup
     muted: semanticPair(scaleToken(accentColor, 7), darkScaleToken(accentColor, 7)),
     solid: semanticPair(scaleToken(accentColor, solid), darkScaleToken(accentColor, solid)),
     emphasis: emphasisFor(accentColor),
+    // Colored body text. Shares the canonical theme's emphasis value so existing
+    // `tone` text is unchanged, but stays a distinct token from `emphasis` (which
+    // also drives solid-button hover) so themes can strengthen one without the other.
+    text: emphasisFor(accentColor),
     fg: semanticPair(scaleToken(accentColor, 12), darkScaleToken(accentColor, 12)),
     contrast: contrastFor(accentColor),
   }
@@ -64,6 +68,10 @@ export const createVibrantAccentSemanticTokens = (accentColor: AccentColor): Tok
     muted: semanticPair(scaleToken(accentColor, 8), darkScaleToken(accentColor, 8)),
     solid: semanticPair(scaleToken(accentColor, solid), darkScaleToken(accentColor, solid)),
     emphasis: emphasisFor(accentColor),
+    // Punchier colored text: pure step 11 (Radix's accessible colored-text step) is
+    // more saturated than the 11/12 mix, so `tone` text reads clearly against the
+    // vibrant theme's tinted surfaces.
+    text: semanticPair(scaleToken(accentColor, 11), darkScaleToken(accentColor, 11)),
     fg: semanticPair(scaleToken(accentColor, 12), darkScaleToken(accentColor, 12)),
     contrast: contrastFor(accentColor),
   }
