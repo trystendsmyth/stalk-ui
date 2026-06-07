@@ -15,7 +15,7 @@ const POSITIONS = [
 ] as const
 
 const meta = {
-  title: 'Components/Toast',
+  title: 'Components/Feedback/Toast',
   component: Toaster,
   tags: ['autodocs', 'stable'],
   args: {

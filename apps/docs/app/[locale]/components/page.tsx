@@ -1,4 +1,4 @@
-import { getComponentDocs } from '../../../lib/docs'
+import { getComponentDocsByGroup } from '../../../lib/docs'
 
 interface ComponentsIndexPageProps {
   params: Promise<{
@@ -8,7 +8,7 @@ interface ComponentsIndexPageProps {
 
 export default async function ComponentsIndexPage({ params }: ComponentsIndexPageProps) {
   const { locale } = await params
-  const components = getComponentDocs()
+  const groups = getComponentDocsByGroup()
 
   return (
     <main className="content-grid">
@@ -19,18 +19,23 @@ export default async function ComponentsIndexPage({ params }: ComponentsIndexPag
           Generated API and registry documentation for each Stalk UI component.
         </p>
       </section>
-      <div className="card-grid">
-        {components.map((component) => (
-          <a
-            className="doc-card"
-            href={`/${locale}/components/${component.slug}`}
-            key={component.slug}
-          >
-            <span>{component.title}</span>
-            <p>{component.description}</p>
-          </a>
-        ))}
-      </div>
+      {groups.map((group) => (
+        <section className="component-group" key={group.title}>
+          <h2 className="component-group__title">{group.title}</h2>
+          <div className="card-grid">
+            {group.components.map((component) => (
+              <a
+                className="doc-card"
+                href={`/${locale}/components/${component.slug}`}
+                key={component.slug}
+              >
+                <span>{component.title}</span>
+                <p>{component.description}</p>
+              </a>
+            ))}
+          </div>
+        </section>
+      ))}
     </main>
   )
 }

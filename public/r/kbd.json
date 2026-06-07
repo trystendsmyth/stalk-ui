@@ -1,0 +1,28 @@
+{
+  "$schema": "https://stalk-ui.com/schema/v1/registry-item.json",
+  "name": "kbd",
+  "type": "registry:ui",
+  "dependencies": ["@stalk-ui/preset"],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "src/components/ui/kbd.tsx",
+      "type": "registry:ui",
+      "content": "import { forwardRef } from 'react'\nimport { cx } from 'styled-system/css'\nimport { kbd as kbdRecipe } from 'styled-system/recipes'\n\nimport type { HTMLAttributes } from 'react'\n\nexport type KbdSize = (typeof kbdRecipe.variantMap.size)[number]\n\nexport interface KbdProps extends HTMLAttributes<HTMLElement> {\n  size?: KbdSize\n}\n\nexport const Kbd = /* @__PURE__ */ forwardRef<HTMLElement, KbdProps>(function Kbd(\n  { className, size = 'md', ...props },\n  ref,\n) {\n  return <kbd ref={ref} className={cx(kbdRecipe({ size }), className)} {...props} />\n})\n"
+    }
+  ],
+  "stalk": {
+    "schemaVersion": "1.0",
+    "preset": {
+      "semanticTokens": {},
+      "recipes": ["kbd"]
+    },
+    "packageDependencies": {
+      "preset": "@stalk-ui/preset"
+    },
+    "pandaCodegen": true,
+    "importAliases": {
+      "styledSystem": "styled-system"
+    }
+  }
+}

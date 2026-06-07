@@ -4,7 +4,7 @@ import { Tooltip } from './tooltip'
 import type { Meta, StoryObj } from '@storybook/react-vite'
 
 const meta = {
-  title: 'Components/Tooltip',
+  title: 'Components/Overlay/Tooltip',
   component: Tooltip.Root,
   tags: ['autodocs', 'stable'],
   parameters: { controls: { disable: true } },
