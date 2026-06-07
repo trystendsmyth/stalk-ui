@@ -5,7 +5,7 @@ import { Skeleton } from './skeleton'
 import type { Meta, StoryObj } from '@storybook/react-vite'
 
 const meta = {
-  title: 'Components/Skeleton',
+  title: 'Components/Feedback/Skeleton',
   component: Skeleton,
   tags: ['autodocs', 'stable'],
   args: {

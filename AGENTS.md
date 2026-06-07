@@ -41,6 +41,14 @@ Every component must have:
 7. Forwarded refs (`/* @__PURE__ */ forwardRef(function ComponentName(...) { ... })`) and strict TypeScript types.
 8. Recipe usage from generated `styled-system/recipes`; components do not import from `@stalk-ui/preset` directly.
 9. Documentation and tree-shaking verification for compound components.
+10. Generated docs. Every registry component is also a documented component — there is no "code-only" component. Adding one means updating, in the same change:
+    - `scripts/component-examples.ts` — live, editable example snippets (referencing components by their in-scope names).
+    - `componentDescriptions` in `scripts/generate-docs.ts` — a one-line description (compile-enforced to cover every example).
+    - `apps/docs/components/component-preview.tsx` — import the component and add it to `liveScope` so examples render.
+    - `apps/docs/lib/docs.ts` — add the slug to a `componentGroups` category (mirror the Storybook `Components/<Category>` title).
+    - regenerate `apps/docs/content/components/<name>.mdx` with `pnpm generate-docs` and commit it.
+
+    `pnpm generate-docs` enforces registry↔examples parity and the docs explorer enforces group membership, so a registered component without docs fails the build — keep Storybook grouping and docs grouping in sync.
 
 ## Component Template
 
@@ -67,7 +75,7 @@ After any component, recipe, registry, or i18n edit, run `pnpm verify` as the fi
 
 - `pnpm verify:fast` — `format:check`, `syncpack:check`, `lint`, `typecheck`, unit tests.
 - `pnpm verify:drift` — regenerates `packages/preset/__snapshots__/reference.css` and `public/r/*.json`, then fails if either differs from what's checked in. Slot-recipe or component-source edits require committing the regenerated artifacts; do not bypass this step.
-- `pnpm verify:audit` — completeness, semantic tokens, i18n, third-party budgets, registry deps, tree-shaking, docs, exports.
+- `pnpm verify:audit` — completeness, semantic tokens, i18n, third-party budgets, registry deps, tree-shaking, docs, exports. `check-docs` regenerates `apps/docs/content/components/*.mdx` and fails on drift, so commit regenerated docs alongside source/recipe/registry changes.
 
 Heavier suites (`pnpm test:integration`, `pnpm lost-pixel`, `pnpm size:check`) are not part of `pnpm verify`; run them on demand when their inputs change (registry/CLI/preset publishing, story visuals, bundle budgets respectively). If a Lost Pixel baseline shifts, refresh it before the commit that introduces the visual change.
 

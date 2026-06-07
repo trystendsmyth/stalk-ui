@@ -7,7 +7,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite'
 const SIZES = ['sm', 'md', 'lg', 'xl'] as const
 
 const meta = {
-  title: 'Components/Spinner',
+  title: 'Components/Feedback/Spinner',
   component: Spinner,
   tags: ['autodocs', 'stable'],
   args: {

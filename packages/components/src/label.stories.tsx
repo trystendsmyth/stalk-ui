@@ -9,7 +9,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite'
 const { size: SIZES } = labelRecipe.variantMap
 
 const meta = {
-  title: 'Components/Label',
+  title: 'Components/Forms/Label',
   component: Label,
   tags: ['autodocs', 'stable'],
   args: {

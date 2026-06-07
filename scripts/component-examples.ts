@@ -18,6 +18,11 @@ export const componentExamples = {
     '<Badge variant="solid" tone="success">Live</Badge>',
     '<Badge variant="outline" tone="danger" size="sm" radius="sm">Error</Badge>',
   ],
+  blockquote: [
+    '<Blockquote>The quick brown fox jumps over the lazy dog.</Blockquote>',
+    '<Blockquote tone="accent">A tinted pull quote draws the eye.</Blockquote>',
+    '<Blockquote size="sm">Compact attribution or aside.</Blockquote>',
+  ],
   button: [
     '<Button>Save changes</Button>',
     '<Button variant="outline">Cancel</Button>',
@@ -29,6 +34,11 @@ export const componentExamples = {
     '<Checkbox defaultChecked aria-label="Subscribed" />',
     '<Checkbox checked="indeterminate" aria-label="Bulk select" />',
     '<Checkbox disabled aria-label="Locked" />',
+  ],
+  code: [
+    '<Code>npm install</Code>',
+    '<Code variant="outline">pnpm build</Code>',
+    '<Text>Run <Code>pnpm dlx @stalk-ui/cli add button</Code> to copy a component.</Text>',
   ],
   collapsible: [
     '<Collapsible>\n  <Collapsible.Trigger>Show details</Collapsible.Trigger>\n  <Collapsible.Content>Hidden content that toggles open.</Collapsible.Content>\n</Collapsible>',
@@ -46,15 +56,31 @@ export const componentExamples = {
     '<DropdownMenu.Root>\n  <DropdownMenu.Trigger>Project</DropdownMenu.Trigger>\n  <DropdownMenu.Content>\n    <DropdownMenu.Label>Project</DropdownMenu.Label>\n    <DropdownMenu.Item>Rename<DropdownMenu.Shortcut>⌘R</DropdownMenu.Shortcut></DropdownMenu.Item>\n    <DropdownMenu.Item>Archive<DropdownMenu.Shortcut>⌘E</DropdownMenu.Shortcut></DropdownMenu.Item>\n  </DropdownMenu.Content>\n</DropdownMenu.Root>',
     '<DropdownMenu.Root>\n  <DropdownMenu.Trigger>View</DropdownMenu.Trigger>\n  <DropdownMenu.Content>\n    <DropdownMenu.CheckboxItem defaultChecked>Show toolbar</DropdownMenu.CheckboxItem>\n    <DropdownMenu.CheckboxItem>Show sidebar</DropdownMenu.CheckboxItem>\n  </DropdownMenu.Content>\n</DropdownMenu.Root>',
   ],
+  heading: [
+    '<Heading as="h1">Page title</Heading>',
+    '<Heading as="h2">Section heading</Heading>',
+    '<Heading as="h1" size="display">Hero headline</Heading>',
+    '<Heading as="h3" tone="accent">Tinted subsection</Heading>',
+  ],
   input: [
     '<Input aria-label="Email" placeholder="hello@stalk-ui.com" />',
     '<Input invalid aria-label="Email" defaultValue="not-an-email" />',
     '<Input disabled aria-label="Read only" defaultValue="acme-corp" />',
   ],
+  kbd: [
+    '<Kbd>Esc</Kbd>',
+    '<Text>Press <Kbd>⌘</Kbd> <Kbd>K</Kbd> to open search.</Text>',
+    '<Kbd size="lg">Enter</Kbd>',
+  ],
   label: [
     '<Label htmlFor="email">Email</Label>',
     '<Label required htmlFor="name">Name</Label>',
     '<Label size="lg" htmlFor="bio">About you</Label>',
+  ],
+  link: [
+    '<Link href="#">View documentation</Link>',
+    '<Link href="#" underline="always">Always underlined</Link>',
+    '<Text>Read the <Link href="#">getting started guide</Link> first.</Text>',
   ],
   menubar: [
     '<Menubar>\n  <Menubar.Menu>\n    <Menubar.Trigger>File</Menubar.Trigger>\n    <Menubar.Content>\n      <Menubar.Item>New tab<Menubar.Shortcut>⌘T</Menubar.Shortcut></Menubar.Item>\n      <Menubar.Item>New window<Menubar.Shortcut>⌘N</Menubar.Shortcut></Menubar.Item>\n    </Menubar.Content>\n  </Menubar.Menu>\n  <Menubar.Menu>\n    <Menubar.Trigger>Edit</Menubar.Trigger>\n    <Menubar.Content>\n      <Menubar.Item>Undo</Menubar.Item>\n      <Menubar.Item>Redo</Menubar.Item>\n    </Menubar.Content>\n  </Menubar.Menu>\n</Menubar>',
@@ -95,6 +121,12 @@ export const componentExamples = {
     '<Switch aria-label="Email notifications" />',
     '<Switch defaultChecked aria-label="Push notifications" />',
     '<Switch disabled aria-label="Locked setting" />',
+  ],
+  text: [
+    '<Text>The quick brown fox jumps over the lazy dog.</Text>',
+    '<Text size="bodyLg" weight="medium">A lead paragraph with more presence.</Text>',
+    '<Text tone="danger">Something needs your attention.</Text>',
+    '<Text>Press <Text.Strong>Save</Text.Strong> to keep changes, or <Text.Em>cancel</Text.Em>.</Text>',
   ],
   textarea: [
     '<Textarea aria-label="Message" placeholder="Write a message…" />',

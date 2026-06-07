@@ -30,10 +30,14 @@ export type {
 } from './avatar'
 export { Badge } from './badge'
 export type { BadgeProps, BadgeRadius, BadgeSize, BadgeTone, BadgeVariant } from './badge'
+export { Blockquote } from './blockquote'
+export type { BlockquoteProps, BlockquoteSize } from './blockquote'
 export { Button } from './button'
 export type { ButtonProps, ButtonSize, ButtonTone, ButtonVariant } from './button'
 export { Checkbox } from './checkbox'
 export type { CheckboxProps, CheckboxSize } from './checkbox'
+export { Code } from './code'
+export type { CodeProps, CodeVariant } from './code'
 export { Collapsible, CollapsibleContent, CollapsibleRoot, CollapsibleTrigger } from './collapsible'
 export type { CollapsibleRootProps, CollapsibleVariant } from './collapsible'
 export {
@@ -97,6 +101,8 @@ export type {
   DropdownMenuItemProps,
   DropdownMenuSubTriggerProps,
 } from './dropdown-menu'
+export { Heading } from './heading'
+export type { HeadingLevel, HeadingProps } from './heading'
 export { Input, InputField, InputPrefix, InputRoot, InputSlot, InputSuffix } from './input'
 export type {
   InputAlign,
@@ -108,8 +114,12 @@ export type {
   InputSlotProps,
   InputSlotSide,
 } from './input'
+export { Kbd } from './kbd'
+export type { KbdProps, KbdSize } from './kbd'
 export { Label } from './label'
 export type { LabelProps, LabelSize } from './label'
+export { Link } from './link'
+export type { LinkProps, LinkUnderline } from './link'
 export {
   Menubar,
   MenubarCheckboxItem,
@@ -173,6 +183,18 @@ export type {
 } from './tabs'
 export { Tag } from './tag'
 export type { TagProps, TagRadius, TagSize, TagTone, TagVariant } from './tag'
+export { Em, Quote, Strong, Text } from './text'
+export type {
+  EmProps,
+  QuoteProps,
+  StrongProps,
+  TextAlign,
+  TextColor,
+  TextElement,
+  TextProps,
+  TextSize,
+  TextWeight,
+} from './text'
 export { Textarea } from './textarea'
 export type { TextareaProps, TextareaSize } from './textarea'
 export { Toaster, toast } from './toast'

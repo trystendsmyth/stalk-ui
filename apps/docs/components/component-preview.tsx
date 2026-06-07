@@ -4,14 +4,19 @@ import { Accordion } from '@stalk-ui/components/accordion'
 import { Alert } from '@stalk-ui/components/alert'
 import { Avatar } from '@stalk-ui/components/avatar'
 import { Badge } from '@stalk-ui/components/badge'
+import { Blockquote } from '@stalk-ui/components/blockquote'
 import { Button } from '@stalk-ui/components/button'
 import { Checkbox } from '@stalk-ui/components/checkbox'
+import { Code } from '@stalk-ui/components/code'
 import { Collapsible } from '@stalk-ui/components/collapsible'
 import { ContextMenu } from '@stalk-ui/components/context-menu'
 import { Dialog } from '@stalk-ui/components/dialog'
 import { DropdownMenu } from '@stalk-ui/components/dropdown-menu'
+import { Heading } from '@stalk-ui/components/heading'
 import { Input } from '@stalk-ui/components/input'
+import { Kbd } from '@stalk-ui/components/kbd'
 import { Label } from '@stalk-ui/components/label'
+import { Link } from '@stalk-ui/components/link'
 import { Menubar } from '@stalk-ui/components/menubar'
 import { Popover } from '@stalk-ui/components/popover'
 import { Progress } from '@stalk-ui/components/progress'
@@ -23,6 +28,7 @@ import { Spinner } from '@stalk-ui/components/spinner'
 import { Switch } from '@stalk-ui/components/switch'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@stalk-ui/components/tabs'
 import { Tag } from '@stalk-ui/components/tag'
+import { Text } from '@stalk-ui/components/text'
 import { Textarea } from '@stalk-ui/components/textarea'
 import { Toaster, toast } from '@stalk-ui/components/toast'
 import { Toggle, ToggleGroup, ToggleGroupItem } from '@stalk-ui/components/toggle'
@@ -50,15 +56,20 @@ const liveScope = {
   AlertTriangle,
   Avatar,
   Badge,
+  Blockquote,
   Button,
   Checkbox,
+  Code,
   Collapsible,
   ContextMenu,
   Dialog,
   DropdownMenu,
+  Heading,
   Info,
   Input,
+  Kbd,
   Label,
+  Link,
   Menubar,
   Popover,
   Progress,
@@ -73,6 +84,7 @@ const liveScope = {
   TabsList,
   TabsTrigger,
   Tag,
+  Text,
   Textarea,
   Toaster,
   Toggle,

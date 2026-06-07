@@ -1,0 +1,28 @@
+{
+  "$schema": "https://stalk-ui.com/schema/v1/registry-item.json",
+  "name": "code",
+  "type": "registry:ui",
+  "dependencies": ["@stalk-ui/preset"],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "src/components/ui/code.tsx",
+      "type": "registry:ui",
+      "content": "import { forwardRef } from 'react'\n// Stalk UI component - requires PandaCSS setup and @stalk-ui/preset.\nimport { cx } from 'styled-system/css'\nimport { code as codeRecipe } from 'styled-system/recipes'\n\nimport type { HTMLAttributes } from 'react'\n\nexport type CodeVariant = (typeof codeRecipe.variantMap.variant)[number]\n\nexport interface CodeProps extends HTMLAttributes<HTMLElement> {\n  /** Visual treatment. Defaults to `soft`. */\n  variant?: CodeVariant\n}\n\nexport const Code = /* @__PURE__ */ forwardRef<HTMLElement, CodeProps>(function Code(\n  { className, variant = 'soft', ...props },\n  ref,\n) {\n  return <code ref={ref} className={cx(codeRecipe({ variant }), className)} {...props} />\n})\n"
+    }
+  ],
+  "stalk": {
+    "schemaVersion": "1.0",
+    "preset": {
+      "semanticTokens": {},
+      "recipes": ["code"]
+    },
+    "packageDependencies": {
+      "preset": "@stalk-ui/preset"
+    },
+    "pandaCodegen": true,
+    "importAliases": {
+      "styledSystem": "styled-system"
+    }
+  }
+}
