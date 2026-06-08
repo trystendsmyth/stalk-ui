@@ -182,6 +182,18 @@ export { Spinner } from './spinner'
 export type { SpinnerProps, SpinnerSize } from './spinner'
 export { Switch } from './switch'
 export type { SwitchProps, SwitchSize } from './switch'
+export {
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableFooter,
+  TableHead,
+  TableHeader,
+  TableRoot,
+  TableRow,
+} from './table'
+export type { TableRootProps } from './table'
 export { Tabs, TabsContent, TabsList, TabsRoot, TabsTrigger } from './tabs'
 export type {
   TabsContentProps,

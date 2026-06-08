@@ -248,6 +248,18 @@ export const tabs = ({
   indicator: `stalk-tabs__indicator stalk-tabs__indicator--${variant}`,
 })
 
+export const table = () => ({
+  root: 'stalk-table__root',
+  table: 'stalk-table__table',
+  header: 'stalk-table__header',
+  body: 'stalk-table__body',
+  footer: 'stalk-table__footer',
+  row: 'stalk-table__row',
+  head: 'stalk-table__head',
+  cell: 'stalk-table__cell',
+  caption: 'stalk-table__caption',
+})
+
 interface ToggleRecipeOptions {
   attached?: boolean
   radius?: 'none' | 'sm' | 'md' | 'lg' | 'full'

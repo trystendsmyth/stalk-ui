@@ -69,6 +69,7 @@ const componentDescriptions = {
   slider: 'Selects a numeric value or range along a track.',
   spinner: 'Indicates an indeterminate loading state with an accessible label.',
   switch: 'Toggles a setting on or off.',
+  table: 'Presents rows and columns of data in an accessible HTML table.',
   tabs: 'Organizes related content into selectable panels.',
   tag: 'Labels content with a compact, optionally interactive chip.',
   text: 'Renders body text with consistent size, weight, and tone.',

@@ -25,6 +25,7 @@ import { skeleton } from './skeleton'
 import { slider } from './slider'
 import { spinner } from './spinner'
 import { switchItem } from './switch'
+import { table } from './table'
 import { tabs } from './tabs'
 import { tag } from './tag'
 import { text } from './text'
@@ -66,6 +67,7 @@ export const registryItems = [
   slider,
   spinner,
   switchItem,
+  table,
   tabs,
   tag,
   text,

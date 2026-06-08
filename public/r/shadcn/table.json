@@ -1,0 +1,28 @@
+{
+  "$schema": "https://stalk-ui.com/schema/v1/registry-item.json",
+  "name": "table",
+  "type": "registry:ui",
+  "dependencies": ["@stalk-ui/preset"],
+  "registryDependencies": ["create-style-context"],
+  "files": [
+    {
+      "path": "src/components/ui/table.tsx",
+      "type": "registry:ui",
+      "content": "'use client'\n\nimport { createStyleContext } from '../../lib/stalk-ui/create-style-context'\n// Stalk UI component - requires PandaCSS setup and @stalk-ui/preset.\nimport { forwardRef, useMemo } from 'react'\nimport { cx } from 'styled-system/css'\nimport { table as tableRecipe } from 'styled-system/recipes'\n\nimport type { HTMLAttributes, TableHTMLAttributes } from 'react'\n\nconst { StyleProvider, withContext } = /* @__PURE__ */ createStyleContext(tableRecipe, {\n  name: 'Table',\n})\n\nexport type TableRootProps = TableHTMLAttributes<HTMLTableElement> & {\n  /** Props applied to the scroll container wrapping the `<table>`. */\n  containerProps?: HTMLAttributes<HTMLDivElement>\n}\n\n// The root renders a horizontal scroll container around the table so wide\n// tables stay contained. The forwarded ref points at the <table> element.\nexport const TableRoot = /* @__PURE__ */ forwardRef<HTMLTableElement, TableRootProps>(\n  function TableRoot({ className, containerProps, ...props }, ref) {\n    const styles = useMemo(() => tableRecipe(), [])\n    const { className: containerClassName, ...restContainer } = containerProps ?? {}\n\n    return (\n      <StyleProvider value={styles}>\n        <div className={cx(styles.root, containerClassName)} {...restContainer}>\n          <table ref={ref} className={cx(styles.table, className)} {...props} />\n        </div>\n      </StyleProvider>\n    )\n  },\n)\n\nexport const TableHeader = /* @__PURE__ */ withContext('thead', 'header')\nexport const TableBody = /* @__PURE__ */ withContext('tbody', 'body')\nexport const TableFooter = /* @__PURE__ */ withContext('tfoot', 'footer')\nexport const TableRow = /* @__PURE__ */ withContext('tr', 'row')\nexport const TableHead = /* @__PURE__ */ withContext('th', 'head')\nexport const TableCell = /* @__PURE__ */ withContext('td', 'cell')\nexport const TableCaption = /* @__PURE__ */ withContext('caption', 'caption')\n\nexport const Table = /* @__PURE__ */ Object.assign(TableRoot, {\n  Body: TableBody,\n  Caption: TableCaption,\n  Cell: TableCell,\n  Footer: TableFooter,\n  Head: TableHead,\n  Header: TableHeader,\n  Root: TableRoot,\n  Row: TableRow,\n})\n"
+    }
+  ],
+  "stalk": {
+    "schemaVersion": "1.0",
+    "preset": {
+      "semanticTokens": {},
+      "recipes": ["table"]
+    },
+    "packageDependencies": {
+      "preset": "@stalk-ui/preset"
+    },
+    "pandaCodegen": true,
+    "importAliases": {
+      "styledSystem": "styled-system"
+    }
+  }
+}

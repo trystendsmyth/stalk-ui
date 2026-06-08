@@ -2940,6 +2940,78 @@
       will-change: transform;
 }
 
+    .stalk-table__root {
+      width: var(--sizes-full);
+      overflow-x: auto;
+}
+
+    .stalk-table__table {
+      border-collapse: collapse;
+      caption-side: bottom;
+      color: var(--colors-fg-default);
+      font-size: var(--font-sizes-sm);
+      text-align: start;
+      width: var(--sizes-full);
+}
+
+    .stalk-table__header tr {
+      border-block-end-width: var(--border-widths-xs);
+      border-block-end-style: solid;
+      border-block-end-color: var(--colors-border-default);
+}
+
+    .stalk-table__footer {
+      background-color: var(--colors-bg-subtle);
+      font-weight: var(--font-weights-medium);
+}
+
+    .stalk-table__footer tr {
+      border-block-start-width: var(--border-widths-xs);
+      border-block-start-style: solid;
+      border-block-start-color: var(--colors-border-default);
+}
+
+    .stalk-table__row {
+      border-block-end-width: var(--border-widths-xs);
+      border-block-end-style: solid;
+      border-block-end-color: var(--colors-border-muted);
+      --transition-prop: background-color;
+      transition-property: background-color;
+      --transition-duration: var(--durations-fast);
+      transition-duration: var(--durations-fast);
+}
+
+    .stalk-table__row[data-state="selected"] {
+      background-color: var(--colors-accent-subtle);
+}
+
+    .stalk-table__row:is(:hover, [data-hover]) {
+      background-color: var(--colors-bg-subtle);
+}
+
+    .stalk-table__head {
+      color: var(--colors-fg-muted);
+      font-weight: var(--font-weights-medium);
+      text-align: start;
+      white-space: nowrap;
+      height: var(--sizes-40);
+}
+
+    .stalk-table__head,.stalk-table__cell {
+      padding-inline: var(--spacing-12);
+      vertical-align: middle;
+}
+
+    .stalk-table__cell {
+      padding-block: var(--spacing-10);
+}
+
+    .stalk-table__caption {
+      color: var(--colors-fg-muted);
+      font-size: var(--font-sizes-sm);
+      margin-top: 16px;
+}
+
     .stalk-tabs__root {
       --colors-color-palette-surface: var(--colors-accent-surface);
       --colors-color-palette-subtle: var(--colors-accent-subtle);

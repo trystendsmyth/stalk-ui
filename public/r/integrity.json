@@ -218,6 +218,14 @@
       "path": "/r/shadcn/switch.json",
       "sha256": "84a8f2ff8bde97f2c13c96afd86528631b1d8e4cd1b13f1135bc2287ef3745ba"
     },
+    "table": {
+      "path": "/r/table.json",
+      "sha256": "01436dca9c0cd32e2948f0d87af63b10dedbe8437e3a885ff8078bf1de16dbac"
+    },
+    "shadcn/table": {
+      "path": "/r/shadcn/table.json",
+      "sha256": "d30de6f56b6ad5eea900bb02df5562ecae95745b2dfd6a0dd654ed2cecaeadf7"
+    },
     "tabs": {
       "path": "/r/tabs.json",
       "sha256": "89150ec15c2a2b368a88d7220832b4a7729b7c38a6ef140220ca3066fa4f67cb"

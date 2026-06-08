@@ -27,6 +27,7 @@ import { Skeleton } from '@stalk-ui/components/skeleton'
 import { Slider } from '@stalk-ui/components/slider'
 import { Spinner } from '@stalk-ui/components/spinner'
 import { Switch } from '@stalk-ui/components/switch'
+import { Table } from '@stalk-ui/components/table'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@stalk-ui/components/tabs'
 import { Tag } from '@stalk-ui/components/tag'
 import { Text } from '@stalk-ui/components/text'
@@ -81,6 +82,7 @@ const liveScope = {
   Slider,
   Spinner,
   Switch,
+  Table,
   Tabs,
   TabsContent,
   TabsList,

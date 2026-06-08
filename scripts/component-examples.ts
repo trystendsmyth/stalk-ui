@@ -127,6 +127,10 @@ export const componentExamples = {
     '<Switch defaultChecked aria-label="Push notifications" />',
     '<Switch disabled aria-label="Locked setting" />',
   ],
+  table: [
+    '<Table.Root>\n  <Table.Caption>Recent invoices.</Table.Caption>\n  <Table.Header>\n    <Table.Row>\n      <Table.Head scope="col">Invoice</Table.Head>\n      <Table.Head scope="col">Status</Table.Head>\n      <Table.Head scope="col">Amount</Table.Head>\n    </Table.Row>\n  </Table.Header>\n  <Table.Body>\n    <Table.Row>\n      <Table.Cell>INV-001</Table.Cell>\n      <Table.Cell><Badge tone="success" variant="subtle">Paid</Badge></Table.Cell>\n      <Table.Cell>$250.00</Table.Cell>\n    </Table.Row>\n    <Table.Row>\n      <Table.Cell>INV-002</Table.Cell>\n      <Table.Cell><Badge tone="warning" variant="subtle">Pending</Badge></Table.Cell>\n      <Table.Cell>$150.00</Table.Cell>\n    </Table.Row>\n  </Table.Body>\n</Table.Root>',
+    '<Table.Root>\n  <Table.Header>\n    <Table.Row>\n      <Table.Head scope="col">Name</Table.Head>\n      <Table.Head scope="col">Role</Table.Head>\n    </Table.Row>\n  </Table.Header>\n  <Table.Body>\n    <Table.Row data-state="selected">\n      <Table.Cell>Ada Lovelace</Table.Cell>\n      <Table.Cell>Owner</Table.Cell>\n    </Table.Row>\n    <Table.Row>\n      <Table.Cell>Linus Torvalds</Table.Cell>\n      <Table.Cell>Maintainer</Table.Cell>\n    </Table.Row>\n  </Table.Body>\n</Table.Root>',
+  ],
   text: [
     '<Text>The quick brown fox jumps over the lazy dog.</Text>',
     '<Text size="bodyLg" weight="medium">A lead paragraph with more presence.</Text>',
