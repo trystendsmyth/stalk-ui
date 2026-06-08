@@ -13,6 +13,7 @@ import { contextMenu } from './context-menu'
 import { dialog } from './dialog'
 import { dropdownMenu } from './dropdown-menu'
 import { heading } from './heading'
+import { hoverCard } from './hover-card'
 import { input } from './input'
 import { kbd } from './kbd'
 import { label } from './label'
@@ -57,6 +58,7 @@ export const registryItems = [
   dialog,
   dropdownMenu,
   heading,
+  hoverCard,
   input,
   kbd,
   label,

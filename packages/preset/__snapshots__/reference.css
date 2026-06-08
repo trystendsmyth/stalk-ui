@@ -2462,6 +2462,21 @@
       margin-inline-start: auto;
 }
 
+    .stalk-hover-card__content {
+      border: var(--borders-default);
+      padding: var(--spacing-base);
+      border-radius: var(--radii-md);
+      background-color: var(--colors-bg-default);
+      box-shadow: var(--shadows-lg);
+      color: var(--colors-fg-default);
+      z-index: var(--z-index-popover);
+      width: min(calc(100vw - 2rem), 18rem);
+}
+
+    .stalk-hover-card__arrow {
+      fill: var(--colors-bg-default);
+}
+
     .stalk-input__root {
       border: var(--borders-default);
       border-radius: var(--radii-md);

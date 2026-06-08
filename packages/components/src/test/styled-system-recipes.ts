@@ -109,6 +109,11 @@ export const popover = () => ({
   content: 'stalk-popover__content',
 })
 
+export const hoverCard = () => ({
+  content: 'stalk-hover-card__content',
+  arrow: 'stalk-hover-card__arrow',
+})
+
 interface RadioRecipeOptions {
   size?: 'sm' | 'md' | 'lg'
 }

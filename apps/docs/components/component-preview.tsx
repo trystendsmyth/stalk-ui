@@ -15,6 +15,7 @@ import { ContextMenu } from '@stalk-ui/components/context-menu'
 import { Dialog } from '@stalk-ui/components/dialog'
 import { DropdownMenu } from '@stalk-ui/components/dropdown-menu'
 import { Heading } from '@stalk-ui/components/heading'
+import { HoverCard } from '@stalk-ui/components/hover-card'
 import { Input } from '@stalk-ui/components/input'
 import { Kbd } from '@stalk-ui/components/kbd'
 import { Label } from '@stalk-ui/components/label'
@@ -71,6 +72,7 @@ const liveScope = {
   Dialog,
   DropdownMenu,
   Heading,
+  HoverCard,
   Info,
   Input,
   Kbd,

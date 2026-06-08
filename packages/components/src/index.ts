@@ -128,6 +128,13 @@ export type {
 } from './dropdown-menu'
 export { Heading } from './heading'
 export type { HeadingLevel, HeadingProps } from './heading'
+export {
+  HoverCard,
+  HoverCardContent,
+  HoverCardPortal,
+  HoverCardRoot,
+  HoverCardTrigger,
+} from './hover-card'
 export { Input, InputField, InputPrefix, InputRoot, InputSlot, InputSuffix } from './input'
 export type {
   InputAlign,

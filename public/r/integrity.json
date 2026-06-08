@@ -122,6 +122,14 @@
       "path": "/r/shadcn/heading.json",
       "sha256": "e07577fc1a419c7b72af48d059751bb066f5e84d8d73b99a990e3c95746180ab"
     },
+    "hover-card": {
+      "path": "/r/hover-card.json",
+      "sha256": "49afab17a158b20798432a2f3e9d069f09250edb72dde2b48a4d3919d8bc3be7"
+    },
+    "shadcn/hover-card": {
+      "path": "/r/shadcn/hover-card.json",
+      "sha256": "c68cc60dd5a50e2c23ffbd4da9c5360a36fdadc160903c3c02f4afdf93b0584d"
+    },
     "input": {
       "path": "/r/input.json",
       "sha256": "eac69c759192f935356d913ab45a61bff1dc3e564d973262cbe26444467cf8d4"

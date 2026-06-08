@@ -140,7 +140,7 @@ export const componentGroups = [
   },
   {
     title: 'Overlay',
-    slugs: ['alert-dialog', 'dialog', 'popover', 'sheet', 'tooltip'],
+    slugs: ['alert-dialog', 'dialog', 'hover-card', 'popover', 'sheet', 'tooltip'],
   },
   {
     title: 'Navigation',

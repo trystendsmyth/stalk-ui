@@ -70,6 +70,9 @@ export const componentExamples = {
     '<Heading as="h1" size="display">Hero headline</Heading>',
     '<Heading as="h3" tone="accent">Tinted subsection</Heading>',
   ],
+  'hover-card': [
+    '<HoverCard.Root>\n  <HoverCard.Trigger asChild>\n    <Link href="#">@ada</Link>\n  </HoverCard.Trigger>\n  <HoverCard.Content>\n    <Text weight="medium">Ada Lovelace</Text>\n    <Text size="bodySm">Mathematician and the first computer programmer.</Text>\n  </HoverCard.Content>\n</HoverCard.Root>',
+  ],
   input: [
     '<Input aria-label="Email" placeholder="hello@stalk-ui.com" />',
     '<Input invalid aria-label="Email" defaultValue="not-an-email" />',

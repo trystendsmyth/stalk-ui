@@ -57,6 +57,7 @@ const componentDescriptions = {
   dialog: 'Displays modal content in a focus-trapped overlay.',
   'dropdown-menu': 'Displays a keyboard-accessible menu of actions from a trigger.',
   heading: 'Titles a section with a semantic heading level.',
+  'hover-card': 'Previews rich content when a link or control is hovered or focused.',
   input: 'Collects short-form text from a user.',
   kbd: 'Marks a keyboard key or shortcut.',
   label: 'Associates text with a form control.',
