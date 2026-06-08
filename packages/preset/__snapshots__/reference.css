@@ -2005,6 +2005,7 @@
       font-size: var(--font-sizes-lg);
       line-height: var(--line-heights-lg);
       letter-spacing: var(--letter-spacings-normal);
+      font-weight: var(--font-weights-semibold);
 }
 
     .stalk-alert-dialog__description {
@@ -2079,6 +2080,7 @@
     .stalk-card__title {
       font-size: var(--font-sizes-lg);
       line-height: var(--line-heights-lg);
+      font-weight: var(--font-weights-semibold);
 }
 
     .stalk-card__title,.stalk-card__description {
@@ -2329,6 +2331,7 @@
     .stalk-dialog__title {
       font-size: var(--font-sizes-lg);
       line-height: var(--line-heights-lg);
+      font-weight: var(--font-weights-semibold);
 }
 
     .stalk-dialog__title,.stalk-dialog__description {
@@ -3095,6 +3098,7 @@
     .stalk-sheet__title {
       font-size: var(--font-sizes-lg);
       line-height: var(--line-heights-lg);
+      font-weight: var(--font-weights-semibold);
 }
 
     .stalk-sheet__title,.stalk-sheet__description {

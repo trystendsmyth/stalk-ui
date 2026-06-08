@@ -30,6 +30,7 @@ export const card = {
     title: {
       gridColumn: '1',
       textStyle: 'h5',
+      fontWeight: 'semibold',
     },
     description: {
       color: 'fg.muted',

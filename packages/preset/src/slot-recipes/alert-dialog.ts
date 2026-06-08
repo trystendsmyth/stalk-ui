@@ -35,6 +35,7 @@ export const alertDialog = {
     },
     title: {
       textStyle: 'h5',
+      fontWeight: 'semibold',
     },
     description: {
       color: 'fg.muted',
