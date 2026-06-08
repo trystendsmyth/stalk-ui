@@ -120,25 +120,34 @@ nav a {
   text-transform: uppercase;
 }
 
-h1 {
-  max-width: 22ch;
-  margin: 0;
-  font-size: clamp(2.5rem, 6.5vw, 4.5rem);
-  font-weight: 700;
-  line-height: 1.05;
-  letter-spacing: -0.025em;
-  text-wrap: balance;
-  color: var(--colors-fg-default);
-}
+/*
+ * Page-chrome heading defaults live in the `base` layer (Panda declares
+ * `@layer reset, base, tokens, recipes, utilities`). This keeps the hero/section
+ * scale for plain page headings while letting component recipe styles in the
+ * `recipes` layer win — including content Radix portals to <body> (Dialog,
+ * Alert Dialog, Sheet titles render as <h2>), which a scoped selector can't reach.
+ */
+@layer base {
+  h1 {
+    max-width: 22ch;
+    margin: 0;
+    font-size: clamp(2.5rem, 6.5vw, 4.5rem);
+    font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: -0.025em;
+    text-wrap: balance;
+    color: var(--colors-fg-default);
+  }
 
-h2 {
-  margin: 1rem 0 0;
-  font-size: clamp(1.5rem, 3vw, 2rem);
-  font-weight: 600;
-  line-height: 1.2;
-  letter-spacing: -0.02em;
-  text-wrap: balance;
-  color: var(--colors-fg-default);
+  h2 {
+    margin: 1rem 0 0;
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    text-wrap: balance;
+    color: var(--colors-fg-default);
+  }
 }
 
 .page-heading h1,

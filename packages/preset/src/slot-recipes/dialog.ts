@@ -35,6 +35,7 @@ export const dialog = {
     },
     title: {
       textStyle: 'h5',
+      fontWeight: 'semibold',
     },
     description: {
       color: 'fg.muted',

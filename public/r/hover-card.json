@@ -1,0 +1,28 @@
+{
+  "$schema": "https://stalk-ui.com/schema/v1/registry-item.json",
+  "name": "hover-card",
+  "type": "registry:ui",
+  "dependencies": ["@radix-ui/react-hover-card", "@stalk-ui/preset"],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "src/components/ui/hover-card.tsx",
+      "type": "registry:ui",
+      "content": "'use client'\n\nimport * as HoverCardPrimitive from '@radix-ui/react-hover-card'\nimport { forwardRef } from 'react'\nimport { cx } from 'styled-system/css'\nimport { hoverCard as hoverCardRecipe } from 'styled-system/recipes'\n\nimport type { ComponentPropsWithoutRef, ComponentRef } from 'react'\n\nconst styles = /* @__PURE__ */ hoverCardRecipe()\n\nexport const HoverCardRoot = HoverCardPrimitive.Root\nexport const HoverCardTrigger = HoverCardPrimitive.Trigger\nexport const HoverCardPortal = HoverCardPrimitive.Portal\n\nexport const HoverCardContent = /* @__PURE__ */ forwardRef<\n  ComponentRef<typeof HoverCardPrimitive.Content>,\n  ComponentPropsWithoutRef<typeof HoverCardPrimitive.Content>\n>(function HoverCardContent({ children, className, sideOffset = 4, ...props }, ref) {\n  return (\n    <HoverCardPortal>\n      <HoverCardPrimitive.Content\n        ref={ref}\n        className={cx(styles.content, className)}\n        sideOffset={sideOffset}\n        {...props}\n      >\n        {children}\n        <HoverCardPrimitive.Arrow className={styles.arrow} />\n      </HoverCardPrimitive.Content>\n    </HoverCardPortal>\n  )\n})\n\nexport const HoverCard = /* @__PURE__ */ Object.assign(HoverCardRoot, {\n  Content: HoverCardContent,\n  Portal: HoverCardPortal,\n  Root: HoverCardRoot,\n  Trigger: HoverCardTrigger,\n})\n"
+    }
+  ],
+  "stalk": {
+    "schemaVersion": "1.0",
+    "preset": {
+      "semanticTokens": {},
+      "recipes": ["hoverCard"]
+    },
+    "packageDependencies": {
+      "preset": "@stalk-ui/preset"
+    },
+    "pandaCodegen": true,
+    "importAliases": {
+      "styledSystem": "styled-system"
+    }
+  }
+}

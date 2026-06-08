@@ -18,6 +18,20 @@ export {
   AlertTitle,
 } from './alert'
 export type { AlertCloseProps, AlertRootProps, AlertSize, AlertTone, AlertVariant } from './alert'
+export {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogOverlay,
+  AlertDialogPortal,
+  AlertDialogRoot,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from './alert-dialog'
 export { Avatar, AvatarFallback, AvatarImage, AvatarRoot } from './avatar'
 export type {
   AvatarFallbackProps,
@@ -34,6 +48,17 @@ export { Blockquote } from './blockquote'
 export type { BlockquoteProps, BlockquoteSize } from './blockquote'
 export { Button } from './button'
 export type { ButtonProps, ButtonSize, ButtonTone, ButtonVariant } from './button'
+export {
+  Card,
+  CardAction,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardRoot,
+  CardTitle,
+} from './card'
+export type { CardRootProps, CardVariant } from './card'
 export { Checkbox } from './checkbox'
 export type { CheckboxProps, CheckboxSize } from './checkbox'
 export { Code } from './code'
@@ -103,6 +128,13 @@ export type {
 } from './dropdown-menu'
 export { Heading } from './heading'
 export type { HeadingLevel, HeadingProps } from './heading'
+export {
+  HoverCard,
+  HoverCardContent,
+  HoverCardPortal,
+  HoverCardRoot,
+  HoverCardTrigger,
+} from './hover-card'
 export { Input, InputField, InputPrefix, InputRoot, InputSlot, InputSuffix } from './input'
 export type {
   InputAlign,
@@ -142,6 +174,16 @@ export {
 } from './menubar'
 export type { MenubarContentProps, MenubarItemProps, MenubarSubTriggerProps } from './menubar'
 export {
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  NavigationMenuRoot,
+  NavigationMenuSub,
+  NavigationMenuTrigger,
+} from './navigation-menu'
+export {
   Popover,
   PopoverAnchor,
   PopoverClose,
@@ -163,6 +205,20 @@ export {
   SelectTrigger,
 } from './select'
 export type { SelectContentProps, SelectSize, SelectTriggerProps } from './select'
+export {
+  Sheet,
+  SheetClose,
+  SheetContent,
+  SheetDescription,
+  SheetFooter,
+  SheetHeader,
+  SheetOverlay,
+  SheetPortal,
+  SheetRoot,
+  SheetTitle,
+  SheetTrigger,
+} from './sheet'
+export type { SheetContentProps, SheetSide } from './sheet'
 export { Skeleton } from './skeleton'
 export type { SkeletonProps, SkeletonRadius } from './skeleton'
 export { Slider } from './slider'
@@ -171,6 +227,18 @@ export { Spinner } from './spinner'
 export type { SpinnerProps, SpinnerSize } from './spinner'
 export { Switch } from './switch'
 export type { SwitchProps, SwitchSize } from './switch'
+export {
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableFooter,
+  TableHead,
+  TableHeader,
+  TableRoot,
+  TableRow,
+} from './table'
+export type { TableRootProps } from './table'
 export { Tabs, TabsContent, TabsList, TabsRoot, TabsTrigger } from './tabs'
 export type {
   TabsContentProps,

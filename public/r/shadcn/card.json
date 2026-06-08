@@ -1,0 +1,28 @@
+{
+  "$schema": "https://stalk-ui.com/schema/v1/registry-item.json",
+  "name": "card",
+  "type": "registry:ui",
+  "dependencies": ["@stalk-ui/preset"],
+  "registryDependencies": ["create-style-context"],
+  "files": [
+    {
+      "path": "src/components/ui/card.tsx",
+      "type": "registry:ui",
+      "content": "import { createStyleContext } from '../../lib/stalk-ui/create-style-context'\n// Stalk UI component - requires PandaCSS setup and @stalk-ui/preset.\nimport { card as cardRecipe } from 'styled-system/recipes'\n\nimport type { ComponentPropsWithoutRef } from 'react'\n\nexport type CardVariant = (typeof cardRecipe.variantMap.variant)[number]\n\nexport type CardRootProps = ComponentPropsWithoutRef<'div'> & {\n  /** Surface treatment. `outline` is a bordered surface; `elevated` adds a shadow. */\n  variant?: CardVariant\n}\n\nconst { withContext, withRootProvider } = /* @__PURE__ */ createStyleContext(cardRecipe, {\n  name: 'Card',\n})\n\nexport const CardRoot = /* @__PURE__ */ withRootProvider('div')\nexport const CardHeader = /* @__PURE__ */ withContext('div', 'header')\nexport const CardTitle = /* @__PURE__ */ withContext('h3', 'title')\nexport const CardDescription = /* @__PURE__ */ withContext('p', 'description')\nexport const CardAction = /* @__PURE__ */ withContext('div', 'action')\nexport const CardContent = /* @__PURE__ */ withContext('div', 'content')\nexport const CardFooter = /* @__PURE__ */ withContext('div', 'footer')\n\nexport const Card = /* @__PURE__ */ Object.assign(CardRoot, {\n  Action: CardAction,\n  Content: CardContent,\n  Description: CardDescription,\n  Footer: CardFooter,\n  Header: CardHeader,\n  Root: CardRoot,\n  Title: CardTitle,\n})\n"
+    }
+  ],
+  "stalk": {
+    "schemaVersion": "1.0",
+    "preset": {
+      "semanticTokens": {},
+      "recipes": ["card"]
+    },
+    "packageDependencies": {
+      "preset": "@stalk-ui/preset"
+    },
+    "pandaCodegen": true,
+    "importAliases": {
+      "styledSystem": "styled-system"
+    }
+  }
+}

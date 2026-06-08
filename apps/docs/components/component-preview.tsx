@@ -2,10 +2,12 @@
 
 import { Accordion } from '@stalk-ui/components/accordion'
 import { Alert } from '@stalk-ui/components/alert'
+import { AlertDialog } from '@stalk-ui/components/alert-dialog'
 import { Avatar } from '@stalk-ui/components/avatar'
 import { Badge } from '@stalk-ui/components/badge'
 import { Blockquote } from '@stalk-ui/components/blockquote'
 import { Button } from '@stalk-ui/components/button'
+import { Card } from '@stalk-ui/components/card'
 import { Checkbox } from '@stalk-ui/components/checkbox'
 import { Code } from '@stalk-ui/components/code'
 import { Collapsible } from '@stalk-ui/components/collapsible'
@@ -13,19 +15,23 @@ import { ContextMenu } from '@stalk-ui/components/context-menu'
 import { Dialog } from '@stalk-ui/components/dialog'
 import { DropdownMenu } from '@stalk-ui/components/dropdown-menu'
 import { Heading } from '@stalk-ui/components/heading'
+import { HoverCard } from '@stalk-ui/components/hover-card'
 import { Input } from '@stalk-ui/components/input'
 import { Kbd } from '@stalk-ui/components/kbd'
 import { Label } from '@stalk-ui/components/label'
 import { Link } from '@stalk-ui/components/link'
 import { Menubar } from '@stalk-ui/components/menubar'
+import { NavigationMenu } from '@stalk-ui/components/navigation-menu'
 import { Popover } from '@stalk-ui/components/popover'
 import { Progress } from '@stalk-ui/components/progress'
 import { Radio } from '@stalk-ui/components/radio'
 import { Select } from '@stalk-ui/components/select'
+import { Sheet } from '@stalk-ui/components/sheet'
 import { Skeleton } from '@stalk-ui/components/skeleton'
 import { Slider } from '@stalk-ui/components/slider'
 import { Spinner } from '@stalk-ui/components/spinner'
 import { Switch } from '@stalk-ui/components/switch'
+import { Table } from '@stalk-ui/components/table'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@stalk-ui/components/tabs'
 import { Tag } from '@stalk-ui/components/tag'
 import { Text } from '@stalk-ui/components/text'
@@ -52,12 +58,14 @@ type PreviewTheme = 'monochrome' | 'neutral' | 'rainbow'
 const liveScope = {
   Accordion,
   Alert,
+  AlertDialog,
   AlertCircle,
   AlertTriangle,
   Avatar,
   Badge,
   Blockquote,
   Button,
+  Card,
   Checkbox,
   Code,
   Collapsible,
@@ -65,20 +73,24 @@ const liveScope = {
   Dialog,
   DropdownMenu,
   Heading,
+  HoverCard,
   Info,
   Input,
   Kbd,
   Label,
   Link,
   Menubar,
+  NavigationMenu,
   Popover,
   Progress,
   Radio,
   Select,
+  Sheet,
   Skeleton,
   Slider,
   Spinner,
   Switch,
+  Table,
   Tabs,
   TabsContent,
   TabsList,

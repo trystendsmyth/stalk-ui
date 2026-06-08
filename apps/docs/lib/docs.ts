@@ -132,7 +132,7 @@ export const componentGroups = [
   },
   {
     title: 'Data Display',
-    slugs: ['avatar', 'badge', 'tag'],
+    slugs: ['avatar', 'badge', 'card', 'table', 'tag'],
   },
   {
     title: 'Feedback',
@@ -140,11 +140,11 @@ export const componentGroups = [
   },
   {
     title: 'Overlay',
-    slugs: ['dialog', 'popover', 'tooltip'],
+    slugs: ['alert-dialog', 'dialog', 'hover-card', 'popover', 'sheet', 'tooltip'],
   },
   {
     title: 'Navigation',
-    slugs: ['context-menu', 'dropdown-menu', 'menubar', 'tabs'],
+    slugs: ['context-menu', 'dropdown-menu', 'menubar', 'navigation-menu', 'tabs'],
   },
   {
     title: 'Disclosure',
