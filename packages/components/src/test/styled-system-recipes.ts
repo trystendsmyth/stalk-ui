@@ -238,6 +238,15 @@ export const alert = ({ size = 'md', variant = 'subtle' }: AlertRecipeOptions = 
   close: 'stalk-alert__close',
 })
 
+export const alertDialog = () => ({
+  overlay: 'stalk-alert-dialog__overlay',
+  content: 'stalk-alert-dialog__content',
+  header: 'stalk-alert-dialog__header',
+  title: 'stalk-alert-dialog__title',
+  description: 'stalk-alert-dialog__description',
+  footer: 'stalk-alert-dialog__footer',
+})
+
 interface TabsRecipeOptions {
   fitted?: boolean
   size?: 'sm' | 'md' | 'lg'

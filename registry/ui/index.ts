@@ -1,5 +1,6 @@
 import { accordion } from './accordion'
 import { alert } from './alert'
+import { alertDialog } from './alert-dialog'
 import { avatar } from './avatar'
 import { badge } from './badge'
 import { blockquote } from './blockquote'
@@ -43,6 +44,7 @@ import type { RegistrySource } from './_template'
 export const registryItems = [
   accordion,
   alert,
+  alertDialog,
   avatar,
   badge,
   blockquote,

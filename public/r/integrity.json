@@ -18,6 +18,14 @@
       "path": "/r/shadcn/alert.json",
       "sha256": "1ca4eda25fb12d829964dfe6d2e9034152b98e8511e72c10975e6c297b822267"
     },
+    "alert-dialog": {
+      "path": "/r/alert-dialog.json",
+      "sha256": "5b48005b5fc411021bb4472fd7598610b13b511687fe81186be600584751062b"
+    },
+    "shadcn/alert-dialog": {
+      "path": "/r/shadcn/alert-dialog.json",
+      "sha256": "aeee9cf51abed7805f2df7dcd51b2f528775c54fcf62c2013d7f20f9b07f7b88"
+    },
     "avatar": {
       "path": "/r/avatar.json",
       "sha256": "d00b4aa0c7631c6ff7a14d6816c14853a7a228be1e2b119600547d4f585c5034"

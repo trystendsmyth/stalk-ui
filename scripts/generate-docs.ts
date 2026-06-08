@@ -44,6 +44,7 @@ type ComponentName = keyof typeof componentExamples
 const componentDescriptions = {
   accordion: 'Reveals related content in vertically stacked, expandable sections.',
   alert: 'Surfaces an inline, persistent status message.',
+  'alert-dialog': 'Interrupts with a modal that requires an explicit confirm or cancel.',
   avatar: 'Represents a user or entity with an image, initials, or fallback content.',
   badge: 'Displays compact status or metadata.',
   blockquote: 'Sets apart a quotation as a distinct block.',

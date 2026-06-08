@@ -1,5 +1,6 @@
 export { accordion } from './accordion'
 export { alert } from './alert'
+export { alertDialog } from './alert-dialog'
 export { avatar } from './avatar'
 export { card } from './card'
 export { checkbox } from './checkbox'

@@ -18,6 +18,20 @@ export {
   AlertTitle,
 } from './alert'
 export type { AlertCloseProps, AlertRootProps, AlertSize, AlertTone, AlertVariant } from './alert'
+export {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogOverlay,
+  AlertDialogPortal,
+  AlertDialogRoot,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from './alert-dialog'
 export { Avatar, AvatarFallback, AvatarImage, AvatarRoot } from './avatar'
 export type {
   AvatarFallbackProps,

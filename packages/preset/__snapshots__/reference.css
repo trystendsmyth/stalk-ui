@@ -1972,6 +1972,57 @@
       color: var(--colors-fg-default);
 }
 
+    .stalk-alert-dialog__overlay {
+      inset: var(--spacing-0);
+      position: fixed;
+      background-color: black.a8;
+      z-index: var(--z-index-modal);
+}
+
+    .stalk-alert-dialog__content {
+      border: var(--borders-default);
+      padding: var(--spacing-24);
+      overflow: auto;
+      border-radius: var(--radii-lg);
+      position: fixed;
+      inset-inline-start: 50%;
+      inset-block-start: 50%;
+      transform: translate(-50%, -50%);
+      background-color: var(--colors-bg-default);
+      box-shadow: var(--shadows-lg);
+      color: var(--colors-fg-default);
+      z-index: var(--z-index-modal);
+      width: min(calc(100vw - 2rem), 28rem);
+      max-height: calc(100vh - 2rem);
+}
+
+    .stalk-alert-dialog__header {
+      gap: var(--spacing-6);
+      display: grid;
+}
+
+    .stalk-alert-dialog__title {
+      font-size: var(--font-sizes-lg);
+      line-height: var(--line-heights-lg);
+      letter-spacing: var(--letter-spacings-normal);
+}
+
+    .stalk-alert-dialog__description {
+      color: var(--colors-fg-muted);
+      font-size: var(--font-sizes-sm);
+      line-height: var(--line-heights-sm);
+      letter-spacing: var(--letter-spacings-normal);
+}
+
+    .stalk-alert-dialog__footer {
+      gap: var(--spacing-12);
+      align-items: center;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      padding-top: var(--spacing-base);
+}
+
     .stalk-avatar__root {
       overflow: hidden;
       align-items: center;

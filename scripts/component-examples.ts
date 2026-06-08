@@ -8,6 +8,9 @@ export const componentExamples = {
     '<Alert.Root tone="warning">\n  <Alert.Icon><AlertTriangle /></Alert.Icon>\n  <Alert.Body>\n    <Alert.Title>Storage almost full</Alert.Title>\n    <Alert.Description>You\'re using 92% of your storage.</Alert.Description>\n  </Alert.Body>\n  <Alert.Close aria-label="Dismiss"><X /></Alert.Close>\n</Alert.Root>',
     '<Alert.Root tone="danger">\n  <Alert.Icon><AlertCircle /></Alert.Icon>\n  <Alert.Body>\n    <Alert.Title>Deployment failed</Alert.Title>\n    <Alert.Description>Build #424 exited with code 1.</Alert.Description>\n    <Alert.Actions>\n      <Button size="sm" tone="danger">Retry</Button>\n    </Alert.Actions>\n  </Alert.Body>\n</Alert.Root>',
   ],
+  'alert-dialog': [
+    '<AlertDialog.Root>\n  <AlertDialog.Trigger asChild>\n    <Button tone="danger" variant="outline">Delete project</Button>\n  </AlertDialog.Trigger>\n  <AlertDialog.Content>\n    <AlertDialog.Header>\n      <AlertDialog.Title>Delete this project?</AlertDialog.Title>\n      <AlertDialog.Description>This permanently removes the project and all of its data. This action cannot be undone.</AlertDialog.Description>\n    </AlertDialog.Header>\n    <AlertDialog.Footer>\n      <AlertDialog.Cancel asChild><Button variant="outline">Cancel</Button></AlertDialog.Cancel>\n      <AlertDialog.Action asChild><Button tone="danger">Delete</Button></AlertDialog.Action>\n    </AlertDialog.Footer>\n  </AlertDialog.Content>\n</AlertDialog.Root>',
+  ],
   avatar: [
     '<Avatar name="Ada Lovelace" />',
     '<Avatar src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=128&h=128&fit=crop" name="Ada Lovelace" size="lg" />',

@@ -1,0 +1,28 @@
+{
+  "$schema": "https://stalk-ui.com/schema/v1/registry-item.json",
+  "name": "alert-dialog",
+  "type": "registry:ui",
+  "dependencies": ["@radix-ui/react-alert-dialog", "@stalk-ui/preset"],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "src/components/ui/alert-dialog.tsx",
+      "type": "registry:ui",
+      "content": "'use client'\n\nimport * as AlertDialogPrimitive from '@radix-ui/react-alert-dialog'\n// Stalk UI component - requires PandaCSS setup and @stalk-ui/preset.\nimport { forwardRef } from 'react'\nimport { cx } from 'styled-system/css'\nimport { alertDialog as alertDialogRecipe } from 'styled-system/recipes'\n\nimport type { ComponentPropsWithoutRef, ComponentRef, HTMLAttributes } from 'react'\n\nconst styles = /* @__PURE__ */ alertDialogRecipe()\n\nexport const AlertDialogRoot = AlertDialogPrimitive.Root\nexport const AlertDialogTrigger = AlertDialogPrimitive.Trigger\nexport const AlertDialogPortal = AlertDialogPrimitive.Portal\n\n// Action and Cancel carry Radix's focus + dismissal behavior; compose a Button\n// through `asChild` for styling (see docs/stories).\nexport const AlertDialogAction = AlertDialogPrimitive.Action\nexport const AlertDialogCancel = AlertDialogPrimitive.Cancel\n\nexport const AlertDialogOverlay = /* @__PURE__ */ forwardRef<\n  ComponentRef<typeof AlertDialogPrimitive.Overlay>,\n  ComponentPropsWithoutRef<typeof AlertDialogPrimitive.Overlay>\n>(function AlertDialogOverlay({ className, ...props }, ref) {\n  return (\n    <AlertDialogPrimitive.Overlay ref={ref} className={cx(styles.overlay, className)} {...props} />\n  )\n})\n\nexport const AlertDialogContent = /* @__PURE__ */ forwardRef<\n  ComponentRef<typeof AlertDialogPrimitive.Content>,\n  ComponentPropsWithoutRef<typeof AlertDialogPrimitive.Content>\n>(function AlertDialogContent({ children, className, ...props }, ref) {\n  return (\n    <AlertDialogPortal>\n      <AlertDialogOverlay />\n      <AlertDialogPrimitive.Content ref={ref} className={cx(styles.content, className)} {...props}>\n        {children}\n      </AlertDialogPrimitive.Content>\n    </AlertDialogPortal>\n  )\n})\n\nexport const AlertDialogHeader = /* @__PURE__ */ forwardRef<\n  HTMLDivElement,\n  HTMLAttributes<HTMLDivElement>\n>(function AlertDialogHeader({ className, ...props }, ref) {\n  return <div ref={ref} className={cx(styles.header, className)} {...props} />\n})\n\nexport const AlertDialogTitle = /* @__PURE__ */ forwardRef<\n  ComponentRef<typeof AlertDialogPrimitive.Title>,\n  ComponentPropsWithoutRef<typeof AlertDialogPrimitive.Title>\n>(function AlertDialogTitle({ className, ...props }, ref) {\n  return <AlertDialogPrimitive.Title ref={ref} className={cx(styles.title, className)} {...props} />\n})\n\nexport const AlertDialogDescription = /* @__PURE__ */ forwardRef<\n  ComponentRef<typeof AlertDialogPrimitive.Description>,\n  ComponentPropsWithoutRef<typeof AlertDialogPrimitive.Description>\n>(function AlertDialogDescription({ className, ...props }, ref) {\n  return (\n    <AlertDialogPrimitive.Description\n      ref={ref}\n      className={cx(styles.description, className)}\n      {...props}\n    />\n  )\n})\n\nexport const AlertDialogFooter = /* @__PURE__ */ forwardRef<\n  HTMLDivElement,\n  HTMLAttributes<HTMLDivElement>\n>(function AlertDialogFooter({ className, ...props }, ref) {\n  return <div ref={ref} className={cx(styles.footer, className)} {...props} />\n})\n\nexport const AlertDialog = /* @__PURE__ */ Object.assign(AlertDialogRoot, {\n  Action: AlertDialogAction,\n  Cancel: AlertDialogCancel,\n  Content: AlertDialogContent,\n  Description: AlertDialogDescription,\n  Footer: AlertDialogFooter,\n  Header: AlertDialogHeader,\n  Overlay: AlertDialogOverlay,\n  Portal: AlertDialogPortal,\n  Root: AlertDialogRoot,\n  Title: AlertDialogTitle,\n  Trigger: AlertDialogTrigger,\n})\n"
+    }
+  ],
+  "stalk": {
+    "schemaVersion": "1.0",
+    "preset": {
+      "semanticTokens": {},
+      "recipes": ["alertDialog"]
+    },
+    "packageDependencies": {
+      "preset": "@stalk-ui/preset"
+    },
+    "pandaCodegen": true,
+    "importAliases": {
+      "styledSystem": "styled-system"
+    }
+  }
+}

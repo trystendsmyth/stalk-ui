@@ -2,6 +2,7 @@
 
 import { Accordion } from '@stalk-ui/components/accordion'
 import { Alert } from '@stalk-ui/components/alert'
+import { AlertDialog } from '@stalk-ui/components/alert-dialog'
 import { Avatar } from '@stalk-ui/components/avatar'
 import { Badge } from '@stalk-ui/components/badge'
 import { Blockquote } from '@stalk-ui/components/blockquote'
@@ -55,6 +56,7 @@ type PreviewTheme = 'monochrome' | 'neutral' | 'rainbow'
 const liveScope = {
   Accordion,
   Alert,
+  AlertDialog,
   AlertCircle,
   AlertTriangle,
   Avatar,
