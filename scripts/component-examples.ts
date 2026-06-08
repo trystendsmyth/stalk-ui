@@ -108,6 +108,10 @@ export const componentExamples = {
     '<Select.Root>\n  <Select.Trigger invalid aria-label="Status"><Select.Value placeholder="Required" /></Select.Trigger>\n  <Select.Content>\n    <Select.Item value="draft">Draft</Select.Item>\n  </Select.Content>\n</Select.Root>',
     '<Select.Root disabled>\n  <Select.Trigger aria-label="Locked"><Select.Value placeholder="Locked" /></Select.Trigger>\n  <Select.Content>\n    <Select.Item value="locked">Locked</Select.Item>\n  </Select.Content>\n</Select.Root>',
   ],
+  sheet: [
+    '<Sheet.Root>\n  <Sheet.Trigger asChild>\n    <Button>Open sheet</Button>\n  </Sheet.Trigger>\n  <Sheet.Content side="right">\n    <Sheet.Header>\n      <Sheet.Title>Edit profile</Sheet.Title>\n      <Sheet.Description>Update your details, then save to apply changes.</Sheet.Description>\n    </Sheet.Header>\n    <Sheet.Footer>\n      <Sheet.Close asChild><Button variant="outline">Cancel</Button></Sheet.Close>\n      <Button>Save</Button>\n    </Sheet.Footer>\n  </Sheet.Content>\n</Sheet.Root>',
+    '<Sheet.Root>\n  <Sheet.Trigger asChild>\n    <Button variant="outline">Open left</Button>\n  </Sheet.Trigger>\n  <Sheet.Content side="left">\n    <Sheet.Header>\n      <Sheet.Title>Navigation</Sheet.Title>\n      <Sheet.Description>A panel anchored to the start edge.</Sheet.Description>\n    </Sheet.Header>\n  </Sheet.Content>\n</Sheet.Root>',
+  ],
   skeleton: [
     '<Skeleton style={{ height: 14, width: 240 }} />',
     '<Skeleton radius="full" style={{ height: 48, width: 48 }} />',

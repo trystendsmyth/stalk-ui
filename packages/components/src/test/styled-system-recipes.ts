@@ -132,6 +132,20 @@ export const select = ({ size = 'md' }: SelectRecipeOptions = {}) => ({
   separator: 'stalk-select__separator',
 })
 
+interface SheetRecipeOptions {
+  side?: 'top' | 'right' | 'bottom' | 'left'
+}
+
+export const sheet = ({ side = 'right' }: SheetRecipeOptions = {}) => ({
+  overlay: 'stalk-sheet__overlay',
+  content: `stalk-sheet__content stalk-sheet__content--side-${side}`,
+  header: 'stalk-sheet__header',
+  title: 'stalk-sheet__title',
+  description: 'stalk-sheet__description',
+  footer: 'stalk-sheet__footer',
+  close: 'stalk-sheet__close',
+})
+
 export const toast = () => ({
   toaster: 'stalk-toast__toaster',
   toast: 'stalk-toast__toast',

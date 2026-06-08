@@ -174,6 +174,20 @@ export {
   SelectTrigger,
 } from './select'
 export type { SelectContentProps, SelectSize, SelectTriggerProps } from './select'
+export {
+  Sheet,
+  SheetClose,
+  SheetContent,
+  SheetDescription,
+  SheetFooter,
+  SheetHeader,
+  SheetOverlay,
+  SheetPortal,
+  SheetRoot,
+  SheetTitle,
+  SheetTrigger,
+} from './sheet'
+export type { SheetContentProps, SheetSide } from './sheet'
 export { Skeleton } from './skeleton'
 export type { SkeletonProps, SkeletonRadius } from './skeleton'
 export { Slider } from './slider'

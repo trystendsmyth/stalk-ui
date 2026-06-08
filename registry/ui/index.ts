@@ -21,6 +21,7 @@ import { popover } from './popover'
 import { progress } from './progress'
 import { radio } from './radio'
 import { select } from './select'
+import { sheet } from './sheet'
 import { skeleton } from './skeleton'
 import { slider } from './slider'
 import { spinner } from './spinner'
@@ -63,6 +64,7 @@ export const registryItems = [
   progress,
   radio,
   select,
+  sheet,
   skeleton,
   slider,
   spinner,

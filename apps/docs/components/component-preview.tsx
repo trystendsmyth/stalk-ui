@@ -23,6 +23,7 @@ import { Popover } from '@stalk-ui/components/popover'
 import { Progress } from '@stalk-ui/components/progress'
 import { Radio } from '@stalk-ui/components/radio'
 import { Select } from '@stalk-ui/components/select'
+import { Sheet } from '@stalk-ui/components/sheet'
 import { Skeleton } from '@stalk-ui/components/skeleton'
 import { Slider } from '@stalk-ui/components/slider'
 import { Spinner } from '@stalk-ui/components/spinner'
@@ -78,6 +79,7 @@ const liveScope = {
   Progress,
   Radio,
   Select,
+  Sheet,
   Skeleton,
   Slider,
   Spinner,

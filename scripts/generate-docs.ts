@@ -65,6 +65,7 @@ const componentDescriptions = {
   progress: 'Shows the completion progress of a task.',
   radio: 'Selects one option from a related set of choices.',
   select: 'Lets a user choose one option from a native menu.',
+  sheet: 'Slides a panel in from a screen edge for secondary content or forms.',
   skeleton: 'Reserves layout space with a shimmering placeholder while content loads.',
   slider: 'Selects a numeric value or range along a track.',
   spinner: 'Indicates an indeterminate loading state with an accessible label.',

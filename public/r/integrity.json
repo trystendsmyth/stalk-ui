@@ -186,6 +186,14 @@
       "path": "/r/shadcn/select.json",
       "sha256": "ed6f2b26d894bae06fbce155daa7a71b4853f36a00614c23cd0357a233dce075"
     },
+    "sheet": {
+      "path": "/r/sheet.json",
+      "sha256": "1a7915a94a84f0098ac756941007cba1b19ad12a6aa25c2543edb6ca4d0213bb"
+    },
+    "shadcn/sheet": {
+      "path": "/r/shadcn/sheet.json",
+      "sha256": "b1a90b889a1a7bed254bbbbfccd2cb4199f7a4d45dbdd6d6b9753f7be7b37167"
+    },
     "skeleton": {
       "path": "/r/skeleton.json",
       "sha256": "261495214262f8040c1fe0d4242763042dfa5b470513050d40213b78a2fe12ba"

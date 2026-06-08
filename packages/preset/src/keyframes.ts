@@ -56,4 +56,38 @@ export const keyframes = {
     from: { height: 'var(--radix-collapsible-content-height)' },
     to: { height: '0' },
   },
+  // Edge-anchored slide for Sheet content, one pair per physical side. The side
+  // name matches the offscreen origin so RTL keeps the physical direction.
+  'slide-in-from-top': {
+    from: { transform: 'translateY(-100%)' },
+    to: { transform: 'translateY(0)' },
+  },
+  'slide-out-to-top': {
+    from: { transform: 'translateY(0)' },
+    to: { transform: 'translateY(-100%)' },
+  },
+  'slide-in-from-bottom': {
+    from: { transform: 'translateY(100%)' },
+    to: { transform: 'translateY(0)' },
+  },
+  'slide-out-to-bottom': {
+    from: { transform: 'translateY(0)' },
+    to: { transform: 'translateY(100%)' },
+  },
+  'slide-in-from-left': {
+    from: { transform: 'translateX(-100%)' },
+    to: { transform: 'translateX(0)' },
+  },
+  'slide-out-to-left': {
+    from: { transform: 'translateX(0)' },
+    to: { transform: 'translateX(-100%)' },
+  },
+  'slide-in-from-right': {
+    from: { transform: 'translateX(100%)' },
+    to: { transform: 'translateX(0)' },
+  },
+  'slide-out-to-right': {
+    from: { transform: 'translateX(0)' },
+    to: { transform: 'translateX(100%)' },
+  },
 }
