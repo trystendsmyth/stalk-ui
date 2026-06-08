@@ -109,6 +109,21 @@ export const popover = () => ({
   content: 'stalk-popover__content',
 })
 
+export const hoverCard = () => ({
+  content: 'stalk-hover-card__content',
+  arrow: 'stalk-hover-card__arrow',
+})
+
+export const navigationMenu = () => ({
+  root: 'stalk-navigation-menu__root',
+  list: 'stalk-navigation-menu__list',
+  item: 'stalk-navigation-menu__item',
+  trigger: 'stalk-navigation-menu__trigger',
+  triggerIcon: 'stalk-navigation-menu__triggerIcon',
+  content: 'stalk-navigation-menu__content',
+  link: 'stalk-navigation-menu__link',
+})
+
 interface RadioRecipeOptions {
   size?: 'sm' | 'md' | 'lg'
 }
@@ -130,6 +145,20 @@ export const select = ({ size = 'md' }: SelectRecipeOptions = {}) => ({
   itemIndicator: 'stalk-select__item-indicator',
   label: 'stalk-select__label',
   separator: 'stalk-select__separator',
+})
+
+interface SheetRecipeOptions {
+  side?: 'top' | 'right' | 'bottom' | 'left'
+}
+
+export const sheet = ({ side = 'right' }: SheetRecipeOptions = {}) => ({
+  overlay: 'stalk-sheet__overlay',
+  content: `stalk-sheet__content stalk-sheet__content--side-${side}`,
+  header: 'stalk-sheet__header',
+  title: 'stalk-sheet__title',
+  description: 'stalk-sheet__description',
+  footer: 'stalk-sheet__footer',
+  close: 'stalk-sheet__close',
 })
 
 export const toast = () => ({
@@ -224,6 +253,15 @@ export const alert = ({ size = 'md', variant = 'subtle' }: AlertRecipeOptions = 
   close: 'stalk-alert__close',
 })
 
+export const alertDialog = () => ({
+  overlay: 'stalk-alert-dialog__overlay',
+  content: 'stalk-alert-dialog__content',
+  header: 'stalk-alert-dialog__header',
+  title: 'stalk-alert-dialog__title',
+  description: 'stalk-alert-dialog__description',
+  footer: 'stalk-alert-dialog__footer',
+})
+
 interface TabsRecipeOptions {
   fitted?: boolean
   size?: 'sm' | 'md' | 'lg'
@@ -246,6 +284,18 @@ export const tabs = ({
   trigger: `stalk-tabs__trigger stalk-tabs__trigger--${size}`,
   content: 'stalk-tabs__content',
   indicator: `stalk-tabs__indicator stalk-tabs__indicator--${variant}`,
+})
+
+export const table = () => ({
+  root: 'stalk-table__root',
+  table: 'stalk-table__table',
+  header: 'stalk-table__header',
+  body: 'stalk-table__body',
+  footer: 'stalk-table__footer',
+  row: 'stalk-table__row',
+  head: 'stalk-table__head',
+  cell: 'stalk-table__cell',
+  caption: 'stalk-table__caption',
 })
 
 interface ToggleRecipeOptions {
@@ -316,6 +366,26 @@ export const collapsible = ({ variant = 'inline' }: CollapsibleRecipeOptions = {
 collapsible.variantMap = { variant: ['inline', 'card'] as const }
 collapsible.variantKeys = collapsibleVariantKeys
 collapsible.splitVariantProps = makeSplitVariantProps(collapsibleVariantKeys)
+
+interface CardRecipeOptions {
+  variant?: 'outline' | 'elevated'
+}
+
+const cardVariantKeys = ['variant'] as const
+
+export const card = ({ variant = 'outline' }: CardRecipeOptions = {}) => ({
+  root: `stalk-card__root stalk-card--${variant}`,
+  header: 'stalk-card__header',
+  title: 'stalk-card__title',
+  description: 'stalk-card__description',
+  action: 'stalk-card__action',
+  content: 'stalk-card__content',
+  footer: 'stalk-card__footer',
+})
+
+card.variantMap = { variant: ['outline', 'elevated'] as const }
+card.variantKeys = cardVariantKeys
+card.splitVariantProps = makeSplitVariantProps(cardVariantKeys)
 
 interface ContextMenuRecipeOptions {
   inset?: boolean

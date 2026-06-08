@@ -8,6 +8,9 @@ export const componentExamples = {
     '<Alert.Root tone="warning">\n  <Alert.Icon><AlertTriangle /></Alert.Icon>\n  <Alert.Body>\n    <Alert.Title>Storage almost full</Alert.Title>\n    <Alert.Description>You\'re using 92% of your storage.</Alert.Description>\n  </Alert.Body>\n  <Alert.Close aria-label="Dismiss"><X /></Alert.Close>\n</Alert.Root>',
     '<Alert.Root tone="danger">\n  <Alert.Icon><AlertCircle /></Alert.Icon>\n  <Alert.Body>\n    <Alert.Title>Deployment failed</Alert.Title>\n    <Alert.Description>Build #424 exited with code 1.</Alert.Description>\n    <Alert.Actions>\n      <Button size="sm" tone="danger">Retry</Button>\n    </Alert.Actions>\n  </Alert.Body>\n</Alert.Root>',
   ],
+  'alert-dialog': [
+    '<AlertDialog.Root>\n  <AlertDialog.Trigger asChild>\n    <Button tone="danger" variant="outline">Delete project</Button>\n  </AlertDialog.Trigger>\n  <AlertDialog.Content>\n    <AlertDialog.Header>\n      <AlertDialog.Title>Delete this project?</AlertDialog.Title>\n      <AlertDialog.Description>This permanently removes the project and all of its data. This action cannot be undone.</AlertDialog.Description>\n    </AlertDialog.Header>\n    <AlertDialog.Footer>\n      <AlertDialog.Cancel asChild><Button variant="outline">Cancel</Button></AlertDialog.Cancel>\n      <AlertDialog.Action asChild><Button tone="danger">Delete</Button></AlertDialog.Action>\n    </AlertDialog.Footer>\n  </AlertDialog.Content>\n</AlertDialog.Root>',
+  ],
   avatar: [
     '<Avatar name="Ada Lovelace" />',
     '<Avatar src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=128&h=128&fit=crop" name="Ada Lovelace" size="lg" />',
@@ -28,6 +31,11 @@ export const componentExamples = {
     '<Button variant="outline">Cancel</Button>',
     '<Button variant="ghost" size="sm">Learn more</Button>',
     '<Button loading>Saving…</Button>',
+  ],
+  card: [
+    '<Card.Root>\n  <Card.Header>\n    <Card.Title>Project settings</Card.Title>\n    <Card.Description>Manage how this project is shared with your team.</Card.Description>\n  </Card.Header>\n  <Card.Content>Cards group related content and actions into one surface.</Card.Content>\n</Card.Root>',
+    '<Card.Root>\n  <Card.Header>\n    <Card.Title>Invite people</Card.Title>\n    <Card.Description>Add collaborators to this project.</Card.Description>\n  </Card.Header>\n  <Card.Content>An invite gives full edit access.</Card.Content>\n  <Card.Footer>\n    <Button size="sm">Send invite</Button>\n    <Button size="sm" variant="outline">Cancel</Button>\n  </Card.Footer>\n</Card.Root>',
+    '<Card.Root variant="elevated">\n  <Card.Header>\n    <Card.Title>Billing</Card.Title>\n    <Card.Description>You are on the Pro plan.</Card.Description>\n    <Card.Action>\n      <Button size="sm" variant="outline">Upgrade</Button>\n    </Card.Action>\n  </Card.Header>\n  <Card.Content>Your plan renews on the 1st of each month.</Card.Content>\n</Card.Root>',
   ],
   checkbox: [
     '<Checkbox aria-label="Accept terms" />',
@@ -62,6 +70,9 @@ export const componentExamples = {
     '<Heading as="h1" size="display">Hero headline</Heading>',
     '<Heading as="h3" tone="accent">Tinted subsection</Heading>',
   ],
+  'hover-card': [
+    '<HoverCard.Root>\n  <HoverCard.Trigger asChild>\n    <Link href="#">@ada</Link>\n  </HoverCard.Trigger>\n  <HoverCard.Content>\n    <Text weight="medium">Ada Lovelace</Text>\n    <Text size="bodySm">Mathematician and the first computer programmer.</Text>\n  </HoverCard.Content>\n</HoverCard.Root>',
+  ],
   input: [
     '<Input aria-label="Email" placeholder="hello@stalk-ui.com" />',
     '<Input invalid aria-label="Email" defaultValue="not-an-email" />',
@@ -85,6 +96,9 @@ export const componentExamples = {
   menubar: [
     '<Menubar>\n  <Menubar.Menu>\n    <Menubar.Trigger>File</Menubar.Trigger>\n    <Menubar.Content>\n      <Menubar.Item>New tab<Menubar.Shortcut>⌘T</Menubar.Shortcut></Menubar.Item>\n      <Menubar.Item>New window<Menubar.Shortcut>⌘N</Menubar.Shortcut></Menubar.Item>\n    </Menubar.Content>\n  </Menubar.Menu>\n  <Menubar.Menu>\n    <Menubar.Trigger>Edit</Menubar.Trigger>\n    <Menubar.Content>\n      <Menubar.Item>Undo</Menubar.Item>\n      <Menubar.Item>Redo</Menubar.Item>\n    </Menubar.Content>\n  </Menubar.Menu>\n</Menubar>',
   ],
+  'navigation-menu': [
+    '<NavigationMenu.Root>\n  <NavigationMenu.List>\n    <NavigationMenu.Item>\n      <NavigationMenu.Trigger>Products</NavigationMenu.Trigger>\n      <NavigationMenu.Content>\n        <ul style={{ minWidth: "14rem" }}>\n          <li><NavigationMenu.Link href="#">Analytics</NavigationMenu.Link></li>\n          <li><NavigationMenu.Link href="#">Automation</NavigationMenu.Link></li>\n          <li><NavigationMenu.Link href="#">Reports</NavigationMenu.Link></li>\n        </ul>\n      </NavigationMenu.Content>\n    </NavigationMenu.Item>\n    <NavigationMenu.Item>\n      <NavigationMenu.Link href="#">Pricing</NavigationMenu.Link>\n    </NavigationMenu.Item>\n  </NavigationMenu.List>\n</NavigationMenu.Root>',
+  ],
   popover: [
     '<Popover.Root>\n  <Popover.Trigger>Open popover</Popover.Trigger>\n  <Popover.Content>Quick actions go here.</Popover.Content>\n</Popover.Root>',
     '<Popover.Root>\n  <Popover.Trigger>Filters</Popover.Trigger>\n  <Popover.Content side="bottom" align="start">Filter controls render below the trigger.</Popover.Content>\n</Popover.Root>',
@@ -102,6 +116,10 @@ export const componentExamples = {
     '<Select.Root>\n  <Select.Trigger aria-label="Status"><Select.Value placeholder="Choose a status" /></Select.Trigger>\n  <Select.Content>\n    <Select.Item value="draft">Draft</Select.Item>\n    <Select.Item value="published">Published</Select.Item>\n    <Select.Item value="archived">Archived</Select.Item>\n  </Select.Content>\n</Select.Root>',
     '<Select.Root>\n  <Select.Trigger invalid aria-label="Status"><Select.Value placeholder="Required" /></Select.Trigger>\n  <Select.Content>\n    <Select.Item value="draft">Draft</Select.Item>\n  </Select.Content>\n</Select.Root>',
     '<Select.Root disabled>\n  <Select.Trigger aria-label="Locked"><Select.Value placeholder="Locked" /></Select.Trigger>\n  <Select.Content>\n    <Select.Item value="locked">Locked</Select.Item>\n  </Select.Content>\n</Select.Root>',
+  ],
+  sheet: [
+    '<Sheet.Root>\n  <Sheet.Trigger asChild>\n    <Button>Open sheet</Button>\n  </Sheet.Trigger>\n  <Sheet.Content side="right">\n    <Sheet.Header>\n      <Sheet.Title>Edit profile</Sheet.Title>\n      <Sheet.Description>Update your details, then save to apply changes.</Sheet.Description>\n    </Sheet.Header>\n    <Sheet.Footer>\n      <Sheet.Close asChild><Button variant="outline">Cancel</Button></Sheet.Close>\n      <Button>Save</Button>\n    </Sheet.Footer>\n  </Sheet.Content>\n</Sheet.Root>',
+    '<Sheet.Root>\n  <Sheet.Trigger asChild>\n    <Button variant="outline">Open left</Button>\n  </Sheet.Trigger>\n  <Sheet.Content side="left">\n    <Sheet.Header>\n      <Sheet.Title>Navigation</Sheet.Title>\n      <Sheet.Description>A panel anchored to the start edge.</Sheet.Description>\n    </Sheet.Header>\n  </Sheet.Content>\n</Sheet.Root>',
   ],
   skeleton: [
     '<Skeleton style={{ height: 14, width: 240 }} />',
@@ -121,6 +139,10 @@ export const componentExamples = {
     '<Switch aria-label="Email notifications" />',
     '<Switch defaultChecked aria-label="Push notifications" />',
     '<Switch disabled aria-label="Locked setting" />',
+  ],
+  table: [
+    '<Table.Root>\n  <Table.Caption>Recent invoices.</Table.Caption>\n  <Table.Header>\n    <Table.Row>\n      <Table.Head scope="col">Invoice</Table.Head>\n      <Table.Head scope="col">Status</Table.Head>\n      <Table.Head scope="col">Amount</Table.Head>\n    </Table.Row>\n  </Table.Header>\n  <Table.Body>\n    <Table.Row>\n      <Table.Cell>INV-001</Table.Cell>\n      <Table.Cell><Badge tone="success" variant="subtle">Paid</Badge></Table.Cell>\n      <Table.Cell>$250.00</Table.Cell>\n    </Table.Row>\n    <Table.Row>\n      <Table.Cell>INV-002</Table.Cell>\n      <Table.Cell><Badge tone="warning" variant="subtle">Pending</Badge></Table.Cell>\n      <Table.Cell>$150.00</Table.Cell>\n    </Table.Row>\n  </Table.Body>\n</Table.Root>',
+    '<Table.Root>\n  <Table.Header>\n    <Table.Row>\n      <Table.Head scope="col">Name</Table.Head>\n      <Table.Head scope="col">Role</Table.Head>\n    </Table.Row>\n  </Table.Header>\n  <Table.Body>\n    <Table.Row data-state="selected">\n      <Table.Cell>Ada Lovelace</Table.Cell>\n      <Table.Cell>Owner</Table.Cell>\n    </Table.Row>\n    <Table.Row>\n      <Table.Cell>Linus Torvalds</Table.Cell>\n      <Table.Cell>Maintainer</Table.Cell>\n    </Table.Row>\n  </Table.Body>\n</Table.Root>',
   ],
   text: [
     '<Text>The quick brown fox jumps over the lazy dog.</Text>',

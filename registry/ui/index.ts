@@ -1,9 +1,11 @@
 import { accordion } from './accordion'
 import { alert } from './alert'
+import { alertDialog } from './alert-dialog'
 import { avatar } from './avatar'
 import { badge } from './badge'
 import { blockquote } from './blockquote'
 import { button } from './button'
+import { card } from './card'
 import { checkbox } from './checkbox'
 import { code } from './code'
 import { collapsible } from './collapsible'
@@ -11,19 +13,23 @@ import { contextMenu } from './context-menu'
 import { dialog } from './dialog'
 import { dropdownMenu } from './dropdown-menu'
 import { heading } from './heading'
+import { hoverCard } from './hover-card'
 import { input } from './input'
 import { kbd } from './kbd'
 import { label } from './label'
 import { link } from './link'
 import { menubar } from './menubar'
+import { navigationMenu } from './navigation-menu'
 import { popover } from './popover'
 import { progress } from './progress'
 import { radio } from './radio'
 import { select } from './select'
+import { sheet } from './sheet'
 import { skeleton } from './skeleton'
 import { slider } from './slider'
 import { spinner } from './spinner'
 import { switchItem } from './switch'
+import { table } from './table'
 import { tabs } from './tabs'
 import { tag } from './tag'
 import { text } from './text'
@@ -40,10 +46,12 @@ import type { RegistrySource } from './_template'
 export const registryItems = [
   accordion,
   alert,
+  alertDialog,
   avatar,
   badge,
   blockquote,
   button,
+  card,
   checkbox,
   code,
   collapsible,
@@ -51,19 +59,23 @@ export const registryItems = [
   dialog,
   dropdownMenu,
   heading,
+  hoverCard,
   input,
   kbd,
   label,
   link,
   menubar,
+  navigationMenu,
   popover,
   progress,
   radio,
   select,
+  sheet,
   skeleton,
   slider,
   spinner,
   switchItem,
+  table,
   tabs,
   tag,
   text,
