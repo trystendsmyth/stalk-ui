@@ -1,6 +1,7 @@
 export { accordion } from './accordion'
 export { alert } from './alert'
 export { avatar } from './avatar'
+export { card } from './card'
 export { checkbox } from './checkbox'
 export { collapsible } from './collapsible'
 export { contextMenu } from './context-menu'

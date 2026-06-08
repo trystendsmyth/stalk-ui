@@ -34,6 +34,17 @@ export { Blockquote } from './blockquote'
 export type { BlockquoteProps, BlockquoteSize } from './blockquote'
 export { Button } from './button'
 export type { ButtonProps, ButtonSize, ButtonTone, ButtonVariant } from './button'
+export {
+  Card,
+  CardAction,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardRoot,
+  CardTitle,
+} from './card'
+export type { CardRootProps, CardVariant } from './card'
 export { Checkbox } from './checkbox'
 export type { CheckboxProps, CheckboxSize } from './checkbox'
 export { Code } from './code'

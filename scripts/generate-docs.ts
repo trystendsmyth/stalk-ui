@@ -48,6 +48,7 @@ const componentDescriptions = {
   badge: 'Displays compact status or metadata.',
   blockquote: 'Sets apart a quotation as a distinct block.',
   button: 'Triggers an action or submits a form.',
+  card: 'Groups related content and actions on a single bordered surface.',
   checkbox: 'Toggles a binary option in a form or settings surface.',
   code: 'Marks inline code or a short command within running text.',
   collapsible: 'Toggles the visibility of a single content region.',

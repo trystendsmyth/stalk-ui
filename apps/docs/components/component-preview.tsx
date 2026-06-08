@@ -6,6 +6,7 @@ import { Avatar } from '@stalk-ui/components/avatar'
 import { Badge } from '@stalk-ui/components/badge'
 import { Blockquote } from '@stalk-ui/components/blockquote'
 import { Button } from '@stalk-ui/components/button'
+import { Card } from '@stalk-ui/components/card'
 import { Checkbox } from '@stalk-ui/components/checkbox'
 import { Code } from '@stalk-ui/components/code'
 import { Collapsible } from '@stalk-ui/components/collapsible'
@@ -58,6 +59,7 @@ const liveScope = {
   Badge,
   Blockquote,
   Button,
+  Card,
   Checkbox,
   Code,
   Collapsible,

@@ -4,6 +4,7 @@ import { avatar } from './avatar'
 import { badge } from './badge'
 import { blockquote } from './blockquote'
 import { button } from './button'
+import { card } from './card'
 import { checkbox } from './checkbox'
 import { code } from './code'
 import { collapsible } from './collapsible'
@@ -44,6 +45,7 @@ export const registryItems = [
   badge,
   blockquote,
   button,
+  card,
   checkbox,
   code,
   collapsible,

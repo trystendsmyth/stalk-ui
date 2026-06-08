@@ -1918,14 +1918,64 @@
 }
 
     .stalk-avatar__fallback {
+      align-items: center;
       display: flex;
+      justify-content: center;
       line-height: 1;
       text-transform: uppercase;
 }
 
-    .stalk-avatar__fallback,.stalk-checkbox__root {
+    .stalk-card__root {
+      border: var(--borders-default);
+      gap: var(--spacing-24);
+      padding-block: var(--spacing-24);
+      border-radius: var(--radii-lg);
+      background-color: var(--colors-bg-default);
+      color: var(--colors-fg-default);
+      display: flex;
+      flex-direction: column;
+}
+
+    .stalk-card__header {
+      padding-inline: var(--spacing-24);
+      align-items: start;
+      column-gap: var(--spacing-12);
+      display: grid;
+      grid-template-columns: 1fr auto;
+      row-gap: var(--spacing-6);
+}
+
+    .stalk-card__title {
+      font-size: var(--font-sizes-lg);
+      line-height: var(--line-heights-lg);
+}
+
+    .stalk-card__title,.stalk-card__description {
+      grid-column: 1;
+      letter-spacing: var(--letter-spacings-normal);
+}
+
+    .stalk-card__description {
+      color: var(--colors-fg-muted);
+      font-size: var(--font-sizes-sm);
+      line-height: var(--line-heights-sm);
+}
+
+    .stalk-card__action {
+      grid-row: 1 / -1;
+      align-self: start;
+      grid-column-start: 2;
+      justify-self: end;
+}
+
+    .stalk-card__content,.stalk-card__footer {
+      padding-inline: var(--spacing-24);
+}
+
+    .stalk-card__footer {
+      gap: var(--spacing-12);
       align-items: center;
-      justify-content: center;
+      display: flex;
 }
 
     .stalk-checkbox__root {
@@ -1933,11 +1983,13 @@
       border-radius: var(--radii-sm);
       outline: 2px solid transparent;
       outline-offset: 2px;
+      align-items: center;
       background-color: var(--colors-bg-default);
       color: var(--colors-accent-contrast);
       cursor: pointer;
       display: inline-flex;
       flex-shrink: 0;
+      justify-content: center;
       --transition-duration: var(--durations-fast);
       transition-duration: var(--durations-fast);
       --transition-prop: background-color, border-color, box-shadow, color;
@@ -3485,6 +3537,10 @@
 
   .stalk-avatar__root--radius_lg {
     border-radius: var(--radii-lg);
+}
+
+  .stalk-card__root--variant_elevated {
+    box-shadow: var(--shadows-md);
 }
 
   .stalk-checkbox__root--size_md {

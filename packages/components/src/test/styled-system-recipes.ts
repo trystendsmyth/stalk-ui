@@ -317,6 +317,26 @@ collapsible.variantMap = { variant: ['inline', 'card'] as const }
 collapsible.variantKeys = collapsibleVariantKeys
 collapsible.splitVariantProps = makeSplitVariantProps(collapsibleVariantKeys)
 
+interface CardRecipeOptions {
+  variant?: 'outline' | 'elevated'
+}
+
+const cardVariantKeys = ['variant'] as const
+
+export const card = ({ variant = 'outline' }: CardRecipeOptions = {}) => ({
+  root: `stalk-card__root stalk-card--${variant}`,
+  header: 'stalk-card__header',
+  title: 'stalk-card__title',
+  description: 'stalk-card__description',
+  action: 'stalk-card__action',
+  content: 'stalk-card__content',
+  footer: 'stalk-card__footer',
+})
+
+card.variantMap = { variant: ['outline', 'elevated'] as const }
+card.variantKeys = cardVariantKeys
+card.splitVariantProps = makeSplitVariantProps(cardVariantKeys)
+
 interface ContextMenuRecipeOptions {
   inset?: boolean
 }

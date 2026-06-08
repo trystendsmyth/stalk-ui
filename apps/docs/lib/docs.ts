@@ -132,7 +132,7 @@ export const componentGroups = [
   },
   {
     title: 'Data Display',
-    slugs: ['avatar', 'badge', 'tag'],
+    slugs: ['avatar', 'badge', 'card', 'tag'],
   },
   {
     title: 'Feedback',

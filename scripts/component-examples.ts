@@ -29,6 +29,11 @@ export const componentExamples = {
     '<Button variant="ghost" size="sm">Learn more</Button>',
     '<Button loading>Saving…</Button>',
   ],
+  card: [
+    '<Card.Root>\n  <Card.Header>\n    <Card.Title>Project settings</Card.Title>\n    <Card.Description>Manage how this project is shared with your team.</Card.Description>\n  </Card.Header>\n  <Card.Content>Cards group related content and actions into one surface.</Card.Content>\n</Card.Root>',
+    '<Card.Root>\n  <Card.Header>\n    <Card.Title>Invite people</Card.Title>\n    <Card.Description>Add collaborators to this project.</Card.Description>\n  </Card.Header>\n  <Card.Content>An invite gives full edit access.</Card.Content>\n  <Card.Footer>\n    <Button size="sm">Send invite</Button>\n    <Button size="sm" variant="outline">Cancel</Button>\n  </Card.Footer>\n</Card.Root>',
+    '<Card.Root variant="elevated">\n  <Card.Header>\n    <Card.Title>Billing</Card.Title>\n    <Card.Description>You are on the Pro plan.</Card.Description>\n    <Card.Action>\n      <Button size="sm" variant="outline">Upgrade</Button>\n    </Card.Action>\n  </Card.Header>\n  <Card.Content>Your plan renews on the 1st of each month.</Card.Content>\n</Card.Root>',
+  ],
   checkbox: [
     '<Checkbox aria-label="Accept terms" />',
     '<Checkbox defaultChecked aria-label="Subscribed" />',

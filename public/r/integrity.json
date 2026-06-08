@@ -50,6 +50,14 @@
       "path": "/r/shadcn/button.json",
       "sha256": "ee7ad280b5a70f78070b05eb847a80befa0d40c24b223dee88f947fb0b82c77c"
     },
+    "card": {
+      "path": "/r/card.json",
+      "sha256": "fda31f3f67d4a6bf24842c0cb6fa970dac6782d7bc2619ed78348d26fe60ffbf"
+    },
+    "shadcn/card": {
+      "path": "/r/shadcn/card.json",
+      "sha256": "49dca0a8d7987351cb0b4e4c4a63ec03405b397557c2c8b8630c604eb0787f61"
+    },
     "checkbox": {
       "path": "/r/checkbox.json",
       "sha256": "c16a6839a725123b964bac17eef749034f8213c1d0c4a69de499d1e227164e89"
