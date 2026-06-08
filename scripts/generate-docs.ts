@@ -63,6 +63,7 @@ const componentDescriptions = {
   label: 'Associates text with a form control.',
   link: 'Navigates to another page or resource.',
   menubar: 'Provides a persistent menu surface for top-level application commands.',
+  'navigation-menu': 'Presents site navigation with links and rich dropdown panels.',
   popover: 'Displays interactive floating content from a trigger.',
   progress: 'Shows the completion progress of a task.',
   radio: 'Selects one option from a related set of choices.',

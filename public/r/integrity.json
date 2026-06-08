@@ -170,6 +170,14 @@
       "path": "/r/shadcn/menubar.json",
       "sha256": "524a5d763f813e4b8eb253dc0fe45fe6d2772264d60a23b9ef47f0404962e8c3"
     },
+    "navigation-menu": {
+      "path": "/r/navigation-menu.json",
+      "sha256": "350ddbf871084761087d778a793a3ac20b77063bf298ed305d220acf79ef87ed"
+    },
+    "shadcn/navigation-menu": {
+      "path": "/r/shadcn/navigation-menu.json",
+      "sha256": "37261b79ee771f4b3cbe2cc8d0e4ccbd4a5e750ef895c0280a5c98eb7611c62c"
+    },
     "popover": {
       "path": "/r/popover.json",
       "sha256": "8dba3e50230d23dbc69a793a703597e0f97bb328fbd0bd56c556233cad42c875"

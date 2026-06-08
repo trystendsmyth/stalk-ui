@@ -19,6 +19,7 @@ import { kbd } from './kbd'
 import { label } from './label'
 import { link } from './link'
 import { menubar } from './menubar'
+import { navigationMenu } from './navigation-menu'
 import { popover } from './popover'
 import { progress } from './progress'
 import { radio } from './radio'
@@ -64,6 +65,7 @@ export const registryItems = [
   label,
   link,
   menubar,
+  navigationMenu,
   popover,
   progress,
   radio,

@@ -144,7 +144,7 @@ export const componentGroups = [
   },
   {
     title: 'Navigation',
-    slugs: ['context-menu', 'dropdown-menu', 'menubar', 'tabs'],
+    slugs: ['context-menu', 'dropdown-menu', 'menubar', 'navigation-menu', 'tabs'],
   },
   {
     title: 'Disclosure',

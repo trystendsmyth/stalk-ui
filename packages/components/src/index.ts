@@ -174,6 +174,16 @@ export {
 } from './menubar'
 export type { MenubarContentProps, MenubarItemProps, MenubarSubTriggerProps } from './menubar'
 export {
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  NavigationMenuRoot,
+  NavigationMenuSub,
+  NavigationMenuTrigger,
+} from './navigation-menu'
+export {
   Popover,
   PopoverAnchor,
   PopoverClose,

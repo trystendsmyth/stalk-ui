@@ -1,0 +1,28 @@
+{
+  "$schema": "https://stalk-ui.com/schema/v1/registry-item.json",
+  "name": "navigation-menu",
+  "type": "registry:ui",
+  "dependencies": ["@radix-ui/react-navigation-menu", "@stalk-ui/preset", "lucide-react"],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "src/components/ui/navigation-menu.tsx",
+      "type": "registry:ui",
+      "content": "'use client'\n\nimport * as NavigationMenuPrimitive from '@radix-ui/react-navigation-menu'\n// Stalk UI component - requires PandaCSS setup and @stalk-ui/preset.\nimport { ChevronDown } from 'lucide-react'\nimport { forwardRef } from 'react'\nimport { cx } from 'styled-system/css'\nimport { navigationMenu as navigationMenuRecipe } from 'styled-system/recipes'\n\nimport type { ComponentPropsWithoutRef, ComponentRef, FC } from 'react'\n\nconst styles = /* @__PURE__ */ navigationMenuRecipe()\n\nexport const NavigationMenuSub: FC<ComponentPropsWithoutRef<typeof NavigationMenuPrimitive.Sub>> =\n  function NavigationMenuSub(props) {\n    return <NavigationMenuPrimitive.Sub {...props} />\n  }\n\nexport const NavigationMenuRoot = /* @__PURE__ */ forwardRef<\n  ComponentRef<typeof NavigationMenuPrimitive.Root>,\n  ComponentPropsWithoutRef<typeof NavigationMenuPrimitive.Root>\n>(function NavigationMenuRoot({ className, ...props }, ref) {\n  return (\n    <NavigationMenuPrimitive.Root ref={ref} className={cx(styles.root, className)} {...props} />\n  )\n})\n\nexport const NavigationMenuList = /* @__PURE__ */ forwardRef<\n  ComponentRef<typeof NavigationMenuPrimitive.List>,\n  ComponentPropsWithoutRef<typeof NavigationMenuPrimitive.List>\n>(function NavigationMenuList({ className, ...props }, ref) {\n  return (\n    <NavigationMenuPrimitive.List ref={ref} className={cx(styles.list, className)} {...props} />\n  )\n})\n\nexport const NavigationMenuItem = /* @__PURE__ */ forwardRef<\n  ComponentRef<typeof NavigationMenuPrimitive.Item>,\n  ComponentPropsWithoutRef<typeof NavigationMenuPrimitive.Item>\n>(function NavigationMenuItem({ className, ...props }, ref) {\n  return (\n    <NavigationMenuPrimitive.Item ref={ref} className={cx(styles.item, className)} {...props} />\n  )\n})\n\nexport const NavigationMenuTrigger = /* @__PURE__ */ forwardRef<\n  ComponentRef<typeof NavigationMenuPrimitive.Trigger>,\n  ComponentPropsWithoutRef<typeof NavigationMenuPrimitive.Trigger>\n>(function NavigationMenuTrigger({ children, className, ...props }, ref) {\n  return (\n    <NavigationMenuPrimitive.Trigger ref={ref} className={cx(styles.trigger, className)} {...props}>\n      {children}\n      <ChevronDown aria-hidden=\"true\" className={styles.triggerIcon} />\n    </NavigationMenuPrimitive.Trigger>\n  )\n})\n\nexport const NavigationMenuContent = /* @__PURE__ */ forwardRef<\n  ComponentRef<typeof NavigationMenuPrimitive.Content>,\n  ComponentPropsWithoutRef<typeof NavigationMenuPrimitive.Content>\n>(function NavigationMenuContent({ className, ...props }, ref) {\n  return (\n    <NavigationMenuPrimitive.Content\n      ref={ref}\n      className={cx(styles.content, className)}\n      {...props}\n    />\n  )\n})\n\nexport const NavigationMenuLink = /* @__PURE__ */ forwardRef<\n  ComponentRef<typeof NavigationMenuPrimitive.Link>,\n  ComponentPropsWithoutRef<typeof NavigationMenuPrimitive.Link>\n>(function NavigationMenuLink({ className, ...props }, ref) {\n  return (\n    <NavigationMenuPrimitive.Link ref={ref} className={cx(styles.link, className)} {...props} />\n  )\n})\n\nexport const NavigationMenu = /* @__PURE__ */ Object.assign(NavigationMenuRoot, {\n  Content: NavigationMenuContent,\n  Item: NavigationMenuItem,\n  Link: NavigationMenuLink,\n  List: NavigationMenuList,\n  Root: NavigationMenuRoot,\n  Sub: NavigationMenuSub,\n  Trigger: NavigationMenuTrigger,\n})\n"
+    }
+  ],
+  "stalk": {
+    "schemaVersion": "1.0",
+    "preset": {
+      "semanticTokens": {},
+      "recipes": ["navigationMenu"]
+    },
+    "packageDependencies": {
+      "preset": "@stalk-ui/preset"
+    },
+    "pandaCodegen": true,
+    "importAliases": {
+      "styledSystem": "styled-system"
+    }
+  }
+}

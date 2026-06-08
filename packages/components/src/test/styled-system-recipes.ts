@@ -114,6 +114,16 @@ export const hoverCard = () => ({
   arrow: 'stalk-hover-card__arrow',
 })
 
+export const navigationMenu = () => ({
+  root: 'stalk-navigation-menu__root',
+  list: 'stalk-navigation-menu__list',
+  item: 'stalk-navigation-menu__item',
+  trigger: 'stalk-navigation-menu__trigger',
+  triggerIcon: 'stalk-navigation-menu__triggerIcon',
+  content: 'stalk-navigation-menu__content',
+  link: 'stalk-navigation-menu__link',
+})
+
 interface RadioRecipeOptions {
   size?: 'sm' | 'md' | 'lg'
 }

@@ -21,6 +21,7 @@ import { Kbd } from '@stalk-ui/components/kbd'
 import { Label } from '@stalk-ui/components/label'
 import { Link } from '@stalk-ui/components/link'
 import { Menubar } from '@stalk-ui/components/menubar'
+import { NavigationMenu } from '@stalk-ui/components/navigation-menu'
 import { Popover } from '@stalk-ui/components/popover'
 import { Progress } from '@stalk-ui/components/progress'
 import { Radio } from '@stalk-ui/components/radio'
@@ -79,6 +80,7 @@ const liveScope = {
   Label,
   Link,
   Menubar,
+  NavigationMenu,
   Popover,
   Progress,
   Radio,
