@@ -252,11 +252,11 @@
     },
     "phone-input": {
       "path": "/r/phone-input.json",
-      "sha256": "d071359495caebb55a3bc459d4031b2319429ce5f36a5e7842001b3d9b5e10d4"
+      "sha256": "6947da306ded3ab3fde6f1bebbd673a116570a28e2c38bea06e92accc2ce71e1"
     },
     "shadcn/phone-input": {
       "path": "/r/shadcn/phone-input.json",
-      "sha256": "8458e1f4e50f7e515e9dcd3be2e5956950bf52c903e2ea43b6424c9363fe9d88"
+      "sha256": "fd216b92217de0c6c33294397d655d81a570a48d21048ec67dfca59bf46a9d43"
     },
     "popover": {
       "path": "/r/popover.json",
