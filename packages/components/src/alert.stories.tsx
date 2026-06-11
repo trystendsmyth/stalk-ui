@@ -39,6 +39,8 @@ const meta = {
     variant: 'subtle',
   },
   argTypes: {
+    className: { table: { disable: true } },
+    role: { table: { disable: true } },
     size: { control: 'inline-radio', options: SIZES },
     tone: { control: 'select', options: TONES },
     variant: { control: 'select', options: VARIANTS },

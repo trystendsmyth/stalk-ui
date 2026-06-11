@@ -25,7 +25,10 @@ const meta = {
   },
   argTypes: {
     align: { control: 'inline-radio', options: ALIGNS },
+    children: { control: 'text' },
+    className: { table: { disable: true } },
     color: { control: 'inline-radio', options: COLORS },
+    lineClamp: { control: 'number' },
     size: { control: 'select', options: SIZES },
     tone: { control: 'select', options: [undefined, ...TONES] },
     truncate: { control: 'boolean' },

@@ -1,24 +1,41 @@
+import { fn } from 'storybook/test'
+import { input as inputRecipe } from 'styled-system/recipes'
+
 import { Input } from './input'
 import { Label } from './label'
 
 import type { Meta, StoryObj } from '@storybook/react-vite'
 
+const { size: SIZES, align: ALIGNS } = inputRecipe.variantMap
+
 const meta = {
   title: 'Components/Forms/Input',
   component: Input,
+  tags: ['autodocs', 'stable'],
   args: {
     'aria-label': 'Email',
+    align: 'start',
+    disabled: false,
+    invalid: false,
+    onChange: fn(),
     placeholder: 'hello@stalk-ui.com',
+    size: 'md',
   },
   argTypes: {
-    align: {
-      control: 'inline-radio',
-      options: ['start', 'center', 'end'],
-    },
-    size: {
-      control: 'inline-radio',
-      options: ['sm', 'md', 'lg'],
-    },
+    'aria-label': { control: 'text' },
+    align: { control: 'inline-radio', options: ALIGNS },
+    disabled: { control: 'boolean' },
+    invalid: { control: 'boolean' },
+    placeholder: { control: 'text' },
+    size: { control: 'inline-radio', options: SIZES },
+    type: { control: 'text' },
+    className: { table: { disable: true } },
+    id: { table: { disable: true } },
+    name: { table: { disable: true } },
+    endSlot: { table: { disable: true } },
+    startSlot: { table: { disable: true } },
+    rootProps: { table: { disable: true } },
+    onChange: { table: { disable: true } },
   },
 } satisfies Meta<typeof Input>
 
@@ -29,6 +46,7 @@ type Story = StoryObj<typeof meta>
 export const Default: Story = {}
 
 export const Sizes: Story = {
+  parameters: { controls: { disable: true } },
   render: () => (
     <div style={{ display: 'grid', gap: 12, maxWidth: 320 }}>
       <Input aria-label="Small input" placeholder="Small" size="sm" />
@@ -39,6 +57,7 @@ export const Sizes: Story = {
 }
 
 export const States: Story = {
+  parameters: { controls: { disable: true } },
   render: () => (
     <div style={{ display: 'grid', gap: 12, maxWidth: 320 }}>
       <Input aria-label="Default input" placeholder="Default" />
@@ -49,6 +68,7 @@ export const States: Story = {
 }
 
 export const WithLabel: Story = {
+  parameters: { controls: { disable: true } },
   render: () => (
     <div style={{ display: 'grid', gap: 8, maxWidth: 320 }}>
       <Label htmlFor="email">Email</Label>
@@ -58,6 +78,7 @@ export const WithLabel: Story = {
 }
 
 export const WithSlots: Story = {
+  parameters: { controls: { disable: true } },
   render: () => (
     <div style={{ display: 'grid', gap: 12, maxWidth: 320 }}>
       <Input.Root>
@@ -85,6 +106,7 @@ export const WithSlots: Story = {
 }
 
 export const Alignments: Story = {
+  parameters: { controls: { disable: true } },
   render: () => (
     <div style={{ display: 'grid', gap: 12, maxWidth: 320 }}>
       <Input align="start" aria-label="Start aligned" defaultValue="Start" />
@@ -95,6 +117,7 @@ export const Alignments: Story = {
 }
 
 export const Rtl: Story = {
+  parameters: { controls: { disable: true } },
   render: () => (
     <div dir="rtl" style={{ maxWidth: 320 }}>
       <Input aria-label="البريد الإلكتروني" placeholder="البريد الإلكتروني" />

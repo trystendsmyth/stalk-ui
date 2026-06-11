@@ -1,3 +1,5 @@
+import { useState } from 'react'
+import { fn } from 'storybook/test'
 import { Box, VStack } from 'styled-system/jsx'
 import { select as selectRecipe } from 'styled-system/recipes'
 
@@ -8,23 +10,34 @@ import type { Meta, StoryObj } from '@storybook/react-vite'
 
 const { size: SIZES } = selectRecipe.variantMap
 
+const onValueChange = fn()
+
 const SelectExample = ({
   'aria-label': ariaLabel = 'Status',
   disabled = false,
   invalid = false,
   size = 'md',
-}: SelectTriggerProps) => (
-  <Select.Root>
-    <Select.Trigger aria-label={ariaLabel} disabled={disabled} invalid={invalid} size={size}>
-      <Select.Value placeholder="Choose a status" />
-    </Select.Trigger>
-    <Select.Content>
-      <Select.Item value="draft">Draft</Select.Item>
-      <Select.Item value="published">Published</Select.Item>
-      <Select.Item value="archived">Archived</Select.Item>
-    </Select.Content>
-  </Select.Root>
-)
+}: SelectTriggerProps) => {
+  const [value, setValue] = useState<string>()
+  return (
+    <Select.Root
+      {...(value === undefined ? {} : { value })}
+      onValueChange={(next) => {
+        setValue(next)
+        onValueChange(next)
+      }}
+    >
+      <Select.Trigger aria-label={ariaLabel} disabled={disabled} invalid={invalid} size={size}>
+        <Select.Value placeholder="Choose a status" />
+      </Select.Trigger>
+      <Select.Content>
+        <Select.Item value="draft">Draft</Select.Item>
+        <Select.Item value="published">Published</Select.Item>
+        <Select.Item value="archived">Archived</Select.Item>
+      </Select.Content>
+    </Select.Root>
+  )
+}
 
 const meta = {
   title: 'Components/Forms/Select',
@@ -37,13 +50,13 @@ const meta = {
     size: 'md',
   },
   argTypes: {
-    size: {
-      control: 'select',
-      options: SIZES,
-    },
-    invalid: { control: 'boolean' },
+    'aria-label': { control: 'text' },
     disabled: { control: 'boolean' },
+    invalid: { control: 'boolean' },
+    size: { control: 'select', options: SIZES },
     asChild: { table: { disable: true } },
+    className: { table: { disable: true } },
+    children: { table: { disable: true } },
   },
 } satisfies Meta<typeof Select.Trigger>
 

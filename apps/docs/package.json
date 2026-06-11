@@ -24,6 +24,7 @@
     "@stalk-ui/components": "workspace:*",
     "@stalk-ui/i18n": "workspace:*",
     "@stalk-ui/preset": "workspace:*",
+    "@tanstack/react-table": "^8.21.3",
     "@vercel/analytics": "^2.0.1",
     "@vercel/speed-insights": "^2.0.0",
     "fumadocs-core": "^16.9.3",
@@ -34,6 +35,7 @@
     "prism-react-renderer": "^2.4.1",
     "react": "catalog:",
     "react-dom": "catalog:",
+    "react-hook-form": "^7.78.0",
     "react-live": "^4.1.8",
     "zod": "^4.4.3"
   },

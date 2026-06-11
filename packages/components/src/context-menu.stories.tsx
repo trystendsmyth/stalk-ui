@@ -1,16 +1,29 @@
 import { useState } from 'react'
+import { fn } from 'storybook/test'
 import { Center } from 'styled-system/jsx'
 
 import { ContextMenu } from './context-menu'
 
 import type { Meta, StoryObj } from '@storybook/react-vite'
 
+const onSelect = fn()
+
 const meta = {
   title: 'Components/Navigation/ContextMenu',
   component: ContextMenu.Root,
   tags: ['autodocs', 'stable'],
+  args: {
+    dir: 'ltr',
+    modal: true,
+    onOpenChange: fn(),
+  },
+  argTypes: {
+    children: { table: { disable: true } },
+    dir: { control: 'inline-radio', options: ['ltr', 'rtl'] },
+    modal: { control: 'boolean' },
+    onOpenChange: { table: { disable: true } },
+  },
   parameters: {
-    controls: { disable: true },
     layout: 'padded',
     docs: { story: { inline: false, iframeHeight: '360px' } },
   },
@@ -39,20 +52,20 @@ const Target = (
 )
 
 export const Default: Story = {
-  render: () => (
+  render: (args) => (
     <Center minH="calc(100vh - 2rem)" w="full">
-      <ContextMenu>
+      <ContextMenu {...args}>
         <ContextMenu.Trigger asChild>{Target}</ContextMenu.Trigger>
         <ContextMenu.Content>
-          <ContextMenu.Item>
+          <ContextMenu.Item onSelect={onSelect}>
             Back
             <ContextMenu.Shortcut>⌘[</ContextMenu.Shortcut>
           </ContextMenu.Item>
-          <ContextMenu.Item disabled>
+          <ContextMenu.Item disabled onSelect={onSelect}>
             Forward
             <ContextMenu.Shortcut>⌘]</ContextMenu.Shortcut>
           </ContextMenu.Item>
-          <ContextMenu.Item>
+          <ContextMenu.Item onSelect={onSelect}>
             Reload
             <ContextMenu.Shortcut>⌘R</ContextMenu.Shortcut>
           </ContextMenu.Item>
@@ -61,9 +74,9 @@ export const Default: Story = {
             <ContextMenu.SubTrigger>More tools</ContextMenu.SubTrigger>
             <ContextMenu.Portal>
               <ContextMenu.SubContent>
-                <ContextMenu.Item>Save page as…</ContextMenu.Item>
-                <ContextMenu.Item>Create shortcut…</ContextMenu.Item>
-                <ContextMenu.Item>Name window…</ContextMenu.Item>
+                <ContextMenu.Item onSelect={onSelect}>Save page as…</ContextMenu.Item>
+                <ContextMenu.Item onSelect={onSelect}>Create shortcut…</ContextMenu.Item>
+                <ContextMenu.Item onSelect={onSelect}>Name window…</ContextMenu.Item>
               </ContextMenu.SubContent>
             </ContextMenu.Portal>
           </ContextMenu.Sub>
@@ -74,12 +87,12 @@ export const Default: Story = {
 }
 
 export const WithCheckboxAndRadio: Story = {
-  render: function Render() {
+  render: function Render(args) {
     const [showBookmarks, setShowBookmarks] = useState(true)
     const [position, setPosition] = useState('bottom')
     return (
       <Center minH="calc(100vh - 2rem)" w="full">
-        <ContextMenu>
+        <ContextMenu {...args}>
           <ContextMenu.Trigger asChild>{Target}</ContextMenu.Trigger>
           <ContextMenu.Content>
             <ContextMenu.Label>View</ContextMenu.Label>

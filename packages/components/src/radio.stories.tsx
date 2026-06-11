@@ -23,20 +23,13 @@ const meta = {
     value: 'basic',
   },
   argTypes: {
-    size: {
-      control: 'select',
-      options: SIZES,
-      description: 'Visual size of the radio.',
-    },
-    disabled: {
-      control: 'boolean',
-      description: 'Disable the radio.',
-    },
-    invalid: {
-      control: 'boolean',
-      description: 'Mark the radio as invalid.',
-    },
+    size: { control: 'select', options: SIZES, description: 'Visual size of the radio.' },
+    disabled: { control: 'boolean', description: 'Disable the radio.' },
+    invalid: { control: 'boolean', description: 'Mark the radio as invalid.' },
+    value: { control: 'text', description: 'Value submitted when this radio is selected.' },
     asChild: { table: { disable: true } },
+    className: { table: { disable: true } },
+    id: { table: { disable: true } },
   },
   parameters: {
     docs: {

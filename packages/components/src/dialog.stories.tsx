@@ -1,4 +1,5 @@
 import { X } from 'lucide-react'
+import { fn } from 'storybook/test'
 import { css } from 'styled-system/css'
 import { VStack } from 'styled-system/jsx'
 
@@ -12,7 +13,18 @@ const meta = {
   title: 'Components/Overlay/Dialog',
   component: Dialog.Root,
   tags: ['autodocs', 'stable'],
-  parameters: { controls: { disable: true } },
+  args: {
+    defaultOpen: false,
+    modal: true,
+    onOpenChange: fn(),
+  },
+  argTypes: {
+    children: { table: { disable: true } },
+    defaultOpen: { control: 'boolean' },
+    modal: { control: 'boolean' },
+    onOpenChange: { table: { disable: true } },
+    open: { table: { disable: true } },
+  },
 } satisfies Meta<typeof Dialog.Root>
 
 export default meta
@@ -20,8 +32,8 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
-  render: () => (
-    <Dialog.Root>
+  render: (args) => (
+    <Dialog.Root {...args}>
       <Dialog.Trigger asChild>
         <Button>Open dialog</Button>
       </Dialog.Trigger>
@@ -48,8 +60,9 @@ export const Default: Story = {
 }
 
 export const Open: Story = {
-  render: () => (
-    <Dialog.Root defaultOpen>
+  args: { defaultOpen: true },
+  render: (args) => (
+    <Dialog.Root {...args}>
       <Dialog.Content>
         <Dialog.Header>
           <Dialog.Title>Open dialog</Dialog.Title>

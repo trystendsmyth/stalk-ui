@@ -1,8 +1,11 @@
 import { HStack, VStack } from 'styled-system/jsx'
+import { skeleton as skeletonRecipe } from 'styled-system/recipes'
 
 import { Skeleton } from './skeleton'
 
 import type { Meta, StoryObj } from '@storybook/react-vite'
+
+const { radius: RADII } = skeletonRecipe.variantMap
 
 const meta = {
   title: 'Components/Feedback/Skeleton',
@@ -12,10 +15,9 @@ const meta = {
     radius: 'md',
   },
   argTypes: {
-    radius: {
-      control: 'select',
-      options: ['none', 'sm', 'md', 'lg', 'full'],
-    },
+    className: { table: { disable: true } },
+    radius: { control: 'select', options: RADII },
+    style: { table: { disable: true } },
   },
 } satisfies Meta<typeof Skeleton>
 

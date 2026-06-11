@@ -17,17 +17,16 @@ const meta = {
   tags: ['autodocs', 'stable'],
   args: {
     'aria-label': 'Upload progress',
+    max: 100,
     size: 'md',
     value: 50,
   },
   argTypes: {
-    size: {
-      control: 'select',
-      options: SIZES,
-    },
-    value: {
-      control: { type: 'range', max: 100, min: 0, step: 1 },
-    },
+    'aria-label': { control: 'text' },
+    className: { table: { disable: true } },
+    max: { control: 'number' },
+    size: { control: 'select', options: SIZES },
+    value: { control: 'number' },
   },
   decorators: [
     (Story) => (

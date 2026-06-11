@@ -1,0 +1,28 @@
+{
+  "$schema": "https://stalk-ui.com/schema/v1/registry-item.json",
+  "name": "otp-input",
+  "type": "registry:ui",
+  "dependencies": ["@stalk-ui/preset", "input-otp"],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "src/components/ui/otp-input.tsx",
+      "type": "registry:ui",
+      "content": "'use client'\n\nimport { OTPInput, OTPInputContext } from 'input-otp'\nimport { createContext, forwardRef, useContext, useMemo } from 'react'\nimport { cx } from 'styled-system/css'\nimport { otpInput as otpInputRecipe } from 'styled-system/recipes'\n\nimport type { ComponentPropsWithoutRef, ComponentRef, HTMLAttributes, ReactNode } from 'react'\n\nexport type OtpInputSize = (typeof otpInputRecipe.variantMap.size)[number]\n\ntype OtpInputStyles = ReturnType<typeof otpInputRecipe>\n\nconst OtpInputStylesContext = /* @__PURE__ */ createContext<OtpInputStyles | null>(null)\n\nconst useOtpInputStyles = (): OtpInputStyles => {\n  const styles = useContext(OtpInputStylesContext)\n  if (styles === null) {\n    throw new Error('OtpInput subcomponents must be rendered inside <OtpInputRoot>.')\n  }\n  return styles\n}\n\n// `OTPInput`'s props are a render-XOR-children union over the native input\n// attributes (whose `size` is a number). Strip the union discriminants and the\n// numeric `size`, then re-add the slot children and our recipe `size` variant so\n// the public type is a single clean shape.\ntype OtpInputBaseProps = Omit<\n  ComponentPropsWithoutRef<typeof OTPInput>,\n  'size' | 'render' | 'children'\n>\n\nexport type OtpInputRootProps = OtpInputBaseProps & {\n  /** Cell size. */\n  size?: OtpInputSize\n  /** The slot groups to render (see `OtpInput.Group` / `OtpInput.Slot`). */\n  children: ReactNode\n}\n\nexport const OtpInputRoot = /* @__PURE__ */ forwardRef<\n  ComponentRef<typeof OTPInput>,\n  OtpInputRootProps\n>(function OtpInputRoot({ className, containerClassName, size = 'md', ...props }, ref) {\n  const styles = useMemo(() => otpInputRecipe({ size }), [size])\n  return (\n    <OtpInputStylesContext.Provider value={styles}>\n      <OTPInput\n        ref={ref}\n        containerClassName={cx(styles.root, containerClassName)}\n        className={className}\n        {...props}\n      />\n    </OtpInputStylesContext.Provider>\n  )\n})\n\nexport type OtpInputGroupProps = HTMLAttributes<HTMLDivElement>\n\nexport const OtpInputGroup = /* @__PURE__ */ forwardRef<HTMLDivElement, OtpInputGroupProps>(\n  function OtpInputGroup({ className, ...props }, ref) {\n    const styles = useOtpInputStyles()\n    return <div ref={ref} className={cx(styles.group, className)} {...props} />\n  },\n)\n\nexport type OtpInputSlotProps = HTMLAttributes<HTMLDivElement> & {\n  /** Index of the underlying input character this cell renders. */\n  index: number\n}\n\nexport const OtpInputSlot = /* @__PURE__ */ forwardRef<HTMLDivElement, OtpInputSlotProps>(\n  function OtpInputSlot({ className, index, ...props }, ref) {\n    const styles = useOtpInputStyles()\n    const context = useContext(OTPInputContext)\n    const slot = context.slots[index]\n    const { char, hasFakeCaret, isActive } = slot ?? {\n      char: null,\n      hasFakeCaret: false,\n      isActive: false,\n    }\n\n    return (\n      <div ref={ref} data-active={isActive} className={cx(styles.slot, className)} {...props}>\n        {char}\n        {hasFakeCaret ? <div className={styles.caret} /> : null}\n      </div>\n    )\n  },\n)\n\nexport type OtpInputSeparatorProps = HTMLAttributes<HTMLDivElement>\n\nexport const OtpInputSeparator = /* @__PURE__ */ forwardRef<HTMLDivElement, OtpInputSeparatorProps>(\n  function OtpInputSeparator({ className, children, ...props }, ref) {\n    const styles = useOtpInputStyles()\n    return (\n      <div ref={ref} role=\"separator\" className={cx(styles.separator, className)} {...props}>\n        {children ?? '-'}\n      </div>\n    )\n  },\n)\n\nexport const OtpInput = /* @__PURE__ */ Object.assign(OtpInputRoot, {\n  Group: OtpInputGroup,\n  Root: OtpInputRoot,\n  Separator: OtpInputSeparator,\n  Slot: OtpInputSlot,\n})\n"
+    }
+  ],
+  "stalk": {
+    "schemaVersion": "1.0",
+    "preset": {
+      "semanticTokens": {},
+      "recipes": ["otpInput"]
+    },
+    "packageDependencies": {
+      "preset": "@stalk-ui/preset"
+    },
+    "pandaCodegen": true,
+    "importAliases": {
+      "styledSystem": "styled-system"
+    }
+  }
+}

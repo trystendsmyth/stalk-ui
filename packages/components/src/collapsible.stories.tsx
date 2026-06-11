@@ -1,11 +1,15 @@
 import { ChevronsUpDown } from 'lucide-react'
+import { fn } from 'storybook/test'
 import { css } from 'styled-system/css'
 import { HStack, VStack } from 'styled-system/jsx'
+import { collapsible as collapsibleRecipe } from 'styled-system/recipes'
 
 import { Button } from './button'
 import { Collapsible } from './collapsible'
 
 import type { Meta, StoryObj } from '@storybook/react-vite'
+
+const { variant: VARIANTS } = collapsibleRecipe.variantMap
 
 const frame = css({ width: '420px' })
 const panel = css({
@@ -33,7 +37,18 @@ const meta = {
   title: 'Components/Disclosure/Collapsible',
   component: Collapsible.Root,
   tags: ['autodocs', 'stable'],
-  parameters: { controls: { disable: true } },
+  args: {
+    defaultOpen: false,
+    onOpenChange: fn(),
+    variant: 'inline',
+  },
+  argTypes: {
+    children: { table: { disable: true } },
+    defaultOpen: { control: 'boolean' },
+    onOpenChange: { table: { disable: true } },
+    open: { table: { disable: true } },
+    variant: { control: 'select', options: VARIANTS },
+  },
 } satisfies Meta<typeof Collapsible.Root>
 
 export default meta
@@ -41,9 +56,9 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
-  render: () => (
+  render: (args) => (
     <div className={frame}>
-      <Collapsible>
+      <Collapsible {...args}>
         <Collapsible.Trigger asChild>
           <Button size="sm" variant="ghost">
             Show details <ChevronsUpDown aria-hidden size={14} />
@@ -61,9 +76,10 @@ export const Default: Story = {
 }
 
 export const Card: Story = {
-  render: () => (
+  args: { defaultOpen: true },
+  render: (args) => (
     <div className={frame}>
-      <Collapsible defaultOpen>
+      <Collapsible {...args}>
         <VStack alignItems="stretch" gap="8">
           <HStack justifyContent="space-between" alignItems="center">
             <span className={repoHeader}>@peduarte starred 3 repositories</span>
@@ -87,9 +103,10 @@ export const Card: Story = {
 }
 
 export const OpenByDefault: Story = {
-  render: () => (
+  args: { defaultOpen: true },
+  render: (args) => (
     <div className={frame}>
-      <Collapsible defaultOpen>
+      <Collapsible {...args}>
         <Collapsible.Trigger asChild>
           <Button size="sm" variant="outline">
             Toggle

@@ -59,6 +59,7 @@ export const select = {
       zIndex: 'popover',
     },
     viewport: {
+      overflowY: 'auto',
       p: '4',
     },
     item: {
