@@ -18,6 +18,14 @@ const PACKAGE_SIZE_OVERRIDES: Record<string, number> = {
   '@radix-ui/react-select': 1 * 1024 * 1024,
   // ~1500 icon modules; tree-shakes per-icon at the consumer's bundler.
   'lucide-react': 30 * 1024 * 1024,
+  // Ships ESM + CJS + UMD builds and full TS types; the runtime imported by the
+  // Form component tree-shakes to a fraction at the consumer's bundler.
+  'react-hook-form': 3 * 1024 * 1024,
+  // Bundles its own date math plus ESM/CJS builds; locale data tree-shakes to
+  // the locales actually imported by the Calendar.
+  'react-day-picker': 4 * 1024 * 1024,
+  // Headless core shipped as ESM + CJS + UMD builds; tree-shakes at consumers.
+  '@tanstack/react-table': 1 * 1024 * 1024,
 }
 
 const SELF_PACKAGES = new Set([

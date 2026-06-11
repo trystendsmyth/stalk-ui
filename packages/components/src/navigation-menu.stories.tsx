@@ -1,3 +1,5 @@
+import { fn } from 'storybook/test'
+
 import { NavigationMenu } from './navigation-menu'
 
 import type { Meta, StoryObj } from '@storybook/react-vite'
@@ -6,7 +8,26 @@ const meta = {
   title: 'Components/Navigation/Navigation Menu',
   component: NavigationMenu.Root,
   tags: ['autodocs', 'stable'],
-  parameters: { controls: { disable: true } },
+  args: {
+    delayDuration: 200,
+    dir: 'ltr',
+    onValueChange: fn(),
+    orientation: 'horizontal',
+  },
+  argTypes: {
+    asChild: { table: { disable: true } },
+    children: { table: { disable: true } },
+    className: { table: { disable: true } },
+    defaultValue: { control: 'text' },
+    delayDuration: { control: 'number' },
+    dir: { control: 'inline-radio', options: ['ltr', 'rtl'] },
+    id: { table: { disable: true } },
+    onValueChange: { table: { disable: true } },
+    orientation: { control: 'inline-radio', options: ['horizontal', 'vertical'] },
+    skipDelayDuration: { control: 'number' },
+    style: { table: { disable: true } },
+    value: { table: { disable: true } },
+  },
 } satisfies Meta<typeof NavigationMenu.Root>
 
 export default meta
@@ -14,8 +35,8 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
-  render: () => (
-    <NavigationMenu.Root>
+  render: (args) => (
+    <NavigationMenu.Root {...args}>
       <NavigationMenu.List>
         <NavigationMenu.Item>
           <NavigationMenu.Trigger>Products</NavigationMenu.Trigger>

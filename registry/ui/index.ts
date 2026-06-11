@@ -5,13 +5,21 @@ import { avatar } from './avatar'
 import { badge } from './badge'
 import { blockquote } from './blockquote'
 import { button } from './button'
+import { calendar } from './calendar'
 import { card } from './card'
 import { checkbox } from './checkbox'
 import { code } from './code'
 import { collapsible } from './collapsible'
+import { combobox } from './combobox'
+import { command } from './command'
 import { contextMenu } from './context-menu'
+import { dataList } from './data-list'
+import { dataTable } from './data-table'
+import { datePicker } from './date-picker'
+import { datetimeInput } from './datetime-input'
 import { dialog } from './dialog'
 import { dropdownMenu } from './dropdown-menu'
+import { form } from './form'
 import { heading } from './heading'
 import { hoverCard } from './hover-card'
 import { input } from './input'
@@ -20,8 +28,11 @@ import { label } from './label'
 import { link } from './link'
 import { menubar } from './menubar'
 import { navigationMenu } from './navigation-menu'
+import { otpInput } from './otp-input'
+import { phoneInput } from './phone-input'
 import { popover } from './popover'
 import { progress } from './progress'
+import { qrCode } from './qr-code'
 import { radio } from './radio'
 import { select } from './select'
 import { sheet } from './sheet'
@@ -34,6 +45,7 @@ import { tabs } from './tabs'
 import { tag } from './tag'
 import { text } from './text'
 import { textarea } from './textarea'
+import { timePicker } from './time-picker'
 import { toast } from './toast'
 import { toggle } from './toggle'
 import { tooltip } from './tooltip'
@@ -51,13 +63,21 @@ export const registryItems = [
   badge,
   blockquote,
   button,
+  calendar,
   card,
   checkbox,
   code,
   collapsible,
+  combobox,
+  command,
   contextMenu,
+  dataList,
+  dataTable,
+  datePicker,
+  datetimeInput,
   dialog,
   dropdownMenu,
+  form,
   heading,
   hoverCard,
   input,
@@ -66,8 +86,11 @@ export const registryItems = [
   link,
   menubar,
   navigationMenu,
+  otpInput,
+  phoneInput,
   popover,
   progress,
+  qrCode,
   radio,
   select,
   sheet,
@@ -80,6 +103,7 @@ export const registryItems = [
   tag,
   text,
   textarea,
+  timePicker,
   toast,
   toggle,
   tooltip,

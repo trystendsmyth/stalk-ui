@@ -1,0 +1,28 @@
+{
+  "$schema": "https://stalk-ui.com/schema/v1/registry-item.json",
+  "name": "phone-input",
+  "type": "registry:ui",
+  "dependencies": ["@stalk-ui/preset", "react-international-phone"],
+  "registryDependencies": ["input", "select"],
+  "files": [
+    {
+      "path": "src/components/ui/phone-input.tsx",
+      "type": "registry:ui",
+      "content": "'use client'\n\nimport { forwardRef } from 'react'\nimport { defaultCountries, parseCountry, usePhoneInput } from 'react-international-phone'\nimport { css } from 'styled-system/css'\n\nimport { Input } from './input'\nimport { Select } from './select'\n\nimport type { InputSize } from './input'\nimport type { CSSProperties, InputHTMLAttributes } from 'react'\nimport type { CountryIso2 } from 'react-international-phone'\n\n// Derive a flag emoji from the ISO-3166 alpha-2 code (regional indicator\n// symbols) so we avoid bundling the library's image/CSS assets.\nconst flagEmoji = (iso2: string): string =>\n  iso2.toUpperCase().replace(/./g, (char) => String.fromCodePoint(127397 + char.charCodeAt(0)))\n\n// Reset the Select trigger to a borderless flag+chevron control so it reads as\n// one cell of the surrounding input rather than a nested bordered select. Inline\n// so it reliably overrides the select recipe.\nconst triggerResetStyle: CSSProperties = {\n  background: 'transparent',\n  border: 'none',\n  boxShadow: 'none',\n  flex: '0 0 auto',\n  height: 'auto',\n  minWidth: 0,\n  paddingInline: 0,\n  width: 'auto',\n}\n\n// The trigger sits inside the input's inline padding; offset the dropdown back\n// by that padding so its left edge lines up with the input's border.\nconst triggerInsetBySize: Record<InputSize, number> = { sm: 12, md: 16, lg: 20 }\n\nconst triggerClass = css({ flexShrink: '0', gap: '4' })\nconst flagClass = css({ fontSize: 'lg', lineHeight: '1' })\nconst dividerClass = css({\n  alignSelf: 'stretch',\n  bgColor: 'border.default',\n  flexShrink: '0',\n  marginBlock: '6',\n  width: '1px',\n})\n\nexport interface PhoneInputProps extends Omit<\n  InputHTMLAttributes<HTMLInputElement>,\n  'value' | 'onChange' | 'size'\n> {\n  /** Phone value in E.164 format (controlled). */\n  value?: string\n  /** Initial country (ISO alpha-2), used until a number implies another. */\n  defaultCountry?: CountryIso2\n  /** Called with the E.164 phone string on every change. */\n  onChange?: (phone: string) => void\n  /** Accessible label for the country selector. */\n  countryLabel?: string\n  size?: InputSize\n  invalid?: boolean\n}\n\nexport const PhoneInput = /* @__PURE__ */ forwardRef<HTMLInputElement, PhoneInputProps>(\n  function PhoneInput(\n    {\n      className,\n      countryLabel = 'Country',\n      defaultCountry = 'us',\n      disabled = false,\n      invalid = false,\n      onChange,\n      size = 'md',\n      value,\n      ...fieldProps\n    },\n    ref,\n  ) {\n    // Pass `value` only when controlled; otherwise the hook manages its own\n    // state (and a constant `''` would freeze an uncontrolled field).\n    const { inputValue, country, setCountry, handlePhoneValueChange, inputRef } = usePhoneInput({\n      countries: defaultCountries,\n      defaultCountry,\n      onChange: (data) => onChange?.(data.phone),\n      ...(value === undefined ? {} : { value }),\n    })\n\n    const setRefs = (node: HTMLInputElement | null) => {\n      inputRef.current = node\n      if (typeof ref === 'function') {\n        ref(node)\n      } else if (ref !== null) {\n        ref.current = node\n      }\n    }\n\n    return (\n      <Input.Root className={className} disabled={disabled} invalid={invalid} size={size}>\n        <Select.Root\n          disabled={disabled}\n          value={country.iso2}\n          onValueChange={(iso2) => {\n            setCountry(iso2)\n          }}\n        >\n          <Select.Trigger\n            aria-label={countryLabel}\n            size={size}\n            className={triggerClass}\n            style={triggerResetStyle}\n          >\n            <span aria-hidden className={flagClass}>\n              {flagEmoji(country.iso2)}\n            </span>\n          </Select.Trigger>\n          <Select.Content\n            align=\"start\"\n            alignOffset={-triggerInsetBySize[size]}\n            style={{ minWidth: '16rem' }}\n          >\n            {defaultCountries.map((countryData) => {\n              const parsed = parseCountry(countryData)\n              return (\n                <Select.Item\n                  key={parsed.iso2}\n                  value={parsed.iso2}\n                  endContent={`+${parsed.dialCode}`}\n                >\n                  <span aria-hidden className={flagClass}>\n                    {flagEmoji(parsed.iso2)}\n                  </span>{' '}\n                  {parsed.name}\n                </Select.Item>\n              )\n            })}\n          </Select.Content>\n        </Select.Root>\n        <span aria-hidden className={dividerClass} />\n        <Input.Field\n          ref={setRefs}\n          type=\"tel\"\n          value={inputValue}\n          onChange={handlePhoneValueChange}\n          {...fieldProps}\n        />\n      </Input.Root>\n    )\n  },\n)\n"
+    }
+  ],
+  "stalk": {
+    "schemaVersion": "1.0",
+    "preset": {
+      "semanticTokens": {},
+      "recipes": []
+    },
+    "packageDependencies": {
+      "preset": "@stalk-ui/preset"
+    },
+    "pandaCodegen": true,
+    "importAliases": {
+      "styledSystem": "styled-system"
+    }
+  }
+}

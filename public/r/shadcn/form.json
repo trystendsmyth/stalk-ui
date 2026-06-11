@@ -1,0 +1,28 @@
+{
+  "$schema": "https://stalk-ui.com/schema/v1/registry-item.json",
+  "name": "form",
+  "type": "registry:ui",
+  "dependencies": ["@radix-ui/react-slot", "@stalk-ui/preset", "react-hook-form"],
+  "registryDependencies": ["label"],
+  "files": [
+    {
+      "path": "src/components/ui/form.tsx",
+      "type": "registry:ui",
+      "content": "'use client'\n\nimport { Slot } from '@radix-ui/react-slot'\n// Stalk UI component - requires PandaCSS setup and @stalk-ui/preset.\nimport { createContext, forwardRef, useContext, useId } from 'react'\nimport { Controller, FormProvider, useFormContext, useFormState } from 'react-hook-form'\nimport { cx } from 'styled-system/css'\nimport { form as formRecipe } from 'styled-system/recipes'\n\nimport { Label } from './label'\n\nimport type { ComponentPropsWithoutRef, ComponentRef, HTMLAttributes } from 'react'\nimport type { ControllerProps, FieldPath, FieldValues } from 'react-hook-form'\n\nconst styles = /* @__PURE__ */ formRecipe()\n\n/** Provides the react-hook-form context. Spread the object returned by `useForm`. */\nexport const Form = FormProvider\n\ninterface FormFieldContextValue<\n  TFieldValues extends FieldValues = FieldValues,\n  TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>,\n> {\n  name: TName\n}\n\nconst FormFieldContext = /* @__PURE__ */ createContext<FormFieldContextValue | null>(null)\n\nexport const FormField = <\n  TFieldValues extends FieldValues = FieldValues,\n  TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>,\n>(\n  props: ControllerProps<TFieldValues, TName>,\n) => {\n  return (\n    <FormFieldContext.Provider value={{ name: props.name }}>\n      <Controller {...props} />\n    </FormFieldContext.Provider>\n  )\n}\n\ninterface FormItemContextValue {\n  id: string\n}\n\nconst FormItemContext = /* @__PURE__ */ createContext<FormItemContextValue | null>(null)\n\nexport const useFormField = () => {\n  const fieldContext = useContext(FormFieldContext)\n  const itemContext = useContext(FormItemContext)\n  const { getFieldState } = useFormContext()\n  // `exactOptionalPropertyTypes` forbids passing `name: undefined`; subscribe to\n  // the whole form state until a field name is available.\n  const formState = useFormState(fieldContext === null ? undefined : { name: fieldContext.name })\n\n  if (fieldContext === null) {\n    throw new Error('useFormField must be used within <FormField>.')\n  }\n  if (itemContext === null) {\n    throw new Error('useFormField must be used within <FormItem>.')\n  }\n\n  const fieldState = getFieldState(fieldContext.name, formState)\n  const { id } = itemContext\n\n  return {\n    id,\n    name: fieldContext.name,\n    formItemId: `${id}-form-item`,\n    formDescriptionId: `${id}-form-item-description`,\n    formMessageId: `${id}-form-item-message`,\n    ...fieldState,\n  }\n}\n\nexport type FormItemProps = HTMLAttributes<HTMLDivElement>\n\nexport const FormItem = /* @__PURE__ */ forwardRef<HTMLDivElement, FormItemProps>(function FormItem(\n  { className, ...props },\n  ref,\n) {\n  const id = useId()\n  return (\n    <FormItemContext.Provider value={{ id }}>\n      <div ref={ref} className={cx(styles.item, className)} {...props} />\n    </FormItemContext.Provider>\n  )\n})\n\nexport type FormLabelProps = ComponentPropsWithoutRef<typeof Label>\n\nexport const FormLabel = /* @__PURE__ */ forwardRef<ComponentRef<typeof Label>, FormLabelProps>(\n  function FormLabel({ className, ...props }, ref) {\n    const { error, formItemId } = useFormField()\n    return (\n      <Label\n        ref={ref}\n        data-error={Boolean(error)}\n        className={cx(styles.label, className)}\n        htmlFor={formItemId}\n        {...props}\n      />\n    )\n  },\n)\n\nexport type FormControlProps = ComponentPropsWithoutRef<typeof Slot>\n\nexport const FormControl = /* @__PURE__ */ forwardRef<ComponentRef<typeof Slot>, FormControlProps>(\n  function FormControl(props, ref) {\n    const { error, formItemId, formDescriptionId, formMessageId } = useFormField()\n    return (\n      <Slot\n        ref={ref}\n        id={formItemId}\n        aria-describedby={error ? `${formDescriptionId} ${formMessageId}` : formDescriptionId}\n        aria-invalid={Boolean(error)}\n        {...props}\n      />\n    )\n  },\n)\n\nexport type FormDescriptionProps = HTMLAttributes<HTMLParagraphElement>\n\nexport const FormDescription = /* @__PURE__ */ forwardRef<\n  HTMLParagraphElement,\n  FormDescriptionProps\n>(function FormDescription({ className, ...props }, ref) {\n  const { formDescriptionId } = useFormField()\n  return (\n    <p ref={ref} id={formDescriptionId} className={cx(styles.description, className)} {...props} />\n  )\n})\n\nexport type FormMessageProps = HTMLAttributes<HTMLParagraphElement>\n\nexport const FormMessage = /* @__PURE__ */ forwardRef<HTMLParagraphElement, FormMessageProps>(\n  function FormMessage({ className, children, ...props }, ref) {\n    const { error, formMessageId } = useFormField()\n    const body = error ? (error.message ?? '') : children\n    if (!body) return null\n    return (\n      <p ref={ref} id={formMessageId} className={cx(styles.message, className)} {...props}>\n        {body}\n      </p>\n    )\n  },\n)\n"
+    }
+  ],
+  "stalk": {
+    "schemaVersion": "1.0",
+    "preset": {
+      "semanticTokens": {},
+      "recipes": ["form"]
+    },
+    "packageDependencies": {
+      "preset": "@stalk-ui/preset"
+    },
+    "pandaCodegen": true,
+    "importAliases": {
+      "styledSystem": "styled-system"
+    }
+  }
+}

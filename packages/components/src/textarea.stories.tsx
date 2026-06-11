@@ -1,3 +1,4 @@
+import { fn } from 'storybook/test'
 import { Box, VStack } from 'styled-system/jsx'
 import { textarea as textareaRecipe } from 'styled-system/recipes'
 
@@ -13,14 +14,23 @@ const meta = {
   tags: ['autodocs', 'stable'],
   args: {
     'aria-label': 'Message',
+    disabled: false,
+    invalid: false,
+    onChange: fn(),
     placeholder: 'Write a message...',
     size: 'md',
   },
   argTypes: {
-    size: {
-      control: 'select',
-      options: SIZES,
-    },
+    'aria-label': { control: 'text' },
+    disabled: { control: 'boolean' },
+    invalid: { control: 'boolean' },
+    placeholder: { control: 'text' },
+    rows: { control: 'number' },
+    size: { control: 'select', options: SIZES },
+    className: { table: { disable: true } },
+    id: { table: { disable: true } },
+    name: { table: { disable: true } },
+    onChange: { table: { disable: true } },
   },
 } satisfies Meta<typeof Textarea>
 

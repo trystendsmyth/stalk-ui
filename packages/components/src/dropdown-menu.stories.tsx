@@ -1,5 +1,6 @@
 import { Activity, Copy, ImageIcon, Layers, Scissors, Trash2, Type as TypeIcon } from 'lucide-react'
 import { useState } from 'react'
+import { fn } from 'storybook/test'
 import { css } from 'styled-system/css'
 import { HStack, VStack } from 'styled-system/jsx'
 
@@ -25,12 +26,27 @@ const useSelection = (initial: string | null = null) => {
   return { value, select }
 }
 
+const onSelect = fn()
+
 const meta = {
   title: 'Components/Navigation/DropdownMenu',
   component: DropdownMenu.Root,
   tags: ['autodocs', 'stable'],
+  args: {
+    defaultOpen: false,
+    dir: 'ltr',
+    modal: false,
+    onOpenChange: fn(),
+  },
+  argTypes: {
+    children: { table: { disable: true } },
+    defaultOpen: { control: 'boolean' },
+    dir: { control: 'inline-radio', options: ['ltr', 'rtl'] },
+    modal: { control: 'boolean' },
+    onOpenChange: { table: { disable: true } },
+    open: { table: { disable: true } },
+  },
   parameters: {
-    controls: { disable: true },
     // Radix DropdownMenu implements the WAI-ARIA modal pattern: when open,
     // sibling content (including the still-focusable Trigger) sits inside an
     // aria-hidden subtree while focus is trapped inside the portal'd Content.
@@ -49,11 +65,11 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
-  render: function Render() {
+  render: function Render(args) {
     const { value, select } = useSelection()
     return (
       <VStack alignItems="flex-start" gap="12">
-        <DropdownMenu.Root>
+        <DropdownMenu.Root {...args}>
           <DropdownMenu.Trigger asChild>
             <Button variant="outline">Open menu</Button>
           </DropdownMenu.Trigger>
@@ -149,17 +165,17 @@ export const WithShortcuts: Story = {
         <Button variant="outline">File</Button>
       </DropdownMenu.Trigger>
       <DropdownMenu.Content>
-        <DropdownMenu.Item>
+        <DropdownMenu.Item onSelect={onSelect}>
           <Copy aria-hidden height={14} width={14} />
           Copy
           <DropdownMenu.Shortcut>⌘C</DropdownMenu.Shortcut>
         </DropdownMenu.Item>
-        <DropdownMenu.Item>
+        <DropdownMenu.Item onSelect={onSelect}>
           Paste
           <DropdownMenu.Shortcut>⌘V</DropdownMenu.Shortcut>
         </DropdownMenu.Item>
         <DropdownMenu.Separator />
-        <DropdownMenu.Item>
+        <DropdownMenu.Item onSelect={onSelect}>
           <Trash2 aria-hidden height={14} width={14} />
           Delete
           <DropdownMenu.Shortcut>⌫</DropdownMenu.Shortcut>
@@ -243,8 +259,12 @@ export const Inset: Story = {
       </DropdownMenu.Trigger>
       <DropdownMenu.Content>
         <DropdownMenu.CheckboxItem checked>Show grid</DropdownMenu.CheckboxItem>
-        <DropdownMenu.Item inset>Plain item (inset)</DropdownMenu.Item>
-        <DropdownMenu.Item inset>Another inset item</DropdownMenu.Item>
+        <DropdownMenu.Item inset onSelect={onSelect}>
+          Plain item (inset)
+        </DropdownMenu.Item>
+        <DropdownMenu.Item inset onSelect={onSelect}>
+          Another inset item
+        </DropdownMenu.Item>
       </DropdownMenu.Content>
     </DropdownMenu.Root>
   ),
@@ -257,9 +277,11 @@ export const Disabled: Story = {
         <Button variant="outline">Menu</Button>
       </DropdownMenu.Trigger>
       <DropdownMenu.Content>
-        <DropdownMenu.Item>Enabled item</DropdownMenu.Item>
-        <DropdownMenu.Item disabled>Disabled item</DropdownMenu.Item>
-        <DropdownMenu.Item>Another enabled item</DropdownMenu.Item>
+        <DropdownMenu.Item onSelect={onSelect}>Enabled item</DropdownMenu.Item>
+        <DropdownMenu.Item disabled onSelect={onSelect}>
+          Disabled item
+        </DropdownMenu.Item>
+        <DropdownMenu.Item onSelect={onSelect}>Another enabled item</DropdownMenu.Item>
       </DropdownMenu.Content>
     </DropdownMenu.Root>
   ),
@@ -303,8 +325,8 @@ export const SidePositions: Story = {
             <Button variant="outline">{side}</Button>
           </DropdownMenu.Trigger>
           <DropdownMenu.Content side={side}>
-            <DropdownMenu.Item>Item 1</DropdownMenu.Item>
-            <DropdownMenu.Item>Item 2</DropdownMenu.Item>
+            <DropdownMenu.Item onSelect={onSelect}>Item 1</DropdownMenu.Item>
+            <DropdownMenu.Item onSelect={onSelect}>Item 2</DropdownMenu.Item>
           </DropdownMenu.Content>
         </DropdownMenu.Root>
       ))}
@@ -319,23 +341,23 @@ export const Submenu: Story = {
         <Button variant="outline">Share</Button>
       </DropdownMenu.Trigger>
       <DropdownMenu.Content>
-        <DropdownMenu.Item>Copy link</DropdownMenu.Item>
+        <DropdownMenu.Item onSelect={onSelect}>Copy link</DropdownMenu.Item>
         <DropdownMenu.Sub open>
           <DropdownMenu.SubTrigger>Send to</DropdownMenu.SubTrigger>
           <DropdownMenu.SubContent>
-            <DropdownMenu.Item>Email</DropdownMenu.Item>
-            <DropdownMenu.Item>Slack</DropdownMenu.Item>
+            <DropdownMenu.Item onSelect={onSelect}>Email</DropdownMenu.Item>
+            <DropdownMenu.Item onSelect={onSelect}>Slack</DropdownMenu.Item>
             <DropdownMenu.Sub open>
               <DropdownMenu.SubTrigger>More</DropdownMenu.SubTrigger>
               <DropdownMenu.SubContent>
-                <DropdownMenu.Item>SMS</DropdownMenu.Item>
-                <DropdownMenu.Item>QR code</DropdownMenu.Item>
+                <DropdownMenu.Item onSelect={onSelect}>SMS</DropdownMenu.Item>
+                <DropdownMenu.Item onSelect={onSelect}>QR code</DropdownMenu.Item>
               </DropdownMenu.SubContent>
             </DropdownMenu.Sub>
           </DropdownMenu.SubContent>
         </DropdownMenu.Sub>
         <DropdownMenu.Separator />
-        <DropdownMenu.Item>Manage access</DropdownMenu.Item>
+        <DropdownMenu.Item onSelect={onSelect}>Manage access</DropdownMenu.Item>
       </DropdownMenu.Content>
     </DropdownMenu.Root>
   ),
@@ -349,8 +371,8 @@ export const Open: Story = {
       </DropdownMenu.Trigger>
       <DropdownMenu.Content>
         <DropdownMenu.Label>Open menu</DropdownMenu.Label>
-        <DropdownMenu.Item>First action</DropdownMenu.Item>
-        <DropdownMenu.Item>Second action</DropdownMenu.Item>
+        <DropdownMenu.Item onSelect={onSelect}>First action</DropdownMenu.Item>
+        <DropdownMenu.Item onSelect={onSelect}>Second action</DropdownMenu.Item>
       </DropdownMenu.Content>
     </DropdownMenu.Root>
   ),
@@ -371,8 +393,8 @@ export const Complex: Story = {
         <DropdownMenu.Sub>
           <DropdownMenu.SubTrigger>Export</DropdownMenu.SubTrigger>
           <DropdownMenu.SubContent>
-            <DropdownMenu.Item>PDF</DropdownMenu.Item>
-            <DropdownMenu.Item>CSV</DropdownMenu.Item>
+            <DropdownMenu.Item onSelect={onSelect}>PDF</DropdownMenu.Item>
+            <DropdownMenu.Item onSelect={onSelect}>CSV</DropdownMenu.Item>
           </DropdownMenu.SubContent>
         </DropdownMenu.Sub>
       </DropdownMenu.Content>

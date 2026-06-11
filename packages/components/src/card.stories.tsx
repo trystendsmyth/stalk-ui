@@ -1,7 +1,11 @@
+import { card as cardRecipe } from 'styled-system/recipes'
+
 import { Button } from './button'
 import { Card } from './card'
 
 import type { Meta, StoryObj } from '@storybook/react-vite'
+
+const { variant: VARIANTS } = cardRecipe.variantMap
 
 const meta = {
   title: 'Components/Data Display/Card',
@@ -11,9 +15,11 @@ const meta = {
     variant: 'outline',
   },
   argTypes: {
+    children: { table: { disable: true } },
+    className: { table: { disable: true } },
     variant: {
       control: 'inline-radio',
-      options: ['outline', 'elevated'],
+      options: VARIANTS,
     },
   },
 } satisfies Meta<typeof Card.Root>

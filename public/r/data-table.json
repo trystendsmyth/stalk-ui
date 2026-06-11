@@ -1,0 +1,28 @@
+{
+  "$schema": "https://stalk-ui.com/schema/v1/registry-item.json",
+  "name": "data-table",
+  "type": "registry:ui",
+  "dependencies": ["@stalk-ui/preset", "@tanstack/react-table", "lucide-react"],
+  "registryDependencies": ["button", "table"],
+  "files": [
+    {
+      "path": "src/components/ui/data-table.tsx",
+      "type": "registry:ui",
+      "content": "'use client'\n\nimport {\n  flexRender,\n  getCoreRowModel,\n  getPaginationRowModel,\n  getSortedRowModel,\n  useReactTable,\n} from '@tanstack/react-table'\nimport { ChevronDown, ChevronsUpDown, ChevronUp } from 'lucide-react'\nimport { useState } from 'react'\nimport { cx } from 'styled-system/css'\nimport { dataTable as dataTableRecipe } from 'styled-system/recipes'\n\nimport { Button } from './button'\nimport { Table } from './table'\n\nimport type { ColumnDef, SortingState } from '@tanstack/react-table'\n\nconst styles = /* @__PURE__ */ dataTableRecipe()\n\nexport interface DataTableProps<TData, TValue> {\n  columns: ColumnDef<TData, TValue>[]\n  data: TData[]\n  /** Message shown when there are no rows. */\n  emptyMessage?: string\n  /** Rows per page; ignored when `enablePagination` is false. */\n  pageSize?: number\n  /** Render the Previous/Next pagination footer (default `true`). */\n  enablePagination?: boolean\n  className?: string\n}\n\nexport function DataTable<TData, TValue>({\n  columns,\n  data,\n  emptyMessage = 'No results.',\n  pageSize = 10,\n  enablePagination = true,\n  className,\n}: DataTableProps<TData, TValue>) {\n  const [sorting, setSorting] = useState<SortingState>([])\n\n  const table = useReactTable({\n    columns,\n    data,\n    state: { sorting },\n    onSortingChange: setSorting,\n    getCoreRowModel: getCoreRowModel(),\n    getSortedRowModel: getSortedRowModel(),\n    initialState: { pagination: { pageSize } },\n    ...(enablePagination ? { getPaginationRowModel: getPaginationRowModel() } : {}),\n  })\n\n  const rows = table.getRowModel().rows\n\n  return (\n    <div className={cx(styles.root, className)}>\n      <Table.Root>\n        <Table.Header>\n          {table.getHeaderGroups().map((headerGroup) => (\n            <Table.Row key={headerGroup.id}>\n              {headerGroup.headers.map((header) => {\n                const sorted = header.column.getIsSorted()\n                const ariaSort =\n                  sorted === 'asc' ? 'ascending' : sorted === 'desc' ? 'descending' : undefined\n                const SortIcon =\n                  sorted === 'asc' ? ChevronUp : sorted === 'desc' ? ChevronDown : ChevronsUpDown\n\n                return (\n                  <Table.Head key={header.id} aria-sort={ariaSort}>\n                    {header.isPlaceholder ? null : header.column.getCanSort() ? (\n                      <button\n                        type=\"button\"\n                        className={styles.sortButton}\n                        onClick={header.column.getToggleSortingHandler()}\n                      >\n                        {flexRender(header.column.columnDef.header, header.getContext())}\n                        <SortIcon size={14} aria-hidden />\n                      </button>\n                    ) : (\n                      flexRender(header.column.columnDef.header, header.getContext())\n                    )}\n                  </Table.Head>\n                )\n              })}\n            </Table.Row>\n          ))}\n        </Table.Header>\n        <Table.Body>\n          {rows.length === 0 ? (\n            <Table.Row>\n              <Table.Cell colSpan={columns.length} style={{ textAlign: 'center' }}>\n                {emptyMessage}\n              </Table.Cell>\n            </Table.Row>\n          ) : (\n            rows.map((row) => (\n              <Table.Row key={row.id} data-state={row.getIsSelected() ? 'selected' : undefined}>\n                {row.getVisibleCells().map((cell) => (\n                  <Table.Cell key={cell.id}>\n                    {flexRender(cell.column.columnDef.cell, cell.getContext())}\n                  </Table.Cell>\n                ))}\n              </Table.Row>\n            ))\n          )}\n        </Table.Body>\n      </Table.Root>\n      {enablePagination && table.getPageCount() > 1 ? (\n        <div className={styles.pagination}>\n          <span className={styles.pageInfo}>\n            Page {table.getState().pagination.pageIndex + 1} of {table.getPageCount()}\n          </span>\n          <Button\n            size=\"sm\"\n            variant=\"outline\"\n            disabled={!table.getCanPreviousPage()}\n            onClick={() => {\n              table.previousPage()\n            }}\n          >\n            Previous\n          </Button>\n          <Button\n            size=\"sm\"\n            variant=\"outline\"\n            disabled={!table.getCanNextPage()}\n            onClick={() => {\n              table.nextPage()\n            }}\n          >\n            Next\n          </Button>\n        </div>\n      ) : null}\n    </div>\n  )\n}\n\nDataTable.displayName = 'DataTable'\n"
+    }
+  ],
+  "stalk": {
+    "schemaVersion": "1.0",
+    "preset": {
+      "semanticTokens": {},
+      "recipes": ["dataTable"]
+    },
+    "packageDependencies": {
+      "preset": "@stalk-ui/preset"
+    },
+    "pandaCodegen": true,
+    "importAliases": {
+      "styledSystem": "styled-system"
+    }
+  }
+}

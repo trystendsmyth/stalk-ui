@@ -7,13 +7,29 @@ import { Avatar } from '@stalk-ui/components/avatar'
 import { Badge } from '@stalk-ui/components/badge'
 import { Blockquote } from '@stalk-ui/components/blockquote'
 import { Button } from '@stalk-ui/components/button'
+import { Calendar } from '@stalk-ui/components/calendar'
 import { Card } from '@stalk-ui/components/card'
 import { Checkbox } from '@stalk-ui/components/checkbox'
 import { Code } from '@stalk-ui/components/code'
 import { Collapsible } from '@stalk-ui/components/collapsible'
+import { Combobox } from '@stalk-ui/components/combobox'
+import { Command } from '@stalk-ui/components/command'
 import { ContextMenu } from '@stalk-ui/components/context-menu'
+import { DataList } from '@stalk-ui/components/data-list'
+import { DataTable } from '@stalk-ui/components/data-table'
+import { DatePicker } from '@stalk-ui/components/date-picker'
+import { DatetimeInput } from '@stalk-ui/components/datetime-input'
 import { Dialog } from '@stalk-ui/components/dialog'
 import { DropdownMenu } from '@stalk-ui/components/dropdown-menu'
+import {
+  Form,
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from '@stalk-ui/components/form'
 import { Heading } from '@stalk-ui/components/heading'
 import { HoverCard } from '@stalk-ui/components/hover-card'
 import { Input } from '@stalk-ui/components/input'
@@ -22,8 +38,11 @@ import { Label } from '@stalk-ui/components/label'
 import { Link } from '@stalk-ui/components/link'
 import { Menubar } from '@stalk-ui/components/menubar'
 import { NavigationMenu } from '@stalk-ui/components/navigation-menu'
+import { OtpInput } from '@stalk-ui/components/otp-input'
+import { PhoneInput } from '@stalk-ui/components/phone-input'
 import { Popover } from '@stalk-ui/components/popover'
 import { Progress } from '@stalk-ui/components/progress'
+import { QrCode } from '@stalk-ui/components/qr-code'
 import { Radio } from '@stalk-ui/components/radio'
 import { Select } from '@stalk-ui/components/select'
 import { Sheet } from '@stalk-ui/components/sheet'
@@ -36,13 +55,105 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@stalk-ui/components/t
 import { Tag } from '@stalk-ui/components/tag'
 import { Text } from '@stalk-ui/components/text'
 import { Textarea } from '@stalk-ui/components/textarea'
+import { TimePicker } from '@stalk-ui/components/time-picker'
 import { Toaster, toast } from '@stalk-ui/components/toast'
 import { Toggle, ToggleGroup, ToggleGroupItem } from '@stalk-ui/components/toggle'
 import { Tooltip } from '@stalk-ui/components/tooltip'
 import { AlertCircle, AlertTriangle, Info, X } from 'lucide-react'
 import { themes } from 'prism-react-renderer'
 import { useId, useState } from 'react'
+import { useForm } from 'react-hook-form'
 import { LiveEditor, LiveError, LivePreview, LiveProvider } from 'react-live'
+
+import type { ColumnDef } from '@tanstack/react-table'
+
+// react-live previews render a single JSX expression, so examples that need
+// column/data definitions or a `useForm` instance can't be expressed inline.
+// Expose ready-made demos the Form / Data Table examples render directly.
+interface DemoInvoice {
+  invoice: string
+  status: 'paid' | 'pending' | 'overdue'
+  amount: number
+}
+
+const invoiceColumns: ColumnDef<DemoInvoice>[] = [
+  { accessorKey: 'invoice', header: 'Invoice' },
+  {
+    accessorKey: 'status',
+    header: 'Status',
+    cell: ({ getValue }) => {
+      const status = getValue<DemoInvoice['status']>()
+      const tone = status === 'paid' ? 'success' : status === 'overdue' ? 'danger' : 'warning'
+      return <Badge tone={tone}>{status}</Badge>
+    },
+  },
+  {
+    accessorKey: 'amount',
+    header: 'Amount',
+    cell: ({ getValue }) => `$${getValue<number>().toFixed(2)}`,
+  },
+]
+
+const invoiceData: DemoInvoice[] = [
+  { invoice: 'INV-001', status: 'paid', amount: 250 },
+  { invoice: 'INV-002', status: 'pending', amount: 150 },
+  { invoice: 'INV-003', status: 'overdue', amount: 350 },
+  { invoice: 'INV-004', status: 'paid', amount: 450 },
+]
+
+const InvoiceTable = () => <DataTable columns={invoiceColumns} data={invoiceData} />
+
+const EventDatePicker = () => {
+  const [date, setDate] = useState<Date>()
+  return <DatePicker aria-label="Event date" value={date} onChange={setDate} />
+}
+
+const FrameworkCombobox = () => {
+  const [value, setValue] = useState<string>()
+  return (
+    <Combobox
+      aria-label="Framework"
+      options={[
+        { label: 'Next.js', value: 'next' },
+        { label: 'Remix', value: 'remix' },
+        { label: 'Astro', value: 'astro' },
+        { label: 'SvelteKit', value: 'sveltekit' },
+      ]}
+      value={value}
+      onChange={setValue}
+      placeholder="Select a framework…"
+    />
+  )
+}
+
+const ProfileForm = () => {
+  const form = useForm<{ bio: string }>({ defaultValues: { bio: '' } })
+  return (
+    <Form {...form}>
+      <form
+        onSubmit={(event) => void form.handleSubmit(() => undefined)(event)}
+        style={{ display: 'flex', flexDirection: 'column', gap: '1rem', maxWidth: '24rem' }}
+      >
+        <FormField
+          control={form.control}
+          name="bio"
+          rules={{ required: 'Tell us a little about yourself.' }}
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Bio</FormLabel>
+              <FormControl>
+                <Textarea placeholder="I build things…" {...field} />
+              </FormControl>
+              <FormDescription>This appears on your public profile.</FormDescription>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <Button type="submit">Save</Button>
+      </form>
+    </Form>
+  )
+}
 
 interface ComponentPreviewProps {
   code: string
@@ -65,13 +176,29 @@ const liveScope = {
   Badge,
   Blockquote,
   Button,
+  Calendar,
   Card,
   Checkbox,
   Code,
   Collapsible,
+  Combobox,
+  Command,
   ContextMenu,
+  DataList,
+  DataTable,
+  DatePicker,
+  DatetimeInput,
   Dialog,
+  EventDatePicker,
+  FrameworkCombobox,
   DropdownMenu,
+  Form,
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
   Heading,
   HoverCard,
   Info,
@@ -80,9 +207,14 @@ const liveScope = {
   Label,
   Link,
   Menubar,
+  InvoiceTable,
   NavigationMenu,
+  OtpInput,
+  PhoneInput,
   Popover,
+  ProfileForm,
   Progress,
+  QrCode,
   Radio,
   Select,
   Sheet,
@@ -98,6 +230,7 @@ const liveScope = {
   Tag,
   Text,
   Textarea,
+  TimePicker,
   Toaster,
   Toggle,
   ToggleGroup,

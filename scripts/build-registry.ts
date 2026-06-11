@@ -43,8 +43,20 @@ const shadcnCompatibilityHeader =
 // source) stay free of bundler warnings about module-level directives.
 const clientHookPattern =
   /\b(useState|useEffect|useLayoutEffect|useRef|useImperativeHandle|useReducer|useCallback|useMemo|useContext|useId|useTransition|useDeferredValue|useSyncExternalStore|createContext)\b/
+// Third-party UI libraries that are client-only (browser APIs, refs, effects)
+// just like Radix. A pure forwardRef wrapper around one of these would not trip
+// the hook pattern, so match their bare imports too.
+const clientOnlyPackages = [
+  'cmdk',
+  'react-day-picker',
+  'input-otp',
+  'react-international-phone',
+  'react-qrcode-logo',
+]
 const sourceNeedsUseClient = (source: string): boolean =>
-  source.includes("from '@radix-ui/") || clientHookPattern.test(source)
+  source.includes("from '@radix-ui/") ||
+  clientOnlyPackages.some((pkg) => source.includes(`from '${pkg}'`)) ||
+  clientHookPattern.test(source)
 const useClientDirective = "'use client'\n\n"
 
 const writeJson = async (path: string, value: unknown) => {

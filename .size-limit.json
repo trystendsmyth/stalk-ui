@@ -48,10 +48,59 @@
     "webpack": false
   },
   {
+    "name": "component: calendar",
+    "disablePlugins": ["@size-limit/esbuild", "@size-limit/webpack"],
+    "path": "packages/components/dist/calendar.js",
+    "limit": "6 KB",
+    "webpack": false
+  },
+  {
     "name": "component: checkbox",
     "disablePlugins": ["@size-limit/esbuild", "@size-limit/webpack"],
     "path": "packages/components/dist/checkbox.js",
     "limit": "3.5 KB",
+    "webpack": false
+  },
+  {
+    "name": "component: combobox",
+    "disablePlugins": ["@size-limit/esbuild", "@size-limit/webpack"],
+    "path": "packages/components/dist/combobox.js",
+    "limit": "4 KB",
+    "webpack": false
+  },
+  {
+    "name": "component: command",
+    "disablePlugins": ["@size-limit/esbuild", "@size-limit/webpack"],
+    "path": "packages/components/dist/command.js",
+    "limit": "4 KB",
+    "webpack": false
+  },
+  {
+    "name": "component: data-list",
+    "disablePlugins": ["@size-limit/esbuild", "@size-limit/webpack"],
+    "path": "packages/components/dist/data-list.js",
+    "limit": "2 KB",
+    "webpack": false
+  },
+  {
+    "name": "component: data-table",
+    "disablePlugins": ["@size-limit/esbuild", "@size-limit/webpack"],
+    "path": "packages/components/dist/data-table.js",
+    "limit": "4 KB",
+    "webpack": false
+  },
+  {
+    "name": "component: date-picker",
+    "disablePlugins": ["@size-limit/esbuild", "@size-limit/webpack"],
+    "path": "packages/components/dist/date-picker.js",
+    "limit": "4 KB",
+    "webpack": false
+  },
+  {
+    "name": "component: datetime-input",
+    "disablePlugins": ["@size-limit/esbuild", "@size-limit/webpack"],
+    "path": "packages/components/dist/datetime-input.js",
+    "limit": "3 KB",
     "webpack": false
   },
   {
@@ -69,6 +118,13 @@
     "webpack": false
   },
   {
+    "name": "component: form",
+    "disablePlugins": ["@size-limit/esbuild", "@size-limit/webpack"],
+    "path": "packages/components/dist/form.js",
+    "limit": "3 KB",
+    "webpack": false
+  },
+  {
     "name": "component: input",
     "disablePlugins": ["@size-limit/esbuild", "@size-limit/webpack"],
     "path": "packages/components/dist/input.js",
@@ -83,10 +139,31 @@
     "webpack": false
   },
   {
+    "name": "component: otp-input",
+    "disablePlugins": ["@size-limit/esbuild", "@size-limit/webpack"],
+    "path": "packages/components/dist/otp-input.js",
+    "limit": "3 KB",
+    "webpack": false
+  },
+  {
+    "name": "component: phone-input",
+    "disablePlugins": ["@size-limit/esbuild", "@size-limit/webpack"],
+    "path": "packages/components/dist/phone-input.js",
+    "limit": "3 KB",
+    "webpack": false
+  },
+  {
     "name": "component: popover",
     "disablePlugins": ["@size-limit/esbuild", "@size-limit/webpack"],
     "path": "packages/components/dist/popover.js",
     "limit": "3 KB",
+    "webpack": false
+  },
+  {
+    "name": "component: qr-code",
+    "disablePlugins": ["@size-limit/esbuild", "@size-limit/webpack"],
+    "path": "packages/components/dist/qr-code.js",
+    "limit": "2 KB",
     "webpack": false
   },
   {
@@ -115,6 +192,13 @@
     "disablePlugins": ["@size-limit/esbuild", "@size-limit/webpack"],
     "path": "packages/components/dist/textarea.js",
     "limit": "1.5 KB",
+    "webpack": false
+  },
+  {
+    "name": "component: time-picker",
+    "disablePlugins": ["@size-limit/esbuild", "@size-limit/webpack"],
+    "path": "packages/components/dist/time-picker.js",
+    "limit": "3 KB",
     "webpack": false
   },
   {

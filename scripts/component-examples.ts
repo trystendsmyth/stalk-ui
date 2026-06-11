@@ -32,6 +32,7 @@ export const componentExamples = {
     '<Button variant="ghost" size="sm">Learn more</Button>',
     '<Button loading>Saving…</Button>',
   ],
+  calendar: ['<Calendar mode="single" />', '<Calendar mode="range" numberOfMonths={2} />'],
   card: [
     '<Card.Root>\n  <Card.Header>\n    <Card.Title>Project settings</Card.Title>\n    <Card.Description>Manage how this project is shared with your team.</Card.Description>\n  </Card.Header>\n  <Card.Content>Cards group related content and actions into one surface.</Card.Content>\n</Card.Root>',
     '<Card.Root>\n  <Card.Header>\n    <Card.Title>Invite people</Card.Title>\n    <Card.Description>Add collaborators to this project.</Card.Description>\n  </Card.Header>\n  <Card.Content>An invite gives full edit access.</Card.Content>\n  <Card.Footer>\n    <Button size="sm">Send invite</Button>\n    <Button size="sm" variant="outline">Cancel</Button>\n  </Card.Footer>\n</Card.Root>',
@@ -52,8 +53,23 @@ export const componentExamples = {
     '<Collapsible>\n  <Collapsible.Trigger>Show details</Collapsible.Trigger>\n  <Collapsible.Content>Hidden content that toggles open.</Collapsible.Content>\n</Collapsible>',
     '<Collapsible defaultOpen>\n  <Collapsible.Trigger>Toggle</Collapsible.Trigger>\n  <Collapsible.Content>Visible from the start.</Collapsible.Content>\n</Collapsible>',
   ],
+  combobox: ['<FrameworkCombobox />'],
+  command: [
+    '<Command label="Command menu" style={{ maxWidth: "24rem", border: "1px solid" }}>\n  <Command.Input aria-label="Search commands" placeholder="Type a command or search…" />\n  <Command.List>\n    <Command.Empty>No results found.</Command.Empty>\n    <Command.Group heading="Suggestions">\n      <Command.Item>Calendar</Command.Item>\n      <Command.Item>Search emoji</Command.Item>\n    </Command.Group>\n    <Command.Separator />\n    <Command.Group heading="Settings">\n      <Command.Item>Profile<Command.Shortcut>⌘P</Command.Shortcut></Command.Item>\n      <Command.Item>Settings<Command.Shortcut>⌘S</Command.Shortcut></Command.Item>\n    </Command.Group>\n  </Command.List>\n</Command>',
+  ],
   'context-menu': [
     '<ContextMenu>\n  <ContextMenu.Trigger>Right click here</ContextMenu.Trigger>\n  <ContextMenu.Content>\n    <ContextMenu.Item>Cut</ContextMenu.Item>\n    <ContextMenu.Item>Copy</ContextMenu.Item>\n    <ContextMenu.Separator />\n    <ContextMenu.Item>Paste</ContextMenu.Item>\n  </ContextMenu.Content>\n</ContextMenu>',
+  ],
+  'data-list': [
+    '<DataList.Root>\n  <DataList.Item>\n    <DataList.Label>Status</DataList.Label>\n    <DataList.Value>\n      <Badge tone="success" variant="subtle">Authorized</Badge>\n    </DataList.Value>\n  </DataList.Item>\n  <DataList.Item>\n    <DataList.Label>ID</DataList.Label>\n    <DataList.Value><Code>u_2J89JSA4GJ</Code></DataList.Value>\n  </DataList.Item>\n  <DataList.Item>\n    <DataList.Label>Name</DataList.Label>\n    <DataList.Value>Ada Lovelace</DataList.Value>\n  </DataList.Item>\n  <DataList.Item>\n    <DataList.Label>Email</DataList.Label>\n    <DataList.Value><Link href="mailto:ada@example.com">ada@example.com</Link></DataList.Value>\n  </DataList.Item>\n</DataList.Root>',
+    '<DataList.Root orientation="vertical">\n  <DataList.Item>\n    <DataList.Label tone="accent">Accent</DataList.Label>\n    <DataList.Value>Primary brand palette</DataList.Value>\n  </DataList.Item>\n  <DataList.Item>\n    <DataList.Label tone="success">Success</DataList.Label>\n    <DataList.Value>Operation completed</DataList.Value>\n  </DataList.Item>\n  <DataList.Item>\n    <DataList.Label tone="danger">Danger</DataList.Label>\n    <DataList.Value>Action required</DataList.Value>\n  </DataList.Item>\n</DataList.Root>',
+  ],
+  'data-table': ['<InvoiceTable />'],
+  'date-picker': ['<EventDatePicker />'],
+  'datetime-input': [
+    '<DatetimeInput aria-label="Date" />',
+    '<DatetimeInput aria-label="Time" mode="time" />',
+    '<DatetimeInput aria-label="Date and time" mode="datetime" />',
   ],
   dialog: [
     '<Dialog.Root>\n  <Dialog.Trigger>Open dialog</Dialog.Trigger>\n  <Dialog.Content>\n    <Dialog.Title>Confirm changes</Dialog.Title>\n  </Dialog.Content>\n</Dialog.Root>',
@@ -64,6 +80,7 @@ export const componentExamples = {
     '<DropdownMenu.Root>\n  <DropdownMenu.Trigger>Project</DropdownMenu.Trigger>\n  <DropdownMenu.Content>\n    <DropdownMenu.Label>Project</DropdownMenu.Label>\n    <DropdownMenu.Item>Rename<DropdownMenu.Shortcut>⌘R</DropdownMenu.Shortcut></DropdownMenu.Item>\n    <DropdownMenu.Item>Archive<DropdownMenu.Shortcut>⌘E</DropdownMenu.Shortcut></DropdownMenu.Item>\n  </DropdownMenu.Content>\n</DropdownMenu.Root>',
     '<DropdownMenu.Root>\n  <DropdownMenu.Trigger>View</DropdownMenu.Trigger>\n  <DropdownMenu.Content>\n    <DropdownMenu.CheckboxItem defaultChecked>Show toolbar</DropdownMenu.CheckboxItem>\n    <DropdownMenu.CheckboxItem>Show sidebar</DropdownMenu.CheckboxItem>\n  </DropdownMenu.Content>\n</DropdownMenu.Root>',
   ],
+  form: ['<ProfileForm />'],
   heading: [
     '<Heading as="h1">Page title</Heading>',
     '<Heading as="h2">Section heading</Heading>',
@@ -99,6 +116,10 @@ export const componentExamples = {
   'navigation-menu': [
     '<NavigationMenu.Root>\n  <NavigationMenu.List>\n    <NavigationMenu.Item>\n      <NavigationMenu.Trigger>Products</NavigationMenu.Trigger>\n      <NavigationMenu.Content>\n        <ul style={{ minWidth: "14rem" }}>\n          <li><NavigationMenu.Link href="#">Analytics</NavigationMenu.Link></li>\n          <li><NavigationMenu.Link href="#">Automation</NavigationMenu.Link></li>\n          <li><NavigationMenu.Link href="#">Reports</NavigationMenu.Link></li>\n        </ul>\n      </NavigationMenu.Content>\n    </NavigationMenu.Item>\n    <NavigationMenu.Item>\n      <NavigationMenu.Link href="#">Pricing</NavigationMenu.Link>\n    </NavigationMenu.Item>\n  </NavigationMenu.List>\n</NavigationMenu.Root>',
   ],
+  'otp-input': [
+    '<OtpInput maxLength={6} aria-label="One-time passcode">\n  <OtpInput.Group>\n    <OtpInput.Slot index={0} />\n    <OtpInput.Slot index={1} />\n    <OtpInput.Slot index={2} />\n  </OtpInput.Group>\n  <OtpInput.Separator />\n  <OtpInput.Group>\n    <OtpInput.Slot index={3} />\n    <OtpInput.Slot index={4} />\n    <OtpInput.Slot index={5} />\n  </OtpInput.Group>\n</OtpInput>',
+  ],
+  'phone-input': ['<PhoneInput aria-label="Phone number" defaultCountry="us" />'],
   popover: [
     '<Popover.Root>\n  <Popover.Trigger>Open popover</Popover.Trigger>\n  <Popover.Content>Quick actions go here.</Popover.Content>\n</Popover.Root>',
     '<Popover.Root>\n  <Popover.Trigger>Filters</Popover.Trigger>\n  <Popover.Content side="bottom" align="start">Filter controls render below the trigger.</Popover.Content>\n</Popover.Root>',
@@ -107,6 +128,10 @@ export const componentExamples = {
     '<Progress aria-label="Upload" value={42} />',
     '<Progress aria-label="Sync" max={200} value={120} size="lg" />',
     '<Progress aria-label="Loading" />',
+  ],
+  'qr-code': [
+    '<QrCode value="https://example.com" aria-label="QR code linking to example.com" />',
+    '<QrCode value="https://example.com" size={160} qrStyle="dots" eyeRadius={8} fgColor="#4f46e5" aria-label="Styled QR code" />',
   ],
   radio: [
     '<Radio.Root defaultValue="basic" name="plan">\n  <Radio.Item value="basic" aria-label="Basic" />\n  <Radio.Item value="pro" aria-label="Pro" />\n  <Radio.Item value="team" aria-label="Team" />\n</Radio.Root>',
@@ -143,6 +168,10 @@ export const componentExamples = {
   table: [
     '<Table.Root>\n  <Table.Caption>Recent invoices.</Table.Caption>\n  <Table.Header>\n    <Table.Row>\n      <Table.Head scope="col">Invoice</Table.Head>\n      <Table.Head scope="col">Status</Table.Head>\n      <Table.Head scope="col">Amount</Table.Head>\n    </Table.Row>\n  </Table.Header>\n  <Table.Body>\n    <Table.Row>\n      <Table.Cell>INV-001</Table.Cell>\n      <Table.Cell><Badge tone="success" variant="subtle">Paid</Badge></Table.Cell>\n      <Table.Cell>$250.00</Table.Cell>\n    </Table.Row>\n    <Table.Row>\n      <Table.Cell>INV-002</Table.Cell>\n      <Table.Cell><Badge tone="warning" variant="subtle">Pending</Badge></Table.Cell>\n      <Table.Cell>$150.00</Table.Cell>\n    </Table.Row>\n  </Table.Body>\n</Table.Root>',
     '<Table.Root>\n  <Table.Header>\n    <Table.Row>\n      <Table.Head scope="col">Name</Table.Head>\n      <Table.Head scope="col">Role</Table.Head>\n    </Table.Row>\n  </Table.Header>\n  <Table.Body>\n    <Table.Row data-state="selected">\n      <Table.Cell>Ada Lovelace</Table.Cell>\n      <Table.Cell>Owner</Table.Cell>\n    </Table.Row>\n    <Table.Row>\n      <Table.Cell>Linus Torvalds</Table.Cell>\n      <Table.Cell>Maintainer</Table.Cell>\n    </Table.Row>\n  </Table.Body>\n</Table.Root>',
+  ],
+  'time-picker': [
+    '<TimePicker hourCycle="12" minuteStep={5} />',
+    '<TimePicker hourCycle="24" minuteStep={15} />',
   ],
   text: [
     '<Text>The quick brown fox jumps over the lazy dog.</Text>',

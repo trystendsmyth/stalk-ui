@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { fn } from 'storybook/test'
 import { css } from 'styled-system/css'
 import { HStack, VStack } from 'styled-system/jsx'
 import { checkbox as checkboxRecipe } from 'styled-system/recipes'
@@ -17,16 +18,15 @@ const meta = {
   component: Checkbox,
   tags: ['autodocs', 'stable'],
   args: {
+    'aria-label': 'Accept terms',
+    defaultChecked: false,
     disabled: false,
     invalid: false,
+    onCheckedChange: fn(),
     size: 'md',
   },
   argTypes: {
-    size: {
-      control: 'select',
-      options: SIZES,
-      description: 'Visual size of the checkbox.',
-    },
+    'aria-label': { control: 'text' },
     checked: {
       control: 'select',
       options: [undefined, true, false, 'indeterminate'],
@@ -37,15 +37,13 @@ const meta = {
       options: [true, false, 'indeterminate'],
       description: 'Initial checked state (uncontrolled).',
     },
-    disabled: {
-      control: 'boolean',
-      description: 'Disable the checkbox.',
-    },
-    invalid: {
-      control: 'boolean',
-      description: 'Mark the checkbox as invalid.',
-    },
+    disabled: { control: 'boolean', description: 'Disable the checkbox.' },
+    invalid: { control: 'boolean', description: 'Mark the checkbox as invalid.' },
+    size: { control: 'select', options: SIZES, description: 'Visual size of the checkbox.' },
     asChild: { table: { disable: true } },
+    className: { table: { disable: true } },
+    id: { table: { disable: true } },
+    name: { table: { disable: true } },
     onCheckedChange: { table: { disable: true } },
   },
   parameters: {
@@ -62,12 +60,7 @@ export default meta
 
 type Story = StoryObj<typeof meta>
 
-export const Default: Story = {
-  args: {
-    'aria-label': 'Accept terms',
-    defaultChecked: false,
-  },
-}
+export const Default: Story = {}
 
 export const Sizes: Story = {
   parameters: { controls: { disable: true } },
@@ -121,11 +114,18 @@ export const States: Story = {
 
 export const Controlled: Story = {
   parameters: { controls: { disable: true } },
-  render: () => {
+  render: (args) => {
     const [checked, setChecked] = useState<boolean | 'indeterminate'>(true)
     return (
       <VStack alignItems="flex-start" gap="8">
-        <Checkbox aria-label="Toggle option" checked={checked} onCheckedChange={setChecked} />
+        <Checkbox
+          aria-label="Toggle option"
+          checked={checked}
+          onCheckedChange={(next) => {
+            setChecked(next)
+            args.onCheckedChange?.(next)
+          }}
+        />
         <span>
           State: <strong>{String(checked)}</strong>
         </span>

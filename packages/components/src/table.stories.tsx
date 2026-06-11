@@ -7,6 +7,11 @@ const meta = {
   title: 'Components/Data Display/Table',
   component: Table.Root,
   tags: ['autodocs', 'stable'],
+  argTypes: {
+    children: { table: { disable: true } },
+    className: { table: { disable: true } },
+    containerProps: { table: { disable: true } },
+  },
   parameters: { controls: { disable: true } },
 } satisfies Meta<typeof Table.Root>
 
