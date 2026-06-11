@@ -1,3 +1,4 @@
+import { fn } from 'storybook/test'
 import { HStack, VStack } from 'styled-system/jsx'
 import { link as linkRecipe } from 'styled-system/recipes'
 
@@ -16,10 +17,16 @@ const meta = {
   args: {
     children: 'View documentation',
     href: '#',
+    onClick: fn(),
     tone: 'accent',
     underline: 'hover',
   },
   argTypes: {
+    asChild: { table: { disable: true } },
+    children: { control: 'text' },
+    className: { table: { disable: true } },
+    href: { control: 'text' },
+    onClick: { table: { disable: true } },
     tone: { control: 'select', options: TONES },
     underline: { control: 'inline-radio', options: UNDERLINES },
   },

@@ -119,20 +119,28 @@ export const componentGroups = [
     title: 'Forms',
     slugs: [
       'button',
+      'calendar',
       'checkbox',
+      'combobox',
+      'date-picker',
+      'datetime-input',
+      'form',
       'input',
       'label',
+      'otp-input',
+      'phone-input',
       'radio',
       'select',
       'slider',
       'switch',
       'textarea',
+      'time-picker',
       'toggle',
     ],
   },
   {
     title: 'Data Display',
-    slugs: ['avatar', 'badge', 'card', 'table', 'tag'],
+    slugs: ['avatar', 'badge', 'card', 'data-list', 'data-table', 'qr-code', 'table', 'tag'],
   },
   {
     title: 'Feedback',
@@ -144,7 +152,7 @@ export const componentGroups = [
   },
   {
     title: 'Navigation',
-    slugs: ['context-menu', 'dropdown-menu', 'menubar', 'navigation-menu', 'tabs'],
+    slugs: ['command', 'context-menu', 'dropdown-menu', 'menubar', 'navigation-menu', 'tabs'],
   },
   {
     title: 'Disclosure',

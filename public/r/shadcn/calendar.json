@@ -1,0 +1,28 @@
+{
+  "$schema": "https://stalk-ui.com/schema/v1/registry-item.json",
+  "name": "calendar",
+  "type": "registry:ui",
+  "dependencies": ["@stalk-ui/preset", "lucide-react", "react-day-picker"],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "src/components/ui/calendar.tsx",
+      "type": "registry:ui",
+      "content": "'use client'\n\nimport { ChevronLeft, ChevronRight } from 'lucide-react'\n// Stalk UI component - requires PandaCSS setup and @stalk-ui/preset.\nimport { DayFlag, DayPicker, SelectionState, UI } from 'react-day-picker'\nimport { cx } from 'styled-system/css'\nimport { calendar as calendarRecipe } from 'styled-system/recipes'\n\nimport type { ComponentProps } from 'react'\n\nconst styles = /* @__PURE__ */ calendarRecipe()\n\nexport type CalendarProps = ComponentProps<typeof DayPicker>\n\nexport const Calendar = ({ className, classNames, ...props }: CalendarProps) => {\n  return (\n    <DayPicker\n      classNames={{\n        [UI.Root]: cx(styles.root, className),\n        [UI.Months]: styles.months,\n        [UI.Month]: styles.month,\n        [UI.Nav]: styles.nav,\n        [UI.PreviousMonthButton]: styles.navButton,\n        [UI.NextMonthButton]: styles.navButton,\n        [UI.MonthCaption]: styles.monthCaption,\n        [UI.CaptionLabel]: styles.captionLabel,\n        [UI.MonthGrid]: styles.monthGrid,\n        [UI.Weekdays]: styles.weekdays,\n        [UI.Weekday]: styles.weekday,\n        [UI.Week]: styles.week,\n        [UI.Day]: styles.day,\n        [UI.DayButton]: styles.dayButton,\n        [DayFlag.today]: styles.today,\n        [DayFlag.outside]: styles.outside,\n        [DayFlag.disabled]: styles.disabled,\n        [DayFlag.hidden]: styles.hidden,\n        [SelectionState.selected]: styles.selected,\n        [SelectionState.range_start]: styles.rangeStart,\n        [SelectionState.range_middle]: styles.rangeMiddle,\n        [SelectionState.range_end]: styles.rangeEnd,\n        ...classNames,\n      }}\n      components={{\n        Chevron: ({ orientation, className: chevronClassName }) => {\n          const Icon = orientation === 'left' ? ChevronLeft : ChevronRight\n          return <Icon className={chevronClassName} size={16} aria-hidden />\n        },\n      }}\n      {...props}\n    />\n  )\n}\n\nCalendar.displayName = 'Calendar'\n"
+    }
+  ],
+  "stalk": {
+    "schemaVersion": "1.0",
+    "preset": {
+      "semanticTokens": {},
+      "recipes": ["calendar"]
+    },
+    "packageDependencies": {
+      "preset": "@stalk-ui/preset"
+    },
+    "pandaCodegen": true,
+    "importAliases": {
+      "styledSystem": "styled-system"
+    }
+  }
+}

@@ -17,18 +17,24 @@ const meta = {
   component: Avatar,
   tags: ['autodocs', 'stable'],
   args: {
+    fallbackDelay: 600,
     name: 'Ada Lovelace',
     radius: 'full',
     size: 'md',
     tone: 'accent',
   },
   argTypes: {
+    alt: { control: 'text' },
+    className: { table: { disable: true } },
+    fallback: { table: { disable: true } },
+    fallbackDelay: { control: 'number' },
+    loading: { control: 'inline-radio', options: ['eager', 'lazy'] },
+    name: { control: 'text' },
+    onLoadingStatusChange: { table: { disable: true } },
     radius: { control: 'select', options: RADII },
     size: { control: 'select', options: SIZES },
-    tone: { control: 'select', options: TONES },
     src: { control: 'text' },
-    name: { control: 'text' },
-    alt: { control: 'text' },
+    tone: { control: 'select', options: TONES },
   },
   parameters: {
     docs: {

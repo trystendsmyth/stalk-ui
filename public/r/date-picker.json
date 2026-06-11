@@ -1,0 +1,28 @@
+{
+  "$schema": "https://stalk-ui.com/schema/v1/registry-item.json",
+  "name": "date-picker",
+  "type": "registry:ui",
+  "dependencies": ["@stalk-ui/preset", "lucide-react"],
+  "registryDependencies": ["button", "calendar", "datetime-input", "popover"],
+  "files": [
+    {
+      "path": "src/components/ui/date-picker.tsx",
+      "type": "registry:ui",
+      "content": "'use client'\n\nimport { CalendarIcon } from 'lucide-react'\nimport { forwardRef, useState } from 'react'\nimport { cx } from 'styled-system/css'\nimport { datePicker as datePickerRecipe } from 'styled-system/recipes'\n\nimport { Calendar } from './calendar'\nimport { DatetimeInput } from './datetime-input'\nimport { Popover } from './popover'\n\nimport type { InputSize } from './input'\n\nconst styles = /* @__PURE__ */ datePickerRecipe()\n\nexport interface DatePickerProps {\n  /** Selected date (controlled). */\n  value?: Date | undefined\n  onChange?: (date: Date | undefined) => void\n  /** BCP-47 locale for the typed field. */\n  locale?: string\n  size?: InputSize\n  invalid?: boolean\n  disabled?: boolean\n  className?: string\n  /** Accessible label for the typed date field. */\n  'aria-label'?: string\n  /** Accessible label for the calendar trigger button. */\n  calendarLabel?: string\n}\n\nexport const DatePicker = /* @__PURE__ */ forwardRef<HTMLDivElement, DatePickerProps>(\n  function DatePicker(\n    {\n      value,\n      onChange,\n      locale,\n      size = 'md',\n      invalid = false,\n      disabled = false,\n      className,\n      'aria-label': ariaLabel,\n      calendarLabel = 'Open calendar',\n    },\n    ref,\n  ) {\n    const [open, setOpen] = useState(false)\n\n    return (\n      <Popover.Root open={open} onOpenChange={setOpen}>\n        <Popover.Anchor asChild>\n          <div className={cx(styles.root, className)}>\n            <DatetimeInput\n              ref={ref}\n              aria-label={ariaLabel}\n              disabled={disabled}\n              invalid={invalid}\n              locale={locale}\n              size={size}\n              value={value}\n              onChange={onChange}\n              endSlot={\n                <Popover.Trigger asChild>\n                  <button\n                    type=\"button\"\n                    aria-label={calendarLabel}\n                    disabled={disabled}\n                    className={styles.trigger}\n                  >\n                    <CalendarIcon size={16} aria-hidden />\n                  </button>\n                </Popover.Trigger>\n              }\n            />\n          </div>\n        </Popover.Anchor>\n        <Popover.Content align=\"start\" className={styles.content}>\n          <Calendar\n            mode=\"single\"\n            {...(value === undefined ? {} : { selected: value, defaultMonth: value })}\n            onSelect={(date) => {\n              onChange?.(date)\n              setOpen(false)\n            }}\n          />\n        </Popover.Content>\n      </Popover.Root>\n    )\n  },\n)\n"
+    }
+  ],
+  "stalk": {
+    "schemaVersion": "1.0",
+    "preset": {
+      "semanticTokens": {},
+      "recipes": ["datePicker"]
+    },
+    "packageDependencies": {
+      "preset": "@stalk-ui/preset"
+    },
+    "pandaCodegen": true,
+    "importAliases": {
+      "styledSystem": "styled-system"
+    }
+  }
+}

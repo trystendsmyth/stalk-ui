@@ -1,3 +1,4 @@
+import { fn } from 'storybook/test'
 import { css } from 'styled-system/css'
 import { HStack, VStack } from 'styled-system/jsx'
 import { switchRecipe } from 'styled-system/recipes'
@@ -16,25 +17,25 @@ const meta = {
   component: Switch,
   tags: ['autodocs', 'stable'],
   args: {
+    'aria-label': 'Email notifications',
+    defaultChecked: false,
     disabled: false,
     invalid: false,
+    onCheckedChange: fn(),
     size: 'md',
   },
   argTypes: {
-    size: {
-      control: 'select',
-      options: SIZES,
-      description: 'Visual size of the switch.',
-    },
-    disabled: {
-      control: 'boolean',
-      description: 'Disable the switch.',
-    },
-    invalid: {
-      control: 'boolean',
-      description: 'Mark the switch as invalid.',
-    },
+    'aria-label': { control: 'text' },
+    checked: { control: 'boolean', description: 'Checked state (controlled).' },
+    defaultChecked: { control: 'boolean', description: 'Initial checked state (uncontrolled).' },
+    disabled: { control: 'boolean', description: 'Disable the switch.' },
+    invalid: { control: 'boolean', description: 'Mark the switch as invalid.' },
+    size: { control: 'select', options: SIZES, description: 'Visual size of the switch.' },
     asChild: { table: { disable: true } },
+    className: { table: { disable: true } },
+    id: { table: { disable: true } },
+    name: { table: { disable: true } },
+    onCheckedChange: { table: { disable: true } },
   },
   parameters: {
     docs: {
@@ -50,11 +51,7 @@ export default meta
 
 type Story = StoryObj<typeof meta>
 
-export const Default: Story = {
-  args: {
-    'aria-label': 'Email notifications',
-  },
-}
+export const Default: Story = {}
 
 export const Sizes: Story = {
   parameters: { controls: { disable: true } },

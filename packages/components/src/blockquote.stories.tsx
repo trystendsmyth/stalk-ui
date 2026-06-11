@@ -19,6 +19,8 @@ const meta = {
     size: 'md',
   },
   argTypes: {
+    children: { control: 'text' },
+    className: { table: { disable: true } },
     size: { control: 'inline-radio', options: SIZES },
     tone: { control: 'select', options: [undefined, ...TONES] },
   },

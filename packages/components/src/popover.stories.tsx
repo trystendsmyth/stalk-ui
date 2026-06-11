@@ -1,3 +1,4 @@
+import { fn } from 'storybook/test'
 import { VStack } from 'styled-system/jsx'
 
 import { Button } from './button'
@@ -27,7 +28,18 @@ const meta = {
   title: 'Components/Overlay/Popover',
   component: Popover.Root,
   tags: ['autodocs', 'stable'],
-  parameters: { controls: { disable: true } },
+  args: {
+    defaultOpen: false,
+    modal: false,
+    onOpenChange: fn(),
+  },
+  argTypes: {
+    children: { table: { disable: true } },
+    defaultOpen: { control: 'boolean' },
+    modal: { control: 'boolean' },
+    onOpenChange: { table: { disable: true } },
+    open: { table: { disable: true } },
+  },
 } satisfies Meta<typeof Popover.Root>
 
 export default meta
@@ -35,8 +47,8 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
-  render: () => (
-    <Popover.Root>
+  render: (args) => (
+    <Popover.Root {...args}>
       <Popover.Trigger asChild>
         <Button variant="outline">Open popover</Button>
       </Popover.Trigger>
@@ -51,8 +63,9 @@ export const Default: Story = {
 }
 
 export const Open: Story = {
-  render: () => (
-    <Popover.Root defaultOpen>
+  args: { defaultOpen: true },
+  render: (args) => (
+    <Popover.Root {...args}>
       <Popover.Trigger asChild>
         <Button variant="outline">Open popover</Button>
       </Popover.Trigger>

@@ -1,10 +1,13 @@
 import { useState } from 'react'
+import { fn } from 'storybook/test'
 import { css } from 'styled-system/css'
 import { VStack } from 'styled-system/jsx'
 
 import { Menubar } from './menubar'
 
 import type { Meta, StoryObj } from '@storybook/react-vite'
+
+const onSelect = fn()
 
 const status = css({
   bgColor: 'bg.subtle',
@@ -19,7 +22,23 @@ const meta = {
   title: 'Components/Navigation/Menubar',
   component: Menubar.Root,
   tags: ['autodocs', 'stable'],
-  parameters: { controls: { disable: true } },
+  args: {
+    dir: 'ltr',
+    loop: false,
+    onValueChange: fn(),
+  },
+  argTypes: {
+    asChild: { table: { disable: true } },
+    children: { table: { disable: true } },
+    className: { table: { disable: true } },
+    defaultValue: { control: 'text' },
+    dir: { control: 'inline-radio', options: ['ltr', 'rtl'] },
+    id: { table: { disable: true } },
+    loop: { control: 'boolean' },
+    onValueChange: { table: { disable: true } },
+    style: { table: { disable: true } },
+    value: { table: { disable: true } },
+  },
 } satisfies Meta<typeof Menubar.Root>
 
 export default meta
@@ -27,34 +46,36 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
-  render: function Render() {
+  render: function Render(args) {
     const [showBookmarks, setShowBookmarks] = useState(true)
     const [layout, setLayout] = useState('comfortable')
     return (
       <VStack alignItems="flex-start" gap="12">
-        <Menubar>
+        <Menubar {...args}>
           <Menubar.Menu>
             <Menubar.Trigger>File</Menubar.Trigger>
             <Menubar.Content>
-              <Menubar.Item>
+              <Menubar.Item onSelect={onSelect}>
                 New tab <Menubar.Shortcut>⌘T</Menubar.Shortcut>
               </Menubar.Item>
-              <Menubar.Item>
+              <Menubar.Item onSelect={onSelect}>
                 New window <Menubar.Shortcut>⌘N</Menubar.Shortcut>
               </Menubar.Item>
               <Menubar.Separator />
-              <Menubar.Item>Share</Menubar.Item>
+              <Menubar.Item onSelect={onSelect}>Share</Menubar.Item>
               <Menubar.Separator />
-              <Menubar.Item disabled>Print…</Menubar.Item>
+              <Menubar.Item disabled onSelect={onSelect}>
+                Print…
+              </Menubar.Item>
             </Menubar.Content>
           </Menubar.Menu>
           <Menubar.Menu>
             <Menubar.Trigger>Edit</Menubar.Trigger>
             <Menubar.Content>
-              <Menubar.Item>
+              <Menubar.Item onSelect={onSelect}>
                 Undo <Menubar.Shortcut>⌘Z</Menubar.Shortcut>
               </Menubar.Item>
-              <Menubar.Item>
+              <Menubar.Item onSelect={onSelect}>
                 Redo <Menubar.Shortcut>⇧⌘Z</Menubar.Shortcut>
               </Menubar.Item>
               <Menubar.Separator />
@@ -62,8 +83,8 @@ export const Default: Story = {
                 <Menubar.SubTrigger>Find</Menubar.SubTrigger>
                 <Menubar.Portal>
                   <Menubar.SubContent>
-                    <Menubar.Item>Search the web…</Menubar.Item>
-                    <Menubar.Item>Find on page…</Menubar.Item>
+                    <Menubar.Item onSelect={onSelect}>Search the web…</Menubar.Item>
+                    <Menubar.Item onSelect={onSelect}>Find on page…</Menubar.Item>
                   </Menubar.SubContent>
                 </Menubar.Portal>
               </Menubar.Sub>

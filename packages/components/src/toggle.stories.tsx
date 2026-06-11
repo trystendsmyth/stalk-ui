@@ -1,5 +1,6 @@
 import { AlignCenter, AlignLeft, AlignRight, Bold, Italic, Underline } from 'lucide-react'
 import { useState } from 'react'
+import { fn } from 'storybook/test'
 import { HStack, VStack } from 'styled-system/jsx'
 import { toggle as toggleRecipe } from 'styled-system/recipes'
 
@@ -16,16 +17,26 @@ const meta = {
   tags: ['autodocs', 'stable'],
   args: {
     children: 'Bold',
+    defaultPressed: false,
+    disabled: false,
+    onPressedChange: fn(),
+    radius: 'md',
     size: 'md',
     tone: 'accent',
     variant: 'outline',
-    radius: 'md',
   },
   argTypes: {
-    size: { control: 'inline-radio', options: SIZES },
-    variant: { control: 'inline-radio', options: VARIANTS },
-    tone: { control: 'select', options: TONES },
+    children: { control: 'text' },
+    defaultPressed: { control: 'boolean' },
+    pressed: { control: 'boolean' },
+    disabled: { control: 'boolean' },
     radius: { control: 'select', options: RADII },
+    size: { control: 'inline-radio', options: SIZES },
+    tone: { control: 'select', options: [...TONES] },
+    variant: { control: 'inline-radio', options: VARIANTS },
+    asChild: { table: { disable: true } },
+    className: { table: { disable: true } },
+    onPressedChange: { table: { disable: true } },
   },
   parameters: {
     docs: {
@@ -76,6 +87,7 @@ export const WithIcon: Story = {
     children: <Bold aria-hidden="true" size={14} />,
     'aria-label': 'Bold',
   },
+  argTypes: { children: { table: { disable: true } } },
 }
 
 export const Group: Story = {

@@ -1,3 +1,5 @@
+import { fn } from 'storybook/test'
+
 import { AlertDialog } from './alert-dialog'
 import { Button } from './button'
 
@@ -7,7 +9,16 @@ const meta = {
   title: 'Components/Overlay/Alert Dialog',
   component: AlertDialog.Root,
   tags: ['autodocs', 'stable'],
-  parameters: { controls: { disable: true } },
+  args: {
+    defaultOpen: false,
+    onOpenChange: fn(),
+  },
+  argTypes: {
+    children: { table: { disable: true } },
+    defaultOpen: { control: 'boolean' },
+    onOpenChange: { table: { disable: true } },
+    open: { table: { disable: true } },
+  },
 } satisfies Meta<typeof AlertDialog.Root>
 
 export default meta
@@ -15,8 +26,8 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
-  render: () => (
-    <AlertDialog.Root>
+  render: (args) => (
+    <AlertDialog.Root {...args}>
       <AlertDialog.Trigger asChild>
         <Button tone="danger" variant="outline">
           Delete project
@@ -43,8 +54,9 @@ export const Default: Story = {
 }
 
 export const Open: Story = {
-  render: () => (
-    <AlertDialog.Root defaultOpen>
+  args: { defaultOpen: true },
+  render: (args) => (
+    <AlertDialog.Root {...args}>
       <AlertDialog.Content>
         <AlertDialog.Header>
           <AlertDialog.Title>Discard changes?</AlertDialog.Title>

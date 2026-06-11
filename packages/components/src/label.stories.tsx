@@ -15,14 +15,15 @@ const meta = {
   args: {
     children: 'Email',
     htmlFor: 'email',
-    size: 'md',
     required: false,
+    size: 'md',
   },
   argTypes: {
-    size: {
-      control: 'select',
-      options: SIZES,
-    },
+    children: { control: 'text' },
+    htmlFor: { control: 'text' },
+    required: { control: 'boolean' },
+    size: { control: 'select', options: SIZES },
+    className: { table: { disable: true } },
   },
 } satisfies Meta<typeof Label>
 

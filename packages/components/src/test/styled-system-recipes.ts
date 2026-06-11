@@ -253,6 +253,13 @@ export const alert = ({ size = 'md', variant = 'subtle' }: AlertRecipeOptions = 
   close: 'stalk-alert__close',
 })
 
+export const form = () => ({
+  item: 'stalk-form__item',
+  label: 'stalk-form__label',
+  description: 'stalk-form__description',
+  message: 'stalk-form__message',
+})
+
 export const alertDialog = () => ({
   overlay: 'stalk-alert-dialog__overlay',
   content: 'stalk-alert-dialog__content',
@@ -284,6 +291,11 @@ export const tabs = ({
   trigger: `stalk-tabs__trigger stalk-tabs__trigger--${size}`,
   content: 'stalk-tabs__content',
   indicator: `stalk-tabs__indicator stalk-tabs__indicator--${variant}`,
+})
+
+export const timePicker = () => ({
+  root: 'stalk-time-picker__root',
+  separator: 'stalk-time-picker__separator',
 })
 
 export const table = () => ({
@@ -367,6 +379,30 @@ collapsible.variantMap = { variant: ['inline', 'card'] as const }
 collapsible.variantKeys = collapsibleVariantKeys
 collapsible.splitVariantProps = makeSplitVariantProps(collapsibleVariantKeys)
 
+export const calendar = () => ({
+  root: 'stalk-calendar__root',
+  months: 'stalk-calendar__months',
+  month: 'stalk-calendar__month',
+  nav: 'stalk-calendar__nav',
+  navButton: 'stalk-calendar__nav-button',
+  monthCaption: 'stalk-calendar__month-caption',
+  captionLabel: 'stalk-calendar__caption-label',
+  monthGrid: 'stalk-calendar__month-grid',
+  weekdays: 'stalk-calendar__weekdays',
+  weekday: 'stalk-calendar__weekday',
+  week: 'stalk-calendar__week',
+  day: 'stalk-calendar__day',
+  dayButton: 'stalk-calendar__day-button',
+  today: 'stalk-calendar__today',
+  outside: 'stalk-calendar__outside',
+  disabled: 'stalk-calendar__disabled',
+  hidden: 'stalk-calendar__hidden',
+  selected: 'stalk-calendar__selected',
+  rangeStart: 'stalk-calendar__range-start',
+  rangeMiddle: 'stalk-calendar__range-middle',
+  rangeEnd: 'stalk-calendar__range-end',
+})
+
 interface CardRecipeOptions {
   variant?: 'outline' | 'elevated'
 }
@@ -387,6 +423,62 @@ card.variantMap = { variant: ['outline', 'elevated'] as const }
 card.variantKeys = cardVariantKeys
 card.splitVariantProps = makeSplitVariantProps(cardVariantKeys)
 
+interface DataListRecipeOptions {
+  orientation?: 'horizontal' | 'vertical'
+  size?: 'sm' | 'md' | 'lg'
+}
+
+const dataListVariantKeys = ['orientation', 'size'] as const
+
+export const dataList = ({
+  orientation = 'horizontal',
+  size = 'md',
+}: DataListRecipeOptions = {}) => ({
+  root: `stalk-data-list__root stalk-data-list--${orientation} stalk-data-list--${size}`,
+  item: 'stalk-data-list__item',
+  label: 'stalk-data-list__label',
+  value: 'stalk-data-list__value',
+})
+
+dataList.variantMap = {
+  orientation: ['horizontal', 'vertical'] as const,
+  size: ['sm', 'md', 'lg'] as const,
+}
+dataList.variantKeys = dataListVariantKeys
+dataList.splitVariantProps = makeSplitVariantProps(dataListVariantKeys)
+
+export const combobox = () => ({
+  trigger: 'stalk-combobox__trigger',
+  value: 'stalk-combobox__value',
+  icon: 'stalk-combobox__icon',
+  content: 'stalk-combobox__content',
+  itemIndicator: 'stalk-combobox__item-indicator',
+})
+
+export const command = () => ({
+  root: 'stalk-command__root',
+  inputWrapper: 'stalk-command__input-wrapper',
+  input: 'stalk-command__input',
+  list: 'stalk-command__list',
+  empty: 'stalk-command__empty',
+  group: 'stalk-command__group',
+  item: 'stalk-command__item',
+  separator: 'stalk-command__separator',
+  shortcut: 'stalk-command__shortcut',
+})
+
+export const dataTable = () => ({
+  root: 'stalk-data-table__root',
+  pagination: 'stalk-data-table__pagination',
+  pageInfo: 'stalk-data-table__page-info',
+  sortButton: 'stalk-data-table__sort-button',
+})
+
+export const datePicker = () => ({
+  root: 'stalk-date-picker__root',
+  content: 'stalk-date-picker__content',
+})
+
 interface ContextMenuRecipeOptions {
   inset?: boolean
 }
@@ -400,6 +492,20 @@ export const contextMenu = ({ inset = false }: ContextMenuRecipeOptions = {}) =>
   separator: 'stalk-context-menu__separator',
   shortcut: 'stalk-context-menu__shortcut',
 })
+
+interface OtpInputRecipeOptions {
+  size?: 'sm' | 'md' | 'lg'
+}
+
+export const otpInput = ({ size = 'md' }: OtpInputRecipeOptions = {}) => ({
+  root: `stalk-otp-input__root stalk-otp-input--${size}`,
+  group: 'stalk-otp-input__group',
+  slot: `stalk-otp-input__slot stalk-otp-input__slot--${size}`,
+  separator: 'stalk-otp-input__separator',
+  caret: 'stalk-otp-input__caret',
+})
+
+otpInput.variantMap = { size: ['sm', 'md', 'lg'] as const }
 
 interface MenubarRecipeOptions {
   inset?: boolean
@@ -482,6 +588,8 @@ interface LinkRecipeOptions {
 
 export const link = ({ underline = 'hover' }: LinkRecipeOptions = {}) =>
   `stalk-link stalk-link--underline-${underline}`
+
+export const qrCode = () => 'stalk-qr-code'
 
 interface BlockquoteRecipeOptions {
   size?: 'sm' | 'md' | 'lg'

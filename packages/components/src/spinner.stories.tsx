@@ -1,23 +1,24 @@
 import { HStack, VStack } from 'styled-system/jsx'
+import { spinner as spinnerRecipe } from 'styled-system/recipes'
 
 import { Spinner } from './spinner'
 
 import type { Meta, StoryObj } from '@storybook/react-vite'
 
-const SIZES = ['sm', 'md', 'lg', 'xl'] as const
+const { size: SIZES } = spinnerRecipe.variantMap
 
 const meta = {
   title: 'Components/Feedback/Spinner',
   component: Spinner,
   tags: ['autodocs', 'stable'],
   args: {
+    'aria-label': 'Loading',
     size: 'md',
   },
   argTypes: {
-    size: {
-      control: 'select',
-      options: SIZES,
-    },
+    'aria-label': { control: 'text' },
+    className: { table: { disable: true } },
+    size: { control: 'select', options: SIZES },
   },
 } satisfies Meta<typeof Spinner>
 

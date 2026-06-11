@@ -1,5 +1,6 @@
 import { Sparkles, Tag as TagIcon } from 'lucide-react'
 import { useState } from 'react'
+import { fn } from 'storybook/test'
 import { HStack, VStack } from 'styled-system/jsx'
 import { tag as tagRecipe } from 'styled-system/recipes'
 
@@ -16,19 +17,28 @@ const meta = {
   tags: ['autodocs', 'stable'],
   args: {
     children: 'Frontend',
+    closeAriaLabel: 'Remove',
     dot: false,
+    onClose: fn(),
     radius: 'full',
     size: 'md',
     tone: 'accent',
     variant: 'subtle',
   },
   argTypes: {
+    children: { control: 'text' },
+    className: { table: { disable: true } },
+    closeAriaLabel: { control: 'text' },
+    count: { control: 'text' },
+    dot: { control: 'boolean' },
+    leadingIcon: { table: { disable: true } },
+    onClick: { table: { disable: true } },
+    onClose: { table: { disable: true } },
     radius: { control: 'select', options: RADII },
     size: { control: 'inline-radio', options: SIZES },
     tone: { control: 'select', options: TONES },
+    trailingIcon: { table: { disable: true } },
     variant: { control: 'select', options: VARIANTS },
-    dot: { control: 'boolean' },
-    count: { control: 'text' },
   },
   parameters: {
     docs: {

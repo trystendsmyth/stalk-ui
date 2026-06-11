@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { fn } from 'storybook/test'
 import { css } from 'styled-system/css'
 import { VStack } from 'styled-system/jsx'
 
@@ -15,9 +16,25 @@ const meta = {
   args: {
     'aria-label': 'Volume',
     defaultValue: [40],
+    disabled: false,
     max: 100,
     min: 0,
+    onValueChange: fn(),
+    onValueCommit: fn(),
     step: 1,
+  },
+  argTypes: {
+    'aria-label': { control: 'text' },
+    disabled: { control: 'boolean' },
+    max: { control: { type: 'number' } },
+    min: { control: { type: 'number' } },
+    step: { control: { type: 'number', min: 1 } },
+    orientation: { control: 'inline-radio', options: ['horizontal', 'vertical'] },
+    className: { table: { disable: true } },
+    name: { table: { disable: true } },
+    value: { table: { disable: true } },
+    onValueChange: { table: { disable: true } },
+    onValueCommit: { table: { disable: true } },
   },
   decorators: [
     (Story) => (
@@ -43,11 +60,19 @@ export const Range: Story = {
 
 export const Controlled: Story = {
   parameters: { controls: { disable: true } },
-  render: function Render() {
+  render: function Render({ defaultValue: _defaultValue, value: _value, ...args }) {
     const [value, setValue] = useState([35])
     return (
       <VStack alignItems="stretch" gap="8">
-        <Slider aria-label="Brightness" value={value} onValueChange={setValue} />
+        <Slider
+          {...args}
+          aria-label="Brightness"
+          value={value}
+          onValueChange={(next) => {
+            setValue(next)
+            args.onValueChange?.(next)
+          }}
+        />
         <span>Value: {value.join(', ')}</span>
       </VStack>
     )

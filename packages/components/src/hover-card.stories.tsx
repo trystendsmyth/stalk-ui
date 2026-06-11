@@ -1,3 +1,4 @@
+import { fn } from 'storybook/test'
 import { HStack, VStack } from 'styled-system/jsx'
 
 import { Avatar } from './avatar'
@@ -11,7 +12,20 @@ const meta = {
   title: 'Components/Overlay/Hover Card',
   component: HoverCard.Root,
   tags: ['autodocs', 'stable'],
-  parameters: { controls: { disable: true } },
+  args: {
+    closeDelay: 300,
+    defaultOpen: false,
+    onOpenChange: fn(),
+    openDelay: 700,
+  },
+  argTypes: {
+    children: { table: { disable: true } },
+    closeDelay: { control: 'number' },
+    defaultOpen: { control: 'boolean' },
+    onOpenChange: { table: { disable: true } },
+    open: { table: { disable: true } },
+    openDelay: { control: 'number' },
+  },
 } satisfies Meta<typeof HoverCard.Root>
 
 export default meta
@@ -29,8 +43,8 @@ const Preview = () => (
 )
 
 export const Default: Story = {
-  render: () => (
-    <HoverCard.Root>
+  render: (args) => (
+    <HoverCard.Root {...args}>
       <HoverCard.Trigger asChild>
         <Link href="#">@ada</Link>
       </HoverCard.Trigger>
@@ -42,8 +56,9 @@ export const Default: Story = {
 }
 
 export const Open: Story = {
-  render: () => (
-    <HoverCard.Root defaultOpen>
+  args: { defaultOpen: true },
+  render: (args) => (
+    <HoverCard.Root {...args}>
       <HoverCard.Trigger asChild>
         <Link href="#">@ada</Link>
       </HoverCard.Trigger>

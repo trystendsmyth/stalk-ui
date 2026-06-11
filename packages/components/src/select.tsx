@@ -1,10 +1,12 @@
 import * as SelectPrimitive from '@radix-ui/react-select'
 import { Check, ChevronDown } from 'lucide-react'
 import { forwardRef } from 'react'
-import { cx } from 'styled-system/css'
+import { css, cx } from 'styled-system/css'
 import { select as selectRecipe } from 'styled-system/recipes'
 
-import type { ComponentPropsWithoutRef, ComponentRef } from 'react'
+import type { ComponentPropsWithoutRef, ComponentRef, ReactNode } from 'react'
+
+const itemEndClass = /* @__PURE__ */ css({ color: 'fg.muted', marginInlineStart: 'auto' })
 
 export type SelectSize = (typeof selectRecipe.variantMap.size)[number]
 
@@ -66,10 +68,15 @@ export const SelectContent = /* @__PURE__ */ forwardRef<
     </SelectPrimitive.Portal>
   )
 })
+export interface SelectItemProps extends ComponentPropsWithoutRef<typeof SelectPrimitive.Item> {
+  /** Trailing content aligned to the inline-end of the option (e.g. meta/shortcut). */
+  endContent?: ReactNode
+}
+
 export const SelectItem = /* @__PURE__ */ forwardRef<
   ComponentRef<typeof SelectPrimitive.Item>,
-  ComponentPropsWithoutRef<typeof SelectPrimitive.Item>
->(function SelectItem({ children, className, ...props }, ref) {
+  SelectItemProps
+>(function SelectItem({ children, className, endContent, ...props }, ref) {
   const styles = /* @__PURE__ */ selectRecipe()
 
   return (
@@ -78,6 +85,7 @@ export const SelectItem = /* @__PURE__ */ forwardRef<
         <Check aria-hidden="true" height={14} width={14} />
       </SelectPrimitive.ItemIndicator>
       <SelectPrimitive.ItemText>{children}</SelectPrimitive.ItemText>
+      {endContent === undefined ? null : <span className={itemEndClass}>{endContent}</span>}
     </SelectPrimitive.Item>
   )
 })

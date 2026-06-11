@@ -17,6 +17,8 @@ const meta = {
     variant: 'soft',
   },
   argTypes: {
+    children: { control: 'text' },
+    className: { table: { disable: true } },
     variant: { control: 'inline-radio', options: VARIANTS },
   },
 } satisfies Meta<typeof Code>

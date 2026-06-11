@@ -1,0 +1,28 @@
+{
+  "$schema": "https://stalk-ui.com/schema/v1/registry-item.json",
+  "name": "qr-code",
+  "type": "registry:ui",
+  "dependencies": ["@stalk-ui/preset", "react-qrcode-logo"],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "src/components/ui/qr-code.tsx",
+      "type": "registry:ui",
+      "content": "'use client'\n\nimport { forwardRef } from 'react'\nimport { QRCode } from 'react-qrcode-logo'\nimport { cx } from 'styled-system/css'\nimport { qrCode as qrCodeRecipe } from 'styled-system/recipes'\n\nimport type { ComponentProps } from 'react'\n\nexport type QrCodeProps = ComponentProps<typeof QRCode> & {\n  className?: string\n  /**\n   * Accessible name announced for the generated code. The underlying canvas is\n   * decorative, so the wrapper exposes the `img` role with this label.\n   */\n  'aria-label'?: string\n}\n\nexport const QrCode = /* @__PURE__ */ forwardRef<HTMLDivElement, QrCodeProps>(function QrCode(\n  { className, 'aria-label': ariaLabel = 'QR code', ...props },\n  ref,\n) {\n  return (\n    <div ref={ref} role=\"img\" aria-label={ariaLabel} className={cx(qrCodeRecipe(), className)}>\n      <QRCode {...props} />\n    </div>\n  )\n})\n"
+    }
+  ],
+  "stalk": {
+    "schemaVersion": "1.0",
+    "preset": {
+      "semanticTokens": {},
+      "recipes": ["qrCode"]
+    },
+    "packageDependencies": {
+      "preset": "@stalk-ui/preset"
+    },
+    "pandaCodegen": true,
+    "importAliases": {
+      "styledSystem": "styled-system"
+    }
+  }
+}

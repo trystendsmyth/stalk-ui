@@ -58,6 +58,14 @@
       "path": "/r/shadcn/button.json",
       "sha256": "ee7ad280b5a70f78070b05eb847a80befa0d40c24b223dee88f947fb0b82c77c"
     },
+    "calendar": {
+      "path": "/r/calendar.json",
+      "sha256": "7da3706a9345dafc195b10bd55751bea22ae4916b96fb96803619b7d27500637"
+    },
+    "shadcn/calendar": {
+      "path": "/r/shadcn/calendar.json",
+      "sha256": "febeb995c3d849262705c9deecb6943bc755d64c6b10c5a771660f862073239a"
+    },
     "card": {
       "path": "/r/card.json",
       "sha256": "fda31f3f67d4a6bf24842c0cb6fa970dac6782d7bc2619ed78348d26fe60ffbf"
@@ -90,6 +98,22 @@
       "path": "/r/shadcn/collapsible.json",
       "sha256": "7d5868a5f7c17f9d209ffdeba20230226918d73fda0e5a39d3620868d76f4e76"
     },
+    "combobox": {
+      "path": "/r/combobox.json",
+      "sha256": "b3c2cbc7c0a0e1b3eee169233a0df2ecd95bd22de61c22c433094413e17f230f"
+    },
+    "shadcn/combobox": {
+      "path": "/r/shadcn/combobox.json",
+      "sha256": "717484b7e8a3994cab11375a2faf20c9a77309fba3ab37398575c8c4b6c8c1a5"
+    },
+    "command": {
+      "path": "/r/command.json",
+      "sha256": "5db345b96cdc002ec14609941621cf5f512c879eaefc0daf1db33a6057db8372"
+    },
+    "shadcn/command": {
+      "path": "/r/shadcn/command.json",
+      "sha256": "fac118de67032d8e88961d894877f18b57fba440c18ea5156eaaeafbce1ea3e1"
+    },
     "context-menu": {
       "path": "/r/context-menu.json",
       "sha256": "ca05d9d9b4f1f8f9a3c65dc9ab94737766ed6f0a299eb1f8a4d7c6adb9b5fdf2"
@@ -97,6 +121,38 @@
     "shadcn/context-menu": {
       "path": "/r/shadcn/context-menu.json",
       "sha256": "85dcc5e1d677f9287e8a31c77539142e20c92d15ccd201a69d54fe5b900c8916"
+    },
+    "data-list": {
+      "path": "/r/data-list.json",
+      "sha256": "56943ce86d4c31f465ccca521e554deda04c76918e2c3396769339eaf8abb55d"
+    },
+    "shadcn/data-list": {
+      "path": "/r/shadcn/data-list.json",
+      "sha256": "7ae4cd5789125d719fbc2023b86e1863d99259f1814b69d2073b39c229e34a3e"
+    },
+    "data-table": {
+      "path": "/r/data-table.json",
+      "sha256": "c424bad80c0f82c3082a5f691d8e1f57e8a8d440a6dc190f595d02eb1f473a89"
+    },
+    "shadcn/data-table": {
+      "path": "/r/shadcn/data-table.json",
+      "sha256": "d1283a28d0db67723b8f7a3203df6d0e45ef69e9f845b5062d0621e5f74be42f"
+    },
+    "date-picker": {
+      "path": "/r/date-picker.json",
+      "sha256": "82bccd598398af1446fc17d44affbac9758b200870a3d9ce6618298154d5938b"
+    },
+    "shadcn/date-picker": {
+      "path": "/r/shadcn/date-picker.json",
+      "sha256": "adae9efdf6e848fd93eeaee9a34d06551f4352d867d8946f05b97c029d158213"
+    },
+    "datetime-input": {
+      "path": "/r/datetime-input.json",
+      "sha256": "8cc994e5ede8d0db37c3826b5a3c904db6183a17201b717f827595d7fae06bb8"
+    },
+    "shadcn/datetime-input": {
+      "path": "/r/shadcn/datetime-input.json",
+      "sha256": "ce2221cb7d4559f7265ad1bff290bcc07f9dee6e47d8706f27d44e0112bcbac1"
     },
     "dialog": {
       "path": "/r/dialog.json",
@@ -113,6 +169,14 @@
     "shadcn/dropdown-menu": {
       "path": "/r/shadcn/dropdown-menu.json",
       "sha256": "c3fe8b5746d7fe9e1d4f63a3ea92e5f740c98cb600022acdbf230849eb415b86"
+    },
+    "form": {
+      "path": "/r/form.json",
+      "sha256": "9e25bdc823a2e08b74e68d146028749baec2ecc102b4894ba162542065c17a9b"
+    },
+    "shadcn/form": {
+      "path": "/r/shadcn/form.json",
+      "sha256": "a94e835c40ca21ea5ecfef19cadce71f7f71b242f42a39cf693cc61be8573283"
     },
     "heading": {
       "path": "/r/heading.json",
@@ -178,6 +242,22 @@
       "path": "/r/shadcn/navigation-menu.json",
       "sha256": "37261b79ee771f4b3cbe2cc8d0e4ccbd4a5e750ef895c0280a5c98eb7611c62c"
     },
+    "otp-input": {
+      "path": "/r/otp-input.json",
+      "sha256": "22de379b250852b2405167a7adfa17effb26fcc9fe5539736b13b71656c41443"
+    },
+    "shadcn/otp-input": {
+      "path": "/r/shadcn/otp-input.json",
+      "sha256": "4c54f766f3ae175aca0e964c07452cdb90d05fabd5bbb6780112cd47e03868ad"
+    },
+    "phone-input": {
+      "path": "/r/phone-input.json",
+      "sha256": "6947da306ded3ab3fde6f1bebbd673a116570a28e2c38bea06e92accc2ce71e1"
+    },
+    "shadcn/phone-input": {
+      "path": "/r/shadcn/phone-input.json",
+      "sha256": "fd216b92217de0c6c33294397d655d81a570a48d21048ec67dfca59bf46a9d43"
+    },
     "popover": {
       "path": "/r/popover.json",
       "sha256": "8dba3e50230d23dbc69a793a703597e0f97bb328fbd0bd56c556233cad42c875"
@@ -194,6 +274,14 @@
       "path": "/r/shadcn/progress.json",
       "sha256": "e52927a4c8291cb92d18839684b8198c8e475b70ee72d8bbf37da78d91918d55"
     },
+    "qr-code": {
+      "path": "/r/qr-code.json",
+      "sha256": "4af99ab0a7df47fb70a547348331607a4162b44c8066224431f9bde5a99d866c"
+    },
+    "shadcn/qr-code": {
+      "path": "/r/shadcn/qr-code.json",
+      "sha256": "25b9500e55425361aaee39f96e67208603d02688ca9d2601b52dc9bdcf5f5bfe"
+    },
     "radio": {
       "path": "/r/radio.json",
       "sha256": "0eb79168c48d0b2bc8a1aab3d8c1a5e7a70ffec4372a122cf68dc2ba6968d8e9"
@@ -204,11 +292,11 @@
     },
     "select": {
       "path": "/r/select.json",
-      "sha256": "fce843ccc20318d82d05012fd1d23859d4d5663d52b52d10a67e4d08959e0557"
+      "sha256": "a6836088e455e10539100aa8bd5edc28146be15ca38d2785450462f34feb5f81"
     },
     "shadcn/select": {
       "path": "/r/shadcn/select.json",
-      "sha256": "ed6f2b26d894bae06fbce155daa7a71b4853f36a00614c23cd0357a233dce075"
+      "sha256": "132319f967d768d95a22d5d20053edfed7f64de3c73422e8d2f17ee0d841e528"
     },
     "sheet": {
       "path": "/r/sheet.json",
@@ -289,6 +377,14 @@
     "shadcn/textarea": {
       "path": "/r/shadcn/textarea.json",
       "sha256": "90279bef7b8ac72a07dec44a7c46f5edb0a2aa6650f99c399f18205e79c0fda9"
+    },
+    "time-picker": {
+      "path": "/r/time-picker.json",
+      "sha256": "c3e8bd537424e3fd32e7343cb244156bf7b6dcc1422cfa1bdd2b0b046a2c530b"
+    },
+    "shadcn/time-picker": {
+      "path": "/r/shadcn/time-picker.json",
+      "sha256": "4647e12dc786fd77b2fe864246c8d15056d2c47d2491bef72e756ba5bcf317bb"
     },
     "toast": {
       "path": "/r/toast.json",

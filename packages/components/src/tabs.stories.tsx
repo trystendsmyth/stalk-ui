@@ -1,4 +1,5 @@
 import { BarChart, Settings, User } from 'lucide-react'
+import { fn } from 'storybook/test'
 import { css } from 'styled-system/css'
 import { VStack } from 'styled-system/jsx'
 import { tabs as tabsRecipe } from 'styled-system/recipes'
@@ -25,16 +26,27 @@ const meta = {
   args: {
     defaultValue: 'overview',
     fitted: false,
+    onValueChange: fn(),
+    orientation: 'horizontal',
     size: 'md',
     tone: 'accent',
     variant: 'line',
   },
   argTypes: {
-    size: { control: 'inline-radio', options: SIZES },
-    tone: { control: 'select', options: TONES },
-    variant: { control: 'select', options: VARIANTS },
+    asChild: { table: { disable: true } },
+    children: { table: { disable: true } },
+    className: { table: { disable: true } },
+    defaultValue: { control: 'text' },
+    dir: { table: { disable: true } },
     fitted: { control: 'boolean' },
+    id: { table: { disable: true } },
+    onValueChange: { table: { disable: true } },
     orientation: { control: 'inline-radio', options: ['horizontal', 'vertical'] },
+    size: { control: 'inline-radio', options: SIZES },
+    style: { table: { disable: true } },
+    tone: { control: 'select', options: TONES },
+    value: { table: { disable: true } },
+    variant: { control: 'select', options: VARIANTS },
   },
   parameters: {
     docs: {

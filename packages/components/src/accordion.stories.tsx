@@ -1,8 +1,12 @@
+import { fn } from 'storybook/test'
 import { css } from 'styled-system/css'
+import { accordion as accordionRecipe } from 'styled-system/recipes'
 
 import { Accordion } from './accordion'
 
 import type { Meta, StoryObj } from '@storybook/react-vite'
+
+const { variant: VARIANTS } = accordionRecipe.variantMap
 
 const frame = css({ w: '480px' })
 
@@ -10,8 +14,20 @@ const meta = {
   title: 'Components/Disclosure/Accordion',
   component: Accordion.Root,
   tags: ['autodocs', 'stable'],
-  args: { type: 'single' },
-  parameters: { controls: { disable: true } },
+  args: {
+    collapsible: true,
+    onValueChange: fn(),
+    type: 'single',
+    variant: 'inline',
+  },
+  argTypes: {
+    children: { table: { disable: true } },
+    collapsible: { control: 'boolean' },
+    onValueChange: { table: { disable: true } },
+    type: { control: 'inline-radio', options: ['single', 'multiple'] },
+    value: { table: { disable: true } },
+    variant: { control: 'select', options: VARIANTS },
+  },
 } satisfies Meta<typeof Accordion.Root>
 
 export default meta
@@ -78,10 +94,11 @@ export const Card: Story = {
     type: 'single',
     collapsible: true,
     defaultValue: 'item-1',
+    variant: 'card',
   },
   render: (args) => (
     <div className={frame}>
-      <Accordion {...args} variant="card">
+      <Accordion {...args}>
         <Accordion.Item value="item-1">
           <Accordion.Trigger>Is it accessible?</Accordion.Trigger>
           <Accordion.Content>Yes. It adheres to the WAI-ARIA design pattern.</Accordion.Content>

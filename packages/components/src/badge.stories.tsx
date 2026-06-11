@@ -20,6 +20,8 @@ const meta = {
     variant: 'subtle',
   },
   argTypes: {
+    children: { control: 'text' },
+    className: { table: { disable: true } },
     radius: {
       control: 'select',
       options: RADII,
