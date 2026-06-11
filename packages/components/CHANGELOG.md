@@ -4,6 +4,28 @@
 
 ### Minor Changes
 
+- [#66](https://github.com/trystendsmyth/stalk-ui/pull/66) [`6933dfc`](https://github.com/trystendsmyth/stalk-ui/commit/6933dfcbeacc18fa7fdfac5179ede5498c7500a4) Thanks [@trystendsmyth](https://github.com/trystendsmyth)! - Add twelve new components.
+  - **Calendar / Date Picker** — month-grid date selection (react-day-picker) and a typed field paired with a calendar popover.
+  - **Datetime Input** — a segmented, locale-aware date / time / datetime field with always-visible separators, auto-advance, range clamping, and full keyboard navigation.
+  - **Time Picker** — hour / minute / period selects.
+  - **Combobox / Command** — a searchable popover select and a cmdk-backed command palette.
+  - **Form** — react-hook-form field scaffolding (item, label, control, description, message) with accessible id/aria wiring.
+  - **Data List / Data Table** — aligned label/value pairs (labels accept a semantic tone) and a sortable, paginated TanStack Table built on the existing `Table`.
+  - **OTP Input / Phone Input / QR Code** — one-time-passcode entry, an international phone field with a country selector, and QR rendering.
+
+  Also: `SelectItem` gains an `endContent` prop for trailing, inline-end option metadata, and the Select dropdown viewport now scrolls for long option lists.
+
+### Patch Changes
+
+- Updated dependencies [[`6933dfc`](https://github.com/trystendsmyth/stalk-ui/commit/6933dfcbeacc18fa7fdfac5179ede5498c7500a4)]:
+  - @stalk-ui/preset@0.5.0
+  - @stalk-ui/i18n@0.5.0
+  - @stalk-ui/utils@0.5.0
+
+## 1.0.0
+
+### Minor Changes
+
 - [#50](https://github.com/trystendsmyth/stalk-ui/pull/50) [`a910520`](https://github.com/trystendsmyth/stalk-ui/commit/a9105202f22985206944a751dadabcefb7aa1892) Thanks [@trystendsmyth](https://github.com/trystendsmyth)! - Add 13 new components and button tones, introduce a registry-distributed createStyleContext helper, and migrate to pnpm 11.
 
 ### Patch Changes
