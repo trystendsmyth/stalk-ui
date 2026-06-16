@@ -2079,6 +2079,83 @@
       text-transform: uppercase;
 }
 
+    .stalk-breadcrumb__root {
+      color: var(--colors-fg-muted);
+}
+
+    .stalk-breadcrumb__list {
+      margin: var(--spacing-0);
+      padding: var(--spacing-0);
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      word-break: break-word;
+      font-size: var(--font-sizes-sm);
+      line-height: var(--line-heights-sm);
+      letter-spacing: var(--letter-spacings-normal);
+}
+
+    .stalk-breadcrumb__list,.stalk-breadcrumb__item {
+      gap: var(--spacing-6);
+      align-items: center;
+}
+
+    .stalk-breadcrumb__item {
+      display: inline-flex;
+}
+
+    .stalk-breadcrumb__link {
+      border-radius: var(--radii-sm);
+      outline: 2px solid transparent;
+      outline-offset: 2px;
+      color: var(--colors-fg-muted);
+      --transition-prop: color;
+      transition-property: color;
+      --transition-duration: var(--durations-fast);
+      transition-duration: var(--durations-fast);
+}
+
+    .stalk-breadcrumb__link:is(:focus-visible, [data-focus-visible]) {
+      --ring-offset-shadow: var(--ring-inset,) 0 0 0 var(--ring-offset-width, 0rem) var(--ring-offset-color);
+      --ring-shadow: var(--ring-inset,) 0 0 0 calc(0.1875rem + var(--ring-offset-width, 0rem)) var(--ring-color);
+      box-shadow: var(--ring-offset-shadow),var(--ring-shadow),var(--base-shadow,0 0 #0000);
+      --ring-color: var(--colors-accent-subtle);
+      --ring-offset-width: 0.125rem;
+      --ring-offset-color: var(--colors-bg-default);
+}
+
+    .stalk-breadcrumb__link:is(:hover, [data-hover]),.stalk-breadcrumb__page {
+      color: var(--colors-fg-default);
+}
+
+    .stalk-breadcrumb__page {
+      font-weight: var(--font-weights-medium);
+}
+
+    .stalk-breadcrumb__separator {
+      display: inline-flex;
+      align-items: center;
+      color: var(--colors-fg-subtle);
+}
+
+    .stalk-breadcrumb__separator > svg {
+      height: var(--sizes-14);
+      width: var(--sizes-14);
+}
+
+    .stalk-breadcrumb__ellipsis {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      height: var(--sizes-20);
+      width: var(--sizes-20);
+}
+
+    .stalk-breadcrumb__ellipsis > svg {
+      height: 16px;
+      width: 16px;
+}
+
     .stalk-calendar__root {
       padding: var(--spacing-12);
       color: var(--colors-fg-default);
@@ -3291,6 +3368,37 @@
       width: 1px;
 }
 
+    .stalk-pagination__root {
+      margin-inline: auto;
+      display: flex;
+      justify-content: center;
+      width: var(--sizes-full);
+}
+
+    .stalk-pagination__content {
+      margin: var(--spacing-0);
+      padding: var(--spacing-0);
+      gap: var(--spacing-4);
+      list-style: none;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+}
+
+    .stalk-pagination__ellipsis {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--colors-fg-muted);
+      height: var(--sizes-36);
+      width: var(--sizes-36);
+}
+
+    .stalk-pagination__ellipsis > svg {
+      height: 16px;
+      width: 16px;
+}
+
     .stalk-popover__content {
       border: var(--borders-default);
       padding: var(--spacing-base);
@@ -4320,6 +4428,212 @@
     .stalk-toggle__item:is(:hover, [data-hover]) {
       background-color: var(--colors-bg-subtle);
       color: var(--colors-fg-default);
+}
+
+    .stalk-toolbar__root {
+      border: var(--borders-default);
+      padding: var(--spacing-4);
+      gap: var(--spacing-4);
+      border-radius: var(--radii-md);
+      display: flex;
+      align-items: center;
+      background-color: var(--colors-bg-default);
+      width: var(--sizes-full);
+      max-width: var(--sizes-full);
+}
+
+    .stalk-toolbar__root[data-orientation="vertical"] {
+      flex-direction: column;
+      align-items: stretch;
+      width: fit-content;
+}
+
+    .stalk-toolbar__button {
+      border: none;
+      gap: var(--spacing-6);
+      outline: 2px solid transparent;
+      outline-offset: 2px;
+      padding-inline: var(--spacing-8);
+      border-radius: var(--radii-sm);
+      align-items: center;
+      appearance: none;
+      -webkit-appearance: none;
+      background-color: transparent;
+      color: var(--colors-fg-default);
+      cursor: default;
+      display: inline-flex;
+      flex-shrink: 0;
+      justify-content: center;
+      font-size: var(--font-sizes-sm);
+      line-height: var(--line-heights-sm);
+      letter-spacing: var(--letter-spacings-normal);
+      -webkit-user-select: none;
+      user-select: none;
+      --transition-prop: background-color, color;
+      transition-property: background-color, color;
+      --transition-duration: var(--durations-fast);
+      transition-duration: var(--durations-fast);
+      min-height: var(--sizes-32);
+}
+
+    .stalk-toolbar__button > svg {
+      flex-shrink: 0;
+      pointer-events: none;
+      height: 16px;
+      width: 16px;
+}
+
+    .stalk-toolbar__button:is(:disabled, [disabled], [data-disabled], [aria-disabled=true]) {
+      opacity: 0.5;
+      pointer-events: none;
+}
+
+    .stalk-toolbar__button:is(:focus-visible, [data-focus-visible]) {
+      --ring-offset-shadow: var(--ring-inset,) 0 0 0 var(--ring-offset-width, 0rem) var(--ring-offset-color);
+      --ring-shadow: var(--ring-inset,) 0 0 0 calc(0.1875rem + var(--ring-offset-width, 0rem)) var(--ring-color);
+      box-shadow: var(--ring-offset-shadow),var(--ring-shadow),var(--base-shadow,0 0 #0000);
+      --ring-color: var(--colors-accent-subtle);
+      --ring-offset-width: 0.0625rem;
+      --ring-offset-color: var(--colors-bg-default);
+}
+
+    .stalk-toolbar__button:is(:hover, [data-hover]) {
+      background-color: var(--colors-bg-subtle);
+}
+
+    .stalk-toolbar__link {
+      border: none;
+      gap: var(--spacing-6);
+      outline: 2px solid transparent;
+      outline-offset: 2px;
+      padding-inline: var(--spacing-8);
+      border-radius: var(--radii-sm);
+      text-decoration: none;
+      align-items: center;
+      appearance: none;
+      -webkit-appearance: none;
+      background-color: transparent;
+      color: var(--colors-fg-default);
+      cursor: default;
+      display: inline-flex;
+      flex-shrink: 0;
+      justify-content: center;
+      font-size: var(--font-sizes-sm);
+      line-height: var(--line-heights-sm);
+      letter-spacing: var(--letter-spacings-normal);
+      -webkit-user-select: none;
+      user-select: none;
+      --transition-prop: background-color, color;
+      transition-property: background-color, color;
+      --transition-duration: var(--durations-fast);
+      transition-duration: var(--durations-fast);
+      min-height: var(--sizes-32);
+}
+
+    .stalk-toolbar__link > svg {
+      flex-shrink: 0;
+      pointer-events: none;
+      height: 16px;
+      width: 16px;
+}
+
+    .stalk-toolbar__link:is(:disabled, [disabled], [data-disabled], [aria-disabled=true]) {
+      opacity: 0.5;
+      pointer-events: none;
+}
+
+    .stalk-toolbar__link:is(:focus-visible, [data-focus-visible]) {
+      --ring-offset-shadow: var(--ring-inset,) 0 0 0 var(--ring-offset-width, 0rem) var(--ring-offset-color);
+      --ring-shadow: var(--ring-inset,) 0 0 0 calc(0.1875rem + var(--ring-offset-width, 0rem)) var(--ring-color);
+      box-shadow: var(--ring-offset-shadow),var(--ring-shadow),var(--base-shadow,0 0 #0000);
+      --ring-color: var(--colors-accent-subtle);
+      --ring-offset-width: 0.0625rem;
+      --ring-offset-color: var(--colors-bg-default);
+}
+
+    .stalk-toolbar__link:is(:hover, [data-hover]) {
+      text-decoration: none;
+      background-color: var(--colors-bg-subtle);
+}
+
+    .stalk-toolbar__separator {
+      flex-shrink: 0;
+      background-color: var(--colors-border-default);
+}
+
+    .stalk-toolbar__separator[data-orientation="vertical"] {
+      margin-inline: var(--spacing-4);
+      align-self: stretch;
+      width: var(--sizes-px);
+}
+
+    .stalk-toolbar__separator[data-orientation="horizontal"] {
+      margin-block: var(--spacing-4);
+      height: var(--sizes-px);
+}
+
+    .stalk-toolbar__toggleGroup {
+      gap: var(--spacing-2);
+      display: inline-flex;
+      align-items: center;
+}
+
+    .stalk-toolbar__toggleItem {
+      border: none;
+      gap: var(--spacing-6);
+      outline: 2px solid transparent;
+      outline-offset: 2px;
+      padding-inline: var(--spacing-8);
+      border-radius: var(--radii-sm);
+      align-items: center;
+      appearance: none;
+      -webkit-appearance: none;
+      background-color: transparent;
+      color: var(--colors-fg-default);
+      cursor: default;
+      display: inline-flex;
+      flex-shrink: 0;
+      justify-content: center;
+      font-size: var(--font-sizes-sm);
+      line-height: var(--line-heights-sm);
+      letter-spacing: var(--letter-spacings-normal);
+      -webkit-user-select: none;
+      user-select: none;
+      --transition-prop: background-color, color;
+      transition-property: background-color, color;
+      --transition-duration: var(--durations-fast);
+      transition-duration: var(--durations-fast);
+      min-height: var(--sizes-32);
+}
+
+    .stalk-toolbar__toggleItem > svg {
+      flex-shrink: 0;
+      pointer-events: none;
+      height: 16px;
+      width: 16px;
+}
+
+    .stalk-toolbar__toggleItem:is(:disabled, [disabled], [data-disabled], [aria-disabled=true]) {
+      opacity: 0.5;
+      pointer-events: none;
+}
+
+    .stalk-toolbar__toggleItem[data-state="on"] {
+      background-color: var(--colors-accent-subtle);
+      color: var(--colors-accent-fg);
+}
+
+    .stalk-toolbar__toggleItem:is(:focus-visible, [data-focus-visible]) {
+      --ring-offset-shadow: var(--ring-inset,) 0 0 0 var(--ring-offset-width, 0rem) var(--ring-offset-color);
+      --ring-shadow: var(--ring-inset,) 0 0 0 calc(0.1875rem + var(--ring-offset-width, 0rem)) var(--ring-color);
+      box-shadow: var(--ring-offset-shadow),var(--ring-shadow),var(--base-shadow,0 0 #0000);
+      --ring-color: var(--colors-accent-subtle);
+      --ring-offset-width: 0.0625rem;
+      --ring-offset-color: var(--colors-bg-default);
+}
+
+    .stalk-toolbar__toggleItem:is(:hover, [data-hover]) {
+      background-color: var(--colors-bg-subtle);
 }
 
     .stalk-tooltip__content {

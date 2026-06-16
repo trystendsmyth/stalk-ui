@@ -589,6 +589,32 @@ interface LinkRecipeOptions {
 export const link = ({ underline = 'hover' }: LinkRecipeOptions = {}) =>
   `stalk-link stalk-link--underline-${underline}`
 
+export const breadcrumb = () => ({
+  root: 'stalk-breadcrumb__root',
+  list: 'stalk-breadcrumb__list',
+  item: 'stalk-breadcrumb__item',
+  link: 'stalk-breadcrumb__link',
+  page: 'stalk-breadcrumb__page',
+  separator: 'stalk-breadcrumb__separator',
+  ellipsis: 'stalk-breadcrumb__ellipsis',
+})
+
+export const pagination = () => ({
+  root: 'stalk-pagination__root',
+  content: 'stalk-pagination__content',
+  item: 'stalk-pagination__item',
+  ellipsis: 'stalk-pagination__ellipsis',
+})
+
+export const toolbar = () => ({
+  root: 'stalk-toolbar__root',
+  button: 'stalk-toolbar__button',
+  link: 'stalk-toolbar__link',
+  separator: 'stalk-toolbar__separator',
+  toggleGroup: 'stalk-toolbar__toggle-group',
+  toggleItem: 'stalk-toolbar__toggle-item',
+})
+
 export const scrollArea = () => ({
   root: 'stalk-scroll-area__root',
   viewport: 'stalk-scroll-area__viewport',

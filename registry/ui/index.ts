@@ -5,6 +5,7 @@ import { aspectRatio } from './aspect-ratio'
 import { avatar } from './avatar'
 import { badge } from './badge'
 import { blockquote } from './blockquote'
+import { breadcrumb } from './breadcrumb'
 import { button } from './button'
 import { calendar } from './calendar'
 import { card } from './card'
@@ -30,6 +31,7 @@ import { link } from './link'
 import { menubar } from './menubar'
 import { navigationMenu } from './navigation-menu'
 import { otpInput } from './otp-input'
+import { pagination } from './pagination'
 import { phoneInput } from './phone-input'
 import { popover } from './popover'
 import { progress } from './progress'
@@ -51,6 +53,7 @@ import { textarea } from './textarea'
 import { timePicker } from './time-picker'
 import { toast } from './toast'
 import { toggle } from './toggle'
+import { toolbar } from './toolbar'
 import { tooltip } from './tooltip'
 
 import type { RegistrySource } from './_template'
@@ -66,6 +69,7 @@ export const registryItems = [
   avatar,
   badge,
   blockquote,
+  breadcrumb,
   button,
   calendar,
   card,
@@ -91,6 +95,7 @@ export const registryItems = [
   menubar,
   navigationMenu,
   otpInput,
+  pagination,
   phoneInput,
   popover,
   progress,
@@ -112,5 +117,6 @@ export const registryItems = [
   timePicker,
   toast,
   toggle,
+  toolbar,
   tooltip,
 ] satisfies RegistrySource[]

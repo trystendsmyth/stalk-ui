@@ -58,6 +58,14 @@
       "path": "/r/shadcn/blockquote.json",
       "sha256": "ae328d075c5c91a65579e72f52a18326a9d3aa12f77627ff1fb2c7b4dac47cd4"
     },
+    "breadcrumb": {
+      "path": "/r/breadcrumb.json",
+      "sha256": "915467bff77f34d95b7b13aad05b20c561e24e753a66e79c0751000f4141a1f5"
+    },
+    "shadcn/breadcrumb": {
+      "path": "/r/shadcn/breadcrumb.json",
+      "sha256": "2be7df8f18b569d718db5930e3166f1fa6701a50ea3457c16859eee93b6edbb2"
+    },
     "button": {
       "path": "/r/button.json",
       "sha256": "24c2fe9e8561072939c6dd999c8b59258714d21897d150da6b96379478378102"
@@ -258,6 +266,14 @@
       "path": "/r/shadcn/otp-input.json",
       "sha256": "4c54f766f3ae175aca0e964c07452cdb90d05fabd5bbb6780112cd47e03868ad"
     },
+    "pagination": {
+      "path": "/r/pagination.json",
+      "sha256": "671ac553cf8113508a7e9742453e22d83973b1d5df6be0ee22aa84faa22e7dfe"
+    },
+    "shadcn/pagination": {
+      "path": "/r/shadcn/pagination.json",
+      "sha256": "45cb5a0fe77f054456b979e999aa14c1582fca21a5f54f4c61939b4b27fb37b2"
+    },
     "phone-input": {
       "path": "/r/phone-input.json",
       "sha256": "6947da306ded3ab3fde6f1bebbd673a116570a28e2c38bea06e92accc2ce71e1"
@@ -300,11 +316,11 @@
     },
     "scroll-area": {
       "path": "/r/scroll-area.json",
-      "sha256": "14e25b0359a3b4825ebe026bec48fcbc678ceb2f03ba8453149c07d0fd71d157"
+      "sha256": "6b58be67d6fcaabaf0ae51ec120b5a4b5b912d9c31390e7ff68b33c806eb08de"
     },
     "shadcn/scroll-area": {
       "path": "/r/shadcn/scroll-area.json",
-      "sha256": "87a302eba288cb2b40b074aca3d1ef3d7104f64082c4f45b30ba1315c01fc259"
+      "sha256": "a4fc6e2f4149df270568a71780ee15cf1e1e6ebd993de1410af1d52ac27c253f"
     },
     "select": {
       "path": "/r/select.json",
@@ -316,11 +332,11 @@
     },
     "separator": {
       "path": "/r/separator.json",
-      "sha256": "5560221be0291bd70d647e8272236f9ba461b9c06275f277bb3d16d8e1d8c06a"
+      "sha256": "8e76b1634e290a30255642c6311acb96efdfcbfc3a31e3b4639d0699feb2c806"
     },
     "shadcn/separator": {
       "path": "/r/shadcn/separator.json",
-      "sha256": "5a2380a0a2517027fe6c23e4cde3644038a1b4bc081a13862dbb262d219b0dd7"
+      "sha256": "52fe8b7e83732ac8199ea42649933a9105b92b695bcfafb3e2fe3790a85119c7"
     },
     "sheet": {
       "path": "/r/sheet.json",
@@ -425,6 +441,14 @@
     "shadcn/toggle": {
       "path": "/r/shadcn/toggle.json",
       "sha256": "4d7295d38fb87eb76adda1c2e8c4a5f06c3f4394282355eae752df9e6bde3512"
+    },
+    "toolbar": {
+      "path": "/r/toolbar.json",
+      "sha256": "b1da087eafaae322cf0f952d868a830c20db775bfb30f29050f5cf44707019f9"
+    },
+    "shadcn/toolbar": {
+      "path": "/r/shadcn/toolbar.json",
+      "sha256": "08af15b80b911ac341cf551d29e2500051cec66f4847aa7ee58fee76ab71d965"
     },
     "tooltip": {
       "path": "/r/tooltip.json",

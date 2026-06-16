@@ -49,6 +49,7 @@ const componentDescriptions = {
   avatar: 'Represents a user or entity with an image, initials, or fallback content.',
   badge: 'Displays compact status or metadata.',
   blockquote: 'Sets apart a quotation as a distinct block.',
+  breadcrumb: 'Shows the path to the current page as a navigable trail.',
   button: 'Triggers an action or submits a form.',
   calendar: 'Displays a month grid for selecting a single date or a range.',
   card: 'Groups related content and actions on a single bordered surface.',
@@ -76,6 +77,7 @@ const componentDescriptions = {
   'otp-input': 'Collects a one-time passcode across discrete, auto-advancing slots.',
   'phone-input':
     'Collects an international phone number with a country selector and live formatting.',
+  pagination: 'Navigates between pages of a large, split data set.',
   popover: 'Displays interactive floating content from a trigger.',
   progress: 'Shows the completion progress of a task.',
   'qr-code': 'Renders a scannable QR code, optionally with a center logo.',
@@ -96,6 +98,7 @@ const componentDescriptions = {
   textarea: 'Collects multi-line text from a user.',
   toast: 'Surfaces transient notifications via a Sonner-backed toaster region.',
   toggle: 'A two-state button for inline preferences and toolbar controls.',
+  toolbar: 'Groups related controls in a single keyboard-navigable bar.',
   tooltip: 'Provides supplemental context when a control is hovered or focused.',
 } as const satisfies Record<ComponentName, string>
 

@@ -7,6 +7,7 @@ import { AspectRatio } from '@stalk-ui/components/aspect-ratio'
 import { Avatar } from '@stalk-ui/components/avatar'
 import { Badge } from '@stalk-ui/components/badge'
 import { Blockquote } from '@stalk-ui/components/blockquote'
+import { Breadcrumb } from '@stalk-ui/components/breadcrumb'
 import { Button } from '@stalk-ui/components/button'
 import { Calendar } from '@stalk-ui/components/calendar'
 import { Card } from '@stalk-ui/components/card'
@@ -40,6 +41,7 @@ import { Link } from '@stalk-ui/components/link'
 import { Menubar } from '@stalk-ui/components/menubar'
 import { NavigationMenu } from '@stalk-ui/components/navigation-menu'
 import { OtpInput } from '@stalk-ui/components/otp-input'
+import { Pagination } from '@stalk-ui/components/pagination'
 import { PhoneInput } from '@stalk-ui/components/phone-input'
 import { Popover } from '@stalk-ui/components/popover'
 import { Progress } from '@stalk-ui/components/progress'
@@ -61,8 +63,9 @@ import { Textarea } from '@stalk-ui/components/textarea'
 import { TimePicker } from '@stalk-ui/components/time-picker'
 import { Toaster, toast } from '@stalk-ui/components/toast'
 import { Toggle, ToggleGroup, ToggleGroupItem } from '@stalk-ui/components/toggle'
+import { Toolbar } from '@stalk-ui/components/toolbar'
 import { Tooltip } from '@stalk-ui/components/tooltip'
-import { AlertCircle, AlertTriangle, Info, X } from 'lucide-react'
+import { AlertCircle, AlertTriangle, Bold, Info, Italic, X } from 'lucide-react'
 import { themes } from 'prism-react-renderer'
 import { useId, useState } from 'react'
 import { useForm } from 'react-hook-form'
@@ -179,6 +182,8 @@ const liveScope = {
   Avatar,
   Badge,
   Blockquote,
+  Bold,
+  Breadcrumb,
   Button,
   Calendar,
   Card,
@@ -207,6 +212,7 @@ const liveScope = {
   HoverCard,
   Info,
   Input,
+  Italic,
   Kbd,
   Label,
   Link,
@@ -214,6 +220,7 @@ const liveScope = {
   InvoiceTable,
   NavigationMenu,
   OtpInput,
+  Pagination,
   PhoneInput,
   Popover,
   ProfileForm,
@@ -241,6 +248,7 @@ const liveScope = {
   Toggle,
   ToggleGroup,
   ToggleGroupItem,
+  Toolbar,
   Tooltip,
   X,
   toast,

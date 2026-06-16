@@ -152,7 +152,17 @@ export const componentGroups = [
   },
   {
     title: 'Navigation',
-    slugs: ['command', 'context-menu', 'dropdown-menu', 'menubar', 'navigation-menu', 'tabs'],
+    slugs: [
+      'breadcrumb',
+      'command',
+      'context-menu',
+      'dropdown-menu',
+      'menubar',
+      'navigation-menu',
+      'pagination',
+      'tabs',
+      'toolbar',
+    ],
   },
   {
     title: 'Disclosure',

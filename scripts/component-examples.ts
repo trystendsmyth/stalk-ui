@@ -30,6 +30,10 @@ export const componentExamples = {
     '<Blockquote tone="accent">A tinted pull quote draws the eye.</Blockquote>',
     '<Blockquote size="sm">Compact attribution or aside.</Blockquote>',
   ],
+  breadcrumb: [
+    '<Breadcrumb>\n  <Breadcrumb.List>\n    <Breadcrumb.Item>\n      <Breadcrumb.Link href="#">Home</Breadcrumb.Link>\n    </Breadcrumb.Item>\n    <Breadcrumb.Separator />\n    <Breadcrumb.Item>\n      <Breadcrumb.Link href="#">Components</Breadcrumb.Link>\n    </Breadcrumb.Item>\n    <Breadcrumb.Separator />\n    <Breadcrumb.Item>\n      <Breadcrumb.Page>Breadcrumb</Breadcrumb.Page>\n    </Breadcrumb.Item>\n  </Breadcrumb.List>\n</Breadcrumb>',
+    '<Breadcrumb>\n  <Breadcrumb.List>\n    <Breadcrumb.Item>\n      <Breadcrumb.Link href="#">Home</Breadcrumb.Link>\n    </Breadcrumb.Item>\n    <Breadcrumb.Separator />\n    <Breadcrumb.Item>\n      <Breadcrumb.Ellipsis />\n    </Breadcrumb.Item>\n    <Breadcrumb.Separator />\n    <Breadcrumb.Item>\n      <Breadcrumb.Page>Settings</Breadcrumb.Page>\n    </Breadcrumb.Item>\n  </Breadcrumb.List>\n</Breadcrumb>',
+  ],
   button: [
     '<Button>Save changes</Button>',
     '<Button variant="outline">Cancel</Button>',
@@ -123,6 +127,9 @@ export const componentExamples = {
   'otp-input': [
     '<OtpInput maxLength={6} aria-label="One-time passcode">\n  <OtpInput.Group>\n    <OtpInput.Slot index={0} />\n    <OtpInput.Slot index={1} />\n    <OtpInput.Slot index={2} />\n  </OtpInput.Group>\n  <OtpInput.Separator />\n  <OtpInput.Group>\n    <OtpInput.Slot index={3} />\n    <OtpInput.Slot index={4} />\n    <OtpInput.Slot index={5} />\n  </OtpInput.Group>\n</OtpInput>',
   ],
+  pagination: [
+    '<Pagination>\n  <Pagination.Content>\n    <Pagination.Item>\n      <Pagination.Previous href="#" />\n    </Pagination.Item>\n    <Pagination.Item>\n      <Pagination.Link href="#">1</Pagination.Link>\n    </Pagination.Item>\n    <Pagination.Item>\n      <Pagination.Link href="#" isActive>2</Pagination.Link>\n    </Pagination.Item>\n    <Pagination.Item>\n      <Pagination.Link href="#">3</Pagination.Link>\n    </Pagination.Item>\n    <Pagination.Item>\n      <Pagination.Ellipsis />\n    </Pagination.Item>\n    <Pagination.Item>\n      <Pagination.Next href="#" />\n    </Pagination.Item>\n  </Pagination.Content>\n</Pagination>',
+  ],
   'phone-input': ['<PhoneInput aria-label="Phone number" defaultCountry="us" />'],
   popover: [
     '<Popover.Root>\n  <Popover.Trigger>Open popover</Popover.Trigger>\n  <Popover.Content>Quick actions go here.</Popover.Content>\n</Popover.Root>',
@@ -215,6 +222,9 @@ export const componentExamples = {
     '<Toggle aria-label="Bold">B</Toggle>',
     '<ToggleGroup type="single" defaultValue="left" aria-label="Alignment" attached>\n  <ToggleGroupItem value="left" aria-label="Left">L</ToggleGroupItem>\n  <ToggleGroupItem value="center" aria-label="Center">C</ToggleGroupItem>\n  <ToggleGroupItem value="right" aria-label="Right">R</ToggleGroupItem>\n</ToggleGroup>',
     '<ToggleGroup type="multiple" defaultValue={["bold"]} aria-label="Formatting">\n  <ToggleGroupItem value="bold" aria-label="Bold">B</ToggleGroupItem>\n  <ToggleGroupItem value="italic" aria-label="Italic">I</ToggleGroupItem>\n  <ToggleGroupItem value="underline" aria-label="Underline">U</ToggleGroupItem>\n</ToggleGroup>',
+  ],
+  toolbar: [
+    '<Toolbar aria-label="Formatting">\n  <Toolbar.ToggleGroup type="multiple" aria-label="Text formatting">\n    <Toolbar.ToggleItem value="bold" aria-label="Bold"><Bold /></Toolbar.ToggleItem>\n    <Toolbar.ToggleItem value="italic" aria-label="Italic"><Italic /></Toolbar.ToggleItem>\n  </Toolbar.ToggleGroup>\n  <Toolbar.Separator />\n  <Toolbar.Button>Comment</Toolbar.Button>\n  <Toolbar.Link href="#">Share</Toolbar.Link>\n</Toolbar>',
   ],
   tooltip: [
     '<Tooltip.Provider>\n  <Tooltip.Root>\n    <Tooltip.Trigger>Help</Tooltip.Trigger>\n    <Tooltip.Content>Helpful context</Tooltip.Content>\n  </Tooltip.Root>\n</Tooltip.Provider>',

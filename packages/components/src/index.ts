@@ -48,6 +48,17 @@ export { Badge } from './badge'
 export type { BadgeProps, BadgeRadius, BadgeSize, BadgeTone, BadgeVariant } from './badge'
 export { Blockquote } from './blockquote'
 export type { BlockquoteProps, BlockquoteSize } from './blockquote'
+export {
+  Breadcrumb,
+  BreadcrumbEllipsis,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbRoot,
+  BreadcrumbSeparator,
+} from './breadcrumb'
+export type { BreadcrumbEllipsisProps, BreadcrumbLinkProps } from './breadcrumb'
 export { Button } from './button'
 export type { ButtonProps, ButtonSize, ButtonTone, ButtonVariant } from './button'
 export { Calendar } from './calendar'
@@ -249,6 +260,21 @@ export type {
   OtpInputSize,
   OtpInputSlotProps,
 } from './otp-input'
+export {
+  Pagination,
+  PaginationContent,
+  PaginationEllipsis,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+  PaginationRoot,
+} from './pagination'
+export type {
+  PaginationEdgeProps,
+  PaginationEllipsisProps,
+  PaginationLinkProps,
+} from './pagination'
 export { PhoneInput } from './phone-input'
 export type { PhoneInputProps } from './phone-input'
 export {
@@ -362,6 +388,15 @@ export type {
   ToggleTone,
   ToggleVariant,
 } from './toggle'
+export {
+  Toolbar,
+  ToolbarButton,
+  ToolbarLink,
+  ToolbarRoot,
+  ToolbarSeparator,
+  ToolbarToggleGroup,
+  ToolbarToggleItem,
+} from './toolbar'
 export {
   Tooltip,
   TooltipContent,
