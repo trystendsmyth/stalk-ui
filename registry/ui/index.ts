@@ -1,6 +1,7 @@
 import { accordion } from './accordion'
 import { alert } from './alert'
 import { alertDialog } from './alert-dialog'
+import { aspectRatio } from './aspect-ratio'
 import { avatar } from './avatar'
 import { badge } from './badge'
 import { blockquote } from './blockquote'
@@ -34,7 +35,9 @@ import { popover } from './popover'
 import { progress } from './progress'
 import { qrCode } from './qr-code'
 import { radio } from './radio'
+import { scrollArea } from './scroll-area'
 import { select } from './select'
+import { separator } from './separator'
 import { sheet } from './sheet'
 import { skeleton } from './skeleton'
 import { slider } from './slider'
@@ -59,6 +62,7 @@ export const registryItems = [
   accordion,
   alert,
   alertDialog,
+  aspectRatio,
   avatar,
   badge,
   blockquote,
@@ -92,7 +96,9 @@ export const registryItems = [
   progress,
   qrCode,
   radio,
+  scrollArea,
   select,
+  separator,
   sheet,
   skeleton,
   slider,

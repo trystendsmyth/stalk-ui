@@ -158,6 +158,10 @@ export const componentGroups = [
     title: 'Disclosure',
     slugs: ['accordion', 'collapsible'],
   },
+  {
+    title: 'Layout',
+    slugs: ['aspect-ratio', 'scroll-area', 'separator'],
+  },
 ] satisfies ComponentGroup[]
 
 const componentSlugs = componentGroups.flatMap((group) => group.slugs)

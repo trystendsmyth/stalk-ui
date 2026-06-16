@@ -1296,6 +1296,12 @@
       line-height: 0;
 }
 
+    .stalk-separator {
+      border: none;
+      flex-shrink: 0;
+      background-color: var(--colors-border-default);
+}
+
     .stalk-skeleton {
       animation: var(--animations-pulse);
       border-radius: var(--radii-md);
@@ -1599,6 +1605,17 @@
 
   .stalk-link--underline_always {
     text-decoration-line: underline;
+}
+
+  .stalk-separator--orientation_horizontal {
+    block-size: var(--sizes-px);
+    inline-size: var(--sizes-full);
+}
+
+  .stalk-separator--orientation_vertical {
+    inline-size: var(--sizes-px);
+    block-size: var(--sizes-full);
+    align-self: stretch;
 }
 
   .stalk-skeleton--radius_md {
@@ -3411,6 +3428,70 @@
       background-color: var(--colors-accent-solid);
       content: "";
       display: block;
+}
+
+    .stalk-scroll-area__root {
+      overflow: hidden;
+      position: relative;
+}
+
+    .stalk-scroll-area__viewport {
+      border-radius: inherit;
+      block-size: var(--sizes-full);
+      inline-size: var(--sizes-full);
+}
+
+    .stalk-scroll-area__scrollbar {
+      padding: var(--spacing-2);
+      display: flex;
+      -webkit-user-select: none;
+      user-select: none;
+      touch-action: none;
+      background-color: transparent;
+      --transition-prop: background-color;
+      transition-property: background-color;
+      --transition-duration: var(--durations-fast);
+      transition-duration: var(--durations-fast);
+}
+
+    .stalk-scroll-area__scrollbar[data-orientation="vertical"] {
+      inline-size: 10px;
+}
+
+    .stalk-scroll-area__scrollbar[data-orientation="horizontal"] {
+      flex-direction: column;
+      block-size: 10px;
+}
+
+    .stalk-scroll-area__scrollbar:is(:hover, [data-hover]) {
+      background-color: var(--colors-bg-subtle);
+}
+
+    .stalk-scroll-area__thumb {
+      flex: 1 1 0%;
+      border-radius: var(--radii-full);
+      position: relative;
+      background-color: var(--colors-border-default);
+}
+
+    .stalk-scroll-area__thumb::before {
+      content: "";
+      position: absolute;
+      inset-block-start: 50%;
+      inset-inline-start: 50%;
+      transform: translate(-50%, -50%);
+      inline-size: var(--sizes-full);
+      block-size: var(--sizes-full);
+      min-inline-size: 44px;
+      min-block-size: 44px;
+}
+
+    .stalk-scroll-area__thumb:is(:hover, [data-hover]) {
+      background-color: var(--colors-border-hover);
+}
+
+    .stalk-scroll-area__corner {
+      background-color: transparent;
 }
 
     .stalk-select__trigger {

@@ -3,6 +3,7 @@
 import { Accordion } from '@stalk-ui/components/accordion'
 import { Alert } from '@stalk-ui/components/alert'
 import { AlertDialog } from '@stalk-ui/components/alert-dialog'
+import { AspectRatio } from '@stalk-ui/components/aspect-ratio'
 import { Avatar } from '@stalk-ui/components/avatar'
 import { Badge } from '@stalk-ui/components/badge'
 import { Blockquote } from '@stalk-ui/components/blockquote'
@@ -44,7 +45,9 @@ import { Popover } from '@stalk-ui/components/popover'
 import { Progress } from '@stalk-ui/components/progress'
 import { QrCode } from '@stalk-ui/components/qr-code'
 import { Radio } from '@stalk-ui/components/radio'
+import { ScrollArea } from '@stalk-ui/components/scroll-area'
 import { Select } from '@stalk-ui/components/select'
+import { Separator } from '@stalk-ui/components/separator'
 import { Sheet } from '@stalk-ui/components/sheet'
 import { Skeleton } from '@stalk-ui/components/skeleton'
 import { Slider } from '@stalk-ui/components/slider'
@@ -172,6 +175,7 @@ const liveScope = {
   AlertDialog,
   AlertCircle,
   AlertTriangle,
+  AspectRatio,
   Avatar,
   Badge,
   Blockquote,
@@ -216,7 +220,9 @@ const liveScope = {
   Progress,
   QrCode,
   Radio,
+  ScrollArea,
   Select,
+  Separator,
   Sheet,
   Skeleton,
   Slider,

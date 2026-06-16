@@ -32,6 +32,8 @@ export {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from './alert-dialog'
+export { AspectRatio } from './aspect-ratio'
+export type { AspectRatioProps } from './aspect-ratio'
 export { Avatar, AvatarFallback, AvatarImage, AvatarRoot } from './avatar'
 export type {
   AvatarFallbackProps,
@@ -272,7 +274,18 @@ export {
   SelectSeparator,
   SelectTrigger,
 } from './select'
+export {
+  ScrollArea,
+  ScrollAreaCorner,
+  ScrollAreaRoot,
+  ScrollAreaScrollbar,
+  ScrollAreaThumb,
+  ScrollAreaViewport,
+} from './scroll-area'
+export type { ScrollAreaProps } from './scroll-area'
 export type { SelectContentProps, SelectItemProps, SelectSize, SelectTriggerProps } from './select'
+export { Separator } from './separator'
+export type { SeparatorOrientation, SeparatorProps } from './separator'
 export {
   Sheet,
   SheetClose,

@@ -1,0 +1,28 @@
+{
+  "$schema": "https://stalk-ui.com/schema/v1/registry-item.json",
+  "name": "scroll-area",
+  "type": "registry:ui",
+  "dependencies": ["@radix-ui/react-scroll-area", "@stalk-ui/preset"],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "src/components/ui/scroll-area.tsx",
+      "type": "registry:ui",
+      "content": "'use client'\n\nimport * as ScrollAreaPrimitive from '@radix-ui/react-scroll-area'\n// Stalk UI component - requires PandaCSS setup and @stalk-ui/preset.\nimport { forwardRef } from 'react'\nimport { cx } from 'styled-system/css'\nimport { scrollArea as scrollAreaRecipe } from 'styled-system/recipes'\n\nimport type { ComponentPropsWithoutRef, ComponentRef } from 'react'\n\nconst styles = /* @__PURE__ */ scrollAreaRecipe()\n\nexport const ScrollAreaViewport = /* @__PURE__ */ forwardRef<\n  ComponentRef<typeof ScrollAreaPrimitive.Viewport>,\n  ComponentPropsWithoutRef<typeof ScrollAreaPrimitive.Viewport>\n>(function ScrollAreaViewport({ className, ...props }, ref) {\n  return (\n    <ScrollAreaPrimitive.Viewport ref={ref} className={cx(styles.viewport, className)} {...props} />\n  )\n})\n\nexport const ScrollAreaThumb = /* @__PURE__ */ forwardRef<\n  ComponentRef<typeof ScrollAreaPrimitive.Thumb>,\n  ComponentPropsWithoutRef<typeof ScrollAreaPrimitive.Thumb>\n>(function ScrollAreaThumb({ className, ...props }, ref) {\n  return <ScrollAreaPrimitive.Thumb ref={ref} className={cx(styles.thumb, className)} {...props} />\n})\n\nexport const ScrollAreaScrollbar = /* @__PURE__ */ forwardRef<\n  ComponentRef<typeof ScrollAreaPrimitive.Scrollbar>,\n  ComponentPropsWithoutRef<typeof ScrollAreaPrimitive.Scrollbar>\n>(function ScrollAreaScrollbar({ className, orientation = 'vertical', ...props }, ref) {\n  return (\n    <ScrollAreaPrimitive.Scrollbar\n      ref={ref}\n      orientation={orientation}\n      className={cx(styles.scrollbar, className)}\n      {...props}\n    >\n      <ScrollAreaThumb />\n    </ScrollAreaPrimitive.Scrollbar>\n  )\n})\n\nexport const ScrollAreaCorner = /* @__PURE__ */ forwardRef<\n  ComponentRef<typeof ScrollAreaPrimitive.Corner>,\n  ComponentPropsWithoutRef<typeof ScrollAreaPrimitive.Corner>\n>(function ScrollAreaCorner({ className, ...props }, ref) {\n  return <ScrollAreaPrimitive.Corner ref={ref} className={cx(styles.corner, className)} {...props} />\n})\n\nexport interface ScrollAreaProps\n  extends ComponentPropsWithoutRef<typeof ScrollAreaPrimitive.Root> {\n  /** Orientation of the convenience scrollbar rendered by the root. */\n  orientation?: 'horizontal' | 'vertical' | 'both'\n}\n\n// Convenience root: wires Root + Viewport + scrollbar(s) + Corner so the common\n// case is a single element. Compose the exported parts directly for finer control.\nexport const ScrollAreaRoot = /* @__PURE__ */ forwardRef<\n  ComponentRef<typeof ScrollAreaPrimitive.Root>,\n  ScrollAreaProps\n>(function ScrollAreaRoot({ children, className, orientation = 'vertical', ...props }, ref) {\n  return (\n    <ScrollAreaPrimitive.Root ref={ref} className={cx(styles.root, className)} {...props}>\n      <ScrollAreaViewport>{children}</ScrollAreaViewport>\n      {orientation !== 'horizontal' && <ScrollAreaScrollbar orientation=\"vertical\" />}\n      {orientation !== 'vertical' && <ScrollAreaScrollbar orientation=\"horizontal\" />}\n      <ScrollAreaCorner />\n    </ScrollAreaPrimitive.Root>\n  )\n})\n\ntype ScrollAreaNamespace = typeof ScrollAreaRoot & {\n  Corner: typeof ScrollAreaCorner\n  Root: typeof ScrollAreaRoot\n  Scrollbar: typeof ScrollAreaScrollbar\n  Thumb: typeof ScrollAreaThumb\n  Viewport: typeof ScrollAreaViewport\n}\n\nexport const ScrollArea: ScrollAreaNamespace = /* @__PURE__ */ Object.assign(ScrollAreaRoot, {\n  Corner: ScrollAreaCorner,\n  Root: ScrollAreaRoot,\n  Scrollbar: ScrollAreaScrollbar,\n  Thumb: ScrollAreaThumb,\n  Viewport: ScrollAreaViewport,\n})\n"
+    }
+  ],
+  "stalk": {
+    "schemaVersion": "1.0",
+    "preset": {
+      "semanticTokens": {},
+      "recipes": ["scrollArea"]
+    },
+    "packageDependencies": {
+      "preset": "@stalk-ui/preset"
+    },
+    "pandaCodegen": true,
+    "importAliases": {
+      "styledSystem": "styled-system"
+    }
+  }
+}

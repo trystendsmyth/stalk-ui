@@ -11,6 +11,10 @@ export const componentExamples = {
   'alert-dialog': [
     '<AlertDialog.Root>\n  <AlertDialog.Trigger asChild>\n    <Button tone="danger" variant="outline">Delete project</Button>\n  </AlertDialog.Trigger>\n  <AlertDialog.Content>\n    <AlertDialog.Header>\n      <AlertDialog.Title>Delete this project?</AlertDialog.Title>\n      <AlertDialog.Description>This permanently removes the project and all of its data. This action cannot be undone.</AlertDialog.Description>\n    </AlertDialog.Header>\n    <AlertDialog.Footer>\n      <AlertDialog.Cancel asChild><Button variant="outline">Cancel</Button></AlertDialog.Cancel>\n      <AlertDialog.Action asChild><Button tone="danger">Delete</Button></AlertDialog.Action>\n    </AlertDialog.Footer>\n  </AlertDialog.Content>\n</AlertDialog.Root>',
   ],
+  'aspect-ratio': [
+    '<div style={{ width: 320 }}>\n  <AspectRatio ratio={16 / 9}>\n    <img alt="Sand dunes under a clear sky" src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=640&h=360&fit=crop" style={{ borderRadius: 8 }} />\n  </AspectRatio>\n</div>',
+    '<div style={{ width: 200 }}>\n  <AspectRatio ratio={1}>\n    <div style={{ alignItems: "center", border: "1px solid var(--colors-border-default)", borderRadius: 8, color: "var(--colors-fg-muted)", display: "flex", justifyContent: "center" }}>1 : 1</div>\n  </AspectRatio>\n</div>',
+  ],
   avatar: [
     '<Avatar name="Ada Lovelace" />',
     '<Avatar src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=128&h=128&fit=crop" name="Ada Lovelace" size="lg" />',
@@ -141,6 +145,13 @@ export const componentExamples = {
     '<Select.Root>\n  <Select.Trigger aria-label="Status"><Select.Value placeholder="Choose a status" /></Select.Trigger>\n  <Select.Content>\n    <Select.Item value="draft">Draft</Select.Item>\n    <Select.Item value="published">Published</Select.Item>\n    <Select.Item value="archived">Archived</Select.Item>\n  </Select.Content>\n</Select.Root>',
     '<Select.Root>\n  <Select.Trigger invalid aria-label="Status"><Select.Value placeholder="Required" /></Select.Trigger>\n  <Select.Content>\n    <Select.Item value="draft">Draft</Select.Item>\n  </Select.Content>\n</Select.Root>',
     '<Select.Root disabled>\n  <Select.Trigger aria-label="Locked"><Select.Value placeholder="Locked" /></Select.Trigger>\n  <Select.Content>\n    <Select.Item value="locked">Locked</Select.Item>\n  </Select.Content>\n</Select.Root>',
+  ],
+  'scroll-area': [
+    '<div style={{ border: "1px solid var(--colors-border-default)", borderRadius: 8, overflow: "hidden" }}>\n  <ScrollArea style={{ blockSize: 180, inlineSize: 240 }}>\n    <div style={{ padding: 12 }}>\n      {Array.from({ length: 24 }, (_, i) => (\n        <div key={i} style={{ borderBottom: "1px solid var(--colors-border-muted)", padding: "6px 0" }}>Row {i + 1}</div>\n      ))}\n    </div>\n  </ScrollArea>\n</div>',
+  ],
+  separator: [
+    '<div style={{ width: 320 }}>\n  <div style={{ color: "var(--colors-fg-default)" }}>Stalk UI</div>\n  <Separator style={{ marginBlock: 12 }} />\n  <div style={{ color: "var(--colors-fg-muted)" }}>An accessible, PandaCSS-native component library.</div>\n</div>',
+    '<div style={{ alignItems: "center", color: "var(--colors-fg-default)", display: "flex", gap: 12, height: 20 }}>\n  <span>Docs</span>\n  <Separator orientation="vertical" />\n  <span>Storybook</span>\n  <Separator orientation="vertical" />\n  <span>GitHub</span>\n</div>',
   ],
   sheet: [
     '<Sheet.Root>\n  <Sheet.Trigger asChild>\n    <Button>Open sheet</Button>\n  </Sheet.Trigger>\n  <Sheet.Content side="right">\n    <Sheet.Header>\n      <Sheet.Title>Edit profile</Sheet.Title>\n      <Sheet.Description>Update your details, then save to apply changes.</Sheet.Description>\n    </Sheet.Header>\n    <Sheet.Footer>\n      <Sheet.Close asChild><Button variant="outline">Cancel</Button></Sheet.Close>\n      <Button>Save</Button>\n    </Sheet.Footer>\n  </Sheet.Content>\n</Sheet.Root>',

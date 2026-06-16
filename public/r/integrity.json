@@ -26,6 +26,14 @@
       "path": "/r/shadcn/alert-dialog.json",
       "sha256": "aeee9cf51abed7805f2df7dcd51b2f528775c54fcf62c2013d7f20f9b07f7b88"
     },
+    "aspect-ratio": {
+      "path": "/r/aspect-ratio.json",
+      "sha256": "0d07362c2657b896431f5cc90cc8ddc576fe4f1eabb2378db7e38a13ecc87dc9"
+    },
+    "shadcn/aspect-ratio": {
+      "path": "/r/shadcn/aspect-ratio.json",
+      "sha256": "1507dba5d7cb9f732abd561a3703373d5888d77e3711aa98c7bde4c655edbf21"
+    },
     "avatar": {
       "path": "/r/avatar.json",
       "sha256": "d00b4aa0c7631c6ff7a14d6816c14853a7a228be1e2b119600547d4f585c5034"
@@ -290,6 +298,14 @@
       "path": "/r/shadcn/radio.json",
       "sha256": "cd511f74e7302a392642f93879ca99b78d85a1b2834f5a5b9a297b782493c46a"
     },
+    "scroll-area": {
+      "path": "/r/scroll-area.json",
+      "sha256": "14e25b0359a3b4825ebe026bec48fcbc678ceb2f03ba8453149c07d0fd71d157"
+    },
+    "shadcn/scroll-area": {
+      "path": "/r/shadcn/scroll-area.json",
+      "sha256": "87a302eba288cb2b40b074aca3d1ef3d7104f64082c4f45b30ba1315c01fc259"
+    },
     "select": {
       "path": "/r/select.json",
       "sha256": "a6836088e455e10539100aa8bd5edc28146be15ca38d2785450462f34feb5f81"
@@ -297,6 +313,14 @@
     "shadcn/select": {
       "path": "/r/shadcn/select.json",
       "sha256": "132319f967d768d95a22d5d20053edfed7f64de3c73422e8d2f17ee0d841e528"
+    },
+    "separator": {
+      "path": "/r/separator.json",
+      "sha256": "5560221be0291bd70d647e8272236f9ba461b9c06275f277bb3d16d8e1d8c06a"
+    },
+    "shadcn/separator": {
+      "path": "/r/shadcn/separator.json",
+      "sha256": "5a2380a0a2517027fe6c23e4cde3644038a1b4bc081a13862dbb262d219b0dd7"
     },
     "sheet": {
       "path": "/r/sheet.json",

@@ -589,6 +589,23 @@ interface LinkRecipeOptions {
 export const link = ({ underline = 'hover' }: LinkRecipeOptions = {}) =>
   `stalk-link stalk-link--underline-${underline}`
 
+export const scrollArea = () => ({
+  root: 'stalk-scroll-area__root',
+  viewport: 'stalk-scroll-area__viewport',
+  scrollbar: 'stalk-scroll-area__scrollbar',
+  thumb: 'stalk-scroll-area__thumb',
+  corner: 'stalk-scroll-area__corner',
+})
+
+interface SeparatorRecipeOptions {
+  orientation?: 'horizontal' | 'vertical'
+}
+
+export const separator = ({ orientation = 'horizontal' }: SeparatorRecipeOptions = {}) =>
+  `stalk-separator stalk-separator--${orientation}`
+
+separator.variantMap = { orientation: ['horizontal', 'vertical'] as const }
+
 export const qrCode = () => 'stalk-qr-code'
 
 interface BlockquoteRecipeOptions {
