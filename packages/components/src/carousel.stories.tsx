@@ -83,7 +83,19 @@ export const Vertical: Story = {
         <Carousel.Content>
           {Array.from({ length: 5 }, (_, index) => (
             <Carousel.Item key={index}>
-              <Slide index={index} />
+              <Box
+                alignItems="center"
+                bgColor="bg.subtle"
+                blockSize="full"
+                border="default"
+                color="fg.default"
+                display="flex"
+                justifyContent="center"
+                rounded="md"
+                textStyle="headingMd"
+              >
+                {index + 1}
+              </Box>
             </Carousel.Item>
           ))}
         </Carousel.Content>

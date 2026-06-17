@@ -5444,11 +5444,13 @@
 
   .stalk-carousel__content--orientation_vertical {
     flex-direction: column;
+    block-size: var(--sizes-full);
     margin-block-start: -16px;
 }
 
   .stalk-carousel__item--orientation_vertical {
     padding-block-start: 16px;
+    min-block-size: var(--sizes-0);
 }
 
   .stalk-carousel__previous--orientation_vertical {

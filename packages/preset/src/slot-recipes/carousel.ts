@@ -60,11 +60,13 @@ export const carousel = {
         },
       },
       vertical: {
-        // Vertical embla needs a measured viewport height; it inherits from the
-        // height the consumer sets on the Carousel root.
+        // Vertical embla needs a measured height on BOTH the viewport and the
+        // slide container so each `flex-basis: 100%` slide resolves to the
+        // viewport height (and the slides overflow → next is enabled). The height
+        // inherits from the one the consumer sets on the Carousel root.
         viewport: { blockSize: 'full' },
-        content: { flexDirection: 'column', marginBlockStart: '-16' },
-        item: { paddingBlockStart: '16' },
+        content: { flexDirection: 'column', blockSize: 'full', marginBlockStart: '-16' },
+        item: { paddingBlockStart: '16', minBlockSize: '0' },
         previous: {
           insetBlockEnd: '100%',
           marginBlockEnd: '8',
