@@ -64,6 +64,21 @@ export type { ButtonProps, ButtonSize, ButtonTone, ButtonVariant } from './butto
 export { Calendar } from './calendar'
 export type { CalendarProps } from './calendar'
 export {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+  CarouselRoot,
+} from './carousel'
+export type {
+  CarouselApi,
+  CarouselOptions,
+  CarouselOrientation,
+  CarouselPlugin,
+  CarouselProps,
+} from './carousel'
+export {
   Card,
   CardAction,
   CardContent,
@@ -74,6 +89,14 @@ export {
   CardTitle,
 } from './card'
 export type { CardRootProps, CardVariant } from './card'
+export { Chart, ChartContainer, ChartLegendContent, ChartTooltipContent, useChart } from './chart'
+export type {
+  ChartConfig,
+  ChartContainerProps,
+  ChartLegendContentProps,
+  ChartSeriesConfig,
+  ChartTooltipContentProps,
+} from './chart'
 export { Checkbox } from './checkbox'
 export type { CheckboxProps, CheckboxSize } from './checkbox'
 export { Code } from './code'
@@ -292,6 +315,8 @@ export { QrCode } from './qr-code'
 export type { QrCodeProps } from './qr-code'
 export { Radio } from './radio'
 export type { RadioProps, RadioSize } from './radio'
+export { Resizable, ResizableHandle, ResizablePanel, ResizableRoot } from './resizable'
+export type { ResizableHandleProps, ResizablePanelProps, ResizableRootProps } from './resizable'
 export {
   Select,
   SelectContent,
@@ -326,6 +351,24 @@ export {
   SheetTrigger,
 } from './sheet'
 export type { SheetContentProps, SheetSide } from './sheet'
+export {
+  Sidebar,
+  SidebarContent,
+  SidebarFooter,
+  SidebarGroup,
+  SidebarGroupLabel,
+  SidebarHeader,
+  SidebarInset,
+  SidebarMenu,
+  SidebarMenuButton,
+  SidebarMenuItem,
+  SidebarProvider,
+  SidebarRail,
+  SidebarRoot,
+  SidebarTrigger,
+  useSidebar,
+} from './sidebar'
+export type { SidebarMenuButtonProps, SidebarProviderProps, SidebarRootProps } from './sidebar'
 export { Skeleton } from './skeleton'
 export type { SkeletonProps, SkeletonRadius } from './skeleton'
 export { Slider } from './slider'

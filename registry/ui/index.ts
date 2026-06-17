@@ -9,6 +9,8 @@ import { breadcrumb } from './breadcrumb'
 import { button } from './button'
 import { calendar } from './calendar'
 import { card } from './card'
+import { carousel } from './carousel'
+import { chart } from './chart'
 import { checkbox } from './checkbox'
 import { code } from './code'
 import { collapsible } from './collapsible'
@@ -37,10 +39,12 @@ import { popover } from './popover'
 import { progress } from './progress'
 import { qrCode } from './qr-code'
 import { radio } from './radio'
+import { resizable } from './resizable'
 import { scrollArea } from './scroll-area'
 import { select } from './select'
 import { separator } from './separator'
 import { sheet } from './sheet'
+import { sidebar } from './sidebar'
 import { skeleton } from './skeleton'
 import { slider } from './slider'
 import { spinner } from './spinner'
@@ -73,6 +77,8 @@ export const registryItems = [
   button,
   calendar,
   card,
+  carousel,
+  chart,
   checkbox,
   code,
   collapsible,
@@ -101,10 +107,12 @@ export const registryItems = [
   progress,
   qrCode,
   radio,
+  resizable,
   scrollArea,
   select,
   separator,
   sheet,
+  sidebar,
   skeleton,
   slider,
   spinner,

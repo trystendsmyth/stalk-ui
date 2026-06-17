@@ -90,6 +90,22 @@
       "path": "/r/shadcn/card.json",
       "sha256": "49dca0a8d7987351cb0b4e4c4a63ec03405b397557c2c8b8630c604eb0787f61"
     },
+    "carousel": {
+      "path": "/r/carousel.json",
+      "sha256": "f510bfe6207665732a8b2b53d83be07679643079cfab779b4c9a9accce31c3cc"
+    },
+    "shadcn/carousel": {
+      "path": "/r/shadcn/carousel.json",
+      "sha256": "5ff58d4b0b165db9aaec04291ae69ce96dee59c81bed4a45cf086118be9b636e"
+    },
+    "chart": {
+      "path": "/r/chart.json",
+      "sha256": "173ff4b4171e71b8d713b865a0d62c2c4a4a7087e2d3347abc74a1ed05494489"
+    },
+    "shadcn/chart": {
+      "path": "/r/shadcn/chart.json",
+      "sha256": "417bc5bdad3ce5e02e12a32384ad27d6dbbcf62a6296161f4b6fc8aba26e5f8d"
+    },
     "checkbox": {
       "path": "/r/checkbox.json",
       "sha256": "c16a6839a725123b964bac17eef749034f8213c1d0c4a69de499d1e227164e89"
@@ -314,6 +330,14 @@
       "path": "/r/shadcn/radio.json",
       "sha256": "cd511f74e7302a392642f93879ca99b78d85a1b2834f5a5b9a297b782493c46a"
     },
+    "resizable": {
+      "path": "/r/resizable.json",
+      "sha256": "d3f7e3c1af96f2bc1dc89183b1af5ad10ae8066c1487432623fd2c05e2d0ebf8"
+    },
+    "shadcn/resizable": {
+      "path": "/r/shadcn/resizable.json",
+      "sha256": "2a752ff224e0c98ea6b5b43088df6c7ab90ded2d26f310369b05ae397e38f179"
+    },
     "scroll-area": {
       "path": "/r/scroll-area.json",
       "sha256": "6b58be67d6fcaabaf0ae51ec120b5a4b5b912d9c31390e7ff68b33c806eb08de"
@@ -345,6 +369,14 @@
     "shadcn/sheet": {
       "path": "/r/shadcn/sheet.json",
       "sha256": "b1a90b889a1a7bed254bbbbfccd2cb4199f7a4d45dbdd6d6b9753f7be7b37167"
+    },
+    "sidebar": {
+      "path": "/r/sidebar.json",
+      "sha256": "d9d26e49676c8bd5cfab04011b106e4d31cfc4fbc07768a4dbc0b95a8421c2cc"
+    },
+    "shadcn/sidebar": {
+      "path": "/r/shadcn/sidebar.json",
+      "sha256": "3d31bf3d502dd0b24c0c48c3a4bb03389b6b3e21ee5016bea518acb3007db496"
     },
     "skeleton": {
       "path": "/r/skeleton.json",
@@ -444,11 +476,11 @@
     },
     "toolbar": {
       "path": "/r/toolbar.json",
-      "sha256": "b1da087eafaae322cf0f952d868a830c20db775bfb30f29050f5cf44707019f9"
+      "sha256": "e18ff8ddae2b222044d9fc7ec0eb54d4eef5de4865af7151ee05287f6362c31f"
     },
     "shadcn/toolbar": {
       "path": "/r/shadcn/toolbar.json",
-      "sha256": "08af15b80b911ac341cf551d29e2500051cec66f4847aa7ee58fee76ab71d965"
+      "sha256": "35f93976ed9bb8f1cc5b7fdedb5f5f278b55c460fe67ea52789bf7765f8f60f9"
     },
     "tooltip": {
       "path": "/r/tooltip.json",

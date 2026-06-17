@@ -41,10 +41,16 @@ export const componentExamples = {
     '<Button loading>Saving…</Button>',
   ],
   calendar: ['<Calendar mode="single" />', '<Calendar mode="range" numberOfMonths={2} />'],
+  carousel: [
+    '<div style={{ paddingInline: 40, width: 320 }}>\n  <Carousel>\n    <Carousel.Content>\n      {Array.from({ length: 5 }, (_, i) => (\n        <Carousel.Item key={i}>\n          <div style={{ alignItems: "center", background: "var(--colors-bg-subtle)", border: "1px solid var(--colors-border-default)", borderRadius: 8, display: "flex", height: 160, justifyContent: "center" }}>{i + 1}</div>\n        </Carousel.Item>\n      ))}\n    </Carousel.Content>\n    <Carousel.Previous />\n    <Carousel.Next />\n  </Carousel>\n</div>',
+  ],
   card: [
     '<Card.Root>\n  <Card.Header>\n    <Card.Title>Project settings</Card.Title>\n    <Card.Description>Manage how this project is shared with your team.</Card.Description>\n  </Card.Header>\n  <Card.Content>Cards group related content and actions into one surface.</Card.Content>\n</Card.Root>',
     '<Card.Root>\n  <Card.Header>\n    <Card.Title>Invite people</Card.Title>\n    <Card.Description>Add collaborators to this project.</Card.Description>\n  </Card.Header>\n  <Card.Content>An invite gives full edit access.</Card.Content>\n  <Card.Footer>\n    <Button size="sm">Send invite</Button>\n    <Button size="sm" variant="outline">Cancel</Button>\n  </Card.Footer>\n</Card.Root>',
     '<Card.Root variant="elevated">\n  <Card.Header>\n    <Card.Title>Billing</Card.Title>\n    <Card.Description>You are on the Pro plan.</Card.Description>\n    <Card.Action>\n      <Button size="sm" variant="outline">Upgrade</Button>\n    </Card.Action>\n  </Card.Header>\n  <Card.Content>Your plan renews on the 1st of each month.</Card.Content>\n</Card.Root>',
+  ],
+  chart: [
+    '<div style={{ width: 360 }}>\n  <ChartContainer config={{ desktop: { label: "Desktop", color: "var(--colors-accent-solid)" }, mobile: { label: "Mobile", color: "var(--colors-success-solid)" } }} style={{ aspectRatio: "auto" }}>\n    <div style={{ display: "grid", gap: 16, width: "100%" }}>\n      <ChartTooltipContent active label="January" payload={[{ dataKey: "desktop", value: 186 }, { dataKey: "mobile", value: 80 }]} />\n      <ChartLegendContent payload={[{ dataKey: "desktop" }, { dataKey: "mobile" }]} />\n    </div>\n  </ChartContainer>\n</div>',
   ],
   checkbox: [
     '<Checkbox aria-label="Accept terms" />',
@@ -153,6 +159,9 @@ export const componentExamples = {
     '<Select.Root>\n  <Select.Trigger invalid aria-label="Status"><Select.Value placeholder="Required" /></Select.Trigger>\n  <Select.Content>\n    <Select.Item value="draft">Draft</Select.Item>\n  </Select.Content>\n</Select.Root>',
     '<Select.Root disabled>\n  <Select.Trigger aria-label="Locked"><Select.Value placeholder="Locked" /></Select.Trigger>\n  <Select.Content>\n    <Select.Item value="locked">Locked</Select.Item>\n  </Select.Content>\n</Select.Root>',
   ],
+  resizable: [
+    '<div style={{ blockSize: 200, border: "1px solid var(--colors-border-default)", borderRadius: 8, inlineSize: 420, overflow: "hidden" }}>\n  <Resizable direction="horizontal">\n    <Resizable.Panel defaultSize={50}>\n      <div style={{ alignItems: "center", blockSize: "100%", display: "flex", justifyContent: "center", padding: 16 }}>One</div>\n    </Resizable.Panel>\n    <Resizable.Handle withHandle />\n    <Resizable.Panel defaultSize={50}>\n      <div style={{ alignItems: "center", blockSize: "100%", display: "flex", justifyContent: "center", padding: 16 }}>Two</div>\n    </Resizable.Panel>\n  </Resizable>\n</div>',
+  ],
   'scroll-area': [
     '<div style={{ border: "1px solid var(--colors-border-default)", borderRadius: 8, overflow: "hidden" }}>\n  <ScrollArea style={{ blockSize: 180, inlineSize: 240 }}>\n    <div style={{ padding: 12 }}>\n      {Array.from({ length: 24 }, (_, i) => (\n        <div key={i} style={{ borderBottom: "1px solid var(--colors-border-muted)", padding: "6px 0" }}>Row {i + 1}</div>\n      ))}\n    </div>\n  </ScrollArea>\n</div>',
   ],
@@ -163,6 +172,9 @@ export const componentExamples = {
   sheet: [
     '<Sheet.Root>\n  <Sheet.Trigger asChild>\n    <Button>Open sheet</Button>\n  </Sheet.Trigger>\n  <Sheet.Content side="right">\n    <Sheet.Header>\n      <Sheet.Title>Edit profile</Sheet.Title>\n      <Sheet.Description>Update your details, then save to apply changes.</Sheet.Description>\n    </Sheet.Header>\n    <Sheet.Footer>\n      <Sheet.Close asChild><Button variant="outline">Cancel</Button></Sheet.Close>\n      <Button>Save</Button>\n    </Sheet.Footer>\n  </Sheet.Content>\n</Sheet.Root>',
     '<Sheet.Root>\n  <Sheet.Trigger asChild>\n    <Button variant="outline">Open left</Button>\n  </Sheet.Trigger>\n  <Sheet.Content side="left">\n    <Sheet.Header>\n      <Sheet.Title>Navigation</Sheet.Title>\n      <Sheet.Description>A panel anchored to the start edge.</Sheet.Description>\n    </Sheet.Header>\n  </Sheet.Content>\n</Sheet.Root>',
+  ],
+  sidebar: [
+    '<div style={{ border: "1px solid var(--colors-border-default)", borderRadius: 8, display: "flex", height: 280, overflow: "hidden" }}>\n  <Sidebar.Provider style={{ minHeight: "100%" }}>\n    <Sidebar>\n      <Sidebar.Header>\n        <Sidebar.Trigger />\n        <span style={{ fontWeight: 600 }}>Aperture</span>\n      </Sidebar.Header>\n      <Sidebar.Content>\n        <Sidebar.Group>\n          <Sidebar.GroupLabel>Workspace</Sidebar.GroupLabel>\n          <Sidebar.Menu>\n            <Sidebar.MenuItem>\n              <Sidebar.MenuButton isActive><Home /><span>Queue</span></Sidebar.MenuButton>\n            </Sidebar.MenuItem>\n            <Sidebar.MenuItem>\n              <Sidebar.MenuButton><Settings /><span>Settings</span></Sidebar.MenuButton>\n            </Sidebar.MenuItem>\n          </Sidebar.Menu>\n        </Sidebar.Group>\n      </Sidebar.Content>\n      <Sidebar.Rail />\n    </Sidebar>\n    <Sidebar.Inset>\n      <div style={{ alignItems: "center", display: "flex", gap: 8, padding: 12 }}>\n        <Sidebar.Trigger />\n        <strong>Triage Queue</strong>\n      </div>\n    </Sidebar.Inset>\n  </Sidebar.Provider>\n</div>',
   ],
   skeleton: [
     '<Skeleton style={{ height: 14, width: 240 }} />',

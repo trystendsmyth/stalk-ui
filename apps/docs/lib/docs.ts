@@ -140,7 +140,17 @@ export const componentGroups = [
   },
   {
     title: 'Data Display',
-    slugs: ['avatar', 'badge', 'card', 'data-list', 'data-table', 'qr-code', 'table', 'tag'],
+    slugs: [
+      'avatar',
+      'badge',
+      'card',
+      'chart',
+      'data-list',
+      'data-table',
+      'qr-code',
+      'table',
+      'tag',
+    ],
   },
   {
     title: 'Feedback',
@@ -160,6 +170,7 @@ export const componentGroups = [
       'menubar',
       'navigation-menu',
       'pagination',
+      'sidebar',
       'tabs',
       'toolbar',
     ],
@@ -170,7 +181,7 @@ export const componentGroups = [
   },
   {
     title: 'Layout',
-    slugs: ['aspect-ratio', 'scroll-area', 'separator'],
+    slugs: ['aspect-ratio', 'carousel', 'resizable', 'scroll-area', 'separator'],
   },
 ] satisfies ComponentGroup[]
 

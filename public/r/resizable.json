@@ -1,0 +1,28 @@
+{
+  "$schema": "https://stalk-ui.com/schema/v1/registry-item.json",
+  "name": "resizable",
+  "type": "registry:ui",
+  "dependencies": ["@stalk-ui/preset", "lucide-react", "react-resizable-panels"],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "src/components/ui/resizable.tsx",
+      "type": "registry:ui",
+      "content": "import { GripVertical } from 'lucide-react'\nimport { Panel, PanelGroup, PanelResizeHandle } from 'react-resizable-panels'\nimport { cx } from 'styled-system/css'\nimport { resizable as resizableRecipe } from 'styled-system/recipes'\n\nimport type { ComponentProps, FC } from 'react'\n\nconst styles = /* @__PURE__ */ resizableRecipe()\n\n// react-resizable-panels exposes imperative handles (not DOM refs), so these are\n// plain styled wrappers rather than forwardRef components.\n\nexport type ResizableRootProps = ComponentProps<typeof PanelGroup>\n\nexport const ResizableRoot: FC<ResizableRootProps> = function ResizableRoot({\n  className,\n  ...props\n}) {\n  return <PanelGroup className={cx(styles.root, className)} {...props} />\n}\n\nexport type ResizablePanelProps = ComponentProps<typeof Panel>\n\nexport const ResizablePanel: FC<ResizablePanelProps> = function ResizablePanel({\n  className,\n  ...props\n}) {\n  return <Panel className={cx(styles.panel, className)} {...props} />\n}\n\nexport interface ResizableHandleProps extends ComponentProps<typeof PanelResizeHandle> {\n  /** Render a visible grip affordance centered on the handle. */\n  withHandle?: boolean\n}\n\nexport const ResizableHandle: FC<ResizableHandleProps> = function ResizableHandle({\n  className,\n  withHandle = false,\n  ...props\n}) {\n  return (\n    <PanelResizeHandle className={cx(styles.handle, className)} {...props}>\n      {withHandle ? (\n        <div className={styles.handleGrip}>\n          <GripVertical aria-hidden=\"true\" />\n        </div>\n      ) : null}\n    </PanelResizeHandle>\n  )\n}\n\ntype ResizableNamespace = typeof ResizableRoot & {\n  Handle: typeof ResizableHandle\n  Panel: typeof ResizablePanel\n  Root: typeof ResizableRoot\n}\n\nexport const Resizable: ResizableNamespace = /* @__PURE__ */ Object.assign(ResizableRoot, {\n  Handle: ResizableHandle,\n  Panel: ResizablePanel,\n  Root: ResizableRoot,\n})\n"
+    }
+  ],
+  "stalk": {
+    "schemaVersion": "1.0",
+    "preset": {
+      "semanticTokens": {},
+      "recipes": ["resizable"]
+    },
+    "packageDependencies": {
+      "preset": "@stalk-ui/preset"
+    },
+    "pandaCodegen": true,
+    "importAliases": {
+      "styledSystem": "styled-system"
+    }
+  }
+}

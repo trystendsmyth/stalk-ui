@@ -615,12 +615,54 @@ export const toolbar = () => ({
   toggleItem: 'stalk-toolbar__toggle-item',
 })
 
+export const chart = () => ({
+  container: 'stalk-chart__container',
+  tooltip: 'stalk-chart__tooltip',
+  tooltipLabel: 'stalk-chart__tooltip-label',
+  tooltipRow: 'stalk-chart__tooltip-row',
+  tooltipIndicator: 'stalk-chart__tooltip-indicator',
+  legend: 'stalk-chart__legend',
+})
+
+export const carousel = () => ({
+  root: 'stalk-carousel__root',
+  viewport: 'stalk-carousel__viewport',
+  content: 'stalk-carousel__content',
+  item: 'stalk-carousel__item',
+  previous: 'stalk-carousel__previous',
+  next: 'stalk-carousel__next',
+})
+
+export const resizable = () => ({
+  root: 'stalk-resizable__root',
+  panel: 'stalk-resizable__panel',
+  handle: 'stalk-resizable__handle',
+  handleGrip: 'stalk-resizable__handle-grip',
+})
+
 export const scrollArea = () => ({
   root: 'stalk-scroll-area__root',
   viewport: 'stalk-scroll-area__viewport',
   scrollbar: 'stalk-scroll-area__scrollbar',
   thumb: 'stalk-scroll-area__thumb',
   corner: 'stalk-scroll-area__corner',
+})
+
+export const sidebar = () => ({
+  provider: 'stalk-sidebar__provider',
+  root: 'stalk-sidebar__root',
+  backdrop: 'stalk-sidebar__backdrop',
+  inset: 'stalk-sidebar__inset',
+  trigger: 'stalk-sidebar__trigger',
+  rail: 'stalk-sidebar__rail',
+  header: 'stalk-sidebar__header',
+  footer: 'stalk-sidebar__footer',
+  content: 'stalk-sidebar__content',
+  group: 'stalk-sidebar__group',
+  groupLabel: 'stalk-sidebar__group-label',
+  menu: 'stalk-sidebar__menu',
+  menuItem: 'stalk-sidebar__menu-item',
+  menuButton: 'stalk-sidebar__menu-button',
 })
 
 interface SeparatorRecipeOptions {
