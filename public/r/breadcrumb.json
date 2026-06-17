@@ -1,0 +1,28 @@
+{
+  "$schema": "https://stalk-ui.com/schema/v1/registry-item.json",
+  "name": "breadcrumb",
+  "type": "registry:ui",
+  "dependencies": ["@radix-ui/react-slot", "@stalk-ui/preset", "lucide-react"],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "src/components/ui/breadcrumb.tsx",
+      "type": "registry:ui",
+      "content": "'use client'\n\nimport { Slot } from '@radix-ui/react-slot'\nimport { ChevronRight, MoreHorizontal } from 'lucide-react'\nimport { forwardRef } from 'react'\nimport { cx } from 'styled-system/css'\nimport { breadcrumb as breadcrumbRecipe } from 'styled-system/recipes'\n\nimport type { ComponentPropsWithoutRef, HTMLAttributes } from 'react'\n\nconst styles = /* @__PURE__ */ breadcrumbRecipe()\n\nexport const BreadcrumbRoot = /* @__PURE__ */ forwardRef<\n  HTMLElement,\n  ComponentPropsWithoutRef<'nav'>\n>(function BreadcrumbRoot({ 'aria-label': ariaLabel = 'Breadcrumb', className, ...props }, ref) {\n  return <nav ref={ref} aria-label={ariaLabel} className={cx(styles.root, className)} {...props} />\n})\n\nexport const BreadcrumbList = /* @__PURE__ */ forwardRef<\n  HTMLOListElement,\n  ComponentPropsWithoutRef<'ol'>\n>(function BreadcrumbList({ className, ...props }, ref) {\n  return <ol ref={ref} className={cx(styles.list, className)} {...props} />\n})\n\nexport const BreadcrumbItem = /* @__PURE__ */ forwardRef<\n  HTMLLIElement,\n  ComponentPropsWithoutRef<'li'>\n>(function BreadcrumbItem({ className, ...props }, ref) {\n  return <li ref={ref} className={cx(styles.item, className)} {...props} />\n})\n\nexport interface BreadcrumbLinkProps extends ComponentPropsWithoutRef<'a'> {\n  /** Render the single child element (e.g. a router `<Link>`) instead of an `<a>`. */\n  asChild?: boolean\n}\n\nexport const BreadcrumbLink = /* @__PURE__ */ forwardRef<HTMLAnchorElement, BreadcrumbLinkProps>(\n  function BreadcrumbLink({ asChild = false, className, ...props }, ref) {\n    const Comp = asChild ? Slot : 'a'\n    return <Comp ref={ref} className={cx(styles.link, className)} {...props} />\n  },\n)\n\nexport const BreadcrumbPage = /* @__PURE__ */ forwardRef<\n  HTMLSpanElement,\n  ComponentPropsWithoutRef<'span'>\n>(function BreadcrumbPage({ className, ...props }, ref) {\n  return (\n    <span\n      ref={ref}\n      aria-current=\"page\"\n      aria-disabled=\"true\"\n      role=\"link\"\n      className={cx(styles.page, className)}\n      {...props}\n    />\n  )\n})\n\nexport const BreadcrumbSeparator = /* @__PURE__ */ forwardRef<\n  HTMLLIElement,\n  ComponentPropsWithoutRef<'li'>\n>(function BreadcrumbSeparator({ children, className, ...props }, ref) {\n  return (\n    <li\n      ref={ref}\n      aria-hidden=\"true\"\n      role=\"presentation\"\n      className={cx(styles.separator, className)}\n      {...props}\n    >\n      {children ?? <ChevronRight />}\n    </li>\n  )\n})\n\nexport interface BreadcrumbEllipsisProps extends HTMLAttributes<HTMLSpanElement> {\n  /** Visually-hidden label announced for the collapsed items. */\n  label?: string\n}\n\nexport const BreadcrumbEllipsis = /* @__PURE__ */ forwardRef<\n  HTMLSpanElement,\n  BreadcrumbEllipsisProps\n>(function BreadcrumbEllipsis({ className, label = 'More', ...props }, ref) {\n  return (\n    <span\n      ref={ref}\n      aria-hidden=\"true\"\n      role=\"presentation\"\n      className={cx(styles.ellipsis, className)}\n      {...props}\n    >\n      <MoreHorizontal />\n      <span style={SR_ONLY}>{label}</span>\n    </span>\n  )\n})\n\nconst SR_ONLY = {\n  position: 'absolute',\n  width: 1,\n  height: 1,\n  padding: 0,\n  margin: -1,\n  overflow: 'hidden',\n  clip: 'rect(0, 0, 0, 0)',\n  whiteSpace: 'nowrap',\n  borderWidth: 0,\n} as const\n\ntype BreadcrumbNamespace = typeof BreadcrumbRoot & {\n  Ellipsis: typeof BreadcrumbEllipsis\n  Item: typeof BreadcrumbItem\n  Link: typeof BreadcrumbLink\n  List: typeof BreadcrumbList\n  Page: typeof BreadcrumbPage\n  Root: typeof BreadcrumbRoot\n  Separator: typeof BreadcrumbSeparator\n}\n\nexport const Breadcrumb: BreadcrumbNamespace = /* @__PURE__ */ Object.assign(BreadcrumbRoot, {\n  Ellipsis: BreadcrumbEllipsis,\n  Item: BreadcrumbItem,\n  Link: BreadcrumbLink,\n  List: BreadcrumbList,\n  Page: BreadcrumbPage,\n  Root: BreadcrumbRoot,\n  Separator: BreadcrumbSeparator,\n})\n"
+    }
+  ],
+  "stalk": {
+    "schemaVersion": "1.0",
+    "preset": {
+      "semanticTokens": {},
+      "recipes": ["breadcrumb"]
+    },
+    "packageDependencies": {
+      "preset": "@stalk-ui/preset"
+    },
+    "pandaCodegen": true,
+    "importAliases": {
+      "styledSystem": "styled-system"
+    }
+  }
+}

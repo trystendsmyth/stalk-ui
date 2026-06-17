@@ -1,0 +1,28 @@
+{
+  "$schema": "https://stalk-ui.com/schema/v1/registry-item.json",
+  "name": "aspect-ratio",
+  "type": "registry:ui",
+  "dependencies": ["@radix-ui/react-slot", "@stalk-ui/preset"],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "src/components/ui/aspect-ratio.tsx",
+      "type": "registry:ui",
+      "content": "'use client'\n\nimport { Slot } from '@radix-ui/react-slot'\nimport { forwardRef } from 'react'\nimport { css, cx } from 'styled-system/css'\n\nimport type { CSSProperties, HTMLAttributes } from 'react'\n\n// Native CSS `aspect-ratio` does the sizing; the ratio itself is a runtime value\n// (set inline) so there is no recipe variant. The frame positions media and\n// absolutely-placed children to fill the box edge to edge.\nconst frame = /* @__PURE__ */ css({\n  position: 'relative',\n  inlineSize: 'full',\n  '& > *': {\n    position: 'absolute',\n    inset: '0',\n    inlineSize: 'full',\n    blockSize: 'full',\n  },\n  '& > img, & > video': {\n    objectFit: 'cover',\n  },\n})\n\nexport interface AspectRatioProps extends HTMLAttributes<HTMLDivElement> {\n  /** Render the single child element instead of a wrapping `<div>`. */\n  asChild?: boolean\n  /** Desired width-to-height ratio (e.g. `16 / 9`). Defaults to `1` (square). */\n  ratio?: number\n}\n\nexport const AspectRatio = /* @__PURE__ */ forwardRef<HTMLDivElement, AspectRatioProps>(\n  function AspectRatio({ asChild = false, className, ratio = 1, style, ...props }, ref) {\n    const Comp = asChild ? Slot : 'div'\n    const ratioStyle: CSSProperties = { aspectRatio: String(ratio), ...style }\n    return <Comp ref={ref} className={cx(frame, className)} style={ratioStyle} {...props} />\n  },\n)\n"
+    }
+  ],
+  "stalk": {
+    "schemaVersion": "1.0",
+    "preset": {
+      "semanticTokens": {},
+      "recipes": []
+    },
+    "packageDependencies": {
+      "preset": "@stalk-ui/preset"
+    },
+    "pandaCodegen": true,
+    "importAliases": {
+      "styledSystem": "styled-system"
+    }
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "$schema": "https://stalk-ui.com/schema/v1/registry-item.json",
+  "name": "pagination",
+  "type": "registry:ui",
+  "dependencies": ["@radix-ui/react-slot", "@stalk-ui/preset", "lucide-react"],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "src/components/ui/pagination.tsx",
+      "type": "registry:ui",
+      "content": "'use client'\n\nimport { Slot } from '@radix-ui/react-slot'\n// Stalk UI component - requires PandaCSS setup and @stalk-ui/preset.\nimport { ChevronLeft, ChevronRight, MoreHorizontal } from 'lucide-react'\nimport { forwardRef } from 'react'\nimport { css, cx } from 'styled-system/css'\nimport { button as buttonRecipe, pagination as paginationRecipe } from 'styled-system/recipes'\n\nimport type { ComponentPropsWithoutRef, HTMLAttributes } from 'react'\n\nconst styles = /* @__PURE__ */ paginationRecipe()\n\n// RTL-aware chevrons: the trail direction mirrors with the writing direction.\nconst directionalIcon = /* @__PURE__ */ css({ _rtl: { transform: 'scaleX(-1)' } })\n\nexport const PaginationRoot = /* @__PURE__ */ forwardRef<\n  HTMLElement,\n  ComponentPropsWithoutRef<'nav'>\n>(function PaginationRoot({ 'aria-label': ariaLabel = 'Pagination', className, ...props }, ref) {\n  return (\n    <nav\n      ref={ref}\n      aria-label={ariaLabel}\n      role=\"navigation\"\n      className={cx(styles.root, className)}\n      {...props}\n    />\n  )\n})\n\nexport const PaginationContent = /* @__PURE__ */ forwardRef<\n  HTMLUListElement,\n  ComponentPropsWithoutRef<'ul'>\n>(function PaginationContent({ className, ...props }, ref) {\n  return <ul ref={ref} className={cx(styles.content, className)} {...props} />\n})\n\nexport const PaginationItem = /* @__PURE__ */ forwardRef<\n  HTMLLIElement,\n  ComponentPropsWithoutRef<'li'>\n>(function PaginationItem({ className, ...props }, ref) {\n  return <li ref={ref} className={cx(styles.item, className)} {...props} />\n})\n\nexport interface PaginationLinkProps extends ComponentPropsWithoutRef<'a'> {\n  /** Render the single child element (e.g. a router `<Link>`) instead of an `<a>`. */\n  asChild?: boolean\n  /** Marks the current page: applies `aria-current=\"page\"` and the outline variant. */\n  isActive?: boolean\n}\n\nexport const PaginationLink = /* @__PURE__ */ forwardRef<HTMLAnchorElement, PaginationLinkProps>(\n  function PaginationLink({ asChild = false, className, isActive = false, ...props }, ref) {\n    const Comp = asChild ? Slot : 'a'\n    return (\n      <Comp\n        ref={ref}\n        aria-current={isActive ? 'page' : undefined}\n        className={cx(buttonRecipe({ variant: isActive ? 'outline' : 'ghost' }), className)}\n        {...props}\n      />\n    )\n  },\n)\n\nexport interface PaginationEdgeProps extends PaginationLinkProps {\n  /** Accessible label for the control. */\n  label?: string\n  /** Show the text label next to the chevron. */\n  showLabel?: boolean\n}\n\nexport const PaginationPrevious = /* @__PURE__ */ forwardRef<\n  HTMLAnchorElement,\n  PaginationEdgeProps\n>(function PaginationPrevious({ label = 'Previous', showLabel = true, ...props }, ref) {\n  return (\n    <PaginationLink ref={ref} aria-label={label} {...props}>\n      <ChevronLeft className={directionalIcon} />\n      {showLabel ? <span>{label}</span> : null}\n    </PaginationLink>\n  )\n})\n\nexport const PaginationNext = /* @__PURE__ */ forwardRef<HTMLAnchorElement, PaginationEdgeProps>(\n  function PaginationNext({ label = 'Next', showLabel = true, ...props }, ref) {\n    return (\n      <PaginationLink ref={ref} aria-label={label} {...props}>\n        {showLabel ? <span>{label}</span> : null}\n        <ChevronRight className={directionalIcon} />\n      </PaginationLink>\n    )\n  },\n)\n\nexport interface PaginationEllipsisProps extends HTMLAttributes<HTMLSpanElement> {\n  /** Visually-hidden label announced for the skipped pages. */\n  label?: string\n}\n\nexport const PaginationEllipsis = /* @__PURE__ */ forwardRef<\n  HTMLSpanElement,\n  PaginationEllipsisProps\n>(function PaginationEllipsis({ className, label = 'More pages', ...props }, ref) {\n  return (\n    <span\n      ref={ref}\n      aria-hidden=\"true\"\n      role=\"presentation\"\n      className={cx(styles.ellipsis, className)}\n      {...props}\n    >\n      <MoreHorizontal />\n      <span style={SR_ONLY}>{label}</span>\n    </span>\n  )\n})\n\nconst SR_ONLY = {\n  position: 'absolute',\n  width: 1,\n  height: 1,\n  padding: 0,\n  margin: -1,\n  overflow: 'hidden',\n  clip: 'rect(0, 0, 0, 0)',\n  whiteSpace: 'nowrap',\n  borderWidth: 0,\n} as const\n\ntype PaginationNamespace = typeof PaginationRoot & {\n  Content: typeof PaginationContent\n  Ellipsis: typeof PaginationEllipsis\n  Item: typeof PaginationItem\n  Link: typeof PaginationLink\n  Next: typeof PaginationNext\n  Previous: typeof PaginationPrevious\n  Root: typeof PaginationRoot\n}\n\nexport const Pagination: PaginationNamespace = /* @__PURE__ */ Object.assign(PaginationRoot, {\n  Content: PaginationContent,\n  Ellipsis: PaginationEllipsis,\n  Item: PaginationItem,\n  Link: PaginationLink,\n  Next: PaginationNext,\n  Previous: PaginationPrevious,\n  Root: PaginationRoot,\n})\n"
+    }
+  ],
+  "stalk": {
+    "schemaVersion": "1.0",
+    "preset": {
+      "semanticTokens": {},
+      "recipes": ["button", "pagination"]
+    },
+    "packageDependencies": {
+      "preset": "@stalk-ui/preset"
+    },
+    "pandaCodegen": true,
+    "importAliases": {
+      "styledSystem": "styled-system"
+    }
+  }
+}

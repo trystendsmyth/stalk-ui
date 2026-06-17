@@ -27,6 +27,47 @@ if (typeof htmlProto.releasePointerCapture !== 'function') {
   }
 }
 
+if (typeof globalThis.matchMedia !== 'function') {
+  // Embla (carousel) and other responsive primitives call matchMedia, which JSDOM
+  // does not implement. Default every query to a non-matching, inert MediaQueryList.
+  const noop = () => {
+    /* inert listener; JSDOM has no media query engine */
+  }
+  globalThis.matchMedia = (query: string): MediaQueryList => ({
+    matches: false,
+    media: query,
+    onchange: null,
+    addListener: noop,
+    removeListener: noop,
+    addEventListener: noop,
+    removeEventListener: noop,
+    dispatchEvent: () => false,
+  })
+}
+
+if (typeof globalThis.IntersectionObserver === 'undefined') {
+  // Embla (carousel) observes slide visibility; JSDOM has no IntersectionObserver.
+  class JSDomIntersectionObserver {
+    readonly root = null
+    readonly rootMargin = ''
+    readonly thresholds: readonly number[] = []
+    observe() {
+      /* no layout in JSDOM; nothing to observe */
+    }
+    unobserve() {
+      /* no-op */
+    }
+    disconnect() {
+      /* no-op */
+    }
+    takeRecords() {
+      return []
+    }
+  }
+
+  globalThis.IntersectionObserver = JSDomIntersectionObserver
+}
+
 if (typeof globalThis.ResizeObserver === 'undefined') {
   class JSDomResizeObserver {
     observe() {

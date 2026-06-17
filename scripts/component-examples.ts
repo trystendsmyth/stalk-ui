@@ -11,6 +11,10 @@ export const componentExamples = {
   'alert-dialog': [
     '<AlertDialog.Root>\n  <AlertDialog.Trigger asChild>\n    <Button tone="danger" variant="outline">Delete project</Button>\n  </AlertDialog.Trigger>\n  <AlertDialog.Content>\n    <AlertDialog.Header>\n      <AlertDialog.Title>Delete this project?</AlertDialog.Title>\n      <AlertDialog.Description>This permanently removes the project and all of its data. This action cannot be undone.</AlertDialog.Description>\n    </AlertDialog.Header>\n    <AlertDialog.Footer>\n      <AlertDialog.Cancel asChild><Button variant="outline">Cancel</Button></AlertDialog.Cancel>\n      <AlertDialog.Action asChild><Button tone="danger">Delete</Button></AlertDialog.Action>\n    </AlertDialog.Footer>\n  </AlertDialog.Content>\n</AlertDialog.Root>',
   ],
+  'aspect-ratio': [
+    '<div style={{ width: 320 }}>\n  <AspectRatio ratio={16 / 9}>\n    <img alt="Sand dunes under a clear sky" src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=640&h=360&fit=crop" style={{ borderRadius: 8 }} />\n  </AspectRatio>\n</div>',
+    '<div style={{ width: 200 }}>\n  <AspectRatio ratio={1}>\n    <div style={{ alignItems: "center", border: "1px solid var(--colors-border-default)", borderRadius: 8, color: "var(--colors-fg-muted)", display: "flex", justifyContent: "center" }}>1 : 1</div>\n  </AspectRatio>\n</div>',
+  ],
   avatar: [
     '<Avatar name="Ada Lovelace" />',
     '<Avatar src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=128&h=128&fit=crop" name="Ada Lovelace" size="lg" />',
@@ -26,6 +30,10 @@ export const componentExamples = {
     '<Blockquote tone="accent">A tinted pull quote draws the eye.</Blockquote>',
     '<Blockquote size="sm">Compact attribution or aside.</Blockquote>',
   ],
+  breadcrumb: [
+    '<Breadcrumb>\n  <Breadcrumb.List>\n    <Breadcrumb.Item>\n      <Breadcrumb.Link href="#">Home</Breadcrumb.Link>\n    </Breadcrumb.Item>\n    <Breadcrumb.Separator />\n    <Breadcrumb.Item>\n      <Breadcrumb.Link href="#">Components</Breadcrumb.Link>\n    </Breadcrumb.Item>\n    <Breadcrumb.Separator />\n    <Breadcrumb.Item>\n      <Breadcrumb.Page>Breadcrumb</Breadcrumb.Page>\n    </Breadcrumb.Item>\n  </Breadcrumb.List>\n</Breadcrumb>',
+    '<Breadcrumb>\n  <Breadcrumb.List>\n    <Breadcrumb.Item>\n      <Breadcrumb.Link href="#">Home</Breadcrumb.Link>\n    </Breadcrumb.Item>\n    <Breadcrumb.Separator />\n    <Breadcrumb.Item>\n      <Breadcrumb.Ellipsis />\n    </Breadcrumb.Item>\n    <Breadcrumb.Separator />\n    <Breadcrumb.Item>\n      <Breadcrumb.Page>Settings</Breadcrumb.Page>\n    </Breadcrumb.Item>\n  </Breadcrumb.List>\n</Breadcrumb>',
+  ],
   button: [
     '<Button>Save changes</Button>',
     '<Button variant="outline">Cancel</Button>',
@@ -33,10 +41,16 @@ export const componentExamples = {
     '<Button loading>Saving…</Button>',
   ],
   calendar: ['<Calendar mode="single" />', '<Calendar mode="range" numberOfMonths={2} />'],
+  carousel: [
+    '<div style={{ paddingInline: 40, width: 320 }}>\n  <Carousel>\n    <Carousel.Content>\n      {Array.from({ length: 5 }, (_, i) => (\n        <Carousel.Item key={i}>\n          <div style={{ alignItems: "center", background: "var(--colors-bg-subtle)", border: "1px solid var(--colors-border-default)", borderRadius: 8, display: "flex", height: 160, justifyContent: "center" }}>{i + 1}</div>\n        </Carousel.Item>\n      ))}\n    </Carousel.Content>\n    <Carousel.Previous />\n    <Carousel.Next />\n  </Carousel>\n</div>',
+  ],
   card: [
     '<Card.Root>\n  <Card.Header>\n    <Card.Title>Project settings</Card.Title>\n    <Card.Description>Manage how this project is shared with your team.</Card.Description>\n  </Card.Header>\n  <Card.Content>Cards group related content and actions into one surface.</Card.Content>\n</Card.Root>',
     '<Card.Root>\n  <Card.Header>\n    <Card.Title>Invite people</Card.Title>\n    <Card.Description>Add collaborators to this project.</Card.Description>\n  </Card.Header>\n  <Card.Content>An invite gives full edit access.</Card.Content>\n  <Card.Footer>\n    <Button size="sm">Send invite</Button>\n    <Button size="sm" variant="outline">Cancel</Button>\n  </Card.Footer>\n</Card.Root>',
     '<Card.Root variant="elevated">\n  <Card.Header>\n    <Card.Title>Billing</Card.Title>\n    <Card.Description>You are on the Pro plan.</Card.Description>\n    <Card.Action>\n      <Button size="sm" variant="outline">Upgrade</Button>\n    </Card.Action>\n  </Card.Header>\n  <Card.Content>Your plan renews on the 1st of each month.</Card.Content>\n</Card.Root>',
+  ],
+  chart: [
+    '<div style={{ width: 360 }}>\n  <ChartContainer config={{ desktop: { label: "Desktop", color: "var(--colors-accent-solid)" }, mobile: { label: "Mobile", color: "var(--colors-success-solid)" } }} style={{ aspectRatio: "auto" }}>\n    <div style={{ display: "grid", gap: 16, width: "100%" }}>\n      <ChartTooltipContent active label="January" payload={[{ dataKey: "desktop", value: 186 }, { dataKey: "mobile", value: 80 }]} />\n      <ChartLegendContent payload={[{ dataKey: "desktop" }, { dataKey: "mobile" }]} />\n    </div>\n  </ChartContainer>\n</div>',
   ],
   checkbox: [
     '<Checkbox aria-label="Accept terms" />',
@@ -119,6 +133,9 @@ export const componentExamples = {
   'otp-input': [
     '<OtpInput maxLength={6} aria-label="One-time passcode">\n  <OtpInput.Group>\n    <OtpInput.Slot index={0} />\n    <OtpInput.Slot index={1} />\n    <OtpInput.Slot index={2} />\n  </OtpInput.Group>\n  <OtpInput.Separator />\n  <OtpInput.Group>\n    <OtpInput.Slot index={3} />\n    <OtpInput.Slot index={4} />\n    <OtpInput.Slot index={5} />\n  </OtpInput.Group>\n</OtpInput>',
   ],
+  pagination: [
+    '<Pagination>\n  <Pagination.Content>\n    <Pagination.Item>\n      <Pagination.Previous href="#" />\n    </Pagination.Item>\n    <Pagination.Item>\n      <Pagination.Link href="#">1</Pagination.Link>\n    </Pagination.Item>\n    <Pagination.Item>\n      <Pagination.Link href="#" isActive>2</Pagination.Link>\n    </Pagination.Item>\n    <Pagination.Item>\n      <Pagination.Link href="#">3</Pagination.Link>\n    </Pagination.Item>\n    <Pagination.Item>\n      <Pagination.Ellipsis />\n    </Pagination.Item>\n    <Pagination.Item>\n      <Pagination.Next href="#" />\n    </Pagination.Item>\n  </Pagination.Content>\n</Pagination>',
+  ],
   'phone-input': ['<PhoneInput aria-label="Phone number" defaultCountry="us" />'],
   popover: [
     '<Popover.Root>\n  <Popover.Trigger>Open popover</Popover.Trigger>\n  <Popover.Content>Quick actions go here.</Popover.Content>\n</Popover.Root>',
@@ -142,9 +159,22 @@ export const componentExamples = {
     '<Select.Root>\n  <Select.Trigger invalid aria-label="Status"><Select.Value placeholder="Required" /></Select.Trigger>\n  <Select.Content>\n    <Select.Item value="draft">Draft</Select.Item>\n  </Select.Content>\n</Select.Root>',
     '<Select.Root disabled>\n  <Select.Trigger aria-label="Locked"><Select.Value placeholder="Locked" /></Select.Trigger>\n  <Select.Content>\n    <Select.Item value="locked">Locked</Select.Item>\n  </Select.Content>\n</Select.Root>',
   ],
+  resizable: [
+    '<div style={{ blockSize: 200, border: "1px solid var(--colors-border-default)", borderRadius: 8, inlineSize: 420, overflow: "hidden" }}>\n  <Resizable direction="horizontal">\n    <Resizable.Panel defaultSize={50}>\n      <div style={{ alignItems: "center", blockSize: "100%", display: "flex", justifyContent: "center", padding: 16 }}>One</div>\n    </Resizable.Panel>\n    <Resizable.Handle withHandle />\n    <Resizable.Panel defaultSize={50}>\n      <div style={{ alignItems: "center", blockSize: "100%", display: "flex", justifyContent: "center", padding: 16 }}>Two</div>\n    </Resizable.Panel>\n  </Resizable>\n</div>',
+  ],
+  'scroll-area': [
+    '<div style={{ border: "1px solid var(--colors-border-default)", borderRadius: 8, overflow: "hidden" }}>\n  <ScrollArea style={{ blockSize: 180, inlineSize: 240 }}>\n    <div style={{ padding: 12 }}>\n      {Array.from({ length: 24 }, (_, i) => (\n        <div key={i} style={{ borderBottom: "1px solid var(--colors-border-muted)", padding: "6px 0" }}>Row {i + 1}</div>\n      ))}\n    </div>\n  </ScrollArea>\n</div>',
+  ],
+  separator: [
+    '<div style={{ width: 320 }}>\n  <div style={{ color: "var(--colors-fg-default)" }}>Stalk UI</div>\n  <Separator style={{ marginBlock: 12 }} />\n  <div style={{ color: "var(--colors-fg-muted)" }}>An accessible, PandaCSS-native component library.</div>\n</div>',
+    '<div style={{ alignItems: "center", color: "var(--colors-fg-default)", display: "flex", gap: 12, height: 20 }}>\n  <span>Docs</span>\n  <Separator orientation="vertical" />\n  <span>Storybook</span>\n  <Separator orientation="vertical" />\n  <span>GitHub</span>\n</div>',
+  ],
   sheet: [
     '<Sheet.Root>\n  <Sheet.Trigger asChild>\n    <Button>Open sheet</Button>\n  </Sheet.Trigger>\n  <Sheet.Content side="right">\n    <Sheet.Header>\n      <Sheet.Title>Edit profile</Sheet.Title>\n      <Sheet.Description>Update your details, then save to apply changes.</Sheet.Description>\n    </Sheet.Header>\n    <Sheet.Footer>\n      <Sheet.Close asChild><Button variant="outline">Cancel</Button></Sheet.Close>\n      <Button>Save</Button>\n    </Sheet.Footer>\n  </Sheet.Content>\n</Sheet.Root>',
     '<Sheet.Root>\n  <Sheet.Trigger asChild>\n    <Button variant="outline">Open left</Button>\n  </Sheet.Trigger>\n  <Sheet.Content side="left">\n    <Sheet.Header>\n      <Sheet.Title>Navigation</Sheet.Title>\n      <Sheet.Description>A panel anchored to the start edge.</Sheet.Description>\n    </Sheet.Header>\n  </Sheet.Content>\n</Sheet.Root>',
+  ],
+  sidebar: [
+    '<div style={{ border: "1px solid var(--colors-border-default)", borderRadius: 8, display: "flex", height: 280, overflow: "hidden" }}>\n  <Sidebar.Provider style={{ minHeight: "100%" }}>\n    <Sidebar>\n      <Sidebar.Header>\n        <Sidebar.Trigger />\n        <span style={{ fontWeight: 600 }}>Aperture</span>\n      </Sidebar.Header>\n      <Sidebar.Content>\n        <Sidebar.Group>\n          <Sidebar.GroupLabel>Workspace</Sidebar.GroupLabel>\n          <Sidebar.Menu>\n            <Sidebar.MenuItem>\n              <Sidebar.MenuButton isActive><Home /><span>Queue</span></Sidebar.MenuButton>\n            </Sidebar.MenuItem>\n            <Sidebar.MenuItem>\n              <Sidebar.MenuButton><Settings /><span>Settings</span></Sidebar.MenuButton>\n            </Sidebar.MenuItem>\n          </Sidebar.Menu>\n        </Sidebar.Group>\n      </Sidebar.Content>\n      <Sidebar.Rail />\n    </Sidebar>\n    <Sidebar.Inset>\n      <div style={{ alignItems: "center", display: "flex", gap: 8, padding: 12 }}>\n        <Sidebar.Trigger />\n        <strong>Triage Queue</strong>\n      </div>\n    </Sidebar.Inset>\n  </Sidebar.Provider>\n</div>',
   ],
   skeleton: [
     '<Skeleton style={{ height: 14, width: 240 }} />',
@@ -204,6 +234,9 @@ export const componentExamples = {
     '<Toggle aria-label="Bold">B</Toggle>',
     '<ToggleGroup type="single" defaultValue="left" aria-label="Alignment" attached>\n  <ToggleGroupItem value="left" aria-label="Left">L</ToggleGroupItem>\n  <ToggleGroupItem value="center" aria-label="Center">C</ToggleGroupItem>\n  <ToggleGroupItem value="right" aria-label="Right">R</ToggleGroupItem>\n</ToggleGroup>',
     '<ToggleGroup type="multiple" defaultValue={["bold"]} aria-label="Formatting">\n  <ToggleGroupItem value="bold" aria-label="Bold">B</ToggleGroupItem>\n  <ToggleGroupItem value="italic" aria-label="Italic">I</ToggleGroupItem>\n  <ToggleGroupItem value="underline" aria-label="Underline">U</ToggleGroupItem>\n</ToggleGroup>',
+  ],
+  toolbar: [
+    '<Toolbar aria-label="Formatting">\n  <Toolbar.ToggleGroup type="multiple" aria-label="Text formatting">\n    <Toolbar.ToggleItem value="bold" aria-label="Bold"><Bold /></Toolbar.ToggleItem>\n    <Toolbar.ToggleItem value="italic" aria-label="Italic"><Italic /></Toolbar.ToggleItem>\n  </Toolbar.ToggleGroup>\n  <Toolbar.Separator />\n  <Toolbar.Button>Comment</Toolbar.Button>\n  <Toolbar.Link href="#">Share</Toolbar.Link>\n</Toolbar>',
   ],
   tooltip: [
     '<Tooltip.Provider>\n  <Tooltip.Root>\n    <Tooltip.Trigger>Help</Tooltip.Trigger>\n    <Tooltip.Content>Helpful context</Tooltip.Content>\n  </Tooltip.Root>\n</Tooltip.Provider>',

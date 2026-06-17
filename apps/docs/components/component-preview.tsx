@@ -3,12 +3,16 @@
 import { Accordion } from '@stalk-ui/components/accordion'
 import { Alert } from '@stalk-ui/components/alert'
 import { AlertDialog } from '@stalk-ui/components/alert-dialog'
+import { AspectRatio } from '@stalk-ui/components/aspect-ratio'
 import { Avatar } from '@stalk-ui/components/avatar'
 import { Badge } from '@stalk-ui/components/badge'
 import { Blockquote } from '@stalk-ui/components/blockquote'
+import { Breadcrumb } from '@stalk-ui/components/breadcrumb'
 import { Button } from '@stalk-ui/components/button'
 import { Calendar } from '@stalk-ui/components/calendar'
 import { Card } from '@stalk-ui/components/card'
+import { Carousel } from '@stalk-ui/components/carousel'
+import { ChartContainer, ChartLegendContent, ChartTooltipContent } from '@stalk-ui/components/chart'
 import { Checkbox } from '@stalk-ui/components/checkbox'
 import { Code } from '@stalk-ui/components/code'
 import { Collapsible } from '@stalk-ui/components/collapsible'
@@ -39,13 +43,18 @@ import { Link } from '@stalk-ui/components/link'
 import { Menubar } from '@stalk-ui/components/menubar'
 import { NavigationMenu } from '@stalk-ui/components/navigation-menu'
 import { OtpInput } from '@stalk-ui/components/otp-input'
+import { Pagination } from '@stalk-ui/components/pagination'
 import { PhoneInput } from '@stalk-ui/components/phone-input'
 import { Popover } from '@stalk-ui/components/popover'
 import { Progress } from '@stalk-ui/components/progress'
 import { QrCode } from '@stalk-ui/components/qr-code'
 import { Radio } from '@stalk-ui/components/radio'
+import { Resizable } from '@stalk-ui/components/resizable'
+import { ScrollArea } from '@stalk-ui/components/scroll-area'
 import { Select } from '@stalk-ui/components/select'
+import { Separator } from '@stalk-ui/components/separator'
 import { Sheet } from '@stalk-ui/components/sheet'
+import { Sidebar } from '@stalk-ui/components/sidebar'
 import { Skeleton } from '@stalk-ui/components/skeleton'
 import { Slider } from '@stalk-ui/components/slider'
 import { Spinner } from '@stalk-ui/components/spinner'
@@ -58,8 +67,9 @@ import { Textarea } from '@stalk-ui/components/textarea'
 import { TimePicker } from '@stalk-ui/components/time-picker'
 import { Toaster, toast } from '@stalk-ui/components/toast'
 import { Toggle, ToggleGroup, ToggleGroupItem } from '@stalk-ui/components/toggle'
+import { Toolbar } from '@stalk-ui/components/toolbar'
 import { Tooltip } from '@stalk-ui/components/tooltip'
-import { AlertCircle, AlertTriangle, Info, X } from 'lucide-react'
+import { AlertCircle, AlertTriangle, Bold, Home, Info, Italic, Settings, X } from 'lucide-react'
 import { themes } from 'prism-react-renderer'
 import { useId, useState } from 'react'
 import { useForm } from 'react-hook-form'
@@ -172,12 +182,19 @@ const liveScope = {
   AlertDialog,
   AlertCircle,
   AlertTriangle,
+  AspectRatio,
   Avatar,
   Badge,
   Blockquote,
+  Bold,
+  Breadcrumb,
   Button,
   Calendar,
   Card,
+  Carousel,
+  ChartContainer,
+  ChartLegendContent,
+  ChartTooltipContent,
   Checkbox,
   Code,
   Collapsible,
@@ -200,9 +217,11 @@ const liveScope = {
   FormLabel,
   FormMessage,
   Heading,
+  Home,
   HoverCard,
   Info,
   Input,
+  Italic,
   Kbd,
   Label,
   Link,
@@ -210,14 +229,20 @@ const liveScope = {
   InvoiceTable,
   NavigationMenu,
   OtpInput,
+  Pagination,
   PhoneInput,
   Popover,
   ProfileForm,
   Progress,
   QrCode,
   Radio,
+  Resizable,
+  ScrollArea,
   Select,
+  Separator,
+  Settings,
   Sheet,
+  Sidebar,
   Skeleton,
   Slider,
   Spinner,
@@ -235,6 +260,7 @@ const liveScope = {
   Toggle,
   ToggleGroup,
   ToggleGroupItem,
+  Toolbar,
   Tooltip,
   X,
   toast,

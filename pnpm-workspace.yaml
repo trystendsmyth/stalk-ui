@@ -13,6 +13,11 @@ overrides:
   # app); pin past the path-traversal / host-confusion advisories (GHSA-q3j6-
   # qgpj-74h6, GHSA-v39h-62p7-jpjc). ajv's range already allows the patch.
   fast-uri: '>=3.1.2'
+  # hono <4.12.25 has a CORS-middleware advisory (reflects any Origin with
+  # credentials when `origin` defaults to wildcard) — GHSA-88fw-hqm2-52qc. Pulled
+  # transitively via @modelcontextprotocol/sdk / @hono/node-server (docs app + CLI
+  # MCP). The patch is within hono's 4.x range, so the parents stay satisfied.
+  hono: '>=4.12.25'
 
 catalog:
   react: ^19.2.7
