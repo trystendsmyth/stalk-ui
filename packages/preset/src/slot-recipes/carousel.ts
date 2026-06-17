@@ -44,20 +44,37 @@ export const carousel = {
       horizontal: {
         content: { marginInlineStart: '-16' },
         item: { paddingInlineStart: '16' },
-        previous: { insetInlineStart: '-12', top: '50%', transform: 'translateY(-50%)' },
-        next: { insetInlineEnd: '-12', top: '50%', transform: 'translateY(-50%)' },
+        // Sit fully outside the viewport (with an 8px gap) so the controls never
+        // overlap the slides. The wrapping element must leave room (e.g. px).
+        previous: {
+          insetInlineEnd: '100%',
+          marginInlineEnd: '8',
+          top: '50%',
+          transform: 'translateY(-50%)',
+        },
+        next: {
+          insetInlineStart: '100%',
+          marginInlineStart: '8',
+          top: '50%',
+          transform: 'translateY(-50%)',
+        },
       },
       vertical: {
+        // Vertical embla needs a measured viewport height; it inherits from the
+        // height the consumer sets on the Carousel root.
+        viewport: { blockSize: 'full' },
         content: { flexDirection: 'column', marginBlockStart: '-16' },
         item: { paddingBlockStart: '16' },
         previous: {
+          insetBlockEnd: '100%',
+          marginBlockEnd: '8',
           insetInlineStart: '50%',
-          top: '-12',
           transform: 'translateX(-50%) rotate(90deg)',
         },
         next: {
+          insetBlockStart: '100%',
+          marginBlockStart: '8',
           insetInlineStart: '50%',
-          bottom: '-12',
           transform: 'translateX(-50%) rotate(90deg)',
         },
       },

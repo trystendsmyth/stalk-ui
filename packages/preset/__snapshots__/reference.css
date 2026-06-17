@@ -5425,15 +5425,21 @@
 }
 
   .stalk-carousel__previous--orientation_horizontal {
-    inset-inline-start: calc(var(--spacing-12) * -1);
+    inset-inline-end: 100%;
+    margin-inline-end: var(--spacing-8);
     transform: translateY(-50%);
     top: 50%;
 }
 
   .stalk-carousel__next--orientation_horizontal {
-    inset-inline-end: calc(var(--spacing-12) * -1);
+    inset-inline-start: 100%;
+    margin-inline-start: var(--spacing-8);
     transform: translateY(-50%);
     top: 50%;
+}
+
+  .stalk-carousel__viewport--orientation_vertical {
+    block-size: var(--sizes-full);
 }
 
   .stalk-carousel__content--orientation_vertical {
@@ -5446,15 +5452,17 @@
 }
 
   .stalk-carousel__previous--orientation_vertical {
+    inset-block-end: 100%;
+    margin-block-end: var(--spacing-8);
     inset-inline-start: 50%;
     transform: translateX(-50%) rotate(90deg);
-    top: calc(var(--spacing-12) * -1);
 }
 
   .stalk-carousel__next--orientation_vertical {
+    inset-block-start: 100%;
+    margin-block-start: var(--spacing-8);
     inset-inline-start: 50%;
     transform: translateX(-50%) rotate(90deg);
-    bottom: calc(var(--spacing-12) * -1);
 }
 
   .stalk-checkbox__root--size_md {
