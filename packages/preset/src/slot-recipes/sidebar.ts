@@ -112,6 +112,10 @@ export const sidebar = {
       gap: '8',
       p: '8',
       minBlockSize: '48',
+      overflow: 'hidden',
+      // Collapsed: hide text labels (same convention as menu items) so the title
+      // doesn't peek past the icon rail.
+      '[data-state="collapsed"] & span': { display: 'none' },
     },
     footer: {
       display: 'flex',
@@ -119,6 +123,8 @@ export const sidebar = {
       gap: '4',
       marginBlockStart: 'auto',
       p: '8',
+      overflow: 'hidden',
+      '[data-state="collapsed"] & span': { display: 'none' },
     },
     content: {
       display: 'flex',

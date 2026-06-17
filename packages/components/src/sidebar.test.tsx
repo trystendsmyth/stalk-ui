@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import { expect, test } from 'vitest'
+import { expect, test, vi } from 'vitest'
 import { axe } from 'vitest-axe'
 
 import { Sidebar } from './sidebar'
@@ -59,6 +59,50 @@ test('toggles with the Cmd/Ctrl+B keyboard shortcut', async () => {
 test('marks the active menu button with aria-current', () => {
   render(<Example />)
   expect(screen.getByText('Queue').closest('button')).toHaveAttribute('aria-current', 'page')
+})
+
+test('menu buttons fire their click handler (navigation hook)', async () => {
+  const user = userEvent.setup()
+  const onClick = vi.fn()
+  render(
+    <Sidebar.Provider>
+      <Sidebar>
+        <Sidebar.Content>
+          <Sidebar.Menu>
+            <Sidebar.MenuItem>
+              <Sidebar.MenuButton onClick={onClick}>
+                <span>Cases</span>
+              </Sidebar.MenuButton>
+            </Sidebar.MenuItem>
+          </Sidebar.Menu>
+        </Sidebar.Content>
+      </Sidebar>
+    </Sidebar.Provider>,
+  )
+  await user.click(screen.getByRole('button', { name: 'Cases' }))
+  expect(onClick).toHaveBeenCalledTimes(1)
+})
+
+test('menu button renders a real link via asChild', () => {
+  render(
+    <Sidebar.Provider>
+      <Sidebar>
+        <Sidebar.Content>
+          <Sidebar.Menu>
+            <Sidebar.MenuItem>
+              <Sidebar.MenuButton asChild isActive>
+                <a href="#queue">Queue</a>
+              </Sidebar.MenuButton>
+            </Sidebar.MenuItem>
+          </Sidebar.Menu>
+        </Sidebar.Content>
+      </Sidebar>
+    </Sidebar.Provider>,
+  )
+  const link = screen.getByRole('link', { name: 'Queue' })
+  expect(link).toHaveAttribute('href', '#queue')
+  expect(link).toHaveAttribute('aria-current', 'page')
+  expect(link.className).toContain('stalk-sidebar__menu-button')
 })
 
 test('throws when parts render outside the provider', () => {
