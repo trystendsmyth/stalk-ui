@@ -5137,8 +5137,11 @@
 }
 
     .stalk-toolbar__toggleItem[data-state="on"] {
-      background-color: var(--colors-accent-subtle);
       color: var(--colors-accent-fg);
+}
+
+    .stalk-toolbar__toggleItem[data-state="on"],.stalk-toolbar__toggleItem[data-state="on"]:is(:hover, [data-hover]) {
+      background-color: var(--colors-accent-subtle);
 }
 
     .stalk-toolbar__toggleItem:is(:focus-visible, [data-focus-visible]) {

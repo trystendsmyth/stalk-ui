@@ -73,6 +73,9 @@ export const toolbar = {
       '&[data-state="on"]': {
         bgColor: 'accent.subtle',
         color: 'accent.fg',
+        // Already-selected items don't react to hover. The higher-specificity
+        // `[data-state=on]:hover` reliably beats the base `:hover` background.
+        _hover: { bgColor: 'accent.subtle' },
       },
     },
   },
