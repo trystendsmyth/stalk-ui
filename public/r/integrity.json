@@ -220,11 +220,11 @@
     },
     "format-input": {
       "path": "/r/format-input.json",
-      "sha256": "7881c11ab30afd35264e9dcd578cfe525f66a8901239a259ea33f5d4df1a1abe"
+      "sha256": "140fbdcd10a8f0e2676ca3f5ab65a4b5f324375d6052b35e3effba90f98f1305"
     },
     "shadcn/format-input": {
       "path": "/r/shadcn/format-input.json",
-      "sha256": "6848688860b326068101cf3656c719332250e29dd63d675fd8734d4a2e2ae1b8"
+      "sha256": "201d7a51e4d5a16a62e5b44064930c7eadecd6d3a3758ca00b36d131c9956b49"
     },
     "heading": {
       "path": "/r/heading.json",
@@ -292,11 +292,11 @@
     },
     "number-input": {
       "path": "/r/number-input.json",
-      "sha256": "eae652d3b5fd963070f9749facf3a3d9ac9a679814bf0548ed4f1e490ea8ce8e"
+      "sha256": "377689ff51c3dc4a12f312e9dca7685d23f0eeb4e8345a2779c7c253fc2b650a"
     },
     "shadcn/number-input": {
       "path": "/r/shadcn/number-input.json",
-      "sha256": "237df36160ab9f143d1b466b5caf037faab3b1b3b682cf6f95b3960917dd69af"
+      "sha256": "9b076ec2ec1ba86bb6af687f6c2cb58772334cade5db60dc6cf874ff7779339e"
     },
     "otp-input": {
       "path": "/r/otp-input.json",

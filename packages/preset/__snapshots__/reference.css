@@ -2732,26 +2732,28 @@
       width: var(--sizes-full);
 }
 
+    .stalk-color-picker__picker .react-colorful {
+      gap: var(--spacing-10);
+      display: flex;
+      flex-direction: column;
+      height: auto;
+      width: var(--sizes-full);
+}
+
     .stalk-color-picker__picker .react-colorful__saturation {
       border-radius: var(--radii-md);
-      border-bottom-left-radius: 0;
-      border-bottom-right-radius: 0;
+      border-bottom-width: 0;
+      height: 150px;
 }
 
     .stalk-color-picker__picker .react-colorful__hue,.stalk-color-picker__picker .react-colorful__alpha {
       border-radius: var(--radii-full);
-      height: 14px;
-      margin-top: var(--spacing-12);
-}
-
-    .stalk-color-picker__picker .react-colorful {
-      width: var(--sizes-full);
-      height: auto;
+      height: 12px;
 }
 
     .stalk-color-picker__picker .react-colorful__pointer {
-      width: 16px;
       height: 16px;
+      width: 16px;
 }
 
     .stalk-color-picker__controls {
@@ -3707,8 +3709,61 @@
       background-color: var(--colors-bg-subtle);
 }
 
+    .stalk-number-input__root {
+      border: var(--borders-default);
+      overflow: hidden;
+      border-radius: var(--radii-md);
+      align-items: stretch;
+      background-color: var(--colors-bg-canvas);
+      color: var(--colors-fg-default);
+      cursor: text;
+      display: inline-flex;
+      --transition-duration: var(--durations-fast);
+      transition-duration: var(--durations-fast);
+      --transition-prop: background-color, border-color, box-shadow;
+      transition-property: background-color, border-color, box-shadow;
+      width: var(--sizes-full);
+}
+
+    .stalk-number-input__root:focus-within {
+      border-color: var(--colors-accent-solid);
+      --ring-offset-shadow: var(--ring-inset,) 0 0 0 var(--ring-offset-width, 0rem) var(--ring-offset-color);
+      --ring-shadow: var(--ring-inset,) 0 0 0 calc(0.1875rem + var(--ring-offset-width, 0rem)) var(--ring-color);
+      box-shadow: var(--ring-offset-shadow),var(--ring-shadow),var(--base-shadow,0 0 #0000);
+      --ring-color: var(--colors-accent-muted);
+      --ring-offset-width: 0.125rem;
+      --ring-offset-color: var(--colors-bg-default);
+}
+
+    .stalk-number-input__field {
+      border: none;
+      flex: 1 1 auto;
+      outline: 2px solid transparent;
+      outline-offset: 2px;
+      appearance: none;
+      -webkit-appearance: none;
+      background-color: transparent;
+      color: inherit;
+      text-align: end;
+      min-width: var(--sizes-0);
+      width: var(--sizes-full);
+}
+
+    .stalk-number-input__field::-webkit-outer-spin-button,.stalk-number-input__field::-webkit-inner-spin-button {
+      margin: var(--spacing-0);
+      -webkit-appearance: none;
+}
+
+    .stalk-number-input__field:is(:disabled, [disabled], [data-disabled], [aria-disabled=true]) {
+      cursor: not-allowed;
+}
+
+    .stalk-number-input__field::placeholder,.stalk-number-input__field[data-placeholder] {
+      color: var(--colors-fg-muted);
+}
+
     .stalk-number-input__stepper {
-      border-color: var(--colors-border-muted);
+      border-color: var(--colors-border-default);
       align-self: stretch;
       border-inline-start-width: 1px;
       display: inline-flex;
@@ -3720,7 +3775,6 @@
       border: none;
       margin: var(--spacing-0);
       flex: 1 1 0;
-      padding-inline: var(--spacing-6);
       align-items: center;
       appearance: none;
       -webkit-appearance: none;
@@ -3737,11 +3791,6 @@
       min-height: var(--sizes-0);
 }
 
-    .stalk-number-input__button:first-of-type {
-      border-color: var(--colors-border-muted);
-      border-block-end-width: 1px;
-}
-
     .stalk-number-input__button:is(:disabled, [disabled], [data-disabled], [aria-disabled=true]) {
       color: var(--colors-fg-muted);
       cursor: not-allowed;
@@ -3749,8 +3798,8 @@
 }
 
     .stalk-number-input__button > svg {
-      height: var(--sizes-12);
-      width: var(--sizes-12);
+      height: var(--sizes-14);
+      width: var(--sizes-14);
 }
 
     .stalk-number-input__button:is(:focus-visible, [data-focus-visible]) {
@@ -5960,6 +6009,99 @@
 
   .stalk-menubar__item--inset_true {
     padding-inline-start: var(--spacing-28);
+}
+
+  .stalk-number-input__button--layout_stacked:first-of-type {
+    border-color: var(--colors-border-default);
+    border-bottom-width: 1px;
+}
+
+  .stalk-number-input__root--size_md {
+    min-height: var(--sizes-40);
+}
+
+  .stalk-number-input__field--size_md {
+    padding-inline: var(--spacing-base);
+    font-size: var(--font-sizes-base);
+    line-height: var(--line-heights-base);
+    letter-spacing: var(--letter-spacings-normal);
+}
+
+  .stalk-number-input__button--size_md {
+    padding-inline: var(--spacing-10);
+}
+
+  .stalk-number-input__root--size_sm {
+    min-height: var(--sizes-32);
+}
+
+  .stalk-number-input__field--size_sm {
+    padding-inline: var(--spacing-12);
+    font-size: var(--font-sizes-sm);
+    line-height: var(--line-heights-sm);
+    letter-spacing: var(--letter-spacings-normal);
+}
+
+  .stalk-number-input__button--size_sm {
+    padding-inline: var(--spacing-8);
+}
+
+  .stalk-number-input__root--size_lg {
+    min-height: var(--sizes-48);
+}
+
+  .stalk-number-input__field--size_lg {
+    padding-inline: var(--spacing-20);
+    font-size: var(--font-sizes-lg);
+    line-height: var(--line-heights-lg);
+    letter-spacing: var(--letter-spacings-normal);
+}
+
+  .stalk-number-input__button--size_lg {
+    padding-inline: var(--spacing-12);
+}
+
+  .stalk-number-input__field--layout_split {
+    text-align: center;
+}
+
+  .stalk-number-input__button--layout_split {
+    flex: 0 0 auto;
+    aspect-ratio: var(--aspect-ratios-square);
+}
+
+  .stalk-number-input__button--layout_split:first-of-type {
+    border-color: var(--colors-border-default);
+    border-inline-end-width: 1px;
+}
+
+  .stalk-number-input__button--layout_split:last-of-type {
+    border-color: var(--colors-border-default);
+    border-inline-start-width: 1px;
+}
+
+  .stalk-number-input__button--layout_split > svg {
+    height: 16px;
+    width: 16px;
+}
+
+  .stalk-number-input__root--disabled_true {
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+  .stalk-number-input__root--invalid_true {
+    border-color: var(--colors-danger-solid);
+}
+
+  .stalk-number-input__root--invalid_true:focus-within {
+    border-color: var(--colors-danger-solid);
+    --ring-offset-shadow: var(--ring-inset,) 0 0 0 var(--ring-offset-width, 0rem) var(--ring-offset-color);
+    --ring-shadow: var(--ring-inset,) 0 0 0 calc(0.1875rem + var(--ring-offset-width, 0rem)) var(--ring-color);
+    box-shadow: var(--ring-offset-shadow),var(--ring-shadow),var(--base-shadow,0 0 #0000);
+    --ring-color: var(--colors-danger-muted);
+    --ring-offset-width: 0.125rem;
+    --ring-offset-color: var(--colors-bg-default);
 }
 
   .stalk-otp-input__slot--size_md {

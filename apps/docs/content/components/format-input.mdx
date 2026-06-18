@@ -49,16 +49,19 @@ pnpm dlx @stalk-ui/cli add @stalk-ui/format-input
 
 ## Props
 
-| Prop           | Type                                                                      | Required | Default | Description                                                           |
-| -------------- | ------------------------------------------------------------------------- | -------- | ------- | --------------------------------------------------------------------- |
-| `align`        | `InputAlign`                                                              | No       | -       | -                                                                     |
-| `className`    | `string`                                                                  | No       | -       | Root className.                                                       |
-| `format`       | `InputFormat`                                                             | Yes      | -       | Selects the input semantics: type, inputMode, and autocomplete token. |
-| `invalid`      | `boolean`                                                                 | No       | -       | -                                                                     |
-| `rootProps`    | `Omit<InputRootProps, 'children' \| 'className' \| 'disabled' \| 'size'>` | No       | -       | -                                                                     |
-| `showValidity` | `boolean`                                                                 | No       | -       | Show a success check once the field holds a valid, non-empty value.   |
-| `size`         | `InputSize`                                                               | No       | -       | -                                                                     |
-| `validLabel`   | `string`                                                                  | No       | -       | Accessible label announced alongside the validity check.              |
+| Prop               | Type                                                                      | Required | Default | Description                                                                           |
+| ------------------ | ------------------------------------------------------------------------- | -------- | ------- | ------------------------------------------------------------------------------------- |
+| `align`            | `InputAlign`                                                              | No       | -       | -                                                                                     |
+| `className`        | `string`                                                                  | No       | -       | Root className.                                                                       |
+| `defaultValue`     | `string`                                                                  | No       | -       | -                                                                                     |
+| `format`           | `InputFormat`                                                             | Yes      | -       | Selects the input semantics: type, inputMode, autocomplete, and restriction.          |
+| `invalid`          | `boolean`                                                                 | No       | -       | -                                                                                     |
+| `onValidityChange` | `(valid: boolean \| null) => void`                                        | No       | -       | Called whenever blur validation runs: true (valid), false (invalid), or null (empty). |
+| `rootProps`        | `Omit<InputRootProps, 'children' \| 'className' \| 'disabled' \| 'size'>` | No       | -       | -                                                                                     |
+| `showValidity`     | `boolean`                                                                 | No       | -       | Show a success check once the field holds a valid, non-empty value.                   |
+| `size`             | `InputSize`                                                               | No       | -       | -                                                                                     |
+| `validLabel`       | `string`                                                                  | No       | -       | Accessible label announced alongside the validity check.                              |
+| `value`            | `string`                                                                  | No       | -       | -                                                                                     |
 
 ## Variants
 

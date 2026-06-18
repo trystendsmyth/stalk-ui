@@ -5,6 +5,5 @@ export const numberInput = defineRegistryItem({
   filePath: 'src/components/ui/number-input.tsx',
   name: 'number-input',
   recipes: ['numberInput'],
-  registryDependencies: ['input'],
   sourcePath: 'packages/components/src/number-input.tsx',
 })

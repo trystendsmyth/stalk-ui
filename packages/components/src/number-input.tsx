@@ -1,14 +1,12 @@
-import { ChevronDown, ChevronUp } from 'lucide-react'
+import { ChevronDown, ChevronUp, Minus, Plus } from 'lucide-react'
 import { forwardRef, useCallback, useEffect, useRef, useState } from 'react'
 import { cx } from 'styled-system/css'
 import { numberInput as numberInputRecipe } from 'styled-system/recipes'
 
-import { Input } from './input'
+import type { FocusEvent, InputHTMLAttributes, KeyboardEvent, PointerEvent, Ref } from 'react'
 
-import type { InputAlign, InputFieldProps, InputRootProps, InputSize } from './input'
-import type { ChangeEvent, FocusEvent, KeyboardEvent, Ref } from 'react'
-
-const styles = /* @__PURE__ */ numberInputRecipe()
+export type NumberInputSize = (typeof numberInputRecipe.variantMap.size)[number]
+export type NumberInputLayout = (typeof numberInputRecipe.variantMap.layout)[number]
 
 const mergeRefs =
   <T,>(...refs: (Ref<T> | undefined)[]) =>
@@ -20,34 +18,36 @@ const mergeRefs =
   }
 
 export interface NumberInputProps extends Omit<
-  InputFieldProps,
-  'defaultValue' | 'size' | 'type' | 'value'
+  InputHTMLAttributes<HTMLInputElement>,
+  'defaultValue' | 'onChange' | 'size' | 'type' | 'value'
 > {
-  align?: InputAlign
   /** Root className. */
   className?: string
   /** Clamp the value into [min, max] on blur. Defaults to true. */
   clampValueOnBlur?: boolean
-  /** Accessible label for the decrement stepper. */
+  /** ISO 4217 currency code; shorthand for an Intl currency format on blur. */
+  currency?: string
+  /** Accessible label for the decrement control. */
   decrementLabel?: string
   defaultValue?: number
-  /** Hide the increment/decrement steppers. */
+  /** `Intl.NumberFormat` options applied to the displayed value when not editing. */
+  formatOptions?: Intl.NumberFormatOptions
+  /** Hide the stepper controls. */
   hideStepper?: boolean
-  /** Accessible label for the increment stepper. */
+  /** Accessible label for the increment control. */
   incrementLabel?: string
   invalid?: boolean
   /** Step applied to PageUp/PageDown. Defaults to `step * 10`. */
   largeStep?: number
+  /** `stacked` chevrons on the trailing edge, or `split` minus/plus on each edge. */
+  layout?: NumberInputLayout
   /** BCP-47 locale used for display formatting. */
   locale?: string
   max?: number
   min?: number
-  /** Called with the parsed numeric value (or null when empty/invalid). */
+  /** Called with the parsed numeric value (or null when empty). */
   onValueChange?: (value: number | null) => void
-  /** `Intl.NumberFormat` options applied to the displayed value on blur. */
-  formatOptions?: Intl.NumberFormatOptions
-  rootProps?: Omit<InputRootProps, 'children' | 'className' | 'disabled' | 'size'>
-  size?: InputSize
+  size?: NumberInputSize
   step?: number
   value?: number | null
 }
@@ -55,9 +55,9 @@ export interface NumberInputProps extends Omit<
 export const NumberInput = /* @__PURE__ */ forwardRef<HTMLInputElement, NumberInputProps>(
   function NumberInput(
     {
-      align = 'end',
       className,
       clampValueOnBlur = true,
+      currency,
       decrementLabel = 'Decrement',
       defaultValue,
       disabled = false,
@@ -66,14 +66,14 @@ export const NumberInput = /* @__PURE__ */ forwardRef<HTMLInputElement, NumberIn
       incrementLabel = 'Increment',
       invalid = false,
       largeStep,
+      layout = 'stacked',
       locale,
       max,
       min,
       onBlur,
-      onChange,
+      onFocus,
       onKeyDown,
       onValueChange,
-      rootProps,
       size = 'md',
       step = 1,
       value,
@@ -85,6 +85,12 @@ export const NumberInput = /* @__PURE__ */ forwardRef<HTMLInputElement, NumberIn
     const inputRef = useRef<HTMLInputElement | null>(null)
     const focusedRef = useRef(false)
     const bigStep = largeStep ?? step * 10
+    const allowNegative = min === undefined || min < 0
+    const styles = numberInputRecipe({ disabled, invalid, layout, size })
+
+    const resolvedFormat: Intl.NumberFormatOptions | undefined = currency
+      ? { style: 'currency', currency, ...formatOptions }
+      : formatOptions
 
     const clamp = useCallback(
       (n: number) => {
@@ -97,65 +103,75 @@ export const NumberInput = /* @__PURE__ */ forwardRef<HTMLInputElement, NumberIn
     )
 
     const parse = (text: string): number | null => {
-      const cleaned = text.replace(/[^0-9.eE+-]/g, '')
-      if (cleaned.trim() === '') return null
-      const n = Number(cleaned)
+      if (text === '' || text === '-' || text === '.' || text === '-.') return null
+      const n = Number(text)
       return Number.isFinite(n) ? n : null
     }
 
-    const formatDisplay = useCallback(
-      (n: number | null): string => {
-        if (n === null) return ''
-        if (formatOptions || locale) return new Intl.NumberFormat(locale, formatOptions).format(n)
-        return String(n)
+    // Keep only digits, a single dot, and (when allowed) a single leading minus.
+    const sanitize = useCallback(
+      (raw: string): string => {
+        let s = raw.replace(/[^0-9.-]/g, '')
+        const negative = allowNegative && s.startsWith('-')
+        s = s.replace(/-/g, '')
+        const dot = s.indexOf('.')
+        if (dot !== -1) s = `${s.slice(0, dot + 1)}${s.slice(dot + 1).replace(/\./g, '')}`
+        return negative ? `-${s}` : s
       },
-      [formatOptions, locale],
+      [allowNegative],
     )
 
-    const initialText =
+    const rawString = (n: number): string => String(n)
+    const formatDisplay = useCallback(
+      (n: number): string =>
+        resolvedFormat || locale
+          ? new Intl.NumberFormat(locale, resolvedFormat).format(n)
+          : String(n),
+      [locale, resolvedFormat],
+    )
+
+    const initial =
       value !== undefined && value !== null
         ? formatDisplay(value)
         : defaultValue !== undefined
           ? formatDisplay(defaultValue)
           : ''
-    const [text, setText] = useState(initialText)
+    const [text, setText] = useState(initial)
 
-    // Keep the field in sync with a controlled `value`, but never while the user
-    // is actively typing (that would clobber transient input like "1." or "-").
+    // Sync a controlled `value` while the user is not actively editing.
     useEffect(() => {
       if (!isControlled || focusedRef.current) return
-      // `isControlled` narrows `value` to `number | null` here (aliased condition).
       setText(value === null ? '' : formatDisplay(value))
     }, [formatDisplay, isControlled, value])
 
     const currentNumber = parse(text)
 
     const commit = useCallback(
-      (n: number | null, display: string) => {
-        if (!isControlled) setText(display)
+      (n: number | null) => {
+        if (!isControlled)
+          setText(n === null ? '' : focusedRef.current ? rawString(n) : formatDisplay(n))
         onValueChange?.(n)
       },
-      [isControlled, onValueChange],
+      [formatDisplay, isControlled, onValueChange],
     )
 
-    const stepBy = useCallback(
-      (delta: number) => {
-        if (disabled) return
-        const base = parse(text) ?? clamp(min ?? 0)
-        const next = clamp(base + delta)
-        commit(next, formatDisplay(next))
-        // Reflect immediately for controlled consumers that echo the value back.
-        if (isControlled) setText(formatDisplay(next))
-        inputRef.current?.focus()
-      },
-      [clamp, commit, disabled, formatDisplay, isControlled, min, text],
-    )
+    const stepBy = (delta: number) => {
+      if (disabled) return
+      const base = parse(text) ?? clamp(min ?? 0)
+      commit(clamp(base + delta))
+    }
 
-    const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-      const raw = event.target.value
-      setText(raw)
-      onChange?.(event)
-      onValueChange?.(parse(raw))
+    const handleChange = (raw: string) => {
+      const next = sanitize(raw)
+      setText(next)
+      onValueChange?.(parse(next))
+    }
+
+    const handleFocus = (event: FocusEvent<HTMLInputElement>) => {
+      focusedRef.current = true
+      onFocus?.(event)
+      const n = parse(text)
+      if (n !== null) setText(rawString(n))
     }
 
     const handleBlur = (event: FocusEvent<HTMLInputElement>) => {
@@ -164,48 +180,40 @@ export const NumberInput = /* @__PURE__ */ forwardRef<HTMLInputElement, NumberIn
       const n = parse(text)
       if (n === null) {
         if (!isControlled) setText('')
+        onValueChange?.(null)
         return
       }
       const next = clampValueOnBlur ? clamp(n) : n
-      commit(next, formatDisplay(next))
+      if (!isControlled) setText(formatDisplay(next))
+      onValueChange?.(next)
     }
 
     const handleKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
       onKeyDown?.(event)
       if (event.defaultPrevented) return
-      switch (event.key) {
-        case 'ArrowUp':
-          event.preventDefault()
-          stepBy(step)
-          break
-        case 'ArrowDown':
-          event.preventDefault()
-          stepBy(-step)
-          break
-        case 'PageUp':
-          event.preventDefault()
-          stepBy(bigStep)
-          break
-        case 'PageDown':
-          event.preventDefault()
-          stepBy(-bigStep)
-          break
-        case 'Home':
-          if (min !== undefined) {
-            event.preventDefault()
-            commit(min, formatDisplay(min))
-            if (isControlled) setText(formatDisplay(min))
-          }
-          break
-        case 'End':
-          if (max !== undefined) {
-            event.preventDefault()
-            commit(max, formatDisplay(max))
-            if (isControlled) setText(formatDisplay(max))
-          }
-          break
-        default:
-          break
+      const keyMap: Record<string, number> = {
+        ArrowUp: step,
+        ArrowDown: -step,
+        PageUp: bigStep,
+        PageDown: -bigStep,
+      }
+      const delta = keyMap[event.key]
+      if (delta !== undefined) {
+        event.preventDefault()
+        stepBy(delta)
+      } else if (event.key === 'Home' && min !== undefined) {
+        event.preventDefault()
+        commit(min)
+      } else if (event.key === 'End' && max !== undefined) {
+        event.preventDefault()
+        commit(max)
+      }
+    }
+
+    const handleShellPointerDown = (event: PointerEvent<HTMLDivElement>) => {
+      if ((event.target as HTMLElement).closest('button, input') === null) {
+        event.preventDefault()
+        if (!disabled) inputRef.current?.focus()
       }
     }
 
@@ -214,64 +222,94 @@ export const NumberInput = /* @__PURE__ */ forwardRef<HTMLInputElement, NumberIn
     const decrementDisabled =
       disabled || (min !== undefined && currentNumber !== null && currentNumber <= min)
 
-    return (
-      <Input.Root
-        align={align}
-        className={className}
+    const field = (
+      <input
+        ref={mergeRefs(ref, inputRef)}
+        aria-valuemax={max}
+        aria-valuemin={min}
+        aria-valuenow={currentNumber ?? undefined}
+        autoComplete="off"
+        className={styles.field}
         disabled={disabled}
-        invalid={invalid}
-        size={size}
-        {...rootProps}
+        inputMode={allowNegative ? 'text' : 'decimal'}
+        role="spinbutton"
+        type="text"
+        value={text}
+        onBlur={handleBlur}
+        onChange={(event) => {
+          handleChange(event.target.value)
+        }}
+        onFocus={handleFocus}
+        onKeyDown={handleKeyDown}
+        {...fieldProps}
+      />
+    )
+
+    return (
+      <div
+        className={cx(styles.root, className)}
+        data-disabled={disabled ? '' : undefined}
+        data-invalid={invalid ? '' : undefined}
+        onPointerDown={handleShellPointerDown}
       >
-        <Input.Field
-          ref={mergeRefs(ref, inputRef)}
-          aria-valuemax={max}
-          aria-valuemin={min}
-          aria-valuenow={currentNumber ?? undefined}
-          autoComplete="off"
-          inputMode="decimal"
-          role="spinbutton"
-          type="text"
-          value={text}
-          onBlur={handleBlur}
-          onChange={handleChange}
-          onFocus={() => {
-            focusedRef.current = true
-          }}
-          onKeyDown={handleKeyDown}
-          {...fieldProps}
-        />
-        {hideStepper ? null : (
-          <Input.Suffix>
-            <span className={cx(styles.stepper)}>
-              <button
-                aria-label={incrementLabel}
-                className={styles.button}
-                disabled={incrementDisabled}
-                onClick={() => {
-                  stepBy(step)
-                }}
-                tabIndex={-1}
-                type="button"
-              >
-                <ChevronUp aria-hidden="true" />
-              </button>
-              <button
-                aria-label={decrementLabel}
-                className={styles.button}
-                disabled={decrementDisabled}
-                onClick={() => {
-                  stepBy(-step)
-                }}
-                tabIndex={-1}
-                type="button"
-              >
-                <ChevronDown aria-hidden="true" />
-              </button>
-            </span>
-          </Input.Suffix>
-        )}
-      </Input.Root>
+        {layout === 'split' && !hideStepper ? (
+          <button
+            aria-label={decrementLabel}
+            className={styles.button}
+            disabled={decrementDisabled}
+            tabIndex={-1}
+            type="button"
+            onClick={() => {
+              stepBy(-step)
+            }}
+          >
+            <Minus aria-hidden="true" />
+          </button>
+        ) : null}
+        {field}
+        {layout === 'split' && !hideStepper ? (
+          <button
+            aria-label={incrementLabel}
+            className={styles.button}
+            disabled={incrementDisabled}
+            tabIndex={-1}
+            type="button"
+            onClick={() => {
+              stepBy(step)
+            }}
+          >
+            <Plus aria-hidden="true" />
+          </button>
+        ) : null}
+        {layout === 'stacked' && !hideStepper ? (
+          <span className={styles.stepper}>
+            <button
+              aria-label={incrementLabel}
+              className={styles.button}
+              disabled={incrementDisabled}
+              tabIndex={-1}
+              type="button"
+              onClick={() => {
+                stepBy(step)
+              }}
+            >
+              <ChevronUp aria-hidden="true" />
+            </button>
+            <button
+              aria-label={decrementLabel}
+              className={styles.button}
+              disabled={decrementDisabled}
+              tabIndex={-1}
+              type="button"
+              onClick={() => {
+                stepBy(-step)
+              }}
+            >
+              <ChevronDown aria-hidden="true" />
+            </button>
+          </span>
+        ) : null}
+      </div>
     )
   },
 )

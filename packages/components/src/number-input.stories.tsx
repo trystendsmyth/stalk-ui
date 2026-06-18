@@ -13,6 +13,7 @@ const meta = {
     defaultValue: 1,
   },
   argTypes: {
+    layout: { control: 'inline-radio', options: ['stacked', 'split'] },
     size: { control: 'inline-radio', options: ['sm', 'md', 'lg'] },
     step: { control: 'number' },
     min: { control: 'number' },
@@ -40,6 +41,10 @@ export const Default: Story = {}
 
 export const MinMaxStep: Story = {
   args: { defaultValue: 4, min: 0, max: 10, step: 2 },
+}
+
+export const Split: Story = {
+  args: { 'aria-label': 'Quantity', defaultValue: 1, layout: 'split', min: 0, max: 99 },
 }
 
 export const Currency: Story = {

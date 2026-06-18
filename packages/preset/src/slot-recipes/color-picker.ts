@@ -51,16 +51,28 @@ export const colorPicker = {
       gap: '12',
       w: '232px',
     },
+    // react-colorful renders one flex column (saturation + hue + optional alpha).
+    // Override its fixed dimensions so every element spans the panel edge-to-edge
+    // with a consistent rounded shape and even spacing.
     picker: {
       w: 'full',
-      '& .react-colorful': { w: 'full', h: 'auto' },
-      '& .react-colorful__saturation': { rounded: 'md', borderBottomRadius: '0' },
-      '& .react-colorful__hue, & .react-colorful__alpha': {
-        h: '14px',
-        mt: '12',
-        rounded: 'full',
+      '& .react-colorful': {
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '10',
+        h: 'auto',
+        w: 'full',
       },
-      '& .react-colorful__pointer': { w: '16px', h: '16px' },
+      '& .react-colorful__saturation': {
+        borderRadius: 'md',
+        borderBottomWidth: '0',
+        h: '150px',
+      },
+      '& .react-colorful__hue, & .react-colorful__alpha': {
+        borderRadius: 'full',
+        h: '12px',
+      },
+      '& .react-colorful__pointer': { h: '16px', w: '16px' },
     },
     controls: {
       alignItems: 'center',

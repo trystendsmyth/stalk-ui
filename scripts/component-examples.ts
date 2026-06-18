@@ -141,8 +141,8 @@ export const componentExamples = {
   ],
   'number-input': [
     '<NumberInput aria-label="Quantity" defaultValue={1} min={0} max={10} />',
-    '<NumberInput aria-label="Step by 5" defaultValue={10} step={5} />',
-    '<NumberInput aria-label="Price" defaultValue={19.99} step={0.5} formatOptions={{ style: "currency", currency: "USD" }} />',
+    '<NumberInput aria-label="Quantity" defaultValue={1} min={0} max={99} layout="split" />',
+    '<NumberInput aria-label="Price" defaultValue={19.99} step={0.5} currency="USD" />',
   ],
   'otp-input': [
     '<OtpInput maxLength={6} aria-label="One-time passcode">\n  <OtpInput.Group>\n    <OtpInput.Slot index={0} />\n    <OtpInput.Slot index={1} />\n    <OtpInput.Slot index={2} />\n  </OtpInput.Group>\n  <OtpInput.Separator />\n  <OtpInput.Group>\n    <OtpInput.Slot index={3} />\n    <OtpInput.Slot index={4} />\n    <OtpInput.Slot index={5} />\n  </OtpInput.Group>\n</OtpInput>',

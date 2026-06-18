@@ -30,54 +30,54 @@ pnpm dlx @stalk-ui/cli add @stalk-ui/number-input
 <ComponentPreview
   slug="number-input"
   example={1}
-  code={`<NumberInput aria-label="Step by 5" defaultValue={10} step={5} />`}
+  code={`<NumberInput aria-label="Quantity" defaultValue={1} min={0} max={99} layout="split" />`}
 />
 
 ```tsx
-<NumberInput aria-label="Step by 5" defaultValue={10} step={5} />
+<NumberInput aria-label="Quantity" defaultValue={1} min={0} max={99} layout="split" />
 ```
 
 <ComponentPreview
   slug="number-input"
   example={2}
-  code={`<NumberInput aria-label="Price" defaultValue={19.99} step={0.5} formatOptions={{ style: "currency", currency: "USD" }} />`}
+  code={`<NumberInput aria-label="Price" defaultValue={19.99} step={0.5} currency="USD" />`}
 />
 
 ```tsx
-<NumberInput
-  aria-label="Price"
-  defaultValue={19.99}
-  step={0.5}
-  formatOptions={{ style: 'currency', currency: 'USD' }}
-/>
+<NumberInput aria-label="Price" defaultValue={19.99} step={0.5} currency="USD" />
 ```
 
 ## Props
 
-| Prop               | Type                                                                      | Required | Default | Description                                                           |
-| ------------------ | ------------------------------------------------------------------------- | -------- | ------- | --------------------------------------------------------------------- |
-| `align`            | `InputAlign`                                                              | No       | -       | -                                                                     |
-| `className`        | `string`                                                                  | No       | -       | Root className.                                                       |
-| `clampValueOnBlur` | `boolean`                                                                 | No       | -       | Clamp the value into [min, max] on blur. Defaults to true.            |
-| `decrementLabel`   | `string`                                                                  | No       | -       | Accessible label for the decrement stepper.                           |
-| `defaultValue`     | `number`                                                                  | No       | -       | -                                                                     |
-| `hideStepper`      | `boolean`                                                                 | No       | -       | Hide the increment/decrement steppers.                                |
-| `incrementLabel`   | `string`                                                                  | No       | -       | Accessible label for the increment stepper.                           |
-| `invalid`          | `boolean`                                                                 | No       | -       | -                                                                     |
-| `largeStep`        | `number`                                                                  | No       | -       | Step applied to PageUp/PageDown. Defaults to \`step \* 10\`.          |
-| `locale`           | `string`                                                                  | No       | -       | BCP-47 locale used for display formatting.                            |
-| `max`              | `number`                                                                  | No       | -       | -                                                                     |
-| `min`              | `number`                                                                  | No       | -       | -                                                                     |
-| `onValueChange`    | `(value: number \| null) => void`                                         | No       | -       | Called with the parsed numeric value (or null when empty/invalid).    |
-| `formatOptions`    | `Intl.NumberFormatOptions`                                                | No       | -       | \`Intl.NumberFormat\` options applied to the displayed value on blur. |
-| `rootProps`        | `Omit<InputRootProps, 'children' \| 'className' \| 'disabled' \| 'size'>` | No       | -       | -                                                                     |
-| `size`             | `InputSize`                                                               | No       | -       | -                                                                     |
-| `step`             | `number`                                                                  | No       | -       | -                                                                     |
-| `value`            | `number \| null`                                                          | No       | -       | -                                                                     |
+| Prop               | Type                              | Required | Default | Description                                                                      |
+| ------------------ | --------------------------------- | -------- | ------- | -------------------------------------------------------------------------------- |
+| `className`        | `string`                          | No       | -       | Root className.                                                                  |
+| `clampValueOnBlur` | `boolean`                         | No       | -       | Clamp the value into [min, max] on blur. Defaults to true.                       |
+| `currency`         | `string`                          | No       | -       | ISO 4217 currency code; shorthand for an Intl currency format on blur.           |
+| `decrementLabel`   | `string`                          | No       | -       | Accessible label for the decrement control.                                      |
+| `defaultValue`     | `number`                          | No       | -       | -                                                                                |
+| `formatOptions`    | `Intl.NumberFormatOptions`        | No       | -       | \`Intl.NumberFormat\` options applied to the displayed value when not editing.   |
+| `hideStepper`      | `boolean`                         | No       | -       | Hide the stepper controls.                                                       |
+| `incrementLabel`   | `string`                          | No       | -       | Accessible label for the increment control.                                      |
+| `invalid`          | `boolean`                         | No       | -       | -                                                                                |
+| `largeStep`        | `number`                          | No       | -       | Step applied to PageUp/PageDown. Defaults to \`step \* 10\`.                     |
+| `layout`           | `NumberInputLayout`               | No       | -       | \`stacked\` chevrons on the trailing edge, or \`split\` minus/plus on each edge. |
+| `locale`           | `string`                          | No       | -       | BCP-47 locale used for display formatting.                                       |
+| `max`              | `number`                          | No       | -       | -                                                                                |
+| `min`              | `number`                          | No       | -       | -                                                                                |
+| `onValueChange`    | `(value: number \| null) => void` | No       | -       | Called with the parsed numeric value (or null when empty).                       |
+| `size`             | `NumberInputSize`                 | No       | -       | -                                                                                |
+| `step`             | `number`                          | No       | -       | -                                                                                |
+| `value`            | `number \| null`                  | No       | -       | -                                                                                |
 
 ## Variants
 
-No recipe variants are documented for this component.
+| Variant    | Values             |
+| ---------- | ------------------ |
+| `size`     | `sm`, `md`, `lg`   |
+| `layout`   | `stacked`, `split` |
+| `disabled` | `true`             |
+| `invalid`  | `true`             |
 
 ## Registry
 

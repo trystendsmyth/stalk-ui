@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { css } from 'styled-system/css'
 import { HStack, VStack } from 'styled-system/jsx'
 
 import { ColorPicker } from './color-picker'
@@ -6,6 +7,8 @@ import { ColorPicker } from './color-picker'
 import type { Meta, StoryObj } from '@storybook/react-vite'
 
 const PRESETS = ['#ef4444', '#f97316', '#eab308', '#22c55e', '#3b82f6', '#8b5cf6', '#ec4899']
+
+const circleTrigger = css({ rounded: 'full' })
 
 const meta = {
   title: 'Components/Forms/Color Picker',
@@ -30,7 +33,7 @@ type Story = StoryObj<typeof meta>
 export const Default: Story = {
   render: () => (
     <ColorPicker defaultValue="#4f46e5">
-      <ColorPicker.Trigger aria-label="Brand color" />
+      <ColorPicker.Trigger aria-label="Brand color" className={circleTrigger} />
       <ColorPicker.Content>
         <ColorPicker.Picker />
         <ColorPicker.Controls>
@@ -50,7 +53,7 @@ export const Default: Story = {
 export const WithAlpha: Story = {
   render: () => (
     <ColorPicker alpha defaultValue="#4f46e5cc">
-      <ColorPicker.Trigger aria-label="Overlay color" />
+      <ColorPicker.Trigger aria-label="Overlay color" className={circleTrigger} />
       <ColorPicker.Content>
         <ColorPicker.Picker />
         <ColorPicker.Controls>
@@ -68,7 +71,7 @@ export const Controlled: Story = {
       return (
         <VStack alignItems="flex-start" gap="12">
           <ColorPicker onValueChange={setColor} value={color}>
-            <ColorPicker.Trigger aria-label="Pick a color" />
+            <ColorPicker.Trigger aria-label="Pick a color" className={circleTrigger} />
             <ColorPicker.Content>
               <ColorPicker.Picker />
               <ColorPicker.Controls>

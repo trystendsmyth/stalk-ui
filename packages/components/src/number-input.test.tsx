@@ -51,3 +51,47 @@ test('disables increment at max and decrement at min', () => {
   expect(screen.getByRole('button', { name: 'Increment' })).toBeDisabled()
   expect(screen.getByRole('button', { name: 'Decrement' })).not.toBeDisabled()
 })
+
+test('ignores letters and keeps a numeric value', async () => {
+  const user = userEvent.setup()
+  const onValueChange = vi.fn()
+  render(<NumberInput aria-label="Quantity" onValueChange={onValueChange} />)
+  const field = screen.getByRole('spinbutton')
+  await user.type(field, 'a1b2.c5d')
+  expect(field).toHaveValue('12.5')
+  expect(onValueChange).toHaveBeenLastCalledWith(12.5)
+})
+
+test('blocks the minus sign when min is non-negative', async () => {
+  const user = userEvent.setup()
+  render(<NumberInput aria-label="Quantity" min={0} />)
+  const field = screen.getByRole('spinbutton')
+  await user.type(field, '-5')
+  expect(field).toHaveValue('5')
+})
+
+test('split layout exposes minus and plus controls that step the value', async () => {
+  const user = userEvent.setup()
+  const onValueChange = vi.fn()
+  render(
+    <NumberInput
+      aria-label="Quantity"
+      defaultValue={1}
+      layout="split"
+      onValueChange={onValueChange}
+    />,
+  )
+  await user.click(screen.getByRole('button', { name: 'Increment' }))
+  expect(onValueChange).toHaveBeenLastCalledWith(2)
+  await user.click(screen.getByRole('button', { name: 'Decrement' }))
+  expect(onValueChange).toHaveBeenLastCalledWith(1)
+})
+
+test('formats as currency on blur', async () => {
+  const user = userEvent.setup()
+  render(<NumberInput aria-label="Price" currency="USD" />)
+  const field = screen.getByRole('spinbutton')
+  await user.type(field, '1999.5')
+  await user.tab()
+  expect(field).toHaveValue('$1,999.50')
+})

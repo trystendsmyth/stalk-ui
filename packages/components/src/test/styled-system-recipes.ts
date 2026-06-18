@@ -243,7 +243,29 @@ export const tag = ({
   close: 'stalk-tag__close',
 })
 
-export const numberInput = () => ({
+interface NumberInputRecipeOptions {
+  disabled?: boolean
+  invalid?: boolean
+  layout?: 'stacked' | 'split'
+  size?: 'sm' | 'md' | 'lg'
+}
+
+export const numberInput = ({
+  disabled = false,
+  invalid = false,
+  layout = 'stacked',
+  size = 'md',
+}: NumberInputRecipeOptions = {}) => ({
+  root: [
+    'stalk-number-input__root',
+    `stalk-number-input--${size}`,
+    `stalk-number-input--${layout}`,
+    disabled ? 'stalk-number-input--disabled' : undefined,
+    invalid ? 'stalk-number-input--invalid' : undefined,
+  ]
+    .filter(Boolean)
+    .join(' '),
+  field: 'stalk-number-input__field',
   stepper: 'stalk-number-input__stepper',
   button: 'stalk-number-input__button',
 })
