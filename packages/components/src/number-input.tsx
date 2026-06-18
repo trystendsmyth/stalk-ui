@@ -103,8 +103,12 @@ export const NumberInput = /* @__PURE__ */ forwardRef<HTMLInputElement, NumberIn
     )
 
     const parse = (text: string): number | null => {
-      if (text === '' || text === '-' || text === '.' || text === '-.') return null
-      const n = Number(text)
+      // Strip grouping separators and currency symbols so a formatted display
+      // value (e.g. "$1,999.50") round-trips back to a number for stepping and
+      // clamping — otherwise the steppers reset to 0 when the field is formatted.
+      const cleaned = text.replace(/[^0-9.-]/g, '')
+      if (cleaned === '' || cleaned === '-' || cleaned === '.' || cleaned === '-.') return null
+      const n = Number(cleaned)
       return Number.isFinite(n) ? n : null
     }
 

@@ -95,3 +95,21 @@ test('formats as currency on blur', async () => {
   await user.tab()
   expect(field).toHaveValue('$1,999.50')
 })
+
+test('steppers operate on a currency-formatted value', async () => {
+  const user = userEvent.setup()
+  const onValueChange = vi.fn()
+  render(
+    <NumberInput
+      aria-label="Price"
+      currency="USD"
+      defaultValue={10}
+      onValueChange={onValueChange}
+    />,
+  )
+  const field = screen.getByRole('spinbutton')
+  expect(field).toHaveValue('$10.00')
+  await user.click(screen.getByRole('button', { name: 'Increment' }))
+  expect(onValueChange).toHaveBeenLastCalledWith(11)
+  expect(field).toHaveValue('$11.00')
+})

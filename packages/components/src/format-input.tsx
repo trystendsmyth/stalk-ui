@@ -70,6 +70,12 @@ export interface FormatInputProps extends Omit<
   defaultValue?: string
   /** Selects the input semantics: type, inputMode, autocomplete, and restriction. */
   format: InputFormat
+  /**
+   * Reformat the value on every keystroke (format-as-you-type), after the format's
+   * character restriction runs. The caret is preserved by distance from the end.
+   * e.g. group phone digits: `(v) => v.replace(/(\d{3})(\d)/, '($1) $2')`.
+   */
+  formatValue?: (value: string) => string
   invalid?: boolean
   /** Called whenever blur validation runs: true (valid), false (invalid), or null (empty). */
   onValidityChange?: (valid: boolean | null) => void
@@ -90,6 +96,7 @@ export const FormatInput = /* @__PURE__ */ forwardRef<HTMLInputElement, FormatIn
       defaultValue,
       disabled = false,
       format,
+      formatValue,
       invalid = false,
       onBlur,
       onChange,
@@ -111,10 +118,19 @@ export const FormatInput = /* @__PURE__ */ forwardRef<HTMLInputElement, FormatIn
     const displayValue = isControlled ? value : internal
 
     const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-      const restricted = preset.restrict(event.target.value)
-      // Reflect the restricted value back so disallowed characters never appear.
-      event.target.value = restricted
-      if (!isControlled) setInternal(restricted)
+      const input = event.target
+      const restricted = preset.restrict(input.value)
+      const next = formatValue ? formatValue(restricted) : restricted
+      // Preserve the caret by its distance from the end across the reformat.
+      const fromEnd = input.value.length - (input.selectionStart ?? input.value.length)
+      input.value = next
+      const caret = Math.max(0, next.length - fromEnd)
+      try {
+        input.setSelectionRange(caret, caret)
+      } catch {
+        // Some states (e.g. number inputs) reject setSelectionRange; ignore.
+      }
+      if (!isControlled) setInternal(next)
       if (validity !== 'idle') setValidity('idle')
       onChange?.(event)
     }

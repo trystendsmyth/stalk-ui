@@ -33,6 +33,11 @@ export interface TagsInputProps {
   allowDuplicates?: boolean
   className?: string
   defaultValue?: string[]
+  /**
+   * Format/normalize each entry before it becomes a tag (e.g. trim + lowercase an
+   * email). Return an empty string to reject the entry. Applied per tag.
+   */
+  formatTag?: (value: string) => string
   disabled?: boolean
   id?: string
   invalid?: boolean
@@ -61,6 +66,7 @@ export const TagsInput = /* @__PURE__ */ forwardRef<HTMLInputElement, TagsInputP
       className,
       defaultValue,
       disabled = false,
+      formatTag,
       id,
       invalid = false,
       max,
@@ -94,8 +100,11 @@ export const TagsInput = /* @__PURE__ */ forwardRef<HTMLInputElement, TagsInputP
         .filter(Boolean)
       if (candidates.length === 0) return
       const next = [...tags]
-      for (const candidate of candidates) {
+      for (const entry of candidates) {
         if (max !== undefined && next.length >= max) break
+        // Format/validate per tag; an empty result rejects the entry.
+        const candidate = formatTag ? formatTag(entry) : entry
+        if (!candidate) continue
         if (!allowDuplicates && next.includes(candidate)) continue
         next.push(candidate)
       }

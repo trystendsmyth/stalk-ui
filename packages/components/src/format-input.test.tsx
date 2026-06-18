@@ -60,6 +60,23 @@ test('marks the field invalid on blur when the value is malformed', async () => 
   expect(onValidityChange).toHaveBeenLastCalledWith(false)
 })
 
+test('formats as you type via formatValue', async () => {
+  const user = userEvent.setup()
+  render(
+    <FormatInput
+      aria-label="Phone"
+      format="tel"
+      formatValue={(v) => {
+        const d = v.replace(/\D/g, '')
+        return d.length > 3 ? `${d.slice(0, 3)}-${d.slice(3)}` : d
+      }}
+    />,
+  )
+  const field = screen.getByLabelText('Phone')
+  await user.type(field, '1234567')
+  expect(field).toHaveValue('123-4567')
+})
+
 test('lowercases and trims email on blur', async () => {
   const user = userEvent.setup()
   render(<FormatInput aria-label="Email" format="email" />)

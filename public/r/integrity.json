@@ -220,11 +220,11 @@
     },
     "format-input": {
       "path": "/r/format-input.json",
-      "sha256": "140fbdcd10a8f0e2676ca3f5ab65a4b5f324375d6052b35e3effba90f98f1305"
+      "sha256": "fe61812fd8a320cba69c2f85d4e7cf4ea4e4ca9c8685468730e5d9a2b3b64175"
     },
     "shadcn/format-input": {
       "path": "/r/shadcn/format-input.json",
-      "sha256": "201d7a51e4d5a16a62e5b44064930c7eadecd6d3a3758ca00b36d131c9956b49"
+      "sha256": "1fbedb6c8339e64ecff527edaeddd051c340a77a8cd5e4311151ce4506d0256a"
     },
     "heading": {
       "path": "/r/heading.json",
@@ -292,11 +292,11 @@
     },
     "number-input": {
       "path": "/r/number-input.json",
-      "sha256": "377689ff51c3dc4a12f312e9dca7685d23f0eeb4e8345a2779c7c253fc2b650a"
+      "sha256": "ba86928a6831aa97fff319cd310a024640e7a5c38b767c9766be9df4a58255b9"
     },
     "shadcn/number-input": {
       "path": "/r/shadcn/number-input.json",
-      "sha256": "9b076ec2ec1ba86bb6af687f6c2cb58772334cade5db60dc6cf874ff7779339e"
+      "sha256": "57c4a96f079f05664a2372c2b9bea84d332f856e9111550c2b7c8817a2f638a1"
     },
     "otp-input": {
       "path": "/r/otp-input.json",
@@ -476,11 +476,11 @@
     },
     "tags-input": {
       "path": "/r/tags-input.json",
-      "sha256": "20793f456c372630b1bf7fca22f4f2735c96e7ff6b55e967767961e43aacdb71"
+      "sha256": "5e1da5f7edc6da62fec21d306f97e59d5b2770a8af05ab819c139415b43d46b0"
     },
     "shadcn/tags-input": {
       "path": "/r/shadcn/tags-input.json",
-      "sha256": "8d53412d8727a61abc1025c609869e0fe6a128ec9664375224b9b9162783bc5e"
+      "sha256": "f914fea4082aac4b7ebcf1f05ad43334a63d0e2a1caca6d5f95077eede69e028"
     },
     "text": {
       "path": "/r/text.json",

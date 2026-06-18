@@ -39,6 +39,26 @@ test('removes a tag via its remove button', async () => {
   expect(onValueChange).toHaveBeenLastCalledWith(['b'])
 })
 
+test('formats each tag via formatTag and rejects empty results', async () => {
+  const user = userEvent.setup()
+  const onValueChange = vi.fn()
+  render(
+    <TagsInput
+      aria-label="Emails"
+      formatTag={(v) => (v.includes('@') ? v.trim().toLowerCase() : '')}
+      onValueChange={onValueChange}
+    />,
+  )
+  const field = screen.getByRole('textbox')
+  // Rejected: no '@'.
+  await user.type(field, 'not-an-email{Enter}')
+  expect(onValueChange).not.toHaveBeenCalled()
+  // Formatted: trimmed + lowercased.
+  await user.type(field, 'ADA@Example.com{Enter}')
+  expect(onValueChange).toHaveBeenLastCalledWith(['ada@example.com'])
+  expect(screen.getByText('ada@example.com')).toBeInTheDocument()
+})
+
 test('ignores duplicates by default', async () => {
   const user = userEvent.setup()
   const onValueChange = vi.fn()

@@ -51,3 +51,21 @@ export const Formats: Story = {
 export const WithValidity: Story = {
   args: { showValidity: true, validLabel: 'Valid email' },
 }
+
+export const FormatAsYouType: Story = {
+  args: {
+    'aria-label': 'Phone',
+    format: 'tel',
+    placeholder: '(555) 000-0000',
+    formatValue: (value) => {
+      const d = value.replace(/\D/g, '').slice(0, 10)
+      const area = d.slice(0, 3)
+      const prefix = d.slice(3, 6)
+      const line = d.slice(6, 10)
+      if (d.length > 6) return `(${area}) ${prefix}-${line}`
+      if (d.length > 3) return `(${area}) ${prefix}`
+      if (d.length > 0) return `(${area}`
+      return ''
+    },
+  },
+}

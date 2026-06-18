@@ -65,3 +65,16 @@ export const MaxAndTone: Story = {
 export const Disabled: Story = {
   args: { defaultValue: ['locked', 'readonly'], disabled: true },
 }
+
+export const PerTagFormat: Story = {
+  args: {
+    'aria-label': 'Recipients',
+    defaultValue: ['ada@stalk-ui.com'],
+    placeholder: 'Add an email…',
+    // Normalize valid emails; reject anything else by returning an empty string.
+    formatTag: (value) => {
+      const trimmed = value.trim().toLowerCase()
+      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmed) ? trimmed : ''
+    },
+  },
+}
