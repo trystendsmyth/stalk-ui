@@ -47,7 +47,8 @@ const componentDescriptions = {
   'alert-dialog': 'Interrupts with a modal that requires an explicit confirm or cancel.',
   'aspect-ratio': 'Constrains content to a fixed width-to-height ratio.',
   avatar: 'Represents a user or entity with an image, initials, or fallback content.',
-  badge: 'Displays compact status or metadata.',
+  badge:
+    'Displays compact, non-interactive status or metadata. For actionable or removable labels, use Tag.',
   blockquote: 'Sets apart a quotation as a distinct block.',
   breadcrumb: 'Shows the path to the current page as a navigable trail.',
   button: 'Triggers an action or submits a form.',
@@ -58,6 +59,8 @@ const componentDescriptions = {
   checkbox: 'Toggles a binary option in a form or settings surface.',
   code: 'Marks inline code or a short command within running text.',
   collapsible: 'Toggles the visibility of a single content region.',
+  'color-picker':
+    'Picks a color via a saturation area, hue/alpha sliders, hex input, and swatches.',
   combobox: 'Selects a value from a searchable list in a popover.',
   command: 'Provides a searchable, keyboard-driven command palette.',
   'context-menu': 'Reveals a menu of actions on right-click or long-press.',
@@ -68,6 +71,8 @@ const componentDescriptions = {
   dialog: 'Displays modal content in a focus-trapped overlay.',
   'dropdown-menu': 'Displays a keyboard-accessible menu of actions from a trigger.',
   form: 'Wires react-hook-form fields to accessible labels, descriptions, and errors.',
+  'format-input':
+    'A text field preset for email, URL, or telephone — sets type, inputMode, and autocomplete.',
   heading: 'Titles a section with a semantic heading level.',
   'hover-card': 'Previews rich content when a link or control is hovered or focused.',
   input: 'Collects short-form text from a user.',
@@ -76,7 +81,10 @@ const componentDescriptions = {
   link: 'Navigates to another page or resource.',
   menubar: 'Provides a persistent menu surface for top-level application commands.',
   'navigation-menu': 'Presents site navigation with links and rich dropdown panels.',
+  'number-input':
+    'Collects a number with steppers, keyboard control, clamping, and Intl formatting.',
   'otp-input': 'Collects a one-time passcode across discrete, auto-advancing slots.',
+  'password-input': 'A password field with a reveal toggle, focus return, and reset-on-submit.',
   'phone-input':
     'Collects an international phone number with a country selector and live formatting.',
   pagination: 'Navigates between pages of a large, split data set.',
@@ -86,6 +94,8 @@ const componentDescriptions = {
   radio: 'Selects one option from a related set of choices.',
   resizable: 'Splits a layout into panels a user can resize by dragging.',
   'scroll-area': 'Adds a styled, cross-browser scroll viewport with custom scrollbars.',
+  'search-input':
+    'A search field with a leading icon, clear button, and optional debounced changes.',
   select: 'Lets a user choose one option from a native menu.',
   separator: 'Divides content with a horizontal or vertical rule.',
   sheet: 'Slides a panel in from a screen edge for secondary content or forms.',
@@ -96,7 +106,8 @@ const componentDescriptions = {
   switch: 'Toggles a setting on or off.',
   table: 'Presents rows and columns of data in an accessible HTML table.',
   tabs: 'Organizes related content into selectable panels.',
-  tag: 'Labels content with a compact, optionally interactive chip.',
+  tag: 'An interactive chip — clickable, removable, with optional avatar, icon, or count. Use over Badge when the label is actionable.',
+  'tags-input': 'Collects multiple values as removable Tag chips with keyboard and paste entry.',
   text: 'Renders body text with consistent size, weight, and tone.',
   'time-picker': 'Selects a time of day with hour, minute, and AM/PM selects.',
   textarea: 'Collects multi-line text from a user.',

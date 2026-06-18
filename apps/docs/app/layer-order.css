@@ -1,0 +1,21 @@
+/*
+ * Master cascade-layer order — MUST be imported before any other stylesheet
+ * (fumadocs-ui, Panda's styled-system, page chrome).
+ *
+ * The first `@layer` statement the browser sees fixes layer precedence; every
+ * later statement can only append *new* names at the end. fumadocs-ui ships
+ * Tailwind v4 and declares `@layer theme, base, components, utilities` — and it
+ * is imported first. Without this file, Panda's later
+ * `@layer reset, base, tokens, recipes, utilities` appends `reset`, `tokens`,
+ * and `recipes` to the END of the order, hoisting Panda's `reset` layer (which
+ * resets `h1…h6 { font-size: inherit; font-weight: inherit }`) *above* `base`.
+ * That reset then wins over every page-chrome heading, leaving bare headings at
+ * default 1rem/400 — the "broken text styles" regression.
+ *
+ * Declaring the union order up front restores each library's intended cascade:
+ *  - Panda:  reset < base < tokens < recipes < utilities
+ *  - Tailwind/fumadocs: theme < base < components < utilities
+ * so component recipe styles still beat page-chrome headings (Dialog/Sheet
+ * titles render as <h2>), while Panda's reset no longer clobbers base.
+ */
+@layer properties, theme, reset, base, tokens, components, recipes, utilities;

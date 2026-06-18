@@ -16,6 +16,7 @@ import { ChartContainer, ChartLegendContent, ChartTooltipContent } from '@stalk-
 import { Checkbox } from '@stalk-ui/components/checkbox'
 import { Code } from '@stalk-ui/components/code'
 import { Collapsible } from '@stalk-ui/components/collapsible'
+import { ColorPicker } from '@stalk-ui/components/color-picker'
 import { Combobox } from '@stalk-ui/components/combobox'
 import { Command } from '@stalk-ui/components/command'
 import { ContextMenu } from '@stalk-ui/components/context-menu'
@@ -34,6 +35,7 @@ import {
   FormLabel,
   FormMessage,
 } from '@stalk-ui/components/form'
+import { FormatInput } from '@stalk-ui/components/format-input'
 import { Heading } from '@stalk-ui/components/heading'
 import { HoverCard } from '@stalk-ui/components/hover-card'
 import { Input } from '@stalk-ui/components/input'
@@ -42,8 +44,10 @@ import { Label } from '@stalk-ui/components/label'
 import { Link } from '@stalk-ui/components/link'
 import { Menubar } from '@stalk-ui/components/menubar'
 import { NavigationMenu } from '@stalk-ui/components/navigation-menu'
+import { NumberInput } from '@stalk-ui/components/number-input'
 import { OtpInput } from '@stalk-ui/components/otp-input'
 import { Pagination } from '@stalk-ui/components/pagination'
+import { PasswordInput } from '@stalk-ui/components/password-input'
 import { PhoneInput } from '@stalk-ui/components/phone-input'
 import { Popover } from '@stalk-ui/components/popover'
 import { Progress } from '@stalk-ui/components/progress'
@@ -51,6 +55,7 @@ import { QrCode } from '@stalk-ui/components/qr-code'
 import { Radio } from '@stalk-ui/components/radio'
 import { Resizable } from '@stalk-ui/components/resizable'
 import { ScrollArea } from '@stalk-ui/components/scroll-area'
+import { SearchInput } from '@stalk-ui/components/search-input'
 import { Select } from '@stalk-ui/components/select'
 import { Separator } from '@stalk-ui/components/separator'
 import { Sheet } from '@stalk-ui/components/sheet'
@@ -62,6 +67,7 @@ import { Switch } from '@stalk-ui/components/switch'
 import { Table } from '@stalk-ui/components/table'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@stalk-ui/components/tabs'
 import { Tag } from '@stalk-ui/components/tag'
+import { TagsInput } from '@stalk-ui/components/tags-input'
 import { Text } from '@stalk-ui/components/text'
 import { Textarea } from '@stalk-ui/components/textarea'
 import { TimePicker } from '@stalk-ui/components/time-picker'
@@ -198,6 +204,7 @@ const liveScope = {
   Checkbox,
   Code,
   Collapsible,
+  ColorPicker,
   Combobox,
   Command,
   ContextMenu,
@@ -216,6 +223,7 @@ const liveScope = {
   FormItem,
   FormLabel,
   FormMessage,
+  FormatInput,
   Heading,
   Home,
   HoverCard,
@@ -228,8 +236,10 @@ const liveScope = {
   Menubar,
   InvoiceTable,
   NavigationMenu,
+  NumberInput,
   OtpInput,
   Pagination,
+  PasswordInput,
   PhoneInput,
   Popover,
   ProfileForm,
@@ -238,6 +248,7 @@ const liveScope = {
   Radio,
   Resizable,
   ScrollArea,
+  SearchInput,
   Select,
   Separator,
   Settings,
@@ -253,6 +264,7 @@ const liveScope = {
   TabsList,
   TabsTrigger,
   Tag,
+  TagsInput,
   Text,
   Textarea,
   TimePicker,

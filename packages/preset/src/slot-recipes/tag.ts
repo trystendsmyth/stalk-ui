@@ -2,8 +2,8 @@ import type { RecipeConfig } from '../types'
 
 export const tag = {
   className: 'stalk-tag',
-  description: 'Slot recipe for the Tag component (root, label, count, close).',
-  slots: ['root', 'label', 'count', 'close'],
+  description: 'Slot recipe for the Tag component (root, avatar, icon, label, count, close).',
+  slots: ['root', 'avatar', 'icon', 'label', 'count', 'close'],
   base: {
     root: {
       alignItems: 'center',
@@ -17,6 +17,34 @@ export const tag = {
       transitionProperty: 'background-color, border-color, color',
       verticalAlign: 'middle',
       whiteSpace: 'nowrap',
+    },
+    // Signature chip avatar: a circular media slot that fills the pill height and
+    // sits flush against the leading edge (negative inline-start margin).
+    avatar: {
+      alignItems: 'center',
+      bgColor: 'colorPalette.muted',
+      color: 'colorPalette.fg',
+      display: 'inline-flex',
+      flexShrink: 0,
+      fontWeight: 'semibold',
+      justifyContent: 'center',
+      lineHeight: 1,
+      overflow: 'hidden',
+      rounded: 'full',
+      '& img': {
+        aspectRatio: 'square',
+        h: 'full',
+        objectFit: 'cover',
+        w: 'full',
+      },
+    },
+    icon: {
+      alignItems: 'center',
+      color: 'inherit',
+      display: 'inline-flex',
+      flexShrink: 0,
+      justifyContent: 'center',
+      '& > svg': { h: 'full', w: 'full' },
     },
     label: {
       alignItems: 'center',
@@ -62,6 +90,7 @@ export const tag = {
         focusRingOffsetColor: 'bg.default',
         opacity: 1,
       },
+      _disabled: { cursor: 'not-allowed' },
       '& > svg': {
         flexShrink: 0,
         h: '10',
@@ -73,16 +102,22 @@ export const tag = {
     size: {
       sm: {
         root: { fontSize: 'xs', minH: '20', px: '6' },
+        avatar: { h: '16', w: '16', marginInlineStart: '-2', fontSize: '2xs' },
+        icon: { h: '12', w: '12' },
         count: { fontSize: '2xs', h: '14', minW: '14', px: '4' },
         close: { h: '14', w: '14', '& > svg': { h: '8', w: '8' } },
       },
       md: {
         root: { fontSize: 'sm', minH: '24', px: '8' },
+        avatar: { h: '18', w: '18', marginInlineStart: '-3', fontSize: '2xs' },
+        icon: { h: '14', w: '14' },
         count: { fontSize: '2xs', h: '16', minW: '16', px: '4' },
         close: { h: '16', w: '16', '& > svg': { h: '10', w: '10' } },
       },
       lg: {
         root: { fontSize: 'sm', minH: '28', px: '10' },
+        avatar: { h: '22', w: '22', marginInlineStart: '-4', fontSize: 'xs' },
+        icon: { h: '16', w: '16' },
         count: { fontSize: 'xs', h: '18', minW: '18', px: '6' },
         close: { h: '18', w: '18', '& > svg': { h: '12', w: '12' } },
       },
@@ -97,6 +132,7 @@ export const tag = {
     variant: {
       solid: {
         root: { bgColor: 'colorPalette.solid', color: 'colorPalette.contrast' },
+        avatar: { bgColor: 'colorPalette.contrast/20', color: 'colorPalette.contrast' },
         count: { bgColor: 'colorPalette.contrast/20', color: 'colorPalette.contrast' },
         close: { _hover: { bgColor: 'colorPalette.contrast/15' } },
       },
@@ -129,9 +165,15 @@ export const tag = {
       },
       false: {},
     },
+    disabled: {
+      true: {
+        root: { cursor: 'not-allowed', opacity: 0.5, _hover: { bgColor: 'colorPalette.subtle' } },
+      },
+      false: {},
+    },
     dot: {
       true: {
-        label: {
+        root: {
           _before: {
             content: '""',
             display: 'inline-block',
@@ -147,6 +189,7 @@ export const tag = {
     },
   },
   defaultVariants: {
+    disabled: false,
     dot: false,
     interactive: false,
     radius: 'full',

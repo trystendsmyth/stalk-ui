@@ -130,6 +130,14 @@
       "path": "/r/shadcn/collapsible.json",
       "sha256": "7d5868a5f7c17f9d209ffdeba20230226918d73fda0e5a39d3620868d76f4e76"
     },
+    "color-picker": {
+      "path": "/r/color-picker.json",
+      "sha256": "286f2eaa246d4198f338c755f7a3a315c3f64de341018c9fe0affbbce007fedd"
+    },
+    "shadcn/color-picker": {
+      "path": "/r/shadcn/color-picker.json",
+      "sha256": "6cfc87e216108438acd40ab8465899cabe660f1eb30b80272f2ca7ff7f8be5ce"
+    },
     "combobox": {
       "path": "/r/combobox.json",
       "sha256": "b3c2cbc7c0a0e1b3eee169233a0df2ecd95bd22de61c22c433094413e17f230f"
@@ -210,6 +218,14 @@
       "path": "/r/shadcn/form.json",
       "sha256": "a94e835c40ca21ea5ecfef19cadce71f7f71b242f42a39cf693cc61be8573283"
     },
+    "format-input": {
+      "path": "/r/format-input.json",
+      "sha256": "7881c11ab30afd35264e9dcd578cfe525f66a8901239a259ea33f5d4df1a1abe"
+    },
+    "shadcn/format-input": {
+      "path": "/r/shadcn/format-input.json",
+      "sha256": "6848688860b326068101cf3656c719332250e29dd63d675fd8734d4a2e2ae1b8"
+    },
     "heading": {
       "path": "/r/heading.json",
       "sha256": "807e7ce68f48bfa86de77eccdcd0981804cac43e3a1973b4a5a1aaaf70f5ea0a"
@@ -274,6 +290,14 @@
       "path": "/r/shadcn/navigation-menu.json",
       "sha256": "37261b79ee771f4b3cbe2cc8d0e4ccbd4a5e750ef895c0280a5c98eb7611c62c"
     },
+    "number-input": {
+      "path": "/r/number-input.json",
+      "sha256": "eae652d3b5fd963070f9749facf3a3d9ac9a679814bf0548ed4f1e490ea8ce8e"
+    },
+    "shadcn/number-input": {
+      "path": "/r/shadcn/number-input.json",
+      "sha256": "237df36160ab9f143d1b466b5caf037faab3b1b3b682cf6f95b3960917dd69af"
+    },
     "otp-input": {
       "path": "/r/otp-input.json",
       "sha256": "22de379b250852b2405167a7adfa17effb26fcc9fe5539736b13b71656c41443"
@@ -289,6 +313,14 @@
     "shadcn/pagination": {
       "path": "/r/shadcn/pagination.json",
       "sha256": "45cb5a0fe77f054456b979e999aa14c1582fca21a5f54f4c61939b4b27fb37b2"
+    },
+    "password-input": {
+      "path": "/r/password-input.json",
+      "sha256": "5396c988c8d5c7d0aaafa4f95d44c64b037fc1feace1c2827e9b73480914602c"
+    },
+    "shadcn/password-input": {
+      "path": "/r/shadcn/password-input.json",
+      "sha256": "832c95eae767aa0ea75c342e96d0a41bec6e2ae5fc22002cf3ed9881253d0eba"
     },
     "phone-input": {
       "path": "/r/phone-input.json",
@@ -345,6 +377,14 @@
     "shadcn/scroll-area": {
       "path": "/r/shadcn/scroll-area.json",
       "sha256": "a4fc6e2f4149df270568a71780ee15cf1e1e6ebd993de1410af1d52ac27c253f"
+    },
+    "search-input": {
+      "path": "/r/search-input.json",
+      "sha256": "04331449c6d99c6fb0f85ac652f94fdc458050e81c7d229dd6e81d75f8c7c9f2"
+    },
+    "shadcn/search-input": {
+      "path": "/r/shadcn/search-input.json",
+      "sha256": "1b712c3fb49013199a2b2c76426814c3e06bf7a838f5bb7e5499c17532fc0a85"
     },
     "select": {
       "path": "/r/select.json",
@@ -428,11 +468,19 @@
     },
     "tag": {
       "path": "/r/tag.json",
-      "sha256": "04549cdb674b9dc4d53d9992e63b8d3f8403d67b80527a794add2411b59301ba"
+      "sha256": "688493efbb2a912cd2caebf7130611a3be323a98d5c81f934c914c1b75fd2498"
     },
     "shadcn/tag": {
       "path": "/r/shadcn/tag.json",
-      "sha256": "9f8bf2382b75284c965367cf5ced34be61cab3098eb02641a7130b5650d3a42d"
+      "sha256": "0d55eb3eae6831a796c76d26a918faceb0f1cddaa5d4a6a7d1dacdd4d8c7c29d"
+    },
+    "tags-input": {
+      "path": "/r/tags-input.json",
+      "sha256": "20793f456c372630b1bf7fca22f4f2735c96e7ff6b55e967767961e43aacdb71"
+    },
+    "shadcn/tags-input": {
+      "path": "/r/shadcn/tags-input.json",
+      "sha256": "8d53412d8727a61abc1025c609869e0fe6a128ec9664375224b9b9162783bc5e"
     },
     "text": {
       "path": "/r/text.json",

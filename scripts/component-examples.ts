@@ -67,6 +67,10 @@ export const componentExamples = {
     '<Collapsible>\n  <Collapsible.Trigger>Show details</Collapsible.Trigger>\n  <Collapsible.Content>Hidden content that toggles open.</Collapsible.Content>\n</Collapsible>',
     '<Collapsible defaultOpen>\n  <Collapsible.Trigger>Toggle</Collapsible.Trigger>\n  <Collapsible.Content>Visible from the start.</Collapsible.Content>\n</Collapsible>',
   ],
+  'color-picker': [
+    '<ColorPicker defaultValue="#4f46e5">\n  <ColorPicker.Trigger aria-label="Brand color" />\n  <ColorPicker.Content>\n    <ColorPicker.Picker />\n    <ColorPicker.Controls>\n      <ColorPicker.Input aria-label="Hex value" />\n      <ColorPicker.EyeDropper />\n    </ColorPicker.Controls>\n    <ColorPicker.Swatches>\n      <ColorPicker.Swatch color="#ef4444" />\n      <ColorPicker.Swatch color="#f97316" />\n      <ColorPicker.Swatch color="#22c55e" />\n      <ColorPicker.Swatch color="#3b82f6" />\n      <ColorPicker.Swatch color="#8b5cf6" />\n    </ColorPicker.Swatches>\n  </ColorPicker.Content>\n</ColorPicker>',
+    '<ColorPicker alpha defaultValue="#4f46e5cc">\n  <ColorPicker.Trigger aria-label="Overlay color" />\n  <ColorPicker.Content>\n    <ColorPicker.Picker />\n    <ColorPicker.Controls>\n      <ColorPicker.Input aria-label="Hex value" />\n    </ColorPicker.Controls>\n  </ColorPicker.Content>\n</ColorPicker>',
+  ],
   combobox: ['<FrameworkCombobox />'],
   command: [
     '<Command label="Command menu" style={{ maxWidth: "24rem", border: "1px solid" }}>\n  <Command.Input aria-label="Search commands" placeholder="Type a command or search…" />\n  <Command.List>\n    <Command.Empty>No results found.</Command.Empty>\n    <Command.Group heading="Suggestions">\n      <Command.Item>Calendar</Command.Item>\n      <Command.Item>Search emoji</Command.Item>\n    </Command.Group>\n    <Command.Separator />\n    <Command.Group heading="Settings">\n      <Command.Item>Profile<Command.Shortcut>⌘P</Command.Shortcut></Command.Item>\n      <Command.Item>Settings<Command.Shortcut>⌘S</Command.Shortcut></Command.Item>\n    </Command.Group>\n  </Command.List>\n</Command>',
@@ -95,6 +99,11 @@ export const componentExamples = {
     '<DropdownMenu.Root>\n  <DropdownMenu.Trigger>View</DropdownMenu.Trigger>\n  <DropdownMenu.Content>\n    <DropdownMenu.CheckboxItem defaultChecked>Show toolbar</DropdownMenu.CheckboxItem>\n    <DropdownMenu.CheckboxItem>Show sidebar</DropdownMenu.CheckboxItem>\n  </DropdownMenu.Content>\n</DropdownMenu.Root>',
   ],
   form: ['<ProfileForm />'],
+  'format-input': [
+    '<FormatInput aria-label="Email" format="email" placeholder="you@stalk-ui.com" />',
+    '<FormatInput aria-label="Website" format="url" placeholder="https://stalk-ui.com" />',
+    '<FormatInput aria-label="Email" format="email" showValidity placeholder="Type a valid email" />',
+  ],
   heading: [
     '<Heading as="h1">Page title</Heading>',
     '<Heading as="h2">Section heading</Heading>',
@@ -130,11 +139,20 @@ export const componentExamples = {
   'navigation-menu': [
     '<NavigationMenu.Root>\n  <NavigationMenu.List>\n    <NavigationMenu.Item>\n      <NavigationMenu.Trigger>Products</NavigationMenu.Trigger>\n      <NavigationMenu.Content>\n        <ul style={{ minWidth: "14rem" }}>\n          <li><NavigationMenu.Link href="#">Analytics</NavigationMenu.Link></li>\n          <li><NavigationMenu.Link href="#">Automation</NavigationMenu.Link></li>\n          <li><NavigationMenu.Link href="#">Reports</NavigationMenu.Link></li>\n        </ul>\n      </NavigationMenu.Content>\n    </NavigationMenu.Item>\n    <NavigationMenu.Item>\n      <NavigationMenu.Link href="#">Pricing</NavigationMenu.Link>\n    </NavigationMenu.Item>\n  </NavigationMenu.List>\n</NavigationMenu.Root>',
   ],
+  'number-input': [
+    '<NumberInput aria-label="Quantity" defaultValue={1} min={0} max={10} />',
+    '<NumberInput aria-label="Step by 5" defaultValue={10} step={5} />',
+    '<NumberInput aria-label="Price" defaultValue={19.99} step={0.5} formatOptions={{ style: "currency", currency: "USD" }} />',
+  ],
   'otp-input': [
     '<OtpInput maxLength={6} aria-label="One-time passcode">\n  <OtpInput.Group>\n    <OtpInput.Slot index={0} />\n    <OtpInput.Slot index={1} />\n    <OtpInput.Slot index={2} />\n  </OtpInput.Group>\n  <OtpInput.Separator />\n  <OtpInput.Group>\n    <OtpInput.Slot index={3} />\n    <OtpInput.Slot index={4} />\n    <OtpInput.Slot index={5} />\n  </OtpInput.Group>\n</OtpInput>',
   ],
   pagination: [
     '<Pagination>\n  <Pagination.Content>\n    <Pagination.Item>\n      <Pagination.Previous href="#" />\n    </Pagination.Item>\n    <Pagination.Item>\n      <Pagination.Link href="#">1</Pagination.Link>\n    </Pagination.Item>\n    <Pagination.Item>\n      <Pagination.Link href="#" isActive>2</Pagination.Link>\n    </Pagination.Item>\n    <Pagination.Item>\n      <Pagination.Link href="#">3</Pagination.Link>\n    </Pagination.Item>\n    <Pagination.Item>\n      <Pagination.Ellipsis />\n    </Pagination.Item>\n    <Pagination.Item>\n      <Pagination.Next href="#" />\n    </Pagination.Item>\n  </Pagination.Content>\n</Pagination>',
+  ],
+  'password-input': [
+    '<PasswordInput aria-label="Password" placeholder="Enter your password" />',
+    '<PasswordInput aria-label="Password" defaultValue="hunter2" invalid />',
   ],
   'phone-input': ['<PhoneInput aria-label="Phone number" defaultCountry="us" />'],
   popover: [
@@ -153,6 +171,10 @@ export const componentExamples = {
   radio: [
     '<Radio.Root defaultValue="basic" name="plan">\n  <Radio.Item value="basic" aria-label="Basic" />\n  <Radio.Item value="pro" aria-label="Pro" />\n  <Radio.Item value="team" aria-label="Team" />\n</Radio.Root>',
     '<Radio.Root name="plan-invalid">\n  <Radio.Item invalid value="required" aria-label="Required choice" />\n</Radio.Root>',
+  ],
+  'search-input': [
+    '<SearchInput aria-label="Search" placeholder="Search…" />',
+    '<SearchInput aria-label="Search" defaultValue="design system" />',
   ],
   select: [
     '<Select.Root>\n  <Select.Trigger aria-label="Status"><Select.Value placeholder="Choose a status" /></Select.Trigger>\n  <Select.Content>\n    <Select.Item value="draft">Draft</Select.Item>\n    <Select.Item value="published">Published</Select.Item>\n    <Select.Item value="archived">Archived</Select.Item>\n  </Select.Content>\n</Select.Root>',
@@ -220,10 +242,15 @@ export const componentExamples = {
     '<Tabs defaultValue="a" variant="pills">\n  <TabsList>\n    <TabsTrigger value="a">All</TabsTrigger>\n    <TabsTrigger value="b">Open</TabsTrigger>\n    <TabsTrigger value="c">Closed</TabsTrigger>\n  </TabsList>\n  <TabsContent value="a">All issues.</TabsContent>\n  <TabsContent value="b">Open issues.</TabsContent>\n  <TabsContent value="c">Closed issues.</TabsContent>\n</Tabs>',
   ],
   tag: [
-    '<Tag>Frontend</Tag>',
-    '<Tag tone="success" dot>Online</Tag>',
-    '<Tag tone="danger" count={12}>Errors</Tag>',
-    '<Tag variant="outline" onClose={() => {}}>Removable</Tag>',
+    '<Tag><Tag.Label>Frontend</Tag.Label></Tag>',
+    '<Tag tone="success" dot><Tag.Label>Online</Tag.Label></Tag>',
+    '<Tag tone="danger">\n  <Tag.Label>Errors</Tag.Label>\n  <Tag.Count>12</Tag.Count>\n</Tag>',
+    '<Tag size="lg">\n  <Tag.Avatar>AB</Tag.Avatar>\n  <Tag.Label>Ada Byron</Tag.Label>\n</Tag>',
+    '<Tag variant="outline" onClose={() => {}}>\n  <Tag.Label>Removable</Tag.Label>\n  <Tag.Close />\n</Tag>',
+  ],
+  'tags-input': [
+    '<TagsInput aria-label="Tags" defaultValue={["design", "engineering"]} placeholder="Add a tag…" />',
+    '<TagsInput aria-label="Tags" defaultValue={["one", "two"]} max={5} tone="success" />',
   ],
   toast: [
     "<>\n  <Button onClick={() => toast('Project saved')}>Show toast</Button>\n  <Toaster />\n</>",

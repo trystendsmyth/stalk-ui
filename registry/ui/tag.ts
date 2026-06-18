@@ -5,5 +5,6 @@ export const tag = defineRegistryItem({
   filePath: 'src/components/ui/tag.tsx',
   name: 'tag',
   recipes: ['tag'],
+  registryDependencies: ['create-style-context'],
   sourcePath: 'packages/components/src/tag.tsx',
 })

@@ -1,3 +1,5 @@
+import './layer-order.css'
+
 import { Analytics } from '@vercel/analytics/next'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 import { RootProvider } from 'fumadocs-ui/provider/next'
