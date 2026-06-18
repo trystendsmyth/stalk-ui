@@ -2734,26 +2734,24 @@
 
     .stalk-color-picker__picker .react-colorful {
       gap: var(--spacing-10);
-      display: flex;
-      flex-direction: column;
-      height: auto;
-      width: var(--sizes-full);
+      height: auto !important;
+      width: 100% !important;
 }
 
     .stalk-color-picker__picker .react-colorful__saturation {
-      border-radius: var(--radii-md);
-      border-bottom-width: 0;
-      height: 150px;
+      border-radius: var(--radii-md) !important;
+      border-bottom-width: 0 !important;
+      height: 156px !important;
 }
 
     .stalk-color-picker__picker .react-colorful__hue,.stalk-color-picker__picker .react-colorful__alpha {
-      border-radius: var(--radii-full);
-      height: 12px;
+      border-radius: var(--radii-full) !important;
+      height: 14px !important;
 }
 
     .stalk-color-picker__picker .react-colorful__pointer {
-      height: 16px;
-      width: 16px;
+      height: 18px !important;
+      width: 18px !important;
 }
 
     .stalk-color-picker__controls {
