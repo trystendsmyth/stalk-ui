@@ -5,5 +5,6 @@ export const avatar = defineRegistryItem({
   filePath: 'src/components/ui/avatar.tsx',
   name: 'avatar',
   recipes: ['avatar'],
+  registryDependencies: ['tones'],
   sourcePath: 'packages/components/src/avatar.tsx',
 })

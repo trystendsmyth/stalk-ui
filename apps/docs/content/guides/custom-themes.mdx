@@ -3,49 +3,121 @@ title: Custom Themes
 description: How to add your own themes to Stalk UI.
 ---
 
-Stalk UI themes are PandaCSS themes registered alongside the preset. Keep the
-Stalk preset as a string reference, then add your own theme in the consumer
-`panda.config.ts`:
+A Stalk theme is a PandaCSS theme variant — a set of `semanticTokens` (and
+optionally raw `tokens`) registered alongside the preset and applied with
+`data-panda-theme`. There are two ways to build one.
 
-```ts
+## The easy way: `defineTheme`
+
+`@stalk-ui/preset/theme` exports `defineTheme`, which generates the **entire**
+semantic color surface (background, foreground, border, accent, status, and
+highlight) from a couple of Radix scale names — so you don't have to hand-author
+every token. It can also re-scale fonts, radii, and the type scale.
+
+```ts title="panda.config.ts"
 import { defineConfig } from '@pandacss/dev'
+import { defineTheme } from '@stalk-ui/preset/theme'
 
 export default defineConfig({
   preflight: true,
   presets: ['@stalk-ui/preset'],
   themes: {
-    midnight: {
-      semanticTokens: {
-        colors: {
-          accent: {
-            solid: {
-              value: {
-                base: '{colors.indigo.9}',
-                _dark: '{colors.indigoDark.9}',
-              },
-            },
-            contrast: {
-              value: {
-                base: '{colors.gray.1}',
-                _dark: '{colors.grayDark.12}',
-              },
-            },
-            // Add the rest of the accent palette used by your components.
-          },
-        },
+    brand: defineTheme({
+      accent: 'violet', // primary accent scale
+      gray: 'mauve', // neutral scale for surfaces/text/borders
+      vibrant: true, // punchier accent tints (optional)
+      // Override any status palette (defaults: emerald / yellow / red / blue):
+      info: 'teal',
+      // Fonts (you must still load the face, e.g. via next/font):
+      fonts: { sans: '"Geist Variable", var(--font-sans, ui-sans-serif, system-ui)' },
+      // Re-scale density, corners, or typography by overriding raw token scales:
+      tokens: {
+        radii: { lg: { value: '1rem' } },
+        fontSizes: { '4xl': { value: '2.5rem' } },
       },
-    },
+    }),
   },
+  // Required: list the theme so its CSS is generated.
+  staticCss: { themes: ['brand'] },
 })
 ```
 
-Apply the custom theme like any built-in theme:
+`defineTheme` options:
+
+| Option                                                  | Type               | Default                                          | Effect                                                                       |
+| ------------------------------------------------------- | ------------------ | ------------------------------------------------ | ---------------------------------------------------------------------------- |
+| `accent`                                                | scale name         | —                                                | Primary accent (buttons, focus rings, `tone="accent"`).                      |
+| `gray`                                                  | scale name         | `slate`                                          | Surfaces, text, borders.                                                     |
+| `vibrant`                                               | boolean            | `false`                                          | Punchier accent spread.                                                      |
+| `success` / `warning` / `danger` / `info` / `highlight` | scale name         | `emerald` / `yellow` / `red` / `blue` / `orange` | Override a status palette.                                                   |
+| `fonts`                                                 | `{ sans?, mono? }` | —                                                | Font stacks (load the faces yourself).                                       |
+| `tokens`                                                | token group        | —                                                | Extra raw scales: `radii`, `fontSizes`, `lineHeights`, `spacing`, `sizes`, … |
+| `semanticTokens`                                        | `{ colors? }`      | —                                                | Additional semantic colors merged over the generated set.                    |
+
+Available scales: accents — `blue`, `violet`, `teal`, `emerald`, `amber`,
+`yellow`, `orange`, `red`; grays — `gray`, `neutral`, `slate`, `mauve`. To use a
+color outside this set, add its raw Radix scale to your config `tokens.colors`
+first, then reference it from a hand-written theme (below).
+
+## The manual way: full token contract
+
+If you need total control, write the theme by hand. A **complete** theme must
+define every semantic token the components consume, otherwise unspecified tokens
+fall back to the neutral baseline:
+
+```ts
+themes: {
+  brand: {
+    tokens: {
+      // optional: fonts, radii, fontSizes, lineHeights, letterSpacings, spacing, sizes …
+    },
+    semanticTokens: {
+      colors: {
+        bg: { canvas: {}, default: {}, subtle: {}, muted: {} },
+        fg: { default: {}, muted: {}, subtle: {}, inverse: {} },
+        border: { muted: {}, default: {}, strong: {}, hover: {}, focus: {}, invalid: {} },
+        // accent + each status palette use the same 8 keys:
+        accent: { surface: {}, subtle: {}, muted: {}, solid: {}, emphasis: {}, text: {}, fg: {}, contrast: {} },
+        success: { /* …same 8… */ },
+        warning: { /* …same 8… */ },
+        danger: { /* …same 8… */ },
+        info: { /* …same 8… */ },
+        highlight: { /* …same 8… */ },
+      },
+    },
+  },
+}
+```
+
+Each leaf is a light/dark pair, e.g.
+`solid: { value: { base: '{colors.violet.11}', _dark: '{colors.violetDark.11}' } }`.
+Prefer composing this with `createSemanticColorTokens(accent, gray)` (also
+exported from `@stalk-ui/preset/theme`) and overriding just the leaves you care
+about.
+
+## Apply the theme
 
 ```html
-<div data-panda-theme="midnight">
-  <button>Midnight blue button</button>
+<!-- whole app, or any subtree -->
+<div data-panda-theme="brand">
+  <button>Brand button</button>
 </div>
 ```
 
+The default `neutral` theme is the implicit baseline and needs no attribute. See
+[Theming](/guides/theming) for runtime switching.
+
+## What a theme variant can and can't change
+
+A `data-panda-theme` variant carries **`tokens` and `semanticTokens` only**. That
+covers colors, fonts, radii, spacing/sizes, and the type scale (textStyles
+resolve through the font-size/line-height tokens, so re-scaling those tokens
+re-scales headings and body text under the theme).
+
+It **cannot** change `textStyles` _structure_ or recipe variants per theme — those
+are global. If you want a single, app-wide custom aesthetic (including custom
+`textStyles` composition), override `theme.extend` directly in your
+`panda.config.ts` instead of registering a switchable theme.
+
 See the [PandaCSS theming docs](https://panda-css.com/docs/customization/theme)
-for the full theme structure and token syntax.
+for the full token syntax.

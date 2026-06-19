@@ -30,6 +30,16 @@
         "default": "./dist/index.cjs"
       }
     },
+    "./theme": {
+      "import": {
+        "types": "./dist/theme.d.ts",
+        "default": "./dist/theme.js"
+      },
+      "require": {
+        "types": "./dist/theme.d.cts",
+        "default": "./dist/theme.cjs"
+      }
+    },
     "./tokens": {
       "import": {
         "types": "./dist/tokens.d.ts",
@@ -47,6 +57,9 @@
   "types": "./dist/index.d.cts",
   "typesVersions": {
     "*": {
+      "theme": [
+        "./dist/theme.d.ts"
+      ],
       "tokens": [
         "./dist/tokens.d.ts"
       ]

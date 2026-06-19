@@ -1,0 +1,28 @@
+{
+  "$schema": "https://stalk-ui.com/schema/v1/registry-item.json",
+  "name": "tones",
+  "type": "registry:lib",
+  "dependencies": [],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "src/lib/stalk-ui/tones.ts",
+      "type": "registry:lib",
+      "content": "// Stalk UI component - requires PandaCSS setup and @stalk-ui/preset.\n/**\n * The semantic color palettes that drive per-component `tone` props. Each name\n * maps to a `colorPalette` token defined in the preset (see\n * `packages/preset/src/tokens/semantic-colors.ts`), so any tone listed here\n * resolves to a full surface/subtle/muted/solid/fg/contrast ramp at runtime.\n *\n * `highlight` is intentionally excluded — it's a promotional brand accent, not\n * a status, and components that want to surface it should opt in explicitly.\n */\nexport const TONES = ['accent', 'success', 'warning', 'danger', 'info'] as const\n\nexport type Tone = (typeof TONES)[number]\n"
+    }
+  ],
+  "stalk": {
+    "schemaVersion": "1.0",
+    "preset": {
+      "semanticTokens": {},
+      "recipes": []
+    },
+    "packageDependencies": {
+      "preset": "@stalk-ui/preset"
+    },
+    "pandaCodegen": false,
+    "importAliases": {
+      "styledSystem": "styled-system"
+    }
+  }
+}

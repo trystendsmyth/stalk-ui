@@ -5,6 +5,6 @@ export const alert = defineRegistryItem({
   filePath: 'src/components/ui/alert.tsx',
   name: 'alert',
   recipes: ['alert'],
-  registryDependencies: ['create-style-context'],
+  registryDependencies: ['create-style-context', 'tones'],
   sourcePath: 'packages/components/src/alert.tsx',
 })

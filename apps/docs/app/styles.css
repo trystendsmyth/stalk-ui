@@ -122,13 +122,21 @@ nav a {
 
 /*
  * Page-chrome heading defaults live in the `base` layer (Panda declares
- * `@layer reset, base, tokens, recipes, utilities`). This keeps the hero/section
- * scale for plain page headings while letting component recipe styles in the
- * `recipes` layer win — including content Radix portals to <body> (Dialog,
- * Alert Dialog, Sheet titles render as <h2>), which a scoped selector can't reach.
+ * `@layer reset, base, tokens, recipes, utilities`), so component recipe styles
+ * in the `recipes` layer still win — including content Radix portals to <body>
+ * (Dialog, Alert Dialog, Sheet titles render as <h2>).
+ *
+ * They are scoped under `.docs-shell` (the page wrapper from [locale]/layout.tsx)
+ * for a reason: fumadocs-ui ships Tailwind v4, whose preflight resets
+ * `h1…h6 { font-size: inherit; font-weight: inherit }` in this same `base` layer.
+ * A bare `h1` selector ties on specificity with that reset and loses on source
+ * order (headings rendered at default size/weight). The `.docs-shell` ancestor
+ * raises specificity so these win *within* the layer, while `@layer recipes`
+ * still beats them for recipe-styled headings. Portalled titles render outside
+ * `.docs-shell`, so they keep their recipe styling untouched.
  */
 @layer base {
-  h1 {
+  .docs-shell h1 {
     max-width: 22ch;
     margin: 0;
     font-size: clamp(2.5rem, 6.5vw, 4.5rem);
@@ -139,7 +147,7 @@ nav a {
     color: var(--colors-fg-default);
   }
 
-  h2 {
+  .docs-shell h2 {
     margin: 1rem 0 0;
     font-size: clamp(1.5rem, 3vw, 2rem);
     font-weight: 600;

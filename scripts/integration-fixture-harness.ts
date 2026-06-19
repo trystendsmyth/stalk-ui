@@ -182,12 +182,22 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     join(tempDirectory, 'src/app/page.tsx'),
     `'use client'
 
+import { ColorPicker } from '../components/ui/color-picker'
 import { Dialog } from '../components/ui/dialog'
+import { TagsInput } from '../components/ui/tags-input'
 
 export default function Page() {
   return (
-    <main>
+    <main data-panda-theme="brand">
       <h1>Stalk UI Next fixture</h1>
+      <TagsInput aria-label="Tags" defaultValue={['alpha', 'beta']} />
+      <ColorPicker defaultValue="#4f46e5">
+        <ColorPicker.Trigger aria-label="Brand color" />
+        <ColorPicker.Content>
+          <ColorPicker.Picker />
+          <ColorPicker.Input aria-label="Hex value" />
+        </ColorPicker.Content>
+      </ColorPicker>
       <Dialog.Root>
         <Dialog.Trigger>Open dialog</Dialog.Trigger>
         <Dialog.Content aria-label="Integration dialog">
@@ -199,6 +209,26 @@ export default function Page() {
     </main>
   )
 }
+`,
+  )
+
+  // Consumer panda config that registers a custom theme via defineTheme — this
+  // exercises the @stalk-ui/preset/theme entry through the real consumer flow.
+  await writeFile(
+    join(tempDirectory, 'panda.config.ts'),
+    `import { defineConfig } from '@pandacss/dev'
+import stalkPreset from '@stalk-ui/preset'
+import { defineTheme } from '@stalk-ui/preset/theme'
+
+export default defineConfig({
+  preflight: true,
+  presets: [stalkPreset],
+  include: ['./src/**/*.{ts,tsx}'],
+  jsxFramework: 'react',
+  outdir: 'styled-system',
+  themes: { brand: defineTheme({ accent: 'violet', gray: 'mauve' }) },
+  staticCss: { themes: ['brand'] },
+})
 `,
   )
 }
@@ -245,23 +275,27 @@ const runNextFixture = async (tempDirectory: string, env: TestEnvironment) => {
     env,
   )
   exec('pnpm', ['exec', 'stalk-ui', 'init', '--no-codegen'], tempDirectory, env)
-  exec(
-    'pnpm',
-    [
-      'exec',
-      'stalk-ui',
-      'add',
-      '@stalk-ui/dialog',
-      '--no-codegen',
-      '--registry',
-      componentRegistry,
-    ],
-    tempDirectory,
-    env,
-  )
+  // tags-input pulls Tag, which exercises the `tones` shared-lib distribution.
+  // (Added one-at-a-time so the run doesn't depend on a freshly-republished CLI
+  // version; `stalk-ui add` also accepts multiple names in a single call.)
+  for (const component of ['@stalk-ui/dialog', '@stalk-ui/color-picker', '@stalk-ui/tags-input']) {
+    exec(
+      'pnpm',
+      ['exec', 'stalk-ui', 'add', component, '--no-codegen', '--registry', componentRegistry],
+      tempDirectory,
+      env,
+    )
+  }
   await writeNextFixtureFiles(tempDirectory)
   exec('pnpm', ['exec', 'panda', 'codegen'], tempDirectory, env)
   exec('pnpm', ['exec', 'panda', 'cssgen'], tempDirectory, env)
+
+  // defineTheme must have produced the custom `brand` theme's CSS.
+  const generatedCss = await readFile(join(tempDirectory, 'styled-system/styles.css'), 'utf8')
+  if (!generatedCss.includes('[data-panda-theme=brand]')) {
+    throw new Error('Next fixture: defineTheme did not emit the brand theme CSS.')
+  }
+
   exec('pnpm', ['exec', 'next', 'build'], tempDirectory, env)
 
   const nextServer = spawnServer('pnpm', ['exec', 'next', 'start', '--port', '3020'], {
@@ -304,6 +338,20 @@ const runNextFixture = async (tempDirectory: string, env: TestEnvironment) => {
       )
       if (!dialogText.includes('Rendered with real Stalk UI styling.')) {
         throw new Error('Next fixture did not render Dialog content.')
+      }
+
+      // TagsInput (which uses Tag → the `tones` shared lib) renders its chips.
+      const bodyText = String(await page.evaluate(`document.body.textContent ?? ''`))
+      if (!bodyText.includes('alpha') || !bodyText.includes('beta')) {
+        throw new Error('Next fixture: TagsInput chips did not render.')
+      }
+
+      // ColorPicker (react-colorful + Popover) mounts its trigger.
+      const hasColorTrigger = await page.evaluate(
+        `!!document.querySelector('button[aria-label="Brand color"]')`,
+      )
+      if (hasColorTrigger !== true) {
+        throw new Error('Next fixture: ColorPicker trigger did not render.')
       }
 
       if (consoleErrors.length > 0) {

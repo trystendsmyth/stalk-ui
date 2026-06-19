@@ -103,6 +103,15 @@ export { Code } from './code'
 export type { CodeProps, CodeVariant } from './code'
 export { Collapsible, CollapsibleContent, CollapsibleRoot, CollapsibleTrigger } from './collapsible'
 export type { CollapsibleRootProps, CollapsibleVariant } from './collapsible'
+export { ColorPicker } from './color-picker'
+export type {
+  ColorPickerContentProps,
+  ColorPickerFormat,
+  ColorPickerInputProps,
+  ColorPickerRootProps,
+  ColorPickerSwatchProps,
+  ColorPickerTriggerProps,
+} from './color-picker'
 export { Combobox } from './combobox'
 export type { ComboboxOption, ComboboxProps } from './combobox'
 export {
@@ -218,6 +227,8 @@ export type {
   FormLabelProps,
   FormMessageProps,
 } from './form'
+export { FormatInput } from './format-input'
+export type { FormatInputProps, InputFormat } from './format-input'
 export { Heading } from './heading'
 export type { HeadingLevel, HeadingProps } from './heading'
 export {
@@ -275,6 +286,8 @@ export {
   NavigationMenuSub,
   NavigationMenuTrigger,
 } from './navigation-menu'
+export { NumberInput } from './number-input'
+export type { NumberInputProps } from './number-input'
 export { OtpInput, OtpInputGroup, OtpInputRoot, OtpInputSeparator, OtpInputSlot } from './otp-input'
 export type {
   OtpInputGroupProps,
@@ -298,6 +311,8 @@ export type {
   PaginationEllipsisProps,
   PaginationLinkProps,
 } from './pagination'
+export { PasswordInput } from './password-input'
+export type { PasswordInputProps } from './password-input'
 export { PhoneInput } from './phone-input'
 export type { PhoneInputProps } from './phone-input'
 export {
@@ -315,6 +330,8 @@ export { QrCode } from './qr-code'
 export type { QrCodeProps } from './qr-code'
 export { Radio } from './radio'
 export type { RadioProps, RadioSize } from './radio'
+export { SearchInput } from './search-input'
+export type { SearchInputProps } from './search-input'
 export { Resizable, ResizableHandle, ResizablePanel, ResizableRoot } from './resizable'
 export type { ResizableHandleProps, ResizablePanelProps, ResizableRootProps } from './resizable'
 export {
@@ -400,7 +417,17 @@ export type {
   TabsVariant,
 } from './tabs'
 export { Tag } from './tag'
-export type { TagProps, TagRadius, TagSize, TagTone, TagVariant } from './tag'
+export type {
+  TagAvatarProps,
+  TagCloseProps,
+  TagRadius,
+  TagRootProps,
+  TagSize,
+  TagTone,
+  TagVariant,
+} from './tag'
+export { TagsInput } from './tags-input'
+export type { TagsInputProps, TagsInputSize } from './tags-input'
 export { Em, Quote, Strong, Text } from './text'
 export type {
   EmProps,

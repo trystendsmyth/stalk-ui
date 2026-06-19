@@ -9,7 +9,23 @@ const publishEnvironment = {
   NPM_CONFIG_PROVENANCE: 'false',
 }
 
-execFileSync('pnpm', ['build'], { stdio: 'inherit' })
+// Build only the published packages (and their workspace deps, via turbo's
+// `^build`). Running the full `pnpm build` also builds the docs/storybook apps,
+// whose `prebuild` lifecycles rebuild `@stalk-ui/preset` concurrently and race on
+// `tsup --clean`; scoping the build avoids that race and is much faster.
+execFileSync(
+  'pnpm',
+  [
+    'exec',
+    'turbo',
+    'run',
+    'build',
+    '--filter=@stalk-ui/preset',
+    '--filter=@stalk-ui/i18n',
+    '--filter=@stalk-ui/cli',
+  ],
+  { stdio: 'inherit' },
+)
 
 for (const packageDirectory of packageDirectories) {
   const absolutePackageDirectory = join(process.cwd(), packageDirectory)

@@ -1,0 +1,159 @@
+import type { RecipeConfig } from '../types'
+
+export const colorPicker = {
+  className: 'stalk-color-picker',
+  description:
+    'Slot recipe for the ColorPicker (trigger, content, picker, input, swatches, swatch, eyeDropper).',
+  slots: [
+    'trigger',
+    'triggerSwatch',
+    'content',
+    'picker',
+    'controls',
+    'input',
+    'swatches',
+    'swatch',
+    'eyeDropper',
+  ],
+  base: {
+    // A square color chip that opens the picker. The current color is applied
+    // inline (dynamic), so the recipe only owns chrome (border, radius, focus).
+    trigger: {
+      alignItems: 'center',
+      border: 'default',
+      borderColor: 'border.default',
+      cursor: 'pointer',
+      display: 'inline-flex',
+      h: '36',
+      justifyContent: 'center',
+      overflow: 'hidden',
+      p: '0',
+      rounded: 'md',
+      transitionDuration: 'fast',
+      transitionProperty: 'border-color, box-shadow',
+      w: '36',
+      _hover: { borderColor: 'border.emphasis' },
+      _focusVisible: {
+        focusRingWidth: 'base',
+        focusRingColor: 'accent.muted',
+        focusRingOffsetWidth: '2',
+        focusRingOffsetColor: 'bg.canvas',
+      },
+      _disabled: { cursor: 'not-allowed', opacity: 0.5 },
+    },
+    triggerSwatch: {
+      h: 'full',
+      w: 'full',
+    },
+    content: {
+      display: 'flex',
+      flexDirection: 'column',
+      gap: '12',
+      w: '232px',
+    },
+    // react-colorful renders one flex column (saturation + hue + optional alpha)
+    // and injects its own *unlayered* stylesheet, which outranks Panda's
+    // `@layer recipes` regardless of specificity — so these overrides must be
+    // `!important` to win. They make every element span the panel edge-to-edge
+    // with a consistent rounded shape and even spacing.
+    picker: {
+      w: 'full',
+      '& .react-colorful': {
+        gap: '10',
+        height: 'auto!',
+        width: '100%!',
+      },
+      '& .react-colorful__saturation': {
+        borderRadius: 'md!',
+        borderBottomWidth: '0!',
+        height: '156px!',
+      },
+      '& .react-colorful__hue, & .react-colorful__alpha': {
+        borderRadius: 'full!',
+        height: '14px!',
+      },
+      '& .react-colorful__pointer': { height: '18px!', width: '18px!' },
+    },
+    controls: {
+      alignItems: 'center',
+      display: 'flex',
+      gap: '8',
+    },
+    input: {
+      appearance: 'none',
+      bgColor: 'bg.canvas',
+      border: 'default',
+      borderColor: 'border.default',
+      color: 'fg.default',
+      flex: '1 1 auto',
+      fontFamily: 'mono',
+      minW: '0',
+      px: '10',
+      py: '6',
+      rounded: 'md',
+      textStyle: 'bodySm',
+      textTransform: 'uppercase',
+      _focusVisible: {
+        borderColor: 'accent.solid',
+        focusRingWidth: 'base',
+        focusRingColor: 'accent.muted',
+        focusRingOffsetWidth: '1',
+        focusRingOffsetColor: 'bg.canvas',
+      },
+    },
+    swatches: {
+      display: 'flex',
+      flexWrap: 'wrap',
+      gap: '6',
+    },
+    swatch: {
+      border: 'default',
+      borderColor: 'border.muted',
+      cursor: 'pointer',
+      h: '20',
+      p: '0',
+      rounded: 'sm',
+      transitionDuration: 'fast',
+      transitionProperty: 'transform, box-shadow',
+      w: '20',
+      _hover: { transform: 'scale(1.1)' },
+      _focusVisible: {
+        focusRingWidth: 'base',
+        focusRingColor: 'accent.muted',
+        focusRingOffsetWidth: '2',
+        focusRingOffsetColor: 'bg.canvas',
+      },
+      '&[aria-pressed="true"]': {
+        focusRingWidth: 'base',
+        focusRingColor: 'accent.solid',
+        focusRingOffsetWidth: '2',
+        focusRingOffsetColor: 'bg.canvas',
+      },
+    },
+    eyeDropper: {
+      alignItems: 'center',
+      appearance: 'none',
+      bgColor: 'transparent',
+      border: 'default',
+      borderColor: 'border.default',
+      color: 'fg.muted',
+      cursor: 'pointer',
+      display: 'inline-flex',
+      flexShrink: 0,
+      h: '32',
+      justifyContent: 'center',
+      rounded: 'md',
+      transitionDuration: 'fast',
+      transitionProperty: 'color, background-color',
+      w: '32',
+      _hover: { bgColor: 'bg.muted', color: 'fg.default' },
+      _focusVisible: {
+        focusRingWidth: 'base',
+        focusRingColor: 'accent.muted',
+        focusRingOffsetWidth: '1',
+        focusRingOffsetColor: 'bg.canvas',
+      },
+      '& > svg': { h: '16', w: '16' },
+    },
+  },
+} satisfies RecipeConfig

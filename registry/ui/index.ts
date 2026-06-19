@@ -14,6 +14,7 @@ import { chart } from './chart'
 import { checkbox } from './checkbox'
 import { code } from './code'
 import { collapsible } from './collapsible'
+import { colorPicker } from './color-picker'
 import { combobox } from './combobox'
 import { command } from './command'
 import { contextMenu } from './context-menu'
@@ -24,6 +25,7 @@ import { datetimeInput } from './datetime-input'
 import { dialog } from './dialog'
 import { dropdownMenu } from './dropdown-menu'
 import { form } from './form'
+import { formatInput } from './format-input'
 import { heading } from './heading'
 import { hoverCard } from './hover-card'
 import { input } from './input'
@@ -32,8 +34,10 @@ import { label } from './label'
 import { link } from './link'
 import { menubar } from './menubar'
 import { navigationMenu } from './navigation-menu'
+import { numberInput } from './number-input'
 import { otpInput } from './otp-input'
 import { pagination } from './pagination'
+import { passwordInput } from './password-input'
 import { phoneInput } from './phone-input'
 import { popover } from './popover'
 import { progress } from './progress'
@@ -41,6 +45,7 @@ import { qrCode } from './qr-code'
 import { radio } from './radio'
 import { resizable } from './resizable'
 import { scrollArea } from './scroll-area'
+import { searchInput } from './search-input'
 import { select } from './select'
 import { separator } from './separator'
 import { sheet } from './sheet'
@@ -52,6 +57,7 @@ import { switchItem } from './switch'
 import { table } from './table'
 import { tabs } from './tabs'
 import { tag } from './tag'
+import { tagsInput } from './tags-input'
 import { text } from './text'
 import { textarea } from './textarea'
 import { timePicker } from './time-picker'
@@ -82,6 +88,7 @@ export const registryItems = [
   checkbox,
   code,
   collapsible,
+  colorPicker,
   combobox,
   command,
   contextMenu,
@@ -92,6 +99,7 @@ export const registryItems = [
   dialog,
   dropdownMenu,
   form,
+  formatInput,
   heading,
   hoverCard,
   input,
@@ -100,8 +108,10 @@ export const registryItems = [
   link,
   menubar,
   navigationMenu,
+  numberInput,
   otpInput,
   pagination,
+  passwordInput,
   phoneInput,
   popover,
   progress,
@@ -109,6 +119,7 @@ export const registryItems = [
   radio,
   resizable,
   scrollArea,
+  searchInput,
   select,
   separator,
   sheet,
@@ -120,6 +131,7 @@ export const registryItems = [
   table,
   tabs,
   tag,
+  tagsInput,
   text,
   textarea,
   timePicker,

@@ -16,35 +16,35 @@ const meta = {
   component: Tag,
   tags: ['autodocs', 'stable'],
   args: {
-    children: 'Frontend',
+    children: <Tag.Label>Frontend</Tag.Label>,
     closeAriaLabel: 'Remove',
+    disabled: false,
     dot: false,
-    onClose: fn(),
     radius: 'full',
     size: 'md',
     tone: 'accent',
     variant: 'subtle',
   },
   argTypes: {
-    children: { control: 'text' },
+    children: { table: { disable: true } },
     className: { table: { disable: true } },
     closeAriaLabel: { control: 'text' },
-    count: { control: 'text' },
+    disabled: { control: 'boolean' },
     dot: { control: 'boolean' },
-    leadingIcon: { table: { disable: true } },
     onClick: { table: { disable: true } },
     onClose: { table: { disable: true } },
     radius: { control: 'select', options: RADII },
     size: { control: 'inline-radio', options: SIZES },
     tone: { control: 'select', options: TONES },
-    trailingIcon: { table: { disable: true } },
     variant: { control: 'select', options: VARIANTS },
   },
   parameters: {
     docs: {
       description: {
         component:
-          'Compact, optionally interactive label. Supports leading/trailing icons, a count badge, a status dot, and a close button.',
+          'An interactive, chip-style label. Compose `Tag.Avatar`, `Tag.Icon`, `Tag.Label`, ' +
+          '`Tag.Count`, and `Tag.Close` as children. Unlike `Badge` (static status/metadata), ' +
+          'a Tag can be clicked, removed, disabled, and carry an avatar or icon.',
       },
     },
   },
@@ -62,7 +62,7 @@ export const Variants: Story = {
     <HStack gap="8" flexWrap="wrap">
       {VARIANTS.map((variant) => (
         <Tag key={variant} variant={variant}>
-          {variant}
+          <Tag.Label>{variant}</Tag.Label>
         </Tag>
       ))}
     </HStack>
@@ -75,7 +75,7 @@ export const Sizes: Story = {
     <HStack alignItems="center" gap="8">
       {SIZES.map((size) => (
         <Tag key={size} size={size}>
-          {size}
+          <Tag.Label>{size}</Tag.Label>
         </Tag>
       ))}
     </HStack>
@@ -90,7 +90,7 @@ export const Tones: Story = {
         <HStack key={variant} gap="8" flexWrap="wrap">
           {TONES.map((tone) => (
             <Tag key={tone} tone={tone} variant={variant}>
-              {tone}
+              <Tag.Label>{tone}</Tag.Label>
             </Tag>
           ))}
         </HStack>
@@ -100,21 +100,43 @@ export const Tones: Story = {
 }
 
 export const WithDot: Story = {
-  args: { dot: true, children: 'Online', tone: 'success' },
+  args: { dot: true, children: <Tag.Label>Online</Tag.Label>, tone: 'success' },
 }
 
 export const WithIcon: Story = {
   args: {
-    children: 'Featured',
-    leadingIcon: <Sparkles aria-hidden="true" size={12} />,
+    children: (
+      <>
+        <Tag.Icon>
+          <Sparkles />
+        </Tag.Icon>
+        <Tag.Label>Featured</Tag.Label>
+      </>
+    ),
     tone: 'warning',
+  },
+}
+
+export const WithAvatar: Story = {
+  args: {
+    children: (
+      <>
+        <Tag.Avatar>AB</Tag.Avatar>
+        <Tag.Label>Ada Byron</Tag.Label>
+      </>
+    ),
+    size: 'lg',
   },
 }
 
 export const WithCount: Story = {
   args: {
-    children: 'Errors',
-    count: 12,
+    children: (
+      <>
+        <Tag.Label>Errors</Tag.Label>
+        <Tag.Count>12</Tag.Count>
+      </>
+    ),
     tone: 'danger',
   },
 }
@@ -129,12 +151,15 @@ export const Closeable: Story = {
           {tags.map((label) => (
             <Tag
               key={label}
-              leadingIcon={<TagIcon aria-hidden="true" size={10} />}
               onClose={() => {
                 setTags((prev) => prev.filter((t) => t !== label))
               }}
             >
-              {label}
+              <Tag.Icon>
+                <TagIcon />
+              </Tag.Icon>
+              <Tag.Label>{label}</Tag.Label>
+              <Tag.Close />
             </Tag>
           ))}
           {tags.length === 0 ? <span>(empty)</span> : null}
@@ -149,14 +174,20 @@ export const Interactive: Story = {
   parameters: { controls: { disable: true } },
   render: () => (
     <HStack gap="8">
-      <Tag
-        onClick={() => {
-          alert('clicked!')
-        }}
-        tone="accent"
-        variant="outline"
-      >
-        Click me
+      <Tag onClick={fn()} tone="accent" variant="outline">
+        <Tag.Label>Click me</Tag.Label>
+      </Tag>
+    </HStack>
+  ),
+}
+
+export const Disabled: Story = {
+  parameters: { controls: { disable: true } },
+  render: () => (
+    <HStack gap="8">
+      <Tag disabled onClick={fn()} onClose={fn()}>
+        <Tag.Label>Disabled</Tag.Label>
+        <Tag.Close />
       </Tag>
     </HStack>
   ),

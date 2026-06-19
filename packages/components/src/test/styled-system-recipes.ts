@@ -209,6 +209,7 @@ export const avatar = ({ radius = 'full', size = 'md' }: AvatarRecipeOptions = {
 })
 
 interface TagRecipeOptions {
+  disabled?: boolean
   dot?: boolean
   interactive?: boolean
   radius?: 'none' | 'sm' | 'md' | 'lg' | 'full'
@@ -217,6 +218,7 @@ interface TagRecipeOptions {
 }
 
 export const tag = ({
+  disabled = false,
   dot = false,
   interactive = false,
   radius = 'full',
@@ -230,12 +232,76 @@ export const tag = ({
     `stalk-tag--radius-${radius}`,
     dot ? 'stalk-tag--dot' : undefined,
     interactive ? 'stalk-tag--interactive' : undefined,
+    disabled ? 'stalk-tag--disabled' : undefined,
   ]
     .filter(Boolean)
     .join(' '),
+  avatar: 'stalk-tag__avatar',
+  icon: 'stalk-tag__icon',
   label: 'stalk-tag__label',
   count: 'stalk-tag__count',
   close: 'stalk-tag__close',
+})
+
+interface NumberInputRecipeOptions {
+  disabled?: boolean
+  invalid?: boolean
+  layout?: 'stacked' | 'split'
+  size?: 'sm' | 'md' | 'lg'
+}
+
+export const numberInput = ({
+  disabled = false,
+  invalid = false,
+  layout = 'stacked',
+  size = 'md',
+}: NumberInputRecipeOptions = {}) => ({
+  root: [
+    'stalk-number-input__root',
+    `stalk-number-input--${size}`,
+    `stalk-number-input--${layout}`,
+    disabled ? 'stalk-number-input--disabled' : undefined,
+    invalid ? 'stalk-number-input--invalid' : undefined,
+  ]
+    .filter(Boolean)
+    .join(' '),
+  field: 'stalk-number-input__field',
+  stepper: 'stalk-number-input__stepper',
+  button: 'stalk-number-input__button',
+})
+
+export const colorPicker = () => ({
+  trigger: 'stalk-color-picker__trigger',
+  triggerSwatch: 'stalk-color-picker__trigger-swatch',
+  content: 'stalk-color-picker__content',
+  picker: 'stalk-color-picker__picker',
+  controls: 'stalk-color-picker__controls',
+  input: 'stalk-color-picker__input',
+  swatches: 'stalk-color-picker__swatches',
+  swatch: 'stalk-color-picker__swatch',
+  eyeDropper: 'stalk-color-picker__eye-dropper',
+})
+
+interface TagsInputRecipeOptions {
+  disabled?: boolean
+  invalid?: boolean
+  size?: 'sm' | 'md' | 'lg'
+}
+
+export const tagsInput = ({
+  disabled = false,
+  invalid = false,
+  size = 'md',
+}: TagsInputRecipeOptions = {}) => ({
+  root: [
+    'stalk-tags-input__root',
+    `stalk-tags-input--${size}`,
+    disabled ? 'stalk-tags-input--disabled' : undefined,
+    invalid ? 'stalk-tags-input--invalid' : undefined,
+  ]
+    .filter(Boolean)
+    .join(' '),
+  field: 'stalk-tags-input__field',
 })
 
 interface AlertRecipeOptions {
