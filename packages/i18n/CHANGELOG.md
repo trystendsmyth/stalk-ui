@@ -1,5 +1,11 @@
 # @stalk-ui/i18n
 
+## 1.0.0
+
+### Major Changes
+
+- [#77](https://github.com/trystendsmyth/stalk-ui/pull/77) [`f836782`](https://github.com/trystendsmyth/stalk-ui/commit/f836782d58dfa21e4e5543f4cd673a67480fa856) Thanks [@trystendsmyth](https://github.com/trystendsmyth)! - Stalk UI 1.0: production-ready components and theming
+
 ## 0.5.0
 
 ### Minor Changes
