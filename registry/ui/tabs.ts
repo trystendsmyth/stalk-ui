@@ -5,5 +5,6 @@ export const tabs = defineRegistryItem({
   filePath: 'src/components/ui/tabs.tsx',
   name: 'tabs',
   recipes: ['tabs'],
+  registryDependencies: ['tones'],
   sourcePath: 'packages/components/src/tabs.tsx',
 })

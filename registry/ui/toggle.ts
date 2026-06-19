@@ -5,5 +5,6 @@ export const toggle = defineRegistryItem({
   filePath: 'src/components/ui/toggle.tsx',
   name: 'toggle',
   recipes: ['toggle'],
+  registryDependencies: ['tones'],
   sourcePath: 'packages/components/src/toggle.tsx',
 })

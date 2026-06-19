@@ -3,6 +3,7 @@ import { fileURLToPath } from 'node:url'
 
 import { Project, SyntaxKind } from 'ts-morph'
 
+import { componentLibBySpecifier, componentLibNames } from '../registry/lib/component-libs'
 import { stalkUtilLibByExport, stalkUtilLibNames } from '../registry/lib/utils-exports'
 import { registryItems } from '../registry/ui'
 
@@ -133,6 +134,48 @@ for (const item of registryItems) {
     if (stalkUtilLibNames.has(declared) && !requiredLibs.has(declared)) {
       failures.push(
         `${item.name}: declares lib dependency '${declared}' but no source file imports it from '@stalk-ui/utils'.`,
+      )
+    }
+  }
+}
+
+// Component-internal lib modules (e.g. `./tones`) are relative in source but are
+// distributed as copyable libs, so each relative import must declare the matching
+// lib in `registryDependencies` (and vice-versa). This guards the class of bug
+// where a sibling import isn't bundled into the registry output.
+for (const item of registryItems) {
+  const declaredRegistryDependencies = new Set(item.registryDependencies)
+  const requiredLibs = new Set<string>()
+
+  for (const file of item.files) {
+    if (!file.sourcePath) continue
+    const absoluteSource = resolve(projectRoot, file.sourcePath)
+
+    let source: SourceFile
+    try {
+      source = getSourceFile(absoluteSource)
+    } catch (error) {
+      failures.push(`${item.name}: failed to parse ${file.sourcePath}: ${(error as Error).message}`)
+      continue
+    }
+
+    for (const declaration of source.getImportDeclarations()) {
+      const lib = componentLibBySpecifier.get(declaration.getModuleSpecifierValue())
+      if (lib === undefined) continue
+      requiredLibs.add(lib.name)
+      if (!declaredRegistryDependencies.has(lib.name)) {
+        failures.push(
+          `${item.name}: imports '${lib.sourceSpecifier}' but manifest does not declare lib ` +
+            `dependency '${lib.name}' in 'registryDependencies'.`,
+        )
+      }
+    }
+  }
+
+  for (const declared of declaredRegistryDependencies) {
+    if (componentLibNames.has(declared) && !requiredLibs.has(declared)) {
+      failures.push(
+        `${item.name}: declares lib dependency '${declared}' but no source file imports it.`,
       )
     }
   }

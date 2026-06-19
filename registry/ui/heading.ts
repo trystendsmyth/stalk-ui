@@ -5,6 +5,6 @@ export const heading = defineRegistryItem({
   filePath: 'src/components/ui/heading.tsx',
   name: 'heading',
   recipes: ['text'],
-  registryDependencies: ['text'],
+  registryDependencies: ['text', 'tones'],
   sourcePath: 'packages/components/src/heading.tsx',
 })

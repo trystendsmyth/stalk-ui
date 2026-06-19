@@ -5,5 +5,6 @@ export const text = defineRegistryItem({
   filePath: 'src/components/ui/text.tsx',
   name: 'text',
   recipes: ['text'],
+  registryDependencies: ['tones'],
   sourcePath: 'packages/components/src/text.tsx',
 })

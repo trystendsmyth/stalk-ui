@@ -5,5 +5,6 @@ export const badge = defineRegistryItem({
   filePath: 'src/components/ui/badge.tsx',
   name: 'badge',
   recipes: ['badge'],
+  registryDependencies: ['tones'],
   sourcePath: 'packages/components/src/badge.tsx',
 })

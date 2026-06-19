@@ -5,5 +5,6 @@ export const link = defineRegistryItem({
   filePath: 'src/components/ui/link.tsx',
   name: 'link',
   recipes: ['link'],
+  registryDependencies: ['tones'],
   sourcePath: 'packages/components/src/link.tsx',
 })

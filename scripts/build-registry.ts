@@ -6,6 +6,7 @@ import { format, resolveConfig } from 'prettier'
 import { rimrafSync } from 'rimraf'
 
 import { registryLibs } from '../registry/lib'
+import { COMPONENT_LIBS } from '../registry/lib/component-libs'
 import { stalkUtilLibByExport } from '../registry/lib/utils-exports'
 import {
   DEFAULT_VARIANT,
@@ -120,9 +121,22 @@ const rewriteStalkUtilsImports = (source: string, componentPath: string): string
       .join('\n')
   })
 
+// Components import shared component-internal modules (e.g. `./tones`) via a
+// relative specifier for local dev. Rewrite that to the copied lib path so the
+// installed component resolves the file the CLI drops in `src/lib/stalk-ui/`.
+const rewriteComponentLibImports = (source: string, componentPath: string): string => {
+  let result = source
+  for (const lib of COMPONENT_LIBS) {
+    if (componentPath === lib.filePath) continue
+    const pattern = new RegExp(`(from\\s+['"])${lib.sourceSpecifier}(['"])`, 'g')
+    result = result.replace(pattern, `$1${relativeSpecifier(componentPath, lib.filePath)}$2`)
+  }
+  return result
+}
+
 const inlineFile = (file: RegistryFile, sourcePath: string): RegistryFile => {
   const raw = readFileSync(join(rootDirectory, sourcePath), 'utf8')
-  const rewritten = rewriteStalkUtilsImports(raw, file.path)
+  const rewritten = rewriteComponentLibImports(rewriteStalkUtilsImports(raw, file.path), file.path)
   const content = sourceNeedsUseClient(rewritten) ? `${useClientDirective}${rewritten}` : rewritten
   const { sourcePath: _sourcePath, ...serializableFile } = file
 

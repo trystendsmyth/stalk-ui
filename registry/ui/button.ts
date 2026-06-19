@@ -5,6 +5,6 @@ export const button = defineRegistryItem({
   filePath: 'src/components/ui/button.tsx',
   name: 'button',
   recipes: ['button'],
-  registryDependencies: ['spinner'],
+  registryDependencies: ['spinner', 'tones'],
   sourcePath: 'packages/components/src/button.tsx',
 })

@@ -5,5 +5,6 @@ export const blockquote = defineRegistryItem({
   filePath: 'src/components/ui/blockquote.tsx',
   name: 'blockquote',
   recipes: ['blockquote'],
+  registryDependencies: ['tones'],
   sourcePath: 'packages/components/src/blockquote.tsx',
 })
