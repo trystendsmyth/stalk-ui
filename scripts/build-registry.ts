@@ -7,7 +7,7 @@ import { rimrafSync } from 'rimraf'
 
 import { registryLibs } from '../registry/lib'
 import { COMPONENT_LIBS } from '../registry/lib/component-libs'
-import { stalkUtilLibByExport } from '../registry/lib/utils-exports'
+import { stalkUtilLibByExport, STALK_UTILS_LIBS } from '../registry/lib/utils-exports'
 import {
   DEFAULT_VARIANT,
   registryIndexSchema,
@@ -192,13 +192,44 @@ const withShadcnCompatibilityHeader = (content: string) => {
   )}`
 }
 
-const toShadcnItem = (item: RegistryItem): RegistryItem => ({
-  ...item,
-  files: item.files.map((file) => ({
-    ...file,
-    content: file.content === undefined ? undefined : withShadcnCompatibilityHeader(file.content),
-  })),
+// Stalk's internal lib files (e.g. `tones`, `create-style-context`) live at
+// `src/lib/stalk-ui/*`. The native registry resolves them via `registryDependencies`
+// against Stalk's own registry, but the shadcn CLI resolves a *bare* dependency
+// name against ITS registry (ui.shadcn.com) — where these names don't exist (404).
+// So for the shadcn variant, inline each lib file directly into the component and
+// drop it from `registryDependencies`. Component→component deps stay as bare names
+// (shadcn resolves the ones it has, e.g. `spinner`).
+const libFileByName = new Map<string, { filePath: string; sourcePath: string }>(
+  [...STALK_UTILS_LIBS, ...COMPONENT_LIBS].map((lib) => [
+    lib.name,
+    { filePath: lib.filePath, sourcePath: lib.sourcePath },
+  ]),
+)
+
+const addShadcnHeader = (file: RegistryFile): RegistryFile => ({
+  ...file,
+  content: file.content === undefined ? undefined : withShadcnCompatibilityHeader(file.content),
 })
+
+const toShadcnItem = (item: RegistryItem): RegistryItem => {
+  const inlinedLibFiles: RegistryFile[] = []
+  const registryDependencies: string[] = []
+
+  for (const dependency of item.registryDependencies) {
+    const lib = libFileByName.get(dependency)
+    if (lib === undefined) {
+      registryDependencies.push(dependency)
+      continue
+    }
+    inlinedLibFiles.push(inlineFile({ path: lib.filePath, type: 'registry:lib' }, lib.sourcePath))
+  }
+
+  return {
+    ...item,
+    files: [...item.files, ...inlinedLibFiles].map(addShadcnHeader),
+    registryDependencies,
+  }
+}
 
 rimrafSync(registryDirectory)
 mkdirSync(shadcnDirectory, { recursive: true })
