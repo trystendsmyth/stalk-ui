@@ -17,7 +17,7 @@ export default async function LocaleHomePage({ params }: LocaleHomePageProps) {
       </p>
       <div className="action-list" aria-label="Documentation entry points">
         <a href={`/${locale}/docs`}>Get started</a>
-        <a href={`/${locale}/components/button`}>Button docs</a>
+        <a href={`/${locale}/components`}>Browse components</a>
         <a href="/r/shadcn/button.json">shadcn manifest</a>
       </div>
     </main>
