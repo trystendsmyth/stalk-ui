@@ -4,10 +4,11 @@ import { axe } from 'vitest-axe'
 
 import { OtpInput } from './otp-input'
 
-// input-otp schedules a 0ms timer on render that it does not clear on unmount.
-// Drain it within this file's living JSDOM so it cannot fire after the
-// environment is torn down (which would throw "window is not defined" and fail
-// the run even though every test passed).
+// input-otp's password-manager badge detection schedules polling timers
+// (setInterval / delayed setTimeout) it doesn't clear on unmount, so they fire
+// after JSDOM is torn down → "window is not defined", failing the run even
+// though every test passed. Disable that strategy here (a PWM-only UX
+// affordance, irrelevant to these tests); the 0ms drain mops up one-shot timers.
 afterEach(async () => {
   await new Promise((resolve) => {
     setTimeout(resolve, 0)
@@ -16,7 +17,7 @@ afterEach(async () => {
 
 const renderOtp = () =>
   render(
-    <OtpInput maxLength={4} aria-label="One-time passcode">
+    <OtpInput maxLength={4} aria-label="One-time passcode" pushPasswordManagerStrategy="none">
       <OtpInput.Group>
         <OtpInput.Slot index={0} />
         <OtpInput.Slot index={1} />
