@@ -47,10 +47,12 @@ const main = async () => {
   })
 
   withGlobalOptions(
-    program.command('add <name>').description('install a component from a registry'),
-  ).action(async (name: string, options: GlobalOptions) => {
-    intro(`Stalk UI add ${name}`)
-    await addCommand(name, options)
+    program.command('add <names...>').description('install one or more components from a registry'),
+  ).action(async (names: string[], options: GlobalOptions) => {
+    intro(`Stalk UI add ${names.join(' ')}`)
+    for (const name of names) {
+      await addCommand(name, options)
+    }
     outro('Done')
   })
 
