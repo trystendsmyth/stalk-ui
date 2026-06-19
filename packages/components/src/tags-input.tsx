@@ -4,8 +4,15 @@ import { tagsInput as tagsInputRecipe } from 'styled-system/recipes'
 
 import { Tag } from './tag'
 
-import type { TagSize, TagTone } from './tag'
+import type { TagRadius, TagSize, TagTone, TagVariant } from './tag'
 import type { ChangeEvent, ClipboardEvent, KeyboardEvent, Ref } from 'react'
+
+/** Per-tag visual overrides returned by `getTagProps`. */
+export interface TagStyleProps {
+  radius?: TagRadius
+  tone?: TagTone
+  variant?: TagVariant
+}
 
 export type TagsInputSize = (typeof tagsInputRecipe.variantMap.size)[number]
 
@@ -38,6 +45,11 @@ export interface TagsInputProps {
    * email). Return an empty string to reject the entry. Applied per tag.
    */
   formatTag?: (value: string) => string
+  /**
+   * Per-tag visual overrides — return a `tone`/`variant`/`radius` for each tag so
+   * chips can differ in color and style (e.g. color a label by category).
+   */
+  getTagProps?: (value: string, index: number) => TagStyleProps
   disabled?: boolean
   id?: string
   invalid?: boolean
@@ -67,6 +79,7 @@ export const TagsInput = /* @__PURE__ */ forwardRef<HTMLInputElement, TagsInputP
       defaultValue,
       disabled = false,
       formatTag,
+      getTagProps,
       id,
       invalid = false,
       max,
@@ -169,6 +182,7 @@ export const TagsInput = /* @__PURE__ */ forwardRef<HTMLInputElement, TagsInputP
             disabled={disabled}
             size={CHIP_SIZE[size]}
             tone={tone}
+            {...getTagProps?.(tag, index)}
           >
             <Tag.Label>{tag}</Tag.Label>
             <Tag.Close

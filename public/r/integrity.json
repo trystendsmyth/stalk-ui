@@ -476,11 +476,11 @@
     },
     "tags-input": {
       "path": "/r/tags-input.json",
-      "sha256": "5e1da5f7edc6da62fec21d306f97e59d5b2770a8af05ab819c139415b43d46b0"
+      "sha256": "91a0004d704bbba8f521874399f3ceb1f96ab8bbbd0e1247f55d524cc4fec060"
     },
     "shadcn/tags-input": {
       "path": "/r/shadcn/tags-input.json",
-      "sha256": "f914fea4082aac4b7ebcf1f05ad43334a63d0e2a1caca6d5f95077eede69e028"
+      "sha256": "e42b25b4f2962ecc934de809ae8a3e60426fe259602eb0c73406d609622a08c0"
     },
     "text": {
       "path": "/r/text.json",

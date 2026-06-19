@@ -59,6 +59,13 @@ test('formats each tag via formatTag and rejects empty results', async () => {
   expect(screen.getByText('ada@example.com')).toBeInTheDocument()
 })
 
+test('invokes getTagProps for each tag with its value and index', () => {
+  const getTagProps = vi.fn(() => ({ tone: 'success' as const }))
+  render(<TagsInput aria-label="Labels" defaultValue={['bug', 'docs']} getTagProps={getTagProps} />)
+  expect(getTagProps).toHaveBeenCalledWith('bug', 0)
+  expect(getTagProps).toHaveBeenCalledWith('docs', 1)
+})
+
 test('ignores duplicates by default', async () => {
   const user = userEvent.setup()
   const onValueChange = vi.fn()

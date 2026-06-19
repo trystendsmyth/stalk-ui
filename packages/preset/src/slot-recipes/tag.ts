@@ -12,6 +12,9 @@ export const tag = {
       flexShrink: 0,
       fontWeight: 'medium',
       gap: '4',
+      // Tight line box so the label glyphs sit optically centered in the pill
+      // (an inherited 1.5 line-height pushes the text visibly high).
+      lineHeight: 1,
       maxW: 'full',
       transitionDuration: 'fast',
       transitionProperty: 'background-color, border-color, color',
@@ -50,9 +53,9 @@ export const tag = {
       alignItems: 'center',
       display: 'inline-flex',
       gap: '4',
+      lineHeight: 1,
+      marginBlockEnd: '0.1em',
       minW: 0,
-      overflow: 'hidden',
-      textOverflow: 'ellipsis',
     },
     count: {
       alignItems: 'center',

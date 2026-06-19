@@ -5037,6 +5037,7 @@
       align-items: center;
       display: inline-flex;
       flex-shrink: 0;
+      line-height: 1;
 }
 
     .stalk-tag__avatar {
@@ -5046,7 +5047,6 @@
       color: var(--colors-color-palette-fg);
       font-weight: var(--font-weights-semibold);
       justify-content: center;
-      line-height: 1;
 }
 
     .stalk-tag__avatar img {
@@ -5071,10 +5071,10 @@
 
     .stalk-tag__label {
       gap: var(--spacing-4);
-      overflow: hidden;
       align-items: center;
       display: inline-flex;
-      text-overflow: ellipsis;
+      line-height: 1;
+      margin-block-end: 0.1em;
       min-width: var(--sizes-0);
 }
 

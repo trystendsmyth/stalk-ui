@@ -66,15 +66,21 @@ export const Disabled: Story = {
   args: { defaultValue: ['locked', 'readonly'], disabled: true },
 }
 
+const LABEL_TONES: Record<string, 'accent' | 'success' | 'warning' | 'danger' | 'info'> = {
+  bug: 'danger',
+  enhancement: 'success',
+  question: 'info',
+  docs: 'warning',
+}
+
 export const PerTagFormat: Story = {
   args: {
-    'aria-label': 'Recipients',
-    defaultValue: ['ada@stalk-ui.com'],
-    placeholder: 'Add an email…',
-    // Normalize valid emails; reject anything else by returning an empty string.
-    formatTag: (value) => {
-      const trimmed = value.trim().toLowerCase()
-      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmed) ? trimmed : ''
-    },
+    'aria-label': 'Labels',
+    defaultValue: ['bug', 'enhancement', 'question', 'docs'],
+    placeholder: 'Add a label…',
+    // Format the text per tag (lowercase) …
+    formatTag: (value) => value.trim().toLowerCase(),
+    // … and color/style each tag by its value.
+    getTagProps: (value) => ({ tone: LABEL_TONES[value] ?? 'accent' }),
   },
 }
