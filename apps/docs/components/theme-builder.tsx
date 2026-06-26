@@ -161,17 +161,20 @@ const swatchVars = (profile: ThemeProfile): { radii: Record<string, string> } & 
 const controlClass = css({
   display: 'flex',
   flexDirection: 'column',
+  alignItems: 'flex-start',
   gap: '6',
   fontSize: 'sm',
   fontWeight: 'medium',
-  minW: '9rem',
 })
 
 const selectClass = css({
+  width: 'auto',
   border: '1px solid var(--colors-border-default, #ccc)',
   borderRadius: '8px',
   paddingBlock: '8',
-  paddingInline: '12',
+  // Extra inline-end room so the native chevron sits just past the value, not the edge.
+  paddingInlineStart: '12',
+  paddingInlineEnd: '10',
   background: 'var(--colors-bg-default, #fff)',
   color: 'inherit',
   font: 'inherit',
