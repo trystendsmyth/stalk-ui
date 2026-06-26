@@ -85,3 +85,27 @@ export const Open: Story = {
     </Dialog.Root>
   ),
 }
+
+export const NonModal: Story = {
+  args: { defaultOpen: true, modal: false },
+  render: (args) => (
+    <Dialog.Root {...args}>
+      <Dialog.Content overlay={false}>
+        <Dialog.Header>
+          <Dialog.Title>Non-modal panel</Dialog.Title>
+          <Dialog.Description>
+            With `modal={false}` and `overlay={false}` the page behind stays interactive — for live,
+            click-through side panels.
+          </Dialog.Description>
+        </Dialog.Header>
+        <Dialog.Footer>
+          <Dialog.Close asChild>
+            <Button size="sm" variant="outline">
+              Close
+            </Button>
+          </Dialog.Close>
+        </Dialog.Footer>
+      </Dialog.Content>
+    </Dialog.Root>
+  ),
+}

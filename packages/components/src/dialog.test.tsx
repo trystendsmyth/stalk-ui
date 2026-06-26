@@ -32,6 +32,27 @@ test('renders an accessible dialog without axe violations', async () => {
   )
 })
 
+test('supports a non-modal dialog without the blocking overlay', async () => {
+  const { container } = render(
+    <Dialog.Root defaultOpen modal={false}>
+      <Dialog.Trigger>Open panel</Dialog.Trigger>
+      <Dialog.Content overlay={false}>
+        <Dialog.Header>
+          <Dialog.Title>Run details</Dialog.Title>
+          <Dialog.Description>Live, non-blocking panel.</Dialog.Description>
+        </Dialog.Header>
+        <p>Panel content</p>
+      </Dialog.Content>
+    </Dialog.Root>,
+  )
+
+  const dialog = screen.getByRole('dialog', { name: 'Run details' })
+  // Radix marks modal dialogs aria-modal="true"; non-modal omits it so the page
+  // behind stays in the a11y tree and interactive.
+  expect(dialog).not.toHaveAttribute('aria-modal', 'true')
+  expect((await axe(container)).violations).toHaveLength(0)
+})
+
 test('opens and closes with trigger and close controls', async () => {
   const user = userEvent.setup()
   renderDialog(false)

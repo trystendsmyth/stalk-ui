@@ -196,11 +196,11 @@
     },
     "dialog": {
       "path": "/r/dialog.json",
-      "sha256": "84e0d9835ec7d7c2639de1d3153f90368879b7cfbc0704d87e8ccd22a2870051"
+      "sha256": "a82ded7cf04ba906d28fcab177f59c2d3b9fe247f34cffb39d6fa0371b2f958d"
     },
     "shadcn/dialog": {
       "path": "/r/shadcn/dialog.json",
-      "sha256": "978c57604b57c5d15adea758048c984247439ae4ad3f309650eadd930e2a5b16"
+      "sha256": "102e329e08d00bfd3997db9a64b18bb3623a67aaa2ac7ee7718208b47b13b236"
     },
     "dropdown-menu": {
       "path": "/r/dropdown-menu.json",
