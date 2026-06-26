@@ -1,0 +1,28 @@
+{
+  "$schema": "https://stalk-ui.com/schema/v1/registry-item.json",
+  "name": "sparkline",
+  "type": "registry:ui",
+  "dependencies": ["@stalk-ui/preset"],
+  "registryDependencies": ["tones"],
+  "files": [
+    {
+      "path": "src/components/ui/sparkline.tsx",
+      "type": "registry:ui",
+      "content": "'use client'\n\nimport { forwardRef } from 'react'\nimport { css, cx } from 'styled-system/css'\nimport { sparkline as sparklineRecipe } from 'styled-system/recipes'\n\nimport type { Tone } from '../../lib/stalk-ui/tones'\nimport type { SVGProps } from 'react'\n\nconst styles = /* @__PURE__ */ sparklineRecipe()\n\n/** Trim coordinate floats for compact, stable path strings. */\nconst n = (value: number) => value.toFixed(2)\n\nexport interface SparklineProps extends Omit<SVGProps<SVGSVGElement>, 'children'> {\n  /** Series of numbers, left → right. Needs at least two points to draw a line. */\n  data: number[]\n  /** Intrinsic width in px (the SVG still scales to its box). Default `80`. */\n  width?: number\n  /** Intrinsic height in px. Default `24`. */\n  height?: number\n  /** Tone for the line / area / point. Default `accent`. */\n  tone?: Tone\n  /** Fill the area beneath the line. */\n  area?: boolean\n  /** Mark the final data point. */\n  showLastPoint?: boolean\n  /** Line thickness in px. Default `1.5`. */\n  strokeWidth?: number\n  /**\n   * Accessible label, e.g. \"Revenue, last 30 days\". When omitted the sparkline is\n   * decorative (`aria-hidden`) — pair it with adjacent text in that case.\n   */\n  'aria-label'?: string\n}\n\n/** Map values to SVG points within `[pad, size-pad]`, flipping Y so up = larger. */\nconst buildPoints = (data: number[], width: number, height: number, pad: number) => {\n  const min = Math.min(...data)\n  const max = Math.max(...data)\n  const span = max - min || 1\n  const innerW = width - pad * 2\n  const innerH = height - pad * 2\n  const step = data.length > 1 ? innerW / (data.length - 1) : 0\n  return data.map((value, i) => {\n    const x = pad + i * step\n    const y = pad + innerH - ((value - min) / span) * innerH\n    return [x, y] as const\n  })\n}\n\nexport const Sparkline = /* @__PURE__ */ forwardRef<SVGSVGElement, SparklineProps>(\n  function Sparkline(\n    {\n      data,\n      width = 80,\n      height = 24,\n      tone = 'accent',\n      area = false,\n      showLastPoint = false,\n      strokeWidth = 1.5,\n      className,\n      'aria-label': ariaLabel,\n      ...props\n    },\n    ref,\n  ) {\n    const pad = Math.max(strokeWidth, showLastPoint ? strokeWidth + 1.5 : strokeWidth)\n    const points = data.length > 0 ? buildPoints(data, width, height, pad) : []\n    const line = points.map(([x, y], i) => `${i === 0 ? 'M' : 'L'}${n(x)} ${n(y)}`).join(' ')\n    const last = points.at(-1)\n    const first = points.at(0)\n    const baseline = n(height - pad)\n    const areaPath =\n      area && first && last\n        ? `${line} L${n(last[0])} ${baseline} L${n(first[0])} ${baseline} Z`\n        : undefined\n\n    return (\n      <svg\n        ref={ref}\n        className={cx(css({ colorPalette: tone }), styles.root, className)}\n        width={width}\n        height={height}\n        viewBox={`0 0 ${String(width)} ${String(height)}`}\n        preserveAspectRatio=\"none\"\n        role={ariaLabel ? 'img' : undefined}\n        aria-label={ariaLabel}\n        aria-hidden={ariaLabel ? undefined : true}\n        {...props}\n      >\n        {areaPath ? <path className={styles.area} d={areaPath} /> : null}\n        {line ? <path className={styles.line} d={line} strokeWidth={strokeWidth} /> : null}\n        {showLastPoint && last ? (\n          <circle\n            className={styles.point}\n            cx={last[0]}\n            cy={last[1]}\n            r={strokeWidth + 0.5}\n            strokeWidth={strokeWidth}\n          />\n        ) : null}\n      </svg>\n    )\n  },\n)\n"
+    }
+  ],
+  "stalk": {
+    "schemaVersion": "1.0",
+    "preset": {
+      "semanticTokens": {},
+      "recipes": ["sparkline"]
+    },
+    "packageDependencies": {
+      "preset": "@stalk-ui/preset"
+    },
+    "pandaCodegen": true,
+    "importAliases": {
+      "styledSystem": "styled-system"
+    }
+  }
+}

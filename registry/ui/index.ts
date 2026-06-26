@@ -53,6 +53,7 @@ import { sheet } from './sheet'
 import { sidebar } from './sidebar'
 import { skeleton } from './skeleton'
 import { slider } from './slider'
+import { sparkline } from './sparkline'
 import { spinner } from './spinner'
 import { switchItem } from './switch'
 import { table } from './table'
@@ -128,6 +129,7 @@ export const registryItems = [
   sidebar,
   skeleton,
   slider,
+  sparkline,
   spinner,
   switchItem,
   table,

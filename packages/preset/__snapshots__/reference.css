@@ -4929,6 +4929,38 @@
       border-color: var(--colors-accent-fg);
 }
 
+    .stalk-sparkline__root {
+      overflow: visible;
+      --colors-color-palette-surface: var(--colors-accent-surface);
+      --colors-color-palette-subtle: var(--colors-accent-subtle);
+      --colors-color-palette-muted: var(--colors-accent-muted);
+      --colors-color-palette-solid: var(--colors-accent-solid);
+      --colors-color-palette-emphasis: var(--colors-accent-emphasis);
+      --colors-color-palette-text: var(--colors-accent-text);
+      --colors-color-palette-fg: var(--colors-accent-fg);
+      --colors-color-palette-contrast: var(--colors-accent-contrast);
+      display: inline-block;
+      vertical-align: middle;
+}
+
+    .stalk-sparkline__area {
+      fill: var(--colors-color-palette-solid);
+      opacity: 0.15;
+      stroke: none;
+}
+
+    .stalk-sparkline__line {
+      fill: none;
+      stroke: var(--colors-color-palette-solid);
+      stroke-linecap: round;
+      stroke-linejoin: round;
+}
+
+    .stalk-sparkline__point {
+      fill: var(--colors-color-palette-solid);
+      stroke: var(--colors-bg-default);
+}
+
     .stalk-spinner__root {
       align-items: center;
       color: currentColor;

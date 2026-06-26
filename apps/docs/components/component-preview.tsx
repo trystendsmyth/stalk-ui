@@ -63,6 +63,7 @@ import { Sheet } from '@stalk-ui/components/sheet'
 import { Sidebar } from '@stalk-ui/components/sidebar'
 import { Skeleton } from '@stalk-ui/components/skeleton'
 import { Slider } from '@stalk-ui/components/slider'
+import { Sparkline } from '@stalk-ui/components/sparkline'
 import { Spinner } from '@stalk-ui/components/spinner'
 import { Switch } from '@stalk-ui/components/switch'
 import { Table } from '@stalk-ui/components/table'
@@ -280,6 +281,7 @@ const liveScope = {
   Sidebar,
   Skeleton,
   Slider,
+  Sparkline,
   Spinner,
   Switch,
   Table,

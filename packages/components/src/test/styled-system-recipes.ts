@@ -173,6 +173,13 @@ export const toast = () => ({
   loader: 'stalk-toast__loader',
 })
 
+export const sparkline = () => ({
+  root: 'stalk-sparkline__root',
+  area: 'stalk-sparkline__area',
+  line: 'stalk-sparkline__line',
+  point: 'stalk-sparkline__point',
+})
+
 interface SpinnerRecipeOptions {
   size?: 'sm' | 'md' | 'lg' | 'xl'
 }
