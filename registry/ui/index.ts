@@ -20,6 +20,7 @@ import { command } from './command'
 import { contextMenu } from './context-menu'
 import { dataList } from './data-list'
 import { dataTable } from './data-table'
+import { dataTableAdvanced } from './data-table-advanced'
 import { datePicker } from './date-picker'
 import { datetimeInput } from './datetime-input'
 import { dialog } from './dialog'
@@ -96,6 +97,7 @@ export const registryItems = [
   contextMenu,
   dataList,
   dataTable,
+  dataTableAdvanced,
   datePicker,
   datetimeInput,
   dialog,

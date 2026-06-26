@@ -22,6 +22,7 @@ import { Command } from '@stalk-ui/components/command'
 import { ContextMenu } from '@stalk-ui/components/context-menu'
 import { DataList } from '@stalk-ui/components/data-list'
 import { DataTable } from '@stalk-ui/components/data-table'
+import { DataTableAdvanced } from '@stalk-ui/components/data-table-advanced'
 import { DatePicker } from '@stalk-ui/components/date-picker'
 import { DatetimeInput } from '@stalk-ui/components/datetime-input'
 import { Dialog } from '@stalk-ui/components/dialog'
@@ -120,6 +121,19 @@ const invoiceData: DemoInvoice[] = [
 ]
 
 const InvoiceTable = () => <DataTable columns={invoiceColumns} data={invoiceData} />
+
+const MembersTable = () => (
+  <DataTableAdvanced
+    columns={invoiceColumns}
+    data={invoiceData}
+    columnPinning={{ left: ['invoice'] }}
+    renderSubRow={(row) => (
+      <div style={{ color: 'var(--colors-fg-muted)', padding: '0.5rem 0' }}>
+        {row.invoice} — {row.status}, billed {row.amount}.
+      </div>
+    )}
+  />
+)
 
 const heatmapRows = ['Inverter 1', 'Inverter 2', 'Inverter 3', 'Inverter 4']
 const heatmapColumns = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri']
@@ -233,6 +247,8 @@ const liveScope = {
   ContextMenu,
   DataList,
   DataTable,
+  DataTableAdvanced,
+  MembersTable,
   DatePicker,
   DatetimeInput,
   Dialog,

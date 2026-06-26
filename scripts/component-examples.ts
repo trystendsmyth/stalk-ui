@@ -83,6 +83,7 @@ export const componentExamples = {
     '<DataList.Root orientation="vertical">\n  <DataList.Item>\n    <DataList.Label tone="accent">Accent</DataList.Label>\n    <DataList.Value>Primary brand palette</DataList.Value>\n  </DataList.Item>\n  <DataList.Item>\n    <DataList.Label tone="success">Success</DataList.Label>\n    <DataList.Value>Operation completed</DataList.Value>\n  </DataList.Item>\n  <DataList.Item>\n    <DataList.Label tone="danger">Danger</DataList.Label>\n    <DataList.Value>Action required</DataList.Value>\n  </DataList.Item>\n</DataList.Root>',
   ],
   'data-table': ['<InvoiceTable />'],
+  'data-table-advanced': ['<MembersTable />'],
   'date-picker': ['<EventDatePicker />'],
   heatmap: ['<PerformanceHeatMap />'],
   'datetime-input': [

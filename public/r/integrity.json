@@ -178,6 +178,14 @@
       "path": "/r/shadcn/data-table.json",
       "sha256": "d1283a28d0db67723b8f7a3203df6d0e45ef69e9f845b5062d0621e5f74be42f"
     },
+    "data-table-advanced": {
+      "path": "/r/data-table-advanced.json",
+      "sha256": "f2d3984f0e670a09f02b45d9447e1d2346ffc5adeaa2a742aed13cae3885cda0"
+    },
+    "shadcn/data-table-advanced": {
+      "path": "/r/shadcn/data-table-advanced.json",
+      "sha256": "3084893c852f5b59321575a5e72867c2411852a6200c42ad6de5a338aad6bc0d"
+    },
     "date-picker": {
       "path": "/r/date-picker.json",
       "sha256": "82bccd598398af1446fc17d44affbac9758b200870a3d9ce6618298154d5938b"
