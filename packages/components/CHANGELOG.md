@@ -2,6 +2,19 @@
 
 ## 1.0.0
 
+### Major Changes
+
+- [#77](https://github.com/trystendsmyth/stalk-ui/pull/77) [`f836782`](https://github.com/trystendsmyth/stalk-ui/commit/f836782d58dfa21e4e5543f4cd673a67480fa856) Thanks [@trystendsmyth](https://github.com/trystendsmyth)! - Stalk UI 1.0: production-ready components and theming
+
+### Patch Changes
+
+- Updated dependencies [[`f836782`](https://github.com/trystendsmyth/stalk-ui/commit/f836782d58dfa21e4e5543f4cd673a67480fa856)]:
+  - @stalk-ui/preset@1.0.0
+  - @stalk-ui/i18n@1.0.0
+  - @stalk-ui/utils@1.0.0
+
+## 1.0.0
+
 ### Minor Changes
 
 - [#66](https://github.com/trystendsmyth/stalk-ui/pull/66) [`6933dfc`](https://github.com/trystendsmyth/stalk-ui/commit/6933dfcbeacc18fa7fdfac5179ede5498c7500a4) Thanks [@trystendsmyth](https://github.com/trystendsmyth)! - Add twelve new components.
