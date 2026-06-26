@@ -613,6 +613,24 @@
     --colors-highlight-text: color-mix(in srgb, var(--colors-orange-11) 50%, var(--colors-orange-12) 50%);
     --colors-highlight-fg: var(--colors-orange-12);
     --colors-highlight-contrast: var(--colors-gray-1);
+    --colors-scale-sequential-1: var(--colors-blue-3);
+    --colors-scale-sequential-2: var(--colors-blue-4);
+    --colors-scale-sequential-3: var(--colors-blue-5);
+    --colors-scale-sequential-4: var(--colors-blue-6);
+    --colors-scale-sequential-5: var(--colors-blue-7);
+    --colors-scale-sequential-6: var(--colors-blue-8);
+    --colors-scale-sequential-7: var(--colors-blue-9);
+    --colors-scale-sequential-8: var(--colors-blue-10);
+    --colors-scale-sequential-9: var(--colors-blue-11);
+    --colors-scale-diverging-neg-1: var(--colors-red-11);
+    --colors-scale-diverging-neg-2: var(--colors-red-9);
+    --colors-scale-diverging-neg-3: var(--colors-red-7);
+    --colors-scale-diverging-neg-4: var(--colors-red-5);
+    --colors-scale-diverging-mid: var(--colors-neutral-6);
+    --colors-scale-diverging-pos-1: var(--colors-blue-5);
+    --colors-scale-diverging-pos-2: var(--colors-blue-7);
+    --colors-scale-diverging-pos-3: var(--colors-blue-9);
+    --colors-scale-diverging-pos-4: var(--colors-blue-11);
 }
 
   .dark {
@@ -677,7 +695,25 @@
     --colors-highlight-emphasis: color-mix(in srgb, var(--colors-orange-dark-11) 50%, var(--colors-orange-dark-12) 50%);
     --colors-highlight-text: color-mix(in srgb, var(--colors-orange-dark-11) 50%, var(--colors-orange-dark-12) 50%);
     --colors-highlight-fg: var(--colors-orange-dark-12);
-    --colors-highlight-contrast: var(--colors-gray-12)
+    --colors-highlight-contrast: var(--colors-gray-12);
+    --colors-scale-sequential-1: var(--colors-blue-dark-3);
+    --colors-scale-sequential-2: var(--colors-blue-dark-4);
+    --colors-scale-sequential-3: var(--colors-blue-dark-5);
+    --colors-scale-sequential-4: var(--colors-blue-dark-6);
+    --colors-scale-sequential-5: var(--colors-blue-dark-7);
+    --colors-scale-sequential-6: var(--colors-blue-dark-8);
+    --colors-scale-sequential-7: var(--colors-blue-dark-9);
+    --colors-scale-sequential-8: var(--colors-blue-dark-10);
+    --colors-scale-sequential-9: var(--colors-blue-dark-11);
+    --colors-scale-diverging-neg-1: var(--colors-red-dark-11);
+    --colors-scale-diverging-neg-2: var(--colors-red-dark-9);
+    --colors-scale-diverging-neg-3: var(--colors-red-dark-7);
+    --colors-scale-diverging-neg-4: var(--colors-red-dark-5);
+    --colors-scale-diverging-mid: var(--colors-neutral-dark-6);
+    --colors-scale-diverging-pos-1: var(--colors-blue-dark-5);
+    --colors-scale-diverging-pos-2: var(--colors-blue-dark-7);
+    --colors-scale-diverging-pos-3: var(--colors-blue-dark-9);
+    --colors-scale-diverging-pos-4: var(--colors-blue-dark-11)
 }
 
   [data-panda-theme=monochrome] {

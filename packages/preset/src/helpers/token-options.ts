@@ -49,3 +49,8 @@ export const HIGHLIGHT_COLORS = flattenTokenKeys(
   semanticTokens.colors.highlight as Record<string, unknown>,
   'highlight',
 )
+
+export const SCALE_COLORS = flattenTokenKeys(
+  semanticTokens.colors.scale as Record<string, unknown>,
+  'scale',
+)

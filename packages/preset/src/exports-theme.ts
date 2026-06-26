@@ -5,4 +5,10 @@ export {
   createSemanticColorTokens,
   createVibrantAccentSemanticTokens,
 } from './tokens/semantic-colors'
+export {
+  createDivergingScaleTokens,
+  createScaleSemanticTokens,
+  createSequentialScaleTokens,
+} from './tokens/semantic-scales'
+export type { ScaleTokenOptions } from './tokens/semantic-scales'
 export type { AccentColor, GrayColor } from './types'
