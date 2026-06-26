@@ -161,17 +161,21 @@ const swatchVars = (profile: ThemeProfile): { radii: Record<string, string> } & 
 const controlClass = css({
   display: 'flex',
   flexDirection: 'column',
-  gap: '1',
+  gap: '6',
   fontSize: 'sm',
+  fontWeight: 'medium',
+  minW: '9rem',
 })
 
 const selectClass = css({
   border: '1px solid var(--colors-border-default, #ccc)',
-  borderRadius: '6px',
-  padding: '1.5',
+  borderRadius: '8px',
+  paddingBlock: '8',
+  paddingInline: '12',
   background: 'var(--colors-bg-default, #fff)',
   color: 'inherit',
   font: 'inherit',
+  cursor: 'pointer',
 })
 
 const panelClass = css({
@@ -179,10 +183,10 @@ const panelClass = css({
   border: '1px solid var(--colors-border-default)',
   background: 'var(--colors-bg-default)',
   color: 'var(--colors-fg-default)',
-  padding: '5',
+  padding: '24',
   display: 'flex',
   flexDirection: 'column',
-  gap: '3',
+  gap: '14',
 })
 
 const trend = [4, 6, 5, 8, 7, 10, 8, 12, 11, 14]
@@ -191,7 +195,7 @@ function PreviewSurface({ vars, label }: { vars: CSSProperties; label: string })
   return (
     <div className={panelClass} style={vars}>
       <span className={css({ fontSize: 'xs', opacity: 0.6 })}>{label}</span>
-      <div className={css({ display: 'flex', flexWrap: 'wrap', gap: '2', alignItems: 'center' })}>
+      <div className={css({ display: 'flex', flexWrap: 'wrap', gap: '12', alignItems: 'center' })}>
         <Button size="sm">Primary</Button>
         <Button size="sm" variant="outline">
           Outline
@@ -203,7 +207,7 @@ function PreviewSurface({ vars, label }: { vars: CSSProperties; label: string })
           Delete
         </Button>
       </div>
-      <div className={css({ display: 'flex', flexWrap: 'wrap', gap: '2', alignItems: 'center' })}>
+      <div className={css({ display: 'flex', flexWrap: 'wrap', gap: '12', alignItems: 'center' })}>
         <Badge>Default</Badge>
         <Badge tone="success" variant="solid">
           Live
@@ -250,8 +254,10 @@ export function ThemeBuilder() {
   const darkVars = { ...dark, ...radii } as CSSProperties
 
   return (
-    <section className={css({ display: 'flex', flexDirection: 'column', gap: '5', mt: '6' })}>
-      <div className={css({ display: 'flex', flexWrap: 'wrap', gap: '4' })}>
+    <section className={css({ display: 'flex', flexDirection: 'column', gap: '24', mt: '32' })}>
+      <div
+        className={css({ display: 'flex', flexWrap: 'wrap', gap: '20', alignItems: 'flex-end' })}
+      >
         <label className={controlClass}>
           Accent
           <select
@@ -322,9 +328,11 @@ export function ThemeBuilder() {
             display: 'flex',
             flexDirection: 'row',
             alignItems: 'center',
-            gap: '2',
+            gap: '8',
             fontSize: 'sm',
+            fontWeight: 'medium',
             alignSelf: 'flex-end',
+            paddingBlock: '8',
           })}
         >
           <input
@@ -351,16 +359,16 @@ export function ThemeBuilder() {
       <div
         className={css({
           display: 'grid',
-          gap: '4',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
+          gap: '20',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
         })}
       >
         <PreviewSurface vars={lightVars} label="Light" />
         <PreviewSurface vars={darkVars} label="Dark" />
       </div>
 
-      <div className={css({ display: 'flex', flexDirection: 'column', gap: '2' })}>
-        <div className={css({ display: 'flex', alignItems: 'center', gap: '3' })}>
+      <div className={css({ display: 'flex', flexDirection: 'column', gap: '10' })}>
+        <div className={css({ display: 'flex', alignItems: 'center', gap: '12' })}>
           <strong className={css({ fontSize: 'sm' })}>panda.config.ts</strong>
           <button
             type="button"
@@ -377,8 +385,9 @@ export function ThemeBuilder() {
           className={css({
             overflowX: 'auto',
             borderRadius: '8px',
-            padding: '4',
+            padding: '18',
             fontSize: 'xs',
+            lineHeight: '1.6',
             background: 'var(--colors-bg-subtle, #f5f5f5)',
             border: '1px solid var(--colors-border-muted, #eee)',
           })}
@@ -387,8 +396,8 @@ export function ThemeBuilder() {
         </pre>
       </div>
 
-      <div className={css({ display: 'flex', flexDirection: 'column', gap: '2' })}>
-        <div className={css({ display: 'flex', alignItems: 'center', gap: '3' })}>
+      <div className={css({ display: 'flex', flexDirection: 'column', gap: '10' })}>
+        <div className={css({ display: 'flex', alignItems: 'center', gap: '12' })}>
           <strong className={css({ fontSize: 'sm' })}>theme profile (JSON)</strong>
           <button
             type="button"
@@ -405,8 +414,9 @@ export function ThemeBuilder() {
           className={css({
             overflowX: 'auto',
             borderRadius: '8px',
-            padding: '4',
+            padding: '18',
             fontSize: 'xs',
+            lineHeight: '1.6',
             background: 'var(--colors-bg-subtle, #f5f5f5)',
             border: '1px solid var(--colors-border-muted, #eee)',
           })}
