@@ -84,6 +84,7 @@ export const componentExamples = {
   ],
   'data-table': ['<InvoiceTable />'],
   'date-picker': ['<EventDatePicker />'],
+  heatmap: ['<PerformanceHeatMap />'],
   'datetime-input': [
     '<DatetimeInput aria-label="Date" />',
     '<DatetimeInput aria-label="Time" mode="time" />',

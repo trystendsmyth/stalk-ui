@@ -71,7 +71,9 @@ pnpm dlx @stalk-ui/cli add @stalk-ui/dialog
 
 ## Props
 
-No component-specific props are documented yet. Primitive props pass through to the underlying element or Radix part.
+| Prop      | Type      | Required | Default | Description                                                                                                                                                                                                                                                                                                       |
+| --------- | --------- | -------- | ------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `overlay` | `boolean` | No       | -       | Render the dimming overlay behind the content. Default \`true\`. Set \`false\`<br />for a non-modal dialog (\`<Dialog modal={false}>\`) so the page behind stays<br />interactive and click-through — Radix's \`modal\` prop is forwarded by<br />\`Dialog.Root\`, this just drops the blocking overlay to match. |
 
 ## Variants
 

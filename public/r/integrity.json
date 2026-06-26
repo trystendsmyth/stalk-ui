@@ -234,6 +234,14 @@
       "path": "/r/shadcn/heading.json",
       "sha256": "3a27c618feae310e270e3fccc46df88f6da72b44ee4b5638c6279113d8aae2c3"
     },
+    "heatmap": {
+      "path": "/r/heatmap.json",
+      "sha256": "19d3824e5edcb1ec08025ba729ca3f9a1775ab3c40baf1af38e01efa460eff01"
+    },
+    "shadcn/heatmap": {
+      "path": "/r/shadcn/heatmap.json",
+      "sha256": "0cd68e46e5947e494b7fd9fd8fc76d861d3af58e52925d636d90c06cff4b5bbb"
+    },
     "hover-card": {
       "path": "/r/hover-card.json",
       "sha256": "49afab17a158b20798432a2f3e9d069f09250edb72dde2b48a4d3919d8bc3be7"

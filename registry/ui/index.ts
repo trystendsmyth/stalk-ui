@@ -27,6 +27,7 @@ import { dropdownMenu } from './dropdown-menu'
 import { form } from './form'
 import { formatInput } from './format-input'
 import { heading } from './heading'
+import { heatmap } from './heatmap'
 import { hoverCard } from './hover-card'
 import { input } from './input'
 import { kbd } from './kbd'
@@ -101,6 +102,7 @@ export const registryItems = [
   form,
   formatInput,
   heading,
+  heatmap,
   hoverCard,
   input,
   kbd,

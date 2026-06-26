@@ -37,6 +37,7 @@ import {
 } from '@stalk-ui/components/form'
 import { FormatInput } from '@stalk-ui/components/format-input'
 import { Heading } from '@stalk-ui/components/heading'
+import { HeatMap } from '@stalk-ui/components/heatmap'
 import { HoverCard } from '@stalk-ui/components/hover-card'
 import { Input } from '@stalk-ui/components/input'
 import { Kbd } from '@stalk-ui/components/kbd'
@@ -118,6 +119,27 @@ const invoiceData: DemoInvoice[] = [
 ]
 
 const InvoiceTable = () => <DataTable columns={invoiceColumns} data={invoiceData} />
+
+const heatmapRows = ['Inverter 1', 'Inverter 2', 'Inverter 3', 'Inverter 4']
+const heatmapColumns = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri']
+const heatmapData: Record<string, Record<string, number | null>> = {
+  'Inverter 1': { Mon: 98, Tue: 96, Wed: 99, Thu: 94, Fri: 97 },
+  'Inverter 2': { Mon: 82, Tue: 88, Wed: 79, Thu: 91, Fri: 85 },
+  'Inverter 3': { Mon: 64, Tue: 58, Wed: null, Thu: 71, Fri: 69 },
+  'Inverter 4': { Mon: 45, Tue: 52, Wed: 48, Thu: 40, Fri: 55 },
+}
+
+const PerformanceHeatMap = () => (
+  <HeatMap
+    rows={heatmapRows}
+    columns={heatmapColumns}
+    cell={(row, column) => heatmapData[row]?.[column] ?? null}
+    aria-label="Weekly inverter performance index"
+    caption="Performance index (%) by inverter and weekday."
+    formatValue={(value) => `${String(value)}%`}
+    legend
+  />
+)
 
 const EventDatePicker = () => {
   const [date, setDate] = useState<Date>()
@@ -225,6 +247,7 @@ const liveScope = {
   FormMessage,
   FormatInput,
   Heading,
+  HeatMap,
   Home,
   HoverCard,
   Info,
@@ -235,6 +258,7 @@ const liveScope = {
   Link,
   Menubar,
   InvoiceTable,
+  PerformanceHeatMap,
   NavigationMenu,
   NumberInput,
   OtpInput,

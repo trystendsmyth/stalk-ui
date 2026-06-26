@@ -123,13 +123,16 @@ pnpm dlx @stalk-ui/cli add @stalk-ui/table
 
 ## Props
 
-| Prop             | Type                             | Required | Default | Description                                                     |
-| ---------------- | -------------------------------- | -------- | ------- | --------------------------------------------------------------- |
-| `containerProps` | `HTMLAttributes<HTMLDivElement>` | No       | -       | Props applied to the scroll container wrapping the \`<table>\`. |
+| Prop             | Type                             | Required | Default | Description                                                                                                                                                                                                                                                                                       |
+| ---------------- | -------------------------------- | -------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `containerProps` | `HTMLAttributes<HTMLDivElement>` | No       | -       | Props applied to the scroll container wrapping the \`<table>\`.                                                                                                                                                                                                                                   |
+| `stickyHeader`   | `boolean`                        | No       | -       | Keep the header rows pinned while the body scrolls. Pair with a max-height +<br />\`overflowY: 'auto'\` on \`containerProps\` to get the vertical scroll region.<br />Freeze individual columns by setting \`data-pinned="start" \| "end"\` on the<br />matching \`Table.Head\` / \`Table.Cell\`. |
 
 ## Variants
 
-No recipe variants are documented for this component.
+| Variant        | Values |
+| -------------- | ------ |
+| `stickyHeader` | `true` |
 
 ## Registry
 

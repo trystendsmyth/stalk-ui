@@ -364,6 +364,17 @@ export const timePicker = () => ({
   separator: 'stalk-time-picker__separator',
 })
 
+export const heatmap = () => ({
+  root: 'stalk-heatmap__root',
+  table: 'stalk-heatmap__table',
+  corner: 'stalk-heatmap__corner',
+  columnHeader: 'stalk-heatmap__columnHeader',
+  rowHeader: 'stalk-heatmap__rowHeader',
+  cell: 'stalk-heatmap__cell',
+  legend: 'stalk-heatmap__legend',
+  caption: 'stalk-heatmap__caption',
+})
+
 interface TableRecipeOptions {
   stickyHeader?: boolean
 }
