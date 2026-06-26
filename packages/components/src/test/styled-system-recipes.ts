@@ -364,14 +364,20 @@ export const timePicker = () => ({
   separator: 'stalk-time-picker__separator',
 })
 
-export const table = () => ({
+interface TableRecipeOptions {
+  stickyHeader?: boolean
+}
+
+export const table = ({ stickyHeader = false }: TableRecipeOptions = {}) => ({
   root: 'stalk-table__root',
   table: 'stalk-table__table',
   header: 'stalk-table__header',
   body: 'stalk-table__body',
   footer: 'stalk-table__footer',
   row: 'stalk-table__row',
-  head: 'stalk-table__head',
+  head: ['stalk-table__head', stickyHeader ? 'stalk-table__head--stickyHeader_true' : undefined]
+    .filter(Boolean)
+    .join(' '),
   cell: 'stalk-table__cell',
   caption: 'stalk-table__caption',
 })

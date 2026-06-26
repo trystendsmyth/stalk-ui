@@ -196,11 +196,11 @@
     },
     "dialog": {
       "path": "/r/dialog.json",
-      "sha256": "a82ded7cf04ba906d28fcab177f59c2d3b9fe247f34cffb39d6fa0371b2f958d"
+      "sha256": "b22a8b18b09c03fceffed50eaeabb5839de280053a77d6d8449d865173e43e43"
     },
     "shadcn/dialog": {
       "path": "/r/shadcn/dialog.json",
-      "sha256": "102e329e08d00bfd3997db9a64b18bb3623a67aaa2ac7ee7718208b47b13b236"
+      "sha256": "a510848fa305ef5affe9e7e5ac6d7cf3436c0c3cd9dd0d06b5450fe2b83b7f47"
     },
     "dropdown-menu": {
       "path": "/r/dropdown-menu.json",
@@ -452,11 +452,11 @@
     },
     "table": {
       "path": "/r/table.json",
-      "sha256": "01436dca9c0cd32e2948f0d87af63b10dedbe8437e3a885ff8078bf1de16dbac"
+      "sha256": "bdc457ffc151b9b32b61b47ad885b0b83733ada7fef8de08cb17981e12dac781"
     },
     "shadcn/table": {
       "path": "/r/shadcn/table.json",
-      "sha256": "688c9e75c379213b635f52b2e3d1884baaf03700d637deedaf9ab00d9316a1c5"
+      "sha256": "d059ae11be75182d2e08b0276546a8b89e10c6676efdc5139b6e651d1963fd42"
     },
     "tabs": {
       "path": "/r/tabs.json",
