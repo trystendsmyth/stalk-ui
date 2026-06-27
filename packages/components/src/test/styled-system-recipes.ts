@@ -173,6 +173,13 @@ export const toast = () => ({
   loader: 'stalk-toast__loader',
 })
 
+export const sparkline = () => ({
+  root: 'stalk-sparkline__root',
+  area: 'stalk-sparkline__area',
+  line: 'stalk-sparkline__line',
+  point: 'stalk-sparkline__point',
+})
+
 interface SpinnerRecipeOptions {
   size?: 'sm' | 'md' | 'lg' | 'xl'
 }
@@ -364,14 +371,31 @@ export const timePicker = () => ({
   separator: 'stalk-time-picker__separator',
 })
 
-export const table = () => ({
+export const heatmap = () => ({
+  root: 'stalk-heatmap__root',
+  table: 'stalk-heatmap__table',
+  corner: 'stalk-heatmap__corner',
+  columnHeader: 'stalk-heatmap__columnHeader',
+  rowHeader: 'stalk-heatmap__rowHeader',
+  cell: 'stalk-heatmap__cell',
+  legend: 'stalk-heatmap__legend',
+  caption: 'stalk-heatmap__caption',
+})
+
+interface TableRecipeOptions {
+  stickyHeader?: boolean
+}
+
+export const table = ({ stickyHeader = false }: TableRecipeOptions = {}) => ({
   root: 'stalk-table__root',
   table: 'stalk-table__table',
   header: 'stalk-table__header',
   body: 'stalk-table__body',
   footer: 'stalk-table__footer',
   row: 'stalk-table__row',
-  head: 'stalk-table__head',
+  head: ['stalk-table__head', stickyHeader ? 'stalk-table__head--stickyHeader_true' : undefined]
+    .filter(Boolean)
+    .join(' '),
   cell: 'stalk-table__cell',
   caption: 'stalk-table__caption',
 })

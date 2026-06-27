@@ -66,6 +66,8 @@ const componentDescriptions = {
   'context-menu': 'Reveals a menu of actions on right-click or long-press.',
   'data-list': 'Presents label/value pairs as an aligned definition list.',
   'data-table': 'Renders sortable, paginated tabular data with TanStack Table.',
+  'data-table-advanced':
+    'Extends the data table with expandable detail rows, frozen columns, and a sticky header, plus a headless useDataTable hook.',
   'date-picker': 'Pairs a typed date field with a calendar popover.',
   'datetime-input': 'Collects a date, time, or date-and-time as locale-aware masked text.',
   dialog: 'Displays modal content in a focus-trapped overlay.',
@@ -74,6 +76,8 @@ const componentDescriptions = {
   'format-input':
     'A text field preset for email, URL, or telephone — sets type, inputMode, and autocomplete.',
   heading: 'Titles a section with a semantic heading level.',
+  heatmap:
+    'Plots a labeled matrix of color-coded cells with sequential or diverging ramps that follow the theme and color mode.',
   'hover-card': 'Previews rich content when a link or control is hovered or focused.',
   input: 'Collects short-form text from a user.',
   kbd: 'Marks a keyboard key or shortcut.',
@@ -102,6 +106,8 @@ const componentDescriptions = {
   sidebar: 'Provides a collapsible, keyboard-toggled application sidebar.',
   skeleton: 'Reserves layout space with a shimmering placeholder while content loads.',
   slider: 'Selects a numeric value or range along a track.',
+  sparkline:
+    'Draws a compact inline-SVG trend line with no charting dependency; tints follow the tone and color mode.',
   spinner: 'Indicates an indeterminate loading state with an accessible label.',
   switch: 'Toggles a setting on or off.',
   table: 'Presents rows and columns of data in an accessible HTML table.',

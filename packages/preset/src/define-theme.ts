@@ -3,7 +3,9 @@ import {
   createSemanticColorTokens,
   createVibrantAccentSemanticTokens,
 } from './tokens/semantic-colors'
+import { createScaleSemanticTokens } from './tokens/semantic-scales'
 
+import type { ScaleTokenOptions } from './tokens/semantic-scales'
 import type { AccentColor, GrayColor, TokenGroup } from './types'
 import type { Preset } from '@pandacss/dev'
 
@@ -32,6 +34,24 @@ export interface DefineThemeOptions {
    * or `@fontsource`); this only sets the `fonts.sans` / `fonts.mono` tokens.
    */
   fonts?: { mono?: string; sans?: string }
+  /**
+   * Re-hue the data-viz ramps (`scale.sequential.*`, `scale.diverging.*`).
+   * Defaults follow the accent (sequential) and `['red', 'blue']` (diverging).
+   * Consumed by the HeatMap primitive and dependency-free Sparklines.
+   */
+  scales?: ScaleTokenOptions
+  /**
+   * Extra status-style tone groups beyond the built-ins (accent/success/warning/
+   * danger/info/highlight). Each entry generates the full 8-key tone surface from
+   * a Radix accent scale, so `colorPalette="<name>"` retints any component to it.
+   *
+   * @example tones: { brand: 'teal', promo: 'violet' }
+   *
+   * Note: to use a custom tone as a *dynamic* (runtime) `colorPalette` value, add
+   * its name to your config `staticCss.css[].properties.colorPalette`; static
+   * usages in source are extracted automatically.
+   */
+  tones?: Record<string, AccentColor>
   /**
    * Extra raw token scales merged into the theme — e.g. `radii`, `fontSizes`,
    * `lineHeights`, `spacing`, `sizes`. These re-scale density, corners, and the
@@ -70,6 +90,12 @@ export const defineTheme = (options: DefineThemeOptions): StalkTheme => {
 
   const base = createSemanticColorTokens(accent, gray)
 
+  // Custom tones → full 8-key tone surfaces keyed by name.
+  const toneColors: TokenGroup = {}
+  for (const [name, scale] of Object.entries(options.tones ?? {})) {
+    toneColors[name] = createAccentSemanticTokens(scale)
+  }
+
   const colors: TokenGroup = {
     ...base,
     accent: vibrant
@@ -80,6 +106,13 @@ export const defineTheme = (options: DefineThemeOptions): StalkTheme => {
     ...(options.danger ? { danger: createAccentSemanticTokens(options.danger) } : {}),
     ...(options.info ? { info: createAccentSemanticTokens(options.info) } : {}),
     ...(options.highlight ? { highlight: createAccentSemanticTokens(options.highlight) } : {}),
+    // Re-hue the viz ramps; sequential defaults to the theme accent.
+    ...createScaleSemanticTokens({
+      sequential: options.scales?.sequential ?? accent,
+      diverging: options.scales?.diverging ?? ['red', 'blue'],
+      gray: options.scales?.gray ?? gray,
+    }),
+    ...toneColors,
     ...(options.semanticTokens?.colors ?? {}),
   }
 

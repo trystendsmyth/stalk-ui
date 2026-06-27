@@ -83,3 +83,28 @@ export const Selectable: Story = {
     </Table.Root>
   ),
 }
+
+export const StickyHeaderAndPinnedColumn: Story = {
+  render: () => (
+    <Table.Root stickyHeader containerProps={{ style: { maxHeight: 180 } }}>
+      <Table.Header>
+        <Table.Row>
+          <Table.Head scope="col" data-pinned="start">
+            Name
+          </Table.Head>
+          <Table.Head scope="col">Role</Table.Head>
+          <Table.Head scope="col">Team</Table.Head>
+        </Table.Row>
+      </Table.Header>
+      <Table.Body>
+        {Array.from({ length: 12 }, (_, i) => (
+          <Table.Row key={i}>
+            <Table.Cell data-pinned="start">Member {i + 1}</Table.Cell>
+            <Table.Cell>Maintainer</Table.Cell>
+            <Table.Cell>Platform</Table.Cell>
+          </Table.Row>
+        ))}
+      </Table.Body>
+    </Table.Root>
+  ),
+}

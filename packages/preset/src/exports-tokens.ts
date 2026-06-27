@@ -4,6 +4,7 @@ export {
   BORDER_COLORS,
   FOREGROUND_COLORS,
   HIGHLIGHT_COLORS,
+  SCALE_COLORS,
   SEMANTIC_COLOR_TOKENS,
   STATUS_COLORS,
 } from './helpers/token-options'

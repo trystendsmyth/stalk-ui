@@ -20,6 +20,7 @@ import { command } from './command'
 import { contextMenu } from './context-menu'
 import { dataList } from './data-list'
 import { dataTable } from './data-table'
+import { dataTableAdvanced } from './data-table-advanced'
 import { datePicker } from './date-picker'
 import { datetimeInput } from './datetime-input'
 import { dialog } from './dialog'
@@ -27,6 +28,7 @@ import { dropdownMenu } from './dropdown-menu'
 import { form } from './form'
 import { formatInput } from './format-input'
 import { heading } from './heading'
+import { heatmap } from './heatmap'
 import { hoverCard } from './hover-card'
 import { input } from './input'
 import { kbd } from './kbd'
@@ -52,6 +54,7 @@ import { sheet } from './sheet'
 import { sidebar } from './sidebar'
 import { skeleton } from './skeleton'
 import { slider } from './slider'
+import { sparkline } from './sparkline'
 import { spinner } from './spinner'
 import { switchItem } from './switch'
 import { table } from './table'
@@ -94,6 +97,7 @@ export const registryItems = [
   contextMenu,
   dataList,
   dataTable,
+  dataTableAdvanced,
   datePicker,
   datetimeInput,
   dialog,
@@ -101,6 +105,7 @@ export const registryItems = [
   form,
   formatInput,
   heading,
+  heatmap,
   hoverCard,
   input,
   kbd,
@@ -126,6 +131,7 @@ export const registryItems = [
   sidebar,
   skeleton,
   slider,
+  sparkline,
   spinner,
   switchItem,
   table,

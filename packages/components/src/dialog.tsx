@@ -32,13 +32,25 @@ export const DialogOverlay = /* @__PURE__ */ forwardRef<
   return <DialogPrimitive.Overlay ref={ref} className={cx(styles.overlay, className)} {...props} />
 })
 
+export interface DialogContentProps extends ComponentPropsWithoutRef<
+  typeof DialogPrimitive.Content
+> {
+  /**
+   * Render the dimming overlay behind the content. Default `true`. Set `false`
+   * for a non-modal dialog (`<Dialog modal={false}>`) so the page behind stays
+   * interactive and click-through — Radix's `modal` prop is forwarded by
+   * `Dialog.Root`, this just drops the blocking overlay to match.
+   */
+  overlay?: boolean
+}
+
 export const DialogContent = /* @__PURE__ */ forwardRef<
   ComponentRef<typeof DialogPrimitive.Content>,
-  ComponentPropsWithoutRef<typeof DialogPrimitive.Content>
->(function DialogContent({ children, className, ...props }, ref) {
+  DialogContentProps
+>(function DialogContent({ children, className, overlay = true, ...props }, ref) {
   return (
     <DialogPortal>
-      <DialogOverlay />
+      {overlay ? <DialogOverlay /> : null}
       <DialogPrimitive.Content ref={ref} className={cx(styles.content, className)} {...props}>
         {children}
       </DialogPrimitive.Content>

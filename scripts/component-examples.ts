@@ -83,7 +83,9 @@ export const componentExamples = {
     '<DataList.Root orientation="vertical">\n  <DataList.Item>\n    <DataList.Label tone="accent">Accent</DataList.Label>\n    <DataList.Value>Primary brand palette</DataList.Value>\n  </DataList.Item>\n  <DataList.Item>\n    <DataList.Label tone="success">Success</DataList.Label>\n    <DataList.Value>Operation completed</DataList.Value>\n  </DataList.Item>\n  <DataList.Item>\n    <DataList.Label tone="danger">Danger</DataList.Label>\n    <DataList.Value>Action required</DataList.Value>\n  </DataList.Item>\n</DataList.Root>',
   ],
   'data-table': ['<InvoiceTable />'],
+  'data-table-advanced': ['<MembersTable />'],
   'date-picker': ['<EventDatePicker />'],
+  heatmap: ['<PerformanceHeatMap />'],
   'datetime-input': [
     '<DatetimeInput aria-label="Date" />',
     '<DatetimeInput aria-label="Time" mode="time" />',
@@ -206,6 +208,10 @@ export const componentExamples = {
     '<Slider aria-label="Volume" defaultValue={[40]} />',
     '<Slider aria-label="Price range" defaultValue={[20, 80]} />',
     '<Slider aria-label="Locked" defaultValue={[60]} disabled />',
+  ],
+  sparkline: [
+    '<Sparkline data={[4, 6, 5, 8, 7, 9, 6, 10, 12, 9, 13, 11]} aria-label="Revenue, last 12 weeks" />',
+    '<Sparkline data={[4, 6, 5, 8, 7, 9, 6, 10, 12, 9, 13, 11]} tone="success" area showLastPoint aria-label="Signups trend" />',
   ],
   spinner: [
     '<Spinner aria-label="Loading" />',

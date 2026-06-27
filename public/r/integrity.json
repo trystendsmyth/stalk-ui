@@ -178,6 +178,14 @@
       "path": "/r/shadcn/data-table.json",
       "sha256": "d1283a28d0db67723b8f7a3203df6d0e45ef69e9f845b5062d0621e5f74be42f"
     },
+    "data-table-advanced": {
+      "path": "/r/data-table-advanced.json",
+      "sha256": "f2d3984f0e670a09f02b45d9447e1d2346ffc5adeaa2a742aed13cae3885cda0"
+    },
+    "shadcn/data-table-advanced": {
+      "path": "/r/shadcn/data-table-advanced.json",
+      "sha256": "3084893c852f5b59321575a5e72867c2411852a6200c42ad6de5a338aad6bc0d"
+    },
     "date-picker": {
       "path": "/r/date-picker.json",
       "sha256": "82bccd598398af1446fc17d44affbac9758b200870a3d9ce6618298154d5938b"
@@ -196,11 +204,11 @@
     },
     "dialog": {
       "path": "/r/dialog.json",
-      "sha256": "84e0d9835ec7d7c2639de1d3153f90368879b7cfbc0704d87e8ccd22a2870051"
+      "sha256": "b22a8b18b09c03fceffed50eaeabb5839de280053a77d6d8449d865173e43e43"
     },
     "shadcn/dialog": {
       "path": "/r/shadcn/dialog.json",
-      "sha256": "978c57604b57c5d15adea758048c984247439ae4ad3f309650eadd930e2a5b16"
+      "sha256": "a510848fa305ef5affe9e7e5ac6d7cf3436c0c3cd9dd0d06b5450fe2b83b7f47"
     },
     "dropdown-menu": {
       "path": "/r/dropdown-menu.json",
@@ -233,6 +241,14 @@
     "shadcn/heading": {
       "path": "/r/shadcn/heading.json",
       "sha256": "3a27c618feae310e270e3fccc46df88f6da72b44ee4b5638c6279113d8aae2c3"
+    },
+    "heatmap": {
+      "path": "/r/heatmap.json",
+      "sha256": "19d3824e5edcb1ec08025ba729ca3f9a1775ab3c40baf1af38e01efa460eff01"
+    },
+    "shadcn/heatmap": {
+      "path": "/r/shadcn/heatmap.json",
+      "sha256": "0cd68e46e5947e494b7fd9fd8fc76d861d3af58e52925d636d90c06cff4b5bbb"
     },
     "hover-card": {
       "path": "/r/hover-card.json",
@@ -434,6 +450,14 @@
       "path": "/r/shadcn/slider.json",
       "sha256": "30da01750a0d1c23442101c55589cec8e80f10bb71293468e7e735b3d3ce53f8"
     },
+    "sparkline": {
+      "path": "/r/sparkline.json",
+      "sha256": "8bf5c65f2dd41006506fadf44096a67ae825278cb8da07cdc7d0d545029af977"
+    },
+    "shadcn/sparkline": {
+      "path": "/r/shadcn/sparkline.json",
+      "sha256": "55d2c7efd90fb61f7861ad809de424ea6caafc20eb07fce60f40d531d05481b8"
+    },
     "spinner": {
       "path": "/r/spinner.json",
       "sha256": "1782721d24b0a6202924b35e080351e5216b6cc5c44b759f39aba8a82b3e6bfe"
@@ -452,11 +476,11 @@
     },
     "table": {
       "path": "/r/table.json",
-      "sha256": "01436dca9c0cd32e2948f0d87af63b10dedbe8437e3a885ff8078bf1de16dbac"
+      "sha256": "bdc457ffc151b9b32b61b47ad885b0b83733ada7fef8de08cb17981e12dac781"
     },
     "shadcn/table": {
       "path": "/r/shadcn/table.json",
-      "sha256": "688c9e75c379213b635f52b2e3d1884baaf03700d637deedaf9ab00d9316a1c5"
+      "sha256": "d059ae11be75182d2e08b0276546a8b89e10c6676efdc5139b6e651d1963fd42"
     },
     "tabs": {
       "path": "/r/tabs.json",

@@ -22,6 +22,7 @@ import { Command } from '@stalk-ui/components/command'
 import { ContextMenu } from '@stalk-ui/components/context-menu'
 import { DataList } from '@stalk-ui/components/data-list'
 import { DataTable } from '@stalk-ui/components/data-table'
+import { DataTableAdvanced } from '@stalk-ui/components/data-table-advanced'
 import { DatePicker } from '@stalk-ui/components/date-picker'
 import { DatetimeInput } from '@stalk-ui/components/datetime-input'
 import { Dialog } from '@stalk-ui/components/dialog'
@@ -37,6 +38,7 @@ import {
 } from '@stalk-ui/components/form'
 import { FormatInput } from '@stalk-ui/components/format-input'
 import { Heading } from '@stalk-ui/components/heading'
+import { HeatMap } from '@stalk-ui/components/heatmap'
 import { HoverCard } from '@stalk-ui/components/hover-card'
 import { Input } from '@stalk-ui/components/input'
 import { Kbd } from '@stalk-ui/components/kbd'
@@ -62,6 +64,7 @@ import { Sheet } from '@stalk-ui/components/sheet'
 import { Sidebar } from '@stalk-ui/components/sidebar'
 import { Skeleton } from '@stalk-ui/components/skeleton'
 import { Slider } from '@stalk-ui/components/slider'
+import { Sparkline } from '@stalk-ui/components/sparkline'
 import { Spinner } from '@stalk-ui/components/spinner'
 import { Switch } from '@stalk-ui/components/switch'
 import { Table } from '@stalk-ui/components/table'
@@ -118,6 +121,40 @@ const invoiceData: DemoInvoice[] = [
 ]
 
 const InvoiceTable = () => <DataTable columns={invoiceColumns} data={invoiceData} />
+
+const MembersTable = () => (
+  <DataTableAdvanced
+    columns={invoiceColumns}
+    data={invoiceData}
+    columnPinning={{ left: ['invoice'] }}
+    renderSubRow={(row) => (
+      <div style={{ color: 'var(--colors-fg-muted)', padding: '0.5rem 0' }}>
+        {row.invoice} — {row.status}, billed {row.amount}.
+      </div>
+    )}
+  />
+)
+
+const heatmapRows = ['Inverter 1', 'Inverter 2', 'Inverter 3', 'Inverter 4']
+const heatmapColumns = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri']
+const heatmapData: Record<string, Record<string, number | null>> = {
+  'Inverter 1': { Mon: 98, Tue: 96, Wed: 99, Thu: 94, Fri: 97 },
+  'Inverter 2': { Mon: 82, Tue: 88, Wed: 79, Thu: 91, Fri: 85 },
+  'Inverter 3': { Mon: 64, Tue: 58, Wed: null, Thu: 71, Fri: 69 },
+  'Inverter 4': { Mon: 45, Tue: 52, Wed: 48, Thu: 40, Fri: 55 },
+}
+
+const PerformanceHeatMap = () => (
+  <HeatMap
+    rows={heatmapRows}
+    columns={heatmapColumns}
+    cell={(row, column) => heatmapData[row]?.[column] ?? null}
+    aria-label="Weekly inverter performance index"
+    caption="Performance index (%) by inverter and weekday."
+    formatValue={(value) => `${String(value)}%`}
+    legend
+  />
+)
 
 const EventDatePicker = () => {
   const [date, setDate] = useState<Date>()
@@ -210,6 +247,8 @@ const liveScope = {
   ContextMenu,
   DataList,
   DataTable,
+  DataTableAdvanced,
+  MembersTable,
   DatePicker,
   DatetimeInput,
   Dialog,
@@ -225,6 +264,7 @@ const liveScope = {
   FormMessage,
   FormatInput,
   Heading,
+  HeatMap,
   Home,
   HoverCard,
   Info,
@@ -235,6 +275,7 @@ const liveScope = {
   Link,
   Menubar,
   InvoiceTable,
+  PerformanceHeatMap,
   NavigationMenu,
   NumberInput,
   OtpInput,
@@ -256,6 +297,7 @@ const liveScope = {
   Sidebar,
   Skeleton,
   Slider,
+  Sparkline,
   Spinner,
   Switch,
   Table,

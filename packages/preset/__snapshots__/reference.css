@@ -613,6 +613,24 @@
     --colors-highlight-text: color-mix(in srgb, var(--colors-orange-11) 50%, var(--colors-orange-12) 50%);
     --colors-highlight-fg: var(--colors-orange-12);
     --colors-highlight-contrast: var(--colors-gray-1);
+    --colors-scale-sequential-1: var(--colors-blue-3);
+    --colors-scale-sequential-2: var(--colors-blue-4);
+    --colors-scale-sequential-3: var(--colors-blue-5);
+    --colors-scale-sequential-4: var(--colors-blue-6);
+    --colors-scale-sequential-5: var(--colors-blue-7);
+    --colors-scale-sequential-6: var(--colors-blue-8);
+    --colors-scale-sequential-7: var(--colors-blue-9);
+    --colors-scale-sequential-8: var(--colors-blue-10);
+    --colors-scale-sequential-9: var(--colors-blue-11);
+    --colors-scale-diverging-neg-1: var(--colors-red-11);
+    --colors-scale-diverging-neg-2: var(--colors-red-9);
+    --colors-scale-diverging-neg-3: var(--colors-red-7);
+    --colors-scale-diverging-neg-4: var(--colors-red-5);
+    --colors-scale-diverging-mid: var(--colors-neutral-6);
+    --colors-scale-diverging-pos-1: var(--colors-blue-5);
+    --colors-scale-diverging-pos-2: var(--colors-blue-7);
+    --colors-scale-diverging-pos-3: var(--colors-blue-9);
+    --colors-scale-diverging-pos-4: var(--colors-blue-11);
 }
 
   .dark {
@@ -677,7 +695,25 @@
     --colors-highlight-emphasis: color-mix(in srgb, var(--colors-orange-dark-11) 50%, var(--colors-orange-dark-12) 50%);
     --colors-highlight-text: color-mix(in srgb, var(--colors-orange-dark-11) 50%, var(--colors-orange-dark-12) 50%);
     --colors-highlight-fg: var(--colors-orange-dark-12);
-    --colors-highlight-contrast: var(--colors-gray-12)
+    --colors-highlight-contrast: var(--colors-gray-12);
+    --colors-scale-sequential-1: var(--colors-blue-dark-3);
+    --colors-scale-sequential-2: var(--colors-blue-dark-4);
+    --colors-scale-sequential-3: var(--colors-blue-dark-5);
+    --colors-scale-sequential-4: var(--colors-blue-dark-6);
+    --colors-scale-sequential-5: var(--colors-blue-dark-7);
+    --colors-scale-sequential-6: var(--colors-blue-dark-8);
+    --colors-scale-sequential-7: var(--colors-blue-dark-9);
+    --colors-scale-sequential-8: var(--colors-blue-dark-10);
+    --colors-scale-sequential-9: var(--colors-blue-dark-11);
+    --colors-scale-diverging-neg-1: var(--colors-red-dark-11);
+    --colors-scale-diverging-neg-2: var(--colors-red-dark-9);
+    --colors-scale-diverging-neg-3: var(--colors-red-dark-7);
+    --colors-scale-diverging-neg-4: var(--colors-red-dark-5);
+    --colors-scale-diverging-mid: var(--colors-neutral-dark-6);
+    --colors-scale-diverging-pos-1: var(--colors-blue-dark-5);
+    --colors-scale-diverging-pos-2: var(--colors-blue-dark-7);
+    --colors-scale-diverging-pos-3: var(--colors-blue-dark-9);
+    --colors-scale-diverging-pos-4: var(--colors-blue-dark-11)
 }
 
   [data-panda-theme=monochrome] {
@@ -3375,6 +3411,154 @@
       font-weight: var(--font-weights-medium);
 }
 
+    .stalk-heatmap__root {
+      gap: var(--spacing-12);
+      color: var(--colors-fg-default);
+      display: inline-flex;
+      flex-direction: column;
+      max-width: var(--sizes-full);
+      overflow-x: auto;
+}
+
+    .stalk-heatmap__table {
+      border-collapse: separate;
+      border-spacing: var(--spacing-2);
+      font-size: var(--font-sizes-xs);
+}
+
+    .stalk-heatmap__corner {
+      background-color: transparent;
+}
+
+    .stalk-heatmap__columnHeader {
+      padding-inline: var(--spacing-4);
+      text-align: center;
+      padding-bottom: var(--spacing-4);
+}
+
+    .stalk-heatmap__columnHeader,.stalk-heatmap__rowHeader {
+      color: var(--colors-fg-muted);
+      font-weight: var(--font-weights-medium);
+      white-space: nowrap;
+}
+
+    .stalk-heatmap__rowHeader {
+      text-align: end;
+      padding-right: var(--spacing-8);
+}
+
+    .stalk-heatmap__cell {
+      border-radius: var(--radii-sm);
+      outline: 2px solid transparent;
+      outline-offset: 2px;
+      --transition-prop: box-shadow, transform;
+      transition-property: box-shadow, transform;
+      --transition-duration: var(--durations-fast);
+      transition-duration: var(--durations-fast);
+      height: var(--sizes-20);
+      min-width: var(--sizes-20);
+}
+
+    .stalk-heatmap__cell[data-empty] {
+      background-color: var(--colors-bg-subtle);
+}
+
+    .stalk-heatmap__cell[data-level="1"] {
+      background-color: var(--colors-scale-sequential-1);
+}
+
+    .stalk-heatmap__cell[data-level="2"] {
+      background-color: var(--colors-scale-sequential-2);
+}
+
+    .stalk-heatmap__cell[data-level="3"] {
+      background-color: var(--colors-scale-sequential-3);
+}
+
+    .stalk-heatmap__cell[data-level="4"] {
+      background-color: var(--colors-scale-sequential-4);
+}
+
+    .stalk-heatmap__cell[data-level="5"] {
+      background-color: var(--colors-scale-sequential-5);
+}
+
+    .stalk-heatmap__cell[data-level="6"] {
+      background-color: var(--colors-scale-sequential-6);
+}
+
+    .stalk-heatmap__cell[data-level="7"] {
+      background-color: var(--colors-scale-sequential-7);
+}
+
+    .stalk-heatmap__cell[data-level="8"] {
+      background-color: var(--colors-scale-sequential-8);
+}
+
+    .stalk-heatmap__cell[data-level="9"] {
+      background-color: var(--colors-scale-sequential-9);
+}
+
+    .stalk-heatmap__cell[data-tone="mid"] {
+      background-color: var(--colors-scale-diverging-mid);
+}
+
+    .stalk-heatmap__cell[data-tone="neg"][data-level="1"] {
+      background-color: var(--colors-scale-diverging-neg-4);
+}
+
+    .stalk-heatmap__cell[data-tone="neg"][data-level="2"] {
+      background-color: var(--colors-scale-diverging-neg-3);
+}
+
+    .stalk-heatmap__cell[data-tone="neg"][data-level="3"] {
+      background-color: var(--colors-scale-diverging-neg-2);
+}
+
+    .stalk-heatmap__cell[data-tone="neg"][data-level="4"] {
+      background-color: var(--colors-scale-diverging-neg-1);
+}
+
+    .stalk-heatmap__cell[data-tone="pos"][data-level="1"] {
+      background-color: var(--colors-scale-diverging-pos-1);
+}
+
+    .stalk-heatmap__cell[data-tone="pos"][data-level="2"] {
+      background-color: var(--colors-scale-diverging-pos-2);
+}
+
+    .stalk-heatmap__cell[data-tone="pos"][data-level="3"] {
+      background-color: var(--colors-scale-diverging-pos-3);
+}
+
+    .stalk-heatmap__cell[data-tone="pos"][data-level="4"] {
+      background-color: var(--colors-scale-diverging-pos-4);
+}
+
+    .stalk-heatmap__cell:is(:focus-visible, [data-focus-visible]) {
+      --ring-offset-shadow: var(--ring-inset,) 0 0 0 var(--ring-offset-width, 0rem) var(--ring-offset-color);
+      --ring-shadow: var(--ring-inset,) 0 0 0 calc(0.1875rem + var(--ring-offset-width, 0rem)) var(--ring-color);
+      box-shadow: var(--ring-offset-shadow),var(--ring-shadow),var(--base-shadow,0 0 #0000);
+      --ring-color: var(--colors-border-focus);
+      --ring-offset-width: 0.0625rem;
+      --ring-offset-color: var(--colors-bg-default);
+}
+
+    .stalk-heatmap__legend {
+      gap: var(--spacing-8);
+      align-items: center;
+      color: var(--colors-fg-muted);
+      display: flex;
+      font-size: var(--font-sizes-xs);
+}
+
+    .stalk-heatmap__caption {
+      color: var(--colors-fg-muted);
+      font-size: var(--font-sizes-sm);
+      text-align: start;
+      margin-top: var(--spacing-4);
+}
+
     .stalk-hover-card__content {
       border: var(--borders-default);
       padding: var(--spacing-base);
@@ -4745,6 +4929,38 @@
       border-color: var(--colors-accent-fg);
 }
 
+    .stalk-sparkline__root {
+      overflow: visible;
+      --colors-color-palette-surface: var(--colors-accent-surface);
+      --colors-color-palette-subtle: var(--colors-accent-subtle);
+      --colors-color-palette-muted: var(--colors-accent-muted);
+      --colors-color-palette-solid: var(--colors-accent-solid);
+      --colors-color-palette-emphasis: var(--colors-accent-emphasis);
+      --colors-color-palette-text: var(--colors-accent-text);
+      --colors-color-palette-fg: var(--colors-accent-fg);
+      --colors-color-palette-contrast: var(--colors-accent-contrast);
+      display: inline-block;
+      vertical-align: middle;
+}
+
+    .stalk-sparkline__area {
+      fill: var(--colors-color-palette-solid);
+      opacity: 0.15;
+      stroke: none;
+}
+
+    .stalk-sparkline__line {
+      fill: none;
+      stroke: var(--colors-color-palette-solid);
+      stroke-linecap: round;
+      stroke-linejoin: round;
+}
+
+    .stalk-sparkline__point {
+      fill: var(--colors-color-palette-solid);
+      stroke: var(--colors-bg-default);
+}
+
     .stalk-spinner__root {
       align-items: center;
       color: currentColor;
@@ -4873,20 +5089,47 @@
 }
 
     .stalk-table__head {
+      padding-inline: var(--spacing-12);
       color: var(--colors-fg-muted);
       font-weight: var(--font-weights-medium);
       text-align: start;
+      vertical-align: middle;
       white-space: nowrap;
       height: var(--sizes-40);
 }
 
-    .stalk-table__head,.stalk-table__cell {
-      padding-inline: var(--spacing-12);
-      vertical-align: middle;
+    .stalk-table__head[data-pinned="start"] {
+      inset-inline-start: var(--spacing-0);
+}
+
+    .stalk-table__head[data-pinned="start"],.stalk-table__head[data-pinned="end"] {
+      position: sticky;
+      z-index: 1;
+      background-color: var(--colors-bg-default);
+}
+
+    .stalk-table__head[data-pinned="end"] {
+      inset-inline-end: var(--spacing-0);
 }
 
     .stalk-table__cell {
+      padding-inline: var(--spacing-12);
       padding-block: var(--spacing-10);
+      vertical-align: middle;
+}
+
+    .stalk-table__cell[data-pinned="start"] {
+      inset-inline-start: var(--spacing-0);
+}
+
+    .stalk-table__cell[data-pinned="start"],.stalk-table__cell[data-pinned="end"] {
+      position: sticky;
+      z-index: 1;
+      background-color: var(--colors-bg-default);
+}
+
+    .stalk-table__cell[data-pinned="end"] {
+      inset-inline-end: var(--spacing-0);
 }
 
     .stalk-table__caption {
@@ -6300,6 +6543,17 @@
 
   [data-state="checked"] .stalk-switch__thumb--size_lg {
     transform: translateX(var(--spacing-20));
+}
+
+  .stalk-table__head--stickyHeader_true {
+    position: sticky;
+    inset-block-start: var(--spacing-0);
+    z-index: 2;
+    background-color: var(--colors-bg-default);
+}
+
+  .stalk-table__head--stickyHeader_true[data-pinned] {
+    z-index: 3;
 }
 
   .stalk-tabs__list--size_md {
