@@ -91,13 +91,24 @@ export const extendedScaleVars = (names: string[]): Record<string, string> => {
   return vars
 }
 
-/** Serialize an extended scale to a `tokens.colors` block for the emitted config. */
-export const rawScaleTokens = (name: string): string => {
+/** Prefix every non-empty line with spaces. */
+export const emitBlock = (lines: string[], indent = 0): string[] => {
+  const pad = ' '.repeat(indent)
+  return lines.map((line) => (line ? pad + line : line))
+}
+
+/** Serialize an extended scale to a nicely formatted `tokens.colors` block. */
+export const rawScaleTokens = (name: string): string[] => {
   const scale = SCALE_BY_NAME.get(name)
-  if (!scale || scale.builtin || !scale.light || !scale.dark) return ''
-  const block = (values: string[]) =>
-    `{ ${values.map((hex, i) => `'${String(i + 1)}': { value: '${hex}' }`).join(', ')} }`
-  return `      ${name}: ${block(scale.light)},\n      ${name}Dark: ${block(scale.dark)},`
+  if (!scale || scale.builtin || !scale.light || !scale.dark) return []
+
+  const emitScale = (scaleName: string, values: string[]): string[] => [
+    `${scaleName}: {`,
+    ...values.map((hex, i) => `  '${String(i + 1)}': { value: '${hex}' },`),
+    `},`,
+  ]
+
+  return [...emitScale(name, scale.light), '', ...emitScale(`${name}Dark`, scale.dark)]
 }
 
 // ── Fonts (lazy-loaded from Google Fonts on selection) ─────────────────────

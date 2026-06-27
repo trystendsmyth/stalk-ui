@@ -11,6 +11,7 @@ import { useId, useMemo, useState } from 'react'
 import { css } from 'styled-system/css'
 
 import {
+  emitBlock,
   extendedScaleVars,
   FONT_BY_LABEL,
   FONTS,
@@ -195,15 +196,24 @@ const swatchVars = (profile: ThemeProfile): { light: CSSProperties; dark: CSSPro
 
 // ── Config emit ────────────────────────────────────────────────────────────
 
-const serializeTone = (name: string): string => {
+const serializeTone = (name: string): string[] => {
   const tone = createAccentSemanticTokens(name as AccentColor) as Record<
     string,
     { value: { base: string; _dark: string } }
   >
-  const entries = Object.entries(tone)
-    .map(([k, v]) => `${k}: { value: { base: '${v.value.base}', _dark: '${v.value._dark}' } }`)
-    .join(', ')
-  return `{ ${entries} }`
+
+  return [
+    `{`,
+    ...Object.entries(tone).flatMap(([key, value]) => [
+      `  ${key}: {`,
+      `    value: {`,
+      `      base: '${value.value.base}',`,
+      `      _dark: '${value.value._dark}',`,
+      `    },`,
+      `  },`,
+    ]),
+    `}`,
+  ]
 }
 
 const toConfigSnippet = (profile: ThemeProfile): string => {
@@ -239,14 +249,20 @@ const toConfigSnippet = (profile: ThemeProfile): string => {
     )
   if (tokenParts.length > 0) dt.push(`  tokens: { ${tokenParts.join(', ')} },`)
   if (ext.length > 0) {
-    dt.push(`  semanticTokens: { colors: {`)
-    for (const tone of ext) dt.push(`    ${tone}: ${serializeTone(profile[tone])},`)
-    dt.push(`  } },`)
+    dt.push(`  semanticTokens: {`)
+    dt.push(`    colors: {`)
+
+    for (const tone of ext) {
+      dt.push(`      ${tone}: {`)
+      dt.push(...emitBlock(serializeTone(profile[tone]).slice(1, -1), 8))
+      dt.push(`      },`)
+    }
+
+    dt.push(`    },`)
+    dt.push(`  },`)
   }
 
-  const rawScales = [...new Set(ext.map((tone) => profile[tone]))]
-    .map(rawScaleTokens)
-    .filter(Boolean)
+  const rawScales = [...new Set(ext.map((tone) => profile[tone]))].flatMap(rawScaleTokens)
 
   return [
     `import { defineConfig } from '@pandacss/dev'`,
@@ -255,17 +271,25 @@ const toConfigSnippet = (profile: ThemeProfile): string => {
     `export default defineConfig({`,
     `  preflight: true,`,
     `  presets: ['@stalk-ui/preset'],`,
-    ...(rawScales.length > 0
+
+    ...(rawScales.length
       ? [
           `  // Custom Radix scales used by the tones below:`,
-          `  theme: { extend: { tokens: { colors: {`,
-          ...rawScales,
-          `  } } } },`,
+          `  theme: {`,
+          `    extend: {`,
+          `      tokens: {`,
+          `        colors: {`,
+          ...emitBlock(rawScales, 10),
+          `        },`,
+          `      },`,
+          `    },`,
+          `  },`,
         ]
       : []),
+
     `  themes: {`,
     `    custom: defineTheme({`,
-    ...dt.map((line) => `  ${line}`),
+    ...dt.map((line) => `      ${line}`),
     `    }),`,
     `  },`,
     `  staticCss: { themes: ['custom'] },`,
@@ -277,25 +301,6 @@ const toConfigSnippet = (profile: ThemeProfile): string => {
 
 const labelClass = css({ color: 'fg.muted', fontSize: 'sm', fontWeight: 'medium' })
 const controlClass = css({ display: 'flex', flexDirection: 'column', gap: '6' })
-const groupClass = css({
-  display: 'flex',
-  flexDirection: 'column',
-  gap: '14',
-  border: '1px solid',
-  borderColor: 'border.muted',
-  borderRadius: '10px',
-  padding: '18',
-  margin: '0',
-})
-const legendClass = css({
-  fontSize: 'xs',
-  fontWeight: 'semibold',
-  color: 'fg.subtle',
-  textTransform: 'uppercase',
-  letterSpacing: '0.06em',
-  paddingInline: '6',
-})
-const rowClass = css({ display: 'flex', flexWrap: 'wrap', gap: '18' })
 const triggerClass = css({ minW: '9rem' })
 
 function ScaleSelect({
@@ -371,25 +376,36 @@ function ToneSelect({
 
 function ControlGroup({ title, children }: { title: string; children: ReactNode }) {
   return (
-    <fieldset className={groupClass}>
-      <legend className={legendClass}>{title}</legend>
-      <div className={rowClass}>{children}</div>
+    <fieldset
+      className={css({
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '14',
+        border: '1px solid',
+        borderColor: 'border.muted',
+        borderRadius: '10px',
+        padding: '18',
+        margin: '0',
+      })}
+    >
+      <legend
+        className={css({
+          fontSize: 'xs',
+          fontWeight: 'semibold',
+          color: 'fg.subtle',
+          textTransform: 'uppercase',
+          letterSpacing: '0.06em',
+          paddingInline: '6',
+        })}
+      >
+        {title}
+      </legend>
+      <div className={css({ display: 'flex', flexWrap: 'wrap', gap: '18' })}>{children}</div>
     </fieldset>
   )
 }
 
 // ── Preview ──────────────────────────────────────────────────────────────
-
-const panelClass = css({
-  borderRadius: '12px',
-  border: '1px solid var(--colors-border-default)',
-  background: 'var(--colors-bg-default)',
-  color: 'var(--colors-fg-default)',
-  padding: '24',
-  display: 'flex',
-  flexDirection: 'column',
-  gap: '14',
-})
 
 const trend = [4, 6, 5, 8, 7, 10, 8, 12, 11, 14]
 const SEQUENTIAL_STOPS = [1, 2, 3, 4, 5, 6, 7, 8, 9]
@@ -424,7 +440,19 @@ function Ramp({ caption, vars }: { caption: string; vars: string[] }) {
 
 function PreviewSurface({ vars, label }: { vars: CSSProperties; label: string }) {
   return (
-    <div className={panelClass} style={vars}>
+    <div
+      className={css({
+        borderRadius: '12px',
+        border: '1px solid var(--colors-border-default)',
+        background: 'var(--colors-bg-default)',
+        color: 'var(--colors-fg-default)',
+        padding: '24',
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '14',
+      })}
+      style={vars}
+    >
       <span className={css({ fontSize: 'xs', opacity: 0.6 })}>{label}</span>
       <div className={css({ display: 'flex', flexWrap: 'wrap', gap: '12', alignItems: 'center' })}>
         <Button size="sm">Primary</Button>
@@ -477,17 +505,6 @@ function PreviewSurface({ vars, label }: { vars: CSSProperties; label: string })
   )
 }
 
-const preClass = css({
-  overflowX: 'auto',
-  borderRadius: '8px',
-  padding: '18',
-  fontSize: 'xs',
-  lineHeight: '1.6',
-  background: 'bg.subtle',
-  border: '1px solid',
-  borderColor: 'border.muted',
-})
-
 function CodeBlock({
   title,
   code,
@@ -500,14 +517,27 @@ function CodeBlock({
   onCopy: () => void
 }) {
   return (
-    <div className={css({ display: 'flex', flexDirection: 'column', gap: '10' })}>
+    <div className={css({ display: 'flex', flexDirection: 'column', gap: '10', minWidth: 0 })}>
       <div className={css({ display: 'flex', alignItems: 'center', gap: '12' })}>
         <strong className={css({ fontSize: 'sm' })}>{title}</strong>
         <Button size="sm" variant="outline" onClick={onCopy}>
           {copied ? 'Copied' : 'Copy'}
         </Button>
       </div>
-      <pre className={preClass}>
+      <pre
+        className={css({
+          overflowX: 'auto',
+          maxWidth: '100%',
+          minWidth: 0,
+          borderRadius: '8px',
+          padding: '18',
+          fontSize: 'xs',
+          lineHeight: '1.6',
+          background: 'bg.subtle',
+          border: '1px solid',
+          borderColor: 'border.muted',
+        })}
+      >
         <code>{code}</code>
       </pre>
     </div>
