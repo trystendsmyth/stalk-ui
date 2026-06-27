@@ -6,14 +6,26 @@ import { Card } from '@stalk-ui/components/card'
 import { Select } from '@stalk-ui/components/select'
 import { Sparkline } from '@stalk-ui/components/sparkline'
 import { Switch } from '@stalk-ui/components/switch'
-import { defineTheme } from '@stalk-ui/preset/theme'
+import { createAccentSemanticTokens, defineTheme } from '@stalk-ui/preset/theme'
 import { useId, useMemo, useState } from 'react'
 import { css } from 'styled-system/css'
 
+import {
+  extendedScaleVars,
+  FONT_BY_LABEL,
+  FONTS,
+  isExtended,
+  loadGoogleFont,
+  RADII,
+  rawScaleTokens,
+  SHADOWS,
+  TONE_GROUPS,
+} from './theme-data'
+
+import type { Elevation, Roundness } from './theme-data'
 import type { AccentColor, DefineThemeOptions, GrayColor } from '@stalk-ui/preset/theme'
 import type { CSSProperties, ReactNode } from 'react'
 
-// The scale sets `defineTheme` accepts, so the emitted config always typechecks.
 const ACCENTS: AccentColor[] = [
   'blue',
   'violet',
@@ -25,28 +37,23 @@ const ACCENTS: AccentColor[] = [
   'red',
 ]
 const GRAYS: GrayColor[] = ['gray', 'neutral', 'slate', 'mauve']
-const RAMP_SCALES: (AccentColor | GrayColor)[] = [...ACCENTS, ...GRAYS]
+const RAMP_SCALES: string[] = [...ACCENTS, ...GRAYS]
+const TONE_KEYS = ['success', 'warning', 'danger', 'info', 'highlight'] as const
+type ToneKey = (typeof TONE_KEYS)[number]
 
-type Roundness = 'sharp' | 'default' | 'rounded'
-
-const RADII: Record<Roundness, Record<string, string> | undefined> = {
-  sharp: { sm: '0', md: '0', lg: '0', xl: '2px' },
-  default: undefined,
-  rounded: { sm: '8px', md: '12px', lg: '16px', xl: '22px' },
-}
-
-/** A portable theme profile — the shape a CLI install would consume. */
 interface ThemeProfile {
   accent: AccentColor
   gray: GrayColor
   vibrant: boolean
   roundness: Roundness
-  success: AccentColor
-  warning: AccentColor
-  danger: AccentColor
-  info: AccentColor
-  highlight: AccentColor
-  sequential: AccentColor | GrayColor
+  elevation: Elevation
+  font: string
+  success: string
+  warning: string
+  danger: string
+  info: string
+  highlight: string
+  sequential: string
   divergingNeg: AccentColor
   divergingPos: AccentColor
 }
@@ -56,6 +63,8 @@ const DEFAULTS: ThemeProfile = {
   gray: 'slate',
   vibrant: false,
   roundness: 'default',
+  elevation: 'soft',
+  font: 'System (default)',
   success: 'emerald',
   warning: 'amber',
   danger: 'red',
@@ -66,7 +75,14 @@ const DEFAULTS: ThemeProfile = {
   divergingPos: 'blue',
 }
 
-/** Convert a Panda token reference (`{colors.tealDark.9}`) to a live CSS var (`var(--colors-teal-dark-9)`). */
+const TONE_DEFAULTS: Record<ToneKey, string> = {
+  success: 'emerald',
+  warning: 'amber',
+  danger: 'red',
+  info: 'blue',
+  highlight: 'orange',
+}
+
 const tokenRefToVar = (ref: string): string =>
   ref.replace(/\{colors\.([A-Za-z]+)\.(\d+)\}/g, (_match, scale: string, step: string) => {
     const dark = scale.endsWith('Dark')
@@ -74,19 +90,14 @@ const tokenRefToVar = (ref: string): string =>
     return `var(--colors-${base}${dark ? '-dark' : ''}-${step})`
   })
 
-interface VarPair {
-  light: Record<string, string>
-  dark: Record<string, string>
-}
-
 const isLeaf = (node: unknown): node is { value: { base: string; _dark: string } } =>
   typeof node === 'object' && node !== null && 'value' in node
 
-/** Flatten `defineTheme`'s semantic-color tree into light/dark CSS-var override maps. */
-const flattenColors = (colors: Record<string, unknown>): VarPair => {
+const flattenColors = (
+  colors: Record<string, unknown>,
+): { light: Record<string, string>; dark: Record<string, string> } => {
   const light: Record<string, string> = {}
   const dark: Record<string, string> = {}
-
   const walk = (node: Record<string, unknown>, path: string[]) => {
     for (const [key, value] of Object.entries(node)) {
       const next = [...path, key]
@@ -99,7 +110,6 @@ const flattenColors = (colors: Record<string, unknown>): VarPair => {
       }
     }
   }
-
   walk(colors, [])
   return { light, dark }
 }
@@ -109,57 +119,135 @@ const scalesChanged = (profile: ThemeProfile): boolean =>
   profile.divergingNeg !== DEFAULTS.divergingNeg ||
   profile.divergingPos !== DEFAULTS.divergingPos
 
-/** Build the `defineTheme` options object from a profile (only the non-default keys). */
+const extendedTones = (profile: ThemeProfile): ToneKey[] =>
+  TONE_KEYS.filter((tone) => isExtended(profile[tone]))
+
+/** `defineTheme` options covering everything except extended (custom-scale) tones. */
 const toDefineThemeOptions = (profile: ThemeProfile): DefineThemeOptions => {
   const radii = RADII[profile.roundness]
+  const shadows = SHADOWS[profile.elevation]
+  const font = FONT_BY_LABEL.get(profile.font)
+  const tokens: Record<string, unknown> = {}
+  if (radii)
+    tokens.radii = Object.fromEntries(Object.entries(radii).map(([k, v]) => [k, { value: v }]))
+  if (shadows)
+    tokens.shadows = Object.fromEntries(Object.entries(shadows).map(([k, v]) => [k, { value: v }]))
+
+  const toneOption = (tone: ToneKey) =>
+    isExtended(profile[tone]) || profile[tone] === TONE_DEFAULTS[tone]
+      ? {}
+      : { [tone]: profile[tone] as AccentColor }
+
   return {
     accent: profile.accent,
     gray: profile.gray,
     ...(profile.vibrant ? { vibrant: true } : {}),
-    ...(profile.success === DEFAULTS.success ? {} : { success: profile.success }),
-    ...(profile.warning === DEFAULTS.warning ? {} : { warning: profile.warning }),
-    ...(profile.danger === DEFAULTS.danger ? {} : { danger: profile.danger }),
-    ...(profile.info === DEFAULTS.info ? {} : { info: profile.info }),
-    ...(profile.highlight === DEFAULTS.highlight ? {} : { highlight: profile.highlight }),
+    ...toneOption('success'),
+    ...toneOption('warning'),
+    ...toneOption('danger'),
+    ...toneOption('info'),
+    ...toneOption('highlight'),
     ...(scalesChanged(profile)
       ? {
           scales: {
-            sequential: profile.sequential,
+            sequential: profile.sequential as AccentColor,
             diverging: [profile.divergingNeg, profile.divergingPos],
           },
         }
       : {}),
-    ...(radii
-      ? {
-          tokens: {
-            radii: Object.fromEntries(Object.entries(radii).map(([k, v]) => [k, { value: v }])),
-          },
-        }
+    ...(font?.google ? { fonts: { sans: font.stack } } : {}),
+    ...(Object.keys(tokens).length > 0
+      ? { tokens: tokens as NonNullable<DefineThemeOptions['tokens']> }
       : {}),
   }
 }
 
-/** Pretty-print the `defineTheme(...)` config a consumer pastes into panda.config.ts. */
+/** Live preview vars: full semantic surface + token + extended-scale overrides. */
+const swatchVars = (profile: ThemeProfile): { light: CSSProperties; dark: CSSProperties } => {
+  const theme = defineTheme(toDefineThemeOptions(profile)) as {
+    semanticTokens?: { colors?: Record<string, unknown> }
+    tokens?: Record<string, Record<string, { value: string }>>
+  }
+  const colors: Record<string, unknown> = { ...(theme.semanticTokens?.colors ?? {}) }
+  // Override extended (custom-scale) tones the typed API can't express.
+  for (const tone of extendedTones(profile)) {
+    colors[tone] = createAccentSemanticTokens(profile[tone] as AccentColor)
+  }
+  const { light, dark } = flattenColors(colors)
+
+  const tokenVars: Record<string, string> = extendedScaleVars(
+    extendedTones(profile).map((t) => profile[t]),
+  )
+  for (const group of ['radii', 'shadows'] as const) {
+    for (const [k, v] of Object.entries(theme.tokens?.[group] ?? {}))
+      tokenVars[`--${group}-${k}`] = v.value
+  }
+  const font = FONT_BY_LABEL.get(profile.font)
+  // Override the `sans` token so components (which resolve `fontFamily: 'sans'`)
+  // pick up the choice, not just loose text.
+  if (font) tokenVars['--fonts-sans'] = font.stack
+
+  return {
+    light: { ...light, ...tokenVars, fontFamily: 'var(--fonts-sans)' },
+    dark: { ...dark, ...tokenVars, fontFamily: 'var(--fonts-sans)' },
+  }
+}
+
+// ── Config emit ────────────────────────────────────────────────────────────
+
+const serializeTone = (name: string): string => {
+  const tone = createAccentSemanticTokens(name as AccentColor) as Record<
+    string,
+    { value: { base: string; _dark: string } }
+  >
+  const entries = Object.entries(tone)
+    .map(([k, v]) => `${k}: { value: { base: '${v.value.base}', _dark: '${v.value._dark}' } }`)
+    .join(', ')
+  return `{ ${entries} }`
+}
+
 const toConfigSnippet = (profile: ThemeProfile): string => {
-  const lines = [`  accent: '${profile.accent}',`, `  gray: '${profile.gray}',`]
-  if (profile.vibrant) lines.push(`  vibrant: true,`)
-  if (profile.success !== DEFAULTS.success) lines.push(`  success: '${profile.success}',`)
-  if (profile.warning !== DEFAULTS.warning) lines.push(`  warning: '${profile.warning}',`)
-  if (profile.danger !== DEFAULTS.danger) lines.push(`  danger: '${profile.danger}',`)
-  if (profile.info !== DEFAULTS.info) lines.push(`  info: '${profile.info}',`)
-  if (profile.highlight !== DEFAULTS.highlight) lines.push(`  highlight: '${profile.highlight}',`)
+  const ext = extendedTones(profile)
+  const dt: string[] = [`  accent: '${profile.accent}',`, `  gray: '${profile.gray}',`]
+  if (profile.vibrant) dt.push(`  vibrant: true,`)
+  for (const tone of TONE_KEYS) {
+    if (!isExtended(profile[tone]) && profile[tone] !== TONE_DEFAULTS[tone]) {
+      dt.push(`  ${tone}: '${profile[tone]}',`)
+    }
+  }
   if (scalesChanged(profile)) {
-    lines.push(
+    dt.push(
       `  scales: { sequential: '${profile.sequential}', diverging: ['${profile.divergingNeg}', '${profile.divergingPos}'] },`,
     )
   }
+  const font = FONT_BY_LABEL.get(profile.font)
+  if (font?.google) dt.push(`  fonts: { sans: "${font.stack}" },`)
   const radii = RADII[profile.roundness]
-  if (radii) {
-    const entries = Object.entries(radii)
-      .map(([k, v]) => `${k}: { value: '${v}' }`)
-      .join(', ')
-    lines.push(`  tokens: { radii: { ${entries} } },`)
+  const shadows = SHADOWS[profile.elevation]
+  const tokenParts: string[] = []
+  if (radii)
+    tokenParts.push(
+      `radii: { ${Object.entries(radii)
+        .map(([k, v]) => `${k}: { value: '${v}' }`)
+        .join(', ')} }`,
+    )
+  if (shadows)
+    tokenParts.push(
+      `shadows: { ${Object.entries(shadows)
+        .map(([k, v]) => `${k}: { value: '${v}' }`)
+        .join(', ')} }`,
+    )
+  if (tokenParts.length > 0) dt.push(`  tokens: { ${tokenParts.join(', ')} },`)
+  if (ext.length > 0) {
+    dt.push(`  semanticTokens: { colors: {`)
+    for (const tone of ext) dt.push(`    ${tone}: ${serializeTone(profile[tone])},`)
+    dt.push(`  } },`)
   }
+
+  const rawScales = [...new Set(ext.map((tone) => profile[tone]))]
+    .map(rawScaleTokens)
+    .filter(Boolean)
+
   return [
     `import { defineConfig } from '@pandacss/dev'`,
     `import { defineTheme } from '@stalk-ui/preset/theme'`,
@@ -167,36 +255,28 @@ const toConfigSnippet = (profile: ThemeProfile): string => {
     `export default defineConfig({`,
     `  preflight: true,`,
     `  presets: ['@stalk-ui/preset'],`,
+    ...(rawScales.length > 0
+      ? [
+          `  // Custom Radix scales used by the tones below:`,
+          `  theme: { extend: { tokens: { colors: {`,
+          ...rawScales,
+          `  } } } },`,
+        ]
+      : []),
     `  themes: {`,
     `    custom: defineTheme({`,
-    ...lines.map((line) => `  ${line}`),
+    ...dt.map((line) => `  ${line}`),
     `    }),`,
     `  },`,
-    `  staticCss: { themes: ['custom'] }, // required so the theme CSS is emitted`,
+    `  staticCss: { themes: ['custom'] },`,
     `})`,
   ].join('\n')
 }
 
-const swatchVars = (profile: ThemeProfile): { radii: Record<string, string> } & VarPair => {
-  const theme = defineTheme(toDefineThemeOptions(profile)) as {
-    semanticTokens?: { colors?: Record<string, unknown> }
-    tokens?: { radii?: Record<string, { value: string }> }
-  }
-  const colors = theme.semanticTokens?.colors ?? {}
-  const radii: Record<string, string> = {}
-  const tokenRadii = theme.tokens?.radii
-  if (tokenRadii) {
-    for (const [k, v] of Object.entries(tokenRadii)) radii[`--radii-${k}`] = v.value
-  }
-  return { ...flattenColors(colors), radii }
-}
-
-// ── Chrome (rendered in the page's own theme, so semantic tokens resolve) ──
+// ── Chrome ───────────────────────────────────────────────────────────────
 
 const labelClass = css({ color: 'fg.muted', fontSize: 'sm', fontWeight: 'medium' })
-
 const controlClass = css({ display: 'flex', flexDirection: 'column', gap: '6' })
-
 const groupClass = css({
   display: 'flex',
   flexDirection: 'column',
@@ -207,7 +287,6 @@ const groupClass = css({
   padding: '18',
   margin: '0',
 })
-
 const legendClass = css({
   fontSize: 'xs',
   fontWeight: 'semibold',
@@ -216,8 +295,8 @@ const legendClass = css({
   letterSpacing: '0.06em',
   paddingInline: '6',
 })
-
 const rowClass = css({ display: 'flex', flexWrap: 'wrap', gap: '18' })
+const triggerClass = css({ minW: '9rem' })
 
 function ScaleSelect({
   label,
@@ -237,7 +316,7 @@ function ScaleSelect({
         {label}
       </span>
       <Select.Root value={value} onValueChange={onChange}>
-        <Select.Trigger aria-labelledby={id} size="sm" className={css({ minW: '8.5rem' })}>
+        <Select.Trigger aria-labelledby={id} size="sm" className={triggerClass}>
           <Select.Value />
         </Select.Trigger>
         <Select.Content>
@@ -245,6 +324,44 @@ function ScaleSelect({
             <Select.Item key={option} value={option}>
               {option}
             </Select.Item>
+          ))}
+        </Select.Content>
+      </Select.Root>
+    </div>
+  )
+}
+
+/** Tone picker grouped by hue, with built-in vs custom-scale markers. */
+function ToneSelect({
+  label,
+  value,
+  onChange,
+}: {
+  label: string
+  value: string
+  onChange: (value: string) => void
+}) {
+  const id = useId()
+  return (
+    <div className={controlClass}>
+      <span id={id} className={labelClass}>
+        {label}
+      </span>
+      <Select.Root value={value} onValueChange={onChange}>
+        <Select.Trigger aria-labelledby={id} size="sm" className={triggerClass}>
+          <Select.Value />
+        </Select.Trigger>
+        <Select.Content>
+          {TONE_GROUPS.map((group) => (
+            <Select.Group key={group.hue}>
+              <Select.Label>{group.hue}</Select.Label>
+              {group.scales.map((scale) => (
+                <Select.Item key={scale.name} value={scale.name}>
+                  {scale.name}
+                  {scale.builtin ? '' : ' (custom)'}
+                </Select.Item>
+              ))}
+            </Select.Group>
           ))}
         </Select.Content>
       </Select.Root>
@@ -261,7 +378,7 @@ function ControlGroup({ title, children }: { title: string; children: ReactNode 
   )
 }
 
-// ── Preview (rendered under the live-overridden theme vars) ──
+// ── Preview ──────────────────────────────────────────────────────────────
 
 const panelClass = css({
   borderRadius: '12px',
@@ -275,7 +392,6 @@ const panelClass = css({
 })
 
 const trend = [4, 6, 5, 8, 7, 10, 8, 12, 11, 14]
-
 const SEQUENTIAL_STOPS = [1, 2, 3, 4, 5, 6, 7, 8, 9]
 const DIVERGING_STOPS = [
   'neg-4',
@@ -315,15 +431,11 @@ function PreviewSurface({ vars, label }: { vars: CSSProperties; label: string })
         <Button size="sm" variant="outline">
           Outline
         </Button>
-        <Button size="sm" variant="ghost">
-          Ghost
-        </Button>
         <Button size="sm" tone="danger">
           Delete
         </Button>
       </div>
       <div className={css({ display: 'flex', flexWrap: 'wrap', gap: '12', alignItems: 'center' })}>
-        <Badge tone="accent">Accent</Badge>
         <Badge tone="success" variant="solid">
           Live
         </Badge>
@@ -353,10 +465,12 @@ function PreviewSurface({ vars, label }: { vars: CSSProperties; label: string })
         vars={SEQUENTIAL_STOPS.map((s) => `scale-sequential-${String(s)}`)}
       />
       <Ramp caption="Diverging ramp" vars={DIVERGING_STOPS.map((s) => `scale-diverging-${s}`)} />
-      <Card.Root>
+      <Card.Root variant="elevated">
         <Card.Header>
-          <Card.Title>Card title</Card.Title>
-          <Card.Description>Surfaces, borders, and accents all retheme live.</Card.Description>
+          <Card.Title>Elevated card</Card.Title>
+          <Card.Description>
+            Surfaces, accents, radius, shadow, and font all retheme live.
+          </Card.Description>
         </Card.Header>
       </Card.Root>
     </div>
@@ -404,7 +518,7 @@ export function ThemeBuilder() {
   const [profile, setProfile] = useState<ThemeProfile>(DEFAULTS)
   const [copied, setCopied] = useState<'config' | 'profile' | null>(null)
 
-  const { light, dark, radii } = useMemo(() => swatchVars(profile), [profile])
+  const { light, dark } = useMemo(() => swatchVars(profile), [profile])
   const configSnippet = useMemo(() => toConfigSnippet(profile), [profile])
   const jsonProfile = useMemo(() => JSON.stringify(profile, null, 2), [profile])
 
@@ -421,9 +535,6 @@ export function ThemeBuilder() {
     })
   }
 
-  const lightVars = { ...light, ...radii } as CSSProperties
-  const darkVars = { ...dark, ...radii } as CSSProperties
-
   return (
     <section className={css({ display: 'flex', flexDirection: 'column', gap: '24', mt: '24' })}>
       <div className={css({ display: 'flex', flexDirection: 'column', gap: '14' })}>
@@ -432,24 +543,41 @@ export function ThemeBuilder() {
             label="Accent"
             value={profile.accent}
             options={ACCENTS}
-            onChange={(value) => {
-              set('accent', value as AccentColor)
+            onChange={(v) => {
+              set('accent', v as AccentColor)
             }}
           />
           <ScaleSelect
             label="Gray"
             value={profile.gray}
             options={GRAYS}
-            onChange={(value) => {
-              set('gray', value as GrayColor)
+            onChange={(v) => {
+              set('gray', v as GrayColor)
             }}
           />
           <ScaleSelect
             label="Roundness"
             value={profile.roundness}
             options={['sharp', 'default', 'rounded']}
-            onChange={(value) => {
-              set('roundness', value as Roundness)
+            onChange={(v) => {
+              set('roundness', v as Roundness)
+            }}
+          />
+          <ScaleSelect
+            label="Elevation"
+            value={profile.elevation}
+            options={['flat', 'soft', 'deep']}
+            onChange={(v) => {
+              set('elevation', v as Elevation)
+            }}
+          />
+          <ScaleSelect
+            label="Font"
+            value={profile.font}
+            options={FONTS.map((f) => f.label)}
+            onChange={(v) => {
+              loadGoogleFont(FONT_BY_LABEL.get(v)?.google)
+              set('font', v)
             }}
           />
           <div
@@ -475,15 +603,14 @@ export function ThemeBuilder() {
           </div>
         </ControlGroup>
 
-        <ControlGroup title="Status tones">
-          {(['success', 'warning', 'danger', 'info', 'highlight'] as const).map((tone) => (
-            <ScaleSelect
+        <ControlGroup title="Status tones (any hue)">
+          {TONE_KEYS.map((tone) => (
+            <ToneSelect
               key={tone}
               label={`${tone[0]?.toUpperCase() ?? ''}${tone.slice(1)}`}
               value={profile[tone]}
-              options={ACCENTS}
-              onChange={(value) => {
-                set(tone, value as AccentColor)
+              onChange={(v) => {
+                set(tone, v)
               }}
             />
           ))}
@@ -494,24 +621,24 @@ export function ThemeBuilder() {
             label="Sequential"
             value={profile.sequential}
             options={RAMP_SCALES}
-            onChange={(value) => {
-              set('sequential', value as AccentColor | GrayColor)
+            onChange={(v) => {
+              set('sequential', v)
             }}
           />
           <ScaleSelect
             label="Diverging (low)"
             value={profile.divergingNeg}
             options={ACCENTS}
-            onChange={(value) => {
-              set('divergingNeg', value as AccentColor)
+            onChange={(v) => {
+              set('divergingNeg', v as AccentColor)
             }}
           />
           <ScaleSelect
             label="Diverging (high)"
             value={profile.divergingPos}
             options={ACCENTS}
-            onChange={(value) => {
-              set('divergingPos', value as AccentColor)
+            onChange={(v) => {
+              set('divergingPos', v as AccentColor)
             }}
           />
         </ControlGroup>
@@ -536,8 +663,8 @@ export function ThemeBuilder() {
           gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
         })}
       >
-        <PreviewSurface vars={lightVars} label="Light" />
-        <PreviewSurface vars={darkVars} label="Dark" />
+        <PreviewSurface vars={light} label="Light" />
+        <PreviewSurface vars={dark} label="Dark" />
       </div>
 
       <CodeBlock
@@ -558,8 +685,9 @@ export function ThemeBuilder() {
           }}
         />
         <p className={css({ fontSize: 'xs', color: 'fg.muted' })}>
-          The JSON profile is a portable, CLI-installable description of the theme; the config above
-          is the ready-to-paste PandaCSS output it expands to.
+          Built-in scales use the typed `defineTheme` shorthand; custom-scale tones emit their Radix
+          scale into your own config, so the preset stays lean. The JSON profile is the portable,
+          CLI-installable description.
         </p>
       </div>
     </section>
