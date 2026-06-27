@@ -1,5 +1,6 @@
 import { notFound } from 'next/navigation'
 
+import { GettingStartedInteractive } from '../../../../../components/getting-started-interactive'
 import { ThemeBuilder } from '../../../../../components/theme-builder'
 import { getGettingStartedPage, gettingStartedPages, locales } from '../../../../../lib/docs'
 
@@ -36,7 +37,8 @@ export default async function GettingStartedPage({ params }: GettingStartedPageP
           <p key={paragraph}>{paragraph}</p>
         ))}
       </section>
-      {slug === 'theming' ? (
+      <GettingStartedInteractive slug={slug} />
+      {slug === 'custom-themes' ? (
         <section className="docs-section">
           <header className="docs-section__header">
             <h2 className="docs-section__title">Theme builder</h2>

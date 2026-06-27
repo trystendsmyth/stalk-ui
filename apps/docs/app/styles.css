@@ -511,3 +511,196 @@ td {
   border-radius: 0.375rem;
   background: var(--colors-bg-canvas);
 }
+
+.docs-interactive {
+  display: grid;
+  gap: 1rem;
+}
+
+.docs-interactive__segments {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+  width: fit-content;
+  max-width: 100%;
+  padding: 0.25rem;
+  border: 1px solid var(--colors-border-muted);
+  border-radius: 0.5rem;
+  background: var(--colors-bg-muted);
+}
+
+.docs-interactive__segment {
+  min-height: 2rem;
+  padding: 0.375rem 0.625rem;
+  border: 0;
+  border-radius: 0.375rem;
+  background: transparent;
+  color: var(--colors-fg-muted);
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.docs-interactive__segment[aria-pressed='true'] {
+  background: var(--colors-bg-default);
+  color: var(--colors-fg-default);
+  box-shadow: 0 0 0 1px var(--colors-border-default);
+}
+
+.docs-interactive__segment:focus-visible {
+  outline: 2px solid var(--colors-accent-muted);
+  outline-offset: 2px;
+}
+
+.docs-interactive__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr));
+  gap: 1rem;
+}
+
+.docs-interactive__panel,
+.docs-interactive__preview {
+  display: grid;
+  gap: 0.75rem;
+  min-width: 0;
+  padding: 1rem;
+  border: 1px solid var(--colors-border-muted);
+  border-radius: 0.5rem;
+  background: var(--colors-bg-canvas);
+}
+
+.docs-interactive__panel h3 {
+  margin: 0;
+  color: var(--colors-fg-default);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  letter-spacing: 0;
+}
+
+.docs-interactive__panel p,
+.docs-interactive__preview p {
+  margin: 0;
+  color: var(--colors-fg-muted);
+  font-size: 0.875rem;
+}
+
+.docs-interactive__code {
+  min-width: 0;
+  padding: 0.875rem;
+  border: 1px solid var(--colors-border-muted);
+  border-radius: 0.5rem;
+  background: var(--colors-bg-default);
+  color: var(--colors-fg-default);
+  font-size: 0.8125rem;
+  line-height: 1.55;
+  overflow-x: auto;
+}
+
+.docs-interactive__list {
+  display: grid;
+  gap: 0.5rem;
+  padding: 0;
+  margin: 0;
+  color: var(--colors-fg-muted);
+  font-size: 0.875rem;
+  list-style: none;
+}
+
+.docs-interactive__list li {
+  padding: 0.625rem 0.75rem;
+  border: 1px solid var(--colors-border-muted);
+  border-radius: 0.375rem;
+  background: var(--colors-bg-default);
+}
+
+.docs-interactive__meta {
+  width: fit-content;
+  max-width: 100%;
+  padding: 0.375rem 0.5rem;
+  border: 1px solid var(--colors-border-muted);
+  border-radius: 0.375rem;
+  background: var(--colors-bg-muted);
+  color: var(--colors-fg-default);
+  font-family: var(--fonts-mono);
+  overflow-wrap: anywhere;
+}
+
+.docs-interactive__preview {
+  background: var(--colors-bg-default);
+  color: var(--colors-fg-default);
+}
+
+.docs-interactive__badge,
+.docs-interactive__chip {
+  width: fit-content;
+  max-width: 100%;
+  border: 1px solid var(--colors-border-muted);
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.docs-interactive__badge {
+  padding: 0.25rem 0.5rem;
+  background: var(--colors-bg-subtle);
+  color: var(--colors-fg-muted);
+}
+
+.docs-interactive__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.docs-interactive__chip {
+  padding: 0.4375rem 0.75rem;
+  background: var(--colors-bg-subtle);
+  color: var(--colors-fg-default);
+}
+
+.docs-interactive__chip--solid {
+  border-color: var(--colors-accent-solid);
+  background: var(--colors-accent-solid);
+  color: var(--colors-accent-contrast);
+}
+
+.docs-interactive__swatches {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 10rem), 1fr));
+  gap: 0.625rem;
+}
+
+.docs-interactive__swatch {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  min-width: 0;
+  padding: 0.625rem;
+  border: 1px solid var(--colors-border-muted);
+  border-radius: 0.375rem;
+  background: var(--colors-bg-subtle);
+}
+
+.docs-interactive__swatch code {
+  font-size: 0.75rem;
+  overflow-wrap: anywhere;
+}
+
+.docs-interactive__swatch-color {
+  flex: 0 0 auto;
+  width: 1.75rem;
+  height: 1.75rem;
+  border: 1px solid var(--colors-border-default);
+  border-radius: 0.375rem;
+}
+
+.docs-interactive__specimen {
+  margin: 0;
+  color: var(--colors-fg-default);
+  font-size: 1.25rem;
+  line-height: 1.55;
+  text-wrap: pretty;
+}
