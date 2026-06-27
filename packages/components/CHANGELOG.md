@@ -1,5 +1,60 @@
 # @stalk-ui/components
 
+## 2.0.0
+
+### Minor Changes
+
+- [#80](https://github.com/trystendsmyth/stalk-ui/pull/80) [`b83e93a`](https://github.com/trystendsmyth/stalk-ui/commit/b83e93a26d27a6207a2c51c2fde73f88cc1ce32d) Thanks [@trystendsmyth](https://github.com/trystendsmyth)! - data-table-advanced: headless `useDataTable` hook + batteries-included component
+
+  A new `data-table-advanced` item exporting both `useDataTable` (TanStack core +
+  sorting + pagination, statically imported and tree-shakeable, with a column-pinning
+  helper and detail-panel expansion) and `DataTableAdvanced`, which adds expandable
+  detail rows, frozen columns (via the WS-1 `data-pinned` recipe), a sticky header,
+  and pagination. The basic `data-table` stays lightweight; consumers opt into the
+  advanced surface only when they `add` it.
+
+- [#80](https://github.com/trystendsmyth/stalk-ui/pull/80) [`b83e93a`](https://github.com/trystendsmyth/stalk-ui/commit/b83e93a26d27a6207a2c51c2fde73f88cc1ce32d) Thanks [@trystendsmyth](https://github.com/trystendsmyth)! - dialog: support non-modal dialogs via an optional overlay
+
+  `Dialog.Content` gains an `overlay` prop (default `true`). Setting `overlay={false}`
+  alongside `Dialog.Root`'s already-forwarded `modal={false}` renders a non-blocking,
+  click-through panel (the page behind stays interactive) — for live side panels that
+  shouldn't trap focus or dim the app.
+
+- [#80](https://github.com/trystendsmyth/stalk-ui/pull/80) [`b83e93a`](https://github.com/trystendsmyth/stalk-ui/commit/b83e93a26d27a6207a2c51c2fde73f88cc1ce32d) Thanks [@trystendsmyth](https://github.com/trystendsmyth)! - heatmap: new dependency-free HeatMap primitive
+
+  A labeled matrix of color-coded cells built on a real `<table>` (row/column
+  headers give screen readers the full grid for free). Sequential and diverging
+  ramps drive cell color via `data-*` attributes mapped to the new `scale.*`
+  tokens, so it themes and inverts with color mode automatically. Zero runtime
+  dependencies; optional keyboard-inspectable cells and a ramp legend.
+
+- [#80](https://github.com/trystendsmyth/stalk-ui/pull/80) [`b83e93a`](https://github.com/trystendsmyth/stalk-ui/commit/b83e93a26d27a6207a2c51c2fde73f88cc1ce32d) Thanks [@trystendsmyth](https://github.com/trystendsmyth)! - sparkline: new dependency-free Sparkline component
+
+  A compact inline-SVG trend line with no charting dependency (no recharts). Color
+  flows through `colorPalette` so `tone` retints it and it inverts with color mode;
+  optional area fill and last-point marker. Decorative by default, accessible
+  (`role="img"`) when given an `aria-label`.
+
+- [#80](https://github.com/trystendsmyth/stalk-ui/pull/80) [`b83e93a`](https://github.com/trystendsmyth/stalk-ui/commit/b83e93a26d27a6207a2c51c2fde73f88cc1ce32d) Thanks [@trystendsmyth](https://github.com/trystendsmyth)! - table: sticky header + frozen columns (CSS-only, shared by every table)
+
+  `Table.Root` gains a `stickyHeader` prop, and any `Table.Head` / `Table.Cell`
+  can be frozen with `data-pinned="start" | "end"` (logical insets → RTL-correct).
+  Pure recipe CSS, so it benefits `DataTable` and any custom table at zero JS cost.
+
+- [#80](https://github.com/trystendsmyth/stalk-ui/pull/80) [`b83e93a`](https://github.com/trystendsmyth/stalk-ui/commit/b83e93a26d27a6207a2c51c2fde73f88cc1ce32d) Thanks [@trystendsmyth](https://github.com/trystendsmyth)! - preset: add data-viz scale tokens and `defineTheme` `scales`/`tones` options
+
+  Adds mode-aware `scale.sequential.*` and `scale.diverging.*` semantic ramps
+  (derived from existing Radix scales, no new raw colors) plus `defineTheme({ scales })`
+  to re-hue them and `defineTheme({ tones })` to register extra `colorPalette` tone
+  groups. Foundation for the HeatMap primitive and dependency-free Sparklines.
+
+### Patch Changes
+
+- Updated dependencies [[`b83e93a`](https://github.com/trystendsmyth/stalk-ui/commit/b83e93a26d27a6207a2c51c2fde73f88cc1ce32d), [`b83e93a`](https://github.com/trystendsmyth/stalk-ui/commit/b83e93a26d27a6207a2c51c2fde73f88cc1ce32d), [`b83e93a`](https://github.com/trystendsmyth/stalk-ui/commit/b83e93a26d27a6207a2c51c2fde73f88cc1ce32d), [`b83e93a`](https://github.com/trystendsmyth/stalk-ui/commit/b83e93a26d27a6207a2c51c2fde73f88cc1ce32d), [`b83e93a`](https://github.com/trystendsmyth/stalk-ui/commit/b83e93a26d27a6207a2c51c2fde73f88cc1ce32d), [`b83e93a`](https://github.com/trystendsmyth/stalk-ui/commit/b83e93a26d27a6207a2c51c2fde73f88cc1ce32d)]:
+  - @stalk-ui/preset@1.1.0
+  - @stalk-ui/i18n@1.1.0
+  - @stalk-ui/utils@1.1.0
+
 ## 1.0.0
 
 ### Major Changes
