@@ -5105,16 +5105,32 @@
       stroke: none;
 }
 
-    .stalk-sparkline__line {
+    .stalk-sparkline__line,.stalk-sparkline__lineMuted {
       fill: none;
       stroke: var(--colors-color-palette-solid);
       stroke-linecap: round;
       stroke-linejoin: round;
 }
 
+    .stalk-sparkline__lineMuted {
+      opacity: 0.4;
+}
+
     .stalk-sparkline__point {
       fill: var(--colors-color-palette-solid);
       stroke: var(--colors-bg-default);
+}
+
+    .stalk-sparkline__referenceLine {
+      fill: none;
+      stroke: var(--colors-border-strong);
+      stroke-dasharray: 3 2;
+}
+
+    .stalk-sparkline__referenceBand {
+      fill: var(--colors-fg-muted);
+      opacity: 0.12;
+      stroke: none;
 }
 
     .stalk-spinner__root {

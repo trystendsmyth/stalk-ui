@@ -9,7 +9,7 @@ import type { RecipeConfig } from '../types'
 export const sparkline = {
   className: 'stalk-sparkline',
   description: 'Slot recipe for Sparkline — a compact inline-SVG trend (root, area, line, point).',
-  slots: ['root', 'area', 'line', 'point'],
+  slots: ['root', 'area', 'line', 'lineMuted', 'point', 'referenceLine', 'referenceBand'],
   base: {
     root: {
       colorPalette: 'accent',
@@ -28,9 +28,28 @@ export const sparkline = {
       strokeLinecap: 'round',
       strokeLinejoin: 'round',
     },
+    // Secondary series: same tone, faded so the primary line stays dominant.
+    lineMuted: {
+      fill: 'none',
+      stroke: 'colorPalette.solid',
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      opacity: 0.4,
+    },
     point: {
       fill: 'colorPalette.solid',
       stroke: 'bg.default',
+    },
+    // Reference threshold line (dashed) and band (faint fill).
+    referenceLine: {
+      fill: 'none',
+      stroke: 'border.strong',
+      strokeDasharray: '3 2',
+    },
+    referenceBand: {
+      fill: 'fg.muted',
+      opacity: 0.12,
+      stroke: 'none',
     },
   },
 } satisfies RecipeConfig
