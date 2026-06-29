@@ -338,6 +338,7 @@ export type { ResizableHandleProps, ResizablePanelProps, ResizableRootProps } fr
 export {
   Select,
   SelectContent,
+  SelectField,
   SelectItem,
   SelectLabel,
   SelectSeparator,
@@ -352,7 +353,14 @@ export {
   ScrollAreaViewport,
 } from './scroll-area'
 export type { ScrollAreaProps } from './scroll-area'
-export type { SelectContentProps, SelectItemProps, SelectSize, SelectTriggerProps } from './select'
+export type {
+  SelectContentProps,
+  SelectFieldProps,
+  SelectItemProps,
+  SelectOption,
+  SelectSize,
+  SelectTriggerProps,
+} from './select'
 export { Separator } from './separator'
 export type { SeparatorOrientation, SeparatorProps } from './separator'
 export {

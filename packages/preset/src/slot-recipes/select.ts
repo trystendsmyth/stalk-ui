@@ -20,7 +20,8 @@ export const select = {
       outline: 'none',
       transitionDuration: 'fast',
       transitionProperty: 'background-color, border-color, box-shadow',
-      w: 'full',
+      // Content-width by default (with minW:0 above) so inline selects fit a toolbar;
+      // opt into full width with the `fullWidth` variant (shared width vocabulary).
       _disabled: {
         cursor: 'not-allowed',
         opacity: 0.5,
@@ -118,6 +119,11 @@ export const select = {
       lg: {
         trigger: { fontSize: 'base', minH: '48', px: '20' },
       },
+    },
+    // Stretch the trigger to fill its container (forms); default is content-width.
+    fullWidth: {
+      true: { trigger: { w: 'full' } },
+      false: {},
     },
   },
   defaultVariants: {

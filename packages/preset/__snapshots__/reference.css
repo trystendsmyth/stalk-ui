@@ -4471,7 +4471,6 @@
       --transition-prop: background-color, border-color, box-shadow;
       transition-property: background-color, border-color, box-shadow;
       min-width: var(--sizes-0);
-      width: var(--sizes-full);
 }
 
     .stalk-select__trigger[data-invalid],.stalk-select__trigger[aria-invalid="true"] {
@@ -6530,6 +6529,10 @@
     padding-inline: var(--spacing-20);
     font-size: var(--font-sizes-base);
     min-height: var(--sizes-48);
+}
+
+  .stalk-select__trigger--fullWidth_true {
+    width: var(--sizes-full);
 }
 
   .stalk-sheet__content--side_right {
