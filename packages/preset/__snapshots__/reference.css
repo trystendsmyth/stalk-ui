@@ -6139,7 +6139,17 @@
 }
 
   .stalk-card__root--variant_elevated {
+    background-color: var(--colors-bg-canvas);
     box-shadow: var(--shadows-md);
+}
+
+  .stalk-card__root--size_sm {
+    gap: var(--spacing-12);
+    padding-block: var(--spacing-12);
+}
+
+  .stalk-card__header--size_sm,.stalk-card__content--size_sm,.stalk-card__footer--size_sm {
+    padding-inline: var(--spacing-12);
 }
 
   .stalk-carousel__content--orientation_horizontal {
@@ -6454,6 +6464,12 @@
     font-size: var(--font-sizes-lg);
     line-height: var(--line-heights-lg);
     letter-spacing: var(--letter-spacings-normal);
+}
+
+  .stalk-popover__content--scrollable_true {
+    overscroll-behavior: contain;
+    max-block-size: var(--radix-popover-content-available-height);
+    overflow-y: auto;
 }
 
   .stalk-progress__root--size_md {

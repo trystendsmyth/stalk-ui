@@ -88,7 +88,7 @@ export {
   CardRoot,
   CardTitle,
 } from './card'
-export type { CardRootProps, CardVariant } from './card'
+export type { CardRootProps, CardSize, CardVariant } from './card'
 export { Chart, ChartContainer, ChartLegendContent, ChartTooltipContent, useChart } from './chart'
 export type {
   ChartConfig,
@@ -324,6 +324,7 @@ export {
   PopoverRoot,
   PopoverTrigger,
 } from './popover'
+export type { PopoverContentProps } from './popover'
 export { Progress } from './progress'
 export type { ProgressProps, ProgressSize } from './progress'
 export { QrCode } from './qr-code'
