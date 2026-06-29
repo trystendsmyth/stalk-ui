@@ -1647,6 +1647,10 @@
     width: var(--sizes-18);
 }
 
+  .stalk-button--fullWidth_true {
+    width: var(--sizes-full);
+}
+
   .stalk-code--variant_soft {
     background-color: var(--colors-bg-muted);
     color: var(--colors-fg-default);
