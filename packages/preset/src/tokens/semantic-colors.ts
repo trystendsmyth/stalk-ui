@@ -35,6 +35,23 @@ const contrastFor = (accentColor: AccentColor) =>
     ? semanticPair(scaleToken('gray', 12), scaleToken('gray', 12))
     : semanticPair(scaleToken('gray', 1), scaleToken('gray', 12))
 
+/**
+ * Radix step 9 is the saturated "solid" step and is hue-stable across light/dark, so a
+ * step-9 fill bears the same text color in BOTH modes — unlike `solid` (11/10), whose
+ * contrast must flip with the inverting dark scale. `vivid` is the saturated indicator /
+ * text-bearing fill tier (status text on dark surfaces, dots, tags, heat cells); pair it
+ * with `vividContrast` for text on a `vivid` fill. It is AA as a foreground only on
+ * dark/tinted surfaces — keep `text`/`fg` for AA body text on arbitrary backgrounds.
+ */
+const VIVID_STEP = 9
+
+/** Text on a `vivid` fill: white on most step-9 fills, dark on light-solid accents — and
+ *  it does NOT mode-flip, because step 9 is stable across modes. */
+const vividContrastFor = (accentColor: AccentColor) =>
+  isLightSolid(accentColor)
+    ? semanticPair(scaleToken('gray', 12), scaleToken('gray', 12))
+    : semanticPair(scaleToken('gray', 1), scaleToken('gray', 1))
+
 const emphasisFor = (accentColor: AccentColor) =>
   semanticPair(
     midStepMix(scaleToken(accentColor, 11), scaleToken(accentColor, 12)),
@@ -56,6 +73,11 @@ export const createAccentSemanticTokens = (accentColor: AccentColor): TokenGroup
     text: emphasisFor(accentColor),
     fg: semanticPair(scaleToken(accentColor, 12), darkScaleToken(accentColor, 12)),
     contrast: contrastFor(accentColor),
+    vivid: semanticPair(
+      scaleToken(accentColor, VIVID_STEP),
+      darkScaleToken(accentColor, VIVID_STEP),
+    ),
+    vividContrast: vividContrastFor(accentColor),
   }
 }
 
@@ -74,6 +96,11 @@ export const createVibrantAccentSemanticTokens = (accentColor: AccentColor): Tok
     text: semanticPair(scaleToken(accentColor, 11), darkScaleToken(accentColor, 11)),
     fg: semanticPair(scaleToken(accentColor, 12), darkScaleToken(accentColor, 12)),
     contrast: contrastFor(accentColor),
+    vivid: semanticPair(
+      scaleToken(accentColor, VIVID_STEP),
+      darkScaleToken(accentColor, VIVID_STEP),
+    ),
+    vividContrast: vividContrastFor(accentColor),
   }
 }
 

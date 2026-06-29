@@ -110,6 +110,12 @@ export const defineTheme = (options: DefineThemeOptions): StalkTheme => {
     ...createScaleSemanticTokens({
       sequential: options.scales?.sequential ?? accent,
       diverging: options.scales?.diverging ?? ['red', 'blue'],
+      ...(options.scales?.divergingMid !== undefined
+        ? { divergingMid: options.scales.divergingMid }
+        : {}),
+      ...(options.scales?.divergingMidStep !== undefined
+        ? { divergingMidStep: options.scales.divergingMidStep }
+        : {}),
       gray: options.scales?.gray ?? gray,
     }),
     ...toneColors,

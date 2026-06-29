@@ -39,15 +39,18 @@ export const createSequentialScaleTokens = (scale: AccentColor | GrayColor): Tok
   )
 
 /**
- * Two-hue diverging ramp around a neutral midpoint:
+ * Two-hue diverging ramp around a configurable midpoint:
  * `scale.diverging.neg.{1..4}` (strong → faint), `scale.diverging.mid`,
  * `scale.diverging.pos.{1..4}` (faint → strong). Use for signed data
- * (over/under, gain/loss) where direction matters.
+ * (over/under, gain/loss) where direction matters. `mid` defaults to a neutral grey
+ * (`neutral.6`); pass an accent (e.g. `amber`, `midStep` ~9) for a colored midpoint —
+ * a low → mid → high health ramp without a grey middle.
  */
 export const createDivergingScaleTokens = (
   neg: AccentColor,
   pos: AccentColor,
-  gray: GrayColor = 'neutral',
+  mid: AccentColor | GrayColor = 'neutral',
+  midStep = 6,
 ): TokenGroup => ({
   neg: Object.fromEntries(
     DIVERGING_STEPS.map((step, i) => [
@@ -55,7 +58,7 @@ export const createDivergingScaleTokens = (
       semanticPair(scaleToken(neg, step), darkScaleToken(neg, step)),
     ]),
   ),
-  mid: semanticPair(scaleToken(gray, 6), darkScaleToken(gray, 6)),
+  mid: semanticPair(scaleToken(mid, midStep), darkScaleToken(mid, midStep)),
   pos: Object.fromEntries(
     [...DIVERGING_STEPS]
       .reverse()
@@ -71,7 +74,12 @@ export interface ScaleTokenOptions {
   sequential?: AccentColor | GrayColor
   /** `[negative, positive]` hues for the diverging ramp (default: `['red', 'blue']`). */
   diverging?: [AccentColor, AccentColor]
-  /** Neutral scale for the diverging midpoint (default: `'neutral'`). */
+  /** Midpoint hue for the diverging ramp (default: `'neutral'` grey). Pass an accent
+   *  (e.g. `'amber'`) for a colored midpoint — a low → mid → high health ramp. */
+  divergingMid?: AccentColor | GrayColor
+  /** Step for the diverging midpoint (default `6` = neutral; ~`9` for a saturated colored mid). */
+  divergingMidStep?: number
+  /** Legacy alias for `divergingMid` (a grey midpoint); prefer `divergingMid`. Default: `'neutral'`. */
   gray?: GrayColor
 }
 
@@ -79,10 +87,17 @@ export interface ScaleTokenOptions {
 export const createScaleSemanticTokens = ({
   sequential = 'blue',
   diverging = ['red', 'blue'],
+  divergingMid,
+  divergingMidStep,
   gray = 'neutral',
 }: ScaleTokenOptions = {}): TokenGroup => ({
   scale: {
     sequential: createSequentialScaleTokens(sequential),
-    diverging: createDivergingScaleTokens(diverging[0], diverging[1], gray),
+    diverging: createDivergingScaleTokens(
+      diverging[0],
+      diverging[1],
+      divergingMid ?? gray,
+      divergingMidStep ?? 6,
+    ),
   },
 })
