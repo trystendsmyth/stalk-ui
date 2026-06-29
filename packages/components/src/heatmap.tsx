@@ -1,9 +1,10 @@
 'use client'
 
-import { forwardRef } from 'react'
-import { cx } from 'styled-system/css'
+import { createContext, forwardRef, useContext, useMemo } from 'react'
+import { css, cx } from 'styled-system/css'
 import { heatmap as heatmapRecipe } from 'styled-system/recipes'
 
+import type { Tone } from './tones'
 import type { CSSProperties, HTMLAttributes, ReactNode } from 'react'
 
 const styles = /* @__PURE__ */ heatmapRecipe()
@@ -90,7 +91,7 @@ const cellTone = (
   return { 'data-level': level }
 }
 
-export const HeatMap = /* @__PURE__ */ forwardRef<HTMLDivElement, HeatMapProps>(function HeatMap(
+const HeatMapBase = /* @__PURE__ */ forwardRef<HTMLDivElement, HeatMapProps>(function HeatMap(
   {
     rows,
     columns,
@@ -192,4 +193,274 @@ export const HeatMap = /* @__PURE__ */ forwardRef<HTMLDivElement, HeatMapProps>(
       ) : null}
     </div>
   )
+})
+
+// ── Composable HeatMap.* — a sectioned, content-bearing data grid ──────────────
+// The simple data-driven HeatMap above stays a textless color matrix; these parts
+// add in-cell content, per-cell activation, and labeled row groups via composition
+// (children / dot notation), with color from a `tone` or the scale path. Importing
+// only the simple HeatMap does not pull these in.
+
+interface HeatMapScaleContextValue {
+  levelFor: (value: number | null) => { 'data-level'?: number; 'data-tone'?: string } | undefined
+}
+
+const HeatMapScaleContext = /* @__PURE__ */ createContext<HeatMapScaleContextValue | null>(null)
+
+export interface UseHeatMapScaleOptions {
+  /** Values to auto-compute the domain from (ignored when `domain` is given). */
+  values?: readonly (number | null | undefined)[]
+  /** Explicit `[min, max]` domain. */
+  domain?: [number, number]
+  /** Ramp style. */
+  scale?: HeatMapScale
+  /** Neutral midpoint for `diverging` (default 0). */
+  midpoint?: number
+}
+
+export interface HeatMapScaleApi {
+  /** Bucket a value into the `data-*` attributes the cell recipe maps to a ramp color. */
+  levelFor: (value: number | null) => { 'data-level'?: number; 'data-tone'?: string } | undefined
+}
+
+/**
+ * Headless color engine for composable HeatMaps: pass your value array (or a fixed
+ * `domain`) and spread `levelFor(value)` onto `<HeatMap.Cell>`. Computed up front,
+ * so no measurement render is needed.
+ */
+export function useHeatMapScale({
+  values,
+  domain,
+  scale = 'sequential',
+  midpoint = 0,
+}: UseHeatMapScaleOptions): HeatMapScaleApi {
+  return useMemo<HeatMapScaleApi>(() => {
+    const nums =
+      domain === undefined
+        ? (values ?? []).filter((value): value is number => typeof value === 'number')
+        : null
+    const [min, max] = domain ?? [
+      nums && nums.length > 0 ? Math.min(...nums) : 0,
+      nums && nums.length > 0 ? Math.max(...nums) : 0,
+    ]
+    return {
+      levelFor: (value) =>
+        value === null ? undefined : cellTone(value, scale, min, max, midpoint),
+    }
+  }, [values, domain, scale, midpoint])
+}
+
+const groupHeaderRowClass = /* @__PURE__ */ css({
+  display: 'inline-flex',
+  alignItems: 'center',
+  w: 'full',
+})
+
+export interface HeatMapRootProps extends Omit<HTMLAttributes<HTMLTableElement>, 'children'> {
+  /** Ramp style for cells that resolve color from `value` (default `sequential`). */
+  scale?: HeatMapScale
+  /** Explicit `[min, max]` domain for value-colored cells (required for auto-color). */
+  domain?: [number, number]
+  /** Neutral midpoint for `diverging` (default 0). */
+  midpoint?: number
+  /** Column headers; renders a header row. */
+  columns?: readonly ReactNode[]
+  children?: ReactNode
+}
+
+export const HeatMapRoot = /* @__PURE__ */ forwardRef<HTMLTableElement, HeatMapRootProps>(
+  function HeatMapRoot(
+    { scale = 'sequential', domain, midpoint = 0, columns, className, children, ...props },
+    ref,
+  ) {
+    const api = useHeatMapScale({ scale, midpoint, ...(domain ? { domain } : {}) })
+    return (
+      <HeatMapScaleContext.Provider value={api}>
+        <table ref={ref} className={cx(styles.table, className)} {...props}>
+          {columns !== undefined && columns.length > 0 ? (
+            <thead>
+              <tr>
+                <td className={styles.corner} />
+                {columns.map((column, index) => (
+                  <th key={index} scope="col" className={styles.columnHeader}>
+                    {column}
+                  </th>
+                ))}
+              </tr>
+            </thead>
+          ) : null}
+          {children}
+        </table>
+      </HeatMapScaleContext.Provider>
+    )
+  },
+)
+
+export interface HeatMapGroupProps extends Omit<
+  HTMLAttributes<HTMLTableSectionElement>,
+  'children'
+> {
+  /** Section label rendered in a header row. */
+  label?: ReactNode
+  /** Optional trailing slot in the section header (e.g. a status chip). */
+  aside?: ReactNode
+  /** Columns the header spans (default spans the whole grid). */
+  headerColSpan?: number
+  children?: ReactNode
+}
+
+export const HeatMapGroup = /* @__PURE__ */ forwardRef<HTMLTableSectionElement, HeatMapGroupProps>(
+  function HeatMapGroup(
+    { label, aside, headerColSpan = 1000, className, children, ...props },
+    ref,
+  ) {
+    const hasHeader = label !== undefined || aside !== undefined
+    return (
+      <tbody ref={ref} className={cx(styles.group, className)} {...props}>
+        {hasHeader ? (
+          <tr>
+            <th scope="colgroup" colSpan={headerColSpan} className={styles.groupHeader}>
+              <span className={groupHeaderRowClass}>
+                {label}
+                {aside !== undefined ? <span className={styles.groupAside}>{aside}</span> : null}
+              </span>
+            </th>
+          </tr>
+        ) : null}
+        {children}
+      </tbody>
+    )
+  },
+)
+
+export interface HeatMapRowProps extends Omit<HTMLAttributes<HTMLTableRowElement>, 'children'> {
+  /** Row header (rendered as a `<th scope="row">`). */
+  header?: ReactNode
+  children?: ReactNode
+}
+
+export const HeatMapRow = /* @__PURE__ */ forwardRef<HTMLTableRowElement, HeatMapRowProps>(
+  function HeatMapRow({ header, className, children, ...props }, ref) {
+    return (
+      <tr ref={ref} className={className} {...props}>
+        {header !== undefined ? (
+          <th scope="row" className={styles.rowHeader}>
+            {header}
+          </th>
+        ) : null}
+        {children}
+      </tr>
+    )
+  },
+)
+
+export interface HeatMapCellProps extends Omit<HTMLAttributes<HTMLTableCellElement>, 'onClick'> {
+  /** Value used to resolve color from the Root's scale/domain (or `useHeatMapScale`). */
+  value?: number | null
+  /** Status tone → a saturated `vivid` fill with legible text. Overrides `value`/`level`. */
+  tone?: Tone
+  /** Explicit ramp bucket (1–9), bypassing value resolution. */
+  level?: number
+  /** Render as an inert "no data" cell. */
+  empty?: boolean
+  /** Per-cell activation. Renders a focusable button; React delegates the handler. */
+  onClick?: () => void
+  /** Accessible name (visible content is often a poor screen-reader label). */
+  label?: string
+  children?: ReactNode
+}
+
+export const HeatMapCell = /* @__PURE__ */ forwardRef<HTMLTableCellElement, HeatMapCellProps>(
+  function HeatMapCell(
+    {
+      value,
+      tone,
+      level,
+      empty = false,
+      onClick,
+      label,
+      className,
+      children,
+      title,
+      'aria-label': ariaLabelProp,
+      ...props
+    },
+    ref,
+  ) {
+    const ctx = useContext(HeatMapScaleContext)
+    const isEmpty = empty || value === null
+    let toneAttrs: { 'data-level'?: number; 'data-tone'?: string } | undefined
+    let toneClass: string | undefined
+    if (tone !== undefined) {
+      toneClass = css({
+        colorPalette: tone,
+        bgColor: 'colorPalette.vivid',
+        color: 'colorPalette.vividContrast',
+      })
+    } else if (!isEmpty) {
+      if (level !== undefined) toneAttrs = { 'data-level': level }
+      else if (typeof value === 'number' && ctx) toneAttrs = ctx.levelFor(value)
+    }
+    const hasContent = children !== undefined
+    const content = hasContent ? <span className={styles.cellContent}>{children}</span> : null
+    const accessible =
+      label ?? (typeof ariaLabelProp === 'string' ? ariaLabelProp : undefined) ?? title
+    const interactive = onClick !== undefined
+    return (
+      <td
+        ref={ref}
+        aria-label={interactive ? undefined : accessible}
+        className={cx(styles.cell, toneClass, className)}
+        data-content={hasContent ? '' : undefined}
+        data-empty={isEmpty ? '' : undefined}
+        title={accessible}
+        {...toneAttrs}
+        {...props}
+      >
+        {interactive ? (
+          <button
+            aria-label={accessible}
+            className={styles.cellButton}
+            onClick={onClick}
+            type="button"
+          >
+            {content}
+          </button>
+        ) : (
+          content
+        )}
+      </td>
+    )
+  },
+)
+
+export const HeatMapCellLabel = /* @__PURE__ */ forwardRef<
+  HTMLSpanElement,
+  HTMLAttributes<HTMLSpanElement>
+>(function HeatMapCellLabel({ className, ...props }, ref) {
+  return <span ref={ref} className={cx(styles.cellLabel, className)} {...props} />
+})
+
+export const HeatMapCellValue = /* @__PURE__ */ forwardRef<
+  HTMLSpanElement,
+  HTMLAttributes<HTMLSpanElement>
+>(function HeatMapCellValue({ className, ...props }, ref) {
+  return <span ref={ref} className={cx(styles.cellValue, className)} {...props} />
+})
+
+export const HeatMapCellMeta = /* @__PURE__ */ forwardRef<
+  HTMLSpanElement,
+  HTMLAttributes<HTMLSpanElement>
+>(function HeatMapCellMeta({ className, ...props }, ref) {
+  return <span ref={ref} className={cx(styles.cellMeta, className)} {...props} />
+})
+
+export const HeatMap = /* @__PURE__ */ Object.assign(HeatMapBase, {
+  Root: HeatMapRoot,
+  Group: HeatMapGroup,
+  Row: HeatMapRow,
+  Cell: HeatMapCell,
+  CellLabel: HeatMapCellLabel,
+  CellValue: HeatMapCellValue,
+  CellMeta: HeatMapCellMeta,
 })

@@ -3615,6 +3615,14 @@
       background-color: var(--colors-scale-diverging-pos-4);
 }
 
+    .stalk-heatmap__cell[data-content] {
+      text-align: start;
+      vertical-align: top;
+      height: auto;
+      min-height: var(--sizes-44);
+      min-width: var(--sizes-64);
+}
+
     .stalk-heatmap__cell:is(:focus-visible, [data-focus-visible]) {
       --ring-offset-shadow: var(--ring-inset,) 0 0 0 var(--ring-offset-width, 0rem) var(--ring-offset-color);
       --ring-shadow: var(--ring-inset,) 0 0 0 calc(0.1875rem + var(--ring-offset-width, 0rem)) var(--ring-color);
@@ -3633,10 +3641,77 @@
 }
 
     .stalk-heatmap__caption {
-      color: var(--colors-fg-muted);
       font-size: var(--font-sizes-sm);
-      text-align: start;
       margin-top: var(--spacing-4);
+}
+
+    .stalk-heatmap__caption,.stalk-heatmap__groupHeader {
+      color: var(--colors-fg-muted);
+      text-align: start;
+}
+
+    .stalk-heatmap__groupHeader {
+      padding-inline: var(--spacing-4);
+      font-size: var(--font-sizes-xs);
+      font-weight: var(--font-weights-semibold);
+      white-space: nowrap;
+      padding-top: var(--spacing-12);
+      padding-bottom: var(--spacing-4);
+}
+
+    .stalk-heatmap__groupAside {
+      display: inline-flex;
+      align-items: center;
+      margin-inline-start: auto;
+}
+
+    .stalk-heatmap__cellButton {
+      border: none;
+      font: inherit;
+      margin: var(--spacing-0);
+      padding: var(--spacing-0);
+      outline: 2px solid transparent;
+      outline-offset: 2px;
+      appearance: none;
+      -webkit-appearance: none;
+      background-color: transparent;
+      color: inherit;
+      cursor: pointer;
+      display: flex;
+      text-align: start;
+      height: var(--sizes-full);
+      width: var(--sizes-full);
+}
+
+    .stalk-heatmap__cellContent {
+      gap: var(--spacing-2);
+      padding-block: var(--spacing-6);
+      padding-inline: var(--spacing-8);
+      align-items: flex-start;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      height: var(--sizes-full);
+}
+
+    .stalk-heatmap__cellLabel {
+      overflow: hidden;
+      font-size: var(--font-sizes-xs);
+      font-weight: var(--font-weights-medium);
+      opacity: 0.85;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      max-width: var(--sizes-full);
+}
+
+    .stalk-heatmap__cellValue {
+      font-size: var(--font-sizes-sm);
+      font-weight: var(--font-weights-semibold);
+}
+
+    .stalk-heatmap__cellMeta {
+      font-size: var(--font-sizes-xs);
+      opacity: 0.8;
 }
 
     .stalk-hover-card__content {
