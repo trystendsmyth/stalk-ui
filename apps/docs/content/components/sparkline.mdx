@@ -45,16 +45,18 @@ pnpm dlx @stalk-ui/cli add @stalk-ui/sparkline
 
 ## Props
 
-| Prop            | Type       | Required | Default | Description                                                                                                                                                |
-| --------------- | ---------- | -------- | ------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `data`          | `number[]` | Yes      | -       | Series of numbers, left → right. Needs at least two points to draw a line.                                                                                 |
-| `width`         | `number`   | No       | -       | Intrinsic width in px (the SVG still scales to its box). Default \`80\`.                                                                                   |
-| `height`        | `number`   | No       | -       | Intrinsic height in px. Default \`24\`.                                                                                                                    |
-| `tone`          | `Tone`     | No       | -       | Tone for the line / area / point. Default \`accent\`.                                                                                                      |
-| `area`          | `boolean`  | No       | -       | Fill the area beneath the line.                                                                                                                            |
-| `showLastPoint` | `boolean`  | No       | -       | Mark the final data point.                                                                                                                                 |
-| `strokeWidth`   | `number`   | No       | -       | Line thickness in px. Default \`1.5\`.                                                                                                                     |
-| `'aria-label'`  | `string`   | No       | -       | Accessible label, e.g. "Revenue, last 30 days". When omitted the sparkline is<br />decorative (\`aria-hidden\`) — pair it with adjacent text in that case. |
+| Prop            | Type                         | Required | Default | Description                                                                                                                                                |
+| --------------- | ---------------------------- | -------- | ------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `data`          | `number[]`                   | Yes      | -       | Primary series of numbers, left → right. Needs at least two points to draw a line.                                                                         |
+| `series`        | `number[][]`                 | No       | -       | Additional series sharing the same x/y domain, drawn as muted lines.                                                                                       |
+| `reference`     | `number \| [number, number]` | No       | -       | Reference threshold: a single value draws a dashed line; \`[low, high]\` shades a band.                                                                    |
+| `width`         | `number`                     | No       | -       | Intrinsic width in px (the SVG still scales to its box). Default \`80\`.                                                                                   |
+| `height`        | `number`                     | No       | -       | Intrinsic height in px. Default \`24\`.                                                                                                                    |
+| `tone`          | `Tone`                       | No       | -       | Tone for the line / area / point. Default \`accent\`.                                                                                                      |
+| `area`          | `boolean`                    | No       | -       | Fill the area beneath the primary line.                                                                                                                    |
+| `showLastPoint` | `boolean`                    | No       | -       | Mark the final data point of the primary series.                                                                                                           |
+| `strokeWidth`   | `number`                     | No       | -       | Line thickness in px. Default \`1.5\`.                                                                                                                     |
+| `'aria-label'`  | `string`                     | No       | -       | Accessible label, e.g. "Revenue, last 30 days". When omitted the sparkline is<br />decorative (\`aria-hidden\`) — pair it with adjacent text in that case. |
 
 ## Variants
 
