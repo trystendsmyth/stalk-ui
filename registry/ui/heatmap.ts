@@ -5,5 +5,6 @@ export const heatmap = defineRegistryItem({
   filePath: 'src/components/ui/heatmap.tsx',
   name: 'heatmap',
   recipes: ['heatmap'],
+  registryDependencies: ['tones'],
   sourcePath: 'packages/components/src/heatmap.tsx',
 })

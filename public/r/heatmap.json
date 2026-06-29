@@ -3,7 +3,7 @@
   "name": "heatmap",
   "type": "registry:ui",
   "dependencies": ["@stalk-ui/preset"],
-  "registryDependencies": [],
+  "registryDependencies": ["tones"],
   "files": [
     {
       "path": "src/components/ui/heatmap.tsx",
