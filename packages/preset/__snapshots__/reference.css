@@ -5228,7 +5228,6 @@
       --colors-color-palette-vivid: var(--colors-accent-vivid);
       --colors-color-palette-vivid-contrast: var(--colors-accent-vivid-contrast);
       display: flex;
-      width: var(--sizes-full);
 }
 
     .stalk-tabs__root[data-orientation="vertical"] {
@@ -6721,12 +6720,12 @@
 }
 
   .stalk-tabs__trigger--variant_segmented[data-state="active"] {
-    color: var(--colors-fg-default);
+    color: var(--colors-color-palette-contrast);
 }
 
   .stalk-tabs__indicator--variant_segmented {
     border-radius: var(--radii-md);
-    background-color: var(--colors-bg-default);
+    background-color: var(--colors-color-palette-solid);
     box-shadow: var(--shadows-sm);
 }
 
@@ -6747,7 +6746,7 @@
     background-color: var(--colors-color-palette-solid);
 }
 
-  .stalk-tabs__list--fitted_true {
+  .stalk-tabs__root--fitted_true,.stalk-tabs__list--fitted_true {
     width: var(--sizes-full);
 }
 
