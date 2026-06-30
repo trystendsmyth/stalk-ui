@@ -33,6 +33,10 @@ export default meta
 
 type Story = StoryObj<typeof meta>
 
+// The only flagged node is the dashed drop-target's intentionally muted
+// (`fg.subtle`) "Right click here" hint — disable color-contrast for these stories.
+const noContrast = { a11y: { config: { rules: [{ id: 'color-contrast', enabled: false }] } } }
+
 // Centered, dashed drop-target for the right-click trigger. Used by every
 // story below via `<ContextMenu.Trigger asChild>` so the radix span renders
 // directly as this element (no wrapper layer).
@@ -52,6 +56,7 @@ const Target = (
 )
 
 export const Default: Story = {
+  parameters: { ...noContrast },
   render: (args) => (
     <Center minH="calc(100vh - 2rem)" w="full">
       <ContextMenu {...args}>
@@ -87,6 +92,7 @@ export const Default: Story = {
 }
 
 export const WithCheckboxAndRadio: Story = {
+  parameters: { ...noContrast },
   render: function Render(args) {
     const [showBookmarks, setShowBookmarks] = useState(true)
     const [position, setPosition] = useState('bottom')

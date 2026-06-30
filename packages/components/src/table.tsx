@@ -40,7 +40,10 @@ export const TableRoot = /* @__PURE__ */ forwardRef<HTMLTableElement, TableRootP
 
     return (
       <StyleProvider value={styles}>
-        <div className={cx(styles.root, containerClassName)} {...restContainer}>
+        {/* Focusable so keyboard users can scroll the region (sticky/wide tables);
+            overridable via containerProps. WAI endorses tabindex on scroll regions. */}
+        {/* eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex -- scroll region */}
+        <div className={cx(styles.root, containerClassName)} tabIndex={0} {...restContainer}>
           <table ref={ref} className={cx(styles.table, className)} {...props} />
         </div>
       </StyleProvider>

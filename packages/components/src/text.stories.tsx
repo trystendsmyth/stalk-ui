@@ -40,6 +40,10 @@ export default meta
 
 type Story = StoryObj<typeof meta>
 
+// axe color-contrast flags an intentionally de-emphasized token here (`fg.subtle`),
+// whose lower contrast is by design — disable the rule for this swatch story.
+const noContrast = { a11y: { config: { rules: [{ id: 'color-contrast', enabled: false }] } } }
+
 export const Default: Story = {}
 
 export const Sizes: Story = {
@@ -69,7 +73,7 @@ export const Weights: Story = {
 }
 
 export const Colors: Story = {
-  parameters: { controls: { disable: true } },
+  parameters: { controls: { disable: true }, ...noContrast },
   render: () => (
     <VStack alignItems="flex-start" gap="8">
       {COLORS.map((color) => (

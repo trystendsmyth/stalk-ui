@@ -1,3 +1,5 @@
+import { VisuallyHidden } from 'styled-system/jsx'
+
 import { Badge } from './badge'
 import { Table } from './table'
 
@@ -114,7 +116,9 @@ export const ExpandableRows: Story = {
     <Table.Root>
       <Table.Header>
         <Table.Row>
-          <Table.Head scope="col" />
+          <Table.Head scope="col">
+            <VisuallyHidden>Toggle details</VisuallyHidden>
+          </Table.Head>
           <Table.Head scope="col">Invoice</Table.Head>
           <Table.Head scope="col">Status</Table.Head>
           <Table.Head scope="col">Amount</Table.Head>

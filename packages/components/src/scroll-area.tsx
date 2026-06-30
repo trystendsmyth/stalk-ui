@@ -11,8 +11,15 @@ export const ScrollAreaViewport = /* @__PURE__ */ forwardRef<
   ComponentRef<typeof ScrollAreaPrimitive.Viewport>,
   ComponentPropsWithoutRef<typeof ScrollAreaPrimitive.Viewport>
 >(function ScrollAreaViewport({ className, ...props }, ref) {
+  // A scrollable region must be keyboard-operable; make the viewport focusable so
+  // keyboard users can scroll it (overridable via props).
   return (
-    <ScrollAreaPrimitive.Viewport ref={ref} className={cx(styles.viewport, className)} {...props} />
+    <ScrollAreaPrimitive.Viewport
+      ref={ref}
+      tabIndex={0}
+      className={cx(styles.viewport, className)}
+      {...props}
+    />
   )
 })
 

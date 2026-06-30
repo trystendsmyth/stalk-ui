@@ -78,7 +78,13 @@ export const Inspectable: Story = {
 export const DataGrid: Story = {
   // Placeholder args satisfy the simple-HeatMap meta type; the render uses HeatMap.*.
   args: { cell: () => null, columns: [], rows: [] },
-  parameters: { controls: { disable: true } },
+  parameters: {
+    controls: { disable: true },
+    // Cell values render as small text over data-driven color fills; axe flags the
+    // readout on saturated cells (e.g. white on green ≈ 3.07:1). The coloring is the
+    // data encoding, so disable color-contrast here rather than mute the scale.
+    a11y: { config: { rules: [{ id: 'color-contrast', enabled: false }] } },
+  },
   render: () => (
     <HeatMap.Root aria-label="Service availability by window" columns={['1h', '24h', '7d']}>
       <HeatMap.Group aside={<span>witness ok</span>} label="us-east">

@@ -22,3 +22,6 @@ Data-density & dark-surface gap-closing pass (all additive / backward-compatible
 - **Button:** `fullWidth` variant.
 - **Popover:** `scrollable` variant.
 - **Sparkline:** `reference` line/band and multiple `series`.
+- **Accessibility:** `Slider` gains `thumbLabels` for per-thumb names on range
+  sliders; `ScrollArea` viewport and `Table` scroll container are keyboard-focusable
+  scroll regions; `Command.Separator` is hidden from the listbox a11y tree.

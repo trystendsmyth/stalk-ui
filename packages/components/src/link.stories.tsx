@@ -36,6 +36,10 @@ export default meta
 
 type Story = StoryObj<typeof meta>
 
+// Showcases every semantic tone, incl. success/warning hues that don't hit 4.5:1 —
+// a tone-palette demo, not the recommended link color; disable color-contrast.
+const noContrast = { a11y: { config: { rules: [{ id: 'color-contrast', enabled: false }] } } }
+
 export const Default: Story = {}
 
 export const Underlines: Story = {
@@ -52,7 +56,7 @@ export const Underlines: Story = {
 }
 
 export const Tones: Story = {
-  parameters: { controls: { disable: true } },
+  parameters: { controls: { disable: true }, ...noContrast },
   render: () => (
     <VStack alignItems="flex-start" gap="8">
       {TONES.map((tone) => (
