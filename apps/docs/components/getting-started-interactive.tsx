@@ -267,14 +267,14 @@ function CustomizationBlock() {
             {title || 'Untitled'}
           </strong>
           <p>Group related content and actions on a single bordered surface.</p>
-          <div className="docs-interactive__chips">
+          <div className="docs-interactive__actions">
             <span
-              className="docs-interactive__chip"
-              style={{ background: solid, borderColor: solid, color: 'var(--colors-gray-1)' }}
+              className="docs-interactive__button docs-interactive__button--primary"
+              style={{ background: solid, borderColor: solid }}
             >
               Save
             </span>
-            <span className="docs-interactive__chip">Cancel</span>
+            <span className="docs-interactive__button">Cancel</span>
           </div>
         </div>
         <Panel title="defineTheme">

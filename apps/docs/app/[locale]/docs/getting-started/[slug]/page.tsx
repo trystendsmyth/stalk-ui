@@ -4,6 +4,21 @@ import { GettingStartedInteractive } from '../../../../../components/getting-sta
 import { ThemeBuilder } from '../../../../../components/theme-builder'
 import { getGettingStartedPage, gettingStartedPages, locales } from '../../../../../lib/docs'
 
+import type { ReactNode } from 'react'
+
+/** Minimal inline markup for body copy: `**bold**` → <strong>, `` `code` `` → <code>. */
+function renderRichText(text: string): ReactNode {
+  return text.split(/(\*\*[^*]+\*\*|`[^`]+`)/g).map((part, index) => {
+    if (part.startsWith('**') && part.endsWith('**')) {
+      return <strong key={`${String(index)}:${part}`}>{part.slice(2, -2)}</strong>
+    }
+    if (part.startsWith('`') && part.endsWith('`')) {
+      return <code key={`${String(index)}:${part}`}>{part.slice(1, -1)}</code>
+    }
+    return part
+  })
+}
+
 interface GettingStartedPageProps {
   params: Promise<{
     locale: string
@@ -34,7 +49,7 @@ export default async function GettingStartedPage({ params }: GettingStartedPageP
           <h2 className="docs-section__title">Overview</h2>
         </header>
         {page.body.map((paragraph) => (
-          <p key={paragraph}>{paragraph}</p>
+          <p key={paragraph}>{renderRichText(paragraph)}</p>
         ))}
       </section>
       <GettingStartedInteractive slug={slug} />
