@@ -98,6 +98,40 @@ const accentOptions = [
   { label: 'Red', value: 'red' },
 ] as const satisfies readonly Option<AccentScale>[]
 
+const customThemeSteps = {
+  profile: {
+    label: 'Profile',
+    title: 'Choose scales',
+    code: ['{', '  "accent": "teal",', '  "gray": "slate",', '  "roundness": "default"', '}'].join(
+      '\n',
+    ),
+  },
+  config: {
+    label: 'Config',
+    title: 'Register theme',
+    code: [
+      "import { defineTheme } from '@stalk-ui/preset/theme'",
+      '',
+      'themes: {',
+      '  brand: defineTheme({ accent: "teal", gray: "slate" }),',
+      '}',
+    ].join('\n'),
+  },
+  css: {
+    label: 'Static CSS',
+    title: 'Ship attribute CSS',
+    code: ['staticCss: {', '  themes: ["brand"],', '}'].join('\n'),
+  },
+} as const
+
+type CustomThemeStep = keyof typeof customThemeSteps
+
+const customThemeStepOptions = [
+  { label: 'Profile', value: 'profile' },
+  { label: 'Config', value: 'config' },
+  { label: 'Static CSS', value: 'css' },
+] as const satisfies readonly Option<CustomThemeStep>[]
+
 const typographyProfiles = {
   latin: {
     label: 'Latin',
@@ -157,18 +191,31 @@ export function GettingStartedInteractive({ slug }: GettingStartedInteractivePro
   const copy = sectionCopy[slug]
 
   return (
-    <section className="docs-section">
-      <header className="docs-section__header">
-        <h2 className="docs-section__title">{copy.title}</h2>
-        <p className="docs-section__hint">{copy.hint}</p>
-      </header>
-      {slug === 'installation' ? <InstallationBlock /> : null}
-      {slug === 'theming' ? <ThemingBlock /> : null}
-      {slug === 'customization' ? <CustomizationBlock /> : null}
-      {slug === 'registry' ? <RegistryBlock /> : null}
-      {slug === 'semantic-tokens' ? <SemanticTokensBlock /> : null}
-      {slug === 'typography' ? <TypographyBlock /> : null}
-    </section>
+    <>
+      <section className="docs-section">
+        <header className="docs-section__header">
+          <h2 className="docs-section__title">{copy.title}</h2>
+          <p className="docs-section__hint">{copy.hint}</p>
+        </header>
+        {slug === 'installation' ? <InstallationBlock /> : null}
+        {slug === 'theming' ? <ThemingBlock /> : null}
+        {slug === 'customization' ? <CustomizationBlock /> : null}
+        {slug === 'registry' ? <RegistryBlock /> : null}
+        {slug === 'semantic-tokens' ? <SemanticTokensBlock /> : null}
+        {slug === 'typography' ? <TypographyBlock /> : null}
+      </section>
+      {slug === 'customization' ? (
+        <section className="docs-section">
+          <header className="docs-section__header">
+            <h2 className="docs-section__title">Builder output</h2>
+            <p className="docs-section__hint">
+              See how the theme builder choices turn into profile, config, and static CSS work.
+            </p>
+          </header>
+          <BuilderOutputBlock />
+        </section>
+      ) : null}
+    </>
   )
 }
 
@@ -261,8 +308,7 @@ function CustomizationBlock() {
         </label>
       </div>
       <div className="docs-interactive__grid">
-        <div className="docs-interactive__preview">
-          <span className="docs-interactive__badge">Card</span>
+        <div className="docs-interactive__preview docs-interactive__card">
           <strong className="docs-interactive__card-title" style={{ color: solid }}>
             {title || 'Untitled'}
           </strong>
@@ -279,6 +325,34 @@ function CustomizationBlock() {
         </div>
         <Panel title="defineTheme">
           <CodeBlock code={code} />
+        </Panel>
+      </div>
+    </div>
+  )
+}
+
+function BuilderOutputBlock() {
+  const [step, setStep] = useState<CustomThemeStep>('profile')
+  const current = customThemeSteps[step]
+
+  return (
+    <div className="docs-interactive">
+      <SegmentedControl
+        label="Builder output step"
+        options={customThemeStepOptions}
+        value={step}
+        onChange={setStep}
+      />
+      <div className="docs-interactive__grid">
+        <Panel title={current.title}>
+          <CodeBlock code={current.code} />
+        </Panel>
+        <Panel title="Apply">
+          <div className="docs-interactive__preview" data-panda-theme="rainbow">
+            <span className="docs-interactive__badge">data-panda-theme</span>
+            <strong>Use the generated name as the theme attribute.</strong>
+            <code>{'data-panda-theme="brand"'}</code>
+          </div>
         </Panel>
       </div>
     </div>
