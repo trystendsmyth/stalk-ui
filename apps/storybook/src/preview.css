@@ -11,8 +11,12 @@ body {
   min-height: 100vh;
 }
 
+/* No page padding on <body>: Radix overlays (Select, Dialog, Popover, Dropdown, …)
+ * lock scroll via react-remove-scroll, which rewrites <body> padding when they open
+ * — that's what shifts the centered story. Storybook's per-layout gutter already
+ * lives on `#storybook-root` (a stable element the scroll-lock never touches), so
+ * dropping the redundant body padding removes the jump with no layout change. */
 body {
-  padding: 1rem;
   background-color: var(--colors-bg-canvas);
   color: var(--colors-fg-default);
 }
