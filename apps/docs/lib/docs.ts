@@ -95,6 +95,16 @@ export const gettingStartedPages = [
       'For multilingual apps, load a script-specific Noto Sans family first in the stack (Noto_Sans_Arabic, Noto_Sans_JP, etc.) and map locales to those loaders so only the glyphs you need are downloaded.',
     ],
   },
+  {
+    slug: 'recipe-overrides',
+    title: 'Recipe overrides & elevation',
+    description: 'Override a Stalk recipe in your panda.config, and use the elevation model.',
+    body: [
+      'Adjust any Stalk recipe from your own panda.config.ts with theme.extend. Slot recipes (Card, Select, Tabs, Table, …) extend under theme.extend.slotRecipes.<name>.<base|variants>; single-element recipes (Button, Badge, …) under theme.extend.recipes.<name>. For example, set theme.extend.recipes.button.defaultVariants to make outline/sm your app default — Stalk’s own internal components pin their variants explicitly, so they are unaffected.',
+      'Stalk’s elevation model is page = bg.canvas, surfaces = bg.default: bg.canvas is one step under bg.default so an elevated surface reads as raised. Set your page/background to bg.canvas and leave cards on the default bg.default and they pop automatically.',
+      'If your page background must be bg.default, use <Card variant="elevated">, which raises the card to bg.canvas and adds a shadow so it stays visible — rather than overriding the card recipe’s base background.',
+    ],
+  },
 ] satisfies GettingStartedPage[]
 
 const contentDirectory = join(process.cwd(), 'content/components')
