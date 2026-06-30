@@ -82,7 +82,6 @@ export const Open: Story = {
 // `scrollable` caps content to the available height and scrolls within (with
 // overscroll containment) — for tall panels like filter lists.
 export const Scrollable: Story = {
-  args: { defaultOpen: true },
   render: (args) => (
     <Popover.Root {...args}>
       <Popover.Trigger asChild>

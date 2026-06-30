@@ -2398,25 +2398,26 @@
 }
 
     .stalk-calendar__selected button {
-      color: var(--colors-accent-fg);
+      color: var(--colors-accent-contrast);
 }
 
     .stalk-calendar__selected button,.stalk-calendar__selected button:is(:hover, [data-hover]),.stalk-calendar__rangeStart button {
       background-color: var(--colors-accent-solid);
 }
 
-    .stalk-calendar__rangeStart button,.stalk-calendar__rangeMiddle button {
-      color: var(--colors-accent-fg);
+    .stalk-calendar__rangeStart button {
+      color: var(--colors-accent-contrast);
 }
 
     .stalk-calendar__rangeMiddle button {
       border-radius: var(--radii-none);
       background-color: var(--colors-accent-subtle);
+      color: var(--colors-accent-fg);
 }
 
     .stalk-calendar__rangeEnd button {
       background-color: var(--colors-accent-solid);
-      color: var(--colors-accent-fg);
+      color: var(--colors-accent-contrast);
 }
 
     .stalk-card__root {
@@ -3624,6 +3625,8 @@
 }
 
     .stalk-heatmap__cell:is(:focus-visible, [data-focus-visible]) {
+      position: relative;
+      z-index: 1;
       --ring-offset-shadow: var(--ring-inset,) 0 0 0 var(--ring-offset-width, 0rem) var(--ring-offset-color);
       --ring-shadow: var(--ring-inset,) 0 0 0 calc(0.1875rem + var(--ring-offset-width, 0rem)) var(--ring-color);
       box-shadow: var(--ring-offset-shadow),var(--ring-shadow),var(--base-shadow,0 0 #0000);
@@ -3641,19 +3644,26 @@
 }
 
     .stalk-heatmap__caption {
+      color: var(--colors-fg-muted);
+}
+
+    .stalk-heatmap__caption,.stalk-heatmap__readout {
       font-size: var(--font-sizes-sm);
+      text-align: start;
       margin-top: var(--spacing-4);
 }
 
-    .stalk-heatmap__caption,.stalk-heatmap__groupHeader {
-      color: var(--colors-fg-muted);
-      text-align: start;
+    .stalk-heatmap__readout {
+      color: var(--colors-fg-default);
+      font-weight: var(--font-weights-medium);
 }
 
     .stalk-heatmap__groupHeader {
       padding-inline: var(--spacing-4);
+      color: var(--colors-fg-muted);
       font-size: var(--font-sizes-xs);
       font-weight: var(--font-weights-semibold);
+      text-align: start;
       white-space: nowrap;
       padding-top: var(--spacing-12);
       padding-bottom: var(--spacing-4);

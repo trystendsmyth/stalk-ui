@@ -6,6 +6,8 @@ const meta = {
   title: 'Components/Navigation/Breadcrumb',
   component: Breadcrumb,
   tags: ['autodocs', 'stable'],
+  // Composed via children — no single controllable prop, so hide the empty controls.
+  parameters: { controls: { disable: true } },
 } satisfies Meta<typeof Breadcrumb>
 
 export default meta

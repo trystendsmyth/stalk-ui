@@ -1,6 +1,6 @@
 import { ArrowRight, Plus, Trash2 } from 'lucide-react'
 import { fn } from 'storybook/test'
-import { HStack } from 'styled-system/jsx'
+import { HStack, VStack } from 'styled-system/jsx'
 import { button as buttonRecipe } from 'styled-system/recipes'
 
 import { Button } from './button'
@@ -17,6 +17,7 @@ const meta = {
   args: {
     children: 'Button',
     disabled: false,
+    fullWidth: false,
     loading: false,
     loadingLabel: 'Loading',
     onClick: fn(),
@@ -28,6 +29,7 @@ const meta = {
     asChild: { table: { disable: true } },
     children: { control: 'text' },
     disabled: { control: 'boolean' },
+    fullWidth: { control: 'boolean' },
     loading: { control: 'boolean' },
     loadingLabel: { control: 'text' },
     onClick: { table: { disable: true } },
@@ -163,12 +165,26 @@ export const AsChild: Story = {
   ),
 }
 
+// The dashed box is the container; `fullWidth` makes the button span it (and it
+// re-fits when the container width changes), vs. the content-width default below.
 export const FullWidth: Story = {
-  args: { children: 'Continue', fullWidth: true },
   parameters: { controls: { disable: true } },
-  render: (args) => (
-    <div style={{ maxWidth: '20rem' }}>
-      <Button {...args} />
-    </div>
+  render: () => (
+    <VStack
+      alignItems="start"
+      borderColor="border.default"
+      borderRadius="lg"
+      borderStyle="dashed"
+      borderWidth="1px"
+      gap="12"
+      maxWidth="22rem"
+      p="16"
+    >
+      <Button fullWidth>Save changes</Button>
+      <Button fullWidth variant="outline">
+        Cancel
+      </Button>
+      <Button>Content-width (default)</Button>
+    </VStack>
   ),
 }

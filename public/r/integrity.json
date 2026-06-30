@@ -244,11 +244,11 @@
     },
     "heatmap": {
       "path": "/r/heatmap.json",
-      "sha256": "3ff55d7dc87c3512f349331356f0d416c24c4e9b001ace644eb1bbb87e743410"
+      "sha256": "44c33ee1274e8cad4bf6e5fd6fe8151c740c42fb981374784f098b4e8aa901c2"
     },
     "shadcn/heatmap": {
       "path": "/r/shadcn/heatmap.json",
-      "sha256": "091b83337d563b004722e07cd3e6c35fc20ae8b38d4b27aa6e3af13cd85cffa3"
+      "sha256": "bd9438459676a387533586d0473a6d92e0f9d779ef04368b0234aac9fbe26da1"
     },
     "hover-card": {
       "path": "/r/hover-card.json",

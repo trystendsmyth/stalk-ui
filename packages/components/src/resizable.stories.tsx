@@ -8,6 +8,8 @@ const meta: Meta<typeof ResizableRoot> = {
   title: 'Components/Layout/Resizable',
   component: ResizableRoot,
   tags: ['autodocs', 'stable'],
+  // Render-based stories demo each direction; the controls would not drive them.
+  parameters: { controls: { disable: true } },
   args: {
     direction: 'horizontal',
   },

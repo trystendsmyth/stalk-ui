@@ -14,6 +14,8 @@ const meta = {
   title: 'Components/Data Display/Chart',
   component: ChartContainer,
   tags: ['autodocs', 'stable'],
+  // `config` is a complex object and the chart is composed via children — hide controls.
+  parameters: { controls: { disable: true } },
   args: { config },
 } satisfies Meta<typeof ChartContainer>
 

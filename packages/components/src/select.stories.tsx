@@ -15,6 +15,7 @@ const onValueChange = fn()
 const SelectExample = ({
   'aria-label': ariaLabel = 'Status',
   disabled = false,
+  fullWidth = false,
   invalid = false,
   size = 'md',
 }: SelectTriggerProps) => {
@@ -27,7 +28,13 @@ const SelectExample = ({
         onValueChange(next)
       }}
     >
-      <Select.Trigger aria-label={ariaLabel} disabled={disabled} invalid={invalid} size={size}>
+      <Select.Trigger
+        aria-label={ariaLabel}
+        disabled={disabled}
+        fullWidth={fullWidth}
+        invalid={invalid}
+        size={size}
+      >
         <Select.Value placeholder="Choose a status" />
       </Select.Trigger>
       <Select.Content>
@@ -43,15 +50,23 @@ const meta = {
   title: 'Components/Forms/Select',
   component: Select.Trigger,
   tags: ['autodocs', 'stable'],
+  // Render each story in its own fixed-height iframe in autodocs so opening a
+  // (portalled, scroll-locking) dropdown can't reflow the shared docs page. The
+  // global `layout: 'centered'` keeps the content centered inside that iframe.
+  parameters: {
+    docs: { story: { iframeHeight: '420px', inline: false } },
+  },
   args: {
     'aria-label': 'Status',
     disabled: false,
+    fullWidth: false,
     invalid: false,
     size: 'md',
   },
   argTypes: {
     'aria-label': { control: 'text' },
     disabled: { control: 'boolean' },
+    fullWidth: { control: 'boolean' },
     invalid: { control: 'boolean' },
     size: { control: 'select', options: SIZES },
     asChild: { table: { disable: true } },

@@ -1,6 +1,6 @@
 'use client'
 
-import { createContext, forwardRef, useContext, useMemo } from 'react'
+import { createContext, forwardRef, useContext, useMemo, useState } from 'react'
 import { css, cx } from 'styled-system/css'
 import { heatmap as heatmapRecipe } from 'styled-system/recipes'
 
@@ -126,6 +126,11 @@ const HeatMapBase = /* @__PURE__ */ forwardRef<HTMLDivElement, HeatMapProps>(fun
     values.length > 0 ? Math.max(...values) : 0,
   ]
 
+  // When inspectable, the focused cell's value surfaces in a visible readout so a
+  // sighted keyboard user can read it (the value is otherwise only in the cell's
+  // aria-label / hover title).
+  const [inspected, setInspected] = useState<ReactNode>(null)
+
   return (
     <div ref={ref} className={cx(styles.root, className)} {...props}>
       <table className={styles.table} aria-label={ariaLabel}>
@@ -163,6 +168,13 @@ const HeatMapBase = /* @__PURE__ */ forwardRef<HTMLDivElement, HeatMapProps>(fun
                     title={accessible}
                     data-empty={empty ? '' : undefined}
                     tabIndex={inspectable ? 0 : undefined}
+                    onFocus={
+                      inspectable
+                        ? () => {
+                            setInspected(text)
+                          }
+                        : undefined
+                    }
                     {...tone}
                   />
                 )
@@ -190,6 +202,9 @@ const HeatMapBase = /* @__PURE__ */ forwardRef<HTMLDivElement, HeatMapProps>(fun
               ))}
           <span>{scale === 'diverging' ? 'High' : 'More'}</span>
         </div>
+      ) : null}
+      {inspectable ? (
+        <output className={styles.readout}>{inspected ?? 'Focus a cell to read its value.'}</output>
       ) : null}
     </div>
   )

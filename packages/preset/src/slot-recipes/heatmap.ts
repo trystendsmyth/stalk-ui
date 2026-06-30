@@ -20,6 +20,7 @@ export const heatmap = {
     'cell',
     'legend',
     'caption',
+    'readout',
     'group',
     'groupHeader',
     'groupAside',
@@ -101,8 +102,11 @@ export const heatmap = {
         textAlign: 'start',
         verticalAlign: 'top',
       },
-      // Keyboard focus ring on inspectable cells (component sets tabIndex).
+      // Keyboard focus ring on inspectable cells (component sets tabIndex). The
+      // cell is lifted so the box-shadow ring isn't painted over by adjacent cells.
       _focusVisible: {
+        position: 'relative',
+        zIndex: 1,
         focusRingWidth: 'base',
         focusRingColor: 'border.focus',
         focusRingOffsetWidth: '1',
@@ -119,6 +123,14 @@ export const heatmap = {
     caption: {
       color: 'fg.muted',
       fontSize: 'sm',
+      mt: '4',
+      textAlign: 'start',
+    },
+    // Visible value of the focused cell when `inspectable` (keyboard inspection).
+    readout: {
+      color: 'fg.default',
+      fontSize: 'sm',
+      fontWeight: 'medium',
       mt: '4',
       textAlign: 'start',
     },
