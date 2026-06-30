@@ -38,13 +38,13 @@ export default async function GettingStartedPage({ params }: GettingStartedPageP
         ))}
       </section>
       <GettingStartedInteractive slug={slug} />
-      {slug === 'custom-themes' ? (
+      {slug === 'customization' ? (
         <section className="docs-section">
           <header className="docs-section__header">
             <h2 className="docs-section__title">Theme builder</h2>
           </header>
           <p>
-            Pick scales below to design a completely custom theme. The preview retheme live in both
+            Pick scales below to design a completely custom theme. The preview rethemes live in both
             color modes; copy the generated <code>defineTheme</code> config straight into{' '}
             <code>panda.config.ts</code>, or the portable JSON profile.
           </p>

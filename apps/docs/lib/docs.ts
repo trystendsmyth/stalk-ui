@@ -56,15 +56,6 @@ export const gettingStartedPages = [
     ],
   },
   {
-    slug: 'custom-themes',
-    title: 'Custom Themes',
-    description: 'Extend the preset with your own PandaCSS theme definitions.',
-    body: [
-      'Keep presets: ["@stalk-ui/preset"] in panda.config.ts, then add custom themes through PandaCSS theme configuration.',
-      'Apply custom themes with the same data-panda-theme attribute used by the built-in rainbow theme.',
-    ],
-  },
-  {
     slug: 'registry',
     title: 'Registry',
     description: 'Install source components from the native or shadcn-compatible registry.',
@@ -96,13 +87,14 @@ export const gettingStartedPages = [
     ],
   },
   {
-    slug: 'recipe-overrides',
-    title: 'Recipe overrides & elevation',
-    description: 'Override a Stalk recipe in your panda.config, and use the elevation model.',
+    slug: 'customization',
+    title: 'Customization',
+    description: 'Theme, override recipes, and tune surfaces — without forking component source.',
     body: [
-      'Adjust any Stalk recipe from your own panda.config.ts with theme.extend. Slot recipes (Card, Select, Tabs, Table, …) extend under theme.extend.slotRecipes.<name>.<base|variants>; single-element recipes (Button, Badge, …) under theme.extend.recipes.<name>. For example, set theme.extend.recipes.button.defaultVariants to make outline/sm your app default — Stalk’s own internal components pin their variants explicitly, so they are unaffected.',
-      'Stalk’s elevation model is page = bg.canvas, surfaces = bg.default: bg.canvas is one step under bg.default so an elevated surface reads as raised. Set your page/background to bg.canvas and leave cards on the default bg.default and they pop automatically.',
-      'If your page background must be bg.default, use <Card variant="elevated">, which raises the card to bg.canvas and adds a shadow so it stays visible — rather than overriding the card recipe’s base background.',
+      'Customize Stalk at three levels: full themes via defineTheme, recipe overrides in your panda.config, and per-instance props or tokens. Try the interactive card and theme builder below.',
+      'Themes: @stalk-ui/preset/theme exports defineTheme, which generates the entire semantic surface (background, foreground, border, accent, status, and highlight) from a couple of Radix scale names. Register the result under themes in panda.config.ts, add it to staticCss.themes, and apply it with the data-panda-theme attribute.',
+      'Recipe overrides: adjust any Stalk recipe from your own panda.config.ts with theme.extend. Slot recipes (Card, Select, Tabs, Table, …) extend under theme.extend.slotRecipes.<name>.<base|variants>; single-element recipes (Button, Badge, …) under theme.extend.recipes.<name>. For example, set theme.extend.recipes.button.defaultVariants to make outline/sm your app default — Stalk’s internal components pin their variants explicitly, so they are unaffected.',
+      'Elevation: the model is page = bg.canvas, surfaces = bg.default, where bg.canvas sits one step under bg.default so raised surfaces read as elevated. Set your page background to bg.canvas and cards on the default bg.default pop automatically; if your page must stay bg.default, reach for <Card variant="elevated"> instead of overriding the card recipe’s base background.',
     ],
   },
 ] satisfies GettingStartedPage[]

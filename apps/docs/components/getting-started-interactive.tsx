@@ -28,9 +28,9 @@ const sectionCopy = {
     title: 'Theme switcher',
     hint: 'Preview the built-in theme attribute before applying it to an app or subtree.',
   },
-  'custom-themes': {
-    title: 'Builder output',
-    hint: 'See how the theme builder choices turn into profile, config, and static CSS work.',
+  customization: {
+    title: 'Customize a card',
+    hint: 'Pick an accent and edit the title — the card rethemes live, and the same accent flows straight into defineTheme.',
   },
   registry: {
     title: 'Registry route',
@@ -88,39 +88,15 @@ const registryOptions = [
   { label: 'shadcn', value: 'shadcn' },
 ] as const satisfies readonly Option<RegistryMode>[]
 
-const customThemeSteps = {
-  profile: {
-    label: 'Profile',
-    title: 'Choose scales',
-    code: ['{', '  "accent": "teal",', '  "gray": "slate",', '  "roundness": "default"', '}'].join(
-      '\n',
-    ),
-  },
-  config: {
-    label: 'Config',
-    title: 'Register theme',
-    code: [
-      "import { defineTheme } from '@stalk-ui/preset/theme'",
-      '',
-      'themes: {',
-      '  brand: defineTheme({ accent: "teal", gray: "slate" }),',
-      '}',
-    ].join('\n'),
-  },
-  css: {
-    label: 'Static CSS',
-    title: 'Ship attribute CSS',
-    code: ['staticCss: {', '  themes: ["brand"],', '}'].join('\n'),
-  },
-} as const
+type AccentScale = 'teal' | 'blue' | 'violet' | 'emerald' | 'red'
 
-type CustomThemeStep = keyof typeof customThemeSteps
-
-const customThemeStepOptions = [
-  { label: 'Profile', value: 'profile' },
-  { label: 'Config', value: 'config' },
-  { label: 'Static CSS', value: 'css' },
-] as const satisfies readonly Option<CustomThemeStep>[]
+const accentOptions = [
+  { label: 'Teal', value: 'teal' },
+  { label: 'Blue', value: 'blue' },
+  { label: 'Violet', value: 'violet' },
+  { label: 'Emerald', value: 'emerald' },
+  { label: 'Red', value: 'red' },
+] as const satisfies readonly Option<AccentScale>[]
 
 const typographyProfiles = {
   latin: {
@@ -188,7 +164,7 @@ export function GettingStartedInteractive({ slug }: GettingStartedInteractivePro
       </header>
       {slug === 'installation' ? <InstallationBlock /> : null}
       {slug === 'theming' ? <ThemingBlock /> : null}
-      {slug === 'custom-themes' ? <CustomThemesBlock /> : null}
+      {slug === 'customization' ? <CustomizationBlock /> : null}
       {slug === 'registry' ? <RegistryBlock /> : null}
       {slug === 'semantic-tokens' ? <SemanticTokensBlock /> : null}
       {slug === 'typography' ? <TypographyBlock /> : null}
@@ -248,28 +224,61 @@ function ThemingBlock() {
   )
 }
 
-function CustomThemesBlock() {
-  const [step, setStep] = useState<CustomThemeStep>('profile')
-  const current = customThemeSteps[step]
+function CustomizationBlock() {
+  const [accent, setAccent] = useState<AccentScale>('teal')
+  const [title, setTitle] = useState('Project settings')
+
+  // Step 9 is the saturated, near-mode-stable step, so the title/button read in
+  // both color modes from the raw scale (real apps set this via defineTheme).
+  const solid = `var(--colors-${accent}-9)`
+  const code = [
+    "import { defineTheme } from '@stalk-ui/preset/theme'",
+    '',
+    'themes: {',
+    `  brand: defineTheme({ accent: '${accent}' }),`,
+    '}',
+  ].join('\n')
 
   return (
     <div className="docs-interactive">
-      <SegmentedControl
-        label="Builder output step"
-        options={customThemeStepOptions}
-        value={step}
-        onChange={setStep}
-      />
+      <div className="docs-interactive__controls">
+        <SegmentedControl
+          label="Accent scale"
+          options={accentOptions}
+          value={accent}
+          onChange={setAccent}
+        />
+        <label className="docs-interactive__field">
+          <span>Card title</span>
+          <input
+            className="docs-interactive__input"
+            maxLength={40}
+            value={title}
+            onChange={(event) => {
+              setTitle(event.target.value)
+            }}
+          />
+        </label>
+      </div>
       <div className="docs-interactive__grid">
-        <Panel title={current.title}>
-          <CodeBlock code={current.code} />
-        </Panel>
-        <Panel title="Apply">
-          <div className="docs-interactive__preview" data-panda-theme="rainbow">
-            <span className="docs-interactive__badge">data-panda-theme</span>
-            <strong>Use the generated name as the theme attribute.</strong>
-            <code>{'data-panda-theme="brand"'}</code>
+        <div className="docs-interactive__preview">
+          <span className="docs-interactive__badge">Card</span>
+          <strong className="docs-interactive__card-title" style={{ color: solid }}>
+            {title || 'Untitled'}
+          </strong>
+          <p>Group related content and actions on a single bordered surface.</p>
+          <div className="docs-interactive__chips">
+            <span
+              className="docs-interactive__chip"
+              style={{ background: solid, borderColor: solid, color: 'var(--colors-gray-1)' }}
+            >
+              Save
+            </span>
+            <span className="docs-interactive__chip">Cancel</span>
           </div>
+        </div>
+        <Panel title="defineTheme">
+          <CodeBlock code={code} />
         </Panel>
       </div>
     </div>
