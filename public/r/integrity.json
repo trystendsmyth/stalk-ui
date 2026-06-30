@@ -148,11 +148,11 @@
     },
     "command": {
       "path": "/r/command.json",
-      "sha256": "5db345b96cdc002ec14609941621cf5f512c879eaefc0daf1db33a6057db8372"
+      "sha256": "0e6e3c3d3442af89dbd4f5b7356d45db5a2fd4cb7ad2f7573718b2608fde3490"
     },
     "shadcn/command": {
       "path": "/r/shadcn/command.json",
-      "sha256": "fac118de67032d8e88961d894877f18b57fba440c18ea5156eaaeafbce1ea3e1"
+      "sha256": "3fd1cb3315b77a61f697d00593a2863b5dcc8ed0939af9979707ee325f712c98"
     },
     "context-menu": {
       "path": "/r/context-menu.json",
@@ -388,11 +388,11 @@
     },
     "scroll-area": {
       "path": "/r/scroll-area.json",
-      "sha256": "6b58be67d6fcaabaf0ae51ec120b5a4b5b912d9c31390e7ff68b33c806eb08de"
+      "sha256": "cb2a0d29562161a4147919f0c1a09e1e591ec60846cb241e61f1539925f8060e"
     },
     "shadcn/scroll-area": {
       "path": "/r/shadcn/scroll-area.json",
-      "sha256": "a4fc6e2f4149df270568a71780ee15cf1e1e6ebd993de1410af1d52ac27c253f"
+      "sha256": "e05663d38e252967ef4041029a8a7d8d0630ca03567ea97816b6c1cb98084924"
     },
     "search-input": {
       "path": "/r/search-input.json",
@@ -444,11 +444,11 @@
     },
     "slider": {
       "path": "/r/slider.json",
-      "sha256": "5e1af73b7d86d472fee9e15439ebf1b1a1370eb77d4ab3d2f7f532f64b76fb6b"
+      "sha256": "d3a49156d9488ea7e1704cd9d18d721e6cd80a9f55a5cccf03c4c8edd8113d15"
     },
     "shadcn/slider": {
       "path": "/r/shadcn/slider.json",
-      "sha256": "30da01750a0d1c23442101c55589cec8e80f10bb71293468e7e735b3d3ce53f8"
+      "sha256": "d1944689c29ddf96f9a668c3f47e8103dea7458e3c0961e5fb63e55f01f1091e"
     },
     "sparkline": {
       "path": "/r/sparkline.json",
@@ -476,11 +476,11 @@
     },
     "table": {
       "path": "/r/table.json",
-      "sha256": "23c5f48e82f8405f0efcbd1219b4a49e8489660f9129b52a7677dca129b9fac4"
+      "sha256": "12bc41c90d8aad37af2208a92089c377c5efb09fb460b7ff46705fb43a158c93"
     },
     "shadcn/table": {
       "path": "/r/shadcn/table.json",
-      "sha256": "8d5b9cec2b1fafd2324cff8406b02388169ba8c9453c61b38ad6a58eda6942b8"
+      "sha256": "aa5d47b864bbe8aecf65e70ee7146452c5bea36cb1110d1a46b50c1161a30dd5"
     },
     "tabs": {
       "path": "/r/tabs.json",
