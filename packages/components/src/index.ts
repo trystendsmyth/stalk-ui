@@ -408,13 +408,15 @@ export {
   TableBody,
   TableCaption,
   TableCell,
+  TableExpandableRow,
+  TableExpandTrigger,
   TableFooter,
   TableHead,
   TableHeader,
   TableRoot,
   TableRow,
 } from './table'
-export type { TableRootProps } from './table'
+export type { TableExpandableRowProps, TableExpandTriggerProps, TableRootProps } from './table'
 export { Tabs, TabsContent, TabsList, TabsRoot, TabsTrigger } from './tabs'
 export type {
   TabsContentProps,
