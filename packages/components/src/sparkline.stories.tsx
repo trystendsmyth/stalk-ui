@@ -33,3 +33,20 @@ export const Tones: Story = {
     </div>
   ),
 }
+
+export const ReferenceLine: Story = {
+  args: { area: true, height: 48, reference: 8, showLastPoint: true, width: 160 },
+}
+
+export const ReferenceBand: Story = {
+  args: { height: 48, reference: [6, 10], width: 160 },
+}
+
+export const MultiSeries: Story = {
+  args: {
+    'aria-label': 'Actual vs target, last 12 weeks',
+    height: 48,
+    series: [[6, 5, 7, 6, 8, 7, 9, 8, 10, 9, 11, 10]],
+    width: 160,
+  },
+}

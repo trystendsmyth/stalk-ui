@@ -162,3 +162,13 @@ export const AsChild: Story = {
     </Button>
   ),
 }
+
+export const FullWidth: Story = {
+  args: { children: 'Continue', fullWidth: true },
+  parameters: { controls: { disable: true } },
+  render: (args) => (
+    <div style={{ maxWidth: '20rem' }}>
+      <Button {...args} />
+    </div>
+  ),
+}

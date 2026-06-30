@@ -5,18 +5,23 @@ import { Card } from './card'
 
 import type { Meta, StoryObj } from '@storybook/react-vite'
 
-const { variant: VARIANTS } = cardRecipe.variantMap
+const { size: SIZES, variant: VARIANTS } = cardRecipe.variantMap
 
 const meta = {
   title: 'Components/Data Display/Card',
   component: Card.Root,
   tags: ['autodocs', 'stable'],
   args: {
+    size: 'md',
     variant: 'outline',
   },
   argTypes: {
     children: { table: { disable: true } },
     className: { table: { disable: true } },
+    size: {
+      control: 'inline-radio',
+      options: SIZES,
+    },
     variant: {
       control: 'inline-radio',
       options: VARIANTS,
@@ -66,6 +71,19 @@ export const WithAction: Story = {
         </Card.Action>
       </Card.Header>
       <Card.Content>Your plan renews on the 1st of each month.</Card.Content>
+    </Card.Root>
+  ),
+}
+
+// size="sm" tightens gap/padding for compact metric tiles.
+export const Compact: Story = {
+  args: { size: 'sm', variant: 'elevated' },
+  render: (args) => (
+    <Card.Root {...args} style={{ maxWidth: '12rem' }}>
+      <Card.Header>
+        <Card.Description>Active users</Card.Description>
+        <Card.Title>12,480</Card.Title>
+      </Card.Header>
     </Card.Root>
   ),
 }

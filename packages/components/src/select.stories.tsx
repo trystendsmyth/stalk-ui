@@ -3,7 +3,7 @@ import { fn } from 'storybook/test'
 import { Box, VStack } from 'styled-system/jsx'
 import { select as selectRecipe } from 'styled-system/recipes'
 
-import { Select } from './select'
+import { Select, SelectField } from './select'
 
 import type { SelectTriggerProps } from './select'
 import type { Meta, StoryObj } from '@storybook/react-vite'
@@ -118,5 +118,36 @@ export const Grouped: Story = {
         </Select.Content>
       </Select.Root>
     </Box>
+  ),
+}
+
+// SelectField: the convenience over the compound for the value/onChange/options
+// case. The empty-value option is selectable via the built-in sentinel.
+export const Field: Story = {
+  parameters: { controls: { disable: true } },
+  render: () => (
+    <VStack alignItems="start" gap="12" maxWidth="320">
+      <SelectField
+        aria-label="Status"
+        onValueChange={fn()}
+        options={[
+          { label: 'Any status', value: '' },
+          { label: 'Draft', value: 'draft' },
+          { label: 'Published', value: 'published' },
+          { label: 'Archived', value: 'archived' },
+        ]}
+        placeholder="Choose a status"
+      />
+      <SelectField
+        aria-label="Status, full width"
+        fullWidth
+        onValueChange={fn()}
+        options={[
+          { label: 'Draft', value: 'draft' },
+          { label: 'Published', value: 'published' },
+        ]}
+        placeholder="Full-width trigger"
+      />
+    </VStack>
   ),
 }

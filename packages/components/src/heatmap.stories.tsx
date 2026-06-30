@@ -1,3 +1,5 @@
+import { fn } from 'storybook/test'
+
 import { HeatMap } from './heatmap'
 
 import type { Meta, StoryObj } from '@storybook/react-vite'
@@ -68,4 +70,47 @@ export const Inspectable: Story = {
     inspectable: true,
     caption: 'Cells are keyboard-focusable — tab through to inspect each value.',
   },
+}
+
+// Composable HeatMap.* — labeled sections, in-cell content, status-tone fills, and
+// click-to-drill cells (each cell is a focusable button). Color here comes from a
+// `tone` (a saturated `vivid` fill); pass `value` + a Root `domain` for scale color.
+export const DataGrid: Story = {
+  // Placeholder args satisfy the simple-HeatMap meta type; the render uses HeatMap.*.
+  args: { cell: () => null, columns: [], rows: [] },
+  parameters: { controls: { disable: true } },
+  render: () => (
+    <HeatMap.Root aria-label="Service availability by window" columns={['1h', '24h', '7d']}>
+      <HeatMap.Group aside={<span>witness ok</span>} label="us-east">
+        <HeatMap.Row header="api">
+          <HeatMap.Cell label="api, 1h: 99.9%" onClick={fn()} tone="success">
+            <HeatMap.CellValue>99.9%</HeatMap.CellValue>
+            <HeatMap.CellMeta>0 err</HeatMap.CellMeta>
+          </HeatMap.Cell>
+          <HeatMap.Cell label="api, 24h: 99.4%" onClick={fn()} tone="success">
+            <HeatMap.CellValue>99.4%</HeatMap.CellValue>
+            <HeatMap.CellMeta>2 err</HeatMap.CellMeta>
+          </HeatMap.Cell>
+          <HeatMap.Cell label="api, 7d: 97.1%" onClick={fn()} tone="warning">
+            <HeatMap.CellValue>97.1%</HeatMap.CellValue>
+            <HeatMap.CellMeta>18 err</HeatMap.CellMeta>
+          </HeatMap.Cell>
+        </HeatMap.Row>
+        <HeatMap.Row header="web">
+          <HeatMap.Cell label="web, 1h: 99.2%" onClick={fn()} tone="success">
+            <HeatMap.CellValue>99.2%</HeatMap.CellValue>
+            <HeatMap.CellMeta>1 err</HeatMap.CellMeta>
+          </HeatMap.Cell>
+          <HeatMap.Cell label="web, 24h: 94.0%" onClick={fn()} tone="warning">
+            <HeatMap.CellValue>94.0%</HeatMap.CellValue>
+            <HeatMap.CellMeta>40 err</HeatMap.CellMeta>
+          </HeatMap.Cell>
+          <HeatMap.Cell label="web, 7d: 88.5%" onClick={fn()} tone="danger">
+            <HeatMap.CellValue>88.5%</HeatMap.CellValue>
+            <HeatMap.CellMeta>210 err</HeatMap.CellMeta>
+          </HeatMap.Cell>
+        </HeatMap.Row>
+      </HeatMap.Group>
+    </HeatMap.Root>
+  ),
 }

@@ -108,3 +108,65 @@ export const StickyHeaderAndPinnedColumn: Story = {
     </Table.Root>
   ),
 }
+
+export const ExpandableRows: Story = {
+  render: () => (
+    <Table.Root>
+      <Table.Header>
+        <Table.Row>
+          <Table.Head scope="col" />
+          <Table.Head scope="col">Invoice</Table.Head>
+          <Table.Head scope="col">Status</Table.Head>
+          <Table.Head scope="col">Amount</Table.Head>
+        </Table.Row>
+      </Table.Header>
+      <Table.Body>
+        {invoices.map((row) => (
+          <Table.ExpandableRow
+            key={row.invoice}
+            colSpan={4}
+            detail={`${row.invoice} — settled via ${row.method}.`}
+          >
+            <Table.Cell>
+              <Table.ExpandTrigger label={`Toggle ${row.invoice} details`} />
+            </Table.Cell>
+            <Table.Cell>{row.invoice}</Table.Cell>
+            <Table.Cell>
+              <Badge tone={row.status === 'Paid' ? 'success' : 'warning'} variant="subtle">
+                {row.status}
+              </Badge>
+            </Table.Cell>
+            <Table.Cell>{row.amount}</Table.Cell>
+          </Table.ExpandableRow>
+        ))}
+      </Table.Body>
+    </Table.Root>
+  ),
+}
+
+export const StickyFooter: Story = {
+  render: () => (
+    <Table.Root containerProps={{ style: { maxHeight: 180 } }} stickyFooter>
+      <Table.Header>
+        <Table.Row>
+          <Table.Head scope="col">Member</Table.Head>
+          <Table.Head scope="col">Commits</Table.Head>
+        </Table.Row>
+      </Table.Header>
+      <Table.Body>
+        {Array.from({ length: 12 }, (_, i) => (
+          <Table.Row key={i}>
+            <Table.Cell>Member {i + 1}</Table.Cell>
+            <Table.Cell>{(i + 1) * 7}</Table.Cell>
+          </Table.Row>
+        ))}
+      </Table.Body>
+      <Table.Footer>
+        <Table.Row>
+          <Table.Cell>Total</Table.Cell>
+          <Table.Cell>546</Table.Cell>
+        </Table.Row>
+      </Table.Footer>
+    </Table.Root>
+  ),
+}

@@ -107,6 +107,20 @@ export const Pills: Story = {
   ),
 }
 
+// Segmented now honors `tone` (branded indicator) and is content-width by default.
+export const SegmentedTones: Story = {
+  parameters: { controls: { disable: true } },
+  render: () => (
+    <VStack alignItems="start" gap="16">
+      {(['accent', 'success', 'danger'] as const).map((tone) => (
+        <TabsRoot key={tone} defaultValue="overview" tone={tone} variant="segmented">
+          <Demo />
+        </TabsRoot>
+      ))}
+    </VStack>
+  ),
+}
+
 export const Sizes: Story = {
   parameters: { controls: { disable: true } },
   render: () => (
