@@ -23,7 +23,9 @@ export default async function DocsIndexPage({ params }: DocsIndexPageProps) {
             href={`/${locale}/docs/getting-started/${page.slug}`}
             key={page.slug}
           >
-            <span>{page.title}</span>
+            <span className={page.slug === 'customization' ? 'doc-card__title--accent' : undefined}>
+              {page.title}
+            </span>
             <p>{page.description}</p>
           </a>
         ))}

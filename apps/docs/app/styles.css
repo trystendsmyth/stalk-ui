@@ -158,6 +158,12 @@ nav a {
   }
 }
 
+/* Eyebrow → title → lede rhythm so large titles never collide with the lede. */
+.page-heading {
+  display: grid;
+  gap: 0.5rem;
+}
+
 .page-heading h1,
 .article h1 {
   max-width: 20ch;
@@ -226,6 +232,10 @@ nav a {
   font-weight: 700;
   letter-spacing: -0.01em;
   color: var(--colors-fg-default);
+}
+
+.doc-card span.doc-card__title--accent {
+  color: var(--colors-accent-vivid);
 }
 
 .doc-card p,
@@ -423,11 +433,12 @@ td {
  * Examples, Props, Variants, Registry, and similar groupings.
  */
 
+/* Spacing between sections comes from the .article / .content-grid grid gap
+ * (1.5rem); the section itself adds no margin so the rhythm stays consistent. */
 .docs-section {
   display: grid;
   gap: 1rem;
   padding: 1.5rem;
-  margin-block-start: 1.5rem;
   border: 1px solid var(--colors-border-muted);
   border-radius: 0.5rem;
   background: var(--colors-bg-subtle);
