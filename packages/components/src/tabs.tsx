@@ -70,15 +70,10 @@ export const TabsRoot = /* @__PURE__ */ forwardRef<
 
 export type TabsListProps = ComponentPropsWithoutRef<typeof TabsPrimitive.List>
 
-/** Drives the sliding indicator. Reads the active trigger's position on every state
- *  change (via MutationObserver, scoped to `data-state` attribute mutations) and on
- *  resize, then writes inline `transform`/`width`/`height` to the indicator element.
- *  Only transform/size are animated → all on the compositor thread, no layout reflow.
- *
- *  Variant determines whether the indicator hugs one axis (line) or covers the full
- *  trigger box (segmented, pills). For the line variant the orthogonal dimension is
- *  pinned by CSS (`height: 2px` for horizontal, `width: 2px` for vertical), so we
- *  intentionally leave that style empty here to defer to the recipe. */
+/** Drives the sliding indicator: on each active-tab change (MutationObserver on
+ *  `data-state`) or resize, writes inline transform/size to it — compositor only, no
+ *  reflow. The `line` variant pins its thin axis via CSS, so that dimension is left
+ *  empty here to defer to the recipe. */
 const useIndicator = (listRef: React.RefObject<HTMLDivElement | null>, variant: TabsVariant) => {
   const indicatorRef = useRef<HTMLSpanElement>(null)
 

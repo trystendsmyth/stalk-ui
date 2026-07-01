@@ -28,9 +28,12 @@ const meta = {
   component: HeatMap,
   tags: ['autodocs', 'stable'],
   argTypes: {
+    // Data/render props + the [min,max] domain tuple aren't editable as controls.
     cell: { table: { disable: true } },
     rows: { table: { disable: true } },
     columns: { table: { disable: true } },
+    domain: { table: { disable: true } },
+    formatValue: { table: { disable: true } },
   },
 } satisfies Meta<typeof HeatMap>
 

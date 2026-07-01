@@ -1,3 +1,4 @@
+import { fn } from 'storybook/test'
 import { VStack } from 'styled-system/jsx'
 
 import { NumberInput } from './number-input'
@@ -11,16 +12,22 @@ const meta = {
   args: {
     'aria-label': 'Quantity',
     defaultValue: 1,
+    onValueChange: fn(),
   },
   argTypes: {
     layout: { control: 'inline-radio', options: ['stacked', 'split'] },
     size: { control: 'inline-radio', options: ['sm', 'md', 'lg'] },
+    defaultValue: { control: 'number' },
     step: { control: 'number' },
     min: { control: 'number' },
     max: { control: 'number' },
     hideStepper: { control: 'boolean' },
     invalid: { control: 'boolean' },
     disabled: { control: 'boolean' },
+    // Controlled value + Intl options object aren't editable as controls.
+    value: { table: { disable: true } },
+    formatOptions: { table: { disable: true } },
+    className: { table: { disable: true } },
   },
   parameters: {
     docs: {

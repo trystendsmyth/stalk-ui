@@ -27,6 +27,7 @@ const meta = {
     locale: { control: 'text' },
     onChange: { table: { disable: true } },
     size: { control: 'inline-radio', options: ['sm', 'md', 'lg'] },
+    value: { table: { disable: true } },
   },
   render: (args) => {
     const [date, setDate] = useState<Date>()
