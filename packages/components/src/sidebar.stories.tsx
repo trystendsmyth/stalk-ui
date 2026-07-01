@@ -1,5 +1,6 @@
 import { FileText, Home, Inbox, Settings } from 'lucide-react'
 import { useState } from 'react'
+import { fn } from 'storybook/test'
 import { Box } from 'styled-system/jsx'
 
 import { Sidebar } from './sidebar'
@@ -39,7 +40,7 @@ const NavSidebar = () => {
   const current = NAV_ITEMS.find((item) => item.key === active)
 
   return (
-    <Sidebar.Provider>
+    <Sidebar.Provider onOpenChange={fn()}>
       <Sidebar>
         <Sidebar.Header>
           <Sidebar.Trigger />

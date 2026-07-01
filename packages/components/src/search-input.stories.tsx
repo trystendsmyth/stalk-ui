@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { fn } from 'storybook/test'
 import { VStack } from 'styled-system/jsx'
 
 import { SearchInput } from './search-input'
@@ -11,13 +12,17 @@ const meta = {
   tags: ['autodocs', 'stable'],
   args: {
     'aria-label': 'Search',
+    onValueChange: fn(),
     placeholder: 'Search…',
   },
   argTypes: {
     size: { control: 'inline-radio', options: ['sm', 'md', 'lg'] },
+    align: { control: 'inline-radio', options: ['start', 'center', 'end'] },
     invalid: { control: 'boolean' },
     disabled: { control: 'boolean' },
     debounce: { control: 'number' },
+    className: { table: { disable: true } },
+    rootProps: { table: { disable: true } },
   },
   parameters: {
     docs: {

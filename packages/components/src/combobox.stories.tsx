@@ -37,6 +37,7 @@ const meta = {
     placeholder: { control: 'text' },
     searchPlaceholder: { control: 'text' },
     size: { control: 'inline-radio', options: ['sm', 'md', 'lg'] },
+    value: { table: { disable: true } },
   },
   render: (args) => {
     const [value, setValue] = useState<string>()

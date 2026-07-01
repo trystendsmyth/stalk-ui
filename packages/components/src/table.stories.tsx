@@ -1,9 +1,12 @@
+import { fn } from 'storybook/test'
 import { VisuallyHidden } from 'styled-system/jsx'
 
 import { Badge } from './badge'
 import { Table } from './table'
 
 import type { Meta, StoryObj } from '@storybook/react-vite'
+
+const onExpandChange = fn()
 
 const meta = {
   title: 'Components/Data Display/Table',
@@ -13,6 +16,10 @@ const meta = {
     children: { table: { disable: true } },
     className: { table: { disable: true } },
     containerProps: { table: { disable: true } },
+    // Composition component; sticky modes need a max-height container, so they're
+    // shown in dedicated stories rather than as no-op controls.
+    stickyHeader: { table: { disable: true } },
+    stickyFooter: { table: { disable: true } },
   },
   parameters: { controls: { disable: true } },
 } satisfies Meta<typeof Table.Root>
@@ -130,6 +137,7 @@ export const ExpandableRows: Story = {
             key={row.invoice}
             colSpan={4}
             detail={`${row.invoice} — settled via ${row.method}.`}
+            onOpenChange={onExpandChange}
           >
             <Table.Cell>
               <Table.ExpandTrigger label={`Toggle ${row.invoice} details`} />

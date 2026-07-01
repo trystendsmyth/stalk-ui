@@ -484,11 +484,11 @@
     },
     "tabs": {
       "path": "/r/tabs.json",
-      "sha256": "204b75bbaccb78f4b414e2a962dea5c58718c101fe89cb6aef6a0648846422de"
+      "sha256": "cbd283b47c29020efa8f096c8da23eb872d46c2abbdef7605f6d047589710691"
     },
     "shadcn/tabs": {
       "path": "/r/shadcn/tabs.json",
-      "sha256": "228290b1ea376099f6435290c21241e29a0bc3af16b02cdd34b582fcb26c7ee8"
+      "sha256": "73dbe5b798e5b92cf0d86ba748ccb3846b45586c00cc1702f477a6e0d283a0e4"
     },
     "tag": {
       "path": "/r/tag.json",

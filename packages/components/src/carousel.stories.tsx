@@ -10,8 +10,16 @@ const meta = {
   title: 'Components/Layout/Carousel',
   component: Carousel,
   tags: ['autodocs', 'stable'],
+  args: { orientation: 'horizontal' },
   argTypes: {
     orientation: { control: 'inline-radio', options: ['horizontal', 'vertical'] },
+    'aria-label': { control: 'text' },
+    // Embla config objects / imperative handle — not editable as controls.
+    opts: { table: { disable: true } },
+    plugins: { table: { disable: true } },
+    setApi: { table: { disable: true } },
+    children: { table: { disable: true } },
+    className: { table: { disable: true } },
   },
 } satisfies Meta<typeof Carousel>
 

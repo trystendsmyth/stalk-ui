@@ -1,3 +1,4 @@
+import { fn } from 'storybook/test'
 import { VStack } from 'styled-system/jsx'
 
 import { FormatInput } from './format-input'
@@ -11,14 +12,19 @@ const meta = {
   args: {
     'aria-label': 'Email',
     format: 'email',
+    onValidityChange: fn(),
     placeholder: 'you@stalk-ui.com',
   },
   argTypes: {
     format: { control: 'inline-radio', options: ['email', 'url', 'tel'] },
     size: { control: 'inline-radio', options: ['sm', 'md', 'lg'] },
+    align: { control: 'inline-radio', options: ['start', 'center', 'end'] },
     showValidity: { control: 'boolean' },
     invalid: { control: 'boolean' },
     disabled: { control: 'boolean' },
+    className: { table: { disable: true } },
+    rootProps: { table: { disable: true } },
+    value: { table: { disable: true } },
   },
   parameters: {
     docs: {

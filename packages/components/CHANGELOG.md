@@ -4,6 +4,36 @@
 
 ### Minor Changes
 
+- [#88](https://github.com/trystendsmyth/stalk-ui/pull/88) [`17b3597`](https://github.com/trystendsmyth/stalk-ui/commit/17b35977c00b394633c1272998bd4b7c9b5bf4ea) Thanks [@trystendsmyth](https://github.com/trystendsmyth)! - Data-density & dark-surface gap-closing pass (all additive / backward-compatible):
+
+  - **Tokens:** `vivid` / `vividContrast` on every tone (saturated, mode-stable Radix
+    step 9 with per-accent text contrast); `createDivergingScaleTokens` accepts a
+    configurable colored midpoint (`divergingMid` / `divergingMidStep`).
+  - **HeatMap:** composable `HeatMap.*` data grid (`Root/Group/Row/Cell` +
+    `CellLabel/CellValue/CellMeta`) and `useHeatMapScale` hook, alongside the unchanged
+    simple data-driven `HeatMap`.
+  - **Tabs:** `segmented` honors `tone`/`colorPalette` and is content-width by default.
+  - **Card:** `elevated` raises to `bg.canvas`; new `size="sm"` density.
+  - **Select:** content-width trigger with `fullWidth` opt-in; first-party `SelectField`
+    with empty-value sentinel.
+  - **Button:** `fullWidth` variant.
+  - **Popover:** `scrollable` variant.
+  - **Sparkline:** `reference` line/band and multiple `series`.
+  - **Accessibility:** `Slider` gains `thumbLabels` for per-thumb names on range
+    sliders; `ScrollArea` viewport and `Table` scroll container are keyboard-focusable
+    scroll regions; `Command.Separator` is hidden from the listbox a11y tree.
+
+### Patch Changes
+
+- Updated dependencies [[`17b3597`](https://github.com/trystendsmyth/stalk-ui/commit/17b35977c00b394633c1272998bd4b7c9b5bf4ea)]:
+  - @stalk-ui/preset@1.2.0
+  - @stalk-ui/i18n@1.2.0
+  - @stalk-ui/utils@1.2.0
+
+## 2.0.0
+
+### Minor Changes
+
 - [#80](https://github.com/trystendsmyth/stalk-ui/pull/80) [`b83e93a`](https://github.com/trystendsmyth/stalk-ui/commit/b83e93a26d27a6207a2c51c2fde73f88cc1ce32d) Thanks [@trystendsmyth](https://github.com/trystendsmyth)! - data-table-advanced: headless `useDataTable` hook + batteries-included component
 
   A new `data-table-advanced` item exporting both `useDataTable` (TanStack core +
