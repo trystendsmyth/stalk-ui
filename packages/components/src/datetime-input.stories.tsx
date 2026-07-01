@@ -30,6 +30,7 @@ const meta = {
     mode: { control: 'inline-radio', options: ['date', 'time', 'datetime'] },
     onChange: { table: { disable: true } },
     size: { control: 'inline-radio', options: ['sm', 'md', 'lg'] },
+    value: { table: { disable: true } },
   },
 } satisfies Meta<typeof DatetimeInput>
 

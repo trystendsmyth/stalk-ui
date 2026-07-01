@@ -31,9 +31,15 @@ const meta = {
   component: DataTableAdvanced<Member>,
   tags: ['autodocs', 'stable'],
   argTypes: {
+    pageSize: { control: 'number' },
+    // Data/render/config objects + handlers aren't editable as controls.
     columns: { table: { disable: true } },
     data: { table: { disable: true } },
     renderSubRow: { table: { disable: true } },
+    columnPinning: { table: { disable: true } },
+    maxHeight: { table: { disable: true } },
+    getRowId: { table: { disable: true } },
+    className: { table: { disable: true } },
   },
 } satisfies Meta<typeof DataTableAdvanced<Member>>
 

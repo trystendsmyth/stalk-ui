@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { fn } from 'storybook/test'
 import { VStack } from 'styled-system/jsx'
 
 import { TagsInput } from './tags-input'
@@ -11,6 +12,7 @@ const meta = {
   tags: ['autodocs', 'stable'],
   args: {
     'aria-label': 'Tags',
+    onValueChange: fn(),
     placeholder: 'Add a tag…',
   },
   argTypes: {
@@ -20,6 +22,9 @@ const meta = {
     allowDuplicates: { control: 'boolean' },
     invalid: { control: 'boolean' },
     disabled: { control: 'boolean' },
+    // Controlled value array + className aren't editable as controls.
+    value: { table: { disable: true } },
+    className: { table: { disable: true } },
   },
   parameters: {
     docs: {

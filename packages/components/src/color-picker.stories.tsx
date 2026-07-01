@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { fn } from 'storybook/test'
 import { css } from 'styled-system/css'
 import { HStack, VStack } from 'styled-system/jsx'
 
@@ -54,10 +55,27 @@ const meta = {
   title: 'Components/Forms/Color Picker',
   component: ColorPicker,
   tags: ['autodocs', 'stable'],
-  args: { children: null },
+  args: {
+    alpha: false,
+    children: null,
+    defaultValue: '#4f46e5',
+    disabled: false,
+    onOpenChange: fn(),
+    onValueChange: fn(),
+  },
+  argTypes: {
+    alpha: { control: 'boolean' },
+    defaultValue: { control: 'color' },
+    defaultOpen: { control: 'boolean' },
+    disabled: { control: 'boolean' },
+    // Composed via children; controlled value/open + handlers aren't editable.
+    children: { table: { disable: true } },
+    value: { table: { disable: true } },
+    open: { table: { disable: true } },
+    onValueChange: { table: { disable: true } },
+    onOpenChange: { table: { disable: true } },
+  },
   parameters: {
-    // Composed via children (Trigger/Content/Picker/…) — no useful single control.
-    controls: { disable: true },
     docs: {
       description: {
         component:
@@ -73,8 +91,8 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
-  render: () => (
-    <ColorPicker defaultValue="#4f46e5">
+  render: (args) => (
+    <ColorPicker {...args}>
       <ColorPicker.Trigger aria-label="Brand color" className={circleTrigger} />
       <ColorPicker.Content>
         <ColorPicker.Picker />

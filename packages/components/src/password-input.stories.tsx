@@ -14,8 +14,11 @@ const meta = {
   },
   argTypes: {
     size: { control: 'inline-radio', options: ['sm', 'md', 'lg'] },
+    align: { control: 'inline-radio', options: ['start', 'center', 'end'] },
     invalid: { control: 'boolean' },
     disabled: { control: 'boolean' },
+    className: { table: { disable: true } },
+    rootProps: { table: { disable: true } },
   },
   parameters: {
     docs: {
