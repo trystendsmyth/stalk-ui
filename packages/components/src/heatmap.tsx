@@ -9,6 +9,29 @@ import type { CSSProperties, HTMLAttributes, ReactNode } from 'react'
 
 const styles = /* @__PURE__ */ heatmapRecipe()
 
+// Layout mode for the composable HeatMap.* parts. `matrix` (default) keeps the
+// native table layout — cells align into fixed columns. `flow` lays each group's
+// cells out as a responsive auto-fill grid that wraps to the available width, for
+// ragged "device grid" data (e.g. inverters per meter) that isn't a rows×columns
+// matrix. Threaded Root → Group/Row via context so every part agrees. Semantic
+// table markup and the data-* color engine are unchanged in both modes.
+export type HeatMapLayout = 'matrix' | 'flow'
+const HeatMapLayoutContext = /* @__PURE__ */ createContext<HeatMapLayout>('matrix')
+
+// `--heatmap-cell-min` (default 76px) sets the smallest cell track; the grid packs
+// as many equal columns as fit and wraps the rest.
+const flowTableClass = /* @__PURE__ */ css({ display: 'block', borderSpacing: '0' })
+const flowGroupClass = /* @__PURE__ */ css({
+  display: 'block',
+  '&:not(:last-of-type)': { marginBottom: '12' },
+})
+const flowGroupHeaderRowClass = /* @__PURE__ */ css({ display: 'block' })
+const flowRowClass = /* @__PURE__ */ css({
+  display: 'grid',
+  gridTemplateColumns: 'repeat(auto-fill, minmax(var(--heatmap-cell-min, 76px), 1fr))',
+  gap: '6',
+})
+
 /** Inline swatch size — geometry only (no color), so it stays out of the token audit. */
 const SWATCH_STYLE: CSSProperties = { height: '0.75rem', minWidth: '0.75rem', width: '0.75rem' }
 
@@ -280,32 +303,49 @@ export interface HeatMapRootProps extends Omit<HTMLAttributes<HTMLTableElement>,
   midpoint?: number
   /** Column headers; renders a header row. */
   columns?: readonly ReactNode[]
+  /** Cell layout: `matrix` (default, aligned columns) or `flow` (auto-fill wrap). */
+  layout?: HeatMapLayout
   children?: ReactNode
 }
 
 export const HeatMapRoot = /* @__PURE__ */ forwardRef<HTMLTableElement, HeatMapRootProps>(
   function HeatMapRoot(
-    { scale = 'sequential', domain, midpoint = 0, columns, className, children, ...props },
+    {
+      scale = 'sequential',
+      domain,
+      midpoint = 0,
+      layout = 'matrix',
+      columns,
+      className,
+      children,
+      ...props
+    },
     ref,
   ) {
     const api = useHeatMapScale({ scale, midpoint, ...(domain ? { domain } : {}) })
     return (
       <HeatMapScaleContext.Provider value={api}>
-        <table ref={ref} className={cx(styles.table, className)} {...props}>
-          {columns !== undefined && columns.length > 0 ? (
-            <thead>
-              <tr>
-                <td className={styles.corner} />
-                {columns.map((column, index) => (
-                  <th key={index} scope="col" className={styles.columnHeader}>
-                    {column}
-                  </th>
-                ))}
-              </tr>
-            </thead>
-          ) : null}
-          {children}
-        </table>
+        <HeatMapLayoutContext.Provider value={layout}>
+          <table
+            ref={ref}
+            className={cx(styles.table, layout === 'flow' && flowTableClass, className)}
+            {...props}
+          >
+            {columns !== undefined && columns.length > 0 ? (
+              <thead>
+                <tr>
+                  <td className={styles.corner} />
+                  {columns.map((column, index) => (
+                    <th key={index} scope="col" className={styles.columnHeader}>
+                      {column}
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+            ) : null}
+            {children}
+          </table>
+        </HeatMapLayoutContext.Provider>
       </HeatMapScaleContext.Provider>
     )
   },
@@ -329,11 +369,16 @@ export const HeatMapGroup = /* @__PURE__ */ forwardRef<HTMLTableSectionElement, 
     { label, aside, headerColSpan = 1000, className, children, ...props },
     ref,
   ) {
+    const layout = useContext(HeatMapLayoutContext)
     const hasHeader = label !== undefined || aside !== undefined
     return (
-      <tbody ref={ref} className={cx(styles.group, className)} {...props}>
+      <tbody
+        ref={ref}
+        className={cx(styles.group, layout === 'flow' && flowGroupClass, className)}
+        {...props}
+      >
         {hasHeader ? (
-          <tr>
+          <tr className={layout === 'flow' ? flowGroupHeaderRowClass : undefined}>
             <th scope="colgroup" colSpan={headerColSpan} className={styles.groupHeader}>
               <span className={groupHeaderRowClass}>
                 {label}
@@ -356,8 +401,9 @@ export interface HeatMapRowProps extends Omit<HTMLAttributes<HTMLTableRowElement
 
 export const HeatMapRow = /* @__PURE__ */ forwardRef<HTMLTableRowElement, HeatMapRowProps>(
   function HeatMapRow({ header, className, children, ...props }, ref) {
+    const layout = useContext(HeatMapLayoutContext)
     return (
-      <tr ref={ref} className={className} {...props}>
+      <tr ref={ref} className={cx(layout === 'flow' && flowRowClass, className)} {...props}>
         {header !== undefined ? (
           <th scope="row" className={styles.rowHeader}>
             {header}
