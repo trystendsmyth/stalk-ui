@@ -78,3 +78,22 @@ export const Open: Story = {
     </Popover.Root>
   ),
 }
+
+// `scrollable` caps content to the available height and scrolls within (with
+// overscroll containment) — for tall panels like filter lists.
+export const Scrollable: Story = {
+  render: (args) => (
+    <Popover.Root {...args}>
+      <Popover.Trigger asChild>
+        <Button variant="outline">Open filters</Button>
+      </Popover.Trigger>
+      <Popover.Content aria-label="Filter options" scrollable>
+        <VStack alignItems="stretch" gap="8">
+          {Array.from({ length: 24 }, (_, i) => (
+            <span key={i}>Option {i + 1}</span>
+          ))}
+        </VStack>
+      </Popover.Content>
+    </Popover.Root>
+  ),
+}

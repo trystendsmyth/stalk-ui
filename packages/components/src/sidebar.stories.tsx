@@ -11,7 +11,7 @@ const meta = {
   title: 'Components/Navigation/Sidebar',
   component: Sidebar,
   tags: ['autodocs', 'stable'],
-  parameters: { layout: 'fullscreen' },
+  parameters: { layout: 'fullscreen', controls: { disable: true } },
 } satisfies Meta<typeof Sidebar>
 
 export default meta

@@ -32,6 +32,7 @@ const meta = {
     orientation: { control: 'inline-radio', options: ['horizontal', 'vertical'] },
     className: { table: { disable: true } },
     name: { table: { disable: true } },
+    thumbLabels: { table: { disable: true } },
     value: { table: { disable: true } },
     onValueChange: { table: { disable: true } },
     onValueCommit: { table: { disable: true } },
@@ -55,6 +56,7 @@ export const Range: Story = {
   args: {
     'aria-label': 'Price range',
     defaultValue: [20, 80],
+    thumbLabels: ['Minimum price', 'Maximum price'],
   },
 }
 

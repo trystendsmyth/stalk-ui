@@ -57,11 +57,24 @@ export const card = {
     variant: {
       outline: {},
       elevated: {
-        root: { shadow: 'md' },
+        // Raise the surface a step over the page so an elevated card stays visible
+        // even when the page background is bg.default (not just bg.canvas).
+        root: { bgColor: 'bg.canvas', shadow: 'md' },
+      },
+    },
+    // Density. `sm` tightens gap/padding for compact metric tiles.
+    size: {
+      md: {},
+      sm: {
+        root: { gap: '12', py: '12' },
+        header: { px: '12' },
+        content: { px: '12' },
+        footer: { px: '12' },
       },
     },
   },
   defaultVariants: {
+    size: 'md',
     variant: 'outline',
   },
 } satisfies RecipeConfig

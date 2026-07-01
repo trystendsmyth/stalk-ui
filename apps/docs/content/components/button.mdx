@@ -52,6 +52,7 @@ pnpm dlx @stalk-ui/cli add @stalk-ui/button
 | Prop           | Type            | Required | Default | Description                                                                                                                                           |
 | -------------- | --------------- | -------- | ------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `asChild`      | `boolean`       | No       | -       | -                                                                                                                                                     |
+| `fullWidth`    | `boolean`       | No       | -       | Stretch to fill the inline container, e.g. a column-spanning CTA.                                                                                     |
 | `loading`      | `boolean`       | No       | -       | -                                                                                                                                                     |
 | `loadingLabel` | `string`        | No       | -       | Accessible label announced while \`loading\`. Defaults to \`"Loading"\`. Pass a<br />localized string when the surrounding app supplies translations. |
 | `size`         | `ButtonSize`    | No       | -       | -                                                                                                                                                     |
@@ -60,10 +61,11 @@ pnpm dlx @stalk-ui/cli add @stalk-ui/button
 
 ## Variants
 
-| Variant   | Values                                |
-| --------- | ------------------------------------- |
-| `variant` | `solid`, `outline`, `ghost`, `subtle` |
-| `size`    | `sm`, `md`, `lg`                      |
+| Variant     | Values                                |
+| ----------- | ------------------------------------- |
+| `variant`   | `solid`, `outline`, `ghost`, `subtle` |
+| `size`      | `sm`, `md`, `lg`                      |
+| `fullWidth` | `true`, `false`                       |
 
 ## Registry
 

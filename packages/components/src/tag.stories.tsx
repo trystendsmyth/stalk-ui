@@ -54,6 +54,9 @@ export default meta
 
 type Story = StoryObj<typeof meta>
 
+// A disabled chip is intentionally de-emphasized; its lower contrast is by design.
+const noContrast = { a11y: { config: { rules: [{ id: 'color-contrast', enabled: false }] } } }
+
 export const Default: Story = {}
 
 export const Variants: Story = {
@@ -182,7 +185,7 @@ export const Interactive: Story = {
 }
 
 export const Disabled: Story = {
-  parameters: { controls: { disable: true } },
+  parameters: { controls: { disable: true }, ...noContrast },
   render: () => (
     <HStack gap="8">
       <Tag disabled onClick={fn()} onClose={fn()}>

@@ -103,15 +103,17 @@ pnpm dlx @stalk-ui/cli add @stalk-ui/card
 
 ## Props
 
-| Prop      | Type          | Required | Default | Description                                                                       |
-| --------- | ------------- | -------- | ------- | --------------------------------------------------------------------------------- |
-| `variant` | `CardVariant` | No       | -       | Surface treatment. \`outline\` is a bordered surface; \`elevated\` adds a shadow. |
+| Prop      | Type          | Required | Default | Description                                                                                                                                                         |
+| --------- | ------------- | -------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `variant` | `CardVariant` | No       | -       | Surface treatment. \`outline\` is a bordered surface; \`elevated\` raises it to<br /> \`bg.canvas\` and adds a shadow so it stays visible on a \`bg.default\` page. |
+| `size`    | `CardSize`    | No       | -       | Density. \`sm\` tightens gap/padding for compact metric tiles.                                                                                                      |
 
 ## Variants
 
 | Variant   | Values                |
 | --------- | --------------------- |
 | `variant` | `outline`, `elevated` |
+| `size`    | `md`, `sm`            |
 
 ## Registry
 

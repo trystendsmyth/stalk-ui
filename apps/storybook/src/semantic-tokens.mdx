@@ -157,5 +157,70 @@ import { token } from 'styled-system/tokens'
       />
     </ColorPalette>
 
+    ## Vivid (saturated indicators)
+
+    A saturated, **mode-stable** step (Radix 9) for status text on dark surfaces and saturated indicators (dots, tags, heat cells). Pair `*.vivid` fills with `*.vividContrast` for legible text — `warning.vividContrast` is dark text, the others are light, and neither flips with color mode.
+
+    <ColorPalette>
+      <ColorItem
+        title="Vivid"
+        subtitle="Saturated, mode-stable fills (step 9)"
+        colors={{
+          accent: token('colors.accent.vivid'),
+          success: token('colors.success.vivid'),
+          warning: token('colors.warning.vivid'),
+          danger: token('colors.danger.vivid'),
+          info: token('colors.info.vivid'),
+          highlight: token('colors.highlight.vivid'),
+        }}
+      />
+      <ColorItem
+        title="Vivid contrast"
+        subtitle="Text on a vivid fill"
+        colors={{
+          accent: token('colors.accent.vividContrast'),
+          warning: token('colors.warning.vividContrast'),
+          danger: token('colors.danger.vividContrast'),
+        }}
+      />
+    </ColorPalette>
+
+    ## Data-viz ramps
+
+    Sequential (single-hue) and diverging (two-hue around a configurable midpoint) ramps that drive `HeatMap` and `Sparkline`. Mode-aware like every other semantic color.
+
+    <ColorPalette>
+      <ColorItem
+        title="Sequential"
+        subtitle="faint → strong"
+        colors={{
+          1: token('colors.scale.sequential.1'),
+          2: token('colors.scale.sequential.2'),
+          3: token('colors.scale.sequential.3'),
+          4: token('colors.scale.sequential.4'),
+          5: token('colors.scale.sequential.5'),
+          6: token('colors.scale.sequential.6'),
+          7: token('colors.scale.sequential.7'),
+          8: token('colors.scale.sequential.8'),
+          9: token('colors.scale.sequential.9'),
+        }}
+      />
+      <ColorItem
+        title="Diverging"
+        subtitle="negative → midpoint → positive"
+        colors={{
+          'neg.1': token('colors.scale.diverging.neg.1'),
+          'neg.2': token('colors.scale.diverging.neg.2'),
+          'neg.3': token('colors.scale.diverging.neg.3'),
+          'neg.4': token('colors.scale.diverging.neg.4'),
+          mid: token('colors.scale.diverging.mid'),
+          'pos.4': token('colors.scale.diverging.pos.4'),
+          'pos.3': token('colors.scale.diverging.pos.3'),
+          'pos.2': token('colors.scale.diverging.pos.2'),
+          'pos.1': token('colors.scale.diverging.pos.1'),
+        }}
+      />
+    </ColorPalette>
+
   </div>
 </div>

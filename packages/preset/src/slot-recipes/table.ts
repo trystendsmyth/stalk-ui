@@ -4,7 +4,19 @@ export const table = {
   className: 'stalk-table',
   description:
     'Slot recipe for data tables (root, table, header, body, footer, row, head, cell, caption).',
-  slots: ['root', 'table', 'header', 'body', 'footer', 'row', 'head', 'cell', 'caption'],
+  slots: [
+    'root',
+    'table',
+    'header',
+    'body',
+    'footer',
+    'row',
+    'head',
+    'cell',
+    'caption',
+    'expandTrigger',
+    'expandedCell',
+  ],
   base: {
     // Scroll container so wide tables stay within their column on narrow viewports.
     root: {
@@ -94,6 +106,42 @@ export const table = {
       fontSize: 'sm',
       mt: '16',
     },
+    // Row-expansion disclosure: a chevron toggle and the detail cell it reveals.
+    expandTrigger: {
+      alignItems: 'center',
+      appearance: 'none',
+      bgColor: 'transparent',
+      border: 'none',
+      borderRadius: 'sm',
+      color: 'fg.muted',
+      cursor: 'pointer',
+      display: 'inline-flex',
+      h: '24',
+      justifyContent: 'center',
+      p: '0',
+      transitionDuration: 'fast',
+      transitionProperty: 'color, background-color',
+      w: '24',
+      _hover: { bgColor: 'bg.subtle', color: 'fg.default' },
+      _focusVisible: {
+        focusRingWidth: 'base',
+        focusRingColor: 'accent.subtle',
+        focusRingOffsetWidth: '1',
+        focusRingOffsetColor: 'bg.default',
+      },
+      '& > svg': {
+        transitionDuration: 'fast',
+        transitionProperty: 'transform',
+      },
+      '&[aria-expanded="true"] > svg': {
+        transform: 'rotate(90deg)',
+      },
+    },
+    expandedCell: {
+      bgColor: 'bg.subtle',
+      px: '12',
+      py: '10',
+    },
   },
   variants: {
     /**
@@ -115,8 +163,29 @@ export const table = {
         },
       },
     },
+    /**
+     * Pin the footer to the bottom of the scroll container — the mirror of
+     * `stickyHeader`. Same vertical-scroll requirement on `containerProps`. The
+     * footer cells carry an opaque bg so scrolled body rows are occluded.
+     */
+    stickyFooter: {
+      true: {
+        footer: {
+          '& th, & td': {
+            position: 'sticky',
+            insetBlockEnd: '0',
+            zIndex: 2,
+            bgColor: 'bg.subtle',
+            '&[data-pinned]': {
+              zIndex: 3,
+            },
+          },
+        },
+      },
+    },
   },
   defaultVariants: {
     stickyHeader: false,
+    stickyFooter: false,
   },
 } satisfies RecipeConfig

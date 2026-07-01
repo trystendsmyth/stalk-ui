@@ -129,7 +129,7 @@ export const calendar = {
     selected: {
       '& button': {
         bgColor: 'accent.solid',
-        color: 'accent.fg',
+        color: 'accent.contrast',
         _hover: { bgColor: 'accent.solid' },
       },
     },
@@ -137,10 +137,10 @@ export const calendar = {
       '& button': { bgColor: 'accent.subtle', color: 'accent.fg', rounded: 'none' },
     },
     rangeStart: {
-      '& button': { bgColor: 'accent.solid', color: 'accent.fg' },
+      '& button': { bgColor: 'accent.solid', color: 'accent.contrast' },
     },
     rangeEnd: {
-      '& button': { bgColor: 'accent.solid', color: 'accent.fg' },
+      '& button': { bgColor: 'accent.solid', color: 'accent.contrast' },
     },
   },
 } satisfies RecipeConfig

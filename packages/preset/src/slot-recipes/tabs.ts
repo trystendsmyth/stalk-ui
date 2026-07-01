@@ -8,7 +8,8 @@ export const tabs = {
     root: {
       colorPalette: 'accent',
       display: 'flex',
-      w: 'full',
+      // Content-width by default so a tab strip / segmented control sits inline in a
+      // toolbar; opt into full width with the `fitted` variant (shared width vocabulary).
       '&[data-orientation="vertical"]': { flexDirection: 'row' },
       '&[data-orientation="horizontal"]': { flexDirection: 'column' },
     },
@@ -146,10 +147,12 @@ export const tabs = {
         trigger: {
           rounded: 'md',
           flex: 1,
-          '&[data-state="active"]': { color: 'fg.default' },
+          // Honor `tone`/`colorPalette` like `pills` does — the selected segment is
+          // branded, not a neutral grey. A neutral look is opt-in via `tone`.
+          '&[data-state="active"]': { color: 'colorPalette.contrast' },
         },
         indicator: {
-          bgColor: 'bg.default',
+          bgColor: 'colorPalette.solid',
           rounded: 'md',
           shadow: 'sm',
         },
@@ -167,7 +170,7 @@ export const tabs = {
       },
     },
     fitted: {
-      true: { list: { w: 'full' }, trigger: { flex: 1 } },
+      true: { root: { w: 'full' }, list: { w: 'full' }, trigger: { flex: 1 } },
       false: {},
     },
   },

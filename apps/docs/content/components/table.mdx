@@ -123,16 +123,36 @@ pnpm dlx @stalk-ui/cli add @stalk-ui/table
 
 ## Props
 
+### `<Table.ExpandableRow>`
+
+| Prop           | Type                      | Required | Default | Description                                                                    |
+| -------------- | ------------------------- | -------- | ------- | ------------------------------------------------------------------------------ |
+| `detail`       | `ReactNode`               | Yes      | -       | Detail content revealed below the row, in a cell spanning \`colSpan\` columns. |
+| `colSpan`      | `number`                  | Yes      | -       | Number of columns the detail cell spans.                                       |
+| `open`         | `boolean`                 | No       | -       | Controlled open state.                                                         |
+| `defaultOpen`  | `boolean`                 | No       | -       | Initial open state when uncontrolled.                                          |
+| `onOpenChange` | `(open: boolean) => void` | No       | -       | Called when the open state changes.                                            |
+
+### `<Table.ExpandTrigger>`
+
+| Prop    | Type     | Required | Default | Description                                                        |
+| ------- | -------- | -------- | ------- | ------------------------------------------------------------------ |
+| `label` | `string` | No       | -       | Accessible label for the toggle. Default \`"Toggle row details"\`. |
+
+### `<Table.Root>`
+
 | Prop             | Type                             | Required | Default | Description                                                                                                                                                                                                                                                                                       |
 | ---------------- | -------------------------------- | -------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `containerProps` | `HTMLAttributes<HTMLDivElement>` | No       | -       | Props applied to the scroll container wrapping the \`<table>\`.                                                                                                                                                                                                                                   |
 | `stickyHeader`   | `boolean`                        | No       | -       | Keep the header rows pinned while the body scrolls. Pair with a max-height +<br />\`overflowY: 'auto'\` on \`containerProps\` to get the vertical scroll region.<br />Freeze individual columns by setting \`data-pinned="start" \| "end"\` on the<br />matching \`Table.Head\` / \`Table.Cell\`. |
+| `stickyFooter`   | `boolean`                        | No       | -       | Keep the footer rows pinned to the bottom while the body scrolls (mirror of<br /> \`stickyHeader\`; same \`containerProps\` scroll requirement).                                                                                                                                                  |
 
 ## Variants
 
 | Variant        | Values |
 | -------------- | ------ |
 | `stickyHeader` | `true` |
+| `stickyFooter` | `true` |
 
 ## Registry
 

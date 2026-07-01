@@ -4,10 +4,14 @@ import { card as cardRecipe } from 'styled-system/recipes'
 import type { ComponentPropsWithoutRef } from 'react'
 
 export type CardVariant = (typeof cardRecipe.variantMap.variant)[number]
+export type CardSize = (typeof cardRecipe.variantMap.size)[number]
 
 export type CardRootProps = ComponentPropsWithoutRef<'div'> & {
-  /** Surface treatment. `outline` is a bordered surface; `elevated` adds a shadow. */
+  /** Surface treatment. `outline` is a bordered surface; `elevated` raises it to
+   *  `bg.canvas` and adds a shadow so it stays visible on a `bg.default` page. */
   variant?: CardVariant
+  /** Density. `sm` tightens gap/padding for compact metric tiles. */
+  size?: CardSize
 }
 
 const { withContext, withRootProvider } = /* @__PURE__ */ createStyleContext(cardRecipe, {

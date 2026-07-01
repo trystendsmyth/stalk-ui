@@ -55,4 +55,18 @@ export const popover = {
       },
     },
   },
+  variants: {
+    // Cap height to the Radix-provided available space and scroll within, with
+    // overscroll containment so a tall panel doesn't trap page scroll.
+    scrollable: {
+      true: {
+        content: {
+          maxBlockSize: 'var(--radix-popover-content-available-height)',
+          overflowY: 'auto',
+          overscrollBehavior: 'contain',
+        },
+      },
+      false: {},
+    },
+  },
 } satisfies RecipeConfig

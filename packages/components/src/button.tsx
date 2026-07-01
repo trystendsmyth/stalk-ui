@@ -15,6 +15,8 @@ export type ButtonTone = Tone
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   asChild?: boolean
+  /** Stretch to fill the inline container, e.g. a column-spanning CTA. */
+  fullWidth?: boolean
   loading?: boolean
   /**
    * Accessible label announced while `loading`. Defaults to `"Loading"`. Pass a
@@ -47,6 +49,7 @@ export const Button = /* @__PURE__ */ forwardRef<HTMLButtonElement, ButtonProps>
     children,
     className,
     disabled,
+    fullWidth = false,
     loading = false,
     loadingLabel = 'Loading',
     onClick,
@@ -112,7 +115,11 @@ export const Button = /* @__PURE__ */ forwardRef<HTMLButtonElement, ButtonProps>
       ref={ref}
       aria-busy={loading || undefined}
       aria-disabled={asChild && isDisabled ? true : undefined}
-      className={cx(buttonRecipe({ size, variant }), css({ colorPalette: tone }), className)}
+      className={cx(
+        buttonRecipe({ fullWidth, size, variant }),
+        css({ colorPalette: tone }),
+        className,
+      )}
       data-loading={loading ? '' : undefined}
       disabled={asChild ? undefined : isDisabled}
       onClick={handleClick}

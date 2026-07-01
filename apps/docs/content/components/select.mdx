@@ -89,6 +89,24 @@ pnpm dlx @stalk-ui/cli add @stalk-ui/select
 
 ## Props
 
+### `<Select.Field>`
+
+| Prop               | Type                      | Required | Default | Description                                                          |
+| ------------------ | ------------------------- | -------- | ------- | -------------------------------------------------------------------- |
+| `options`          | `readonly SelectOption[]` | Yes      | -       | -                                                                    |
+| `value`            | `string`                  | No       | -       | -                                                                    |
+| `defaultValue`     | `string`                  | No       | -       | -                                                                    |
+| `onValueChange`    | `(value: string) => void` | No       | -       | -                                                                    |
+| `placeholder`      | `ReactNode`               | No       | -       | -                                                                    |
+| `size`             | `SelectSize`              | No       | -       | -                                                                    |
+| `fullWidth`        | `boolean`                 | No       | -       | Stretch the trigger to fill its container; default is content-width. |
+| `invalid`          | `boolean`                 | No       | -       | -                                                                    |
+| `disabled`         | `boolean`                 | No       | -       | -                                                                    |
+| `name`             | `string`                  | No       | -       | -                                                                    |
+| `required`         | `boolean`                 | No       | -       | -                                                                    |
+| `'aria-label'`     | `string`                  | No       | -       | -                                                                    |
+| `triggerClassName` | `string`                  | No       | -       | -                                                                    |
+
 ### `<Select.Item>`
 
 | Prop         | Type        | Required | Default | Description                                                                    |
@@ -97,16 +115,18 @@ pnpm dlx @stalk-ui/cli add @stalk-ui/select
 
 ### `<Select.Trigger>`
 
-| Prop      | Type         | Required | Default | Description |
-| --------- | ------------ | -------- | ------- | ----------- |
-| `invalid` | `boolean`    | No       | -       | -           |
-| `size`    | `SelectSize` | No       | -       | -           |
+| Prop        | Type         | Required | Default | Description                                                          |
+| ----------- | ------------ | -------- | ------- | -------------------------------------------------------------------- |
+| `fullWidth` | `boolean`    | No       | -       | Stretch the trigger to fill its container; default is content-width. |
+| `invalid`   | `boolean`    | No       | -       | -                                                                    |
+| `size`      | `SelectSize` | No       | -       | -                                                                    |
 
 ## Variants
 
-| Variant | Values           |
-| ------- | ---------------- |
-| `size`  | `sm`, `md`, `lg` |
+| Variant     | Values           |
+| ----------- | ---------------- |
+| `size`      | `sm`, `md`, `lg` |
+| `fullWidth` | `true`, `false`  |
 
 ## Registry
 

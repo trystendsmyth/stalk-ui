@@ -28,9 +28,9 @@ const sectionCopy = {
     title: 'Theme switcher',
     hint: 'Preview the built-in theme attribute before applying it to an app or subtree.',
   },
-  'custom-themes': {
-    title: 'Builder output',
-    hint: 'See how the theme builder choices turn into profile, config, and static CSS work.',
+  customization: {
+    title: 'Customize a card',
+    hint: 'Pick an accent and edit the title — the card rethemes live, and the same accent flows straight into defineTheme.',
   },
   registry: {
     title: 'Registry route',
@@ -87,6 +87,16 @@ const registryOptions = [
   { label: 'Native', value: 'native' },
   { label: 'shadcn', value: 'shadcn' },
 ] as const satisfies readonly Option<RegistryMode>[]
+
+type AccentScale = 'teal' | 'blue' | 'violet' | 'emerald' | 'red'
+
+const accentOptions = [
+  { label: 'Teal', value: 'teal' },
+  { label: 'Blue', value: 'blue' },
+  { label: 'Violet', value: 'violet' },
+  { label: 'Emerald', value: 'emerald' },
+  { label: 'Red', value: 'red' },
+] as const satisfies readonly Option<AccentScale>[]
 
 const customThemeSteps = {
   profile: {
@@ -181,18 +191,31 @@ export function GettingStartedInteractive({ slug }: GettingStartedInteractivePro
   const copy = sectionCopy[slug]
 
   return (
-    <section className="docs-section">
-      <header className="docs-section__header">
-        <h2 className="docs-section__title">{copy.title}</h2>
-        <p className="docs-section__hint">{copy.hint}</p>
-      </header>
-      {slug === 'installation' ? <InstallationBlock /> : null}
-      {slug === 'theming' ? <ThemingBlock /> : null}
-      {slug === 'custom-themes' ? <CustomThemesBlock /> : null}
-      {slug === 'registry' ? <RegistryBlock /> : null}
-      {slug === 'semantic-tokens' ? <SemanticTokensBlock /> : null}
-      {slug === 'typography' ? <TypographyBlock /> : null}
-    </section>
+    <>
+      <section className="docs-section">
+        <header className="docs-section__header">
+          <h2 className="docs-section__title">{copy.title}</h2>
+          <p className="docs-section__hint">{copy.hint}</p>
+        </header>
+        {slug === 'installation' ? <InstallationBlock /> : null}
+        {slug === 'theming' ? <ThemingBlock /> : null}
+        {slug === 'customization' ? <CustomizationBlock /> : null}
+        {slug === 'registry' ? <RegistryBlock /> : null}
+        {slug === 'semantic-tokens' ? <SemanticTokensBlock /> : null}
+        {slug === 'typography' ? <TypographyBlock /> : null}
+      </section>
+      {slug === 'customization' ? (
+        <section className="docs-section">
+          <header className="docs-section__header">
+            <h2 className="docs-section__title">Builder output</h2>
+            <p className="docs-section__hint">
+              See how the theme builder choices turn into profile, config, and static CSS work.
+            </p>
+          </header>
+          <BuilderOutputBlock />
+        </section>
+      ) : null}
+    </>
   )
 }
 
@@ -248,7 +271,67 @@ function ThemingBlock() {
   )
 }
 
-function CustomThemesBlock() {
+function CustomizationBlock() {
+  const [accent, setAccent] = useState<AccentScale>('teal')
+  const [title, setTitle] = useState('Project settings')
+
+  // Step 9 is the saturated, near-mode-stable step, so the title/button read in
+  // both color modes from the raw scale (real apps set this via defineTheme).
+  const solid = `var(--colors-${accent}-9)`
+  const code = [
+    "import { defineTheme } from '@stalk-ui/preset/theme'",
+    '',
+    'themes: {',
+    `  brand: defineTheme({ accent: '${accent}' }),`,
+    '}',
+  ].join('\n')
+
+  return (
+    <div className="docs-interactive">
+      <div className="docs-interactive__controls">
+        <SegmentedControl
+          label="Accent scale"
+          options={accentOptions}
+          value={accent}
+          onChange={setAccent}
+        />
+        <label className="docs-interactive__field">
+          <span>Card title</span>
+          <input
+            className="docs-interactive__input"
+            maxLength={40}
+            value={title}
+            onChange={(event) => {
+              setTitle(event.target.value)
+            }}
+          />
+        </label>
+      </div>
+      <div className="docs-interactive__grid">
+        <div className="docs-interactive__preview docs-interactive__card">
+          <strong className="docs-interactive__card-title" style={{ color: solid }}>
+            {title || 'Untitled'}
+          </strong>
+          <p>Group related content and actions on a single bordered surface.</p>
+          <div className="docs-interactive__actions">
+            <span
+              className="docs-interactive__button docs-interactive__button--primary"
+              style={{ background: solid, borderColor: solid }}
+            >
+              Save
+            </span>
+            <span className="docs-interactive__button">Cancel</span>
+          </div>
+        </div>
+        <Panel title="defineTheme">
+          <CodeBlock code={code} />
+        </Panel>
+      </div>
+    </div>
+  )
+}
+
+function BuilderOutputBlock() {
   const [step, setStep] = useState<CustomThemeStep>('profile')
   const current = customThemeSteps[step]
 

@@ -73,8 +73,16 @@ export const CommandSeparator = /* @__PURE__ */ forwardRef<
   ComponentRef<typeof CommandPrimitive.Separator>,
   CommandSeparatorProps
 >(function CommandSeparator({ className, ...props }, ref) {
+  // cmdk hard-codes role="separator" on this element, but a separator isn't a valid
+  // child of the listbox (it breaks aria-required-children). It's purely decorative —
+  // groups already convey structure — so hide it from the a11y tree.
   return (
-    <CommandPrimitive.Separator ref={ref} className={cx(styles.separator, className)} {...props} />
+    <CommandPrimitive.Separator
+      ref={ref}
+      aria-hidden="true"
+      className={cx(styles.separator, className)}
+      {...props}
+    />
   )
 })
 

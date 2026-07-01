@@ -25,20 +25,30 @@ export const PopoverClose = /* @__PURE__ */ forwardRef<
     />
   )
 })
+export type PopoverContentProps = ComponentPropsWithoutRef<typeof PopoverPrimitive.Content> & {
+  /** Cap height to the available space and scroll within (with overscroll
+   *  containment) instead of overflowing — for tall panels like filter lists. */
+  scrollable?: boolean
+}
+
 export const PopoverContent = /* @__PURE__ */ forwardRef<
   ComponentRef<typeof PopoverPrimitive.Content>,
-  ComponentPropsWithoutRef<typeof PopoverPrimitive.Content>
->(function PopoverContent({ children, className, sideOffset = 4, ...props }, ref) {
+  PopoverContentProps
+>(function PopoverContent(
+  { children, className, scrollable = false, sideOffset = 4, ...props },
+  ref,
+) {
+  const variantStyles = popoverRecipe({ scrollable })
   return (
     <PopoverPortal>
       <PopoverPrimitive.Content
         ref={ref}
-        className={cx(styles.content, className)}
+        className={cx(variantStyles.content, className)}
         sideOffset={sideOffset}
         {...props}
       >
         {children}
-        <PopoverPrimitive.Arrow className={styles.arrow} />
+        <PopoverPrimitive.Arrow className={variantStyles.arrow} />
       </PopoverPrimitive.Content>
     </PopoverPortal>
   )

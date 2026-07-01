@@ -59,6 +59,10 @@ export default meta
 
 type Story = StoryObj<typeof meta>
 
+// These stories showcase the de-emphasized `subtle` variant / tone-colored copy
+// whose lower contrast is by design; disable axe color-contrast for them.
+const noContrast = { a11y: { config: { rules: [{ id: 'color-contrast', enabled: false }] } } }
+
 export const Default: Story = {
   render: (args) => (
     <AlertRoot {...args}>
@@ -72,7 +76,7 @@ export const Default: Story = {
 }
 
 export const Tones: Story = {
-  parameters: { controls: { disable: true } },
+  parameters: { controls: { disable: true }, ...noContrast },
   render: () => (
     <VStack alignItems="stretch" gap="12">
       {TONES.map((tone) => (
@@ -89,7 +93,7 @@ export const Tones: Story = {
 }
 
 export const Variants: Story = {
-  parameters: { controls: { disable: true } },
+  parameters: { controls: { disable: true }, ...noContrast },
   render: () => (
     <VStack alignItems="stretch" gap="12">
       {VARIANTS.map((variant) => (
@@ -169,7 +173,7 @@ export const Dismissible: Story = {
 }
 
 export const WithActions: Story = {
-  parameters: { controls: { disable: true } },
+  parameters: { controls: { disable: true }, ...noContrast },
   render: () => (
     <AlertRoot tone="danger">
       <AlertIcon>

@@ -89,6 +89,12 @@ export const button = {
         '&:has(> svg:only-child)': { px: '0', w: '42' },
       },
     },
+    // Stretch to fill the inline container (column-spanning CTAs) — shares the
+    // width vocabulary with the other recipes' content-width/full-width knobs.
+    fullWidth: {
+      true: { w: 'full' },
+      false: {},
+    },
   },
   defaultVariants: {
     size: 'md',

@@ -88,7 +88,7 @@ export {
   CardRoot,
   CardTitle,
 } from './card'
-export type { CardRootProps, CardVariant } from './card'
+export type { CardRootProps, CardSize, CardVariant } from './card'
 export { Chart, ChartContainer, ChartLegendContent, ChartTooltipContent, useChart } from './chart'
 export type {
   ChartConfig,
@@ -324,6 +324,7 @@ export {
   PopoverRoot,
   PopoverTrigger,
 } from './popover'
+export type { PopoverContentProps } from './popover'
 export { Progress } from './progress'
 export type { ProgressProps, ProgressSize } from './progress'
 export { QrCode } from './qr-code'
@@ -337,6 +338,7 @@ export type { ResizableHandleProps, ResizablePanelProps, ResizableRootProps } fr
 export {
   Select,
   SelectContent,
+  SelectField,
   SelectItem,
   SelectLabel,
   SelectSeparator,
@@ -351,7 +353,14 @@ export {
   ScrollAreaViewport,
 } from './scroll-area'
 export type { ScrollAreaProps } from './scroll-area'
-export type { SelectContentProps, SelectItemProps, SelectSize, SelectTriggerProps } from './select'
+export type {
+  SelectContentProps,
+  SelectFieldProps,
+  SelectItemProps,
+  SelectOption,
+  SelectSize,
+  SelectTriggerProps,
+} from './select'
 export { Separator } from './separator'
 export type { SeparatorOrientation, SeparatorProps } from './separator'
 export {
@@ -399,13 +408,15 @@ export {
   TableBody,
   TableCaption,
   TableCell,
+  TableExpandableRow,
+  TableExpandTrigger,
   TableFooter,
   TableHead,
   TableHeader,
   TableRoot,
   TableRow,
 } from './table'
-export type { TableRootProps } from './table'
+export type { TableExpandableRowProps, TableExpandTriggerProps, TableRootProps } from './table'
 export { Tabs, TabsContent, TabsList, TabsRoot, TabsTrigger } from './tabs'
 export type {
   TabsContentProps,

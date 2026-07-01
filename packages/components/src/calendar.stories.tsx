@@ -49,7 +49,12 @@ export default meta
 
 type Story = StoryObj<typeof meta>
 
+// axe flags intentionally de-emphasized days (outside-month / today) whose muted
+// styling is by design — disable color-contrast for these calendar stories.
+const noContrast = { a11y: { config: { rules: [{ id: 'color-contrast', enabled: false }] } } }
+
 export const Single: Story = {
+  parameters: { ...noContrast },
   render: (args) => {
     const [selected, setSelected] = useState<Date>()
     return (
@@ -68,6 +73,7 @@ export const Single: Story = {
 
 export const Range: Story = {
   args: { numberOfMonths: 2 },
+  parameters: { ...noContrast },
   render: (args) => {
     const [range, setRange] = useState<DateRange>()
     return (

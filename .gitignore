@@ -2,6 +2,9 @@
 node_modules/
 .pnpm-store/
 
+# Claude Code local settings
+.claude/settings.local.json
+
 # Build
 dist/
 build/

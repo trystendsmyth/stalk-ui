@@ -56,6 +56,8 @@ const meta = {
   tags: ['autodocs', 'stable'],
   args: { children: null },
   parameters: {
+    // Composed via children (Trigger/Content/Picker/…) — no useful single control.
+    controls: { disable: true },
     docs: {
       description: {
         component:

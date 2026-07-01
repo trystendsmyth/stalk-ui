@@ -36,6 +36,9 @@ export default meta
 
 type Story = StoryObj<typeof meta>
 
+// Disabled chips are intentionally de-emphasized; their lower contrast is by design.
+const noContrast = { a11y: { config: { rules: [{ id: 'color-contrast', enabled: false }] } } }
+
 export const Default: Story = {
   args: { defaultValue: ['design', 'engineering'] },
 }
@@ -64,6 +67,7 @@ export const MaxAndTone: Story = {
 
 export const Disabled: Story = {
   args: { defaultValue: ['locked', 'readonly'], disabled: true },
+  parameters: { ...noContrast },
 }
 
 const LABEL_TONES: Record<string, 'accent' | 'success' | 'warning' | 'danger' | 'info'> = {

@@ -56,15 +56,6 @@ export const gettingStartedPages = [
     ],
   },
   {
-    slug: 'custom-themes',
-    title: 'Custom Themes',
-    description: 'Extend the preset with your own PandaCSS theme definitions.',
-    body: [
-      'Keep presets: ["@stalk-ui/preset"] in panda.config.ts, then add custom themes through PandaCSS theme configuration.',
-      'Apply custom themes with the same data-panda-theme attribute used by the built-in rainbow theme.',
-    ],
-  },
-  {
     slug: 'registry',
     title: 'Registry',
     description: 'Install source components from the native or shadcn-compatible registry.',
@@ -93,6 +84,17 @@ export const gettingStartedPages = [
       '@stalk-ui/preset defines fonts.sans as var(--font-sans, system stack). Set --font-sans on :root (for example with next/font/google and Noto_Sans) so headings, body text, and components inherit your choice.',
       'Copied registry components never hardcode a font name; override --font-sans or replace the fonts.sans token in your Panda theme to use a different family.',
       'For multilingual apps, load a script-specific Noto Sans family first in the stack (Noto_Sans_Arabic, Noto_Sans_JP, etc.) and map locales to those loaders so only the glyphs you need are downloaded.',
+    ],
+  },
+  {
+    slug: 'customization',
+    title: 'Customization',
+    description: 'Theme, override recipes, and tune surfaces — without forking component source.',
+    body: [
+      'Customize Stalk at three levels — full themes via `defineTheme`, recipe overrides in your `panda.config`, and per-instance props or tokens. Try the interactive card and theme builder below.',
+      '**Themes.** `@stalk-ui/preset/theme` exports `defineTheme`, which generates the entire semantic surface (background, foreground, border, accent, status, highlight) from a couple of Radix scale names. Register the result under `themes` in `panda.config.ts`, add it to `staticCss.themes`, and apply it with the `data-panda-theme` attribute.',
+      '**Recipe overrides.** Adjust any Stalk recipe from your own `panda.config.ts` with `theme.extend`. Slot recipes (Card, Select, Tabs, Table) extend under `theme.extend.slotRecipes.<name>`; single-element recipes (Button, Badge) under `theme.extend.recipes.<name>`. For example, set `theme.extend.recipes.button.defaultVariants` to make outline / sm your app default — Stalk’s internal components pin their variants explicitly, so they are unaffected.',
+      '**Elevation.** The model is page = `bg.canvas`, surfaces = `bg.default`: `bg.canvas` sits one step under `bg.default`, so raised surfaces read as elevated. Set your page background to `bg.canvas` and cards on the default `bg.default` pop automatically; if your page must stay `bg.default`, reach for `<Card variant="elevated">` instead of overriding the card recipe’s base background.',
     ],
   },
 ] satisfies GettingStartedPage[]

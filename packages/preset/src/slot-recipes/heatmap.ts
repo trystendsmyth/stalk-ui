@@ -11,7 +11,25 @@ export const heatmap = {
   className: 'stalk-heatmap',
   description:
     'Slot recipe for HeatMap — a labeled matrix of color-coded cells (root, table, corner, columnHeader, rowHeader, cell, legend).',
-  slots: ['root', 'table', 'corner', 'columnHeader', 'rowHeader', 'cell', 'legend', 'caption'],
+  slots: [
+    'root',
+    'table',
+    'corner',
+    'columnHeader',
+    'rowHeader',
+    'cell',
+    'legend',
+    'caption',
+    'readout',
+    'group',
+    'groupHeader',
+    'groupAside',
+    'cellButton',
+    'cellContent',
+    'cellLabel',
+    'cellValue',
+    'cellMeta',
+  ],
   base: {
     root: {
       color: 'fg.default',
@@ -75,8 +93,20 @@ export const heatmap = {
       '&[data-tone="pos"][data-level="2"]': { bgColor: 'scale.diverging.pos.2' },
       '&[data-tone="pos"][data-level="3"]': { bgColor: 'scale.diverging.pos.3' },
       '&[data-tone="pos"][data-level="4"]': { bgColor: 'scale.diverging.pos.4' },
-      // Keyboard focus ring on inspectable cells (component sets tabIndex).
+      // Content-bearing cells (composable HeatMap.Cell with children) grow to fit
+      // text and top-align it; fill color comes from a tone or the scale path.
+      '&[data-content]': {
+        h: 'auto',
+        minH: '44',
+        minW: '64',
+        textAlign: 'start',
+        verticalAlign: 'top',
+      },
+      // Keyboard focus ring on inspectable cells (component sets tabIndex). The
+      // cell is lifted so the box-shadow ring isn't painted over by adjacent cells.
       _focusVisible: {
+        position: 'relative',
+        zIndex: 1,
         focusRingWidth: 'base',
         focusRingColor: 'border.focus',
         focusRingOffsetWidth: '1',
@@ -95,6 +125,74 @@ export const heatmap = {
       fontSize: 'sm',
       mt: '4',
       textAlign: 'start',
+    },
+    // Visible value of the focused cell when `inspectable` (keyboard inspection).
+    readout: {
+      color: 'fg.default',
+      fontSize: 'sm',
+      fontWeight: 'medium',
+      mt: '4',
+      textAlign: 'start',
+    },
+    // Composable HeatMap.* slots (a sectioned, content-bearing data grid). The
+    // simple data-driven HeatMap above does not use these.
+    group: {},
+    groupHeader: {
+      color: 'fg.muted',
+      fontSize: 'xs',
+      fontWeight: 'semibold',
+      pt: '12',
+      pb: '4',
+      px: '4',
+      textAlign: 'start',
+      whiteSpace: 'nowrap',
+    },
+    groupAside: {
+      display: 'inline-flex',
+      alignItems: 'center',
+      marginInlineStart: 'auto',
+    },
+    cellButton: {
+      appearance: 'none',
+      bgColor: 'transparent',
+      border: 'none',
+      color: 'inherit',
+      cursor: 'pointer',
+      display: 'flex',
+      font: 'inherit',
+      h: 'full',
+      m: '0',
+      outline: 'none',
+      p: '0',
+      textAlign: 'start',
+      w: 'full',
+    },
+    cellContent: {
+      alignItems: 'flex-start',
+      display: 'flex',
+      flexDirection: 'column',
+      gap: '2',
+      h: 'full',
+      justifyContent: 'center',
+      paddingBlock: '6',
+      paddingInline: '8',
+    },
+    cellLabel: {
+      fontSize: 'xs',
+      fontWeight: 'medium',
+      maxW: 'full',
+      opacity: 0.85,
+      overflow: 'hidden',
+      textOverflow: 'ellipsis',
+      whiteSpace: 'nowrap',
+    },
+    cellValue: {
+      fontSize: 'sm',
+      fontWeight: 'semibold',
+    },
+    cellMeta: {
+      fontSize: 'xs',
+      opacity: 0.8,
     },
   },
 } satisfies RecipeConfig

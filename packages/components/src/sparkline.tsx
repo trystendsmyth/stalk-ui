@@ -13,17 +13,21 @@ const styles = /* @__PURE__ */ sparklineRecipe()
 const n = (value: number) => value.toFixed(2)
 
 export interface SparklineProps extends Omit<SVGProps<SVGSVGElement>, 'children'> {
-  /** Series of numbers, left → right. Needs at least two points to draw a line. */
+  /** Primary series of numbers, left → right. Needs at least two points to draw a line. */
   data: number[]
+  /** Additional series sharing the same x/y domain, drawn as muted lines. */
+  series?: number[][]
+  /** Reference threshold: a single value draws a dashed line; `[low, high]` shades a band. */
+  reference?: number | [number, number]
   /** Intrinsic width in px (the SVG still scales to its box). Default `80`. */
   width?: number
   /** Intrinsic height in px. Default `24`. */
   height?: number
   /** Tone for the line / area / point. Default `accent`. */
   tone?: Tone
-  /** Fill the area beneath the line. */
+  /** Fill the area beneath the primary line. */
   area?: boolean
-  /** Mark the final data point. */
+  /** Mark the final data point of the primary series. */
   showLastPoint?: boolean
   /** Line thickness in px. Default `1.5`. */
   strokeWidth?: number
@@ -34,25 +38,40 @@ export interface SparklineProps extends Omit<SVGProps<SVGSVGElement>, 'children'
   'aria-label'?: string
 }
 
-/** Map values to SVG points within `[pad, size-pad]`, flipping Y so up = larger. */
-const buildPoints = (data: number[], width: number, height: number, pad: number) => {
-  const min = Math.min(...data)
-  const max = Math.max(...data)
+interface Scale {
+  xFor: (index: number, length: number) => number
+  yFor: (value: number) => number
+}
+
+/** Build x/y mappers over a shared `[min, max]` domain, flipping Y so up = larger. */
+const buildScale = (
+  width: number,
+  height: number,
+  pad: number,
+  min: number,
+  max: number,
+): Scale => {
   const span = max - min || 1
   const innerW = width - pad * 2
   const innerH = height - pad * 2
-  const step = data.length > 1 ? innerW / (data.length - 1) : 0
-  return data.map((value, i) => {
-    const x = pad + i * step
-    const y = pad + innerH - ((value - min) / span) * innerH
-    return [x, y] as const
-  })
+  return {
+    xFor: (index, length) => pad + (length > 1 ? (innerW / (length - 1)) * index : 0),
+    yFor: (value) => pad + innerH - ((value - min) / span) * innerH,
+  }
 }
+
+const toPoints = (data: number[], scale: Scale) =>
+  data.map((value, index) => [scale.xFor(index, data.length), scale.yFor(value)] as const)
+
+const toLine = (points: readonly (readonly [number, number])[]) =>
+  points.map(([x, y], i) => `${i === 0 ? 'M' : 'L'}${n(x)} ${n(y)}`).join(' ')
 
 export const Sparkline = /* @__PURE__ */ forwardRef<SVGSVGElement, SparklineProps>(
   function Sparkline(
     {
       data,
+      series,
+      reference,
       width = 80,
       height = 24,
       tone = 'accent',
@@ -66,31 +85,78 @@ export const Sparkline = /* @__PURE__ */ forwardRef<SVGSVGElement, SparklineProp
     ref,
   ) {
     const pad = Math.max(strokeWidth, showLastPoint ? strokeWidth + 1.5 : strokeWidth)
-    const points = data.length > 0 ? buildPoints(data, width, height, pad) : []
-    const line = points.map(([x, y], i) => `${i === 0 ? 'M' : 'L'}${n(x)} ${n(y)}`).join(' ')
-    const last = points.at(-1)
-    const first = points.at(0)
+    const refValues =
+      reference === undefined ? [] : Array.isArray(reference) ? reference : [reference]
+    // Shared domain spans every series and the reference so they align vertically.
+    const everyValue = [...data, ...(series ?? []).flat(), ...refValues]
+    const min = everyValue.length > 0 ? Math.min(...everyValue) : 0
+    const max = everyValue.length > 0 ? Math.max(...everyValue) : 0
+    const scale = buildScale(width, height, pad, min, max)
+
+    const primary = data.length > 0 ? toPoints(data, scale) : []
+    const primaryLine = toLine(primary)
+    const first = primary.at(0)
+    const last = primary.at(-1)
     const baseline = n(height - pad)
     const areaPath =
       area && first && last
-        ? `${line} L${n(last[0])} ${baseline} L${n(first[0])} ${baseline} Z`
+        ? `${primaryLine} L${n(last[0])} ${baseline} L${n(first[0])} ${baseline} Z`
         : undefined
+
+    const refBand = Array.isArray(reference)
+      ? {
+          y: scale.yFor(Math.max(reference[0], reference[1])),
+          height: Math.abs(scale.yFor(reference[0]) - scale.yFor(reference[1])),
+        }
+      : undefined
+    const refLineY = typeof reference === 'number' ? scale.yFor(reference) : undefined
 
     return (
       <svg
         ref={ref}
+        aria-hidden={ariaLabel ? undefined : true}
+        aria-label={ariaLabel}
         className={cx(css({ colorPalette: tone }), styles.root, className)}
-        width={width}
         height={height}
-        viewBox={`0 0 ${String(width)} ${String(height)}`}
         preserveAspectRatio="none"
         role={ariaLabel ? 'img' : undefined}
-        aria-label={ariaLabel}
-        aria-hidden={ariaLabel ? undefined : true}
+        viewBox={`0 0 ${String(width)} ${String(height)}`}
+        width={width}
         {...props}
       >
+        {refBand ? (
+          <rect
+            className={styles.referenceBand}
+            height={n(refBand.height)}
+            width={n(width - pad * 2)}
+            x={n(pad)}
+            y={n(refBand.y)}
+          />
+        ) : null}
+        {refLineY !== undefined ? (
+          <line
+            className={styles.referenceLine}
+            strokeWidth={strokeWidth}
+            x1={n(pad)}
+            x2={n(width - pad)}
+            y1={n(refLineY)}
+            y2={n(refLineY)}
+          />
+        ) : null}
         {areaPath ? <path className={styles.area} d={areaPath} /> : null}
-        {line ? <path className={styles.line} d={line} strokeWidth={strokeWidth} /> : null}
+        {(series ?? []).map((s, i) =>
+          s.length > 0 ? (
+            <path
+              key={i}
+              className={styles.lineMuted}
+              d={toLine(toPoints(s, scale))}
+              strokeWidth={strokeWidth}
+            />
+          ) : null,
+        )}
+        {primaryLine ? (
+          <path className={styles.line} d={primaryLine} strokeWidth={strokeWidth} />
+        ) : null}
         {showLastPoint && last ? (
           <circle
             className={styles.point}
