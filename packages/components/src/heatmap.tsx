@@ -26,6 +26,16 @@ const flowGroupClass = /* @__PURE__ */ css({
   '&:not(:last-of-type)': { marginBottom: '12' },
 })
 const flowGroupHeaderRowClass = /* @__PURE__ */ css({ display: 'block' })
+// In flow layout the header <th> must be block-level: it otherwise stays a
+// table-cell inside the display:block row, collapsing to content width — the
+// inner inline-flex row's `w: full` then has no width to fill, so an `aside`
+// with margin-inline-start auto sits flush against the label. Block th +
+// gap/wrap on the inner row restores the right-aligned aside.
+const flowGroupHeaderCellClass = /* @__PURE__ */ css({ display: 'block' })
+const flowGroupHeaderInnerClass = /* @__PURE__ */ css({
+  gap: '10',
+  flexWrap: 'wrap',
+})
 const flowRowClass = /* @__PURE__ */ css({
   display: 'grid',
   gridTemplateColumns: 'repeat(auto-fill, minmax(var(--heatmap-cell-min, 76px), 1fr))',
@@ -379,8 +389,14 @@ export const HeatMapGroup = /* @__PURE__ */ forwardRef<HTMLTableSectionElement, 
       >
         {hasHeader ? (
           <tr className={layout === 'flow' ? flowGroupHeaderRowClass : undefined}>
-            <th scope="colgroup" colSpan={headerColSpan} className={styles.groupHeader}>
-              <span className={groupHeaderRowClass}>
+            <th
+              scope="colgroup"
+              colSpan={headerColSpan}
+              className={cx(styles.groupHeader, layout === 'flow' && flowGroupHeaderCellClass)}
+            >
+              <span
+                className={cx(groupHeaderRowClass, layout === 'flow' && flowGroupHeaderInnerClass)}
+              >
                 {label}
                 {aside !== undefined ? <span className={styles.groupAside}>{aside}</span> : null}
               </span>
