@@ -42,6 +42,16 @@ const flowRowClass = /* @__PURE__ */ css({
   gap: '6',
 })
 
+// Sticky column axis: CSS-only `position: sticky` on the header-row cells so
+// the axis stays visible while a tall grid scrolls in its container. Opaque
+// surface + z-index keep cells from showing through underneath.
+const stickyColumnHeaderClass = /* @__PURE__ */ css({
+  position: 'sticky',
+  top: '0',
+  zIndex: '1',
+  bgColor: 'bg.default',
+})
+
 /** Inline swatch size — geometry only (no color), so it stays out of the token audit. */
 const SWATCH_STYLE: CSSProperties = { height: '0.75rem', minWidth: '0.75rem', width: '0.75rem' }
 
@@ -81,6 +91,8 @@ export interface HeatMapProps extends Omit<HTMLAttributes<HTMLDivElement>, 'chil
   emptyLabel?: string
   /** Render a min → max ramp legend below the grid. */
   legend?: boolean
+  /** Keep the column-header row visible while the grid scrolls vertically. */
+  columnsSticky?: boolean
 }
 
 const SEQUENTIAL_STOPS = [1, 3, 5, 7, 9] as const
@@ -137,6 +149,7 @@ const HeatMapBase = /* @__PURE__ */ forwardRef<HTMLDivElement, HeatMapProps>(fun
     formatValue = (value) => String(value),
     emptyLabel = 'No data',
     legend = false,
+    columnsSticky = false,
     className,
     'aria-label': ariaLabel,
     ...props
@@ -169,9 +182,13 @@ const HeatMapBase = /* @__PURE__ */ forwardRef<HTMLDivElement, HeatMapProps>(fun
       <table className={styles.table} aria-label={ariaLabel}>
         <thead>
           <tr>
-            <td className={styles.corner} />
+            <td className={cx(styles.corner, columnsSticky && stickyColumnHeaderClass)} />
             {columns.map((column) => (
-              <th key={column} scope="col" className={styles.columnHeader}>
+              <th
+                key={column}
+                scope="col"
+                className={cx(styles.columnHeader, columnsSticky && stickyColumnHeaderClass)}
+              >
                 {column}
               </th>
             ))}
@@ -315,6 +332,8 @@ export interface HeatMapRootProps extends Omit<HTMLAttributes<HTMLTableElement>,
   columns?: readonly ReactNode[]
   /** Cell layout: `matrix` (default, aligned columns) or `flow` (auto-fill wrap). */
   layout?: HeatMapLayout
+  /** Keep the column-header row visible while the grid scrolls vertically. */
+  columnsSticky?: boolean
   children?: ReactNode
 }
 
@@ -326,6 +345,7 @@ export const HeatMapRoot = /* @__PURE__ */ forwardRef<HTMLTableElement, HeatMapR
       midpoint = 0,
       layout = 'matrix',
       columns,
+      columnsSticky = false,
       className,
       children,
       ...props
@@ -344,9 +364,13 @@ export const HeatMapRoot = /* @__PURE__ */ forwardRef<HTMLTableElement, HeatMapR
             {columns !== undefined && columns.length > 0 ? (
               <thead>
                 <tr>
-                  <td className={styles.corner} />
+                  <td className={cx(styles.corner, columnsSticky && stickyColumnHeaderClass)} />
                   {columns.map((column, index) => (
-                    <th key={index} scope="col" className={styles.columnHeader}>
+                    <th
+                      key={index}
+                      scope="col"
+                      className={cx(styles.columnHeader, columnsSticky && stickyColumnHeaderClass)}
+                    >
                       {column}
                     </th>
                   ))}

@@ -73,3 +73,37 @@ test('makes cells focusable when inspectable', () => {
 
   expect(screen.getByLabelText('A, X: 10')).toHaveAttribute('tabindex', '0')
 })
+
+test('columnsSticky pins the header row cells', () => {
+  const { rerender } = renderHeatMap()
+  const plainClass = screen.getByRole('columnheader', { name: 'X' }).className
+
+  rerender(
+    <HeatMap
+      rows={rows}
+      columns={columns}
+      cell={(row, column) => values[row]?.[column] ?? null}
+      aria-label="Sample grid"
+      columnsSticky
+    />,
+  )
+  const sticky = screen.getByRole('columnheader', { name: 'X' })
+
+  expect(sticky.className).not.toBe(plainClass)
+  expect(sticky.className).toContain('pos_sticky')
+})
+
+test('Root columnsSticky pins the column axis', () => {
+  render(
+    <HeatMap.Root aria-label="Sticky axis" columns={['00', '01']} columnsSticky>
+      <HeatMap.Group label="bank">
+        <HeatMap.Row header="dev">
+          <HeatMap.Cell level={3} label="dev, 00" />
+          <HeatMap.Cell level={5} label="dev, 01" />
+        </HeatMap.Row>
+      </HeatMap.Group>
+    </HeatMap.Root>,
+  )
+
+  expect(screen.getByRole('columnheader', { name: '00' }).className).toContain('pos_sticky')
+})

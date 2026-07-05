@@ -75,6 +75,24 @@ export const Inspectable: Story = {
   },
 }
 
+// `columnsSticky` pins the column axis while a tall grid scrolls in its container
+// — e.g. a 63-device site over a 24h hour axis.
+export const StickyColumns: Story = {
+  args: {
+    'aria-label': 'Inverter performance with sticky axis',
+    cell: (row, column) => performance[row]?.[column] ?? null,
+    columns: days,
+    columnsSticky: true,
+    rows: inverters,
+  },
+  parameters: { controls: { disable: true } },
+  render: (args) => (
+    <div style={{ height: 140, overflowY: 'auto' }}>
+      <HeatMap {...args} />
+    </div>
+  ),
+}
+
 // Composable HeatMap.* — labeled sections, in-cell content, status-tone fills, and
 // click-to-drill cells (each cell is a focusable button). Color here comes from a
 // `tone` (a saturated `vivid` fill); pass `value` + a Root `domain` for scale color.
