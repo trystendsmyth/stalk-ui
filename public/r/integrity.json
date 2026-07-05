@@ -140,11 +140,11 @@
     },
     "combobox": {
       "path": "/r/combobox.json",
-      "sha256": "b3c2cbc7c0a0e1b3eee169233a0df2ecd95bd22de61c22c433094413e17f230f"
+      "sha256": "18a1cc41f7dd103d964ed4d050fb2e60c1e1383802165d7e4c1d75992e016829"
     },
     "shadcn/combobox": {
       "path": "/r/shadcn/combobox.json",
-      "sha256": "717484b7e8a3994cab11375a2faf20c9a77309fba3ab37398575c8c4b6c8c1a5"
+      "sha256": "c1f765d2b942680cb9c33b32b6af7d3419ad41768313e8442c83c8ee4303164b"
     },
     "command": {
       "path": "/r/command.json",

@@ -183,6 +183,23 @@ const ReportRangePicker = () => {
   )
 }
 
+const StackMultiCombobox = () => {
+  const [value, setValue] = useState<string[]>(['next'])
+  return (
+    <Combobox
+      aria-label="Frameworks"
+      multiple
+      options={[
+        { label: 'Next.js', value: 'next' },
+        { label: 'Remix', value: 'remix' },
+        { label: 'Astro', value: 'astro' },
+      ]}
+      value={value}
+      onChange={setValue}
+    />
+  )
+}
+
 const FrameworkCombobox = () => {
   const [value, setValue] = useState<string>()
   return (
@@ -277,6 +294,7 @@ const liveScope = {
   EventDatePicker,
   ReportRangePicker,
   FrameworkCombobox,
+  StackMultiCombobox,
   DropdownMenu,
   Form,
   FormControl,
