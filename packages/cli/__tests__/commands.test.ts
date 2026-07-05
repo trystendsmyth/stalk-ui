@@ -68,7 +68,7 @@ const captureOutput = async (callback: () => Promise<void>) => {
 const normalizeOutput = (root: string, lines: string[]) =>
   lines.map((line) => line.replaceAll(root, '$ROOT'))
 
-const createRegistryServer = async () => {
+const createRegistryServer = async (buttonContent = 'export const Button = () => null\n') => {
   const manifest = {
     $schema: 'https://stalk-ui.com/schema/v1/registry-item.json',
     name: 'button',
@@ -79,7 +79,7 @@ const createRegistryServer = async () => {
       {
         path: 'src/components/ui/button.tsx',
         type: 'registry:ui',
-        content: 'export const Button = () => null\n',
+        content: buttonContent,
       },
     ],
     stalk: {
@@ -301,6 +301,37 @@ describe('CLI command golden files', () => {
         await writeFile(
           join(fixture.root, 'src/components/ui/button.tsx'),
           'export const Button = () => null\n',
+        )
+        const output = await captureOutput(async () => {
+          await diffCommand('button', { registry: registry.url })
+        })
+
+        expect(output).toMatchInlineSnapshot(`
+          [
+            "button: no differences",
+          ]
+        `)
+      })
+    } finally {
+      await registry.close()
+    }
+  })
+
+  test('diff rewrites registry imports through the panda importMap before comparing', async () => {
+    const registry = await createRegistryServer(
+      "import { css } from 'styled-system/css'\nexport const Button = () => css({})\n",
+    )
+
+    try {
+      await withFixture(async (fixture) => {
+        await writeFile(
+          join(fixture.root, 'panda.config.ts'),
+          `import { defineConfig } from '@pandacss/dev'\n\nexport default defineConfig({ importMap: '@styled' })\n`,
+        )
+        await mkdir(join(fixture.root, 'src/components/ui'), { recursive: true })
+        await writeFile(
+          join(fixture.root, 'src/components/ui/button.tsx'),
+          "import { css } from '@styled/css'\nexport const Button = () => css({})\n",
         )
         const output = await captureOutput(async () => {
           await diffCommand('button', { registry: registry.url })

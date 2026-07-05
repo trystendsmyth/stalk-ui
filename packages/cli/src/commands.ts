@@ -6,9 +6,14 @@ import { note } from '@clack/prompts'
 import { defaultConfig } from './constants'
 import { CliError } from './errors'
 import { backupFile, pathExists, readTextIfExists, toProjectPath, writeText } from './fs'
+import {
+  createImportRewriter,
+  resolveStyledSystemTarget,
+  styledSystemAliasFor,
+} from './import-rewrite'
 import { fetchManifest, resolveManifestUrl } from './manifest'
 import { installPackages, runPandaCodegen } from './package-manager'
-import { patchPandaConfig } from './panda-config'
+import { detectPandaImportMap, patchPandaConfig } from './panda-config'
 import { describeProject, resolveProject, writeProjectConfig } from './project'
 
 import type { GlobalOptions, RegistryItem, StalkConfig } from './types'
@@ -129,6 +134,17 @@ export const initCommand = async (options: InitOptions) => {
   await ensureGitignoreEntry(context.root, options)
   await patchPandaConfig(context.root, options)
 
+  // A consumer whose panda config aliases the outdir (Panda `importMap`) gets
+  // that alias recorded as `styledSystem`, so installs rewrite imports to it.
+  if (nextConfig.styledSystem === defaultConfig.styledSystem) {
+    const importMap = await detectPandaImportMap(context.root, options)
+    const alias = importMap === undefined ? undefined : styledSystemAliasFor(importMap)
+
+    if (alias !== undefined) {
+      nextConfig.styledSystem = alias
+    }
+  }
+
   if (options.dryRun === true) {
     console.log(`[dry-run] write ${context.configPath}`)
   } else {
@@ -147,6 +163,7 @@ export const initCommand = async (options: InitOptions) => {
 export const addCommand = async (name: string, options: GlobalOptions) => {
   const context = await resolveProject(options)
   const resolved = await collectManifests(name, context, options, new Set(), options.registry)
+  const styledSystemTarget = await resolveStyledSystemTarget(context.root, context.config, options)
   const backupDirectory = backupRoot(context.root)
 
   if (options.dryRun !== true) {
@@ -157,16 +174,21 @@ export const addCommand = async (name: string, options: GlobalOptions) => {
   // files (e.g. a lib helper pulled in by multiple components) by target path.
   const writtenPaths = new Set<string>()
   for (const { manifest } of resolved) {
+    const rewriteImports = createImportRewriter(
+      manifest.stalk.importAliases.styledSystem,
+      styledSystemTarget,
+    )
     for (const file of manifest.files) {
       if (writtenPaths.has(file.path)) {
         continue
       }
       writtenPaths.add(file.path)
 
+      const content = rewriteImports(file.content)
       const targetPath = toProjectPath(context.root, file.path)
       const existing = await readTextIfExists(targetPath)
 
-      if (existing === file.content) {
+      if (existing === content) {
         continue
       }
 
@@ -174,7 +196,7 @@ export const addCommand = async (name: string, options: GlobalOptions) => {
         throw new CliError(`${file.path} already exists. Re-run with --force to overwrite.`)
       }
 
-      await writeFileWithBackup(context.root, backupDirectory, targetPath, file.content, options)
+      await writeFileWithBackup(context.root, backupDirectory, targetPath, content, options)
     }
   }
 
@@ -247,11 +269,16 @@ https://stalk-ui.com/en/docs/getting-started/custom-themes`)
 export const diffCommand = async (name: string, options: GlobalOptions) => {
   const context = await resolveProject(options)
   const resolved = await collectManifests(name, context, options, new Set(), options.registry)
+  const styledSystemTarget = await resolveStyledSystemTarget(context.root, context.config, options)
   const requested = resolved.at(-1)?.manifest.name ?? name
   let differences = 0
 
   const checkedPaths = new Set<string>()
   for (const { manifest } of resolved) {
+    const rewriteImports = createImportRewriter(
+      manifest.stalk.importAliases.styledSystem,
+      styledSystemTarget,
+    )
     for (const file of manifest.files) {
       if (checkedPaths.has(file.path)) {
         continue
@@ -261,7 +288,7 @@ export const diffCommand = async (name: string, options: GlobalOptions) => {
       const targetPath = toProjectPath(context.root, file.path)
       const existing = await readTextIfExists(targetPath)
 
-      if (existing !== file.content) {
+      if (existing !== rewriteImports(file.content)) {
         differences += 1
         console.log(`${file.path}: ${existing === undefined ? 'missing' : 'differs'}`)
       }
