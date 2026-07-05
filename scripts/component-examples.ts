@@ -85,7 +85,7 @@ export const componentExamples = {
   ],
   'data-table': ['<InvoiceTable />'],
   'data-table-advanced': ['<MembersTable />'],
-  'date-picker': ['<EventDatePicker />'],
+  'date-picker': ['<EventDatePicker />', '<ReportRangePicker />'],
   heatmap: ['<PerformanceHeatMap />'],
   'datetime-input': [
     '<DatetimeInput aria-label="Date" />',
@@ -166,6 +166,7 @@ export const componentExamples = {
     '<Progress aria-label="Upload" value={42} />',
     '<Progress aria-label="Sync" max={200} value={120} size="lg" />',
     '<Progress aria-label="Loading" />',
+    '<Progress aria-label="Capacity" shape="circular" showValue value={72} />',
   ],
   'qr-code': [
     '<QrCode value="https://example.com" aria-label="QR code linking to example.com" />',

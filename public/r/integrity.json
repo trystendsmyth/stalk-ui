@@ -188,11 +188,11 @@
     },
     "date-picker": {
       "path": "/r/date-picker.json",
-      "sha256": "82bccd598398af1446fc17d44affbac9758b200870a3d9ce6618298154d5938b"
+      "sha256": "f48b81ef26db68793118876ddf2c8a7001f8e81536f826bf3d612db04e82bd9e"
     },
     "shadcn/date-picker": {
       "path": "/r/shadcn/date-picker.json",
-      "sha256": "adae9efdf6e848fd93eeaee9a34d06551f4352d867d8946f05b97c029d158213"
+      "sha256": "22660805eba2c1a592070570f340b4f3ad4003c71a709af9c200359ba9a82c49"
     },
     "datetime-input": {
       "path": "/r/datetime-input.json",
@@ -356,11 +356,11 @@
     },
     "progress": {
       "path": "/r/progress.json",
-      "sha256": "9e4c8f9271bccced518033c79ab3492258473e3155416ad6b283e473f8a7ed4f"
+      "sha256": "0655335dee58dcbc2e5c2d868abb20d7a635b0c52efa1fc6f4b0ca55075e18e0"
     },
     "shadcn/progress": {
       "path": "/r/shadcn/progress.json",
-      "sha256": "e52927a4c8291cb92d18839684b8198c8e475b70ee72d8bbf37da78d91918d55"
+      "sha256": "58ec67dbd7bcfd1deb84ea0a1e43c2f9a2bd49d227edceb8e68638d7c061c51c"
     },
     "qr-code": {
       "path": "/r/qr-code.json",

@@ -3332,6 +3332,58 @@
       max-width: calc(100vw - 2rem);
 }
 
+    .stalk-date-picker__rangeField {
+      gap: var(--spacing-8);
+      padding-inline: var(--spacing-12);
+      align-items: center;
+      cursor: pointer;
+      text-align: start;
+}
+
+    .stalk-date-picker__rangeValue {
+      flex: 1 1 auto;
+      overflow: hidden;
+      color: var(--colors-fg-default);
+      text-overflow: ellipsis;
+      white-space: nowrap;
+}
+
+    .stalk-date-picker__rangeValue[data-placeholder] {
+      color: var(--colors-fg-muted);
+}
+
+    .stalk-date-picker__panel {
+      align-items: stretch;
+      display: flex;
+}
+
+    .stalk-date-picker__presets {
+      padding: var(--spacing-8);
+      gap: var(--spacing-2);
+      border-inline-end-width: 1px;
+      border-inline-end-style: solid;
+      border-inline-end-color: var(--colors-border-muted);
+      display: flex;
+      flex-direction: column;
+      min-width: var(--sizes-128);
+}
+
+    .stalk-date-picker__preset {
+      border: none;
+      border-radius: var(--radii-sm);
+      padding-inline: var(--spacing-10);
+      padding-block: var(--spacing-6);
+      background-color: transparent;
+      color: var(--colors-fg-default);
+      cursor: pointer;
+      font-size: var(--font-sizes-sm);
+      text-align: start;
+}
+
+    .stalk-date-picker__preset:is(:hover, [data-hover]) {
+      background-color: var(--colors-bg-subtle);
+}
+
     .stalk-dialog__overlay {
       inset: var(--spacing-0);
       background-color: black.a8;
@@ -4371,6 +4423,35 @@
       transition-property: inline-size;
       --transition-easing: ease-out;
       transition-timing-function: ease-out;
+}
+
+    .stalk-progress__circle {
+      display: block;
+}
+
+    .stalk-progress__circleTrack {
+      fill: none;
+      stroke: var(--colors-bg-subtle);
+}
+
+    .stalk-progress__circleRange {
+      fill: none;
+      stroke: var(--colors-accent-solid);
+      stroke-linecap: round;
+      transform: rotate(-90deg);
+      transform-origin: 50px 50px;
+      --transition-duration: var(--durations-normal);
+      transition-duration: var(--durations-normal);
+      --transition-prop: stroke-dashoffset;
+      transition-property: stroke-dashoffset;
+      --transition-easing: ease-out;
+      transition-timing-function: ease-out;
+}
+
+    .stalk-progress__valueText {
+      fill: var(--colors-fg-default);
+      font-size: 22px;
+      font-weight: var(--font-weights-semibold);
 }
 
     .stalk-radio__root {
@@ -6670,12 +6751,35 @@
     height: var(--sizes-12);
 }
 
+  .stalk-progress__circle--size_md {
+    height: var(--sizes-64);
+    width: var(--sizes-64);
+}
+
+  .stalk-progress__root--shape_circular {
+    overflow: visible;
+    border-radius: var(--radii-none);
+    background-color: transparent;
+    display: inline-block;
+    width: auto;
+}
+
   .stalk-progress__root--size_sm {
     height: var(--sizes-8);
 }
 
+  .stalk-progress__circle--size_sm {
+    height: var(--sizes-40);
+    width: var(--sizes-40);
+}
+
   .stalk-progress__root--size_lg {
     height: 16px;
+}
+
+  .stalk-progress__circle--size_lg {
+    height: var(--sizes-96);
+    width: var(--sizes-96);
 }
 
   .stalk-radio__root--size_md {
@@ -7517,6 +7621,10 @@
     --colors-color-palette-contrast: var(--colors-highlight-contrast);
     --colors-color-palette-vivid: var(--colors-highlight-vivid);
     --colors-color-palette-vivid-contrast: var(--colors-highlight-vivid-contrast);
+}
+
+  .h_auto {
+    height: auto;
 }
 
   .focusVisible\:focus-ring-width_base:is(:focus-visible, [data-focus-visible]) {

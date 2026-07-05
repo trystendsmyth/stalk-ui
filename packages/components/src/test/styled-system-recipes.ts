@@ -13,13 +13,13 @@ const makeSplitVariantProps =
 
 interface BadgeRecipeOptions {
   radius?: 'none' | 'sm' | 'md' | 'lg' | 'full'
-  size?: 'sm' | 'md'
+  size?: 'micro' | 'sm' | 'md' | 'lg'
   variant?: 'solid' | 'subtle' | 'outline'
 }
 
 export const badge = ({
   radius = 'full',
-  size = 'md',
+  size = 'lg',
   variant = 'subtle',
 }: BadgeRecipeOptions = {}) =>
   `stalk-badge stalk-badge--${variant} stalk-badge--${size} stalk-badge--radius-${radius}`
@@ -614,12 +614,17 @@ export const menubar = ({ inset = false }: MenubarRecipeOptions = {}) => ({
 })
 
 interface ProgressRecipeOptions {
+  shape?: 'linear' | 'circular'
   size?: 'sm' | 'md' | 'lg'
 }
 
-export const progress = ({ size = 'md' }: ProgressRecipeOptions = {}) => ({
-  root: `stalk-progress__root stalk-progress__root--${size}`,
+export const progress = ({ shape = 'linear', size = 'md' }: ProgressRecipeOptions = {}) => ({
+  root: `stalk-progress__root stalk-progress__root--${size} stalk-progress__root--${shape}`,
   indicator: 'stalk-progress__indicator',
+  circle: 'stalk-progress__circle',
+  circleTrack: 'stalk-progress__circleTrack',
+  circleRange: 'stalk-progress__circleRange',
+  valueText: 'stalk-progress__valueText',
 })
 
 interface SkeletonRecipeOptions {

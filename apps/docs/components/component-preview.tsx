@@ -84,6 +84,7 @@ import { useId, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { LiveEditor, LiveError, LivePreview, LiveProvider } from 'react-live'
 
+import type { DateRange } from '@stalk-ui/components/date-picker'
 import type { ColumnDef } from '@tanstack/react-table'
 
 // react-live previews render a single JSX expression, so examples that need
@@ -159,6 +160,27 @@ const PerformanceHeatMap = () => (
 const EventDatePicker = () => {
   const [date, setDate] = useState<Date>()
   return <DatePicker aria-label="Event date" value={date} onChange={setDate} />
+}
+
+const ReportRangePicker = () => {
+  const [range, setRange] = useState<DateRange | undefined>()
+  const day = (offset: number) => {
+    const date = new Date()
+    date.setDate(date.getDate() + offset)
+    return date
+  }
+  return (
+    <DatePicker
+      aria-label="Report window"
+      mode="range"
+      presets={[
+        { label: 'Last 7 days', range: { from: day(-6), to: day(0) } },
+        { label: 'Last 30 days', range: { from: day(-29), to: day(0) } },
+      ]}
+      value={range}
+      onChange={setRange}
+    />
+  )
 }
 
 const FrameworkCombobox = () => {
@@ -253,6 +275,7 @@ const liveScope = {
   DatetimeInput,
   Dialog,
   EventDatePicker,
+  ReportRangePicker,
   FrameworkCombobox,
   DropdownMenu,
   Form,
