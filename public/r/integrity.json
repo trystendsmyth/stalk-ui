@@ -580,11 +580,11 @@
     },
     "editable": {
       "path": "/r/editable.json",
-      "sha256": "9309113a1531f5a07ba012da9521a32200365a18224e4bee0a8cb95e4f24ba6f"
+      "sha256": "80034563ee8678839f0e529499ba4e498482e37559cfd6e0e77e4fe620a03e8f"
     },
     "shadcn/editable": {
       "path": "/r/shadcn/editable.json",
-      "sha256": "593f7a310b7cbb9dc4e3acd07543a9d40218250714ab1223c94937406d718500"
+      "sha256": "b6e2d5b0707d13fde047791c62ea86916eb26de394a8551fc844a141e7978bcd"
     },
     "empty-state": {
       "path": "/r/empty-state.json",
@@ -604,19 +604,19 @@
     },
     "rating": {
       "path": "/r/rating.json",
-      "sha256": "cf6978f49f3efdbad2bdd4316a91d625ab2e70f6805e111799cc762deb82dbc6"
+      "sha256": "af81f8e2dff7ba81ecfad8f02f23fb0ea3a63511b5ead096bd3f8d4b2927f110"
     },
     "shadcn/rating": {
       "path": "/r/shadcn/rating.json",
-      "sha256": "cf9a83410e59f87397e74953d8355ea805c617262dc26953394e51b9bfc8c521"
+      "sha256": "68a77bf41bac573cc3aad44d3436c4cef19312446ec04649282a10d44167982b"
     },
     "stat": {
       "path": "/r/stat.json",
-      "sha256": "c6e8895f01a5f25b92a65279e4447d1dfeb3c7099f854d3d83a59bb7477089bb"
+      "sha256": "f2252827c5ff69cacfedbea4cc96658fdd8970e524d333f509ec175828317df3"
     },
     "shadcn/stat": {
       "path": "/r/shadcn/stat.json",
-      "sha256": "db230367d401076645be51414228d0bf28c6b6ad1a208ca014bfe6505b00db28"
+      "sha256": "dc6943da777f4f2cf8e77a7dda90f22bd9bdc18a8c8804ac08940f2f0fd3ae2b"
     },
     "steps": {
       "path": "/r/steps.json",
