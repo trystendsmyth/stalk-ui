@@ -75,6 +75,24 @@ export const WithAction: Story = {
   ),
 }
 
+// size="lg" opens up gap/padding for hero / feature panels.
+export const Large: Story = {
+  args: { size: 'lg' },
+  render: (args) => (
+    <Card.Root {...args} style={{ maxWidth: '28rem' }}>
+      <Card.Header>
+        <Card.Title>Start your migration</Card.Title>
+        <Card.Description>
+          Move an existing app onto Stalk UI with the CLI and a preset bump.
+        </Card.Description>
+      </Card.Header>
+      <Card.Content>
+        Roomier padding suits a single feature panel that anchors the page.
+      </Card.Content>
+    </Card.Root>
+  ),
+}
+
 // size="sm" tightens gap/padding for compact metric tiles.
 export const Compact: Story = {
   args: { size: 'sm', variant: 'elevated' },

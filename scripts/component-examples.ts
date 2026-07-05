@@ -23,7 +23,8 @@ export const componentExamples = {
   badge: [
     '<Badge>Published</Badge>',
     '<Badge variant="solid" tone="success">Live</Badge>',
-    '<Badge variant="outline" tone="danger" size="sm" radius="sm">Error</Badge>',
+    '<Badge variant="outline" tone="danger" size="md" radius="sm">Error</Badge>',
+    '<Badge tone="neutral" size="micro">vendor-reported</Badge>',
   ],
   blockquote: [
     '<Blockquote>The quick brown fox jumps over the lazy dog.</Blockquote>',

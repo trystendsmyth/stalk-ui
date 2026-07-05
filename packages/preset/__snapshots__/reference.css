@@ -615,6 +615,16 @@
     --colors-info-contrast: var(--colors-gray-1);
     --colors-info-vivid: var(--colors-blue-9);
     --colors-info-vivid-contrast: var(--colors-gray-1);
+    --colors-neutral-surface: var(--colors-neutral-2);
+    --colors-neutral-subtle: var(--colors-neutral-5);
+    --colors-neutral-muted: var(--colors-neutral-7);
+    --colors-neutral-solid: var(--colors-neutral-11);
+    --colors-neutral-emphasis: color-mix(in srgb, var(--colors-neutral-11) 50%, var(--colors-neutral-12) 50%);
+    --colors-neutral-text: color-mix(in srgb, var(--colors-neutral-11) 50%, var(--colors-neutral-12) 50%);
+    --colors-neutral-fg: var(--colors-neutral-12);
+    --colors-neutral-contrast: var(--colors-gray-1);
+    --colors-neutral-vivid: var(--colors-neutral-9);
+    --colors-neutral-vivid-contrast: var(--colors-gray-1);
     --colors-highlight-surface: var(--colors-orange-2);
     --colors-highlight-subtle: var(--colors-orange-5);
     --colors-highlight-muted: var(--colors-orange-7);
@@ -710,6 +720,16 @@
     --colors-info-contrast: var(--colors-gray-12);
     --colors-info-vivid: var(--colors-blue-dark-9);
     --colors-info-vivid-contrast: var(--colors-gray-1);
+    --colors-neutral-surface: var(--colors-neutral-dark-2);
+    --colors-neutral-subtle: var(--colors-neutral-dark-5);
+    --colors-neutral-muted: var(--colors-neutral-dark-7);
+    --colors-neutral-solid: var(--colors-neutral-dark-11);
+    --colors-neutral-emphasis: color-mix(in srgb, var(--colors-neutral-dark-11) 50%, var(--colors-neutral-dark-12) 50%);
+    --colors-neutral-text: color-mix(in srgb, var(--colors-neutral-dark-11) 50%, var(--colors-neutral-dark-12) 50%);
+    --colors-neutral-fg: var(--colors-neutral-dark-12);
+    --colors-neutral-contrast: var(--colors-gray-12);
+    --colors-neutral-vivid: var(--colors-neutral-dark-9);
+    --colors-neutral-vivid-contrast: var(--colors-gray-1);
     --colors-highlight-surface: var(--colors-orange-dark-2);
     --colors-highlight-subtle: var(--colors-orange-dark-5);
     --colors-highlight-muted: var(--colors-orange-dark-7);
@@ -1491,7 +1511,7 @@
     border-radius: var(--radii-full);
 }
 
-  .stalk-badge--size_md {
+  .stalk-badge--size_lg {
     padding-inline: var(--spacing-10);
     font-size: var(--font-sizes-sm);
     min-height: var(--sizes-24);
@@ -1514,7 +1534,21 @@
     color: var(--colors-color-palette-fg);
 }
 
+  .stalk-badge--size_micro {
+    gap: var(--spacing-4);
+    padding-inline: var(--spacing-4);
+    font-size: var(--font-sizes-2xs);
+    min-height: var(--sizes-14);
+}
+
   .stalk-badge--size_sm {
+    gap: var(--spacing-4);
+    padding-inline: var(--spacing-6);
+    font-size: var(--font-sizes-xs);
+    min-height: var(--sizes-18);
+}
+
+  .stalk-badge--size_md {
     padding-inline: var(--spacing-8);
     font-size: var(--font-sizes-xs);
     min-height: var(--sizes-20);
@@ -6303,6 +6337,15 @@
     padding-inline: var(--spacing-12);
 }
 
+  .stalk-card__root--size_lg {
+    gap: var(--spacing-32);
+    padding-block: var(--spacing-32);
+}
+
+  .stalk-card__header--size_lg,.stalk-card__content--size_lg,.stalk-card__footer--size_lg {
+    padding-inline: var(--spacing-32);
+}
+
   .stalk-carousel__content--orientation_horizontal {
     margin-inline-start: -16px;
 }
@@ -7436,6 +7479,31 @@
     --colors-color-palette-contrast: var(--colors-info-contrast);
     --colors-color-palette-vivid: var(--colors-info-vivid);
     --colors-color-palette-vivid-contrast: var(--colors-info-vivid-contrast);
+}
+
+  .color-palette_neutral {
+    --colors-color-palette-1: var(--colors-neutral-1);
+    --colors-color-palette-2: var(--colors-neutral-2);
+    --colors-color-palette-3: var(--colors-neutral-3);
+    --colors-color-palette-4: var(--colors-neutral-4);
+    --colors-color-palette-5: var(--colors-neutral-5);
+    --colors-color-palette-6: var(--colors-neutral-6);
+    --colors-color-palette-7: var(--colors-neutral-7);
+    --colors-color-palette-8: var(--colors-neutral-8);
+    --colors-color-palette-9: var(--colors-neutral-9);
+    --colors-color-palette-10: var(--colors-neutral-10);
+    --colors-color-palette-11: var(--colors-neutral-11);
+    --colors-color-palette-12: var(--colors-neutral-12);
+    --colors-color-palette-surface: var(--colors-neutral-surface);
+    --colors-color-palette-subtle: var(--colors-neutral-subtle);
+    --colors-color-palette-muted: var(--colors-neutral-muted);
+    --colors-color-palette-solid: var(--colors-neutral-solid);
+    --colors-color-palette-emphasis: var(--colors-neutral-emphasis);
+    --colors-color-palette-text: var(--colors-neutral-text);
+    --colors-color-palette-fg: var(--colors-neutral-fg);
+    --colors-color-palette-contrast: var(--colors-neutral-contrast);
+    --colors-color-palette-vivid: var(--colors-neutral-vivid);
+    --colors-color-palette-vivid-contrast: var(--colors-neutral-vivid-contrast);
 }
 
   .color-palette_highlight {

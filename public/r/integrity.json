@@ -44,11 +44,11 @@
     },
     "badge": {
       "path": "/r/badge.json",
-      "sha256": "2be4010390d57b094016fec587152d516baa07044c5b45c542b026ac999bd814"
+      "sha256": "866c9bb7a789e4e516a3b415d97598a77e8b5dd0d9a72493f4adb6fce9310d71"
     },
     "shadcn/badge": {
       "path": "/r/shadcn/badge.json",
-      "sha256": "752fe9ede9f538bccf3acdf0e6be7870f8b5a09b652bd558045f316dc48c3169"
+      "sha256": "dcee8e76f2f81f85500507dbe0d0910d5f3e4b8ce11da08dfbf633f4f3426951"
     },
     "blockquote": {
       "path": "/r/blockquote.json",
@@ -244,11 +244,11 @@
     },
     "heatmap": {
       "path": "/r/heatmap.json",
-      "sha256": "8078f5555c240a09acf511a3614e8bb7d57e7f062ed9626fd748ad79197ba302"
+      "sha256": "36b454dc4e91973d01080eb9d7f9a0cf0507f1ed47759beda7bab5cc66c6b519"
     },
     "shadcn/heatmap": {
       "path": "/r/shadcn/heatmap.json",
-      "sha256": "faeef4b2e2f717b051bb3448650273de380fb074ca6567de737af1d43cb176ec"
+      "sha256": "03c2da98e901e1c0e01f30da4f40ed35d95fe50c5c576d761ac66f77fa95c263"
     },
     "hover-card": {
       "path": "/r/hover-card.json",
