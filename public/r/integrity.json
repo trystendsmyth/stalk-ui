@@ -172,11 +172,11 @@
     },
     "data-table": {
       "path": "/r/data-table.json",
-      "sha256": "c424bad80c0f82c3082a5f691d8e1f57e8a8d440a6dc190f595d02eb1f473a89"
+      "sha256": "f95520889340cf3eb3e1048924ff7fac878c9aa4e3b0d137e87fc3b076e62aa7"
     },
     "shadcn/data-table": {
       "path": "/r/shadcn/data-table.json",
-      "sha256": "d1283a28d0db67723b8f7a3203df6d0e45ef69e9f845b5062d0621e5f74be42f"
+      "sha256": "046cfd1a9c9dede94be83ee75eeb584bc160401af18d60929479d1feb7340815"
     },
     "data-table-advanced": {
       "path": "/r/data-table-advanced.json",
@@ -244,11 +244,11 @@
     },
     "heatmap": {
       "path": "/r/heatmap.json",
-      "sha256": "251ebee810c77b195cf5eec1181383c7f8c3a150da9c8cc30f74309ff09ce4e0"
+      "sha256": "8078f5555c240a09acf511a3614e8bb7d57e7f062ed9626fd748ad79197ba302"
     },
     "shadcn/heatmap": {
       "path": "/r/shadcn/heatmap.json",
-      "sha256": "918a2901101b92708858980e1ddc0d14f3d4772d0f91ec18619c8db10ca0fc8e"
+      "sha256": "faeef4b2e2f717b051bb3448650273de380fb074ca6567de737af1d43cb176ec"
     },
     "hover-card": {
       "path": "/r/hover-card.json",
