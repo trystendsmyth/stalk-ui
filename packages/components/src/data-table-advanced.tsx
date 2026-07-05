@@ -13,6 +13,7 @@ import { cx } from 'styled-system/css'
 import { dataTable as dataTableRecipe } from 'styled-system/recipes'
 
 import { Button } from './button'
+import { DropdownMenu } from './dropdown-menu'
 import { Table } from './table'
 
 import type {
@@ -22,6 +23,7 @@ import type {
   Row,
   SortingState,
   Table as TanStackTable,
+  VisibilityState,
 } from '@tanstack/react-table'
 import type { ReactNode } from 'react'
 
@@ -46,6 +48,8 @@ export interface UseDataTableOptions<TData> {
   enableSorting?: boolean
   /** Initial frozen columns, e.g. `{ left: ['name'], right: ['actions'] }`. */
   columnPinning?: ColumnPinningState
+  /** Allow pointer column resizing (default `false`). */
+  enableColumnResizing?: boolean
   /** Stable row id; defaults to TanStack's index-based id. */
   getRowId?: (row: TData, index: number) => string
 }
@@ -74,17 +78,20 @@ export function useDataTable<TData>({
   enablePagination = true,
   enableSorting = true,
   columnPinning,
+  enableColumnResizing = false,
   getRowId,
 }: UseDataTableOptions<TData>): UseDataTableResult<TData> {
   const [sorting, setSorting] = useState<SortingState>([])
+  const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({})
   const [expanded, setExpanded] = useState<Record<string, boolean>>({})
 
   const table = useReactTable<TData>({
     columns,
     data,
-    state: { sorting },
+    state: { columnVisibility, sorting },
     enableSorting,
     onSortingChange: setSorting,
+    onColumnVisibilityChange: setColumnVisibility,
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
     initialState: {
@@ -92,6 +99,8 @@ export function useDataTable<TData>({
       ...(columnPinning ? { columnPinning } : {}),
     },
     ...(enablePagination ? { getPaginationRowModel: getPaginationRowModel() } : {}),
+    ...(enableColumnResizing ? { columnResizeMode: 'onChange' as const } : {}),
+    enableColumnResizing,
     ...(getRowId ? { getRowId } : {}),
   })
 
@@ -107,6 +116,47 @@ export function useDataTable<TData>({
   }
 }
 
+/** Column label for menus/exports: the string header when there is one, else the id. */
+const columnLabel = <TData,>(column: Column<TData>): string =>
+  typeof column.columnDef.header === 'string' ? column.columnDef.header : column.id
+
+/**
+ * Serialize the table's current view (visible accessor columns x sorted rows
+ * across every page) to CSV. Exported for reuse and tests.
+ */
+export const tableToCsv = <TData,>(table: TanStackTable<TData>): string => {
+  const columns = table.getVisibleLeafColumns().filter((column) => column.accessorFn !== undefined)
+  const escape = (value: unknown) => {
+    const text =
+      value === undefined || value === null
+        ? ''
+        : typeof value === 'string'
+          ? value
+          : typeof value === 'number' || typeof value === 'boolean' || typeof value === 'bigint'
+            ? String(value)
+            : value instanceof Date
+              ? value.toISOString()
+              : JSON.stringify(value)
+    return /[",\n]/.test(text) ? `"${text.replaceAll('"', '""')}"` : text
+  }
+
+  const lines = [columns.map((column) => escape(columnLabel(column))).join(',')]
+  for (const row of table.getPrePaginationRowModel().rows) {
+    lines.push(columns.map((column) => escape(row.getValue(column.id))).join(','))
+  }
+  return lines.join('\n')
+}
+
+const downloadCsv = (csv: string, fileName: string) => {
+  const blob = new Blob([csv], { type: 'text/csv;charset=utf-8' })
+  const url = URL.createObjectURL(blob)
+  const anchor = document.createElement('a')
+  anchor.href = url
+  anchor.download = fileName
+  anchor.click()
+  URL.revokeObjectURL(url)
+}
+
 export interface DataTableAdvancedProps<TData> extends UseDataTableOptions<TData> {
   /** Message shown when there are no rows. */
   emptyMessage?: string
@@ -118,6 +168,14 @@ export interface DataTableAdvancedProps<TData> extends UseDataTableOptions<TData
   renderSubRow?: (row: TData) => ReactNode
   /** Accessible label for the expand toggle (i18n). Default `'Toggle row details'`. */
   expandLabel?: string
+  /** Show a column-visibility menu in the toolbar. */
+  enableColumnVisibility?: boolean
+  /** Trigger label for the column-visibility menu (i18n). */
+  columnsLabel?: string
+  /** Show a CSV export button downloading the current view under this name. */
+  exportFileName?: string
+  /** Label for the CSV export button (i18n). */
+  exportLabel?: string
   className?: string
 }
 
@@ -127,13 +185,19 @@ export function DataTableAdvanced<TData>({
   maxHeight,
   renderSubRow,
   expandLabel = 'Toggle row details',
+  enableColumnVisibility = false,
+  columnsLabel = 'Columns',
+  exportFileName,
+  exportLabel = 'Export CSV',
   className,
   ...options
 }: DataTableAdvancedProps<TData>) {
   const { table, getPinnedProps, expansion } = useDataTable(options)
   const rows = table.getRowModel().rows
-  const leafCount = table.getAllLeafColumns().length
+  const leafCount = table.getVisibleLeafColumns().length
   const colSpan = leafCount + (renderSubRow ? 1 : 0)
+  const showToolbar = enableColumnVisibility || exportFileName !== undefined
+  const resizable = options.enableColumnResizing === true
 
   const renderExpandToggle = (row: Row<TData>) => (
     <Table.Cell>
@@ -157,6 +221,50 @@ export function DataTableAdvanced<TData>({
 
   return (
     <div className={cx(styles.root, className)}>
+      {showToolbar ? (
+        <div className={styles.toolbar}>
+          {exportFileName !== undefined ? (
+            <Button
+              size="sm"
+              variant="outline"
+              onClick={() => {
+                downloadCsv(tableToCsv(table), exportFileName)
+              }}
+            >
+              {exportLabel}
+            </Button>
+          ) : null}
+          {enableColumnVisibility ? (
+            <DropdownMenu.Root>
+              <DropdownMenu.Trigger asChild>
+                <Button size="sm" variant="outline">
+                  {columnsLabel}
+                  <ChevronDown size={14} aria-hidden />
+                </Button>
+              </DropdownMenu.Trigger>
+              <DropdownMenu.Content align="end">
+                {table
+                  .getAllLeafColumns()
+                  .filter((column) => column.getCanHide())
+                  .map((column) => (
+                    <DropdownMenu.CheckboxItem
+                      key={column.id}
+                      checked={column.getIsVisible()}
+                      onCheckedChange={(checked) => {
+                        column.toggleVisibility(checked)
+                      }}
+                      onSelect={(event) => {
+                        event.preventDefault()
+                      }}
+                    >
+                      {columnLabel(column)}
+                    </DropdownMenu.CheckboxItem>
+                  ))}
+              </DropdownMenu.Content>
+            </DropdownMenu.Root>
+          ) : null}
+        </div>
+      ) : null}
       <Table.Root
         stickyHeader={stickyHeader}
         {...(maxHeight === undefined ? {} : { containerProps: { style: { maxHeight } } })}
@@ -177,6 +285,11 @@ export function DataTableAdvanced<TData>({
                     key={header.id}
                     aria-sort={ariaSort}
                     {...getPinnedProps(header.column)}
+                    // Geometry only: resizable columns need a fixed width and a
+                    // positioning context for the handle.
+                    {...(resizable
+                      ? { style: { position: 'relative', width: header.getSize() } }
+                      : {})}
                   >
                     {header.isPlaceholder ? null : header.column.getCanSort() ? (
                       <button
@@ -190,6 +303,15 @@ export function DataTableAdvanced<TData>({
                     ) : (
                       flexRender(header.column.columnDef.header, header.getContext())
                     )}
+                    {resizable && header.column.getCanResize() ? (
+                      <span
+                        aria-hidden
+                        className={styles.resizeHandle}
+                        data-resizing={header.column.getIsResizing() ? '' : undefined}
+                        onMouseDown={header.getResizeHandler()}
+                        onTouchStart={header.getResizeHandler()}
+                      />
+                    ) : null}
                   </Table.Head>
                 )
               })}

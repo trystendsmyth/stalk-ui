@@ -140,11 +140,11 @@
     },
     "combobox": {
       "path": "/r/combobox.json",
-      "sha256": "18a1cc41f7dd103d964ed4d050fb2e60c1e1383802165d7e4c1d75992e016829"
+      "sha256": "bdc3d9e1a19f926f0978da3a59f8845fe40442f75852b766e7a27710b47896d5"
     },
     "shadcn/combobox": {
       "path": "/r/shadcn/combobox.json",
-      "sha256": "c1f765d2b942680cb9c33b32b6af7d3419ad41768313e8442c83c8ee4303164b"
+      "sha256": "74a33d0f4c1f312ecf7d4ee66c371cdf65888223d59fb743e91ff865722d2c8b"
     },
     "command": {
       "path": "/r/command.json",
@@ -180,11 +180,11 @@
     },
     "data-table-advanced": {
       "path": "/r/data-table-advanced.json",
-      "sha256": "f2d3984f0e670a09f02b45d9447e1d2346ffc5adeaa2a742aed13cae3885cda0"
+      "sha256": "cfa26705150675479d26c586dcaeded65830f56b3cd35d773ff5b79d268b6cc4"
     },
     "shadcn/data-table-advanced": {
       "path": "/r/shadcn/data-table-advanced.json",
-      "sha256": "3084893c852f5b59321575a5e72867c2411852a6200c42ad6de5a338aad6bc0d"
+      "sha256": "faf699c27cecc6563235dea0dac44c3d6a94639cb06bad68005dcbcafef4ac48"
     },
     "date-picker": {
       "path": "/r/date-picker.json",

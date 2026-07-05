@@ -25,14 +25,18 @@ pnpm dlx @stalk-ui/cli add @stalk-ui/data-table-advanced
 
 ## Props
 
-| Prop           | Type                        | Required | Default | Description                                                                      |
-| -------------- | --------------------------- | -------- | ------- | -------------------------------------------------------------------------------- |
-| `emptyMessage` | `string`                    | No       | -       | Message shown when there are no rows.                                            |
-| `stickyHeader` | `boolean`                   | No       | -       | Keep the header pinned while the body scrolls (pairs with \`maxHeight\`).        |
-| `maxHeight`    | `number \| string`          | No       | -       | Max height of the scroll region, enabling vertical scroll for \`stickyHeader\`.  |
-| `renderSubRow` | `(row: TData) => ReactNode` | No       | -       | Render an expandable detail panel for a row; adds a leading expand toggle.       |
-| `expandLabel`  | `string`                    | No       | -       | Accessible label for the expand toggle (i18n). Default \`'Toggle row details'\`. |
-| `className`    | `string`                    | No       | -       | -                                                                                |
+| Prop                     | Type                        | Required | Default | Description                                                                      |
+| ------------------------ | --------------------------- | -------- | ------- | -------------------------------------------------------------------------------- |
+| `emptyMessage`           | `string`                    | No       | -       | Message shown when there are no rows.                                            |
+| `stickyHeader`           | `boolean`                   | No       | -       | Keep the header pinned while the body scrolls (pairs with \`maxHeight\`).        |
+| `maxHeight`              | `number \| string`          | No       | -       | Max height of the scroll region, enabling vertical scroll for \`stickyHeader\`.  |
+| `renderSubRow`           | `(row: TData) => ReactNode` | No       | -       | Render an expandable detail panel for a row; adds a leading expand toggle.       |
+| `expandLabel`            | `string`                    | No       | -       | Accessible label for the expand toggle (i18n). Default \`'Toggle row details'\`. |
+| `enableColumnVisibility` | `boolean`                   | No       | -       | Show a column-visibility menu in the toolbar.                                    |
+| `columnsLabel`           | `string`                    | No       | -       | Trigger label for the column-visibility menu (i18n).                             |
+| `exportFileName`         | `string`                    | No       | -       | Show a CSV export button downloading the current view under this name.           |
+| `exportLabel`            | `string`                    | No       | -       | Label for the CSV export button (i18n).                                          |
+| `className`              | `string`                    | No       | -       | -                                                                                |
 
 ## Variants
 

@@ -3298,6 +3298,33 @@
       color: var(--colors-fg-muted);
 }
 
+    .stalk-data-table__toolbar {
+      gap: var(--spacing-8);
+      display: flex;
+      justify-content: flex-end;
+      padding-bottom: var(--spacing-8);
+}
+
+    .stalk-data-table__resizeHandle {
+      cursor: col-resize;
+      inset-inline-end: var(--spacing-0);
+      position: absolute;
+      touch-action: none;
+      -webkit-user-select: none;
+      user-select: none;
+      bottom: var(--spacing-0);
+      top: var(--spacing-0);
+      width: var(--sizes-4);
+}
+
+    .stalk-data-table__resizeHandle[data-resizing] {
+      background-color: var(--colors-accent-solid);
+}
+
+    .stalk-data-table__resizeHandle:is(:hover, [data-hover]) {
+      background-color: var(--colors-accent-muted);
+}
+
     .stalk-date-picker__root {
       display: block;
       width: var(--sizes-full);
