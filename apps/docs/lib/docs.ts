@@ -62,6 +62,7 @@ export const gettingStartedPages = [
     body: [
       'Native manifests live under /r/*.json and are consumed by the Stalk UI CLI.',
       'Compatibility manifests live under /r/shadcn/*.json for mixed shadcn and Stalk projects: `npx shadcn@latest add https://stalk-ui.com/r/shadcn/<component>.json` installs the same Panda-native source through the shadcn CLI, including Stalk lib helpers (inlined) and the `@stalk-ui/preset` dependency. The flow is exercised in CI against the current shadcn release.',
+      '**Owning the code without owning the drift.** `add` records each install (manifest URL, file hashes, and a pristine base copy) under `.stalk-ui/` — commit that directory. `stalk-ui upgrade` then performs a real three-way merge per file: base snapshot × your local edits × the new registry version. Clean merges keep both sides; true overlaps get git-style conflict markers. `stalk-ui drift` (and the `trystendsmyth/stalk-ui/actions/drift` GitHub Action) reports when the registry has moved past your recorded base — local edits alone never fail the check.',
     ],
   },
   {

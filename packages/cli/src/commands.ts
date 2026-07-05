@@ -11,7 +11,9 @@ import {
   resolveStyledSystemTarget,
   styledSystemAliasFor,
 } from './import-rewrite'
+import { readBaseSnapshot, readLock, recordComponent, writeLock } from './lock'
 import { fetchManifest, resolveManifestUrl } from './manifest'
+import { mergeThreeWay } from './merge'
 import { installPackages, runPandaCodegen } from './package-manager'
 import { detectPandaImportMap, patchPandaConfig } from './panda-config'
 import { describeProject, resolveProject, writeProjectConfig } from './project'
@@ -173,18 +175,22 @@ export const addCommand = async (name: string, options: GlobalOptions) => {
   // Write every file across the dependency closure first, de-duplicating shared
   // files (e.g. a lib helper pulled in by multiple components) by target path.
   const writtenPaths = new Set<string>()
-  for (const { manifest } of resolved) {
+  const lock = await readLock(context.root)
+  for (const { manifest, url } of resolved) {
     const rewriteImports = createImportRewriter(
       manifest.stalk.importAliases.styledSystem,
       styledSystemTarget,
     )
+    const installedFiles: { content: string; path: string }[] = []
     for (const file of manifest.files) {
+      const content = rewriteImports(file.content)
+      installedFiles.push({ content, path: file.path })
+
       if (writtenPaths.has(file.path)) {
         continue
       }
       writtenPaths.add(file.path)
 
-      const content = rewriteImports(file.content)
       const targetPath = toProjectPath(context.root, file.path)
       const existing = await readTextIfExists(targetPath)
 
@@ -198,6 +204,14 @@ export const addCommand = async (name: string, options: GlobalOptions) => {
 
       await writeFileWithBackup(context.root, backupDirectory, targetPath, content, options)
     }
+
+    if (options.dryRun !== true) {
+      await recordComponent(context.root, lock, manifest.name, url, installedFiles)
+    }
+  }
+
+  if (options.dryRun !== true) {
+    await writeLock(context.root, lock)
   }
 
   const packageDependencies = [
@@ -300,15 +314,234 @@ export const diffCommand = async (name: string, options: GlobalOptions) => {
   }
 }
 
-export const upgradeCommand = async (options: GlobalOptions) => {
+const runtimePackages = ['@stalk-ui/preset', '@stalk-ui/i18n']
+
+const assertTracked = (names: string[], tracked: string[]) => {
+  for (const name of names) {
+    if (!tracked.includes(name)) {
+      throw new CliError(
+        tracked.length === 0
+          ? `No tracked components — the lock is recorded by 'add'. Re-run 'stalk-ui add ${name} --force' to begin tracking.`
+          : `'${name}' is not tracked in .stalk-ui/lock.json. Tracked: ${tracked.join(', ')}.`,
+      )
+    }
+  }
+}
+
+export const upgradeCommand = async (names: string[], options: GlobalOptions) => {
   const context = await resolveProject(options)
+  const lock = await readLock(context.root)
+  const tracked = Object.keys(lock.components)
+  assertTracked(names, tracked)
+  const targets = names.length > 0 ? names : tracked
+  const conflicts: string[] = []
+
+  if (targets.length > 0) {
+    const styledSystemTarget = await resolveStyledSystemTarget(
+      context.root,
+      context.config,
+      options,
+    )
+    const backupDirectory = backupRoot(context.root)
+
+    if (options.dryRun !== true) {
+      await mkdir(backupDirectory, { recursive: true })
+    }
+
+    const processedPaths = new Set<string>()
+    const newPackageDependencies = new Set<string>()
+
+    for (const target of targets) {
+      const resolved = await collectManifests(target, context, options, new Set(), options.registry)
+
+      for (const { manifest, url } of resolved) {
+        const rewriteImports = createImportRewriter(
+          manifest.stalk.importAliases.styledSystem,
+          styledSystemTarget,
+        )
+        const installedFiles: { content: string; path: string }[] = []
+
+        for (const file of manifest.files) {
+          const content = rewriteImports(file.content)
+          installedFiles.push({ content, path: file.path })
+
+          if (processedPaths.has(file.path)) {
+            continue
+          }
+          processedPaths.add(file.path)
+
+          const targetPath = toProjectPath(context.root, file.path)
+          const local = await readTextIfExists(targetPath)
+          const base = await readBaseSnapshot(context.root, file.path)
+
+          if (local === content) {
+            console.log(`${file.path}: up to date`)
+            continue
+          }
+
+          if (local === undefined) {
+            console.log(`${file.path}: deleted locally — skipped`)
+            continue
+          }
+
+          if (base === undefined) {
+            // Installed before upgrade tracking existed, so there is no merge
+            // base. Overwrite only under --force; otherwise leave it alone.
+            if (options.force === true) {
+              await writeFileWithBackup(context.root, backupDirectory, targetPath, content, options)
+              console.log(`${file.path}: overwritten (--force; no base snapshot)`)
+            } else {
+              console.log(
+                `${file.path}: no base snapshot — skipped (re-run with --force to overwrite local edits)`,
+              )
+            }
+            continue
+          }
+
+          if (base === content) {
+            console.log(`${file.path}: local edits kept (registry unchanged)`)
+            continue
+          }
+
+          if (local === base) {
+            await writeFileWithBackup(context.root, backupDirectory, targetPath, content, options)
+            console.log(`${file.path}: updated`)
+            continue
+          }
+
+          const merged = mergeThreeWay(base, local, content)
+          await writeFileWithBackup(
+            context.root,
+            backupDirectory,
+            targetPath,
+            merged.content,
+            options,
+          )
+
+          if (merged.conflicted) {
+            conflicts.push(file.path)
+            console.log(`${file.path}: CONFLICT — resolve the markers, then commit`)
+          } else {
+            console.log(`${file.path}: merged local edits with registry changes`)
+          }
+        }
+
+        for (const dependency of packageDependenciesForManifest(manifest)) {
+          if (!runtimePackages.includes(dependency)) {
+            newPackageDependencies.add(dependency)
+          }
+        }
+
+        if (options.dryRun !== true) {
+          await recordComponent(context.root, lock, manifest.name, url, installedFiles)
+        }
+      }
+    }
+
+    if (options.dryRun !== true) {
+      await writeLock(context.root, lock)
+    }
+
+    await installPackages(context.packageManager, [...newPackageDependencies], options)
+  }
+
   await installPackages(
     context.packageManager,
-    ['@stalk-ui/preset@latest', '@stalk-ui/i18n@latest'],
+    runtimePackages.map((name) => `${name}@latest`),
     options,
   )
   await runPandaCodegen(context.packageManager, options)
-  note('Updated shared Stalk UI runtime packages.', 'Upgrade complete')
+
+  if (conflicts.length > 0) {
+    note(
+      `Merged with ${String(conflicts.length)} conflict${conflicts.length === 1 ? '' : 's'}:\n${conflicts
+        .map((path) => `  ${path}`)
+        .join('\n')}\nResolve the conflict markers, then commit. Backups are in .stalk-ui-backup/.`,
+      'Upgrade needs attention',
+    )
+  } else if (targets.length > 0) {
+    note('Upgraded tracked components and shared runtime packages.', 'Upgrade complete')
+  } else {
+    note('Updated shared Stalk UI runtime packages.', 'Upgrade complete')
+  }
+}
+
+interface DriftOptions extends GlobalOptions {
+  json?: boolean
+}
+
+interface DriftFileReport {
+  local: 'clean' | 'deleted' | 'edited' | 'untracked'
+  path: string
+  registry: 'changed' | 'current' | 'untracked'
+}
+
+export const driftCommand = async (names: string[], options: DriftOptions) => {
+  const context = await resolveProject(options)
+  const lock = await readLock(context.root)
+  const tracked = Object.keys(lock.components)
+  assertTracked(names, tracked)
+  const targets = names.length > 0 ? names : tracked
+  const styledSystemTarget = await resolveStyledSystemTarget(context.root, context.config, options)
+
+  const files: DriftFileReport[] = []
+  const seenPaths = new Set<string>()
+
+  for (const target of targets) {
+    const resolved = await collectManifests(target, context, options, new Set(), options.registry)
+
+    for (const { manifest } of resolved) {
+      const rewriteImports = createImportRewriter(
+        manifest.stalk.importAliases.styledSystem,
+        styledSystemTarget,
+      )
+
+      for (const file of manifest.files) {
+        if (seenPaths.has(file.path)) {
+          continue
+        }
+        seenPaths.add(file.path)
+
+        const remote = rewriteImports(file.content)
+        const local = await readTextIfExists(toProjectPath(context.root, file.path))
+        const base = await readBaseSnapshot(context.root, file.path)
+
+        files.push({
+          local:
+            local === undefined
+              ? 'deleted'
+              : base === undefined
+                ? 'untracked'
+                : local === base
+                  ? 'clean'
+                  : 'edited',
+          path: file.path,
+          registry: base === undefined ? 'untracked' : base === remote ? 'current' : 'changed',
+        })
+      }
+    }
+  }
+
+  const upstreamDrift = files.some((file) => file.registry === 'changed')
+
+  if (options.json === true) {
+    console.log(JSON.stringify({ files, upstreamDrift }, null, 2))
+  } else if (files.length === 0) {
+    console.log('No tracked components. Run `stalk-ui add` to begin tracking.')
+  } else {
+    for (const file of files) {
+      console.log(`${file.path}: registry ${file.registry}, local ${file.local}`)
+    }
+    console.log(
+      upstreamDrift
+        ? 'Upstream drift detected — run `stalk-ui upgrade` to merge registry changes.'
+        : 'All tracked components match the registry base.',
+    )
+  }
+
+  if (upstreamDrift) {
+    process.exitCode = 1
+  }
 }
 
 const listInstalledComponents = async (root: string, components: string): Promise<string[]> => {
