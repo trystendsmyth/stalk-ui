@@ -180,19 +180,19 @@
     },
     "data-table-advanced": {
       "path": "/r/data-table-advanced.json",
-      "sha256": "cfa26705150675479d26c586dcaeded65830f56b3cd35d773ff5b79d268b6cc4"
+      "sha256": "deeabce96698d5c323b8edf7bbd4daca5209a7e88954a69f316cfe7a08cb640c"
     },
     "shadcn/data-table-advanced": {
       "path": "/r/shadcn/data-table-advanced.json",
-      "sha256": "faf699c27cecc6563235dea0dac44c3d6a94639cb06bad68005dcbcafef4ac48"
+      "sha256": "49b16db9c30a4ea9ff22783cbd17135d4232b0fb290ff4dff8f766fefc2db8d9"
     },
     "date-picker": {
       "path": "/r/date-picker.json",
-      "sha256": "f48b81ef26db68793118876ddf2c8a7001f8e81536f826bf3d612db04e82bd9e"
+      "sha256": "3dad6fa90db9dac0b9d02704496066c00690f7a12fe016a71fdaca7dae85acf6"
     },
     "shadcn/date-picker": {
       "path": "/r/shadcn/date-picker.json",
-      "sha256": "22660805eba2c1a592070570f340b4f3ad4003c71a709af9c200359ba9a82c49"
+      "sha256": "6cda7ae8399be49dbf91453ec7f4f31597ac98528bd93ca6477195e638b280af"
     },
     "datetime-input": {
       "path": "/r/datetime-input.json",
@@ -561,6 +561,94 @@
     "shadcn/tooltip": {
       "path": "/r/shadcn/tooltip.json",
       "sha256": "c85683220d38134ea83efd1fe0204732bba7b3342828bc786e25f5a78be3a28b"
+    },
+    "copy-button": {
+      "path": "/r/copy-button.json",
+      "sha256": "1a07a91f39136d0cfc693ceb18c103d83eb4d56cb44a8a880db77dd6abbc0f79"
+    },
+    "shadcn/copy-button": {
+      "path": "/r/shadcn/copy-button.json",
+      "sha256": "249d6e850bb4a40197e25157d77038e3b701e7f29012b9458387d1a487654557"
+    },
+    "drawer": {
+      "path": "/r/drawer.json",
+      "sha256": "7e147757b32c37f526571757f8126a75b4f03e5e843546ddbbc25738c304ffe3"
+    },
+    "shadcn/drawer": {
+      "path": "/r/shadcn/drawer.json",
+      "sha256": "3ecaa532eec59fd20545df6fb43011d3efb612bf7d7afa452a885f38a95711c1"
+    },
+    "editable": {
+      "path": "/r/editable.json",
+      "sha256": "9309113a1531f5a07ba012da9521a32200365a18224e4bee0a8cb95e4f24ba6f"
+    },
+    "shadcn/editable": {
+      "path": "/r/shadcn/editable.json",
+      "sha256": "593f7a310b7cbb9dc4e3acd07543a9d40218250714ab1223c94937406d718500"
+    },
+    "empty-state": {
+      "path": "/r/empty-state.json",
+      "sha256": "fb190103f87ab0eba8199148df21414ff626df4bf21e66cb44834f4454f09822"
+    },
+    "shadcn/empty-state": {
+      "path": "/r/shadcn/empty-state.json",
+      "sha256": "0cc7aa3aa0336b8f07c3ff2ce70a9eaadea138dc4f55b1ff525e1c1cdf8971d2"
+    },
+    "file-upload": {
+      "path": "/r/file-upload.json",
+      "sha256": "317a408d9f7f41e9559a9ce791392c596ee487de919552c9738cd383b579c0d7"
+    },
+    "shadcn/file-upload": {
+      "path": "/r/shadcn/file-upload.json",
+      "sha256": "a2992f3fe6c2e0fbd2b6d5afedb1e9522ba4e7497bd8b5b37e0940fcc5de6989"
+    },
+    "rating": {
+      "path": "/r/rating.json",
+      "sha256": "cf6978f49f3efdbad2bdd4316a91d625ab2e70f6805e111799cc762deb82dbc6"
+    },
+    "shadcn/rating": {
+      "path": "/r/shadcn/rating.json",
+      "sha256": "cf9a83410e59f87397e74953d8355ea805c617262dc26953394e51b9bfc8c521"
+    },
+    "stat": {
+      "path": "/r/stat.json",
+      "sha256": "c6e8895f01a5f25b92a65279e4447d1dfeb3c7099f854d3d83a59bb7477089bb"
+    },
+    "shadcn/stat": {
+      "path": "/r/shadcn/stat.json",
+      "sha256": "db230367d401076645be51414228d0bf28c6b6ad1a208ca014bfe6505b00db28"
+    },
+    "steps": {
+      "path": "/r/steps.json",
+      "sha256": "70d0d52f01813dfa7016bc0b0b7248b90539a43ec2237d080865c71ae5e8e103"
+    },
+    "shadcn/steps": {
+      "path": "/r/shadcn/steps.json",
+      "sha256": "2bb913c25ee3cdeb3f5e94fe6b94a2e7cacdd1d18d52d65e51355cf6f0504b40"
+    },
+    "timeline": {
+      "path": "/r/timeline.json",
+      "sha256": "262cd534a94618651a053eb123dbab90ea82d652c3742ba88e68460e55bfbc5f"
+    },
+    "shadcn/timeline": {
+      "path": "/r/shadcn/timeline.json",
+      "sha256": "ac8679493ae7cc64c3aa7f7fd006ed55ce650e1a1956a865a939b5dab4656ad7"
+    },
+    "tour": {
+      "path": "/r/tour.json",
+      "sha256": "b979d1e3c1b453d0ea75e6f590e74e8b7a6a6639d97ba68f6271ffae0a42505d"
+    },
+    "shadcn/tour": {
+      "path": "/r/shadcn/tour.json",
+      "sha256": "02bb142cc5db650967cebef9a218b3905ec0ad19f9237ecf4d627864cebc58ed"
+    },
+    "tree-view": {
+      "path": "/r/tree-view.json",
+      "sha256": "0e3f6736d0310ee62e737f7900eafcebc5224ac007ae65b12e6b52de6c09dde2"
+    },
+    "shadcn/tree-view": {
+      "path": "/r/shadcn/tree-view.json",
+      "sha256": "d2c2e96f73170a5f816cbe3abcfc651056d9077c98a42b777eb63ac02de53b62"
     },
     "create-style-context": {
       "path": "/r/create-style-context.json",

@@ -777,3 +777,73 @@ interface BlockquoteRecipeOptions {
 
 export const blockquote = ({ size = 'md' }: BlockquoteRecipeOptions = {}) =>
   `stalk-blockquote stalk-blockquote--${size}`
+
+const slotMap = (name: string, slots: readonly string[], suffix = '') =>
+  Object.fromEntries(slots.map((slot) => [slot, `stalk-${name}__${slot}${suffix}`]))
+
+interface SizeOnlyOptions {
+  size?: string
+}
+
+export const emptyState = ({ size = 'md' }: SizeOnlyOptions = {}) =>
+  slotMap('empty-state', ['root', 'icon', 'title', 'description', 'actions'], `--${size}`)
+
+export const stat = ({ size = 'md' }: SizeOnlyOptions = {}) =>
+  slotMap('stat', ['root', 'label', 'value', 'unit', 'delta', 'trend'], `--${size}`)
+
+export const timeline = () =>
+  slotMap('timeline', [
+    'root',
+    'item',
+    'rail',
+    'indicator',
+    'connector',
+    'content',
+    'time',
+    'title',
+    'description',
+  ])
+
+export const steps = ({ orientation = 'horizontal' }: { orientation?: string } = {}) =>
+  slotMap(
+    'steps',
+    ['root', 'item', 'indicator', 'separator', 'content', 'title', 'description'],
+    `--${orientation}`,
+  )
+
+export const editable = () => slotMap('editable', ['root', 'preview', 'input'])
+
+export const rating = ({ size = 'md' }: SizeOnlyOptions = {}) =>
+  slotMap('rating', ['root', 'item', 'icon'], `--${size}`)
+
+export const treeView = () =>
+  slotMap('tree-view', ['root', 'branch', 'row', 'indicator', 'label', 'group'])
+
+export const fileUpload = () =>
+  slotMap('file-upload', [
+    'root',
+    'dropzone',
+    'icon',
+    'label',
+    'hint',
+    'list',
+    'item',
+    'itemName',
+    'itemSize',
+    'remove',
+  ])
+
+export const tour = () =>
+  slotMap('tour', ['spotlight', 'content', 'title', 'description', 'footer', 'counter', 'actions'])
+
+export const drawer = () =>
+  slotMap('drawer', [
+    'overlay',
+    'content',
+    'handle',
+    'header',
+    'title',
+    'description',
+    'body',
+    'footer',
+  ])

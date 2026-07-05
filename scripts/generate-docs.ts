@@ -64,6 +64,7 @@ const componentDescriptions = {
   combobox: 'Selects a value from a searchable list in a popover.',
   command: 'Provides a searchable, keyboard-driven command palette.',
   'context-menu': 'Reveals a menu of actions on right-click or long-press.',
+  'copy-button': 'Copies a value to the clipboard with a transient confirmation state.',
   'data-list': 'Presents label/value pairs as an aligned definition list.',
   'data-table': 'Renders sortable, paginated tabular data with TanStack Table.',
   'data-table-advanced':
@@ -71,7 +72,12 @@ const componentDescriptions = {
   'date-picker': 'Pairs a typed date field with a calendar popover.',
   'datetime-input': 'Collects a date, time, or date-and-time as locale-aware masked text.',
   dialog: 'Displays modal content in a focus-trapped overlay.',
+  drawer: 'Slides a Vaul-backed bottom sheet up from the screen edge with drag-to-dismiss.',
   'dropdown-menu': 'Displays a keyboard-accessible menu of actions from a trigger.',
+  editable: 'Edits text in place: a preview that swaps to an input on activation.',
+  'empty-state': 'Communicates an empty view with an icon, message, and next-step actions.',
+  'file-upload':
+    'Accepts files via drag-and-drop or browsing, with validation and a removable list.',
   form: 'Wires react-hook-form fields to accessible labels, descriptions, and errors.',
   'format-input':
     'A text field preset for email, URL, or telephone — sets type, inputMode, and autocomplete.',
@@ -96,6 +102,7 @@ const componentDescriptions = {
   progress: 'Shows the completion progress of a task.',
   'qr-code': 'Renders a scannable QR code, optionally with a center logo.',
   radio: 'Selects one option from a related set of choices.',
+  rating: 'Collects or displays a star rating with radio-group semantics.',
   resizable: 'Splits a layout into panels a user can resize by dragging.',
   'scroll-area': 'Adds a styled, cross-browser scroll viewport with custom scrollbars.',
   'search-input':
@@ -109,6 +116,8 @@ const componentDescriptions = {
   sparkline:
     'Draws a compact inline-SVG trend line with no charting dependency; tints follow the tone and color mode.',
   spinner: 'Indicates an indeterminate loading state with an accessible label.',
+  stat: 'Displays a KPI read-out with label, value, toned delta, and a trend slot.',
+  steps: 'Shows progress through a multi-step flow with numbered, stateful indicators.',
   switch: 'Toggles a setting on or off.',
   table: 'Presents rows and columns of data in an accessible HTML table.',
   tabs: 'Organizes related content into selectable panels.',
@@ -117,10 +126,14 @@ const componentDescriptions = {
   text: 'Renders body text with consistent size, weight, and tone.',
   'time-picker': 'Selects a time of day with hour, minute, and AM/PM selects.',
   textarea: 'Collects multi-line text from a user.',
+  timeline: 'Lists chronological events along a rail of toned dots and connectors.',
   toast: 'Surfaces transient notifications via a Sonner-backed toaster region.',
   toggle: 'A two-state button for inline preferences and toolbar controls.',
   toolbar: 'Groups related controls in a single keyboard-navigable bar.',
+  tour: 'Guides users through the UI by spotlighting targets with a step card.',
   tooltip: 'Provides supplemental context when a control is hovered or focused.',
+  'tree-view':
+    'Navigates hierarchical items with expand/collapse, selection, and full keyboard support.',
 } as const satisfies Record<ComponentName, string>
 
 const project = new Project({

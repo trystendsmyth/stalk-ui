@@ -35,5 +35,6 @@ export interface RecipeConfig {
   base?: Record<string, unknown>
   slots?: string[]
   variants?: Record<string, Record<string, Record<string, unknown>>>
+  compoundVariants?: { css: Record<string, unknown>; [variant: string]: unknown }[]
   defaultVariants?: Record<string, string | boolean>
 }

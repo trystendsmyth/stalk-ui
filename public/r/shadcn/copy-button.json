@@ -1,0 +1,28 @@
+{
+  "$schema": "https://stalk-ui.com/schema/v1/registry-item.json",
+  "name": "copy-button",
+  "type": "registry:ui",
+  "dependencies": ["@stalk-ui/preset", "lucide-react"],
+  "registryDependencies": ["button"],
+  "files": [
+    {
+      "path": "src/components/ui/copy-button.tsx",
+      "type": "registry:ui",
+      "content": "'use client'\n\n'use client'\n\nimport { Check, Copy } from 'lucide-react'\n// Stalk UI component - requires PandaCSS setup and @stalk-ui/preset.\nimport { forwardRef, useEffect, useRef, useState } from 'react'\n\nimport { Button } from './button'\n\nimport type { ButtonProps } from './button'\n\nexport interface CopyButtonProps extends Omit<ButtonProps, 'onCopy' | 'value'> {\n  /** Text written to the clipboard. */\n  value: string\n  /** Visible/accessible label; omit for an icon-only button with aria-label. */\n  label?: string\n  /** Label swapped in while the copied state is active. */\n  copiedLabel?: string\n  /** How long the copied state lasts, in ms. */\n  timeout?: number\n}\n\n/** Clipboard button with a transient copied confirmation. Composes Button. */\nexport const CopyButton = /* @__PURE__ */ forwardRef<HTMLButtonElement, CopyButtonProps>(\n  function CopyButton(\n    {\n      copiedLabel = 'Copied',\n      label = 'Copy',\n      size = 'sm',\n      timeout = 1500,\n      value,\n      variant = 'ghost',\n      ...props\n    },\n    ref,\n  ) {\n    const [copied, setCopied] = useState(false)\n    const timer = useRef<number>(undefined)\n\n    useEffect(\n      () => () => {\n        window.clearTimeout(timer.current)\n      },\n      [],\n    )\n\n    const onCopy = () => {\n      void navigator.clipboard.writeText(value).then(() => {\n        setCopied(true)\n        window.clearTimeout(timer.current)\n        timer.current = window.setTimeout(() => {\n          setCopied(false)\n        }, timeout)\n      })\n    }\n\n    return (\n      <Button ref={ref} size={size} type=\"button\" variant={variant} onClick={onCopy} {...props}>\n        {copied ? <Check size={16} aria-hidden /> : <Copy size={16} aria-hidden />}\n        {copied ? copiedLabel : label}\n      </Button>\n    )\n  },\n)\n"
+    }
+  ],
+  "stalk": {
+    "schemaVersion": "1.0",
+    "preset": {
+      "semanticTokens": {},
+      "recipes": []
+    },
+    "packageDependencies": {
+      "preset": "@stalk-ui/preset"
+    },
+    "pandaCodegen": true,
+    "importAliases": {
+      "styledSystem": "styled-system"
+    }
+  }
+}

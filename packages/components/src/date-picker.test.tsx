@@ -6,6 +6,8 @@ import { axe } from 'vitest-axe'
 
 import { DatePicker } from './date-picker'
 
+import type { DateRange } from './date-picker'
+
 const ControlledDatePicker = ({ onChange }: { onChange?: (date: Date | undefined) => void }) => {
   const [date, setDate] = useState<Date>()
   return (
@@ -82,7 +84,7 @@ test('range mode renders a formatted range field and opens a range calendar', as
 
 test('range presets apply their range and close the popover', async () => {
   const user = userEvent.setup()
-  const onChange = vi.fn<(range: { from?: Date; to?: Date } | undefined) => void>()
+  const onChange = vi.fn<(range: DateRange | undefined) => void>()
   render(
     <DatePicker
       aria-label="Report window"

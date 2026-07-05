@@ -88,7 +88,7 @@ test('renders resize handles when column resizing is enabled', () => {
 
 test('exports the current view as CSV', async () => {
   const user = userEvent.setup()
-  const createObjectURL = vi.fn(() => 'blob:fake')
+  const createObjectURL = vi.fn((_blob: Blob) => 'blob:fake')
   const revokeObjectURL = vi.fn()
   vi.stubGlobal('URL', Object.assign(URL, { createObjectURL, revokeObjectURL }))
   const clicked = vi.spyOn(HTMLAnchorElement.prototype, 'click').mockImplementation(() => undefined)
@@ -98,7 +98,10 @@ test('exports the current view as CSV', async () => {
     await user.click(screen.getByRole('button', { name: 'Export CSV' }))
 
     expect(createObjectURL).toHaveBeenCalledTimes(1)
-    const blob = createObjectURL.mock.calls[0]?.[0] as Blob
+    const blob = createObjectURL.mock.calls[0]?.[0]
+    if (blob === undefined) {
+      throw new Error('createObjectURL not called with a blob')
+    }
     expect(await blob.text()).toBe('Name,Role\nAda,Owner\nLinus,Maintainer')
     expect(clicked).toHaveBeenCalledTimes(1)
     expect(revokeObjectURL).toHaveBeenCalledWith('blob:fake')

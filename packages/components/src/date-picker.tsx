@@ -190,7 +190,12 @@ const RangeDatePicker = /* @__PURE__ */ forwardRef<HTMLButtonElement, DatePicker
             <Calendar
               mode="range"
               numberOfMonths={numberOfMonths}
-              {...(value === undefined ? {} : { selected: value, defaultMonth: value.from })}
+              {...(value === undefined
+                ? {}
+                : {
+                    selected: value,
+                    ...(value.from === undefined ? {} : { defaultMonth: value.from }),
+                  })}
               onSelect={(range) => {
                 onChange?.(range)
 

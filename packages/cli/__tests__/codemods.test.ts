@@ -1,9 +1,8 @@
-// Fixture coverage for repo codemods (scripts/codemods) per their README —
-// they run under the CLI package's vitest so CI exercises them.
+// Fixture coverage for shipped codemods, per scripts/codemods/README.md.
 
 import { describe, expect, test } from 'vitest'
 
-import { badgeSize12To13 } from '../../../scripts/codemods/badge-size-1-2-to-1-3'
+import { badgeSize12To13 } from '../src/codemods/badge-size-1-2-to-1-3'
 
 describe('badgeSize12To13', () => {
   test('renames explicit sizes sm→md and md→lg on Badge only', () => {

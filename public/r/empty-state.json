@@ -1,0 +1,28 @@
+{
+  "$schema": "https://stalk-ui.com/schema/v1/registry-item.json",
+  "name": "empty-state",
+  "type": "registry:ui",
+  "dependencies": ["@stalk-ui/preset"],
+  "registryDependencies": ["create-style-context"],
+  "files": [
+    {
+      "path": "src/components/ui/empty-state.tsx",
+      "type": "registry:ui",
+      "content": "'use client'\n\nimport { createStyleContext } from '../../lib/stalk-ui/create-style-context'\nimport { forwardRef, useMemo } from 'react'\nimport { cx } from 'styled-system/css'\nimport { emptyState as emptyStateRecipe } from 'styled-system/recipes'\n\nimport type { HTMLAttributes } from 'react'\n\nexport type EmptyStateSize = (typeof emptyStateRecipe.variantMap.size)[number]\n\nconst { StyleProvider, useSlotStyles, withContext } = /* @__PURE__ */ createStyleContext(\n  emptyStateRecipe,\n  { name: 'EmptyState' },\n)\n\nexport interface EmptyStateRootProps extends HTMLAttributes<HTMLDivElement> {\n  size?: EmptyStateSize\n}\n\nexport const EmptyStateRoot = /* @__PURE__ */ forwardRef<HTMLDivElement, EmptyStateRootProps>(\n  function EmptyStateRoot({ className, size = 'md', ...props }, ref) {\n    const styles = useMemo(() => emptyStateRecipe({ size }), [size])\n\n    return (\n      <StyleProvider value={styles}>\n        <div ref={ref} className={cx(styles.root, className)} {...props} />\n      </StyleProvider>\n    )\n  },\n)\n\nexport const EmptyStateTitle = /* @__PURE__ */ withContext('h3', 'title')\nexport const EmptyStateDescription = /* @__PURE__ */ withContext('p', 'description')\nexport const EmptyStateActions = /* @__PURE__ */ withContext('div', 'actions')\n\n// Hand-rolled for its aria-hidden default: the icon is decorative.\nexport const EmptyStateIcon = /* @__PURE__ */ forwardRef<\n  HTMLSpanElement,\n  HTMLAttributes<HTMLSpanElement>\n>(function EmptyStateIcon({ className, ...props }, ref) {\n  const styles = useSlotStyles()\n  return <span ref={ref} aria-hidden=\"true\" className={cx(styles.icon, className)} {...props} />\n})\n\nexport const EmptyState = /* @__PURE__ */ Object.assign(EmptyStateRoot, {\n  Actions: EmptyStateActions,\n  Description: EmptyStateDescription,\n  Icon: EmptyStateIcon,\n  Root: EmptyStateRoot,\n  Title: EmptyStateTitle,\n})\n"
+    }
+  ],
+  "stalk": {
+    "schemaVersion": "1.0",
+    "preset": {
+      "semanticTokens": {},
+      "recipes": ["emptyState"]
+    },
+    "packageDependencies": {
+      "preset": "@stalk-ui/preset"
+    },
+    "pandaCodegen": true,
+    "importAliases": {
+      "styledSystem": "styled-system"
+    }
+  }
+}

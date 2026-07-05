@@ -20,13 +20,18 @@ import { ColorPicker } from '@stalk-ui/components/color-picker'
 import { Combobox } from '@stalk-ui/components/combobox'
 import { Command } from '@stalk-ui/components/command'
 import { ContextMenu } from '@stalk-ui/components/context-menu'
+import { CopyButton } from '@stalk-ui/components/copy-button'
 import { DataList } from '@stalk-ui/components/data-list'
 import { DataTable } from '@stalk-ui/components/data-table'
 import { DataTableAdvanced } from '@stalk-ui/components/data-table-advanced'
 import { DatePicker } from '@stalk-ui/components/date-picker'
 import { DatetimeInput } from '@stalk-ui/components/datetime-input'
 import { Dialog } from '@stalk-ui/components/dialog'
+import { Drawer } from '@stalk-ui/components/drawer'
 import { DropdownMenu } from '@stalk-ui/components/dropdown-menu'
+import { Editable } from '@stalk-ui/components/editable'
+import { EmptyState } from '@stalk-ui/components/empty-state'
+import { FileUpload } from '@stalk-ui/components/file-upload'
 import {
   Form,
   FormControl,
@@ -55,6 +60,7 @@ import { Popover } from '@stalk-ui/components/popover'
 import { Progress } from '@stalk-ui/components/progress'
 import { QrCode } from '@stalk-ui/components/qr-code'
 import { Radio } from '@stalk-ui/components/radio'
+import { Rating } from '@stalk-ui/components/rating'
 import { Resizable } from '@stalk-ui/components/resizable'
 import { ScrollArea } from '@stalk-ui/components/scroll-area'
 import { SearchInput } from '@stalk-ui/components/search-input'
@@ -66,6 +72,8 @@ import { Skeleton } from '@stalk-ui/components/skeleton'
 import { Slider } from '@stalk-ui/components/slider'
 import { Sparkline } from '@stalk-ui/components/sparkline'
 import { Spinner } from '@stalk-ui/components/spinner'
+import { Stat } from '@stalk-ui/components/stat'
+import { Steps } from '@stalk-ui/components/steps'
 import { Switch } from '@stalk-ui/components/switch'
 import { Table } from '@stalk-ui/components/table'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@stalk-ui/components/tabs'
@@ -74,11 +82,24 @@ import { TagsInput } from '@stalk-ui/components/tags-input'
 import { Text } from '@stalk-ui/components/text'
 import { Textarea } from '@stalk-ui/components/textarea'
 import { TimePicker } from '@stalk-ui/components/time-picker'
+import { Timeline } from '@stalk-ui/components/timeline'
 import { Toaster, toast } from '@stalk-ui/components/toast'
 import { Toggle, ToggleGroup, ToggleGroupItem } from '@stalk-ui/components/toggle'
 import { Toolbar } from '@stalk-ui/components/toolbar'
 import { Tooltip } from '@stalk-ui/components/tooltip'
-import { AlertCircle, AlertTriangle, Bold, Home, Info, Italic, Settings, X } from 'lucide-react'
+import { Tour } from '@stalk-ui/components/tour'
+import { TreeView } from '@stalk-ui/components/tree-view'
+import {
+  AlertCircle,
+  AlertTriangle,
+  Bold,
+  Home,
+  Inbox,
+  Info,
+  Italic,
+  Settings,
+  X,
+} from 'lucide-react'
 import { themes } from 'prism-react-renderer'
 import { useId, useState } from 'react'
 import { useForm } from 'react-hook-form'
@@ -180,6 +201,59 @@ const ReportRangePicker = () => {
       value={range}
       onChange={setRange}
     />
+  )
+}
+
+const DeviceTree = () => (
+  <TreeView
+    aria-label="Devices"
+    defaultExpanded={['site-a']}
+    nodes={[
+      {
+        id: 'site-a',
+        label: 'North field',
+        children: [
+          { id: 'meter-1', label: 'Meter 1' },
+          { id: 'inv-1', label: 'Inverter 1' },
+          { id: 'inv-2', label: 'Inverter 2' },
+        ],
+      },
+      { id: 'site-b', label: 'South field', children: [{ id: 'inv-9', label: 'Inverter 9' }] },
+    ]}
+  />
+)
+
+const TriageTourDemo = () => {
+  const [open, setOpen] = useState(false)
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+      <Button
+        style={{ alignSelf: 'flex-start' }}
+        variant="outline"
+        onClick={() => {
+          setOpen(true)
+        }}
+      >
+        Start tour
+      </Button>
+      <Card.Root id="preview-tour-queue" size="sm">
+        <Card.Header>
+          <Card.Title>Triage queue</Card.Title>
+          <Card.Description>Work items land here.</Card.Description>
+        </Card.Header>
+      </Card.Root>
+      <Tour
+        open={open}
+        steps={[
+          {
+            target: '#preview-tour-queue',
+            title: 'Triage queue',
+            description: 'New work items land here, newest first.',
+          },
+        ]}
+        onOpenChange={setOpen}
+      />
+    </div>
   )
 }
 
@@ -295,6 +369,20 @@ const liveScope = {
   ReportRangePicker,
   FrameworkCombobox,
   StackMultiCombobox,
+  CopyButton,
+  DeviceTree,
+  Drawer,
+  Editable,
+  EmptyState,
+  FileUpload,
+  Inbox,
+  Rating,
+  Stat,
+  Steps,
+  Timeline,
+  Tour,
+  TreeView,
+  TriageTourDemo,
   DropdownMenu,
   Form,
   FormControl,

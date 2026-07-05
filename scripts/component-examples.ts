@@ -1,4 +1,28 @@
 export const componentExamples = {
+  'copy-button': ['<CopyButton value="pnpm dlx @stalk-ui/cli add copy-button" />'],
+  drawer: [
+    '<Drawer.Root>\n  <Drawer.Trigger asChild>\n    <Button variant="outline">Open filters</Button>\n  </Drawer.Trigger>\n  <Drawer.Content>\n    <Drawer.Header>\n      <Drawer.Title>Filters</Drawer.Title>\n      <Drawer.Description>Narrow the device list.</Drawer.Description>\n    </Drawer.Header>\n    <Drawer.Footer>\n      <Drawer.Close asChild><Button>Apply</Button></Drawer.Close>\n    </Drawer.Footer>\n  </Drawer.Content>\n</Drawer.Root>',
+  ],
+  editable: ['<Editable aria-label="Site name" defaultValue="North field array" />'],
+  'empty-state': [
+    '<EmptyState.Root>\n  <EmptyState.Icon><Inbox /></EmptyState.Icon>\n  <EmptyState.Title>No devices found</EmptyState.Title>\n  <EmptyState.Description>Try widening the date range or clearing filters.</EmptyState.Description>\n  <EmptyState.Actions>\n    <Button size="sm">Clear filters</Button>\n  </EmptyState.Actions>\n</EmptyState.Root>',
+  ],
+  'file-upload': ['<FileUpload accept=".csv" hint="CSV up to 1 MB" maxSize={1048576} multiple />'],
+  rating: [
+    '<Rating aria-label="Quality" defaultValue={3} />',
+    '<Rating aria-label="Vendor score" readOnly value={4} />',
+  ],
+  stat: [
+    '<Stat.Root>\n  <Stat.Label>Production today</Stat.Label>\n  <Stat.Value>412 <Stat.Unit>kWh</Stat.Unit></Stat.Value>\n  <Stat.Delta direction="up">+8.2% vs yesterday</Stat.Delta>\n</Stat.Root>',
+  ],
+  steps: [
+    '<Steps aria-label="Onboarding" current={1} steps={[{ title: "Account" }, { title: "Site" }, { title: "Review" }]} />',
+  ],
+  timeline: [
+    '<Timeline.Root aria-label="Activity">\n  <Timeline.Item tone="success">\n    <Timeline.Content>\n      <Timeline.Time dateTime="2026-07-03T14:10">Today, 14:10</Timeline.Time>\n      <Timeline.Title>Deploy finished</Timeline.Title>\n      <Timeline.Description>Build #424 promoted to production.</Timeline.Description>\n    </Timeline.Content>\n  </Timeline.Item>\n  <Timeline.Item tone="danger">\n    <Timeline.Content>\n      <Timeline.Title>Alert raised</Timeline.Title>\n    </Timeline.Content>\n  </Timeline.Item>\n</Timeline.Root>',
+  ],
+  tour: ['<TriageTourDemo />'],
+  'tree-view': ['<DeviceTree />'],
   accordion: [
     '<Accordion type="single" collapsible defaultValue="item-1">\n  <Accordion.Item value="item-1">\n    <Accordion.Trigger>Is it accessible?</Accordion.Trigger>\n    <Accordion.Content>Yes. It adheres to the WAI-ARIA design pattern.</Accordion.Content>\n  </Accordion.Item>\n  <Accordion.Item value="item-2">\n    <Accordion.Trigger>Is it styled?</Accordion.Trigger>\n    <Accordion.Content>Yes. Defaults use semantic tokens from the preset.</Accordion.Content>\n  </Accordion.Item>\n</Accordion>',
     '<Accordion type="multiple" defaultValue={["a", "b"]}>\n  <Accordion.Item value="a">\n    <Accordion.Trigger>First section</Accordion.Trigger>\n    <Accordion.Content>Multiple sections can be open at once.</Accordion.Content>\n  </Accordion.Item>\n  <Accordion.Item value="b">\n    <Accordion.Trigger>Second section</Accordion.Trigger>\n    <Accordion.Content>Pass type=&quot;multiple&quot; to enable this.</Accordion.Content>\n  </Accordion.Item>\n</Accordion>',

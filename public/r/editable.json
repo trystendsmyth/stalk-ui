@@ -1,0 +1,28 @@
+{
+  "$schema": "https://stalk-ui.com/schema/v1/registry-item.json",
+  "name": "editable",
+  "type": "registry:ui",
+  "dependencies": ["@stalk-ui/preset"],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "src/components/ui/editable.tsx",
+      "type": "registry:ui",
+      "content": "'use client'\n\n'use client'\n\nimport { forwardRef, useEffect, useRef, useState } from 'react'\nimport { cx } from 'styled-system/css'\nimport { editable as editableRecipe } from 'styled-system/recipes'\n\nimport type { HTMLAttributes } from 'react'\n\nconst styles = /* @__PURE__ */ editableRecipe()\n\nexport interface EditableProps\n  extends Omit<HTMLAttributes<HTMLDivElement>, 'defaultValue' | 'onSubmit'> {\n  /** Current text (controlled). */\n  value?: string\n  defaultValue?: string\n  /** Fires when an edit is committed (Enter or blur). */\n  onSubmit?: (value: string) => void\n  placeholder?: string\n  disabled?: boolean\n  /** Accessible name for both the preview button and the input. */\n  'aria-label'?: string\n}\n\n/**\n * Inline edit-in-place text: a button-shaped preview that swaps to a text\n * input on activation. Enter/blur commit (onSubmit), Escape cancels.\n */\nexport const Editable = /* @__PURE__ */ forwardRef<HTMLDivElement, EditableProps>(\n  function Editable(\n    {\n      className,\n      defaultValue = '',\n      disabled = false,\n      onSubmit,\n      placeholder = 'Enter a value',\n      value,\n      'aria-label': ariaLabel,\n      ...props\n    },\n    ref,\n  ) {\n    const [internal, setInternal] = useState(defaultValue)\n    const committed = value ?? internal\n    const [editing, setEditing] = useState(false)\n    const [draft, setDraft] = useState(committed)\n    const inputRef = useRef<HTMLInputElement>(null)\n\n    useEffect(() => {\n      if (editing) {\n        inputRef.current?.focus()\n        inputRef.current?.select()\n      }\n    }, [editing])\n\n    const commit = () => {\n      setEditing(false)\n      setInternal(draft)\n      onSubmit?.(draft)\n    }\n\n    const cancel = () => {\n      setEditing(false)\n      setDraft(committed)\n    }\n\n    return (\n      <div ref={ref} className={cx(styles.root, className)} {...props}>\n        {editing ? (\n          <input\n            ref={inputRef}\n            aria-label={ariaLabel}\n            className={styles.input}\n            value={draft}\n            onBlur={commit}\n            onChange={(event) => {\n              setDraft(event.target.value)\n            }}\n            onKeyDown={(event) => {\n              if (event.key === 'Enter') {\n                commit()\n              } else if (event.key === 'Escape') {\n                cancel()\n              }\n            }}\n          />\n        ) : (\n          <button\n            type=\"button\"\n            aria-label={ariaLabel}\n            className={styles.preview}\n            data-placeholder={committed === '' ? '' : undefined}\n            disabled={disabled}\n            onClick={() => {\n              setDraft(committed)\n              setEditing(true)\n            }}\n          >\n            {committed === '' ? placeholder : committed}\n          </button>\n        )}\n      </div>\n    )\n  },\n)\n"
+    }
+  ],
+  "stalk": {
+    "schemaVersion": "1.0",
+    "preset": {
+      "semanticTokens": {},
+      "recipes": ["editable"]
+    },
+    "packageDependencies": {
+      "preset": "@stalk-ui/preset"
+    },
+    "pandaCodegen": true,
+    "importAliases": {
+      "styledSystem": "styled-system"
+    }
+  }
+}
