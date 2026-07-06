@@ -59,8 +59,9 @@ export const timeline = {
       gap: '2',
       minW: '0',
     },
+    // fg.muted (not subtle): xs text on bg.default must clear WCAG AA.
     time: {
-      color: 'fg.subtle',
+      color: 'fg.muted',
       fontSize: 'xs',
     },
     title: {
@@ -73,5 +74,31 @@ export const timeline = {
       m: '0',
       textStyle: 'bodySm',
     },
+  },
+  variants: {
+    orientation: {
+      vertical: {},
+      // Items spread along a row; each rail runs dot → connector toward the
+      // next item, with the content stacked underneath. The rail spans the
+      // full item and the connector stops one gap short, so the line sits
+      // 4px off each dot on both sides and the dots read as one aligned row.
+      horizontal: {
+        root: { flexDirection: 'row' },
+        item: {
+          flex: '1',
+          flexDirection: 'column',
+          gap: '8',
+          minW: '0',
+          pb: '0',
+        },
+        rail: { flexDirection: 'row', w: 'full' },
+        indicator: { mt: '0' },
+        connector: { h: '2', mr: '4', w: 'auto' },
+        content: { pr: '12' },
+      },
+    },
+  },
+  defaultVariants: {
+    orientation: 'vertical',
   },
 } satisfies RecipeConfig

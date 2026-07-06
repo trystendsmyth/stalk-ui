@@ -13,11 +13,14 @@ const { StyleProvider, useSlotStyles, withContext } = /* @__PURE__ */ createStyl
   { name: 'Timeline' },
 )
 
-export type TimelineRootProps = HTMLAttributes<HTMLOListElement>
+export interface TimelineRootProps extends HTMLAttributes<HTMLOListElement> {
+  /** Lay items along a row (dot rails run left→right) instead of a column. */
+  orientation?: 'vertical' | 'horizontal'
+}
 
 export const TimelineRoot = /* @__PURE__ */ forwardRef<HTMLOListElement, TimelineRootProps>(
-  function TimelineRoot({ className, ...props }, ref) {
-    const styles = useMemo(() => timelineRecipe(), [])
+  function TimelineRoot({ className, orientation = 'vertical', ...props }, ref) {
+    const styles = useMemo(() => timelineRecipe({ orientation }), [orientation])
 
     return (
       <StyleProvider value={styles}>

@@ -15,7 +15,7 @@ const renderDrawer = () =>
       <Drawer.Content>
         <Drawer.Header>
           <Drawer.Title>Filters</Drawer.Title>
-          <Drawer.Description>Narrow the device list.</Drawer.Description>
+          <Drawer.Description>Narrow the results.</Drawer.Description>
         </Drawer.Header>
         <Drawer.Body>Body content</Drawer.Body>
         <Drawer.Footer>
@@ -35,7 +35,7 @@ test('opens from the trigger with dialog semantics', async () => {
 
   expect(await screen.findByRole('dialog')).toBeInTheDocument()
   expect(screen.getByText('Filters')).toBeInTheDocument()
-  expect(screen.getByText('Narrow the device list.')).toBeInTheDocument()
+  expect(screen.getByText('Narrow the results.')).toBeInTheDocument()
   expect((await axe(baseElement)).violations).toHaveLength(0)
 })
 
@@ -60,4 +60,23 @@ test('close requests dismissal (vaul keeps the node until its exit animation)', 
   await user.click(await screen.findByRole('button', { name: 'Apply' }))
 
   expect(onOpenChange).toHaveBeenCalledWith(false)
+})
+
+test('direction="left" flows through to Vaul\'s edge attribute', async () => {
+  const user = userEvent.setup()
+  render(
+    <Drawer.Root direction="left">
+      <Drawer.Trigger asChild>
+        <Button variant="outline">Open menu</Button>
+      </Drawer.Trigger>
+      <Drawer.Content>
+        <Drawer.Header>
+          <Drawer.Title>Menu</Drawer.Title>
+        </Drawer.Header>
+      </Drawer.Content>
+    </Drawer.Root>,
+  )
+
+  await user.click(screen.getByRole('button', { name: 'Open menu' }))
+  expect(await screen.findByRole('dialog')).toHaveAttribute('data-vaul-drawer-direction', 'left')
 })

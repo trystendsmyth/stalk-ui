@@ -55,13 +55,23 @@ pnpm dlx @stalk-ui/cli add @stalk-ui/timeline
 
 ## Props
 
+### `<Timeline.Item>`
+
 | Prop   | Type           | Required | Default | Description                                                              |
 | ------ | -------------- | -------- | ------- | ------------------------------------------------------------------------ |
 | `tone` | `TimelineTone` | No       | -       | Colors the item's dot (accent default; status tones for event severity). |
 
+### `<Timeline.Root>`
+
+| Prop          | Type                         | Required | Default | Description                                                           |
+| ------------- | ---------------------------- | -------- | ------- | --------------------------------------------------------------------- |
+| `orientation` | `'vertical' \| 'horizontal'` | No       | -       | Lay items along a row (dot rails run left→right) instead of a column. |
+
 ## Variants
 
-No recipe variants are documented for this component.
+| Variant       | Values                   |
+| ------------- | ------------------------ |
+| `orientation` | `vertical`, `horizontal` |
 
 ## Registry
 

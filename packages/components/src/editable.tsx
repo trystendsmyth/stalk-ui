@@ -64,13 +64,23 @@ export const Editable = /* @__PURE__ */ forwardRef<HTMLDivElement, EditableProps
     setDraft(committed)
   }
 
+  const shown = editing ? draft : committed
+
   return (
     <div ref={ref} className={cx(styles.root, className)} {...props}>
+      {/* Invisible copy of the current text; sizes the shared grid cell so the
+          preview→input swap stays put and the input grows with the draft. */}
+      <span aria-hidden className={styles.ghost}>
+        {shown === '' ? placeholder : shown}
+      </span>
       {editing ? (
         <input
           ref={inputRef}
           aria-label={ariaLabel}
           className={styles.input}
+          // Minimal intrinsic width: the hidden ghost sizes the shared grid
+          // cell, and `w: full` stretches the input to it.
+          size={1}
           value={draft}
           onBlur={commit}
           onChange={(event) => {

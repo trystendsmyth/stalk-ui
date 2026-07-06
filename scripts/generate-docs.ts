@@ -72,7 +72,8 @@ const componentDescriptions = {
   'date-picker': 'Pairs a typed date field with a calendar popover.',
   'datetime-input': 'Collects a date, time, or date-and-time as locale-aware masked text.',
   dialog: 'Displays modal content in a focus-trapped overlay.',
-  drawer: 'Slides a Vaul-backed bottom sheet up from the screen edge with drag-to-dismiss.',
+  drawer:
+    'A touch-first gesture sheet (Vaul) with drag-to-dismiss physics, openable from any edge via `direction`. Use over Sheet when the surface should answer to swipe gestures — typically mobile.',
   'dropdown-menu': 'Displays a keyboard-accessible menu of actions from a trigger.',
   editable: 'Edits text in place: a preview that swaps to an input on activation.',
   'empty-state': 'Communicates an empty view with an icon, message, and next-step actions.',
@@ -109,7 +110,8 @@ const componentDescriptions = {
     'A search field with a leading icon, clear button, and optional debounced changes.',
   select: 'Lets a user choose one option from a native menu.',
   separator: 'Divides content with a horizontal or vertical rule.',
-  sheet: 'Slides a panel in from a screen edge for secondary content or forms.',
+  sheet:
+    'Slides a panel in from a screen edge for secondary content or forms. Dialog semantics, pointer-agnostic — use Drawer for a gesture-driven mobile sheet.',
   sidebar: 'Provides a collapsible, keyboard-toggled application sidebar.',
   skeleton: 'Reserves layout space with a shimmering placeholder while content loads.',
   slider: 'Selects a numeric value or range along a track.',
@@ -118,6 +120,7 @@ const componentDescriptions = {
   spinner: 'Indicates an indeterminate loading state with an accessible label.',
   stat: 'Displays a KPI read-out with label, value, toned delta, and a trend slot.',
   steps: 'Shows progress through a multi-step flow with numbered, stateful indicators.',
+  swap: 'Swaps between two elements in place with a fade, rotate, flip, or scale transition. Presentational — pair with the control that owns the state.',
   switch: 'Toggles a setting on or off.',
   table: 'Presents rows and columns of data in an accessible HTML table.',
   tabs: 'Organizes related content into selectable panels.',
@@ -132,8 +135,7 @@ const componentDescriptions = {
   toolbar: 'Groups related controls in a single keyboard-navigable bar.',
   tour: 'Guides users through the UI by spotlighting targets with a step card.',
   tooltip: 'Provides supplemental context when a control is hovered or focused.',
-  'tree-view':
-    'Navigates hierarchical items with expand/collapse, selection, and full keyboard support.',
+  tree: 'Navigates hierarchical items with expand/collapse, single or multiple selection, typeahead, and full keyboard support.',
 } as const satisfies Record<ComponentName, string>
 
 const project = new Project({

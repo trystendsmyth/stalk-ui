@@ -6,7 +6,7 @@ import { axe } from 'vitest-axe'
 import { Tour } from './tour'
 
 const steps = [
-  { target: '#queue', title: 'Triage queue', description: 'Work items land here.' },
+  { target: '#queue', title: 'Task queue', description: 'Work items land here.' },
   { target: '#filters', title: 'Filters' },
 ]
 
@@ -20,7 +20,7 @@ const Harness = ({ onOpenChange = vi.fn() }: { onOpenChange?: (open: boolean) =>
 
 test('renders the active step card without axe violations', async () => {
   render(<Harness />)
-  const dialog = screen.getByRole('dialog', { name: 'Triage queue' })
+  const dialog = screen.getByRole('dialog', { name: 'Task queue' })
 
   expect(dialog).toBeInTheDocument()
   expect(screen.getByText('1 / 2')).toBeInTheDocument()
@@ -37,7 +37,7 @@ test('next/back walk the steps; the last step closes with the done label', async
   expect(screen.getByText('2 / 2')).toBeInTheDocument()
 
   await user.click(screen.getByRole('button', { name: 'Back' }))
-  expect(screen.getByText('Triage queue')).toBeInTheDocument()
+  expect(screen.getByText('Task queue')).toBeInTheDocument()
 
   await user.click(screen.getByRole('button', { name: 'Next' }))
   await user.click(screen.getByRole('button', { name: 'Done' }))
@@ -55,6 +55,21 @@ test('skip and Escape close the tour', async () => {
   onOpenChange.mockClear()
   await user.keyboard('{Escape}')
   expect(onOpenChange).toHaveBeenCalledWith(false)
+})
+
+test('renders the pointer arrow by default; arrow={false} removes it', () => {
+  const { unmount } = render(<Harness />)
+  expect(document.querySelector('.stalk-tour__arrow')).toBeInTheDocument()
+  unmount()
+
+  render(
+    <div>
+      <div id="queue">queue</div>
+      <div id="filters">filters</div>
+      <Tour arrow={false} open steps={steps} onOpenChange={vi.fn()} />
+    </div>,
+  )
+  expect(document.querySelector('.stalk-tour__arrow')).not.toBeInTheDocument()
 })
 
 test('renders nothing when closed', () => {

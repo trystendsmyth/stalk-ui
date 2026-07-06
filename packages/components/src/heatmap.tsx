@@ -12,7 +12,7 @@ const styles = /* @__PURE__ */ heatmapRecipe()
 // Layout mode for the composable HeatMap.* parts. `matrix` (default) keeps the
 // native table layout — cells align into fixed columns. `flow` lays each group's
 // cells out as a responsive auto-fill grid that wraps to the available width, for
-// ragged "device grid" data (e.g. inverters per meter) that isn't a rows×columns
+// ragged "device grid" data (e.g. hosts per rack) that isn't a rows×columns
 // matrix. Threaded Root → Group/Row via context so every part agrees. Semantic
 // table markup and the data-* color engine are unchanged in both modes.
 export type HeatMapLayout = 'matrix' | 'flow'
@@ -178,7 +178,10 @@ const HeatMapBase = /* @__PURE__ */ forwardRef<HTMLDivElement, HeatMapProps>(fun
   const [inspected, setInspected] = useState<ReactNode>(null)
 
   return (
-    <div ref={ref} className={cx(styles.root, className)} {...props}>
+    // Focusable so keyboard users can scroll the region (sticky/wide grids),
+    // same as Table. WAI endorses tabindex on scroll regions.
+    // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex -- scroll region
+    <div ref={ref} className={cx(styles.root, className)} tabIndex={0} {...props}>
       <table className={styles.table} aria-label={ariaLabel}>
         <thead>
           <tr>

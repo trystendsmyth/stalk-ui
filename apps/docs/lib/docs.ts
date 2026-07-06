@@ -166,10 +166,11 @@ export const componentGroups = [
       'qr-code',
       'sparkline',
       'stat',
+      'swap',
       'table',
       'tag',
       'timeline',
-      'tree-view',
+      'tree',
     ],
   },
   {

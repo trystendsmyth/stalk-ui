@@ -20,14 +20,14 @@ export default meta
 
 type Story = StoryObj<typeof meta>
 
-const production = [312, 350, 341, 388, 402, 380, 412]
+const bandwidth = [312, 350, 341, 388, 402, 380, 412]
 
 export const Default: Story = {
   render: (args) => (
     <Stat.Root {...args}>
-      <Stat.Label>Production today</Stat.Label>
+      <Stat.Label>Storage used</Stat.Label>
       <Stat.Value>
-        412 <Stat.Unit>kWh</Stat.Unit>
+        412 <Stat.Unit>GB</Stat.Unit>
       </Stat.Value>
       <Stat.Delta direction="up">+8.2% vs yesterday</Stat.Delta>
     </Stat.Root>
@@ -41,13 +41,13 @@ export const WithTrend: Story = {
     <Card.Root size="sm" style={{ maxWidth: '16rem' }}>
       <Card.Content>
         <Stat.Root>
-          <Stat.Label>Production (7d)</Stat.Label>
+          <Stat.Label>Bandwidth (7d)</Stat.Label>
           <Stat.Value>
-            2,585 <Stat.Unit>kWh</Stat.Unit>
+            2,585 <Stat.Unit>GB</Stat.Unit>
           </Stat.Value>
           <Stat.Delta direction="up">+4.9%</Stat.Delta>
           <Stat.Trend>
-            <Sparkline aria-label="Production trend" data={production} height={36} width={192} />
+            <Sparkline aria-label="Bandwidth trend" data={bandwidth} height={36} width={192} />
           </Stat.Trend>
         </Stat.Root>
       </Card.Content>

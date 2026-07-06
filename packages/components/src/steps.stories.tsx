@@ -7,8 +7,8 @@ import type { Meta, StoryObj } from '@storybook/react-vite'
 // title below, not these step titles.
 const flow: Step[] = [
   ['Account', 'Your details'],
-  ['Site', 'Pick a site'],
-  ['Devices', 'Map inverters'],
+  ['Workspace', 'Name your workspace'],
+  ['Members', 'Invite your team'],
   ['Review'],
 ].map(([title, description]) => (description === undefined ? { title } : { description, title }))
 

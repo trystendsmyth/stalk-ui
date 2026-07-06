@@ -6,7 +6,7 @@ import { Steps } from './steps'
 
 const steps = [
   { title: 'Account', description: 'Your details' },
-  { title: 'Site', description: 'Pick a site' },
+  { title: 'Workspace', description: 'Name your workspace' },
   { title: 'Review' },
 ]
 

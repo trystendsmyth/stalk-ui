@@ -4,7 +4,7 @@ export const tour = {
   className: 'stalk-tour',
   description:
     'Slot recipe for the Tour guide (spotlight overlay around a target plus a positioned step card).',
-  slots: ['spotlight', 'content', 'title', 'description', 'footer', 'counter', 'actions'],
+  slots: ['spotlight', 'arrow', 'content', 'title', 'description', 'footer', 'counter', 'actions'],
   base: {
     // A transparent box over the target; the huge spread shadow dims everything
     // around it, producing the spotlight without covering the target itself.
@@ -15,6 +15,20 @@ export const tour = {
       pos: 'fixed',
       zIndex: 'modal',
     },
+    // Rotated square whose two bordered edges form the pointer; the unbordered
+    // half overlaps the card, covering its border segment for a seamless notch.
+    arrow: {
+      bgColor: 'bg.default',
+      borderColor: 'border.default',
+      borderStyle: 'solid',
+      borderWidth: '1px 0 0 1px',
+      h: '12px',
+      pointerEvents: 'none',
+      pos: 'fixed',
+      transform: 'rotate(45deg)',
+      w: '12px',
+      zIndex: 'modal',
+    },
     content: {
       bgColor: 'bg.default',
       border: 'default',
@@ -23,9 +37,10 @@ export const tour = {
       display: 'flex',
       flexDirection: 'column',
       gap: '8',
-      maxW: '320px',
       p: '16',
       pos: 'fixed',
+      // Fixed width (viewport-clamped) so the JS card/arrow geometry is exact.
+      w: 'min(320px, calc(100vw - 20px))',
       zIndex: 'modal',
     },
     title: {

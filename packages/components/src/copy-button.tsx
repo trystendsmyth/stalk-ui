@@ -4,6 +4,7 @@ import { Check, Copy } from 'lucide-react'
 import { forwardRef, useEffect, useRef, useState } from 'react'
 
 import { Button } from './button'
+import { Swap } from './swap'
 
 import type { ButtonProps } from './button'
 
@@ -54,7 +55,7 @@ export const CopyButton = /* @__PURE__ */ forwardRef<HTMLButtonElement, CopyButt
 
     return (
       <Button ref={ref} size={size} type="button" variant={variant} onClick={onCopy} {...props}>
-        {copied ? <Check size={16} aria-hidden /> : <Copy size={16} aria-hidden />}
+        <Swap effect="rotate" off={<Copy size={16} />} on={<Check size={16} />} swap={copied} />
         {copied ? copiedLabel : label}
       </Button>
     )

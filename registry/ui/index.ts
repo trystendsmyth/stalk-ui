@@ -64,6 +64,7 @@ import { sparkline } from './sparkline'
 import { spinner } from './spinner'
 import { stat } from './stat'
 import { steps } from './steps'
+import { swap } from './swap'
 import { switchItem } from './switch'
 import { table } from './table'
 import { tabs } from './tabs'
@@ -78,7 +79,7 @@ import { toggle } from './toggle'
 import { toolbar } from './toolbar'
 import { tooltip } from './tooltip'
 import { tour } from './tour'
-import { treeView } from './tree-view'
+import { tree } from './tree'
 
 import type { RegistrySource } from './_template'
 
@@ -144,6 +145,7 @@ export const registryItems = [
   slider,
   sparkline,
   spinner,
+  swap,
   switchItem,
   table,
   tabs,
@@ -166,5 +168,5 @@ export const registryItems = [
   steps,
   timeline,
   tour,
-  treeView,
+  tree,
 ] satisfies RegistrySource[]

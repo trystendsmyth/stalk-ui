@@ -9,8 +9,8 @@ const meta = {
   component: Editable,
   tags: ['autodocs', 'stable'],
   args: {
-    'aria-label': 'Site name',
-    defaultValue: 'North field array',
+    'aria-label': 'Project name',
+    defaultValue: 'Untitled project',
     disabled: false,
     onSubmit: fn(),
     placeholder: 'Enter a value',
@@ -34,5 +34,4 @@ export const Default: Story = {}
 
 export const Empty: Story = {
   args: { defaultValue: '', placeholder: 'Add a note…' },
-  parameters: { controls: { disable: true } },
 }

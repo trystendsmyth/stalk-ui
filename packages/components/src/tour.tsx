@@ -24,6 +24,8 @@ export interface TourProps extends HTMLAttributes<HTMLDivElement> {
   /** Active step index (controlled); uncontrolled when omitted. */
   step?: number
   onStepChange?: (step: number) => void
+  /** Point an arrow from the step card at the spotlit target. Defaults to `true`. */
+  arrow?: boolean
   nextLabel?: string
   previousLabel?: string
   skipLabel?: string
@@ -32,6 +34,12 @@ export interface TourProps extends HTMLAttributes<HTMLDivElement> {
 
 const SPOTLIGHT_PADDING = 6
 const CARD_GAP = 10
+const CARD_WIDTH = 320
+// Square notch, rotated 45°: half pokes above the card edge, half overlaps the
+// card (hiding the border segment beneath it).
+const ARROW_SIZE = 12
+// Keep the arrow clear of the card's rounded corners.
+const ARROW_INSET = 12
 
 interface Rect {
   height: number
@@ -56,6 +64,7 @@ const rectFor = (selector: string): Rect | undefined => {
  */
 export const Tour = /* @__PURE__ */ forwardRef<HTMLDivElement, TourProps>(function Tour(
   {
+    arrow = true,
     className,
     doneLabel = 'Done',
     nextLabel = 'Next',
@@ -138,12 +147,29 @@ export const Tour = /* @__PURE__ */ forwardRef<HTMLDivElement, TourProps>(functi
         }
 
   // Below the target, clamped to the viewport; centered fallback without a rect.
-  const cardStyle: CSSProperties =
+  const cardLeft =
     rect === undefined
+      ? undefined
+      : Math.max(CARD_GAP, Math.min(rect.left, window.innerWidth - CARD_WIDTH - CARD_GAP))
+  const cardTop =
+    rect === undefined ? undefined : rect.top + rect.height + SPOTLIGHT_PADDING + CARD_GAP
+  const cardStyle: CSSProperties =
+    cardLeft === undefined || cardTop === undefined
       ? { left: '50%', top: '50%', transform: 'translate(-50%, -50%)' }
+      : { left: cardLeft, top: cardTop }
+
+  const arrowStyle: CSSProperties | undefined =
+    !arrow || rect === undefined || cardLeft === undefined || cardTop === undefined
+      ? undefined
       : {
-          left: Math.max(CARD_GAP, Math.min(rect.left, window.innerWidth - 320 - CARD_GAP)),
-          top: rect.top + rect.height + SPOTLIGHT_PADDING + CARD_GAP,
+          left: Math.min(
+            Math.max(rect.left + rect.width / 2 - ARROW_SIZE / 2, cardLeft + ARROW_INSET),
+            cardLeft +
+              Math.min(CARD_WIDTH, window.innerWidth - CARD_GAP * 2) -
+              ARROW_SIZE -
+              ARROW_INSET,
+          ),
+          top: cardTop - ARROW_SIZE / 2,
         }
 
   const last = current === steps.length - 1
@@ -203,6 +229,11 @@ export const Tour = /* @__PURE__ */ forwardRef<HTMLDivElement, TourProps>(functi
           </div>
         </div>
       </div>
+      {/* After the card in DOM: its fill overlays the card's top border, so the
+          bordered notch reads as part of the card. */}
+      {arrowStyle !== undefined ? (
+        <div aria-hidden className={styles.arrow} style={arrowStyle} />
+      ) : null}
     </div>,
     document.body,
   )

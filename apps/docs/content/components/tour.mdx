@@ -17,25 +17,26 @@ pnpm dlx @stalk-ui/cli add @stalk-ui/tour
 
 ## Examples
 
-<ComponentPreview slug="tour" example={0} code={`<TriageTourDemo />`} />
+<ComponentPreview slug="tour" example={0} code={`<TaskTourDemo />`} />
 
 ```tsx
-<TriageTourDemo />
+<TaskTourDemo />
 ```
 
 ## Props
 
-| Prop            | Type                      | Required | Default | Description                                                |
-| --------------- | ------------------------- | -------- | ------- | ---------------------------------------------------------- |
-| `steps`         | `readonly TourStep[]`     | Yes      | -       | -                                                          |
-| `open`          | `boolean`                 | Yes      | -       | -                                                          |
-| `onOpenChange`  | `(open: boolean) => void` | Yes      | -       | -                                                          |
-| `step`          | `number`                  | No       | -       | Active step index (controlled); uncontrolled when omitted. |
-| `onStepChange`  | `(step: number) => void`  | No       | -       | -                                                          |
-| `nextLabel`     | `string`                  | No       | -       | -                                                          |
-| `previousLabel` | `string`                  | No       | -       | -                                                          |
-| `skipLabel`     | `string`                  | No       | -       | -                                                          |
-| `doneLabel`     | `string`                  | No       | -       | -                                                          |
+| Prop            | Type                      | Required | Default | Description                                                                    |
+| --------------- | ------------------------- | -------- | ------- | ------------------------------------------------------------------------------ |
+| `steps`         | `readonly TourStep[]`     | Yes      | -       | -                                                                              |
+| `open`          | `boolean`                 | Yes      | -       | -                                                                              |
+| `onOpenChange`  | `(open: boolean) => void` | Yes      | -       | -                                                                              |
+| `step`          | `number`                  | No       | -       | Active step index (controlled); uncontrolled when omitted.                     |
+| `onStepChange`  | `(step: number) => void`  | No       | -       | -                                                                              |
+| `arrow`         | `boolean`                 | No       | -       | Point an arrow from the step card at the spotlit target. Defaults to \`true\`. |
+| `nextLabel`     | `string`                  | No       | -       | -                                                                              |
+| `previousLabel` | `string`                  | No       | -       | -                                                                              |
+| `skipLabel`     | `string`                  | No       | -       | -                                                                              |
+| `doneLabel`     | `string`                  | No       | -       | -                                                                              |
 
 ## Variants
 

@@ -173,6 +173,9 @@ export const toast = () => ({
   loader: 'stalk-toast__loader',
 })
 
+export const swap = ({ effect = 'fade' }: { effect?: string } = {}) =>
+  slotMap('swap', ['root', 'indicator'], `--${effect}`)
+
 export const sparkline = () => ({
   root: 'stalk-sparkline__root',
   area: 'stalk-sparkline__area',
@@ -639,6 +642,12 @@ export const slider = () => ({
   track: 'stalk-slider__track',
   range: 'stalk-slider__range',
   thumb: 'stalk-slider__thumb',
+  circleRoot: 'stalk-slider__circle-root',
+  circle: 'stalk-slider__circle',
+  circleTrack: 'stalk-slider__circle-track',
+  circleRange: 'stalk-slider__circle-range',
+  circleThumb: 'stalk-slider__circle-thumb',
+  valueText: 'stalk-slider__value-text',
 })
 
 interface TextRecipeOptions {
@@ -791,18 +800,12 @@ export const emptyState = ({ size = 'md' }: SizeOnlyOptions = {}) =>
 export const stat = ({ size = 'md' }: SizeOnlyOptions = {}) =>
   slotMap('stat', ['root', 'label', 'value', 'unit', 'delta', 'trend'], `--${size}`)
 
-export const timeline = () =>
-  slotMap('timeline', [
-    'root',
-    'item',
-    'rail',
-    'indicator',
-    'connector',
-    'content',
-    'time',
-    'title',
-    'description',
-  ])
+export const timeline = ({ orientation = 'vertical' }: { orientation?: string } = {}) =>
+  slotMap(
+    'timeline',
+    ['root', 'item', 'rail', 'indicator', 'connector', 'content', 'time', 'title', 'description'],
+    `--${orientation}`,
+  )
 
 export const steps = ({ orientation = 'horizontal' }: { orientation?: string } = {}) =>
   slotMap(
@@ -811,13 +814,39 @@ export const steps = ({ orientation = 'horizontal' }: { orientation?: string } =
     `--${orientation}`,
   )
 
-export const editable = () => slotMap('editable', ['root', 'preview', 'input'])
+export const editable = () => slotMap('editable', ['root', 'ghost', 'preview', 'input'])
 
 export const rating = ({ size = 'md' }: SizeOnlyOptions = {}) =>
   slotMap('rating', ['root', 'item', 'icon'], `--${size}`)
 
-export const treeView = () =>
-  slotMap('tree-view', ['root', 'branch', 'row', 'indicator', 'label', 'group'])
+interface TreeRecipeOptions {
+  fullWidth?: boolean
+  guides?: boolean
+  radius?: string
+  size?: string
+  variant?: string
+}
+
+export const tree = ({
+  fullWidth = false,
+  guides = false,
+  radius = 'sm',
+  size = 'md',
+  variant = 'ghost',
+}: TreeRecipeOptions = {}) =>
+  Object.fromEntries(
+    ['root', 'branch', 'row', 'indicator', 'label', 'group'].map((slot) => [
+      slot,
+      [
+        `stalk-tree__${slot}`,
+        `stalk-tree__${slot}--${variant}`,
+        `stalk-tree__${slot}--${size}`,
+        `stalk-tree__${slot}--radius-${radius}`,
+        ...(fullWidth ? [`stalk-tree__${slot}--full-width`] : []),
+        ...(guides ? [`stalk-tree__${slot}--guides`] : []),
+      ].join(' '),
+    ]),
+  )
 
 export const fileUpload = () =>
   slotMap('file-upload', [
@@ -834,7 +863,16 @@ export const fileUpload = () =>
   ])
 
 export const tour = () =>
-  slotMap('tour', ['spotlight', 'content', 'title', 'description', 'footer', 'counter', 'actions'])
+  slotMap('tour', [
+    'spotlight',
+    'arrow',
+    'content',
+    'title',
+    'description',
+    'footer',
+    'counter',
+    'actions',
+  ])
 
 export const drawer = () =>
   slotMap('drawer', [

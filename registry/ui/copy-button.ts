@@ -5,6 +5,6 @@ export const copyButton = defineRegistryItem({
   filePath: 'src/components/ui/copy-button.tsx',
   name: 'copy-button',
   recipes: [],
-  registryDependencies: ['button'],
+  registryDependencies: ['button', 'swap'],
   sourcePath: 'packages/components/src/copy-button.tsx',
 })

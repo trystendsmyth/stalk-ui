@@ -31,6 +31,22 @@ test('renders an accessible list of events', async () => {
   expect((await axe(container)).violations).toHaveLength(0)
 })
 
+test('orientation="horizontal" applies the horizontal recipe variant', () => {
+  render(
+    <Timeline.Root aria-label="Progress" orientation="horizontal">
+      <Timeline.Item>
+        <Timeline.Content>
+          <Timeline.Title>Ordered</Timeline.Title>
+        </Timeline.Content>
+      </Timeline.Item>
+    </Timeline.Root>,
+  )
+
+  expect(screen.getByRole('list', { name: 'Progress' })).toHaveClass(
+    'stalk-timeline__root--horizontal',
+  )
+})
+
 test('tones the item dot and hides the rail from assistive tech', () => {
   const { container } = renderFeed()
   const rails = container.querySelectorAll('[aria-hidden="true"]')

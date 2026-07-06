@@ -244,11 +244,11 @@
     },
     "heatmap": {
       "path": "/r/heatmap.json",
-      "sha256": "36b454dc4e91973d01080eb9d7f9a0cf0507f1ed47759beda7bab5cc66c6b519"
+      "sha256": "0bcc8bad8c1e5228df5dd38347be91807b560fe820ef27ce541dd9f46209d2ed"
     },
     "shadcn/heatmap": {
       "path": "/r/shadcn/heatmap.json",
-      "sha256": "03c2da98e901e1c0e01f30da4f40ed35d95fe50c5c576d761ac66f77fa95c263"
+      "sha256": "06240bde7a89b223ecc0389525a8dda98f4cd7ad54df8ffb40422483cd01412e"
     },
     "hover-card": {
       "path": "/r/hover-card.json",
@@ -444,11 +444,11 @@
     },
     "slider": {
       "path": "/r/slider.json",
-      "sha256": "d3a49156d9488ea7e1704cd9d18d721e6cd80a9f55a5cccf03c4c8edd8113d15"
+      "sha256": "b12bb336d7012094a07c8fb3443bd0bb70522d9b2ef3577fb1629e64ae80fb4f"
     },
     "shadcn/slider": {
       "path": "/r/shadcn/slider.json",
-      "sha256": "d1944689c29ddf96f9a668c3f47e8103dea7458e3c0961e5fb63e55f01f1091e"
+      "sha256": "40ffa0e63cfffec293d4adb63477016a493b4c6f439f20013c5462fcd74806ca"
     },
     "sparkline": {
       "path": "/r/sparkline.json",
@@ -465,6 +465,14 @@
     "shadcn/spinner": {
       "path": "/r/shadcn/spinner.json",
       "sha256": "fe7a1f2df52bbcc14e998b4cb9c3ce11900b318515e483a4883389e069c1d61b"
+    },
+    "swap": {
+      "path": "/r/swap.json",
+      "sha256": "8a8e1b7ef1fd4e8c7145624c8842b4e80503c92ed3be4a78707b263ded6a6446"
+    },
+    "shadcn/swap": {
+      "path": "/r/shadcn/swap.json",
+      "sha256": "4073da48d9e1d51ea247ab4bcd625b04da67494b5c666a31d98df028c33a1bca"
     },
     "switch": {
       "path": "/r/switch.json",
@@ -564,11 +572,11 @@
     },
     "copy-button": {
       "path": "/r/copy-button.json",
-      "sha256": "1a07a91f39136d0cfc693ceb18c103d83eb4d56cb44a8a880db77dd6abbc0f79"
+      "sha256": "6c4775596f8ac774d40446f247258a7e8ea90df258c731fbffc4a2e9957bb41c"
     },
     "shadcn/copy-button": {
       "path": "/r/shadcn/copy-button.json",
-      "sha256": "249d6e850bb4a40197e25157d77038e3b701e7f29012b9458387d1a487654557"
+      "sha256": "55ce436b5fb7c03952135bd40741582073bd404302eed6b8ff47c7d500bedfe2"
     },
     "drawer": {
       "path": "/r/drawer.json",
@@ -580,11 +588,11 @@
     },
     "editable": {
       "path": "/r/editable.json",
-      "sha256": "80034563ee8678839f0e529499ba4e498482e37559cfd6e0e77e4fe620a03e8f"
+      "sha256": "e49ffc358670c8f22c33ded46803754d42db8932cfbbff0f2d9c862539b0dffc"
     },
     "shadcn/editable": {
       "path": "/r/shadcn/editable.json",
-      "sha256": "b6e2d5b0707d13fde047791c62ea86916eb26de394a8551fc844a141e7978bcd"
+      "sha256": "9fbfa760447b2eba5c948e66302f4789ba2851e2db5b4c4be9f7fe448b9cb1b1"
     },
     "empty-state": {
       "path": "/r/empty-state.json",
@@ -628,27 +636,27 @@
     },
     "timeline": {
       "path": "/r/timeline.json",
-      "sha256": "262cd534a94618651a053eb123dbab90ea82d652c3742ba88e68460e55bfbc5f"
+      "sha256": "810fd5bea1999445b5da7b72bac64b03aa8200793a348488b031b15f76ecd64c"
     },
     "shadcn/timeline": {
       "path": "/r/shadcn/timeline.json",
-      "sha256": "ac8679493ae7cc64c3aa7f7fd006ed55ce650e1a1956a865a939b5dab4656ad7"
+      "sha256": "3e9bac94d44c9f675c5be6cb51407ed067d7177a0fd21c78f4cdaafabacb84e6"
     },
     "tour": {
       "path": "/r/tour.json",
-      "sha256": "b979d1e3c1b453d0ea75e6f590e74e8b7a6a6639d97ba68f6271ffae0a42505d"
+      "sha256": "4f0fe472e295300b2ffcea085b856c6c53a88ab6fdc3edbe238acd35612b86e7"
     },
     "shadcn/tour": {
       "path": "/r/shadcn/tour.json",
-      "sha256": "02bb142cc5db650967cebef9a218b3905ec0ad19f9237ecf4d627864cebc58ed"
+      "sha256": "72dcdf982e984ba1502fafb95b5e4ec09533a600466262402174f5c2c3dd11c2"
     },
-    "tree-view": {
-      "path": "/r/tree-view.json",
-      "sha256": "0e3f6736d0310ee62e737f7900eafcebc5224ac007ae65b12e6b52de6c09dde2"
+    "tree": {
+      "path": "/r/tree.json",
+      "sha256": "93a77337225568c76666290e20444de0ebef20dcf369415fe67858e60df9536f"
     },
-    "shadcn/tree-view": {
-      "path": "/r/shadcn/tree-view.json",
-      "sha256": "d2c2e96f73170a5f816cbe3abcfc651056d9077c98a42b777eb63ac02de53b62"
+    "shadcn/tree": {
+      "path": "/r/shadcn/tree.json",
+      "sha256": "233a51d481969ccc768ef66aa6c5ff5f74d447a2e26c8a32fa8251391cbcdb78"
     },
     "create-style-context": {
       "path": "/r/create-style-context.json",

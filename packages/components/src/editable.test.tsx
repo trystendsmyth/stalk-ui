@@ -6,36 +6,36 @@ import { axe } from 'vitest-axe'
 import { Editable } from './editable'
 
 test('renders a preview and passes axe', async () => {
-  const { container } = render(<Editable aria-label="Site name" defaultValue="North field" />)
+  const { container } = render(<Editable aria-label="Project name" defaultValue="Alpha notes" />)
 
-  expect(screen.getByRole('button', { name: 'Site name' })).toHaveTextContent('North field')
+  expect(screen.getByRole('button', { name: 'Project name' })).toHaveTextContent('Alpha notes')
   expect((await axe(container)).violations).toHaveLength(0)
 })
 
 test('activating edits, Enter commits', async () => {
   const user = userEvent.setup()
   const onSubmit = vi.fn()
-  render(<Editable aria-label="Site name" defaultValue="North field" onSubmit={onSubmit} />)
+  render(<Editable aria-label="Project name" defaultValue="Alpha notes" onSubmit={onSubmit} />)
 
-  await user.click(screen.getByRole('button', { name: 'Site name' }))
-  const input = screen.getByRole('textbox', { name: 'Site name' })
+  await user.click(screen.getByRole('button', { name: 'Project name' }))
+  const input = screen.getByRole('textbox', { name: 'Project name' })
   await user.clear(input)
-  await user.type(input, 'South field{Enter}')
+  await user.type(input, 'Beta notes{Enter}')
 
-  expect(onSubmit).toHaveBeenCalledWith('South field')
-  expect(screen.getByRole('button', { name: 'Site name' })).toHaveTextContent('South field')
+  expect(onSubmit).toHaveBeenCalledWith('Beta notes')
+  expect(screen.getByRole('button', { name: 'Project name' })).toHaveTextContent('Beta notes')
 })
 
 test('Escape cancels without committing', async () => {
   const user = userEvent.setup()
   const onSubmit = vi.fn()
-  render(<Editable aria-label="Site name" defaultValue="North field" onSubmit={onSubmit} />)
+  render(<Editable aria-label="Project name" defaultValue="Alpha notes" onSubmit={onSubmit} />)
 
-  await user.click(screen.getByRole('button', { name: 'Site name' }))
-  await user.type(screen.getByRole('textbox', { name: 'Site name' }), 'X{Escape}')
+  await user.click(screen.getByRole('button', { name: 'Project name' }))
+  await user.type(screen.getByRole('textbox', { name: 'Project name' }), 'X{Escape}')
 
   expect(onSubmit).not.toHaveBeenCalled()
-  expect(screen.getByRole('button', { name: 'Site name' })).toHaveTextContent('North field')
+  expect(screen.getByRole('button', { name: 'Project name' })).toHaveTextContent('Alpha notes')
 })
 
 test('shows the placeholder when empty', () => {

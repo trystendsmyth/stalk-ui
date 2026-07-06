@@ -74,6 +74,7 @@ import { Sparkline } from '@stalk-ui/components/sparkline'
 import { Spinner } from '@stalk-ui/components/spinner'
 import { Stat } from '@stalk-ui/components/stat'
 import { Steps } from '@stalk-ui/components/steps'
+import { Swap } from '@stalk-ui/components/swap'
 import { Switch } from '@stalk-ui/components/switch'
 import { Table } from '@stalk-ui/components/table'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@stalk-ui/components/tabs'
@@ -88,7 +89,7 @@ import { Toggle, ToggleGroup, ToggleGroupItem } from '@stalk-ui/components/toggl
 import { Toolbar } from '@stalk-ui/components/toolbar'
 import { Tooltip } from '@stalk-ui/components/tooltip'
 import { Tour } from '@stalk-ui/components/tour'
-import { TreeView } from '@stalk-ui/components/tree-view'
+import { Tree } from '@stalk-ui/components/tree'
 import {
   AlertCircle,
   AlertTriangle,
@@ -97,7 +98,9 @@ import {
   Inbox,
   Info,
   Italic,
+  Moon,
   Settings,
+  Sun,
   X,
 } from 'lucide-react'
 import { themes } from 'prism-react-renderer'
@@ -157,13 +160,13 @@ const MembersTable = () => (
   />
 )
 
-const heatmapRows = ['Inverter 1', 'Inverter 2', 'Inverter 3', 'Inverter 4']
+const heatmapRows = ['Node 1', 'Node 2', 'Node 3', 'Node 4']
 const heatmapColumns = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri']
 const heatmapData: Record<string, Record<string, number | null>> = {
-  'Inverter 1': { Mon: 98, Tue: 96, Wed: 99, Thu: 94, Fri: 97 },
-  'Inverter 2': { Mon: 82, Tue: 88, Wed: 79, Thu: 91, Fri: 85 },
-  'Inverter 3': { Mon: 64, Tue: 58, Wed: null, Thu: 71, Fri: 69 },
-  'Inverter 4': { Mon: 45, Tue: 52, Wed: 48, Thu: 40, Fri: 55 },
+  'Node 1': { Mon: 98, Tue: 96, Wed: 99, Thu: 94, Fri: 97 },
+  'Node 2': { Mon: 82, Tue: 88, Wed: 79, Thu: 91, Fri: 85 },
+  'Node 3': { Mon: 64, Tue: 58, Wed: null, Thu: 71, Fri: 69 },
+  'Node 4': { Mon: 45, Tue: 52, Wed: 48, Thu: 40, Fri: 55 },
 }
 
 const PerformanceHeatMap = () => (
@@ -171,8 +174,8 @@ const PerformanceHeatMap = () => (
     rows={heatmapRows}
     columns={heatmapColumns}
     cell={(row, column) => heatmapData[row]?.[column] ?? null}
-    aria-label="Weekly inverter performance index"
-    caption="Performance index (%) by inverter and weekday."
+    aria-label="Weekly node performance index"
+    caption="Performance index (%) by node and weekday."
     formatValue={(value) => `${String(value)}%`}
     legend
   />
@@ -204,26 +207,41 @@ const ReportRangePicker = () => {
   )
 }
 
-const DeviceTree = () => (
-  <TreeView
-    aria-label="Devices"
-    defaultExpanded={['site-a']}
+const FileTree = () => (
+  <Tree
+    aria-label="Files"
+    defaultExpanded={['src']}
     nodes={[
       {
-        id: 'site-a',
-        label: 'North field',
+        id: 'src',
+        label: 'src',
         children: [
-          { id: 'meter-1', label: 'Meter 1' },
-          { id: 'inv-1', label: 'Inverter 1' },
-          { id: 'inv-2', label: 'Inverter 2' },
+          { id: 'app-tsx', label: 'App.tsx' },
+          { id: 'index-ts', label: 'index.ts' },
         ],
       },
-      { id: 'site-b', label: 'South field', children: [{ id: 'inv-9', label: 'Inverter 9' }] },
+      { id: 'public', label: 'public', children: [{ id: 'favicon-svg', label: 'favicon.svg' }] },
     ]}
   />
 )
 
-const TriageTourDemo = () => {
+const SwapDemo = () => {
+  const [on, setOn] = useState(false)
+  return (
+    <Button
+      aria-label="Toggle color mode"
+      variant="outline"
+      onClick={() => {
+        setOn((previous) => !previous)
+      }}
+    >
+      <Swap effect="rotate" off={<Sun size={16} />} on={<Moon size={16} />} swap={on} />
+      {on ? 'Dark' : 'Light'}
+    </Button>
+  )
+}
+
+const TaskTourDemo = () => {
   const [open, setOpen] = useState(false)
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
@@ -238,7 +256,7 @@ const TriageTourDemo = () => {
       </Button>
       <Card.Root id="preview-tour-queue" size="sm">
         <Card.Header>
-          <Card.Title>Triage queue</Card.Title>
+          <Card.Title>Task queue</Card.Title>
           <Card.Description>Work items land here.</Card.Description>
         </Card.Header>
       </Card.Root>
@@ -247,7 +265,7 @@ const TriageTourDemo = () => {
         steps={[
           {
             target: '#preview-tour-queue',
-            title: 'Triage queue',
+            title: 'Task queue',
             description: 'New work items land here, newest first.',
           },
         ]}
@@ -370,7 +388,7 @@ const liveScope = {
   FrameworkCombobox,
   StackMultiCombobox,
   CopyButton,
-  DeviceTree,
+  FileTree,
   Drawer,
   Editable,
   EmptyState,
@@ -381,8 +399,9 @@ const liveScope = {
   Steps,
   Timeline,
   Tour,
-  TreeView,
-  TriageTourDemo,
+  Tree,
+  SwapDemo,
+  TaskTourDemo,
   DropdownMenu,
   Form,
   FormControl,
