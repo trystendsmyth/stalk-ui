@@ -50,3 +50,54 @@ test('selects an option from the popover', async () => {
   expect(onChange).toHaveBeenCalledWith('remix')
   expect(screen.getByRole('combobox', { name: 'Framework' })).toHaveTextContent('Remix')
 })
+
+const MultiCombobox = ({ onChange }: { onChange?: (value: string[]) => void }) => {
+  const [value, setValue] = useState<string[]>([])
+  return (
+    <Combobox
+      aria-label="Stacks"
+      multiple
+      options={[
+        { label: 'Next.js', value: 'next' },
+        { label: 'Remix', value: 'remix' },
+        { label: 'Astro', value: 'astro' },
+      ]}
+      value={value}
+      onChange={(next) => {
+        setValue(next)
+        onChange?.(next)
+      }}
+    />
+  )
+}
+
+test('multiple keeps the list open, toggles values, and summarizes the trigger', async () => {
+  const user = userEvent.setup()
+  const onChange = vi.fn()
+  render(<MultiCombobox onChange={onChange} />)
+
+  await user.click(screen.getByRole('combobox', { name: 'Stacks' }))
+  await user.click(await screen.findByRole('option', { name: 'Next.js' }))
+  await user.click(screen.getByRole('option', { name: 'Remix' }))
+
+  expect(onChange).toHaveBeenLastCalledWith(['next', 'remix'])
+  // List stays open in multiple mode.
+  expect(screen.getByRole('option', { name: 'Astro' })).toBeInTheDocument()
+  expect(screen.getByRole('combobox', { name: 'Stacks' })).toHaveTextContent('Next.js, Remix')
+
+  // Toggling an already-selected value removes it.
+  await user.click(screen.getByRole('option', { name: 'Next.js' }))
+  expect(onChange).toHaveBeenLastCalledWith(['remix'])
+})
+
+test('multiple collapses long selections to a +n summary', async () => {
+  const user = userEvent.setup()
+  render(<MultiCombobox />)
+
+  await user.click(screen.getByRole('combobox', { name: 'Stacks' }))
+  await user.click(await screen.findByRole('option', { name: 'Next.js' }))
+  await user.click(screen.getByRole('option', { name: 'Remix' }))
+  await user.click(screen.getByRole('option', { name: 'Astro' }))
+
+  expect(screen.getByRole('combobox', { name: 'Stacks' })).toHaveTextContent('Next.js, Remix +1')
+})

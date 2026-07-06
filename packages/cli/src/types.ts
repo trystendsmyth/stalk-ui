@@ -7,6 +7,7 @@ export interface GlobalOptions {
   config?: string
   dryRun?: boolean
   force?: boolean
+  install?: boolean
   registry?: string
   verbose?: boolean
   workspace?: string

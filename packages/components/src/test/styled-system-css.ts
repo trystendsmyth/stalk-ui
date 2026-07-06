@@ -5,9 +5,15 @@ export const cx = (...classNames: (string | undefined | null | false)[]) =>
     )
     .join(' ')
 
-type CssInput = Record<string, unknown> & { colorPalette?: string }
+type CssInput = Record<string, unknown> & { colorPalette?: string; position?: string }
 
 export const css = (styles: CssInput = {}): string => {
-  const palette = typeof styles.colorPalette === 'string' ? styles.colorPalette : undefined
-  return palette ? `color-palette_${palette}` : ''
+  const classes: string[] = []
+  if (typeof styles.position === 'string') {
+    classes.push(`pos_${styles.position}`)
+  }
+  if (typeof styles.colorPalette === 'string') {
+    classes.push(`color-palette_${styles.colorPalette}`)
+  }
+  return classes.join(' ')
 }

@@ -17,11 +17,8 @@ export interface ComboboxOption {
   disabled?: boolean
 }
 
-export interface ComboboxProps {
+interface ComboboxBaseProps {
   options: ComboboxOption[]
-  /** Selected option value (controlled). */
-  value?: string | undefined
-  onChange?: (value: string) => void
   placeholder?: string
   searchPlaceholder?: string
   emptyText?: string
@@ -31,24 +28,78 @@ export interface ComboboxProps {
   'aria-label'?: string
 }
 
+export interface ComboboxSingleProps extends ComboboxBaseProps {
+  multiple?: false
+  /** Selected option value (controlled). */
+  value?: string | undefined
+  onChange?: (value: string) => void
+}
+
+export interface ComboboxMultipleProps extends ComboboxBaseProps {
+  /** Select many: toggling keeps the list open; the trigger summarizes. */
+  multiple: true
+  /** Selected option values (controlled). */
+  value?: readonly string[] | undefined
+  onChange?: (value: string[]) => void
+  /** Labels shown verbatim before collapsing to "+n" (default 2). */
+  maxDisplayed?: number
+}
+
+export type ComboboxProps = ComboboxSingleProps | ComboboxMultipleProps
+
+const summarize = (
+  options: ComboboxOption[],
+  selected: readonly string[],
+  maxDisplayed: number,
+) => {
+  const labels = options
+    .filter((option) => selected.includes(option.value))
+    .map((option) => option.label)
+
+  if (labels.length <= maxDisplayed) {
+    return labels.join(', ')
+  }
+
+  return `${labels.slice(0, maxDisplayed).join(', ')} +${String(labels.length - maxDisplayed)}`
+}
+
 export const Combobox = /* @__PURE__ */ forwardRef<HTMLButtonElement, ComboboxProps>(
-  function Combobox(
-    {
+  function Combobox(props, ref) {
+    const {
       options,
-      value,
-      onChange,
-      placeholder = 'Select an option…',
+      placeholder = props.multiple === true ? 'Select options…' : 'Select an option…',
       searchPlaceholder = 'Search…',
       emptyText = 'No results found.',
       disabled = false,
       size = 'md',
       className,
       'aria-label': ariaLabel,
-    },
-    ref,
-  ) {
+    } = props
     const [open, setOpen] = useState(false)
-    const selected = options.find((option) => option.value === value)
+
+    const selectedValues: readonly string[] =
+      props.multiple === true ? (props.value ?? []) : props.value === undefined ? [] : [props.value]
+    const isSelected = (value: string) => selectedValues.includes(value)
+
+    const triggerLabel =
+      props.multiple === true
+        ? selectedValues.length > 0
+          ? summarize(options, selectedValues, props.maxDisplayed ?? 2)
+          : placeholder
+        : (options.find((option) => option.value === props.value)?.label ?? placeholder)
+
+    const handleSelect = (value: string) => {
+      if (props.multiple === true) {
+        const next = isSelected(value)
+          ? selectedValues.filter((existing) => existing !== value)
+          : [...selectedValues, value]
+        props.onChange?.([...next])
+        return
+      }
+
+      props.onChange?.(value)
+      setOpen(false)
+    }
 
     return (
       <Popover.Root open={open} onOpenChange={setOpen}>
@@ -64,7 +115,7 @@ export const Combobox = /* @__PURE__ */ forwardRef<HTMLButtonElement, ComboboxPr
             disabled={disabled}
             className={cx(styles.trigger, className)}
           >
-            <span className={styles.value}>{selected ? selected.label : placeholder}</span>
+            <span className={styles.value}>{triggerLabel}</span>
             <ChevronsUpDown size={16} className={styles.icon} aria-hidden />
           </Button>
         </Popover.Trigger>
@@ -81,12 +132,11 @@ export const Combobox = /* @__PURE__ */ forwardRef<HTMLButtonElement, ComboboxPr
                     keywords={[option.label]}
                     disabled={option.disabled ?? false}
                     onSelect={() => {
-                      onChange?.(option.value)
-                      setOpen(false)
+                      handleSelect(option.value)
                     }}
                   >
                     {option.label}
-                    {option.value === value ? (
+                    {isSelected(option.value) ? (
                       <Check size={16} className={styles.itemIndicator} aria-hidden />
                     ) : null}
                   </Command.Item>

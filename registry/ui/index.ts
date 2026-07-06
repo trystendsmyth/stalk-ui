@@ -18,13 +18,18 @@ import { colorPicker } from './color-picker'
 import { combobox } from './combobox'
 import { command } from './command'
 import { contextMenu } from './context-menu'
+import { copyButton } from './copy-button'
 import { dataList } from './data-list'
 import { dataTable } from './data-table'
 import { dataTableAdvanced } from './data-table-advanced'
 import { datePicker } from './date-picker'
 import { datetimeInput } from './datetime-input'
 import { dialog } from './dialog'
+import { drawer } from './drawer'
 import { dropdownMenu } from './dropdown-menu'
+import { editable } from './editable'
+import { emptyState } from './empty-state'
+import { fileUpload } from './file-upload'
 import { form } from './form'
 import { formatInput } from './format-input'
 import { heading } from './heading'
@@ -45,6 +50,7 @@ import { popover } from './popover'
 import { progress } from './progress'
 import { qrCode } from './qr-code'
 import { radio } from './radio'
+import { rating } from './rating'
 import { resizable } from './resizable'
 import { scrollArea } from './scroll-area'
 import { searchInput } from './search-input'
@@ -56,6 +62,9 @@ import { skeleton } from './skeleton'
 import { slider } from './slider'
 import { sparkline } from './sparkline'
 import { spinner } from './spinner'
+import { stat } from './stat'
+import { steps } from './steps'
+import { swap } from './swap'
 import { switchItem } from './switch'
 import { table } from './table'
 import { tabs } from './tabs'
@@ -64,10 +73,13 @@ import { tagsInput } from './tags-input'
 import { text } from './text'
 import { textarea } from './textarea'
 import { timePicker } from './time-picker'
+import { timeline } from './timeline'
 import { toast } from './toast'
 import { toggle } from './toggle'
 import { toolbar } from './toolbar'
 import { tooltip } from './tooltip'
+import { tour } from './tour'
+import { tree } from './tree'
 
 import type { RegistrySource } from './_template'
 
@@ -133,6 +145,7 @@ export const registryItems = [
   slider,
   sparkline,
   spinner,
+  swap,
   switchItem,
   table,
   tabs,
@@ -145,4 +158,15 @@ export const registryItems = [
   toggle,
   toolbar,
   tooltip,
+  copyButton,
+  drawer,
+  editable,
+  emptyState,
+  fileUpload,
+  rating,
+  stat,
+  steps,
+  timeline,
+  tour,
+  tree,
 ] satisfies RegistrySource[]

@@ -1,5 +1,8 @@
 import type { AccentColor, GrayColor, TokenGroup } from '../types'
 
+/** Any Radix scale a tone group may derive from — accents plus the neutral grays. */
+type ToneScale = AccentColor | GrayColor
+
 const scaleToken = (scale: string, step: number) => `{colors.${scale}.${String(step)}}`
 const darkScaleToken = (scale: string, step: number) => `{colors.${scale}Dark.${String(step)}}`
 
@@ -18,11 +21,11 @@ const midStepMix = (a: string, b: string) => `color-mix(in srgb, ${a} 50%, ${b} 
  * drops to step 10 and `contrast` inverts to gray.12 — the "caution tape" pattern (bright
  * badge, dark text). Radix calls these light-solid accents.
  */
-const LIGHT_SOLID_ACCENTS = new Set<AccentColor>(['amber', 'yellow'])
+const LIGHT_SOLID_ACCENTS = new Set<ToneScale>(['amber', 'yellow'])
 
-const isLightSolid = (accentColor: AccentColor) => LIGHT_SOLID_ACCENTS.has(accentColor)
+const isLightSolid = (accentColor: ToneScale) => LIGHT_SOLID_ACCENTS.has(accentColor)
 
-const solidStep = (accentColor: AccentColor) => (isLightSolid(accentColor) ? 10 : 11)
+const solidStep = (accentColor: ToneScale) => (isLightSolid(accentColor) ? 10 : 11)
 
 /**
  * Dark scales invert luminance: step 11 of `blueDark` is light blue, not dark blue. So `solid`
@@ -30,7 +33,7 @@ const solidStep = (accentColor: AccentColor) => (isLightSolid(accentColor) ? 10 
  * in either mode (we reference the light scale by name on purpose) — that's our "always dark
  * text" token. Light-solid accents already pair with dark text in both modes.
  */
-const contrastFor = (accentColor: AccentColor) =>
+const contrastFor = (accentColor: ToneScale) =>
   isLightSolid(accentColor)
     ? semanticPair(scaleToken('gray', 12), scaleToken('gray', 12))
     : semanticPair(scaleToken('gray', 1), scaleToken('gray', 12))
@@ -47,19 +50,19 @@ const VIVID_STEP = 9
 
 /** Text on a `vivid` fill: white on most step-9 fills, dark on light-solid accents — and
  *  it does NOT mode-flip, because step 9 is stable across modes. */
-const vividContrastFor = (accentColor: AccentColor) =>
+const vividContrastFor = (accentColor: ToneScale) =>
   isLightSolid(accentColor)
     ? semanticPair(scaleToken('gray', 12), scaleToken('gray', 12))
     : semanticPair(scaleToken('gray', 1), scaleToken('gray', 1))
 
-const emphasisFor = (accentColor: AccentColor) =>
+const emphasisFor = (accentColor: ToneScale) =>
   semanticPair(
     midStepMix(scaleToken(accentColor, 11), scaleToken(accentColor, 12)),
     midStepMix(darkScaleToken(accentColor, 11), darkScaleToken(accentColor, 12)),
   )
 
 /** surface/subtle/muted at steps 2/5/7 (not 2/3/4) so stacked tints read as distinct layers. */
-export const createAccentSemanticTokens = (accentColor: AccentColor): TokenGroup => {
+export const createAccentSemanticTokens = (accentColor: ToneScale): TokenGroup => {
   const solid = solidStep(accentColor)
   return {
     surface: semanticPair(scaleToken(accentColor, 2), darkScaleToken(accentColor, 2)),
@@ -140,6 +143,8 @@ export const createSemanticColorTokens = (
   warning: createAccentSemanticTokens('yellow'),
   danger: createAccentSemanticTokens('red'),
   info: createAccentSemanticTokens('blue'),
+  /** Grey "informational, not a status" tone — derives from the theme's gray scale. */
+  neutral: createAccentSemanticTokens(grayColor),
   /** Brand accent for promotional / new / beta UI — sits next to status colors but isn't a system state. */
   highlight: createAccentSemanticTokens('orange'),
 })

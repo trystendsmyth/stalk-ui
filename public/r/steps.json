@@ -1,0 +1,28 @@
+{
+  "$schema": "https://stalk-ui.com/schema/v1/registry-item.json",
+  "name": "steps",
+  "type": "registry:ui",
+  "dependencies": ["@stalk-ui/preset", "lucide-react"],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "src/components/ui/steps.tsx",
+      "type": "registry:ui",
+      "content": "import { Check } from 'lucide-react'\nimport { forwardRef } from 'react'\nimport { cx } from 'styled-system/css'\nimport { steps as stepsRecipe } from 'styled-system/recipes'\n\nimport type { HTMLAttributes, ReactNode } from 'react'\n\nexport type StepsOrientation = (typeof stepsRecipe.variantMap.orientation)[number]\nexport type StepState = 'complete' | 'current' | 'upcoming'\n\nexport interface Step {\n  title: ReactNode\n  description?: ReactNode\n}\n\nexport interface StepsProps extends HTMLAttributes<HTMLOListElement> {\n  steps: readonly Step[]\n  /** Zero-based index of the active step (steps before it render complete). */\n  current?: number\n  orientation?: StepsOrientation\n}\n\nconst stateFor = (index: number, current: number): StepState =>\n  index < current ? 'complete' : index === current ? 'current' : 'upcoming'\n\nexport const Steps = /* @__PURE__ */ forwardRef<HTMLOListElement, StepsProps>(function Steps(\n  { className, current = 0, orientation = 'horizontal', steps, ...props },\n  ref,\n) {\n  const styles = stepsRecipe({ orientation })\n\n  return (\n    <ol ref={ref} className={cx(styles.root, className)} {...props}>\n      {steps.map((step, index) => {\n        const state = stateFor(index, current)\n\n        return (\n          <li\n            key={index}\n            className={styles.item}\n            data-state={state}\n            aria-current={state === 'current' ? 'step' : undefined}\n          >\n            <span className={styles.indicator} aria-hidden=\"true\">\n              {state === 'complete' ? <Check size={14} /> : index + 1}\n            </span>\n            <span className={styles.content}>\n              <span className={styles.title}>{step.title}</span>\n              {step.description !== undefined ? (\n                <span className={styles.description}>{step.description}</span>\n              ) : null}\n            </span>\n            <span className={styles.separator} data-steps-separator aria-hidden=\"true\" />\n          </li>\n        )\n      })}\n    </ol>\n  )\n})\n\nSteps.displayName = 'Steps'\n"
+    }
+  ],
+  "stalk": {
+    "schemaVersion": "1.0",
+    "preset": {
+      "semanticTokens": {},
+      "recipes": ["steps"]
+    },
+    "packageDependencies": {
+      "preset": "@stalk-ui/preset"
+    },
+    "pandaCodegen": true,
+    "importAliases": {
+      "styledSystem": "styled-system"
+    }
+  }
+}

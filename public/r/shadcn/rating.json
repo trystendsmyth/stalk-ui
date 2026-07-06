@@ -1,0 +1,28 @@
+{
+  "$schema": "https://stalk-ui.com/schema/v1/registry-item.json",
+  "name": "rating",
+  "type": "registry:ui",
+  "dependencies": ["@stalk-ui/preset", "lucide-react"],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "src/components/ui/rating.tsx",
+      "type": "registry:ui",
+      "content": "'use client'\n\n'use client'\n\nimport { Star } from 'lucide-react'\n// Stalk UI component - requires PandaCSS setup and @stalk-ui/preset.\nimport { forwardRef, useState } from 'react'\nimport { cx } from 'styled-system/css'\nimport { rating as ratingRecipe } from 'styled-system/recipes'\n\nimport type { HTMLAttributes, KeyboardEvent } from 'react'\n\nexport type RatingSize = (typeof ratingRecipe.variantMap.size)[number]\n\nexport interface RatingProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onChange'> {\n  /** Current rating (controlled). */\n  value?: number\n  defaultValue?: number\n  onChange?: (value: number) => void\n  /** Number of items (default 5). */\n  max?: number\n  readOnly?: boolean\n  disabled?: boolean\n  size?: RatingSize\n  /** Accessible name for the radio group. */\n  'aria-label'?: string\n  /** Accessible per-item label; receives the 1-based value. */\n  itemLabel?: (value: number) => string\n}\n\n/**\n * Star rating with radio-group semantics: one tab stop, Arrow keys move the\n * value, Space/Enter (or click) select. `readOnly` renders a static read-out.\n */\nexport const Rating = /* @__PURE__ */ forwardRef<HTMLDivElement, RatingProps>(function Rating(\n  {\n    className,\n    defaultValue = 0,\n    disabled = false,\n    itemLabel = (value) => `${String(value)} star${value === 1 ? '' : 's'}`,\n    max = 5,\n    onChange,\n    readOnly = false,\n    size = 'md',\n    value,\n    'aria-label': ariaLabel,\n    ...props\n  },\n  ref,\n) {\n  const styles = ratingRecipe({ size })\n  const [internal, setInternal] = useState(defaultValue)\n  const current = value ?? internal\n  const items = Array.from({ length: max }, (_, index) => index + 1)\n\n  const setValue = (next: number) => {\n    if (readOnly || disabled) {\n      return\n    }\n    setInternal(next)\n    onChange?.(next)\n  }\n\n  const onKeyDown = (event: KeyboardEvent<HTMLButtonElement>) => {\n    const delta =\n      event.key === 'ArrowRight' || event.key === 'ArrowUp'\n        ? 1\n        : event.key === 'ArrowLeft' || event.key === 'ArrowDown'\n          ? -1\n          : 0\n\n    if (delta === 0) {\n      return\n    }\n    event.preventDefault()\n    setValue(Math.min(max, Math.max(1, current + delta)))\n  }\n\n  return (\n    <div\n      ref={ref}\n      role=\"radiogroup\"\n      aria-label={ariaLabel}\n      aria-disabled={disabled || undefined}\n      className={cx(styles.root, className)}\n      {...props}\n    >\n      {items.map((item) => {\n        const active = item <= current\n        const checked = item === current\n\n        return (\n          <button\n            key={item}\n            type=\"button\"\n            role=\"radio\"\n            aria-checked={checked}\n            aria-label={itemLabel(item)}\n            className={styles.item}\n            data-active={active ? '' : undefined}\n            data-readonly={readOnly ? '' : undefined}\n            disabled={disabled}\n            // Roving tabindex: the checked item is the single tab stop (or the\n            // first item when nothing is selected yet).\n            tabIndex={readOnly ? -1 : checked || (current === 0 && item === 1) ? 0 : -1}\n            onClick={() => {\n              setValue(item)\n            }}\n            onKeyDown={onKeyDown}\n          >\n            <Star aria-hidden className={styles.icon} data-active={active ? '' : undefined} />\n          </button>\n        )\n      })}\n    </div>\n  )\n})\n"
+    }
+  ],
+  "stalk": {
+    "schemaVersion": "1.0",
+    "preset": {
+      "semanticTokens": {},
+      "recipes": ["rating"]
+    },
+    "packageDependencies": {
+      "preset": "@stalk-ui/preset"
+    },
+    "pandaCodegen": true,
+    "importAliases": {
+      "styledSystem": "styled-system"
+    }
+  }
+}

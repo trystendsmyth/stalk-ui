@@ -38,30 +38,42 @@ pnpm dlx @stalk-ui/cli add @stalk-ui/badge
 <ComponentPreview
   slug="badge"
   example={2}
-  code={`<Badge variant="outline" tone="danger" size="sm" radius="sm">Error</Badge>`}
+  code={`<Badge variant="outline" tone="danger" size="md" radius="sm">Error</Badge>`}
 />
 
 ```tsx
-<Badge variant="outline" tone="danger" size="sm" radius="sm">
+<Badge variant="outline" tone="danger" size="md" radius="sm">
   Error
+</Badge>
+```
+
+<ComponentPreview
+  slug="badge"
+  example={3}
+  code={`<Badge tone="neutral" size="micro">vendor-reported</Badge>`}
+/>
+
+```tsx
+<Badge tone="neutral" size="micro">
+  vendor-reported
 </Badge>
 ```
 
 ## Props
 
-| Prop      | Type           | Required | Default | Description                                                                   |
-| --------- | -------------- | -------- | ------- | ----------------------------------------------------------------------------- |
-| `radius`  | `BadgeRadius`  | No       | -       | Border radius. Defaults to \`full\` (pill).                                   |
-| `size`    | `BadgeSize`    | No       | -       | -                                                                             |
-| `tone`    | `BadgeTone`    | No       | -       | Selects the semantic color palette used by the badge. Defaults to \`accent\`. |
-| `variant` | `BadgeVariant` | No       | -       | -                                                                             |
+| Prop      | Type           | Required | Default | Description                                                                       |
+| --------- | -------------- | -------- | ------- | --------------------------------------------------------------------------------- |
+| `radius`  | `BadgeRadius`  | No       | -       | Border radius. Defaults to \`full\` (pill).                                       |
+| `size`    | `BadgeSize`    | No       | -       | Size ladder \`micro \| sm \| md \| lg\`; defaults to \`lg\` (the pre-1.3 \`md\`). |
+| `tone`    | `BadgeTone`    | No       | -       | Selects the semantic color palette used by the badge. Defaults to \`accent\`.     |
+| `variant` | `BadgeVariant` | No       | -       | -                                                                                 |
 
 ## Variants
 
 | Variant   | Values                           |
 | --------- | -------------------------------- |
 | `variant` | `solid`, `subtle`, `outline`     |
-| `size`    | `sm`, `md`                       |
+| `size`    | `micro`, `sm`, `md`, `lg`        |
 | `radius`  | `none`, `sm`, `md`, `lg`, `full` |
 
 ## Registry

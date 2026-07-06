@@ -401,6 +401,8 @@ export { Slider } from './slider'
 export type { SliderProps } from './slider'
 export { Spinner } from './spinner'
 export type { SpinnerProps, SpinnerSize } from './spinner'
+export { Swap } from './swap'
+export type { SwapEffect, SwapProps } from './swap'
 export { Switch } from './switch'
 export type { SwitchProps, SwitchSize } from './switch'
 export {
@@ -486,3 +488,53 @@ export {
   TooltipRoot,
   TooltipTrigger,
 } from './tooltip'
+export { CopyButton } from './copy-button'
+export type { CopyButtonProps } from './copy-button'
+export {
+  Drawer,
+  DrawerBody,
+  DrawerClose,
+  DrawerContent,
+  DrawerDescription,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerOverlay,
+  DrawerPortal,
+  DrawerRoot,
+  DrawerTitle,
+  DrawerTrigger,
+} from './drawer'
+export type { DrawerContentProps } from './drawer'
+export { Editable } from './editable'
+export type { EditableProps } from './editable'
+export {
+  EmptyState,
+  EmptyStateActions,
+  EmptyStateDescription,
+  EmptyStateIcon,
+  EmptyStateRoot,
+  EmptyStateTitle,
+} from './empty-state'
+export type { EmptyStateRootProps, EmptyStateSize } from './empty-state'
+export { FileUpload } from './file-upload'
+export type { FileUploadProps, RejectedFile } from './file-upload'
+export { Rating } from './rating'
+export type { RatingProps, RatingSize } from './rating'
+export { Stat, StatDelta, StatLabel, StatRoot, StatTrend, StatUnit, StatValue } from './stat'
+export type { StatDeltaDirection, StatDeltaProps, StatRootProps, StatSize } from './stat'
+export { Steps } from './steps'
+export type { Step, StepsOrientation, StepsProps, StepState } from './steps'
+export {
+  Timeline,
+  TimelineContent,
+  TimelineDescription,
+  TimelineItem,
+  TimelineRoot,
+  TimelineTime,
+  TimelineTitle,
+} from './timeline'
+export type { TimelineItemProps, TimelineRootProps, TimelineTone } from './timeline'
+export { Tour } from './tour'
+export type { TourProps, TourStep } from './tour'
+export { Tree } from './tree'
+export type { TreeNode, TreeProps } from './tree'

@@ -3,6 +3,7 @@ import { fn } from 'storybook/test'
 
 import { Combobox } from './combobox'
 
+import type { ComboboxSingleProps } from './combobox'
 import type { Meta, StoryObj } from '@storybook/react-vite'
 
 const frameworks = [
@@ -40,15 +41,16 @@ const meta = {
     value: { table: { disable: true } },
   },
   render: (args) => {
+    const single = args as ComboboxSingleProps
     const [value, setValue] = useState<string>()
     return (
       <div style={{ maxWidth: '16rem' }}>
         <Combobox
-          {...args}
+          {...single}
           value={value}
           onChange={(next) => {
             setValue(next)
-            args.onChange?.(next)
+            single.onChange?.(next)
           }}
         />
       </div>
@@ -60,4 +62,23 @@ export default meta
 
 type Story = StoryObj<typeof meta>
 
+// `multiple`: toggling keeps the list open; the trigger summarizes selections
+// and collapses beyond `maxDisplayed` to a +n count — the msel filter pattern.
+export const Multiple: Story = {
+  parameters: { controls: { disable: true } },
+  render: () => {
+    const [value, setValue] = useState<string[]>(['next', 'remix'])
+    return (
+      <div style={{ maxWidth: '16rem' }}>
+        <Combobox
+          aria-label="Frameworks"
+          multiple
+          options={frameworks}
+          value={value}
+          onChange={setValue}
+        />
+      </div>
+    )
+  },
+}
 export const Default: Story = {}

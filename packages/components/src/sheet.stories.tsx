@@ -22,6 +22,14 @@ const meta = {
   title: 'Components/Overlay/Sheet',
   component: Sheet.Root,
   tags: ['autodocs', 'stable'],
+  parameters: {
+    docs: {
+      description: {
+        component:
+          'Edge-anchored panel with dialog semantics (built on Radix Dialog), for secondary content or forms on any pointer type. Use Drawer instead when you want a gesture-driven mobile bottom sheet with drag-to-dismiss.',
+      },
+    },
+  },
   args: {
     defaultOpen: false,
     modal: true,
