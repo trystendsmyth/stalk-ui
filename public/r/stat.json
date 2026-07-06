@@ -1,0 +1,28 @@
+{
+  "$schema": "https://stalk-ui.com/schema/v1/registry-item.json",
+  "name": "stat",
+  "type": "registry:ui",
+  "dependencies": ["@stalk-ui/preset", "lucide-react"],
+  "registryDependencies": ["create-style-context"],
+  "files": [
+    {
+      "path": "src/components/ui/stat.tsx",
+      "type": "registry:ui",
+      "content": "'use client'\n\nimport { createStyleContext } from '../../lib/stalk-ui/create-style-context'\nimport { ArrowDownRight, ArrowUpRight, Minus } from 'lucide-react'\nimport { forwardRef, useMemo } from 'react'\nimport { css, cx } from 'styled-system/css'\nimport { stat as statRecipe } from 'styled-system/recipes'\n\nimport type { HTMLAttributes } from 'react'\n\nexport type StatSize = (typeof statRecipe.variantMap.size)[number]\nexport type StatDeltaDirection = 'up' | 'down' | 'flat'\n\nconst { StyleProvider, useSlotStyles, withContext } = /* @__PURE__ */ createStyleContext(\n  statRecipe,\n  { name: 'Stat' },\n)\n\nexport interface StatRootProps extends HTMLAttributes<HTMLDivElement> {\n  size?: StatSize\n}\n\nexport const StatRoot = /* @__PURE__ */ forwardRef<HTMLDivElement, StatRootProps>(function StatRoot(\n  { className, size = 'md', ...props },\n  ref,\n) {\n  const styles = useMemo(() => statRecipe({ size }), [size])\n\n  return (\n    <StyleProvider value={styles}>\n      <div ref={ref} className={cx(styles.root, className)} {...props} />\n    </StyleProvider>\n  )\n})\n\nexport const StatLabel = /* @__PURE__ */ withContext('p', 'label')\nexport const StatValue = /* @__PURE__ */ withContext('p', 'value')\nexport const StatUnit = /* @__PURE__ */ withContext('span', 'unit')\n/** Free slot below the read-out — composes naturally with `Sparkline`. */\nexport const StatTrend = /* @__PURE__ */ withContext('div', 'trend')\n\nconst deltaTone: Record<StatDeltaDirection, string> = {\n  up: 'success',\n  down: 'danger',\n  flat: 'neutral',\n}\n\nconst deltaIcons = {\n  up: ArrowUpRight,\n  down: ArrowDownRight,\n  flat: Minus,\n} as const\n\nexport interface StatDeltaProps extends HTMLAttributes<HTMLSpanElement> {\n  /** Movement since the comparison period; drives tone and arrow. */\n  direction?: StatDeltaDirection\n}\n\nexport const StatDelta = /* @__PURE__ */ forwardRef<HTMLSpanElement, StatDeltaProps>(\n  function StatDelta({ children, className, direction = 'flat', ...props }, ref) {\n    const styles = useSlotStyles()\n    const Icon = deltaIcons[direction]\n\n    return (\n      <span\n        ref={ref}\n        className={cx(styles.delta, css({ colorPalette: deltaTone[direction] }), className)}\n        {...props}\n      >\n        <Icon size={14} aria-hidden />\n        {children}\n      </span>\n    )\n  },\n)\n\nexport const Stat = /* @__PURE__ */ Object.assign(StatRoot, {\n  Delta: StatDelta,\n  Label: StatLabel,\n  Root: StatRoot,\n  Trend: StatTrend,\n  Unit: StatUnit,\n  Value: StatValue,\n})\n"
+    }
+  ],
+  "stalk": {
+    "schemaVersion": "1.0",
+    "preset": {
+      "semanticTokens": {},
+      "recipes": ["stat"]
+    },
+    "packageDependencies": {
+      "preset": "@stalk-ui/preset"
+    },
+    "pandaCodegen": true,
+    "importAliases": {
+      "styledSystem": "styled-system"
+    }
+  }
+}

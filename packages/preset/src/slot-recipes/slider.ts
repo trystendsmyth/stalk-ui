@@ -2,8 +2,20 @@ import type { RecipeConfig } from '../types'
 
 export const slider = {
   className: 'stalk-slider',
-  description: 'Slot recipe for the Stalk UI slider (root + track + range + thumb).',
-  slots: ['root', 'track', 'range', 'thumb'],
+  description:
+    'Slot recipe for the Stalk UI slider (root + track + range + thumb, plus circular-knob parts).',
+  slots: [
+    'root',
+    'track',
+    'range',
+    'thumb',
+    'circleRoot',
+    'circle',
+    'circleTrack',
+    'circleRange',
+    'circleThumb',
+    'valueText',
+  ],
   base: {
     root: {
       alignItems: 'center',
@@ -73,6 +85,53 @@ export const slider = {
       _disabled: {
         cursor: 'not-allowed',
       },
+    },
+    // Circular-knob parts. The svg uses a fixed 100-unit viewBox (like the
+    // circular Progress), so stroke widths and the read-out scale with the
+    // rendered size.
+    circleRoot: {
+      cursor: 'pointer',
+      display: 'inline-flex',
+      pos: 'relative',
+      rounded: 'full',
+      touchAction: 'none',
+      userSelect: 'none',
+      _focusVisible: {
+        focusRingWidth: 'base',
+        focusRingColor: 'accent.subtle',
+        focusRingOffsetWidth: '1',
+        focusRingOffsetColor: 'bg.default',
+      },
+      '&[data-disabled]': {
+        cursor: 'not-allowed',
+        opacity: 0.5,
+      },
+    },
+    circle: {
+      display: 'block',
+      h: '96',
+      w: '96',
+    },
+    circleTrack: {
+      fill: 'none',
+      stroke: 'bg.subtle',
+      strokeLinecap: 'round',
+    },
+    circleRange: {
+      fill: 'none',
+      stroke: 'accent.solid',
+      strokeLinecap: 'round',
+    },
+    circleThumb: {
+      fill: 'bg.default',
+      stroke: 'accent.solid',
+      strokeWidth: '3px',
+    },
+    valueText: {
+      fill: 'fg.default',
+      // viewBox units (not document px): ~22% of the knob diameter.
+      fontSize: '22px',
+      fontWeight: 'semibold',
     },
   },
 } satisfies RecipeConfig

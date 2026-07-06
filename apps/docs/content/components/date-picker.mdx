@@ -23,19 +23,44 @@ pnpm dlx @stalk-ui/cli add @stalk-ui/date-picker
 <EventDatePicker />
 ```
 
+<ComponentPreview slug="date-picker" example={1} code={`<ReportRangePicker />`} />
+
+```tsx
+<ReportRangePicker />
+```
+
 ## Props
 
-| Prop            | Type                                | Required | Default | Description                                       |
-| --------------- | ----------------------------------- | -------- | ------- | ------------------------------------------------- |
-| `value`         | `Date \| undefined`                 | No       | -       | Selected date (controlled).                       |
-| `onChange`      | `(date: Date \| undefined) => void` | No       | -       | -                                                 |
-| `locale`        | `string`                            | No       | -       | BCP-47 locale for the typed field.                |
-| `size`          | `InputSize`                         | No       | -       | -                                                 |
-| `invalid`       | `boolean`                           | No       | -       | -                                                 |
-| `disabled`      | `boolean`                           | No       | -       | -                                                 |
-| `className`     | `string`                            | No       | -       | -                                                 |
-| `'aria-label'`  | `string`                            | No       | -       | Accessible label for the typed date field.        |
-| `calendarLabel` | `string`                            | No       | -       | Accessible label for the calendar trigger button. |
+### `<DatePicker.Base>`
+
+| Prop            | Type        | Required | Default | Description                                          |
+| --------------- | ----------- | -------- | ------- | ---------------------------------------------------- |
+| `locale`        | `string`    | No       | -       | BCP-47 locale for the typed field / formatted range. |
+| `size`          | `InputSize` | No       | -       | -                                                    |
+| `invalid`       | `boolean`   | No       | -       | -                                                    |
+| `disabled`      | `boolean`   | No       | -       | -                                                    |
+| `className`     | `string`    | No       | -       | -                                                    |
+| `'aria-label'`  | `string`    | No       | -       | Accessible label for the date field.                 |
+| `calendarLabel` | `string`    | No       | -       | Accessible label for the calendar trigger button.    |
+
+### `<DatePicker.Range>`
+
+| Prop             | Type                                      | Required | Default | Description                                          |
+| ---------------- | ----------------------------------------- | -------- | ------- | ---------------------------------------------------- |
+| `mode`           | `'range'`                                 | Yes      | -       | -                                                    |
+| `value`          | `DateRange \| undefined`                  | No       | -       | Selected range (controlled).                         |
+| `onChange`       | `(range: DateRange \| undefined) => void` | No       | -       | -                                                    |
+| `presets`        | `readonly DatePickerPreset[]`             | No       | -       | Quick ranges rendered in a rail beside the calendar. |
+| `numberOfMonths` | `number`                                  | No       | -       | Months shown side by side (default 2).               |
+| `placeholder`    | `string`                                  | No       | -       | Placeholder when no range is selected.               |
+
+### `<DatePicker.Single>`
+
+| Prop       | Type                                | Required | Default | Description                 |
+| ---------- | ----------------------------------- | -------- | ------- | --------------------------- |
+| `mode`     | `'single'`                          | No       | -       | -                           |
+| `value`    | `Date \| undefined`                 | No       | -       | Selected date (controlled). |
+| `onChange` | `(date: Date \| undefined) => void` | No       | -       | -                           |
 
 ## Variants
 

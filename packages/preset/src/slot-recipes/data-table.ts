@@ -4,8 +4,27 @@ export const dataTable = {
   className: 'stalk-data-table',
   description:
     'Slot recipe for the TanStack-backed data table wrapper (root, sortable header button, pagination footer).',
-  slots: ['root', 'pagination', 'pageInfo', 'sortButton'],
+  slots: ['root', 'pagination', 'pageInfo', 'sortButton', 'toolbar', 'resizeHandle'],
   base: {
+    toolbar: {
+      display: 'flex',
+      gap: '8',
+      justifyContent: 'flex-end',
+      pb: '8',
+    },
+    // Pointer target on the trailing edge of a resizable header cell.
+    resizeHandle: {
+      bottom: '0',
+      cursor: 'col-resize',
+      insetInlineEnd: '0',
+      pos: 'absolute',
+      top: '0',
+      touchAction: 'none',
+      userSelect: 'none',
+      w: '4',
+      _hover: { bgColor: 'accent.muted' },
+      '&[data-resizing]': { bgColor: 'accent.solid' },
+    },
     root: {
       display: 'flex',
       flexDirection: 'column',

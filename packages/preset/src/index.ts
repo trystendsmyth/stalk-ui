@@ -49,7 +49,7 @@ const stalkPreset = definePreset({
     css: [
       {
         properties: {
-          colorPalette: ['accent', 'success', 'warning', 'danger', 'info', 'highlight'],
+          colorPalette: ['accent', 'success', 'warning', 'danger', 'info', 'neutral', 'highlight'],
         },
       },
     ],

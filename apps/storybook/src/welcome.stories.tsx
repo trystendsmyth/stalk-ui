@@ -126,13 +126,19 @@ const kbd = css({
   fontSize: '0.75rem',
   lineHeight: 1,
   color: 'fg.default',
+  minW: '2.75rem',
+  textAlign: 'center',
 })
 
-const hint = css({
+const shortcutList = css({
+  display: 'grid',
+  gap: '0.5rem',
+  listStyle: 'none',
   m: 0,
+  p: 0,
   fontSize: '0.875rem',
   color: 'fg.muted',
-  lineHeight: 1.55,
+  '& li': { display: 'flex', alignItems: 'center', gap: '0.625rem' },
 })
 
 const Welcome = () => (
@@ -168,8 +174,8 @@ const Welcome = () => (
         <div className={card}>
           <h2 className={cardTitle}>Inspect tokens</h2>
           <p className={cardBody}>
-            <em>Foundation &rsaquo; Semantic tokens</em> opens the MDX docs (ColorPalette + full
-            token tables). Use the toolbar <strong>mode</strong> for preview light/dark.
+            <em>Foundation &rsaquo; Semantic tokens</em> documents every token with a ColorPalette
+            and full token tables, in both color modes.
           </p>
         </div>
         <div className={card}>
@@ -179,11 +185,21 @@ const Welcome = () => (
           </p>
         </div>
         <div className={card}>
-          <h2 className={cardTitle}>Toggle themes</h2>
+          <h2 className={cardTitle}>Theme the preview</h2>
           <p className={cardBody}>
-            Use the toolbar for <strong>mode</strong> (preview light/dark),{' '}
-            <strong>pandaTheme</strong> (neutral vs rainbow), and RTL. The moon/sun control only
-            changes the Storybook shell; it does not drive the preview iframe.
+            The toolbar&rsquo;s <strong>mode</strong>, <strong>pandaTheme</strong>, and{' '}
+            <strong>direction</strong> drive the preview iframe. The moon/sun control only themes
+            the Storybook shell around it.
+          </p>
+        </div>
+        <div className={card}>
+          <h2 className={cardTitle}>Install what you see</h2>
+          <p className={cardBody}>
+            Every component ships from the registry:{' '}
+            <code className={css({ fontFamily: 'mono', fontSize: '0.9em' })}>
+              pnpm dlx @stalk-ui/cli add badge
+            </code>{' '}
+            drops the same source into your app.
           </p>
         </div>
       </div>
@@ -191,10 +207,23 @@ const Welcome = () => (
 
     <section>
       <p className={sectionTitle}>Keyboard</p>
-      <p className={hint}>
-        <span className={kbd}>S</span> toggles the sidebar &middot; <span className={kbd}>A</span>{' '}
-        toggles addons &middot; <span className={kbd}>F</span> fullscreen &middot;{' '}
-        <span className={kbd}>D</span> jumps to docs.
+      <ul className={shortcutList}>
+        <li>
+          <span className={kbd}>&#8997; S</span> toggle the sidebar
+        </li>
+        <li>
+          <span className={kbd}>&#8997; A</span> toggle the addons panel
+        </li>
+        <li>
+          <span className={kbd}>&#8997; F</span> go full screen
+        </li>
+        <li>
+          <span className={kbd}>&#8997; D</span> flip the addons panel orientation
+        </li>
+      </ul>
+      <p className={css({ m: 0, mt: '0.625rem', fontSize: '0.8125rem', color: 'fg.muted' })}>
+        &#8997; is Alt on Windows/Linux. Full list: toolbar &ldquo;&hellip;&rdquo; menu &rsaquo;
+        Keyboard shortcuts.
       </p>
     </section>
 

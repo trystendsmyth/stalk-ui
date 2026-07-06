@@ -23,20 +23,43 @@ pnpm dlx @stalk-ui/cli add @stalk-ui/combobox
 <FrameworkCombobox />
 ```
 
+<ComponentPreview slug="combobox" example={1} code={`<StackMultiCombobox />`} />
+
+```tsx
+<StackMultiCombobox />
+```
+
 ## Props
 
-| Prop                | Type                      | Required | Default | Description                         |
-| ------------------- | ------------------------- | -------- | ------- | ----------------------------------- |
-| `options`           | `ComboboxOption[]`        | Yes      | -       | -                                   |
-| `value`             | `string \| undefined`     | No       | -       | Selected option value (controlled). |
-| `onChange`          | `(value: string) => void` | No       | -       | -                                   |
-| `placeholder`       | `string`                  | No       | -       | -                                   |
-| `searchPlaceholder` | `string`                  | No       | -       | -                                   |
-| `emptyText`         | `string`                  | No       | -       | -                                   |
-| `disabled`          | `boolean`                 | No       | -       | -                                   |
-| `size`              | `ButtonSize`              | No       | -       | -                                   |
-| `className`         | `string`                  | No       | -       | -                                   |
-| `'aria-label'`      | `string`                  | No       | -       | -                                   |
+### `<Combobox.Base>`
+
+| Prop                | Type               | Required | Default | Description |
+| ------------------- | ------------------ | -------- | ------- | ----------- |
+| `options`           | `ComboboxOption[]` | Yes      | -       | -           |
+| `placeholder`       | `string`           | No       | -       | -           |
+| `searchPlaceholder` | `string`           | No       | -       | -           |
+| `emptyText`         | `string`           | No       | -       | -           |
+| `disabled`          | `boolean`          | No       | -       | -           |
+| `size`              | `ButtonSize`       | No       | -       | -           |
+| `className`         | `string`           | No       | -       | -           |
+| `'aria-label'`      | `string`           | No       | -       | -           |
+
+### `<Combobox.Multiple>`
+
+| Prop           | Type                             | Required | Default | Description                                                        |
+| -------------- | -------------------------------- | -------- | ------- | ------------------------------------------------------------------ |
+| `multiple`     | `true`                           | Yes      | -       | Select many: toggling keeps the list open; the trigger summarizes. |
+| `value`        | `readonly string[] \| undefined` | No       | -       | Selected option values (controlled).                               |
+| `onChange`     | `(value: string[]) => void`      | No       | -       | -                                                                  |
+| `maxDisplayed` | `number`                         | No       | -       | Labels shown verbatim before collapsing to "+n" (default 2).       |
+
+### `<Combobox.Single>`
+
+| Prop       | Type                      | Required | Default | Description                         |
+| ---------- | ------------------------- | -------- | ------- | ----------------------------------- |
+| `multiple` | `false`                   | No       | -       | -                                   |
+| `value`    | `string \| undefined`     | No       | -       | Selected option value (controlled). |
+| `onChange` | `(value: string) => void` | No       | -       | -                                   |
 
 ## Variants
 

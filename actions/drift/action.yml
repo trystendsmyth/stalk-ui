@@ -1,0 +1,29 @@
+name: 'Stalk UI drift check'
+description: >-
+  Flags drift between locally vendored Stalk UI components, their recorded
+  base snapshots (.stalk-ui/), and the published registry. Fails when the
+  registry has moved past the recorded base — run `stalk-ui upgrade` to
+  three-way merge. Local edits alone never fail the check: you own the code.
+author: 'Stalk UI'
+inputs:
+  working-directory:
+    description: 'Directory containing stalk.config.json and .stalk-ui/lock.json'
+    required: false
+    default: '.'
+  cli-version:
+    description: '@stalk-ui/cli version to run'
+    required: false
+    default: 'latest'
+  components:
+    description: 'Space-separated component names (default: all tracked)'
+    required: false
+    default: ''
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Check component drift
+      shell: bash
+      working-directory: ${{ inputs.working-directory }}
+      run: |
+        npx --yes "@stalk-ui/cli@${{ inputs.cli-version }}" drift ${{ inputs.components }}

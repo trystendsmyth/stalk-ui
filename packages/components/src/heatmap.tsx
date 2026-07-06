@@ -9,6 +9,49 @@ import type { CSSProperties, HTMLAttributes, ReactNode } from 'react'
 
 const styles = /* @__PURE__ */ heatmapRecipe()
 
+// Layout mode for the composable HeatMap.* parts. `matrix` (default) keeps the
+// native table layout — cells align into fixed columns. `flow` lays each group's
+// cells out as a responsive auto-fill grid that wraps to the available width, for
+// ragged "device grid" data (e.g. hosts per rack) that isn't a rows×columns
+// matrix. Threaded Root → Group/Row via context so every part agrees. Semantic
+// table markup and the data-* color engine are unchanged in both modes.
+export type HeatMapLayout = 'matrix' | 'flow'
+const HeatMapLayoutContext = /* @__PURE__ */ createContext<HeatMapLayout>('matrix')
+
+// `--heatmap-cell-min` (default 76px) sets the smallest cell track; the grid packs
+// as many equal columns as fit and wraps the rest.
+const flowTableClass = /* @__PURE__ */ css({ display: 'block', borderSpacing: '0' })
+const flowGroupClass = /* @__PURE__ */ css({
+  display: 'block',
+  '&:not(:last-of-type)': { marginBottom: '12' },
+})
+const flowGroupHeaderRowClass = /* @__PURE__ */ css({ display: 'block' })
+// In flow layout the header <th> must be block-level: it otherwise stays a
+// table-cell inside the display:block row, collapsing to content width — the
+// inner inline-flex row's `w: full` then has no width to fill, so an `aside`
+// with margin-inline-start auto sits flush against the label. Block th +
+// gap/wrap on the inner row restores the right-aligned aside.
+const flowGroupHeaderCellClass = /* @__PURE__ */ css({ display: 'block' })
+const flowGroupHeaderInnerClass = /* @__PURE__ */ css({
+  gap: '10',
+  flexWrap: 'wrap',
+})
+const flowRowClass = /* @__PURE__ */ css({
+  display: 'grid',
+  gridTemplateColumns: 'repeat(auto-fill, minmax(var(--heatmap-cell-min, 76px), 1fr))',
+  gap: '6',
+})
+
+// Sticky column axis: CSS-only `position: sticky` on the header-row cells so
+// the axis stays visible while a tall grid scrolls in its container. Opaque
+// surface + z-index keep cells from showing through underneath.
+const stickyColumnHeaderClass = /* @__PURE__ */ css({
+  position: 'sticky',
+  top: '0',
+  zIndex: '1',
+  bgColor: 'bg.default',
+})
+
 /** Inline swatch size — geometry only (no color), so it stays out of the token audit. */
 const SWATCH_STYLE: CSSProperties = { height: '0.75rem', minWidth: '0.75rem', width: '0.75rem' }
 
@@ -48,6 +91,8 @@ export interface HeatMapProps extends Omit<HTMLAttributes<HTMLDivElement>, 'chil
   emptyLabel?: string
   /** Render a min → max ramp legend below the grid. */
   legend?: boolean
+  /** Keep the column-header row visible while the grid scrolls vertically. */
+  columnsSticky?: boolean
 }
 
 const SEQUENTIAL_STOPS = [1, 3, 5, 7, 9] as const
@@ -104,6 +149,7 @@ const HeatMapBase = /* @__PURE__ */ forwardRef<HTMLDivElement, HeatMapProps>(fun
     formatValue = (value) => String(value),
     emptyLabel = 'No data',
     legend = false,
+    columnsSticky = false,
     className,
     'aria-label': ariaLabel,
     ...props
@@ -132,13 +178,20 @@ const HeatMapBase = /* @__PURE__ */ forwardRef<HTMLDivElement, HeatMapProps>(fun
   const [inspected, setInspected] = useState<ReactNode>(null)
 
   return (
-    <div ref={ref} className={cx(styles.root, className)} {...props}>
+    // Focusable so keyboard users can scroll the region (sticky/wide grids),
+    // same as Table. WAI endorses tabindex on scroll regions.
+    // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex -- scroll region
+    <div ref={ref} className={cx(styles.root, className)} tabIndex={0} {...props}>
       <table className={styles.table} aria-label={ariaLabel}>
         <thead>
           <tr>
-            <td className={styles.corner} />
+            <td className={cx(styles.corner, columnsSticky && stickyColumnHeaderClass)} />
             {columns.map((column) => (
-              <th key={column} scope="col" className={styles.columnHeader}>
+              <th
+                key={column}
+                scope="col"
+                className={cx(styles.columnHeader, columnsSticky && stickyColumnHeaderClass)}
+              >
                 {column}
               </th>
             ))}
@@ -280,32 +333,56 @@ export interface HeatMapRootProps extends Omit<HTMLAttributes<HTMLTableElement>,
   midpoint?: number
   /** Column headers; renders a header row. */
   columns?: readonly ReactNode[]
+  /** Cell layout: `matrix` (default, aligned columns) or `flow` (auto-fill wrap). */
+  layout?: HeatMapLayout
+  /** Keep the column-header row visible while the grid scrolls vertically. */
+  columnsSticky?: boolean
   children?: ReactNode
 }
 
 export const HeatMapRoot = /* @__PURE__ */ forwardRef<HTMLTableElement, HeatMapRootProps>(
   function HeatMapRoot(
-    { scale = 'sequential', domain, midpoint = 0, columns, className, children, ...props },
+    {
+      scale = 'sequential',
+      domain,
+      midpoint = 0,
+      layout = 'matrix',
+      columns,
+      columnsSticky = false,
+      className,
+      children,
+      ...props
+    },
     ref,
   ) {
     const api = useHeatMapScale({ scale, midpoint, ...(domain ? { domain } : {}) })
     return (
       <HeatMapScaleContext.Provider value={api}>
-        <table ref={ref} className={cx(styles.table, className)} {...props}>
-          {columns !== undefined && columns.length > 0 ? (
-            <thead>
-              <tr>
-                <td className={styles.corner} />
-                {columns.map((column, index) => (
-                  <th key={index} scope="col" className={styles.columnHeader}>
-                    {column}
-                  </th>
-                ))}
-              </tr>
-            </thead>
-          ) : null}
-          {children}
-        </table>
+        <HeatMapLayoutContext.Provider value={layout}>
+          <table
+            ref={ref}
+            className={cx(styles.table, layout === 'flow' && flowTableClass, className)}
+            {...props}
+          >
+            {columns !== undefined && columns.length > 0 ? (
+              <thead>
+                <tr>
+                  <td className={cx(styles.corner, columnsSticky && stickyColumnHeaderClass)} />
+                  {columns.map((column, index) => (
+                    <th
+                      key={index}
+                      scope="col"
+                      className={cx(styles.columnHeader, columnsSticky && stickyColumnHeaderClass)}
+                    >
+                      {column}
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+            ) : null}
+            {children}
+          </table>
+        </HeatMapLayoutContext.Provider>
       </HeatMapScaleContext.Provider>
     )
   },
@@ -329,13 +406,24 @@ export const HeatMapGroup = /* @__PURE__ */ forwardRef<HTMLTableSectionElement, 
     { label, aside, headerColSpan = 1000, className, children, ...props },
     ref,
   ) {
+    const layout = useContext(HeatMapLayoutContext)
     const hasHeader = label !== undefined || aside !== undefined
     return (
-      <tbody ref={ref} className={cx(styles.group, className)} {...props}>
+      <tbody
+        ref={ref}
+        className={cx(styles.group, layout === 'flow' && flowGroupClass, className)}
+        {...props}
+      >
         {hasHeader ? (
-          <tr>
-            <th scope="colgroup" colSpan={headerColSpan} className={styles.groupHeader}>
-              <span className={groupHeaderRowClass}>
+          <tr className={layout === 'flow' ? flowGroupHeaderRowClass : undefined}>
+            <th
+              scope="colgroup"
+              colSpan={headerColSpan}
+              className={cx(styles.groupHeader, layout === 'flow' && flowGroupHeaderCellClass)}
+            >
+              <span
+                className={cx(groupHeaderRowClass, layout === 'flow' && flowGroupHeaderInnerClass)}
+              >
                 {label}
                 {aside !== undefined ? <span className={styles.groupAside}>{aside}</span> : null}
               </span>
@@ -356,8 +444,9 @@ export interface HeatMapRowProps extends Omit<HTMLAttributes<HTMLTableRowElement
 
 export const HeatMapRow = /* @__PURE__ */ forwardRef<HTMLTableRowElement, HeatMapRowProps>(
   function HeatMapRow({ header, className, children, ...props }, ref) {
+    const layout = useContext(HeatMapLayoutContext)
     return (
-      <tr ref={ref} className={className} {...props}>
+      <tr ref={ref} className={cx(layout === 'flow' && flowRowClass, className)} {...props}>
         {header !== undefined ? (
           <th scope="row" className={styles.rowHeader}>
             {header}

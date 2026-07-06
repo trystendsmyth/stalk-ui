@@ -49,9 +49,12 @@ pnpm dlx @stalk-ui/cli add @stalk-ui/slider
 
 ## Props
 
-| Prop          | Type       | Required | Default | Description                                                                                                                                                   |
-| ------------- | ---------- | -------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `thumbLabels` | `string[]` | No       | -       | Accessible label for each thumb, index-matched. Use on multi-thumb (range)<br />sliders so every thumb has a distinct name — e.g. \`['Minimum', 'Maximum']\`. |
+| Prop          | Type                                     | Required | Default | Description                                                                                                                                                   |
+| ------------- | ---------------------------------------- | -------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `thumbLabels` | `string[]`                               | No       | -       | Accessible label for each thumb, index-matched. Use on multi-thumb (range)<br />sliders so every thumb has a distinct name — e.g. \`['Minimum', 'Maximum']\`. |
+| `shape`       | `SliderShape`                            | No       | -       | Geometry: linear track (default) or a circular knob. Circular is single-value only.                                                                           |
+| `showValue`   | `boolean`                                | No       | -       | Render the current value in the center of a circular knob.                                                                                                    |
+| `formatValue` | `(value: number, max: number) => string` | No       | -       | Format the circular knob's centered read-out (default: the raw value).                                                                                        |
 
 ## Variants
 

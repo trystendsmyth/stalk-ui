@@ -29,6 +29,33 @@ test('treats missing value as indeterminate', () => {
   expect(bar).not.toHaveAttribute('aria-valuenow')
 })
 
+test('circular gauge keeps the progressbar semantics and centers the value', async () => {
+  const { container } = render(
+    <Progress aria-label="Capacity" shape="circular" showValue value={72} />,
+  )
+  const bar = screen.getByRole('progressbar', { name: 'Capacity' })
+
+  expect(bar).toHaveAttribute('aria-valuenow', '72')
+  expect(screen.getByText('72%')).toBeInTheDocument()
+  expect(container.querySelectorAll('circle')).toHaveLength(2)
+  expect((await axe(container)).violations).toHaveLength(0)
+})
+
+test('circular gauge formats the read-out via formatValue', () => {
+  render(
+    <Progress
+      aria-label="Output"
+      formatValue={(value, max) => `${String(value)}/${String(max)} kW`}
+      max={80}
+      shape="circular"
+      showValue
+      value={20}
+    />,
+  )
+
+  expect(screen.getByText('20/80 kW')).toBeInTheDocument()
+})
+
 test('forwards ref to the root element', () => {
   const ref = createRef<HTMLDivElement>()
   render(<Progress ref={ref} aria-label="Upload" value={10} />)

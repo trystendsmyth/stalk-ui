@@ -14,7 +14,7 @@ export const installPackages = async (
   packages: string[],
   options: GlobalOptions,
 ) => {
-  if (packages.length === 0) {
+  if (packages.length === 0 || options.install === false) {
     return
   }
 

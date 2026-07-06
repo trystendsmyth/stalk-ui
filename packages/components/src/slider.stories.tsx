@@ -30,7 +30,10 @@ const meta = {
     min: { control: { type: 'number' } },
     step: { control: { type: 'number', min: 1 } },
     orientation: { control: 'inline-radio', options: ['horizontal', 'vertical'] },
+    shape: { control: 'inline-radio', options: ['linear', 'circular'] },
+    showValue: { control: 'boolean' },
     className: { table: { disable: true } },
+    formatValue: { table: { disable: true } },
     name: { table: { disable: true } },
     thumbLabels: { table: { disable: true } },
     value: { table: { disable: true } },
@@ -85,5 +88,36 @@ export const Disabled: Story = {
   args: {
     disabled: true,
     defaultValue: [60],
+  },
+}
+
+export const Circular: Story = {
+  args: {
+    'aria-label': 'Target output',
+    defaultValue: [65],
+    shape: 'circular',
+    showValue: true,
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          '`shape="circular"` renders a rotary knob (270° arc, single value): drag around the dial or use Arrow/Page/Home/End keys. `showValue` centers the read-out; `formatValue` formats it.',
+      },
+    },
+  },
+  render: function Render({ defaultValue, ...args }) {
+    const [value, setValue] = useState(defaultValue ?? [65])
+    return (
+      <Slider
+        {...args}
+        formatValue={(current) => `${String(current)}%`}
+        value={value}
+        onValueChange={(next) => {
+          setValue(next)
+          args.onValueChange?.(next)
+        }}
+      />
+    )
   },
 }

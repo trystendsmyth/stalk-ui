@@ -1,8 +1,7 @@
 import { HStack, VStack } from 'styled-system/jsx'
 import { badge as badgeRecipe } from 'styled-system/recipes'
 
-import { Badge } from './badge'
-import { TONES } from './tones'
+import { Badge, BADGE_TONES } from './badge'
 
 import type { Meta, StoryObj } from '@storybook/react-vite'
 
@@ -32,7 +31,7 @@ const meta = {
     },
     tone: {
       control: 'select',
-      options: TONES,
+      options: BADGE_TONES,
     },
     variant: {
       control: 'select',
@@ -92,7 +91,7 @@ export const Tones: Story = {
     <VStack alignItems="flex-start" gap="12">
       {VARIANTS.map((variant) => (
         <HStack key={variant} gap="8" flexWrap="wrap">
-          {TONES.map((tone) => (
+          {BADGE_TONES.map((tone) => (
             <Badge key={tone} tone={tone} variant={variant}>
               {tone}
             </Badge>

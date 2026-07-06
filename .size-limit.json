@@ -3,7 +3,7 @@
     "name": "@stalk-ui/preset",
     "disablePlugins": ["@size-limit/esbuild", "@size-limit/webpack"],
     "path": "packages/preset/dist/index.js",
-    "limit": "25 KB",
+    "limit": "32 KB",
     "webpack": false
   },
   {
@@ -93,7 +93,7 @@
     "name": "component: date-picker",
     "disablePlugins": ["@size-limit/esbuild", "@size-limit/webpack"],
     "path": "packages/components/dist/date-picker.js",
-    "limit": "4 KB",
+    "limit": "4.5 KB",
     "webpack": false
   },
   {

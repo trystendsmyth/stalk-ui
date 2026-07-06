@@ -7,7 +7,7 @@ import { Progress } from './progress'
 
 import type { Meta, StoryObj } from '@storybook/react-vite'
 
-const { size: SIZES } = progressRecipe.variantMap
+const { shape: SHAPES, size: SIZES } = progressRecipe.variantMap
 
 const frame = css({ width: '320px' })
 
@@ -25,6 +25,7 @@ const meta = {
     'aria-label': { control: 'text' },
     className: { table: { disable: true } },
     max: { control: 'number' },
+    shape: { control: 'inline-radio', options: SHAPES },
     size: { control: 'select', options: SIZES },
     value: { control: 'number' },
   },
@@ -42,6 +43,30 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 export const Default: Story = {}
+
+// Circular gauge: same progressbar semantics, radial geometry; `showValue`
+// centers a formatted read-out.
+export const Circular: Story = {
+  args: { shape: 'circular', showValue: true, value: 72 },
+}
+
+export const CircularSizes: Story = {
+  parameters: { controls: { disable: true } },
+  render: () => (
+    <VStack alignItems="flex-start" gap="12">
+      {SIZES.map((size) => (
+        <Progress
+          key={size}
+          aria-label={`Capacity ${size}`}
+          shape="circular"
+          showValue
+          size={size}
+          value={64}
+        />
+      ))}
+    </VStack>
+  ),
+}
 
 export const Sizes: Story = {
   parameters: { controls: { disable: true } },

@@ -43,17 +43,31 @@ pnpm dlx @stalk-ui/cli add @stalk-ui/progress
 <Progress aria-label="Loading" />
 ```
 
+<ComponentPreview
+  slug="progress"
+  example={3}
+  code={`<Progress aria-label="Capacity" shape="circular" showValue value={72} />`}
+/>
+
+```tsx
+<Progress aria-label="Capacity" shape="circular" showValue value={72} />
+```
+
 ## Props
 
-| Prop   | Type           | Required | Default | Description |
-| ------ | -------------- | -------- | ------- | ----------- |
-| `size` | `ProgressSize` | No       | -       | -           |
+| Prop          | Type                                     | Required | Default | Description                                                  |
+| ------------- | ---------------------------------------- | -------- | ------- | ------------------------------------------------------------ |
+| `size`        | `ProgressSize`                           | No       | -       | -                                                            |
+| `shape`       | `ProgressShape`                          | No       | -       | Geometry: linear track (default) or circular gauge.          |
+| `showValue`   | `boolean`                                | No       | -       | Render the current value in the center of a circular gauge.  |
+| `formatValue` | `(value: number, max: number) => string` | No       | -       | Format the centered value read-out (default: whole percent). |
 
 ## Variants
 
-| Variant | Values           |
-| ------- | ---------------- |
-| `size`  | `sm`, `md`, `lg` |
+| Variant | Values               |
+| ------- | -------------------- |
+| `shape` | `linear`, `circular` |
+| `size`  | `sm`, `md`, `lg`     |
 
 ## Registry
 

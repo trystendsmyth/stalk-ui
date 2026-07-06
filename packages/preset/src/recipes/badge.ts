@@ -28,13 +28,27 @@ export const badge = {
         color: 'colorPalette.fg',
       },
     },
+    // Four-step ladder (1.3 rename: old sm→md, old md→lg — the default is
+    // unchanged visually). `micro` serves dense-grid micro-chips.
     size: {
+      micro: {
+        fontSize: '2xs',
+        gap: '4',
+        minH: '14',
+        px: '4',
+      },
       sm: {
+        fontSize: 'xs',
+        gap: '4',
+        minH: '18',
+        px: '6',
+      },
+      md: {
         fontSize: 'xs',
         minH: '20',
         px: '8',
       },
-      md: {
+      lg: {
         fontSize: 'sm',
         minH: '24',
         px: '10',
@@ -50,7 +64,7 @@ export const badge = {
   },
   defaultVariants: {
     radius: 'full',
-    size: 'md',
+    size: 'lg',
     variant: 'subtle',
   },
 } satisfies RecipeConfig

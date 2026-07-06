@@ -4,6 +4,7 @@ import { Command } from 'commander'
 import {
   addCommand,
   diffCommand,
+  driftCommand,
   infoCommand,
   initCommand,
   readCliVersion,
@@ -28,6 +29,7 @@ const withGlobalOptions = (command: Command) =>
     .option('--force', 'overwrite existing files without prompting')
     .option('--verbose', 'print detailed debug output')
     .option('--no-codegen', 'skip panda codegen')
+    .option('--no-install', 'skip package-manager installs')
     .option('--registry <url>', 'override registry URL or URL template')
     .option('--config <path>', 'path to panda config')
     .option('--workspace <name>', 'workspace name when running at a monorepo root')
@@ -72,12 +74,28 @@ const main = async () => {
   })
 
   withGlobalOptions(
-    program.command('upgrade').description('upgrade shared Stalk UI runtime packages'),
-  ).action(async (options: GlobalOptions) => {
+    program
+      .command('upgrade [names...]')
+      .description(
+        'upgrade installed components via three-way merge (base x local edits x registry) plus shared runtime packages',
+      ),
+  ).action(async (names: string[], options: GlobalOptions) => {
     intro('Stalk UI upgrade')
-    await upgradeCommand(options)
+    await upgradeCommand(names, options)
     outro('Done')
   })
+
+  withGlobalOptions(
+    program
+      .command('drift [names...]')
+      .description(
+        'report drift between local components, their recorded base, and the registry (exits 1 on upstream drift)',
+      ),
+  )
+    .option('--json', 'emit JSON')
+    .action(async (names: string[], options: GlobalOptions & { json?: boolean }) => {
+      await driftCommand(names, options)
+    })
 
   withGlobalOptions(program.command('info').description('print project context'))
     .option('--json', 'emit JSON')
