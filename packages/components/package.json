@@ -48,7 +48,7 @@
     "lucide-react": "catalog:",
     "react-colorful": "^5.6.1",
     "react-day-picker": "^10.0.1",
-    "react-hook-form": "^7.78.0",
+    "react-hook-form": "^7.81.0",
     "react-international-phone": "^4.8.0",
     "react-qrcode-logo": "^4.1.0",
     "react-resizable-panels": "^3.0.6",
