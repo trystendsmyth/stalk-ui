@@ -62,7 +62,8 @@ export const card = {
         root: { bgColor: 'bg.canvas', shadow: 'md' },
       },
     },
-    // Density. `sm` tightens gap/padding for compact metric tiles.
+    // Density. `sm` tightens gap/padding for compact metric tiles; `lg` roomier
+    // for hero/feature panels — one size ladder shared with Badge.
     size: {
       md: {},
       sm: {
@@ -70,6 +71,12 @@ export const card = {
         header: { px: '12' },
         content: { px: '12' },
         footer: { px: '12' },
+      },
+      lg: {
+        root: { gap: '32', py: '32' },
+        header: { px: '32' },
+        content: { px: '32' },
+        footer: { px: '32' },
       },
     },
   },

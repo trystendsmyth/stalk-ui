@@ -4,23 +4,23 @@ import { HeatMap } from './heatmap'
 
 import type { Meta, StoryObj } from '@storybook/react-vite'
 
-const inverters = ['Inverter 1', 'Inverter 2', 'Inverter 3', 'Inverter 4']
+const machines = ['Node 1', 'Node 2', 'Node 3', 'Node 4']
 const days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri']
 
 // Deterministic sample data so visual snapshots stay stable.
 const performance: Record<string, Record<string, number | null>> = {
-  'Inverter 1': { Mon: 98, Tue: 96, Wed: 99, Thu: 94, Fri: 97 },
-  'Inverter 2': { Mon: 82, Tue: 88, Wed: 79, Thu: 91, Fri: 85 },
-  'Inverter 3': { Mon: 64, Tue: 58, Wed: null, Thu: 71, Fri: 69 },
-  'Inverter 4': { Mon: 45, Tue: 52, Wed: 48, Thu: 40, Fri: 55 },
+  'Node 1': { Mon: 98, Tue: 96, Wed: 99, Thu: 94, Fri: 97 },
+  'Node 2': { Mon: 82, Tue: 88, Wed: 79, Thu: 91, Fri: 85 },
+  'Node 3': { Mon: 64, Tue: 58, Wed: null, Thu: 71, Fri: 69 },
+  'Node 4': { Mon: 45, Tue: 52, Wed: 48, Thu: 40, Fri: 55 },
 }
 
 // Signed deviation from target, for the diverging scale.
 const deviation: Record<string, Record<string, number | null>> = {
-  'Inverter 1': { Mon: 4, Tue: 1, Wed: 6, Thu: -2, Fri: 3 },
-  'Inverter 2': { Mon: -3, Tue: 2, Wed: -7, Thu: 5, Fri: 0 },
-  'Inverter 3': { Mon: -9, Tue: -12, Wed: null, Thu: -4, Fri: -6 },
-  'Inverter 4': { Mon: -15, Tue: -10, Wed: -13, Thu: -18, Fri: -8 },
+  'Node 1': { Mon: 4, Tue: 1, Wed: 6, Thu: -2, Fri: 3 },
+  'Node 2': { Mon: -3, Tue: 2, Wed: -7, Thu: 5, Fri: 0 },
+  'Node 3': { Mon: -9, Tue: -12, Wed: null, Thu: -4, Fri: -6 },
+  'Node 4': { Mon: -15, Tue: -10, Wed: -13, Thu: -18, Fri: -8 },
 }
 
 const meta = {
@@ -43,11 +43,11 @@ type Story = StoryObj<typeof meta>
 
 export const Sequential: Story = {
   args: {
-    rows: inverters,
+    rows: machines,
     columns: days,
     cell: (row, column) => performance[row]?.[column] ?? null,
-    'aria-label': 'Weekly inverter performance index',
-    caption: 'Performance index (%) by inverter and weekday.',
+    'aria-label': 'Weekly node performance index',
+    caption: 'Performance index (%) by node and weekday.',
     formatValue: (value) => `${String(value)}%`,
     legend: true,
   },
@@ -55,7 +55,7 @@ export const Sequential: Story = {
 
 export const Diverging: Story = {
   args: {
-    rows: inverters,
+    rows: machines,
     columns: days,
     scale: 'diverging',
     midpoint: 0,
@@ -73,6 +73,35 @@ export const Inspectable: Story = {
     inspectable: true,
     caption: 'Cells are keyboard-focusable — tab through to inspect each value.',
   },
+}
+
+// Deterministic fleet large enough that the grid actually scrolls.
+const fleet = Array.from({ length: 24 }, (_, index) => `Node ${String(index + 1)}`)
+const fleetCell = (row: string, column: string) =>
+  40 + ((fleet.indexOf(row) * 13 + days.indexOf(column) * 29) % 60)
+
+// `columnsSticky` pins the column axis while a tall grid scrolls — e.g. a
+// large fleet over a 24h axis. The height constraint goes on the
+// HeatMap itself: its root is the scroll container (it owns `overflow`), so
+// sticky headers pin to it, not to an outer wrapper.
+export const StickyColumns: Story = {
+  args: {
+    'aria-label': 'Fleet performance with sticky column axis',
+    caption: 'Scroll the grid — the weekday axis stays pinned.',
+    cell: fleetCell,
+    columns: days,
+    columnsSticky: true,
+    rows: fleet,
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'A 24-row fleet in a height-capped grid. With `columnsSticky` the weekday axis stays pinned while you scroll; toggle the control off to watch it scroll away. Constrain the HeatMap itself (its root owns the scroll), not a wrapper.',
+      },
+    },
+  },
+  render: (args) => <HeatMap {...args} style={{ maxHeight: 300 }} />,
 }
 
 // Composable HeatMap.* — labeled sections, in-cell content, status-tone fills, and

@@ -7,15 +7,29 @@ import {
 } from '@tanstack/react-table'
 import { ChevronDown, ChevronsUpDown, ChevronUp } from 'lucide-react'
 import { useState } from 'react'
-import { cx } from 'styled-system/css'
+import { css, cx } from 'styled-system/css'
 import { dataTable as dataTableRecipe } from 'styled-system/recipes'
 
 import { Button } from './button'
 import { Table } from './table'
 
-import type { ColumnDef, SortingState } from '@tanstack/react-table'
+import type { ColumnDef, RowData, SortingState } from '@tanstack/react-table'
+
+declare module '@tanstack/react-table' {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  interface ColumnMeta<TData extends RowData, TValue> {
+    /** Column width (any CSS width, e.g. "18%"). Declaring a width on any
+     * column switches the table to fixed layout sized to the container, so
+     * the columns hold a deliberate plan instead of browser auto-sizing. */
+    width?: string
+  }
+}
 
 const styles = /* @__PURE__ */ dataTableRecipe()
+
+// Fixed layout fits the table to its container; the per-column meta widths
+// (applied on the header cells) divide it.
+const fixedLayoutClass = /* @__PURE__ */ css({ tableLayout: 'fixed', w: 'full' })
 
 export interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
@@ -51,10 +65,11 @@ export function DataTable<TData, TValue>({
   })
 
   const rows = table.getRowModel().rows
+  const hasWidths = columns.some((c) => c.meta?.width !== undefined)
 
   return (
     <div className={cx(styles.root, className)}>
-      <Table.Root>
+      <Table.Root className={hasWidths ? fixedLayoutClass : undefined}>
         <Table.Header>
           {table.getHeaderGroups().map((headerGroup) => (
             <Table.Row key={headerGroup.id}>
@@ -65,8 +80,13 @@ export function DataTable<TData, TValue>({
                 const SortIcon =
                   sorted === 'asc' ? ChevronUp : sorted === 'desc' ? ChevronDown : ChevronsUpDown
 
+                const width = header.column.columnDef.meta?.width
                 return (
-                  <Table.Head key={header.id} aria-sort={ariaSort}>
+                  <Table.Head
+                    key={header.id}
+                    aria-sort={ariaSort}
+                    style={width !== undefined ? { width } : undefined}
+                  >
                     {header.isPlaceholder ? null : header.column.getCanSort() ? (
                       <button
                         type="button"

@@ -47,6 +47,19 @@ export default meta
 
 type Story = StoryObj<typeof meta>
 
+// Toolbar affordances: a column-visibility menu, CSV export of the current
+// view, and pointer column resizing — the MUI-X-tier table pillars.
+export const ToolbarAndResizing: Story = {
+  args: {
+    columns,
+    data: members,
+    enableColumnResizing: true,
+    enableColumnVisibility: true,
+    exportFileName: 'members.csv',
+    pageSize: 5,
+  },
+}
+
 export const Sortable: Story = {
   args: { columns, data: members, pageSize: 6 },
 }

@@ -49,3 +49,61 @@ test('honors disabled state', () => {
   const thumb = screen.getByRole('slider', { name: 'Volume' })
   expect(thumb).toHaveAttribute('data-disabled')
 })
+
+test('circular shape renders an accessible single-value knob', async () => {
+  const { container } = render(
+    <Slider aria-label="Target output" defaultValue={[65]} shape="circular" showValue />,
+  )
+
+  const knob = screen.getByRole('slider', { name: 'Target output' })
+  expect(knob).toHaveAttribute('aria-valuenow', '65')
+  expect(knob).toHaveAttribute('aria-valuemin', '0')
+  expect(knob).toHaveAttribute('aria-valuemax', '100')
+  expect(screen.getByText('65')).toBeInTheDocument()
+  expect((await axe(container)).violations).toHaveLength(0)
+})
+
+test('circular knob responds to keyboard input', async () => {
+  const user = userEvent.setup()
+  const onValueChange = vi.fn()
+  render(
+    <Slider
+      aria-label="Target output"
+      defaultValue={[65]}
+      shape="circular"
+      step={5}
+      onValueChange={onValueChange}
+    />,
+  )
+
+  const knob = screen.getByRole('slider', { name: 'Target output' })
+  knob.focus()
+  await user.keyboard('{ArrowUp}')
+  expect(onValueChange).toHaveBeenCalledWith([70])
+
+  await user.keyboard('{End}')
+  expect(onValueChange).toHaveBeenCalledWith([100])
+
+  await user.keyboard('{Home}')
+  expect(onValueChange).toHaveBeenCalledWith([0])
+})
+
+test('disabled circular knob ignores input', async () => {
+  const user = userEvent.setup()
+  const onValueChange = vi.fn()
+  render(
+    <Slider
+      aria-label="Target output"
+      defaultValue={[65]}
+      disabled
+      shape="circular"
+      onValueChange={onValueChange}
+    />,
+  )
+
+  const knob = screen.getByRole('slider', { name: 'Target output' })
+  expect(knob).toHaveAttribute('data-disabled')
+  knob.focus()
+  await user.keyboard('{ArrowUp}')
+  expect(onValueChange).not.toHaveBeenCalled()
+})

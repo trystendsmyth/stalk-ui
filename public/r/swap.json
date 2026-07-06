@@ -1,0 +1,28 @@
+{
+  "$schema": "https://stalk-ui.com/schema/v1/registry-item.json",
+  "name": "swap",
+  "type": "registry:ui",
+  "dependencies": ["@stalk-ui/preset"],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "src/components/ui/swap.tsx",
+      "type": "registry:ui",
+      "content": "import { forwardRef } from 'react'\nimport { cx } from 'styled-system/css'\nimport { swap as swapRecipe } from 'styled-system/recipes'\n\nimport type { HTMLAttributes, ReactNode } from 'react'\n\nexport type SwapEffect = 'fade' | 'rotate' | 'flip' | 'scale'\n\nexport interface SwapProps extends HTMLAttributes<HTMLSpanElement> {\n  /** Show the `on` content; `false` shows `off`. */\n  swap: boolean\n  on: ReactNode\n  off: ReactNode\n  /** Transition between the two: crossfade (default), rotate, flip, or scale. */\n  effect?: SwapEffect\n}\n\n/**\n * Swaps between two elements (icons, labels) stacked in one grid cell, with a\n * CSS transition. Purely presentational — pair it with the control that owns\n * the state (a Toggle, Button, or Switch), which also carries the accessible\n * name; the inactive side is hidden from assistive tech.\n */\nexport const Swap = /* @__PURE__ */ forwardRef<HTMLSpanElement, SwapProps>(function Swap(\n  { className, effect = 'fade', off, on, swap, ...props },\n  ref,\n) {\n  const styles = swapRecipe({ effect })\n\n  return (\n    <span\n      ref={ref}\n      className={cx(styles.root, className)}\n      data-swap={swap ? 'on' : 'off'}\n      {...props}\n    >\n      <span\n        aria-hidden={swap ? undefined : true}\n        className={styles.indicator}\n        data-state={swap ? 'open' : 'closed'}\n      >\n        {on}\n      </span>\n      <span\n        aria-hidden={swap ? true : undefined}\n        className={styles.indicator}\n        data-state={swap ? 'closed' : 'open'}\n      >\n        {off}\n      </span>\n    </span>\n  )\n})\n"
+    }
+  ],
+  "stalk": {
+    "schemaVersion": "1.0",
+    "preset": {
+      "semanticTokens": {},
+      "recipes": ["swap"]
+    },
+    "packageDependencies": {
+      "preset": "@stalk-ui/preset"
+    },
+    "pandaCodegen": true,
+    "importAliases": {
+      "styledSystem": "styled-system"
+    }
+  }
+}

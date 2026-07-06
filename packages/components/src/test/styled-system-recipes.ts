@@ -13,13 +13,13 @@ const makeSplitVariantProps =
 
 interface BadgeRecipeOptions {
   radius?: 'none' | 'sm' | 'md' | 'lg' | 'full'
-  size?: 'sm' | 'md'
+  size?: 'micro' | 'sm' | 'md' | 'lg'
   variant?: 'solid' | 'subtle' | 'outline'
 }
 
 export const badge = ({
   radius = 'full',
-  size = 'md',
+  size = 'lg',
   variant = 'subtle',
 }: BadgeRecipeOptions = {}) =>
   `stalk-badge stalk-badge--${variant} stalk-badge--${size} stalk-badge--radius-${radius}`
@@ -172,6 +172,9 @@ export const toast = () => ({
   icon: 'stalk-toast__icon',
   loader: 'stalk-toast__loader',
 })
+
+export const swap = ({ effect = 'fade' }: { effect?: string } = {}) =>
+  slotMap('swap', ['root', 'indicator'], `--${effect}`)
 
 export const sparkline = () => ({
   root: 'stalk-sparkline__root',
@@ -614,12 +617,17 @@ export const menubar = ({ inset = false }: MenubarRecipeOptions = {}) => ({
 })
 
 interface ProgressRecipeOptions {
+  shape?: 'linear' | 'circular'
   size?: 'sm' | 'md' | 'lg'
 }
 
-export const progress = ({ size = 'md' }: ProgressRecipeOptions = {}) => ({
-  root: `stalk-progress__root stalk-progress__root--${size}`,
+export const progress = ({ shape = 'linear', size = 'md' }: ProgressRecipeOptions = {}) => ({
+  root: `stalk-progress__root stalk-progress__root--${size} stalk-progress__root--${shape}`,
   indicator: 'stalk-progress__indicator',
+  circle: 'stalk-progress__circle',
+  circleTrack: 'stalk-progress__circleTrack',
+  circleRange: 'stalk-progress__circleRange',
+  valueText: 'stalk-progress__valueText',
 })
 
 interface SkeletonRecipeOptions {
@@ -634,6 +642,12 @@ export const slider = () => ({
   track: 'stalk-slider__track',
   range: 'stalk-slider__range',
   thumb: 'stalk-slider__thumb',
+  circleRoot: 'stalk-slider__circle-root',
+  circle: 'stalk-slider__circle',
+  circleTrack: 'stalk-slider__circle-track',
+  circleRange: 'stalk-slider__circle-range',
+  circleThumb: 'stalk-slider__circle-thumb',
+  valueText: 'stalk-slider__value-text',
 })
 
 interface TextRecipeOptions {
@@ -772,3 +786,102 @@ interface BlockquoteRecipeOptions {
 
 export const blockquote = ({ size = 'md' }: BlockquoteRecipeOptions = {}) =>
   `stalk-blockquote stalk-blockquote--${size}`
+
+const slotMap = (name: string, slots: readonly string[], suffix = '') =>
+  Object.fromEntries(slots.map((slot) => [slot, `stalk-${name}__${slot}${suffix}`]))
+
+interface SizeOnlyOptions {
+  size?: string
+}
+
+export const emptyState = ({ size = 'md' }: SizeOnlyOptions = {}) =>
+  slotMap('empty-state', ['root', 'icon', 'title', 'description', 'actions'], `--${size}`)
+
+export const stat = ({ size = 'md' }: SizeOnlyOptions = {}) =>
+  slotMap('stat', ['root', 'label', 'value', 'unit', 'delta', 'trend'], `--${size}`)
+
+export const timeline = ({ orientation = 'vertical' }: { orientation?: string } = {}) =>
+  slotMap(
+    'timeline',
+    ['root', 'item', 'rail', 'indicator', 'connector', 'content', 'time', 'title', 'description'],
+    `--${orientation}`,
+  )
+
+export const steps = ({ orientation = 'horizontal' }: { orientation?: string } = {}) =>
+  slotMap(
+    'steps',
+    ['root', 'item', 'indicator', 'separator', 'content', 'title', 'description'],
+    `--${orientation}`,
+  )
+
+export const editable = () => slotMap('editable', ['root', 'ghost', 'preview', 'input'])
+
+export const rating = ({ size = 'md' }: SizeOnlyOptions = {}) =>
+  slotMap('rating', ['root', 'item', 'icon'], `--${size}`)
+
+interface TreeRecipeOptions {
+  fullWidth?: boolean
+  guides?: boolean
+  radius?: string
+  size?: string
+  variant?: string
+}
+
+export const tree = ({
+  fullWidth = false,
+  guides = false,
+  radius = 'sm',
+  size = 'md',
+  variant = 'ghost',
+}: TreeRecipeOptions = {}) =>
+  Object.fromEntries(
+    ['root', 'branch', 'row', 'indicator', 'label', 'group'].map((slot) => [
+      slot,
+      [
+        `stalk-tree__${slot}`,
+        `stalk-tree__${slot}--${variant}`,
+        `stalk-tree__${slot}--${size}`,
+        `stalk-tree__${slot}--radius-${radius}`,
+        ...(fullWidth ? [`stalk-tree__${slot}--full-width`] : []),
+        ...(guides ? [`stalk-tree__${slot}--guides`] : []),
+      ].join(' '),
+    ]),
+  )
+
+export const fileUpload = () =>
+  slotMap('file-upload', [
+    'root',
+    'dropzone',
+    'icon',
+    'label',
+    'hint',
+    'list',
+    'item',
+    'itemName',
+    'itemSize',
+    'remove',
+  ])
+
+export const tour = () =>
+  slotMap('tour', [
+    'spotlight',
+    'arrow',
+    'content',
+    'title',
+    'description',
+    'footer',
+    'counter',
+    'actions',
+  ])
+
+export const drawer = () =>
+  slotMap('drawer', [
+    'overlay',
+    'content',
+    'handle',
+    'header',
+    'title',
+    'description',
+    'body',
+    'footer',
+  ])

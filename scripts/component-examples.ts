@@ -1,4 +1,29 @@
 export const componentExamples = {
+  'copy-button': ['<CopyButton value="pnpm dlx @stalk-ui/cli add copy-button" />'],
+  drawer: [
+    '<Drawer.Root>\n  <Drawer.Trigger asChild>\n    <Button variant="outline">Open filters</Button>\n  </Drawer.Trigger>\n  <Drawer.Content>\n    <Drawer.Header>\n      <Drawer.Title>Filters</Drawer.Title>\n      <Drawer.Description>Narrow the results.</Drawer.Description>\n    </Drawer.Header>\n    <Drawer.Footer>\n      <Drawer.Close asChild><Button>Apply</Button></Drawer.Close>\n    </Drawer.Footer>\n  </Drawer.Content>\n</Drawer.Root>',
+  ],
+  editable: ['<Editable aria-label="Project name" defaultValue="Untitled project" />'],
+  'empty-state': [
+    '<EmptyState.Root>\n  <EmptyState.Icon><Inbox /></EmptyState.Icon>\n  <EmptyState.Title>No devices found</EmptyState.Title>\n  <EmptyState.Description>Try widening the date range or clearing filters.</EmptyState.Description>\n  <EmptyState.Actions>\n    <Button size="sm">Clear filters</Button>\n  </EmptyState.Actions>\n</EmptyState.Root>',
+  ],
+  'file-upload': ['<FileUpload accept=".csv" hint="CSV up to 1 MB" maxSize={1048576} multiple />'],
+  rating: [
+    '<Rating aria-label="Quality" defaultValue={3} />',
+    '<Rating aria-label="Vendor score" readOnly value={4} />',
+  ],
+  stat: [
+    '<Stat.Root>\n  <Stat.Label>Storage used</Stat.Label>\n  <Stat.Value>412 <Stat.Unit>GB</Stat.Unit></Stat.Value>\n  <Stat.Delta direction="up">+8.2% vs yesterday</Stat.Delta>\n</Stat.Root>',
+  ],
+  steps: [
+    '<Steps aria-label="Onboarding" current={1} steps={[{ title: "Account" }, { title: "Site" }, { title: "Review" }]} />',
+  ],
+  timeline: [
+    '<Timeline.Root aria-label="Activity">\n  <Timeline.Item tone="success">\n    <Timeline.Content>\n      <Timeline.Time dateTime="2026-07-03T14:10">Today, 14:10</Timeline.Time>\n      <Timeline.Title>Deploy finished</Timeline.Title>\n      <Timeline.Description>Build #424 promoted to production.</Timeline.Description>\n    </Timeline.Content>\n  </Timeline.Item>\n  <Timeline.Item tone="danger">\n    <Timeline.Content>\n      <Timeline.Title>Alert raised</Timeline.Title>\n    </Timeline.Content>\n  </Timeline.Item>\n</Timeline.Root>',
+  ],
+  tour: ['<TaskTourDemo />'],
+  swap: ['<SwapDemo />'],
+  tree: ['<FileTree />'],
   accordion: [
     '<Accordion type="single" collapsible defaultValue="item-1">\n  <Accordion.Item value="item-1">\n    <Accordion.Trigger>Is it accessible?</Accordion.Trigger>\n    <Accordion.Content>Yes. It adheres to the WAI-ARIA design pattern.</Accordion.Content>\n  </Accordion.Item>\n  <Accordion.Item value="item-2">\n    <Accordion.Trigger>Is it styled?</Accordion.Trigger>\n    <Accordion.Content>Yes. Defaults use semantic tokens from the preset.</Accordion.Content>\n  </Accordion.Item>\n</Accordion>',
     '<Accordion type="multiple" defaultValue={["a", "b"]}>\n  <Accordion.Item value="a">\n    <Accordion.Trigger>First section</Accordion.Trigger>\n    <Accordion.Content>Multiple sections can be open at once.</Accordion.Content>\n  </Accordion.Item>\n  <Accordion.Item value="b">\n    <Accordion.Trigger>Second section</Accordion.Trigger>\n    <Accordion.Content>Pass type=&quot;multiple&quot; to enable this.</Accordion.Content>\n  </Accordion.Item>\n</Accordion>',
@@ -23,7 +48,8 @@ export const componentExamples = {
   badge: [
     '<Badge>Published</Badge>',
     '<Badge variant="solid" tone="success">Live</Badge>',
-    '<Badge variant="outline" tone="danger" size="sm" radius="sm">Error</Badge>',
+    '<Badge variant="outline" tone="danger" size="md" radius="sm">Error</Badge>',
+    '<Badge tone="neutral" size="micro">vendor-reported</Badge>',
   ],
   blockquote: [
     '<Blockquote>The quick brown fox jumps over the lazy dog.</Blockquote>',
@@ -71,7 +97,7 @@ export const componentExamples = {
     '<ColorPicker defaultValue="#4f46e5">\n  <ColorPicker.Trigger aria-label="Brand color" />\n  <ColorPicker.Content>\n    <ColorPicker.Picker />\n    <ColorPicker.Controls>\n      <ColorPicker.Input aria-label="Hex value" />\n      <ColorPicker.EyeDropper />\n    </ColorPicker.Controls>\n    <ColorPicker.Swatches>\n      <ColorPicker.Swatch color="#ef4444" />\n      <ColorPicker.Swatch color="#f97316" />\n      <ColorPicker.Swatch color="#22c55e" />\n      <ColorPicker.Swatch color="#3b82f6" />\n      <ColorPicker.Swatch color="#8b5cf6" />\n    </ColorPicker.Swatches>\n  </ColorPicker.Content>\n</ColorPicker>',
     '<ColorPicker alpha defaultValue="#4f46e5cc">\n  <ColorPicker.Trigger aria-label="Overlay color" />\n  <ColorPicker.Content>\n    <ColorPicker.Picker />\n    <ColorPicker.Controls>\n      <ColorPicker.Input aria-label="Hex value" />\n    </ColorPicker.Controls>\n  </ColorPicker.Content>\n</ColorPicker>',
   ],
-  combobox: ['<FrameworkCombobox />'],
+  combobox: ['<FrameworkCombobox />', '<StackMultiCombobox />'],
   command: [
     '<Command label="Command menu" style={{ maxWidth: "24rem", border: "1px solid" }}>\n  <Command.Input aria-label="Search commands" placeholder="Type a command or search…" />\n  <Command.List>\n    <Command.Empty>No results found.</Command.Empty>\n    <Command.Group heading="Suggestions">\n      <Command.Item>Calendar</Command.Item>\n      <Command.Item>Search emoji</Command.Item>\n    </Command.Group>\n    <Command.Separator />\n    <Command.Group heading="Settings">\n      <Command.Item>Profile<Command.Shortcut>⌘P</Command.Shortcut></Command.Item>\n      <Command.Item>Settings<Command.Shortcut>⌘S</Command.Shortcut></Command.Item>\n    </Command.Group>\n  </Command.List>\n</Command>',
   ],
@@ -84,7 +110,7 @@ export const componentExamples = {
   ],
   'data-table': ['<InvoiceTable />'],
   'data-table-advanced': ['<MembersTable />'],
-  'date-picker': ['<EventDatePicker />'],
+  'date-picker': ['<EventDatePicker />', '<ReportRangePicker />'],
   heatmap: ['<PerformanceHeatMap />'],
   'datetime-input': [
     '<DatetimeInput aria-label="Date" />',
@@ -165,6 +191,7 @@ export const componentExamples = {
     '<Progress aria-label="Upload" value={42} />',
     '<Progress aria-label="Sync" max={200} value={120} size="lg" />',
     '<Progress aria-label="Loading" />',
+    '<Progress aria-label="Capacity" shape="circular" showValue value={72} />',
   ],
   'qr-code': [
     '<QrCode value="https://example.com" aria-label="QR code linking to example.com" />',
@@ -198,7 +225,7 @@ export const componentExamples = {
     '<Sheet.Root>\n  <Sheet.Trigger asChild>\n    <Button variant="outline">Open left</Button>\n  </Sheet.Trigger>\n  <Sheet.Content side="left">\n    <Sheet.Header>\n      <Sheet.Title>Navigation</Sheet.Title>\n      <Sheet.Description>A panel anchored to the start edge.</Sheet.Description>\n    </Sheet.Header>\n  </Sheet.Content>\n</Sheet.Root>',
   ],
   sidebar: [
-    '<div style={{ border: "1px solid var(--colors-border-default)", borderRadius: 8, display: "flex", height: 280, overflow: "hidden" }}>\n  <Sidebar.Provider style={{ minHeight: "100%" }}>\n    <Sidebar>\n      <Sidebar.Header>\n        <Sidebar.Trigger />\n        <span style={{ fontWeight: 600 }}>Aperture</span>\n      </Sidebar.Header>\n      <Sidebar.Content>\n        <Sidebar.Group>\n          <Sidebar.GroupLabel>Workspace</Sidebar.GroupLabel>\n          <Sidebar.Menu>\n            <Sidebar.MenuItem>\n              <Sidebar.MenuButton isActive><Home /><span>Queue</span></Sidebar.MenuButton>\n            </Sidebar.MenuItem>\n            <Sidebar.MenuItem>\n              <Sidebar.MenuButton><Settings /><span>Settings</span></Sidebar.MenuButton>\n            </Sidebar.MenuItem>\n          </Sidebar.Menu>\n        </Sidebar.Group>\n      </Sidebar.Content>\n      <Sidebar.Rail />\n    </Sidebar>\n    <Sidebar.Inset>\n      <div style={{ alignItems: "center", display: "flex", gap: 8, padding: 12 }}>\n        <Sidebar.Trigger />\n        <strong>Triage Queue</strong>\n      </div>\n    </Sidebar.Inset>\n  </Sidebar.Provider>\n</div>',
+    '<div style={{ border: "1px solid var(--colors-border-default)", borderRadius: 8, display: "flex", height: 280, overflow: "hidden" }}>\n  <Sidebar.Provider style={{ minHeight: "100%" }}>\n    <Sidebar>\n      <Sidebar.Header>\n        <Sidebar.Trigger />\n        <span style={{ fontWeight: 600 }}>Acme</span>\n      </Sidebar.Header>\n      <Sidebar.Content>\n        <Sidebar.Group>\n          <Sidebar.GroupLabel>Workspace</Sidebar.GroupLabel>\n          <Sidebar.Menu>\n            <Sidebar.MenuItem>\n              <Sidebar.MenuButton isActive><Home /><span>Queue</span></Sidebar.MenuButton>\n            </Sidebar.MenuItem>\n            <Sidebar.MenuItem>\n              <Sidebar.MenuButton><Settings /><span>Settings</span></Sidebar.MenuButton>\n            </Sidebar.MenuItem>\n          </Sidebar.Menu>\n        </Sidebar.Group>\n      </Sidebar.Content>\n      <Sidebar.Rail />\n    </Sidebar>\n    <Sidebar.Inset>\n      <div style={{ alignItems: "center", display: "flex", gap: 8, padding: 12 }}>\n        <Sidebar.Trigger />\n        <strong>Task Queue</strong>\n      </div>\n    </Sidebar.Inset>\n  </Sidebar.Provider>\n</div>',
   ],
   skeleton: [
     '<Skeleton style={{ height: 14, width: 240 }} />',

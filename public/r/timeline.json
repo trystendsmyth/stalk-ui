@@ -1,0 +1,28 @@
+{
+  "$schema": "https://stalk-ui.com/schema/v1/registry-item.json",
+  "name": "timeline",
+  "type": "registry:ui",
+  "dependencies": ["@stalk-ui/preset"],
+  "registryDependencies": ["create-style-context", "tones"],
+  "files": [
+    {
+      "path": "src/components/ui/timeline.tsx",
+      "type": "registry:ui",
+      "content": "'use client'\n\nimport { createStyleContext } from '../../lib/stalk-ui/create-style-context'\nimport { forwardRef, useMemo } from 'react'\nimport { css, cx } from 'styled-system/css'\nimport { timeline as timelineRecipe } from 'styled-system/recipes'\n\nimport type { Tone } from '../../lib/stalk-ui/tones'\nimport type { HTMLAttributes, LiHTMLAttributes, TimeHTMLAttributes } from 'react'\n\nexport type TimelineTone = Tone\n\nconst { StyleProvider, useSlotStyles, withContext } = /* @__PURE__ */ createStyleContext(\n  timelineRecipe,\n  { name: 'Timeline' },\n)\n\nexport interface TimelineRootProps extends HTMLAttributes<HTMLOListElement> {\n  /** Lay items along a row (dot rails run left→right) instead of a column. */\n  orientation?: 'vertical' | 'horizontal'\n}\n\nexport const TimelineRoot = /* @__PURE__ */ forwardRef<HTMLOListElement, TimelineRootProps>(\n  function TimelineRoot({ className, orientation = 'vertical', ...props }, ref) {\n    const styles = useMemo(() => timelineRecipe({ orientation }), [orientation])\n\n    return (\n      <StyleProvider value={styles}>\n        <ol ref={ref} className={cx(styles.root, className)} {...props} />\n      </StyleProvider>\n    )\n  },\n)\n\nexport interface TimelineItemProps extends LiHTMLAttributes<HTMLLIElement> {\n  /** Colors the item's dot (accent default; status tones for event severity). */\n  tone?: TimelineTone\n}\n\nexport const TimelineItem = /* @__PURE__ */ forwardRef<HTMLLIElement, TimelineItemProps>(\n  function TimelineItem({ children, className, tone = 'accent', ...props }, ref) {\n    const styles = useSlotStyles()\n\n    return (\n      <li ref={ref} className={cx(styles.item, className)} {...props}>\n        <span className={styles.rail} aria-hidden=\"true\">\n          <span className={cx(styles.indicator, css({ colorPalette: tone }))} />\n          <span className={styles.connector} data-timeline-connector />\n        </span>\n        {children}\n      </li>\n    )\n  },\n)\n\nexport const TimelineContent = /* @__PURE__ */ withContext('div', 'content')\nexport const TimelineTitle = /* @__PURE__ */ withContext('p', 'title')\nexport const TimelineDescription = /* @__PURE__ */ withContext('p', 'description')\n\nexport type TimelineTimeProps = TimeHTMLAttributes<HTMLTimeElement>\n\nexport const TimelineTime = /* @__PURE__ */ forwardRef<HTMLTimeElement, TimelineTimeProps>(\n  function TimelineTime({ className, ...props }, ref) {\n    const styles = useSlotStyles()\n    return <time ref={ref} className={cx(styles.time, className)} {...props} />\n  },\n)\n\nexport const Timeline = /* @__PURE__ */ Object.assign(TimelineRoot, {\n  Content: TimelineContent,\n  Description: TimelineDescription,\n  Item: TimelineItem,\n  Root: TimelineRoot,\n  Time: TimelineTime,\n  Title: TimelineTitle,\n})\n"
+    }
+  ],
+  "stalk": {
+    "schemaVersion": "1.0",
+    "preset": {
+      "semanticTokens": {},
+      "recipes": ["timeline"]
+    },
+    "packageDependencies": {
+      "preset": "@stalk-ui/preset"
+    },
+    "pandaCodegen": true,
+    "importAliases": {
+      "styledSystem": "styled-system"
+    }
+  }
+}

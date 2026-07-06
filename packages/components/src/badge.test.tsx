@@ -18,13 +18,24 @@ test.each(variants)('renders %s variant without axe violations', async (variant)
 test('renders each size', () => {
   render(
     <>
+      <Badge size="micro">Micro</Badge>
       <Badge size="sm">Small</Badge>
       <Badge size="md">Medium</Badge>
+      <Badge size="lg">Large</Badge>
     </>,
   )
 
+  expect(screen.getByText('Micro')).toBeInTheDocument()
   expect(screen.getByText('Small')).toBeInTheDocument()
   expect(screen.getByText('Medium')).toBeInTheDocument()
+  expect(screen.getByText('Large')).toBeInTheDocument()
+})
+
+test('renders the neutral tone', async () => {
+  const { container } = render(<Badge tone="neutral">Vendor-reported</Badge>)
+
+  expect(screen.getByText('Vendor-reported').className).toContain('color-palette_neutral')
+  expect((await axe(container)).violations).toHaveLength(0)
 })
 
 test('forwards refs and attributes', () => {
