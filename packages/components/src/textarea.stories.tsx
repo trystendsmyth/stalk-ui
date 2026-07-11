@@ -9,7 +9,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite'
 const { size: SIZES } = textareaRecipe.variantMap
 
 const meta = {
-  title: 'Components/Forms/Textarea',
+  title: 'Components/Inputs/Textarea',
   component: Textarea,
   tags: ['autodocs', 'stable'],
   args: {

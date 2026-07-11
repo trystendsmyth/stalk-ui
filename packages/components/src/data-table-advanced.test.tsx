@@ -4,6 +4,7 @@ import { expect, test, vi } from 'vitest'
 import { axe } from 'vitest-axe'
 
 import { DataTableAdvanced } from './data-table-advanced'
+import { installVirtualLayoutMocks } from './test/virtual-layout'
 
 import type { ColumnDef } from '@tanstack/react-table'
 
@@ -84,6 +85,41 @@ test('renders resize handles when column resizing is enabled', () => {
   ).toBeGreaterThan(0)
   const header = screen.getByRole('columnheader', { name: 'Name' })
   expect(header.style.width).not.toBe('')
+})
+
+test('virtualization mounts only a windowed subset of a large dataset', () => {
+  // JSDOM has no layout; feed the virtualizer a viewport + row height.
+  const restoreLayout = installVirtualLayoutMocks({ itemSize: 48, viewport: 240 })
+  try {
+    const many = Array.from({ length: 2_000 }, (_, i) => ({
+      name: `Member ${String(i + 1)}`,
+      role: 'Maintainer',
+    }))
+    render(<DataTableAdvanced columns={columns} data={many} enableVirtualization maxHeight={240} />)
+
+    const rendered = screen.getAllByRole('row').length
+    expect(rendered).toBeGreaterThan(1)
+    // 2000 data rows + header; windowing must keep the DOM far below the total.
+    expect(rendered).toBeLessThan(200)
+  } finally {
+    restoreLayout()
+  }
+})
+
+test('throws when virtualization is combined with renderSubRow', () => {
+  const restore = console.error
+  console.error = () => undefined
+  expect(() =>
+    render(
+      <DataTableAdvanced
+        columns={columns}
+        data={data}
+        enableVirtualization
+        renderSubRow={(row) => <span>{row.name}</span>}
+      />,
+    ),
+  ).toThrow(/cannot be combined/)
+  console.error = restore
 })
 
 test('exports the current view as CSV', async () => {

@@ -8,7 +8,7 @@ import { Swap } from './swap'
 import type { Meta, StoryObj } from '@storybook/react-vite'
 
 const meta = {
-  title: 'Components/Data Display/Swap',
+  title: 'Components/Display/Swap',
   component: Swap,
   tags: ['autodocs', 'stable'],
   args: {

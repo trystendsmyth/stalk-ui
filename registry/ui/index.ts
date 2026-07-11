@@ -60,6 +60,7 @@ import { sheet } from './sheet'
 import { sidebar } from './sidebar'
 import { skeleton } from './skeleton'
 import { slider } from './slider'
+import { sortable } from './sortable'
 import { sparkline } from './sparkline'
 import { spinner } from './spinner'
 import { stat } from './stat'
@@ -80,6 +81,7 @@ import { toolbar } from './toolbar'
 import { tooltip } from './tooltip'
 import { tour } from './tour'
 import { tree } from './tree'
+import { virtualList } from './virtual-list'
 
 import type { RegistrySource } from './_template'
 
@@ -143,6 +145,7 @@ export const registryItems = [
   sidebar,
   skeleton,
   slider,
+  sortable,
   sparkline,
   spinner,
   swap,
@@ -169,4 +172,5 @@ export const registryItems = [
   timeline,
   tour,
   tree,
+  virtualList,
 ] satisfies RegistrySource[]

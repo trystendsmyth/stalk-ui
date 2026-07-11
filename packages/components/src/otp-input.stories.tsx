@@ -5,7 +5,7 @@ import { OtpInput } from './otp-input'
 import type { Meta, StoryObj } from '@storybook/react-vite'
 
 const meta = {
-  title: 'Components/Forms/OTP Input',
+  title: 'Components/Inputs/OTP Input',
   component: OtpInput.Root,
   tags: ['autodocs', 'stable'],
   args: {

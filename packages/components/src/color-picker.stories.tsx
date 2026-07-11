@@ -52,7 +52,7 @@ const SWATCH_PALETTE = [
 ]
 
 const meta = {
-  title: 'Components/Forms/Color Picker',
+  title: 'Components/Selection/Color Picker',
   component: ColorPicker,
   tags: ['autodocs', 'stable'],
   args: {

@@ -6,7 +6,7 @@ import { NumberInput } from './number-input'
 import type { Meta, StoryObj } from '@storybook/react-vite'
 
 const meta = {
-  title: 'Components/Forms/Number Input',
+  title: 'Components/Inputs/Number Input',
   component: NumberInput,
   tags: ['autodocs', 'stable'],
   args: {

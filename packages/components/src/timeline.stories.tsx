@@ -3,7 +3,7 @@ import { Timeline } from './timeline'
 import type { Meta, StoryObj } from '@storybook/react-vite'
 
 const meta = {
-  title: 'Components/Data Display/Timeline',
+  title: 'Components/Display/Timeline',
   component: Timeline.Root,
   tags: ['autodocs', 'stable'],
   args: { orientation: 'vertical' },

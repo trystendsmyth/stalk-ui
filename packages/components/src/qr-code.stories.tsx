@@ -3,7 +3,7 @@ import { QrCode } from './qr-code'
 import type { Meta, StoryObj } from '@storybook/react-vite'
 
 const meta = {
-  title: 'Components/Data Display/QR Code',
+  title: 'Components/Data Visualization/QR Code',
   component: QrCode,
   tags: ['autodocs', 'stable'],
   args: {

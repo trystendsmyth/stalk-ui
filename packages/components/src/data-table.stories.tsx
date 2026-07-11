@@ -48,7 +48,7 @@ const InvoiceTable = (props: InvoiceTableProps) => (
 )
 
 const meta = {
-  title: 'Components/Data Display/Data Table',
+  title: 'Components/Tables & Lists/Data Table',
   component: InvoiceTable,
   tags: ['autodocs', 'stable'],
   args: {

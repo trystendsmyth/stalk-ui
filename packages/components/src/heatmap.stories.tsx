@@ -24,7 +24,7 @@ const deviation: Record<string, Record<string, number | null>> = {
 }
 
 const meta = {
-  title: 'Components/Data Display/HeatMap',
+  title: 'Components/Data Visualization/HeatMap',
   component: HeatMap,
   tags: ['autodocs', 'stable'],
   argTypes: {

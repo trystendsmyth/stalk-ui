@@ -6,7 +6,7 @@ import { TimePicker } from './time-picker'
 import type { Meta, StoryObj } from '@storybook/react-vite'
 
 const meta = {
-  title: 'Components/Forms/Time Picker',
+  title: 'Components/Date & Time/Time Picker',
   component: TimePicker,
   tags: ['autodocs', 'stable'],
   args: {

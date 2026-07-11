@@ -15,7 +15,7 @@ const frameworks = [
 ]
 
 const meta = {
-  title: 'Components/Forms/Combobox',
+  title: 'Components/Selection/Combobox',
   component: Combobox,
   tags: ['autodocs', 'stable'],
   args: {

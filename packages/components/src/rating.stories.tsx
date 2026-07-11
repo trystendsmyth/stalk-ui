@@ -6,7 +6,7 @@ import { Rating } from './rating'
 import type { Meta, StoryObj } from '@storybook/react-vite'
 
 const meta = {
-  title: 'Components/Forms/Rating',
+  title: 'Components/Selection/Rating',
   component: Rating,
   tags: ['autodocs', 'stable'],
   args: {

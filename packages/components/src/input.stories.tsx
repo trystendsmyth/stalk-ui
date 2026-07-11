@@ -9,7 +9,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite'
 const { size: SIZES, align: ALIGNS } = inputRecipe.variantMap
 
 const meta = {
-  title: 'Components/Forms/Input',
+  title: 'Components/Inputs/Input',
   component: Input,
   tags: ['autodocs', 'stable'],
   args: {

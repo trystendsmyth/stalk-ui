@@ -47,7 +47,7 @@ const SelectExample = ({
 }
 
 const meta = {
-  title: 'Components/Forms/Select',
+  title: 'Components/Selection/Select',
   component: Select.Trigger,
   tags: ['autodocs', 'stable'],
   // Render each story in its own fixed-height iframe in autodocs so opening a

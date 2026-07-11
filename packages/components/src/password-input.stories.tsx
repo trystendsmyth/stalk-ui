@@ -5,7 +5,7 @@ import { PasswordInput } from './password-input'
 import type { Meta, StoryObj } from '@storybook/react-vite'
 
 const meta = {
-  title: 'Components/Forms/Password Input',
+  title: 'Components/Inputs/Password Input',
   component: PasswordInput,
   tags: ['autodocs', 'stable'],
   args: {

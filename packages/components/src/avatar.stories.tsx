@@ -13,7 +13,7 @@ const SAMPLE_IMAGE =
 const BROKEN_IMAGE = 'https://example.invalid/missing.png'
 
 const meta = {
-  title: 'Components/Data Display/Avatar',
+  title: 'Components/Display/Avatar',
   component: Avatar,
   tags: ['autodocs', 'stable'],
   args: {

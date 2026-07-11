@@ -6,7 +6,7 @@ import { PhoneInput } from './phone-input'
 import type { Meta, StoryObj } from '@storybook/react-vite'
 
 const meta = {
-  title: 'Components/Forms/Phone Input',
+  title: 'Components/Inputs/Phone Input',
   component: PhoneInput,
   tags: ['autodocs', 'stable'],
   args: {

@@ -34,7 +34,7 @@ const files = [
 ]
 
 const meta = {
-  title: 'Components/Data Display/Tree',
+  title: 'Components/Tables & Lists/Tree',
   component: Tree,
   tags: ['autodocs', 'stable'],
   args: {

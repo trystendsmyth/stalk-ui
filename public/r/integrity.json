@@ -180,11 +180,11 @@
     },
     "data-table-advanced": {
       "path": "/r/data-table-advanced.json",
-      "sha256": "deeabce96698d5c323b8edf7bbd4daca5209a7e88954a69f316cfe7a08cb640c"
+      "sha256": "d3466d062300a34d980f8bd0c62144f07ffbfe8165f434ef75b7900952eafa55"
     },
     "shadcn/data-table-advanced": {
       "path": "/r/shadcn/data-table-advanced.json",
-      "sha256": "49b16db9c30a4ea9ff22783cbd17135d4232b0fb290ff4dff8f766fefc2db8d9"
+      "sha256": "2c214dbcb988e93a1c4ee997a5e9bd3f870b476c7c8d58227679de10e6847587"
     },
     "date-picker": {
       "path": "/r/date-picker.json",
@@ -450,6 +450,14 @@
       "path": "/r/shadcn/slider.json",
       "sha256": "40ffa0e63cfffec293d4adb63477016a493b4c6f439f20013c5462fcd74806ca"
     },
+    "sortable": {
+      "path": "/r/sortable.json",
+      "sha256": "b39518fc5586c166b864c05d5d1afbe0191d0346055dc0d9ed6c8c2aff0da393"
+    },
+    "shadcn/sortable": {
+      "path": "/r/shadcn/sortable.json",
+      "sha256": "8a7b6a674f8b206c942f3de100125da2571f236b42d377247d9d837b8f3bb6d2"
+    },
     "sparkline": {
       "path": "/r/sparkline.json",
       "sha256": "2d51edd01cbd6eef299c06e1131482f938a5fd20647cd08dbd4a32795229c80c"
@@ -657,6 +665,14 @@
     "shadcn/tree": {
       "path": "/r/shadcn/tree.json",
       "sha256": "233a51d481969ccc768ef66aa6c5ff5f74d447a2e26c8a32fa8251391cbcdb78"
+    },
+    "virtual-list": {
+      "path": "/r/virtual-list.json",
+      "sha256": "a97f11f38eda43106e0dd8607f1169fbca9da57b55f2a9e6a976bf9e6d50e6d8"
+    },
+    "shadcn/virtual-list": {
+      "path": "/r/shadcn/virtual-list.json",
+      "sha256": "4ba1c0743b3a29f3b7134c660ba45dd50af024f05f18f0950173aaed69544264"
     },
     "create-style-context": {
       "path": "/r/create-style-context.json",

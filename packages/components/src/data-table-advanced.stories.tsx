@@ -27,7 +27,7 @@ const columns: ColumnDef<Member>[] = [
 ]
 
 const meta = {
-  title: 'Components/Data Display/Data Table Advanced',
+  title: 'Components/Tables & Lists/Data Table Advanced',
   component: DataTableAdvanced<Member>,
   tags: ['autodocs', 'stable'],
   argTypes: {
@@ -85,6 +85,26 @@ export const StickyHeaderAndPinnedColumn: Story = {
     enablePagination: false,
     stickyHeader: true,
     maxHeight: 220,
+    columnPinning: { left: ['name'] },
+  },
+}
+
+const manyMembers: Member[] = Array.from({ length: 5_000 }, (_, i) => ({
+  name: `Member ${String(i + 1)}`,
+  role: i % 3 === 0 ? 'Owner' : 'Maintainer',
+  team: ['Platform', 'Growth', 'Infra'][i % 3] ?? 'Platform',
+  commits: (i * 37) % 200,
+}))
+
+// 5,000 rows, only the visible window mounted. Pagination is replaced by scroll;
+// sticky header and pinned columns keep working.
+export const Virtualized: Story = {
+  args: {
+    columns,
+    data: manyMembers,
+    enableVirtualization: true,
+    stickyHeader: true,
+    maxHeight: 360,
     columnPinning: { left: ['name'] },
   },
 }

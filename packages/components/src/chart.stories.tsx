@@ -11,7 +11,7 @@ const config: ChartConfig = {
 }
 
 const meta = {
-  title: 'Components/Data Display/Chart',
+  title: 'Components/Data Visualization/Chart',
   component: ChartContainer,
   tags: ['autodocs', 'stable'],
   // `config` is a complex object and the chart is composed via children — hide controls.

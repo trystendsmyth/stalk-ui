@@ -8,7 +8,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite'
 const { radius: RADII, size: SIZES, variant: VARIANTS } = badgeRecipe.variantMap
 
 const meta = {
-  title: 'Components/Data Display/Badge',
+  title: 'Components/Display/Badge',
   component: Badge,
   tags: ['autodocs', 'stable'],
   args: {

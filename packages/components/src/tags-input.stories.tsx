@@ -7,7 +7,7 @@ import { TagsInput } from './tags-input'
 import type { Meta, StoryObj } from '@storybook/react-vite'
 
 const meta = {
-  title: 'Components/Forms/Tags Input',
+  title: 'Components/Selection/Tags Input',
   component: TagsInput,
   tags: ['autodocs', 'stable'],
   args: {

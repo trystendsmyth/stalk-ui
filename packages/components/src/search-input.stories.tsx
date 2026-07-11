@@ -7,7 +7,7 @@ import { SearchInput } from './search-input'
 import type { Meta, StoryObj } from '@storybook/react-vite'
 
 const meta = {
-  title: 'Components/Forms/Search Input',
+  title: 'Components/Inputs/Search Input',
   component: SearchInput,
   tags: ['autodocs', 'stable'],
   args: {

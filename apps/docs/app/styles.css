@@ -87,6 +87,17 @@ nav a {
   text-decoration: none;
 }
 
+.nav__icon {
+  display: inline-flex;
+  align-items: center;
+  color: var(--colors-fg-muted);
+  transition: color 0.15s ease;
+}
+
+.nav__icon:hover {
+  color: var(--colors-fg-default);
+}
+
 .hero,
 .content-grid,
 .article {

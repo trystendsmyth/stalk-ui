@@ -11,7 +11,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite'
 const { size: SIZES, variant: VARIANTS } = buttonRecipe.variantMap
 
 const meta = {
-  title: 'Components/Forms/Button',
+  title: 'Components/Forms & Buttons/Button',
   component: Button,
   tags: ['autodocs', 'stable'],
   args: {
