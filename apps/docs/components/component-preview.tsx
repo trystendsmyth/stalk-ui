@@ -70,6 +70,7 @@ import { Sheet } from '@stalk-ui/components/sheet'
 import { Sidebar } from '@stalk-ui/components/sidebar'
 import { Skeleton } from '@stalk-ui/components/skeleton'
 import { Slider } from '@stalk-ui/components/slider'
+import { Sortable } from '@stalk-ui/components/sortable'
 import { Sparkline } from '@stalk-ui/components/sparkline'
 import { Spinner } from '@stalk-ui/components/spinner'
 import { Stat } from '@stalk-ui/components/stat'
@@ -90,6 +91,7 @@ import { Toolbar } from '@stalk-ui/components/toolbar'
 import { Tooltip } from '@stalk-ui/components/tooltip'
 import { Tour } from '@stalk-ui/components/tour'
 import { Tree } from '@stalk-ui/components/tree'
+import { VirtualList } from '@stalk-ui/components/virtual-list'
 import {
   AlertCircle,
   AlertTriangle,
@@ -197,6 +199,7 @@ const ReportRangePicker = () => {
     <DatePicker
       aria-label="Report window"
       mode="range"
+      numberOfMonths={1}
       presets={[
         { label: 'Last 7 days', range: { from: day(-6), to: day(0) } },
         { label: 'Last 30 days', range: { from: day(-29), to: day(0) } },
@@ -224,6 +227,61 @@ const FileTree = () => (
     ]}
   />
 )
+
+const virtualListRows = Array.from({ length: 1000 }, (_, index) => ({
+  id: index,
+  label: `Row ${String(index + 1)}`,
+}))
+
+const VirtualListDemo = () => (
+  <VirtualList
+    items={virtualListRows}
+    estimateSize={() => 44}
+    getItemKey={(row) => row.id}
+    style={{
+      border: '1px solid var(--colors-border-default)',
+      borderRadius: 8,
+      height: 260,
+      width: '100%',
+    }}
+  >
+    {(row, virtualItem) => (
+      <VirtualList.Item key={row.id} virtualItem={virtualItem}>
+        <div
+          style={{
+            alignItems: 'center',
+            borderBottom: '1px solid var(--colors-border-muted)',
+            display: 'flex',
+            height: 44,
+            padding: '0 1rem',
+          }}
+        >
+          {row.label}
+        </div>
+      </VirtualList.Item>
+    )}
+  </VirtualList>
+)
+
+const SortableDemo = () => {
+  const [items, setItems] = useState([
+    { id: 'a', label: 'Draft the RFC' },
+    { id: 'b', label: 'Review with the team' },
+    { id: 'c', label: 'Prototype the API' },
+  ])
+  return (
+    <div style={{ width: 320 }}>
+      <Sortable items={items} onReorder={setItems}>
+        {items.map((item, index) => (
+          <Sortable.Item key={item.id} id={item.id} index={index}>
+            <Sortable.Handle />
+            <span style={{ flex: 1 }}>{item.label}</span>
+          </Sortable.Item>
+        ))}
+      </Sortable>
+    </div>
+  )
+}
 
 const SwapDemo = () => {
   const [on, setOn] = useState(false)
@@ -400,6 +458,10 @@ const liveScope = {
   Timeline,
   Tour,
   Tree,
+  Sortable,
+  SortableDemo,
+  VirtualList,
+  VirtualListDemo,
   SwapDemo,
   TaskTourDemo,
   DropdownMenu,

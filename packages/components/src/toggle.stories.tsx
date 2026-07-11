@@ -12,7 +12,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite'
 const { size: SIZES, variant: VARIANTS, radius: RADII } = toggleRecipe.variantMap
 
 const meta = {
-  title: 'Components/Forms/Toggle',
+  title: 'Components/Selection/Toggle',
   component: Toggle,
   tags: ['autodocs', 'stable'],
   args: {

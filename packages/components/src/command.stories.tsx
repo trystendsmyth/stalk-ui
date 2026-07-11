@@ -8,7 +8,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite'
 const onSelect = fn()
 
 const meta = {
-  title: 'Components/Navigation/Command',
+  title: 'Components/Menus/Command',
   component: Command.Root,
   tags: ['autodocs', 'stable'],
   args: {

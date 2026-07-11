@@ -29,7 +29,7 @@ const useSelection = (initial: string | null = null) => {
 const onSelect = fn()
 
 const meta = {
-  title: 'Components/Navigation/DropdownMenu',
+  title: 'Components/Menus/DropdownMenu',
   component: DropdownMenu.Root,
   tags: ['autodocs', 'stable'],
   args: {

@@ -11,7 +11,7 @@ const { variant: VARIANTS } = accordionRecipe.variantMap
 const frame = css({ w: '480px' })
 
 const meta = {
-  title: 'Components/Disclosure/Accordion',
+  title: 'Components/Layout/Accordion',
   component: Accordion.Root,
   tags: ['autodocs', 'stable'],
   args: {

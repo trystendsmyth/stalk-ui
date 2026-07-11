@@ -6,7 +6,7 @@ import { FormatInput } from './format-input'
 import type { Meta, StoryObj } from '@storybook/react-vite'
 
 const meta = {
-  title: 'Components/Forms/Format Input',
+  title: 'Components/Inputs/Format Input',
   component: FormatInput,
   tags: ['autodocs', 'stable'],
   args: {

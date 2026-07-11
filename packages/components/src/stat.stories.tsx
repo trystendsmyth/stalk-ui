@@ -7,7 +7,7 @@ import { Stat } from './stat'
 import type { Meta, StoryObj } from '@storybook/react-vite'
 
 const meta = {
-  title: 'Components/Data Display/Stat',
+  title: 'Components/Display/Stat',
   component: Stat.Root,
   tags: ['autodocs', 'stable'],
   argTypes: {

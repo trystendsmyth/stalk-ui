@@ -5,7 +5,7 @@ import { FileUpload } from './file-upload'
 import type { Meta, StoryObj } from '@storybook/react-vite'
 
 const meta = {
-  title: 'Components/Forms/File Upload',
+  title: 'Components/Forms & Buttons/File Upload',
   component: FileUpload,
   tags: ['autodocs', 'stable'],
   args: {

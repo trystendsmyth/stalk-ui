@@ -12,7 +12,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite'
 const { radius: RADII, size: SIZES, variant: VARIANTS } = tagRecipe.variantMap
 
 const meta = {
-  title: 'Components/Data Display/Tag',
+  title: 'Components/Display/Tag',
   component: Tag,
   tags: ['autodocs', 'stable'],
   args: {

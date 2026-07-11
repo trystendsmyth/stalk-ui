@@ -9,7 +9,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite'
 const onSelect = fn()
 
 const meta = {
-  title: 'Components/Navigation/ContextMenu',
+  title: 'Components/Menus/ContextMenu',
   component: ContextMenu.Root,
   tags: ['autodocs', 'stable'],
   args: {

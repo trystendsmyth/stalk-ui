@@ -8,7 +8,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite'
 const { size: SIZES, variant: VARIANTS } = cardRecipe.variantMap
 
 const meta = {
-  title: 'Components/Data Display/Card',
+  title: 'Components/Display/Card',
   component: Card.Root,
   tags: ['autodocs', 'stable'],
   args: {

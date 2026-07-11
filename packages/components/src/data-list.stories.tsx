@@ -10,7 +10,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite'
 const { orientation: ORIENTATIONS, size: SIZES } = dataListRecipe.variantMap
 
 const meta = {
-  title: 'Components/Data Display/Data List',
+  title: 'Components/Tables & Lists/Data List',
   component: DataList.Root,
   tags: ['autodocs', 'stable'],
   args: {

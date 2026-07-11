@@ -35,7 +35,10 @@ export const datePicker = {
     // Range mode renders a button-shaped field (the typed input is single-date
     // only); it borrows the input recipe's chrome and adds button ergonomics.
     rangeField: {
-      alignItems: 'center',
+      // The field borrows the input recipe's root (align-items: stretch, so
+      // prefix/suffix buttons fill the height). This button centers its icon and
+      // label instead, and needs `!important` to beat that shared root class.
+      alignItems: 'center!',
       cursor: 'pointer',
       gap: '8',
       px: '12',

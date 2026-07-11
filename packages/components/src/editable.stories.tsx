@@ -5,7 +5,7 @@ import { Editable } from './editable'
 import type { Meta, StoryObj } from '@storybook/react-vite'
 
 const meta = {
-  title: 'Components/Forms/Editable',
+  title: 'Components/Inputs/Editable',
   component: Editable,
   tags: ['autodocs', 'stable'],
   args: {

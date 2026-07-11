@@ -180,11 +180,11 @@
     },
     "data-table-advanced": {
       "path": "/r/data-table-advanced.json",
-      "sha256": "deeabce96698d5c323b8edf7bbd4daca5209a7e88954a69f316cfe7a08cb640c"
+      "sha256": "d3466d062300a34d980f8bd0c62144f07ffbfe8165f434ef75b7900952eafa55"
     },
     "shadcn/data-table-advanced": {
       "path": "/r/shadcn/data-table-advanced.json",
-      "sha256": "49b16db9c30a4ea9ff22783cbd17135d4232b0fb290ff4dff8f766fefc2db8d9"
+      "sha256": "2c214dbcb988e93a1c4ee997a5e9bd3f870b476c7c8d58227679de10e6847587"
     },
     "date-picker": {
       "path": "/r/date-picker.json",
@@ -204,11 +204,11 @@
     },
     "dialog": {
       "path": "/r/dialog.json",
-      "sha256": "b22a8b18b09c03fceffed50eaeabb5839de280053a77d6d8449d865173e43e43"
+      "sha256": "aae38c2b4efffdae2e07542e5be694429c4aa911b51c6b35ebf21577c2fb7ae8"
     },
     "shadcn/dialog": {
       "path": "/r/shadcn/dialog.json",
-      "sha256": "a510848fa305ef5affe9e7e5ac6d7cf3436c0c3cd9dd0d06b5450fe2b83b7f47"
+      "sha256": "b4e47ad5078d464c0a5c01638d32273066bb9619f889eba5cdeb8a9ee0045ce4"
     },
     "dropdown-menu": {
       "path": "/r/dropdown-menu.json",
@@ -420,11 +420,11 @@
     },
     "sheet": {
       "path": "/r/sheet.json",
-      "sha256": "1a7915a94a84f0098ac756941007cba1b19ad12a6aa25c2543edb6ca4d0213bb"
+      "sha256": "396fb571fc8fde35b31be480105b723ed74072df04eeaa76cca63481a067ca84"
     },
     "shadcn/sheet": {
       "path": "/r/shadcn/sheet.json",
-      "sha256": "b1a90b889a1a7bed254bbbbfccd2cb4199f7a4d45dbdd6d6b9753f7be7b37167"
+      "sha256": "53e16d54dfb88dc753150aa5221beb2b0a6f32cac8d52efbcae5a8150f552e7f"
     },
     "sidebar": {
       "path": "/r/sidebar.json",
@@ -449,6 +449,14 @@
     "shadcn/slider": {
       "path": "/r/shadcn/slider.json",
       "sha256": "40ffa0e63cfffec293d4adb63477016a493b4c6f439f20013c5462fcd74806ca"
+    },
+    "sortable": {
+      "path": "/r/sortable.json",
+      "sha256": "b39518fc5586c166b864c05d5d1afbe0191d0346055dc0d9ed6c8c2aff0da393"
+    },
+    "shadcn/sortable": {
+      "path": "/r/shadcn/sortable.json",
+      "sha256": "8a7b6a674f8b206c942f3de100125da2571f236b42d377247d9d837b8f3bb6d2"
     },
     "sparkline": {
       "path": "/r/sparkline.json",
@@ -657,6 +665,14 @@
     "shadcn/tree": {
       "path": "/r/shadcn/tree.json",
       "sha256": "233a51d481969ccc768ef66aa6c5ff5f74d447a2e26c8a32fa8251391cbcdb78"
+    },
+    "virtual-list": {
+      "path": "/r/virtual-list.json",
+      "sha256": "a97f11f38eda43106e0dd8607f1169fbca9da57b55f2a9e6a976bf9e6d50e6d8"
+    },
+    "shadcn/virtual-list": {
+      "path": "/r/shadcn/virtual-list.json",
+      "sha256": "4ba1c0743b3a29f3b7134c660ba45dd50af024f05f18f0950173aaed69544264"
     },
     "create-style-context": {
       "path": "/r/create-style-context.json",

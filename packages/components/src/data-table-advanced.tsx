@@ -7,8 +7,9 @@ import {
   getSortedRowModel,
   useReactTable,
 } from '@tanstack/react-table'
+import { useVirtualizer } from '@tanstack/react-virtual'
 import { ChevronDown, ChevronRight, ChevronsUpDown, ChevronUp } from 'lucide-react'
-import { useState } from 'react'
+import { useCallback, useState } from 'react'
 import { cx } from 'styled-system/css'
 import { dataTable as dataTableRecipe } from 'styled-system/recipes'
 
@@ -176,6 +177,17 @@ export interface DataTableAdvancedProps<TData> extends UseDataTableOptions<TData
   exportFileName?: string
   /** Label for the CSV export button (i18n). */
   exportLabel?: string
+  /**
+   * Only mount the rows intersecting the scroll viewport, for large backlogs.
+   * Requires a scroll region (`maxHeight` defaults to `400` when enabled) and is
+   * mutually exclusive with `renderSubRow`. Pagination is forced off — the whole
+   * dataset is windowed instead.
+   */
+  enableVirtualization?: boolean
+  /** Estimated row height in px when virtualizing; refined by measurement (default `48`). */
+  estimateRowHeight?: number
+  /** Extra rows rendered beyond the viewport while virtualizing (default `8`). */
+  overscan?: number
   className?: string
 }
 
@@ -189,15 +201,35 @@ export function DataTableAdvanced<TData>({
   columnsLabel = 'Columns',
   exportFileName,
   exportLabel = 'Export CSV',
+  enableVirtualization = false,
+  estimateRowHeight = 48,
+  overscan = 8,
   className,
   ...options
 }: DataTableAdvancedProps<TData>) {
-  const { table, getPinnedProps, expansion } = useDataTable(options)
+  if (enableVirtualization && renderSubRow) {
+    throw new Error(
+      'DataTableAdvanced: `enableVirtualization` and `renderSubRow` cannot be combined. Expandable detail rows are not windowed.',
+    )
+  }
+
+  // Windowing replaces paging: virtualize the full dataset, not a single page.
+  const tableOptions = enableVirtualization ? { ...options, enablePagination: false } : options
+  const { table, getPinnedProps, expansion } = useDataTable(tableOptions)
+  // The virtualizer scrolls the div `Table.Root` wraps around the `<table>`. A
+  // callback ref + state (rather than a plain ref) re-renders once it mounts, so
+  // the virtualizer actually picks the scroll element up.
+  const [scrollElement, setScrollElement] = useState<HTMLElement | null>(null)
+  const captureScrollElement = useCallback((node: HTMLTableElement | null) => {
+    setScrollElement(node?.parentElement ?? null)
+  }, [])
   const rows = table.getRowModel().rows
   const leafCount = table.getVisibleLeafColumns().length
   const colSpan = leafCount + (renderSubRow ? 1 : 0)
   const showToolbar = enableColumnVisibility || exportFileName !== undefined
   const resizable = options.enableColumnResizing === true
+  // A scroll region is mandatory for windowing; fall back to a sensible height.
+  const effectiveMaxHeight = enableVirtualization && maxHeight === undefined ? 400 : maxHeight
 
   const renderExpandToggle = (row: Row<TData>) => (
     <Table.Cell>
@@ -266,8 +298,11 @@ export function DataTableAdvanced<TData>({
         </div>
       ) : null}
       <Table.Root
+        ref={enableVirtualization ? captureScrollElement : undefined}
         stickyHeader={stickyHeader}
-        {...(maxHeight === undefined ? {} : { containerProps: { style: { maxHeight } } })}
+        {...(effectiveMaxHeight === undefined
+          ? {}
+          : { containerProps: { style: { maxHeight: effectiveMaxHeight } } })}
       >
         <Table.Header>
           {table.getHeaderGroups().map((headerGroup) => (
@@ -325,6 +360,15 @@ export function DataTableAdvanced<TData>({
                 {emptyMessage}
               </Table.Cell>
             </Table.Row>
+          ) : enableVirtualization ? (
+            <VirtualizedRows
+              table={table}
+              scrollElement={scrollElement}
+              colSpan={colSpan}
+              estimateRowHeight={estimateRowHeight}
+              overscan={overscan}
+              getPinnedProps={getPinnedProps}
+            />
           ) : (
             rows.map((row) => (
               <ExpandableRows
@@ -340,7 +384,7 @@ export function DataTableAdvanced<TData>({
           )}
         </Table.Body>
       </Table.Root>
-      {options.enablePagination !== false && table.getPageCount() > 1 ? (
+      {!enableVirtualization && options.enablePagination !== false && table.getPageCount() > 1 ? (
         <div className={styles.pagination}>
           <span className={styles.pageInfo}>
             Page {table.getState().pagination.pageIndex + 1} of {table.getPageCount()}
@@ -368,6 +412,78 @@ export function DataTableAdvanced<TData>({
         </div>
       ) : null}
     </div>
+  )
+}
+
+interface VirtualizedRowsProps<TData> {
+  table: TanStackTable<TData>
+  scrollElement: HTMLElement | null
+  colSpan: number
+  estimateRowHeight: number
+  overscan: number
+  getPinnedProps: (column: Column<TData>) => { 'data-pinned'?: 'start' | 'end' }
+}
+
+/**
+ * Windowed `<tbody>` contents: only the rows intersecting the viewport are
+ * mounted, with spacer rows reserving the height of the rest so the native
+ * scrollbar and sticky header/pinned columns stay correct. The `useVirtualizer`
+ * call lives here (not in the parent) so it only runs when virtualization is on.
+ */
+function VirtualizedRows<TData>({
+  table,
+  scrollElement,
+  colSpan,
+  estimateRowHeight,
+  overscan,
+  getPinnedProps,
+}: VirtualizedRowsProps<TData>) {
+  const rows = table.getRowModel().rows
+  const virtualizer = useVirtualizer({
+    count: rows.length,
+    getScrollElement: () => scrollElement,
+    estimateSize: () => estimateRowHeight,
+    overscan,
+  })
+
+  const virtualRows = virtualizer.getVirtualItems()
+  const totalSize = virtualizer.getTotalSize()
+  const first = virtualRows[0]
+  const last = virtualRows[virtualRows.length - 1]
+  const paddingTop = first ? first.start : 0
+  const paddingBottom = last ? totalSize - last.end : 0
+
+  return (
+    <>
+      {paddingTop > 0 ? (
+        <tr aria-hidden="true">
+          <td colSpan={colSpan} style={{ height: paddingTop, padding: 0, border: 0 }} />
+        </tr>
+      ) : null}
+      {virtualRows.map((virtualRow) => {
+        const row = rows[virtualRow.index]
+        if (row === undefined) return null
+        return (
+          <Table.Row
+            key={row.id}
+            ref={virtualizer.measureElement}
+            data-index={virtualRow.index}
+            data-state={row.getIsSelected() ? 'selected' : undefined}
+          >
+            {row.getVisibleCells().map((cell) => (
+              <Table.Cell key={cell.id} {...getPinnedProps(cell.column)}>
+                {flexRender(cell.column.columnDef.cell, cell.getContext())}
+              </Table.Cell>
+            ))}
+          </Table.Row>
+        )
+      })}
+      {paddingBottom > 0 ? (
+        <tr aria-hidden="true">
+          <td colSpan={colSpan} style={{ height: paddingBottom, padding: 0, border: 0 }} />
+        </tr>
+      ) : null}
+    </>
   )
 }
 

@@ -13,7 +13,7 @@ const fieldsetReset = css({ border: 'none', m: 0, p: 0 })
 const legendStyle = css({ fontWeight: 'semibold', mb: '8' })
 
 const meta = {
-  title: 'Components/Forms/Radio',
+  title: 'Components/Selection/Radio',
   component: Radio.Item,
   tags: ['autodocs', 'stable'],
   args: {

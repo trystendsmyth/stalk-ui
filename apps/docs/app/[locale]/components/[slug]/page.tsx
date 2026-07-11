@@ -86,8 +86,10 @@ export default async function ComponentPage({ params }: ComponentPageProps) {
               </tr>
             </thead>
             <tbody>
-              {component.props.map((prop) => (
-                <tr key={prop.name}>
+              {component.props.map((prop, index) => (
+                // Union-typed components (e.g. DatePicker) legitimately repeat a
+                // prop name across members, so index-qualify the key.
+                <tr key={`${prop.name}-${String(index)}`}>
                   <td>{prop.name}</td>
                   <td>
                     <code>{prop.type}</code>

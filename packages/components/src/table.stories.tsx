@@ -9,7 +9,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite'
 const onExpandChange = fn()
 
 const meta = {
-  title: 'Components/Data Display/Table',
+  title: 'Components/Tables & Lists/Table',
   component: Table.Root,
   tags: ['autodocs', 'stable'],
   argTypes: {

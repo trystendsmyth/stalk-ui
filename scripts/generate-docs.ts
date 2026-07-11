@@ -115,6 +115,8 @@ const componentDescriptions = {
   sidebar: 'Provides a collapsible, keyboard-toggled application sidebar.',
   skeleton: 'Reserves layout space with a shimmering placeholder while content loads.',
   slider: 'Selects a numeric value or range along a track.',
+  sortable:
+    'Reorders a list by dragging, with keyboard and pointer support. Controlled and headless — compose it into reorderable lists, sortable rows, or multi-column boards.',
   sparkline:
     'Draws a compact inline-SVG trend line with no charting dependency; tints follow the tone and color mode.',
   spinner: 'Indicates an indeterminate loading state with an accessible label.',
@@ -136,6 +138,8 @@ const componentDescriptions = {
   tour: 'Guides users through the UI by spotlighting targets with a step card.',
   tooltip: 'Provides supplemental context when a control is hovered or focused.',
   tree: 'Navigates hierarchical items with expand/collapse, single or multiple selection, typeahead, and full keyboard support.',
+  'virtual-list':
+    'Renders only the visible window of a large list, keeping the DOM small for huge backlogs. Supports variable item heights and horizontal orientation.',
 } as const satisfies Record<ComponentName, string>
 
 const project = new Project({

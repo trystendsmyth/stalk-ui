@@ -48,7 +48,9 @@ pnpm dlx @stalk-ui/cli add @stalk-ui/dialog
       <Dialog.Description>Manage your preferences.</Dialog.Description>
     </Dialog.Header>
     <Dialog.Footer>
-      <Dialog.Close>Cancel</Dialog.Close>
+      <Dialog.Close asChild>
+        <Button variant="outline">Cancel</Button>
+      </Dialog.Close>
     </Dialog.Footer>
   </Dialog.Content>
 </Dialog.Root>`}
@@ -63,7 +65,9 @@ pnpm dlx @stalk-ui/cli add @stalk-ui/dialog
       <Dialog.Description>Manage your preferences.</Dialog.Description>
     </Dialog.Header>
     <Dialog.Footer>
-      <Dialog.Close>Cancel</Dialog.Close>
+      <Dialog.Close asChild>
+        <Button variant="outline">Cancel</Button>
+      </Dialog.Close>
     </Dialog.Footer>
   </Dialog.Content>
 </Dialog.Root>

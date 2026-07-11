@@ -6,7 +6,7 @@ import { DatetimeInput } from './datetime-input'
 import type { Meta, StoryObj } from '@storybook/react-vite'
 
 const meta = {
-  title: 'Components/Forms/Datetime Input',
+  title: 'Components/Date & Time/Datetime Input',
   component: DatetimeInput,
   tags: ['autodocs', 'stable'],
   args: {

@@ -3,7 +3,7 @@ import { CopyButton } from './copy-button'
 import type { Meta, StoryObj } from '@storybook/react-vite'
 
 const meta = {
-  title: 'Components/Forms/Copy Button',
+  title: 'Components/Forms & Buttons/Copy Button',
   component: CopyButton,
   tags: ['autodocs', 'stable'],
   args: {

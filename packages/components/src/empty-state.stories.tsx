@@ -6,7 +6,7 @@ import { EmptyState } from './empty-state'
 import type { Meta, StoryObj } from '@storybook/react-vite'
 
 const meta = {
-  title: 'Components/Data Display/Empty State',
+  title: 'Components/Display/Empty State',
   component: EmptyState.Root,
   tags: ['autodocs', 'stable'],
   argTypes: {

@@ -10,7 +10,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite'
 const frame = css({ width: '320px' })
 
 const meta = {
-  title: 'Components/Forms/Slider',
+  title: 'Components/Selection/Slider',
   component: Slider,
   tags: ['autodocs', 'stable'],
   args: {

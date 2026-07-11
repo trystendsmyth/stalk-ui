@@ -12,7 +12,7 @@ import type { DateRange } from 'react-day-picker'
 const onSelect = fn()
 
 const meta = {
-  title: 'Components/Forms/Calendar',
+  title: 'Components/Date & Time/Calendar',
   component: Calendar,
   tags: ['autodocs', 'stable'],
   args: {

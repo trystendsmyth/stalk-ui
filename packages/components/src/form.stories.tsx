@@ -51,7 +51,7 @@ const ProfileForm = () => {
 }
 
 const meta = {
-  title: 'Components/Forms/Form',
+  title: 'Components/Forms & Buttons/Form',
   component: ProfileForm,
   tags: ['autodocs', 'stable'],
   // Self-contained demo (no props) composed via children — hide the empty controls.

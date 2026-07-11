@@ -7,7 +7,7 @@ import type { DatePickerSingleProps, DateRange } from './date-picker'
 import type { Meta, StoryObj } from '@storybook/react-vite'
 
 const meta = {
-  title: 'Components/Forms/Date Picker',
+  title: 'Components/Date & Time/Date Picker',
   component: DatePicker,
   tags: ['autodocs', 'stable'],
   args: {

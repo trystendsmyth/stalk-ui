@@ -6,7 +6,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite'
 const series = [4, 6, 5, 8, 7, 9, 6, 10, 12, 9, 13, 11]
 
 const meta = {
-  title: 'Components/Data Display/Sparkline',
+  title: 'Components/Data Visualization/Sparkline',
   component: Sparkline,
   tags: ['autodocs', 'stable'],
   args: {

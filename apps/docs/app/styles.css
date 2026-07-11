@@ -87,6 +87,17 @@ nav a {
   text-decoration: none;
 }
 
+.nav__icon {
+  display: inline-flex;
+  align-items: center;
+  color: var(--colors-fg-muted);
+  transition: color 0.15s ease;
+}
+
+.nav__icon:hover {
+  color: var(--colors-fg-default);
+}
+
 .hero,
 .content-grid,
 .article {
@@ -322,6 +333,21 @@ td {
   border-radius: 0.5rem;
   background: var(--colors-bg-muted);
   color: var(--colors-fg-default);
+}
+
+/*
+ * react-live wraps the demo in a bare <div>; as a grid item it defaults to a
+ * content-sized column, which collapses width:100% components (Slider track,
+ * linear Progress, VirtualList) to zero width. Give the wrapper a bounded width
+ * and center content within it, so full-width components fill a sensible size
+ * (not the whole preview) while intrinsic-width ones (Button, Badge) stay centered.
+ */
+.component-preview__rendered > * {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: min(100%, 32rem);
 }
 
 .component-preview pre {

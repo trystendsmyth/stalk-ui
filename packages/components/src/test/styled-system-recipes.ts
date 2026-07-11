@@ -814,6 +814,32 @@ export const steps = ({ orientation = 'horizontal' }: { orientation?: string } =
     `--${orientation}`,
   )
 
+const virtualListVariantKeys = ['orientation'] as const
+
+export const virtualList = ({
+  orientation = 'vertical',
+}: { orientation?: 'horizontal' | 'vertical' } = {}) => ({
+  root: `stalk-virtual-list__root stalk-virtual-list__root--${orientation}`,
+  viewport: 'stalk-virtual-list__viewport',
+  item: 'stalk-virtual-list__item',
+})
+
+virtualList.variantMap = { orientation: ['vertical', 'horizontal'] as const }
+virtualList.variantKeys = virtualListVariantKeys
+virtualList.splitVariantProps = makeSplitVariantProps(virtualListVariantKeys)
+
+const sortableVariantKeys = [] as const
+
+export const sortable = () => ({
+  root: 'stalk-sortable__root',
+  item: 'stalk-sortable__item',
+  handle: 'stalk-sortable__handle',
+})
+
+sortable.variantMap = {}
+sortable.variantKeys = sortableVariantKeys
+sortable.splitVariantProps = makeSplitVariantProps(sortableVariantKeys)
+
 export const editable = () => slotMap('editable', ['root', 'ghost', 'preview', 'input'])
 
 export const rating = ({ size = 'md' }: SizeOnlyOptions = {}) =>
