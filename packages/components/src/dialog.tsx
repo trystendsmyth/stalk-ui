@@ -92,7 +92,15 @@ export const DialogFooter = /* @__PURE__ */ forwardRef<
   return <div ref={ref} className={cx(styles.footer, className)} {...props} />
 })
 
-export const Dialog = /* @__PURE__ */ Object.assign(DialogRoot, {
+// Compose the compound on a fresh wrapper rather than mutating the shared
+// `DialogPrimitive.Root` singleton: Sheet is built on the same Radix dialog
+// primitive, so `Object.assign`-ing the singleton in both would clobber each
+// other's parts whenever both are imported together.
+function DialogRootComponent(props: ComponentPropsWithoutRef<typeof DialogPrimitive.Root>) {
+  return <DialogPrimitive.Root {...props} />
+}
+
+export const Dialog = /* @__PURE__ */ Object.assign(DialogRootComponent, {
   Close: DialogClose,
   Content: DialogContent,
   Description: DialogDescription,
