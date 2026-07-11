@@ -121,7 +121,7 @@ export const componentExamples = {
   ],
   dialog: [
     '<Dialog.Root>\n  <Dialog.Trigger>Open dialog</Dialog.Trigger>\n  <Dialog.Content>\n    <Dialog.Title>Confirm changes</Dialog.Title>\n  </Dialog.Content>\n</Dialog.Root>',
-    '<Dialog.Root>\n  <Dialog.Trigger>Settings</Dialog.Trigger>\n  <Dialog.Content>\n    <Dialog.Header>\n      <Dialog.Title>Settings</Dialog.Title>\n      <Dialog.Description>Manage your preferences.</Dialog.Description>\n    </Dialog.Header>\n    <Dialog.Footer>\n      <Dialog.Close>Cancel</Dialog.Close>\n    </Dialog.Footer>\n  </Dialog.Content>\n</Dialog.Root>',
+    '<Dialog.Root>\n  <Dialog.Trigger>Settings</Dialog.Trigger>\n  <Dialog.Content>\n    <Dialog.Header>\n      <Dialog.Title>Settings</Dialog.Title>\n      <Dialog.Description>Manage your preferences.</Dialog.Description>\n    </Dialog.Header>\n    <Dialog.Footer>\n      <Dialog.Close asChild>\n        <Button variant="outline">Cancel</Button>\n      </Dialog.Close>\n    </Dialog.Footer>\n  </Dialog.Content>\n</Dialog.Root>',
   ],
   'dropdown-menu': [
     '<DropdownMenu.Root>\n  <DropdownMenu.Trigger>Open menu</DropdownMenu.Trigger>\n  <DropdownMenu.Content>\n    <DropdownMenu.Item>Edit</DropdownMenu.Item>\n    <DropdownMenu.Item>Duplicate</DropdownMenu.Item>\n    <DropdownMenu.Separator />\n    <DropdownMenu.Item>Delete</DropdownMenu.Item>\n  </DropdownMenu.Content>\n</DropdownMenu.Root>',
@@ -200,7 +200,7 @@ export const componentExamples = {
     '<QrCode value="https://example.com" size={160} qrStyle="dots" eyeRadius={8} fgColor="#4f46e5" aria-label="Styled QR code" />',
   ],
   radio: [
-    '<Radio.Root defaultValue="basic" name="plan">\n  <Radio.Item value="basic" aria-label="Basic" />\n  <Radio.Item value="pro" aria-label="Pro" />\n  <Radio.Item value="team" aria-label="Team" />\n</Radio.Root>',
+    '<Radio.Root defaultValue="basic" name="plan" style={{ display: "flex", flexDirection: "column", gap: 10 }}>\n  <label style={{ alignItems: "center", display: "flex", gap: 8 }}>\n    <Radio.Item value="basic" /> Basic\n  </label>\n  <label style={{ alignItems: "center", display: "flex", gap: 8 }}>\n    <Radio.Item value="pro" /> Pro\n  </label>\n  <label style={{ alignItems: "center", display: "flex", gap: 8 }}>\n    <Radio.Item value="team" /> Team\n  </label>\n</Radio.Root>',
     '<Radio.Root name="plan-invalid">\n  <Radio.Item invalid value="required" aria-label="Required choice" />\n</Radio.Root>',
   ],
   'search-input': [

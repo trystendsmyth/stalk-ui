@@ -20,18 +20,34 @@ pnpm dlx @stalk-ui/cli add @stalk-ui/radio
 <ComponentPreview
   slug="radio"
   example={0}
-  code={`<Radio.Root defaultValue="basic" name="plan">
-  <Radio.Item value="basic" aria-label="Basic" />
-  <Radio.Item value="pro" aria-label="Pro" />
-  <Radio.Item value="team" aria-label="Team" />
+  code={`<Radio.Root defaultValue="basic" name="plan" style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+  <label style={{ alignItems: "center", display: "flex", gap: 8 }}>
+    <Radio.Item value="basic" /> Basic
+  </label>
+  <label style={{ alignItems: "center", display: "flex", gap: 8 }}>
+    <Radio.Item value="pro" /> Pro
+  </label>
+  <label style={{ alignItems: "center", display: "flex", gap: 8 }}>
+    <Radio.Item value="team" /> Team
+  </label>
 </Radio.Root>`}
 />
 
 ```tsx
-<Radio.Root defaultValue="basic" name="plan">
-  <Radio.Item value="basic" aria-label="Basic" />
-  <Radio.Item value="pro" aria-label="Pro" />
-  <Radio.Item value="team" aria-label="Team" />
+<Radio.Root
+  defaultValue="basic"
+  name="plan"
+  style={{ display: 'flex', flexDirection: 'column', gap: 10 }}
+>
+  <label style={{ alignItems: 'center', display: 'flex', gap: 8 }}>
+    <Radio.Item value="basic" /> Basic
+  </label>
+  <label style={{ alignItems: 'center', display: 'flex', gap: 8 }}>
+    <Radio.Item value="pro" /> Pro
+  </label>
+  <label style={{ alignItems: 'center', display: 'flex', gap: 8 }}>
+    <Radio.Item value="team" /> Team
+  </label>
 </Radio.Root>
 ```
 

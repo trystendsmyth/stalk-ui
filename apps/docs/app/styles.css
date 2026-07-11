@@ -328,7 +328,7 @@ td {
 .component-preview__rendered {
   min-height: 12rem;
   display: grid;
-  align-items: center;
+  place-items: center;
   padding: 1.5rem;
   border-radius: 0.5rem;
   background: var(--colors-bg-muted);
@@ -338,16 +338,16 @@ td {
 /*
  * react-live wraps the demo in a bare <div>; as a grid item it defaults to a
  * content-sized column, which collapses width:100% components (Slider track,
- * linear Progress, VirtualList) to zero width. Stretch the wrapper to the full
- * area and center content within it, so full-width components fill while
- * intrinsic-width ones (Button, Badge) stay centered.
+ * linear Progress, VirtualList) to zero width. Give the wrapper a bounded width
+ * and center content within it, so full-width components fill a sensible size
+ * (not the whole preview) while intrinsic-width ones (Button, Badge) stay centered.
  */
 .component-preview__rendered > * {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 100%;
+  width: min(100%, 32rem);
 }
 
 .component-preview pre {
