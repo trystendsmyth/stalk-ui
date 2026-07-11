@@ -7915,12 +7915,11 @@
 }
 
   .stalk-steps__item--orientation_horizontal {
-    align-items: flex-start;
+    align-items: center;
 }
 
   .stalk-steps__separator--orientation_horizontal {
     height: var(--sizes-2);
-    margin-top: var(--spacing-14);
 }
 
   .stalk-steps__root--orientation_vertical {

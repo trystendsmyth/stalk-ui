@@ -76,8 +76,10 @@ export const steps = {
   variants: {
     orientation: {
       horizontal: {
-        item: { alignItems: 'flex-start' },
-        separator: { h: '2', mt: '14' },
+        // Center the indicator, label, and connector on one line so the label
+        // sits level with the number and the separator.
+        item: { alignItems: 'center' },
+        separator: { h: '2' },
       },
       vertical: {
         root: { flexDirection: 'column' },
