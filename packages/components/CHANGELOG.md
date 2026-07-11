@@ -1,5 +1,12 @@
 # @stalk-ui/components
 
+## 1.4.0
+
+### Patch Changes
+
+- Updated dependencies [[`329a3b2`](https://github.com/trystendsmyth/stalk-ui/commit/329a3b2a75e22efee0945a7ee05aba40f1ed18cd), [`329a3b2`](https://github.com/trystendsmyth/stalk-ui/commit/329a3b2a75e22efee0945a7ee05aba40f1ed18cd), [`329a3b2`](https://github.com/trystendsmyth/stalk-ui/commit/329a3b2a75e22efee0945a7ee05aba40f1ed18cd), [`329a3b2`](https://github.com/trystendsmyth/stalk-ui/commit/329a3b2a75e22efee0945a7ee05aba40f1ed18cd), [`329a3b2`](https://github.com/trystendsmyth/stalk-ui/commit/329a3b2a75e22efee0945a7ee05aba40f1ed18cd)]:
+  - @stalk-ui/preset@1.4.0
+
 ## 2.0.0
 
 ### Minor Changes
