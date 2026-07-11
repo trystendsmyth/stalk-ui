@@ -200,7 +200,7 @@ export const componentExamples = {
     '<QrCode value="https://example.com" size={160} qrStyle="dots" eyeRadius={8} fgColor="#4f46e5" aria-label="Styled QR code" />',
   ],
   radio: [
-    '<Radio.Root defaultValue="basic" name="plan" style={{ display: "flex", flexDirection: "column", gap: 10 }}>\n  <label style={{ alignItems: "center", display: "flex", gap: 8 }}>\n    <Radio.Item value="basic" /> Basic\n  </label>\n  <label style={{ alignItems: "center", display: "flex", gap: 8 }}>\n    <Radio.Item value="pro" /> Pro\n  </label>\n  <label style={{ alignItems: "center", display: "flex", gap: 8 }}>\n    <Radio.Item value="team" /> Team\n  </label>\n</Radio.Root>',
+    '<Radio.Root defaultValue="basic" name="plan" style={{ display: "flex", flexDirection: "column", gap: 10 }}>\n  <label style={{ alignItems: "center", display: "flex", gap: 8 }}>\n    <Radio.Item value="basic" aria-label="Basic" /> Basic\n  </label>\n  <label style={{ alignItems: "center", display: "flex", gap: 8 }}>\n    <Radio.Item value="pro" aria-label="Pro" /> Pro\n  </label>\n  <label style={{ alignItems: "center", display: "flex", gap: 8 }}>\n    <Radio.Item value="team" aria-label="Team" /> Team\n  </label>\n</Radio.Root>',
     '<Radio.Root name="plan-invalid">\n  <Radio.Item invalid value="required" aria-label="Required choice" />\n</Radio.Root>',
   ],
   'search-input': [
