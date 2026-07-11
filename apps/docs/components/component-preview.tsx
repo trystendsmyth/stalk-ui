@@ -199,6 +199,7 @@ const ReportRangePicker = () => {
     <DatePicker
       aria-label="Report window"
       mode="range"
+      numberOfMonths={1}
       presets={[
         { label: 'Last 7 days', range: { from: day(-6), to: day(0) } },
         { label: 'Last 30 days', range: { from: day(-29), to: day(0) } },
