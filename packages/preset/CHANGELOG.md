@@ -1,5 +1,47 @@
 # @stalk-ui/preset
 
+## 1.4.0
+
+### Minor Changes
+
+- [#96](https://github.com/trystendsmyth/stalk-ui/pull/96) [`329a3b2`](https://github.com/trystendsmyth/stalk-ui/commit/329a3b2a75e22efee0945a7ee05aba40f1ed18cd) Thanks [@trystendsmyth](https://github.com/trystendsmyth)! - Add VirtualList and Sortable primitives, plus opt-in virtualization for DataTableAdvanced
+
+  - **VirtualList** — a headless, windowed list built on TanStack Virtual for large backlogs. Only the visible window (plus overscan) is mounted; item heights may vary (self-measured) and it supports vertical and horizontal orientation.
+  - **Sortable** — a headless drag-to-reorder primitive built on @dnd-kit/react. Controlled (`items` + `onReorder`), keyboard-accessible out of the box, with an optional `Sortable.Handle`. Composes into reorderable lists, sortable rows, and multi-column boards.
+  - **DataTableAdvanced** — new opt-in `enableVirtualization` mode that windows rows while preserving the sticky header and column pinning. Pagination is replaced by scrolling; not combinable with `renderSubRow`.
+
+### Patch Changes
+
+- [#96](https://github.com/trystendsmyth/stalk-ui/pull/96) [`329a3b2`](https://github.com/trystendsmyth/stalk-ui/commit/329a3b2a75e22efee0945a7ee05aba40f1ed18cd) Thanks [@trystendsmyth](https://github.com/trystendsmyth)! - Center the DatePicker range field's icon and label
+
+  The range-mode field borrows the input recipe's root, whose `align-items: stretch`
+  (so prefix/suffix buttons fill the height) was winning over the range field's own
+  `center`, leaving the calendar icon sitting above the label. The range field now
+  forces `align-items: center`.
+
+- [#96](https://github.com/trystendsmyth/stalk-ui/pull/96) [`329a3b2`](https://github.com/trystendsmyth/stalk-ui/commit/329a3b2a75e22efee0945a7ee05aba40f1ed18cd) Thanks [@trystendsmyth](https://github.com/trystendsmyth)! - Vertically center horizontal Steps labels with their indicators
+
+  Horizontal steps aligned items to `flex-start` and nudged the connector down with
+  a fixed margin, leaving the label sitting slightly above the numbered indicator
+  and the separator line. Items now center on a single line so the label, number,
+  and connector sit level.
+
+- [#96](https://github.com/trystendsmyth/stalk-ui/pull/96) [`329a3b2`](https://github.com/trystendsmyth/stalk-ui/commit/329a3b2a75e22efee0945a7ee05aba40f1ed18cd) Thanks [@trystendsmyth](https://github.com/trystendsmyth)! - Make horizontal Steps fill their container
+
+  The `steps` slot recipe root had no width, so a horizontal stepper shrink-wrapped
+  to its content and the `flex: 1` items had no space to distribute — labels
+  overlapped the following indicator. The root now stretches to `width: full` so
+  items spread and separators fill the gaps.
+
+- [#96](https://github.com/trystendsmyth/stalk-ui/pull/96) [`329a3b2`](https://github.com/trystendsmyth/stalk-ui/commit/329a3b2a75e22efee0945a7ee05aba40f1ed18cd) Thanks [@trystendsmyth](https://github.com/trystendsmyth)! - Fix Dialog and Sheet clobbering each other when imported together
+
+  Both compounds were assembled with `Object.assign` on the shared
+  `@radix-ui/react-dialog` `Root` singleton, so importing `Dialog` and `Sheet` in
+  the same module made the later import overwrite the earlier one's parts — e.g.
+  `Dialog.Content` would render as `Sheet.Content` (a side sheet instead of a
+  centered modal). Each compound now composes onto its own root wrapper instead of
+  mutating the shared Radix primitive.
+
 ## 1.3.0
 
 ### Minor Changes

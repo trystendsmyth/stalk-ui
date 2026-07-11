@@ -2,6 +2,13 @@
 
 ## 2.0.0
 
+### Patch Changes
+
+- Updated dependencies [[`329a3b2`](https://github.com/trystendsmyth/stalk-ui/commit/329a3b2a75e22efee0945a7ee05aba40f1ed18cd), [`329a3b2`](https://github.com/trystendsmyth/stalk-ui/commit/329a3b2a75e22efee0945a7ee05aba40f1ed18cd), [`329a3b2`](https://github.com/trystendsmyth/stalk-ui/commit/329a3b2a75e22efee0945a7ee05aba40f1ed18cd), [`329a3b2`](https://github.com/trystendsmyth/stalk-ui/commit/329a3b2a75e22efee0945a7ee05aba40f1ed18cd), [`329a3b2`](https://github.com/trystendsmyth/stalk-ui/commit/329a3b2a75e22efee0945a7ee05aba40f1ed18cd)]:
+  - @stalk-ui/preset@1.4.0
+
+## 2.0.0
+
 ### Minor Changes
 
 - [#92](https://github.com/trystendsmyth/stalk-ui/pull/92) [`4541385`](https://github.com/trystendsmyth/stalk-ui/commit/4541385c0fe79662c0734b8fa5c039010ef9b28f) Thanks [@trystendsmyth](https://github.com/trystendsmyth)! - Distribution, heat-map close-out, and a major component-surface expansion.
