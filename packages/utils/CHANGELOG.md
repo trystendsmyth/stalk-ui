@@ -1,5 +1,11 @@
 # @stalk-ui/utils
 
+## 1.4.0
+
+### Patch Changes
+
+- Version bump to keep the Stalk UI packages in lockstep with the 1.4.0 release. No functional changes to this package.
+
 ## 1.3.0
 
 ### Minor Changes
