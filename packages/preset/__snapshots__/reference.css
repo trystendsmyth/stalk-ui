@@ -5901,6 +5901,7 @@
       padding: var(--spacing-0);
       list-style: none;
       display: flex;
+      width: var(--sizes-full);
 }
 
     .stalk-steps__item {

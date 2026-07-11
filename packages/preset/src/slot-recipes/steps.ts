@@ -11,6 +11,9 @@ export const steps = {
       listStyle: 'none',
       m: '0',
       p: '0',
+      // Fill the container so the `flex: 1` items distribute and separators
+      // stretch, rather than shrink-wrapping and overlapping their labels.
+      w: 'full',
     },
     item: {
       display: 'flex',
