@@ -9,8 +9,8 @@ Stalk UI has two install paths:
 **`@stalk-ui/cli` (recommended for new projects)**
 
 ```sh
-pnpm dlx stalk-ui@latest init
-pnpm dlx stalk-ui@latest add @stalk-ui/button
+pnpm dlx @stalk-ui/cli@latest init
+pnpm dlx @stalk-ui/cli@latest add @stalk-ui/button
 ```
 
 The CLI configures PandaCSS with the Stalk preset by reference:
@@ -42,8 +42,8 @@ The shadcn-compatible path assumes the project already satisfies Stalk UI's Pand
 ## Quick Start
 
 ```sh
-pnpm dlx stalk-ui@latest init
-pnpm dlx stalk-ui@latest add @stalk-ui/button
+pnpm dlx @stalk-ui/cli@latest init
+pnpm dlx @stalk-ui/cli@latest add @stalk-ui/button
 ```
 
 ## Documentation
