@@ -3,6 +3,7 @@ import type { RecipeConfig } from '../types'
 export const timePicker = {
   className: 'stalk-time-picker',
   description: 'Slot recipe for the Select-based time picker (root row and the field separator).',
+  jsx: ['TimePicker', /^TimePicker\./],
   slots: ['root', 'separator'],
   base: {
     root: {

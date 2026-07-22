@@ -2,6 +2,7 @@ import type { RecipeConfig } from '../types'
 
 export const sortable = {
   className: 'stalk-sortable',
+  jsx: ['Sortable', 'SortableRoot', 'SortableItem', 'SortableHandle', /^Sortable\./],
   description:
     'Slot recipe for the drag-and-drop Sortable primitive (list root, draggable item, drag handle).',
   slots: ['root', 'item', 'handle'],

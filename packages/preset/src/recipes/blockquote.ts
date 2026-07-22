@@ -6,6 +6,7 @@ import type { RecipeConfig } from '../types'
 export const blockquote = {
   className: 'stalk-blockquote',
   description: 'Block quotation styles for the Stalk UI Blockquote component.',
+  jsx: ['Blockquote', /^Blockquote\./],
   base: {
     borderInlineStartWidth: '2px',
     borderInlineStartStyle: 'solid',

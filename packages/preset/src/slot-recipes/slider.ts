@@ -2,6 +2,7 @@ import type { RecipeConfig } from '../types'
 
 export const slider = {
   className: 'stalk-slider',
+  jsx: ['Slider', /^Slider\./],
   description:
     'Slot recipe for the Stalk UI slider (root + track + range + thumb, plus circular-knob parts).',
   slots: [

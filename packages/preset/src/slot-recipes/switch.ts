@@ -3,6 +3,7 @@ import type { RecipeConfig } from '../types'
 export const switchRecipe = {
   className: 'stalk-switch',
   description: 'Slot recipe for the Stalk UI switch primitive (root + thumb).',
+  jsx: ['Switch', /^Switch\./],
   slots: ['root', 'thumb'],
   base: {
     root: {

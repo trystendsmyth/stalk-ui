@@ -3,6 +3,7 @@ import type { RecipeConfig } from '../types'
 export const tabs = {
   className: 'stalk-tabs',
   description: 'Slot recipe for the Tabs component (root, list, trigger, content, indicator).',
+  jsx: ['Tabs', 'TabsRoot', 'TabsList', 'TabsTrigger', 'TabsContent', /^Tabs\./],
   slots: ['root', 'list', 'trigger', 'content', 'indicator'],
   base: {
     root: {

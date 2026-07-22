@@ -2,6 +2,7 @@ import type { RecipeConfig } from '../types'
 
 export const tour = {
   className: 'stalk-tour',
+  jsx: ['Tour', /^Tour\./],
   description:
     'Slot recipe for the Tour guide (spotlight overlay around a target plus a positioned step card).',
   slots: ['spotlight', 'arrow', 'content', 'title', 'description', 'footer', 'counter', 'actions'],

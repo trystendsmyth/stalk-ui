@@ -2,6 +2,17 @@ import type { RecipeConfig } from '../types'
 
 export const alert = {
   className: 'stalk-alert',
+  jsx: [
+    'Alert',
+    'AlertRoot',
+    'AlertBody',
+    'AlertTitle',
+    'AlertDescription',
+    'AlertActions',
+    'AlertIcon',
+    'AlertClose',
+    /^Alert\./,
+  ],
   description:
     'Slot recipe for inline Alert messages (root, icon, body, title, description, actions, close).',
   slots: ['root', 'icon', 'body', 'title', 'description', 'actions', 'close'],

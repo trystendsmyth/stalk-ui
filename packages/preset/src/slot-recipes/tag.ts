@@ -3,6 +3,7 @@ import type { RecipeConfig } from '../types'
 export const tag = {
   className: 'stalk-tag',
   description: 'Slot recipe for the Tag component (root, avatar, icon, label, count, close).',
+  jsx: ['Tag', 'TagRoot', 'TagAvatar', 'TagIcon', 'TagLabel', 'TagCount', 'TagClose', /^Tag\./],
   slots: ['root', 'avatar', 'icon', 'label', 'count', 'close'],
   base: {
     root: {

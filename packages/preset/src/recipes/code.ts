@@ -6,6 +6,7 @@ import type { RecipeConfig } from '../types'
 export const code = {
   className: 'stalk-code',
   description: 'Inline monospace code styles for the Stalk UI Code component.',
+  jsx: ['Code', /^Code\./],
   base: {
     fontFamily: 'mono',
     fontSize: '0.875em',

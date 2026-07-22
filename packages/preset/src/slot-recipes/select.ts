@@ -3,6 +3,20 @@ import type { RecipeConfig } from '../types'
 export const select = {
   className: 'stalk-select',
   description: 'Slot recipe for the Stalk UI select primitive.',
+  jsx: [
+    'Select',
+    'SelectRoot',
+    'SelectGroup',
+    'SelectValue',
+    'SelectPortal',
+    'SelectTrigger',
+    'SelectContent',
+    'SelectItem',
+    'SelectLabel',
+    'SelectSeparator',
+    'SelectField',
+    /^Select\./,
+  ],
   slots: ['trigger', 'content', 'viewport', 'item', 'itemIndicator', 'label', 'separator'],
   base: {
     trigger: {

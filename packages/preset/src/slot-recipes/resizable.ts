@@ -3,6 +3,7 @@ import type { RecipeConfig } from '../types'
 export const resizable = {
   className: 'stalk-resizable',
   description: 'Slot recipe for react-resizable-panels resizable panel groups.',
+  jsx: ['Resizable', 'ResizableRoot', 'ResizablePanel', 'ResizableHandle', /^Resizable\./],
   slots: ['root', 'panel', 'handle', 'handleGrip'],
   base: {
     root: {

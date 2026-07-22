@@ -3,6 +3,15 @@ import type { RecipeConfig } from '../types'
 export const tooltip = {
   className: 'stalk-tooltip',
   description: 'Slot recipe for Radix-backed tooltips.',
+  jsx: [
+    'Tooltip',
+    'TooltipProvider',
+    'TooltipRoot',
+    'TooltipTrigger',
+    'TooltipPortal',
+    'TooltipContent',
+    /^Tooltip\./,
+  ],
   slots: ['content', 'arrow'],
   base: {
     content: {

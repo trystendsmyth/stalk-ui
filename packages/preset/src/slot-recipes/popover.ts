@@ -3,6 +3,16 @@ import type { RecipeConfig } from '../types'
 export const popover = {
   className: 'stalk-popover',
   description: 'Slot recipe for Radix-backed popovers.',
+  jsx: [
+    'Popover',
+    'PopoverRoot',
+    'PopoverTrigger',
+    'PopoverAnchor',
+    'PopoverPortal',
+    'PopoverClose',
+    'PopoverContent',
+    /^Popover\./,
+  ],
   slots: ['content', 'arrow', 'close'],
   base: {
     content: {

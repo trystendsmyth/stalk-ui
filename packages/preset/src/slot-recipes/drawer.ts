@@ -5,6 +5,21 @@ const panelWidth = 'min(calc(100vw - 3rem), 24rem)'
 
 export const drawer = {
   className: 'stalk-drawer',
+  jsx: [
+    'Drawer',
+    'DrawerRoot',
+    'DrawerTrigger',
+    'DrawerPortal',
+    'DrawerClose',
+    'DrawerOverlay',
+    'DrawerContent',
+    'DrawerHeader',
+    'DrawerTitle',
+    'DrawerDescription',
+    'DrawerBody',
+    'DrawerFooter',
+    /^Drawer\./,
+  ],
   description:
     'Slot recipe for the Drawer gesture sheet (Vaul-backed: overlay, draggable content with handle, header, footer). Geometry keys off Vaul’s `data-vaul-drawer-direction`, so `Drawer.Root direction` alone switches the edge.',
   slots: ['overlay', 'content', 'handle', 'header', 'title', 'description', 'body', 'footer'],

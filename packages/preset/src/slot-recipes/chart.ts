@@ -3,6 +3,7 @@ import type { RecipeConfig } from '../types'
 export const chart = {
   className: 'stalk-chart',
   description: 'Slot recipe for the Chart theming contract (consumers bring their own recharts).',
+  jsx: ['Chart', 'ChartContainer', 'ChartTooltipContent', 'ChartLegendContent', /^Chart\./],
   slots: ['container', 'tooltip', 'tooltipLabel', 'tooltipRow', 'tooltipIndicator', 'legend'],
   base: {
     // Themes the recharts DOM via semantic tokens without importing recharts.

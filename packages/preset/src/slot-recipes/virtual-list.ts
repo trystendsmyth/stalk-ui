@@ -2,6 +2,7 @@ import type { RecipeConfig } from '../types'
 
 export const virtualList = {
   className: 'stalk-virtual-list',
+  jsx: ['VirtualList', 'VirtualListRoot', 'VirtualListItem', /^VirtualList\./],
   description:
     'Slot recipe for the windowed VirtualList primitive (scroll root, sized viewport, absolutely-positioned item).',
   slots: ['root', 'viewport', 'item'],

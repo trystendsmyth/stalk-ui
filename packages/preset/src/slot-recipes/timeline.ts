@@ -2,6 +2,16 @@ import type { RecipeConfig } from '../types'
 
 export const timeline = {
   className: 'stalk-timeline',
+  jsx: [
+    'Timeline',
+    'TimelineRoot',
+    'TimelineItem',
+    'TimelineContent',
+    'TimelineTitle',
+    'TimelineDescription',
+    'TimelineTime',
+    /^Timeline\./,
+  ],
   description:
     'Slot recipe for Timeline / activity feeds (rail with toned dot + connector, time, title, description).',
   slots: [

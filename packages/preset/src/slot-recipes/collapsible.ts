@@ -3,6 +3,13 @@ import type { RecipeConfig } from '../types'
 export const collapsible = {
   className: 'stalk-collapsible',
   description: 'Slot recipe for Radix-backed collapsible panels.',
+  jsx: [
+    'Collapsible',
+    'CollapsibleRoot',
+    'CollapsibleContent',
+    'CollapsibleTrigger',
+    /^Collapsible\./,
+  ],
   slots: ['root', 'trigger', 'content'],
   base: {
     root: {

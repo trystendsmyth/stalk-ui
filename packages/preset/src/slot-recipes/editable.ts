@@ -2,6 +2,7 @@ import type { RecipeConfig } from '../types'
 
 export const editable = {
   className: 'stalk-editable',
+  jsx: ['Editable', /^Editable\./],
   description:
     'Slot recipe for Editable in-place text (preview button that swaps to an input on activation).',
   slots: ['root', 'ghost', 'preview', 'input'],

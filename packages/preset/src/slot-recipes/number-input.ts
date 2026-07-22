@@ -3,6 +3,7 @@ import type { RecipeConfig } from '../types'
 export const numberInput = {
   className: 'stalk-number-input',
   description: 'Slot recipe for NumberInput (root shell, field, stepper, button).',
+  jsx: ['NumberInput', /^NumberInput\./],
   slots: ['root', 'field', 'stepper', 'button'],
   base: {
     // Own shell (mirrors `input`) so steppers can sit flush against the edges —

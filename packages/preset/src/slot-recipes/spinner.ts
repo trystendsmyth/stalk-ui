@@ -3,6 +3,7 @@ import type { RecipeConfig } from '../types'
 export const spinner = {
   className: 'stalk-spinner',
   description: 'Slot recipe for the Stalk UI spinner (root wrapper, track ring, indicator arc).',
+  jsx: ['Spinner', /^Spinner\./],
   slots: ['root', 'track', 'indicator'],
   base: {
     root: {

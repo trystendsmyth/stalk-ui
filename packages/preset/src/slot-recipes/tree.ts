@@ -2,6 +2,7 @@ import type { RecipeConfig } from '../types'
 
 export const tree = {
   className: 'stalk-tree',
+  jsx: ['Tree', /^Tree\./],
   description:
     'Slot recipe for Tree hierarchies (rows with expand chevrons, selection, nested groups, and optional indent guides).',
   slots: ['root', 'branch', 'row', 'indicator', 'label', 'group'],

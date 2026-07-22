@@ -2,6 +2,14 @@ import type { RecipeConfig } from '../types'
 
 export const otpInput = {
   className: 'stalk-otp-input',
+  jsx: [
+    'OtpInput',
+    'OtpInputRoot',
+    'OtpInputGroup',
+    'OtpInputSlot',
+    'OtpInputSeparator',
+    /^OtpInput\./,
+  ],
   description:
     'Slot recipe for the OTP / one-time-passcode input (root, group, slot, separator, caret).',
   slots: ['root', 'group', 'slot', 'separator', 'caret'],

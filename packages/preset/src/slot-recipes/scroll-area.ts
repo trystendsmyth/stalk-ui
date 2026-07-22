@@ -3,6 +3,15 @@ import type { RecipeConfig } from '../types'
 export const scrollArea = {
   className: 'stalk-scroll-area',
   description: 'Slot recipe for Radix-backed custom scroll areas.',
+  jsx: [
+    'ScrollArea',
+    'ScrollAreaViewport',
+    'ScrollAreaThumb',
+    'ScrollAreaScrollbar',
+    'ScrollAreaCorner',
+    'ScrollAreaRoot',
+    /^ScrollArea\./,
+  ],
   slots: ['root', 'viewport', 'scrollbar', 'thumb', 'corner'],
   base: {
     root: {

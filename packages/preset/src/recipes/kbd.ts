@@ -5,6 +5,7 @@ import type { RecipeConfig } from '../types'
 export const kbd = {
   className: 'stalk-kbd',
   description: 'Keyboard key styles for the Stalk UI Kbd component.',
+  jsx: ['Kbd', /^Kbd\./],
   base: {
     alignItems: 'center',
     bgColor: 'bg.subtle',

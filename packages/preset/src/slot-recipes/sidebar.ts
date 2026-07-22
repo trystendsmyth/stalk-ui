@@ -3,6 +3,23 @@ import type { RecipeConfig } from '../types'
 export const sidebar = {
   className: 'stalk-sidebar',
   description: 'Slot recipe for the collapsible application sidebar composite.',
+  jsx: [
+    'Sidebar',
+    'SidebarProvider',
+    'SidebarRoot',
+    'SidebarTrigger',
+    'SidebarRail',
+    'SidebarInset',
+    'SidebarHeader',
+    'SidebarFooter',
+    'SidebarContent',
+    'SidebarGroup',
+    'SidebarGroupLabel',
+    'SidebarMenu',
+    'SidebarMenuItem',
+    'SidebarMenuButton',
+    /^Sidebar\./,
+  ],
   slots: [
     'provider',
     'root',

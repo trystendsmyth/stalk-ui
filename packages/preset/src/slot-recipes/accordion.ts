@@ -3,6 +3,15 @@ import type { RecipeConfig } from '../types'
 export const accordion = {
   className: 'stalk-accordion',
   description: 'Slot recipe for Radix-backed accordion layouts.',
+  jsx: [
+    'Accordion',
+    'AccordionRoot',
+    'AccordionItem',
+    'AccordionHeader',
+    'AccordionContent',
+    'AccordionTrigger',
+    /^Accordion\./,
+  ],
   slots: ['root', 'item', 'header', 'trigger', 'content', 'icon'],
   base: {
     root: {

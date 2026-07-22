@@ -2,6 +2,7 @@ import type { RecipeConfig } from '../types'
 
 export const combobox = {
   className: 'stalk-combobox',
+  jsx: ['Combobox', /^Combobox\./],
   description:
     'Slot recipe for the Command-in-Popover combobox (trigger, value, icon, content, item indicator).',
   slots: ['trigger', 'value', 'icon', 'content', 'itemIndicator'],

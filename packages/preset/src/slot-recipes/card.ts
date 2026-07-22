@@ -2,6 +2,17 @@ import type { RecipeConfig } from '../types'
 
 export const card = {
   className: 'stalk-card',
+  jsx: [
+    'Card',
+    'CardRoot',
+    'CardHeader',
+    'CardTitle',
+    'CardDescription',
+    'CardAction',
+    'CardContent',
+    'CardFooter',
+    /^Card\./,
+  ],
   description:
     'Slot recipe for Card surfaces (root, header, title, description, action, content, footer).',
   slots: ['root', 'header', 'title', 'description', 'action', 'content', 'footer'],

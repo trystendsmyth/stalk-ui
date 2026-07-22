@@ -3,6 +3,20 @@ import type { RecipeConfig } from '../types'
 export const input = {
   className: 'stalk-input',
   description: 'Slot recipe for composed Stalk UI input controls.',
+  jsx: [
+    'Input',
+    'InputRoot',
+    'InputField',
+    'InputSlot',
+    'InputPrefix',
+    'InputSuffix',
+    'DatetimeInput',
+    'FormatInput',
+    'PasswordInput',
+    'PhoneInput',
+    'SearchInput',
+    /^Input\./,
+  ],
   slots: ['root', 'input', 'slot'],
   base: {
     root: {

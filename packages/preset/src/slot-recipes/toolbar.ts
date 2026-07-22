@@ -33,6 +33,16 @@ const control = {
 export const toolbar = {
   className: 'stalk-toolbar',
   description: 'Slot recipe for Radix-backed toolbars.',
+  jsx: [
+    'Toolbar',
+    'ToolbarRoot',
+    'ToolbarButton',
+    'ToolbarLink',
+    'ToolbarSeparator',
+    'ToolbarToggleGroup',
+    'ToolbarToggleItem',
+    /^Toolbar\./,
+  ],
   slots: ['root', 'button', 'link', 'separator', 'toggleGroup', 'toggleItem'],
   base: {
     root: {

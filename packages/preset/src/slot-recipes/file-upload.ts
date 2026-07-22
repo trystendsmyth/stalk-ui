@@ -2,6 +2,7 @@ import type { RecipeConfig } from '../types'
 
 export const fileUpload = {
   className: 'stalk-file-upload',
+  jsx: ['FileUpload', /^FileUpload\./],
   description:
     'Slot recipe for FileUpload / Dropzone (drop target with drag state, hint, and selected-file list).',
   slots: [

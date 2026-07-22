@@ -3,6 +3,7 @@ import type { RecipeConfig } from '../types'
 export const separator = {
   className: 'stalk-separator',
   description: 'Thin dividing line between content, horizontal or vertical.',
+  jsx: ['Separator', /^Separator\./],
   base: {
     flexShrink: 0,
     bgColor: 'border.default',
