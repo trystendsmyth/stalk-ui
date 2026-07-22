@@ -35,13 +35,21 @@ const preview: Preview = {
       },
     },
     pandaTheme: {
-      description: 'Stalk Panda theme (neutral, rainbow, monochrome)',
+      description: 'Stalk Panda theme (identities + curated accent palettes)',
       toolbar: {
         icon: 'paintbrush',
         items: [
           { title: 'Neutral', value: 'neutral' },
           { title: 'Rainbow', value: 'rainbow' },
           { title: 'Monochrome', value: 'monochrome' },
+          { title: 'Palette: Blue', value: 'blue' },
+          { title: 'Palette: Violet', value: 'violet' },
+          { title: 'Palette: Teal', value: 'teal' },
+          { title: 'Palette: Emerald', value: 'emerald' },
+          { title: 'Palette: Amber', value: 'amber' },
+          { title: 'Palette: Yellow', value: 'yellow' },
+          { title: 'Palette: Orange', value: 'orange' },
+          { title: 'Palette: Red', value: 'red' },
         ],
       },
     },

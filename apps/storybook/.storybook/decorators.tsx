@@ -8,10 +8,12 @@ import type { Decorator } from '@storybook/react-vite'
 
 type PreviewColorMode = 'dark' | 'light'
 type Direction = 'ltr' | 'rtl'
-type PandaTheme = 'monochrome' | 'neutral' | 'rainbow'
+// Every generated named theme (identities + curated palettes) plus the implicit
+// default, which is "no data-panda-theme attribute" rather than a theme payload.
+type PandaTheme = ThemeName | 'neutral'
 
 const isNamedTheme = (value: PandaTheme | undefined): value is ThemeName =>
-  value === 'monochrome' || value === 'rainbow'
+  value !== undefined && value !== 'neutral'
 
 /** Panda emits non-default themes as a separate JSON payload that must be injected as a
  *  `<style>` tag at runtime; once injected, the theme is gated by `[data-panda-theme=…]`

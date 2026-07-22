@@ -8,7 +8,7 @@ import * as recipes from './recipes'
 import { semanticTokens } from './semantic-tokens'
 import * as slotRecipes from './slot-recipes'
 import { textStyles } from './text-styles'
-import { monochromeTheme, rainbowTheme } from './themes'
+import { monochromeTheme, paletteThemes, rainbowTheme } from './themes'
 import { tokens } from './tokens'
 import { utilities } from './utilities'
 
@@ -44,6 +44,11 @@ const stalkPreset = definePreset({
   themes: {
     monochrome: monochromeTheme,
     rainbow: rainbowTheme,
+    // Curated accent/gray palettes (E3). Registered here so any of them is one
+    // consumer config line away, but deliberately NOT in `staticCss.themes`
+    // below — palette CSS is generated only for consumers that opt in via
+    // `staticCss: { themes: ['emerald'] }`, keeping the default build lean.
+    ...paletteThemes,
   },
   staticCss: {
     css: [
