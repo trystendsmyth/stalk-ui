@@ -3,20 +3,10 @@ import { defineTheme } from '../define-theme'
 import type { StalkTheme } from '../define-theme'
 
 /**
- * Curated named palettes (roadmap E3): one-option accent/gray pairings built
- * with `defineTheme`, registered in the preset's `themes` map so any of them is
- * one config line away:
- *
- * ```ts
- * // panda.config.ts — generate the CSS for the palettes you use:
- * staticCss: { themes: ['emerald'] }
- * // then apply: <html data-panda-theme="emerald">
- * ```
- *
- * Unlike `monochrome`/`rainbow` (full identities), palettes only re-hue the
- * accent + neutral surface; status colors keep their defaults. Gray pairings
- * follow the Radix temperature groupings: slate for the blue/teal family,
- * mauve for the red/violet family, neutral/gray for the warm and green scales.
+ * Curated accent/gray palettes (roadmap E3), registered in the preset `themes`
+ * map. CSS is opt-in: list in `staticCss.themes`, apply via `data-panda-theme`.
+ * Only accent + neutrals re-hue (status colors keep defaults); gray pairings
+ * follow the Radix temperature groups.
  */
 export const paletteThemes: Record<string, StalkTheme> = {
   blue: defineTheme({ accent: 'blue', gray: 'slate' }),

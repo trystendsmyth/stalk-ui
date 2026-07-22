@@ -33,10 +33,8 @@ export interface RecipeConfig {
   className?: string
   description?: string
   /**
-   * JSX element names Panda's static extractor tracks for this recipe, so
-   * variant props written as JSX attributes (`<SelectField size="sm">`) emit
-   * their CSS even when the value never appears as a static recipe call.
-   * Exact part names plus a `^Name\.` regex for dot-notation usage.
+   * JSX names Panda's extractor tracks, so wrapper-passed variant props
+   * (`<SelectField size="sm">`) still emit CSS. Exact names + `^Name\.` regex.
    */
   jsx?: (string | RegExp)[]
   base?: Record<string, unknown>

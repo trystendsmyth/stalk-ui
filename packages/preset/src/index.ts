@@ -44,10 +44,8 @@ const stalkPreset = definePreset({
   themes: {
     monochrome: monochromeTheme,
     rainbow: rainbowTheme,
-    // Curated accent/gray palettes (E3). Registered here so any of them is one
-    // consumer config line away, but deliberately NOT in `staticCss.themes`
-    // below — palette CSS is generated only for consumers that opt in via
-    // `staticCss: { themes: ['emerald'] }`, keeping the default build lean.
+    // Curated palettes (E3): opt-in CSS — consumers list them in their own
+    // `staticCss.themes`; deliberately absent from the preset staticCss below.
     ...paletteThemes,
   },
   staticCss: {

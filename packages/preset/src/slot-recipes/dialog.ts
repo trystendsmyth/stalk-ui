@@ -41,9 +41,7 @@ export const dialog = {
       p: '24',
       zIndex: 'modal',
     },
-    // The scrollable middle region under `scrollBehavior: 'inside'` — header and
-    // footer stay pinned while the body owns the overflow. Inert (a plain block)
-    // in the default outside mode.
+    // Owns the scroll under `scrollBehavior: inside`; plain block otherwise.
     body: {
       flex: '1 1 auto',
       minH: '0',
@@ -108,9 +106,8 @@ export const dialog = {
     },
   },
   variants: {
-    // Where long content scrolls. `outside` (default) scrolls the whole content
-    // panel; `inside` pins header/footer and hands the scroll to Dialog.Body —
-    // the pattern consumers previously hand-rolled with a flex-column override.
+    // `outside` scrolls the whole panel; `inside` pins header/footer and
+    // Dialog.Body owns the scroll.
     scrollBehavior: {
       outside: {},
       inside: {

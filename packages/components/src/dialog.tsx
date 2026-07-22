@@ -43,9 +43,8 @@ export interface DialogContentProps extends ComponentPropsWithoutRef<
    */
   overlay?: boolean
   /**
-   * Where long content scrolls. `outside` (default) scrolls the whole content
-   * panel; `inside` pins the header and footer and hands the scroll to
-   * `Dialog.Body`.
+   * `outside` (default) scrolls the whole panel; `inside` pins header/footer
+   * and hands the scroll to `Dialog.Body`.
    */
   scrollBehavior?: 'outside' | 'inside'
 }
