@@ -3,6 +3,7 @@ import type { RecipeConfig } from '../types'
 export const button = {
   className: 'stalk-button',
   description: 'Button styles shared by copied Stalk UI button components.',
+  jsx: ['Button', 'CopyButton', /^Button\./],
   base: {
     alignItems: 'center',
     colorPalette: 'accent',
@@ -26,12 +27,16 @@ export const button = {
     _disabled: {
       cursor: 'not-allowed',
       opacity: 0.5,
+      // A dead control must not animate press feedback.
+      _active: { transform: 'none' },
     },
     // `asChild` strips the `disabled` attribute (it's invalid on <a>), so the
-    // disabled styling needs to also fire on `aria-disabled`.
+    // disabled styling needs to also fire on `aria-disabled` — and unlike a
+    // natively disabled button, these elements still receive `:active`.
     '&[aria-disabled="true"]': {
       cursor: 'not-allowed',
       opacity: 0.5,
+      _active: { transform: 'none' },
     },
     _focusVisible: {
       focusRingWidth: 'base',
