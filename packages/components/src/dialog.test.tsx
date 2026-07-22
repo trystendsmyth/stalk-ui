@@ -71,3 +71,26 @@ test('applies slot classes', () => {
   expect(screen.getByText('Settings')).toHaveClass('stalk-dialog__title')
   expect(screen.getByText('Manage account preferences.')).toHaveClass('stalk-dialog__description')
 })
+
+test('scrollBehavior="inside" hands the scroll to Dialog.Body', async () => {
+  const { container } = render(
+    <Dialog.Root defaultOpen>
+      <Dialog.Content scrollBehavior="inside">
+        <Dialog.Header>
+          <Dialog.Title>Release notes</Dialog.Title>
+          <Dialog.Description>Header and footer stay pinned.</Dialog.Description>
+        </Dialog.Header>
+        <Dialog.Body>Long changelog</Dialog.Body>
+        <Dialog.Footer>
+          <Dialog.Close>Close</Dialog.Close>
+        </Dialog.Footer>
+      </Dialog.Content>
+    </Dialog.Root>,
+  )
+
+  expect(screen.getByRole('dialog', { name: 'Release notes' })).toHaveClass(
+    'stalk-dialog__content--scrollBehavior_inside',
+  )
+  expect(screen.getByText('Long changelog')).toHaveClass('stalk-dialog__body')
+  expect((await axe(container)).violations).toHaveLength(0)
+})

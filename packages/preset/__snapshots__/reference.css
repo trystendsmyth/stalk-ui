@@ -1327,9 +1327,22 @@
       pointer-events: none;
 }
 
-    .stalk-button:is(:disabled, [disabled], [data-disabled], [aria-disabled=true]),.stalk-button[aria-disabled="true"] {
+    .stalk-button:is(:disabled, [disabled], [data-disabled], [aria-disabled=true]) {
       cursor: not-allowed;
       opacity: 0.5;
+}
+
+    .stalk-button:is(:disabled, [disabled], [data-disabled], [aria-disabled=true]):is(:active, [data-active]) {
+      transform: none;
+}
+
+    .stalk-button[aria-disabled="true"] {
+      cursor: not-allowed;
+      opacity: 0.5;
+}
+
+    .stalk-button[aria-disabled="true"]:is(:active, [data-active]) {
+      transform: none;
 }
 
     .stalk-button:is(:focus-visible, [data-focus-visible]) {
@@ -3434,6 +3447,12 @@
       color: var(--colors-fg-default);
       width: min(calc(100vw - 2rem), 32rem);
       max-height: calc(100vh - 2rem);
+}
+
+    .stalk-dialog__body {
+      flex: 1 1 auto;
+      min-height: var(--sizes-0);
+      overflow-y: auto;
 }
 
     .stalk-dialog__header {
@@ -7508,6 +7527,12 @@
     font-size: var(--font-sizes-lg);
     line-height: var(--line-heights-lg);
     letter-spacing: var(--letter-spacings-normal);
+}
+
+  .stalk-dialog__content--scrollBehavior_inside {
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
 }
 
   .stalk-dropdown-menu__item--inset_true {

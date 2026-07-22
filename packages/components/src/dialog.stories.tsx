@@ -86,6 +86,41 @@ export const Open: Story = {
   ),
 }
 
+export const ScrollInside: Story = {
+  args: { defaultOpen: true },
+  render: (args) => (
+    <Dialog.Root {...args}>
+      <Dialog.Content className={css({ maxH: '20rem' })} scrollBehavior="inside">
+        <Dialog.Header>
+          <Dialog.Title>Release notes</Dialog.Title>
+          <Dialog.Description>
+            With `scrollBehavior` set to `inside`, the header and footer stay pinned while
+            Dialog.Body owns the scroll.
+          </Dialog.Description>
+        </Dialog.Header>
+        <Dialog.Body>
+          {Array.from({ length: 12 }, (_, i) => (
+            <p key={i}>
+              Entry {i + 1}: fixed the thing, improved the other thing, and documented the third
+              thing so the changelog has enough height to demonstrate an inner scroll region.
+            </p>
+          ))}
+        </Dialog.Body>
+        <Dialog.Footer>
+          <Dialog.Close asChild>
+            <Button size="sm" variant="outline">
+              Close
+            </Button>
+          </Dialog.Close>
+        </Dialog.Footer>
+        <Dialog.Close aria-label="Close dialog">
+          <X aria-hidden size={16} />
+        </Dialog.Close>
+      </Dialog.Content>
+    </Dialog.Root>
+  ),
+}
+
 export const NonModal: Story = {
   args: { defaultOpen: true, modal: false },
   render: (args) => (

@@ -3,7 +3,21 @@ import type { RecipeConfig } from '../types'
 export const dialog = {
   className: 'stalk-dialog',
   description: 'Slot recipe for Radix-backed dialog layouts.',
-  slots: ['overlay', 'content', 'header', 'title', 'description', 'footer', 'close'],
+  jsx: [
+    'Dialog',
+    'DialogRoot',
+    'DialogTrigger',
+    'DialogPortal',
+    'DialogClose',
+    'DialogOverlay',
+    'DialogContent',
+    'DialogHeader',
+    'DialogTitle',
+    'DialogDescription',
+    'DialogFooter',
+    /^Dialog\./,
+  ],
+  slots: ['overlay', 'content', 'body', 'header', 'title', 'description', 'footer', 'close'],
   base: {
     overlay: {
       pos: 'fixed',
@@ -26,6 +40,14 @@ export const dialog = {
       color: 'fg.default',
       p: '24',
       zIndex: 'modal',
+    },
+    // The scrollable middle region under `scrollBehavior: 'inside'` — header and
+    // footer stay pinned while the body owns the overflow. Inert (a plain block)
+    // in the default outside mode.
+    body: {
+      flex: '1 1 auto',
+      minH: '0',
+      overflowY: 'auto',
     },
     header: {
       display: 'grid',
@@ -84,5 +106,23 @@ export const dialog = {
         w: '16',
       },
     },
+  },
+  variants: {
+    // Where long content scrolls. `outside` (default) scrolls the whole content
+    // panel; `inside` pins header/footer and hands the scroll to Dialog.Body —
+    // the pattern consumers previously hand-rolled with a flex-column override.
+    scrollBehavior: {
+      outside: {},
+      inside: {
+        content: {
+          display: 'flex',
+          flexDirection: 'column',
+          overflow: 'hidden',
+        },
+      },
+    },
+  },
+  defaultVariants: {
+    scrollBehavior: 'outside',
   },
 } satisfies RecipeConfig

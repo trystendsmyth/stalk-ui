@@ -41,9 +41,19 @@ export const checkbox = ({ size = 'md' }: CheckboxRecipeOptions = {}) => ({
   indicator: 'stalk-checkbox__indicator',
 })
 
-export const dialog = () => ({
+interface DialogRecipeOptions {
+  scrollBehavior?: 'outside' | 'inside'
+}
+
+export const dialog = ({ scrollBehavior = 'outside' }: DialogRecipeOptions = {}) => ({
   close: 'stalk-dialog__close',
-  content: 'stalk-dialog__content',
+  content: [
+    'stalk-dialog__content',
+    scrollBehavior === 'inside' ? 'stalk-dialog__content--scrollBehavior_inside' : undefined,
+  ]
+    .filter(Boolean)
+    .join(' '),
+  body: 'stalk-dialog__body',
   description: 'stalk-dialog__description',
   footer: 'stalk-dialog__footer',
   header: 'stalk-dialog__header',

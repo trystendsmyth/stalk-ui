@@ -42,20 +42,38 @@ export interface DialogContentProps extends ComponentPropsWithoutRef<
    * `Dialog.Root`, this just drops the blocking overlay to match.
    */
   overlay?: boolean
+  /**
+   * Where long content scrolls. `outside` (default) scrolls the whole content
+   * panel; `inside` pins the header and footer and hands the scroll to
+   * `Dialog.Body`.
+   */
+  scrollBehavior?: 'outside' | 'inside'
 }
 
 export const DialogContent = /* @__PURE__ */ forwardRef<
   ComponentRef<typeof DialogPrimitive.Content>,
   DialogContentProps
->(function DialogContent({ children, className, overlay = true, ...props }, ref) {
+>(function DialogContent(
+  { children, className, overlay = true, scrollBehavior = 'outside', ...props },
+  ref,
+) {
+  const contentClass =
+    scrollBehavior === 'outside' ? styles.content : dialogRecipe({ scrollBehavior }).content
   return (
     <DialogPortal>
       {overlay ? <DialogOverlay /> : null}
-      <DialogPrimitive.Content ref={ref} className={cx(styles.content, className)} {...props}>
+      <DialogPrimitive.Content ref={ref} className={cx(contentClass, className)} {...props}>
         {children}
       </DialogPrimitive.Content>
     </DialogPortal>
   )
+})
+
+export const DialogBody = /* @__PURE__ */ forwardRef<
+  HTMLDivElement,
+  HTMLAttributes<HTMLDivElement>
+>(function DialogBody({ className, ...props }, ref) {
+  return <div ref={ref} className={cx(styles.body, className)} {...props} />
 })
 
 export const DialogHeader = /* @__PURE__ */ forwardRef<
@@ -101,6 +119,7 @@ function DialogRootComponent(props: ComponentPropsWithoutRef<typeof DialogPrimit
 }
 
 export const Dialog = /* @__PURE__ */ Object.assign(DialogRootComponent, {
+  Body: DialogBody,
   Close: DialogClose,
   Content: DialogContent,
   Description: DialogDescription,

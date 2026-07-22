@@ -122,6 +122,7 @@ export const componentExamples = {
   dialog: [
     '<Dialog.Root>\n  <Dialog.Trigger>Open dialog</Dialog.Trigger>\n  <Dialog.Content>\n    <Dialog.Title>Confirm changes</Dialog.Title>\n  </Dialog.Content>\n</Dialog.Root>',
     '<Dialog.Root>\n  <Dialog.Trigger>Settings</Dialog.Trigger>\n  <Dialog.Content>\n    <Dialog.Header>\n      <Dialog.Title>Settings</Dialog.Title>\n      <Dialog.Description>Manage your preferences.</Dialog.Description>\n    </Dialog.Header>\n    <Dialog.Footer>\n      <Dialog.Close asChild>\n        <Button variant="outline">Cancel</Button>\n      </Dialog.Close>\n    </Dialog.Footer>\n  </Dialog.Content>\n</Dialog.Root>',
+    '<Dialog.Root>\n  <Dialog.Trigger>Release notes</Dialog.Trigger>\n  <Dialog.Content scrollBehavior="inside">\n    <Dialog.Header>\n      <Dialog.Title>Release notes</Dialog.Title>\n      <Dialog.Description>Header and footer stay pinned; the body scrolls.</Dialog.Description>\n    </Dialog.Header>\n    <Dialog.Body>Long changelog…</Dialog.Body>\n    <Dialog.Footer>\n      <Dialog.Close asChild>\n        <Button variant="outline">Close</Button>\n      </Dialog.Close>\n    </Dialog.Footer>\n  </Dialog.Content>\n</Dialog.Root>',
   ],
   'dropdown-menu': [
     '<DropdownMenu.Root>\n  <DropdownMenu.Trigger>Open menu</DropdownMenu.Trigger>\n  <DropdownMenu.Content>\n    <DropdownMenu.Item>Edit</DropdownMenu.Item>\n    <DropdownMenu.Item>Duplicate</DropdownMenu.Item>\n    <DropdownMenu.Separator />\n    <DropdownMenu.Item>Delete</DropdownMenu.Item>\n  </DropdownMenu.Content>\n</DropdownMenu.Root>',
