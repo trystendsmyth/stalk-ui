@@ -1327,22 +1327,9 @@
       pointer-events: none;
 }
 
-    .stalk-button:is(:disabled, [disabled], [data-disabled], [aria-disabled=true]) {
+    .stalk-button:is(:disabled, [disabled], [data-disabled], [aria-disabled=true]),.stalk-button[aria-disabled="true"] {
       cursor: not-allowed;
       opacity: 0.5;
-}
-
-    .stalk-button:is(:disabled, [disabled], [data-disabled], [aria-disabled=true]):is(:active, [data-active]) {
-      transform: none;
-}
-
-    .stalk-button[aria-disabled="true"] {
-      cursor: not-allowed;
-      opacity: 0.5;
-}
-
-    .stalk-button[aria-disabled="true"]:is(:active, [data-active]) {
-      transform: none;
 }
 
     .stalk-button:is(:focus-visible, [data-focus-visible]) {
@@ -1354,7 +1341,7 @@
       --ring-offset-color: var(--colors-bg-default);
 }
 
-    .stalk-button:is(:active, [data-active]) {
+    .stalk-button:is(:active, [data-active]):not(:disabled, [disabled], [data-disabled], [aria-disabled=true]) {
       transform: scale(0.96);
 }
 
@@ -1627,7 +1614,7 @@
     color: var(--colors-color-palette-contrast);
 }
 
-  .stalk-button--variant_solid:is(:hover, [data-hover]) {
+  .stalk-button--variant_solid:is(:hover, [data-hover]):not(:disabled, [disabled], [data-disabled], [aria-disabled=true]) {
     background-color: var(--colors-color-palette-emphasis);
 }
 
@@ -1637,7 +1624,7 @@
     color: var(--colors-fg-default);
 }
 
-  .stalk-button--variant_outline:is(:hover, [data-hover]) {
+  .stalk-button--variant_outline:is(:hover, [data-hover]):not(:disabled, [disabled], [data-disabled], [aria-disabled=true]) {
     border-color: var(--colors-color-palette-solid);
     background-color: var(--colors-color-palette-subtle);
 }
@@ -1646,7 +1633,7 @@
     color: var(--colors-fg-default);
 }
 
-  .stalk-button--variant_ghost:is(:hover, [data-hover]),.stalk-button--variant_subtle {
+  .stalk-button--variant_ghost:is(:hover, [data-hover]):not(:disabled, [disabled], [data-disabled], [aria-disabled=true]),.stalk-button--variant_subtle {
     background-color: var(--colors-color-palette-subtle);
 }
 
@@ -1654,7 +1641,7 @@
     color: var(--colors-color-palette-fg);
 }
 
-  .stalk-button--variant_subtle:is(:hover, [data-hover]) {
+  .stalk-button--variant_subtle:is(:hover, [data-hover]):not(:disabled, [disabled], [data-disabled], [aria-disabled=true]) {
     background-color: var(--colors-color-palette-muted);
 }
 

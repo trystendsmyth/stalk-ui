@@ -23,20 +23,15 @@ export const button = {
       flexShrink: 0,
       pointerEvents: 'none',
     },
-    _active: { transform: 'scale(0.96)' },
+    _enabledActive: { transform: 'scale(0.96)' },
     _disabled: {
       cursor: 'not-allowed',
       opacity: 0.5,
-      // A dead control must not animate press feedback.
-      _active: { transform: 'none' },
     },
-    // `asChild` strips the `disabled` attribute (it's invalid on <a>), so the
-    // disabled styling needs to also fire on `aria-disabled` — and unlike a
-    // natively disabled button, these elements still receive `:active`.
+    // `asChild` strips `disabled` (invalid on <a>), so mirror on aria-disabled.
     '&[aria-disabled="true"]': {
       cursor: 'not-allowed',
       opacity: 0.5,
-      _active: { transform: 'none' },
     },
     _focusVisible: {
       focusRingWidth: 'base',
@@ -50,25 +45,25 @@ export const button = {
       solid: {
         bgColor: 'colorPalette.solid',
         color: 'colorPalette.contrast',
-        _hover: { bgColor: 'colorPalette.emphasis' },
+        _enabledHover: { bgColor: 'colorPalette.emphasis' },
       },
       outline: {
         border: 'default',
         borderColor: 'colorPalette.muted',
         color: 'fg.default',
-        _hover: {
+        _enabledHover: {
           bgColor: 'colorPalette.subtle',
           borderColor: 'colorPalette.solid',
         },
       },
       ghost: {
         color: 'fg.default',
-        _hover: { bgColor: 'colorPalette.subtle' },
+        _enabledHover: { bgColor: 'colorPalette.subtle' },
       },
       subtle: {
         bgColor: 'colorPalette.subtle',
         color: 'colorPalette.fg',
-        _hover: { bgColor: 'colorPalette.muted' },
+        _enabledHover: { bgColor: 'colorPalette.muted' },
       },
     },
     size: {
