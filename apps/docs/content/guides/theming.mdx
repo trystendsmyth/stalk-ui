@@ -3,11 +3,31 @@ title: Theming
 description: How Stalk UI's themes work and how to apply them.
 ---
 
-Stalk UI ships with three themes:
+Stalk UI ships with three theme identities:
 
 - **neutral** (default): applied automatically. No configuration is required.
 - **rainbow**: applied with `data-panda-theme="rainbow"`.
 - **monochrome**: applied with `data-panda-theme="monochrome"`.
+
+plus eight curated accent palettes: `blue`, `violet`, `teal`, `emerald`,
+`amber`, `yellow`, `orange`, and `red`. Palettes re-hue the accent and neutral
+surface (status colors keep their defaults) and are opt-in — their CSS is
+generated only when you list them in `staticCss`:
+
+```ts
+// panda.config.ts
+export default defineConfig({
+  presets: ['@stalk-ui/preset'],
+  staticCss: { themes: ['emerald'] },
+})
+```
+
+```html
+<html data-panda-theme="emerald"></html>
+```
+
+Run `stalk-ui theme` to list every theme from the CLI. For fully custom
+palettes, see [Custom Themes](/en/docs/getting-started/custom-themes).
 
 ## Applying A Theme
 
@@ -53,3 +73,31 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
 For persistent theme selection, store the current theme in `localStorage` and
 restore it with `useEffect`. This is standard React application state; Stalk UI
 only needs the final `data-panda-theme` attribute.
+
+## Density And Root Font Size
+
+Stalk UI's `sizes` and `spacing` tokens are **rem-valued**, named after their
+pixel value at the browser default 16px root — the `32` size token is `2rem`,
+which renders 32px at a 16px root.
+
+Dense-data apps often shrink the root (`html { font-size: 14px }`, or Stalk's
+own `fontSize: 'sm'`). Every rem-based token scales with it: at a 14px root the
+`32` token renders **28px**, an `sm` button and an `sm` select trigger are 28px
+tall, and the whole density scale shrinks together — coherently.
+
+The trap is mixing units. A hand-written `height: '32px'` does **not** scale,
+so it sits 4px proud of the recipe-sized control next to it and the row goes
+ragged. When you need a custom control to line up with Stalk components, size
+it with the same tokens the recipes use:
+
+```tsx
+// ✅ matches an `sm` Button/Select at ANY root font size
+const field = css({ minH: '32', px: '10' })
+
+// ❌ 32px at every root — 4px taller than `sm` controls under a 14px root
+const field = css({ height: '32px' })
+```
+
+The same applies to spacing: token names describe the 16px-root pixel value,
+not a fixed length. If your app pins a non-16px root, read every token name as
+"× root ÷ 16".
