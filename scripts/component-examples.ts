@@ -122,6 +122,7 @@ export const componentExamples = {
   dialog: [
     '<Dialog.Root>\n  <Dialog.Trigger>Open dialog</Dialog.Trigger>\n  <Dialog.Content>\n    <Dialog.Title>Confirm changes</Dialog.Title>\n  </Dialog.Content>\n</Dialog.Root>',
     '<Dialog.Root>\n  <Dialog.Trigger>Settings</Dialog.Trigger>\n  <Dialog.Content>\n    <Dialog.Header>\n      <Dialog.Title>Settings</Dialog.Title>\n      <Dialog.Description>Manage your preferences.</Dialog.Description>\n    </Dialog.Header>\n    <Dialog.Footer>\n      <Dialog.Close asChild>\n        <Button variant="outline">Cancel</Button>\n      </Dialog.Close>\n    </Dialog.Footer>\n  </Dialog.Content>\n</Dialog.Root>',
+    '<Dialog.Root defaultOpen modal={false}>\n  <Dialog.Content draggable overlay={false}>\n    <Dialog.Header>\n      <Dialog.Title>Inspector</Dialog.Title>\n      <Dialog.Description>Drag the header to move; release near home to snap back.</Dialog.Description>\n    </Dialog.Header>\n    <Dialog.Body>Floating panel</Dialog.Body>\n  </Dialog.Content>\n</Dialog.Root>',
     '<Dialog.Root>\n  <Dialog.Trigger>Release notes</Dialog.Trigger>\n  <Dialog.Content scrollBehavior="inside">\n    <Dialog.Header>\n      <Dialog.Title>Release notes</Dialog.Title>\n      <Dialog.Description>Header and footer stay pinned; the body scrolls.</Dialog.Description>\n    </Dialog.Header>\n    <Dialog.Body>Long changelog…</Dialog.Body>\n    <Dialog.Footer>\n      <Dialog.Close asChild>\n        <Button variant="outline">Close</Button>\n      </Dialog.Close>\n    </Dialog.Footer>\n  </Dialog.Content>\n</Dialog.Root>',
   ],
   'dropdown-menu': [
@@ -300,6 +301,7 @@ export const componentExamples = {
   ],
   toolbar: [
     '<Toolbar aria-label="Formatting">\n  <Toolbar.ToggleGroup type="multiple" aria-label="Text formatting">\n    <Toolbar.ToggleItem value="bold" aria-label="Bold"><Bold /></Toolbar.ToggleItem>\n    <Toolbar.ToggleItem value="italic" aria-label="Italic"><Italic /></Toolbar.ToggleItem>\n  </Toolbar.ToggleGroup>\n  <Toolbar.Separator />\n  <Toolbar.Button>Comment</Toolbar.Button>\n  <Toolbar.Link href="#">Share</Toolbar.Link>\n</Toolbar>',
+    '<Toolbar aria-label="Formatting">\n  <Toolbar.ToggleGroup type="multiple" aria-label="Text formatting">\n    <Toolbar.ToggleItem value="bold" aria-label="Bold" tooltip="Bold" shortcut="\u2318B"><Bold /></Toolbar.ToggleItem>\n    <Toolbar.ToggleItem value="italic" aria-label="Italic" tooltip="Italic" shortcut="\u2318I"><Italic /></Toolbar.ToggleItem>\n  </Toolbar.ToggleGroup>\n  <Toolbar.Separator />\n  <Toolbar.Button tooltip="Add a comment" shortcut={[\'\u2318\', \'\u21e7\', \'M\']}>Comment</Toolbar.Button>\n</Toolbar>',
   ],
   tooltip: [
     '<Tooltip.Provider>\n  <Tooltip.Root>\n    <Tooltip.Trigger>Help</Tooltip.Trigger>\n    <Tooltip.Content>Helpful context</Tooltip.Content>\n  </Tooltip.Root>\n</Tooltip.Provider>',

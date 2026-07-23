@@ -38,6 +38,26 @@ export const Default: Story = {
   ),
 }
 
+export const Shortcuts: Story = {
+  parameters: { controls: { disable: true } },
+  render: () => (
+    <Toolbar aria-label="Formatting">
+      <Toolbar.ToggleGroup type="multiple" aria-label="Text formatting">
+        <Toolbar.ToggleItem value="bold" aria-label="Bold" tooltip="Bold" shortcut="⌘B">
+          <Bold />
+        </Toolbar.ToggleItem>
+        <Toolbar.ToggleItem value="italic" aria-label="Italic" tooltip="Italic" shortcut="⌘I">
+          <Italic />
+        </Toolbar.ToggleItem>
+      </Toolbar.ToggleGroup>
+      <Toolbar.Separator />
+      <Toolbar.Button tooltip="Add a comment" shortcut={['⌘', '⇧', 'M']}>
+        Comment
+      </Toolbar.Button>
+    </Toolbar>
+  ),
+}
+
 export const Vertical: Story = {
   parameters: { controls: { disable: true } },
   render: () => (
