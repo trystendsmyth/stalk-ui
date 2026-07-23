@@ -66,6 +66,16 @@ export const gettingStartedPages = [
     ],
   },
   {
+    slug: 'provenance',
+    title: 'Provenance',
+    description: 'Verify that packages and registry manifests were built by Stalk UI CI.',
+    body: [
+      '**npm packages.** `@stalk-ui/cli`, `@stalk-ui/preset`, and `@stalk-ui/i18n` are published with npm trusted publishing (GitHub Actions OIDC), which attaches SLSA build provenance automatically. Verify with `npm audit signatures` in a consuming project, or inspect the Provenance section on each package page at npmjs.com.',
+      '**Registry manifests.** Every push to `main` that touches `/r/*.json` runs the Registry Provenance workflow, which attests the manifests plus a build-manifest (commit, ref, run id) with GitHub Artifact Attestations. Verify any downloaded manifest against the repo: `gh attestation verify <file> --repo trystendsmyth/stalk-ui`.',
+      'Together these cover both distribution channels: what npm installs and what `stalk-ui add` copies into your project.',
+    ],
+  },
+  {
     slug: 'semantic-tokens',
     title: 'Semantic tokens',
     description:
