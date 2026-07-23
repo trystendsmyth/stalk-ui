@@ -1,6 +1,8 @@
 import { readFileSync, readdirSync } from 'node:fs'
 import { join } from 'node:path'
 
+import { clientComponents, serverComponents } from './rsc-boundaries'
+
 export const locales = ['en'] as const
 
 export type Locale = (typeof locales)[number]
@@ -49,10 +51,11 @@ export const gettingStartedPages = [
   {
     slug: 'theming',
     title: 'Theming',
-    description: 'Apply the neutral baseline or rainbow theme with PandaCSS theme attributes.',
+    description: 'Identities, curated palettes, and density under non-16px roots.',
     body: [
-      'Stalk UI ships recipes, semantic tokens, and themes through @stalk-ui/preset.',
-      'Use data-panda-theme="rainbow" on the whole app or a subtree to opt into the alternate built-in theme.',
+      'Stalk UI ships recipes, semantic tokens, and themes through @stalk-ui/preset. Use data-panda-theme="rainbow" or data-panda-theme="monochrome" on the whole app or a subtree for the alternate identities.',
+      '**Curated palettes.** Eight accent/gray palettes ship in the preset — blue, violet, teal, emerald, amber, yellow, orange, red. Palette CSS is opt-in: list the ones you use under `staticCss.themes` in panda.config.ts, then apply with `data-panda-theme="emerald"`. Run `stalk-ui theme` to list everything.',
+      "**Density and root font size.** The `sizes` and `spacing` tokens are rem-valued, named for their pixel value at a 16px root. A dense app pinning `html { font-size: 14px }` scales every control coherently (the `32` token renders 28px) — the trap is mixing units: a hand-written `height: 32px` sits 4px proud of recipe-sized controls. Size custom controls with the same tokens the recipes use (`minH: '32'`), never raw px.",
     ],
   },
   {
@@ -63,6 +66,17 @@ export const gettingStartedPages = [
       'Native manifests live under /r/*.json and are consumed by the Stalk UI CLI.',
       'Compatibility manifests live under /r/shadcn/*.json for mixed shadcn and Stalk projects: `npx shadcn@latest add https://stalk-ui.com/r/shadcn/<component>.json` installs the same Panda-native source through the shadcn CLI, including Stalk lib helpers (inlined) and the `@stalk-ui/preset` dependency. The flow is exercised in CI against the current shadcn release.',
       '**Owning the code without owning the drift.** `add` records each install (manifest URL, file hashes, and a pristine base copy) under `.stalk-ui/` — commit that directory. `stalk-ui upgrade` then performs a real three-way merge per file: base snapshot × your local edits × the new registry version. Clean merges keep both sides; true overlaps get git-style conflict markers. `stalk-ui drift` (and the `trystendsmyth/stalk-ui/actions/drift` GitHub Action) reports when the registry has moved past your recorded base — local edits alone never fail the check.',
+    ],
+  },
+  {
+    slug: 'rsc-boundaries',
+    title: 'Server Components',
+    description: 'Which components render server-side, and how to compose the rest from RSC.',
+    body: [
+      "Every component installs as copied source, and the registry build injects `'use client'` automatically when the source needs it (Radix primitives, client-only libraries, React state or context). Components installed without the directive are true server modules — rendered entirely on the server with zero client JavaScript.",
+      `**Server modules (${String(serverComponents.length)}):** ${serverComponents.map((name) => `\`${name}\``).join(', ')}. The remaining ${String(clientComponents.length)} components are client components.`,
+      'Client components still render fine from Server Components — but in a server file import the **named part exports** (`import { DialogContent } …`), never property-access a compound namespace: `Dialog.Content` inside an RSC resolves to `undefined` ("Element type is invalid") because the client-module proxy wraps only top-level exports. Every compound part is guaranteed to exist as a named export; CI enforces it.',
+      'Callbacks and other non-serializable props cannot cross the boundary. Put interactive composition (open state, event handlers) in a client file and pass server-rendered content through as `children`.',
     ],
   },
   {
