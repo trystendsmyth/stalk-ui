@@ -2,6 +2,8 @@ import type { Variant } from './types'
 
 export const configSchemaUrl = 'https://stalk-ui.com/schema/v1/config.json'
 export const defaultRegistryTemplate = 'https://stalk-ui.com/r/{name}.json'
+/** Published Storybook (GitHub Pages); override with STALK_STORYBOOK_URL. */
+export const defaultStorybookUrl = 'https://trystendsmyth.github.io/stalk-ui'
 export const supportedSchemaVersion = '1.0'
 
 export const VARIANTS = ['radix', 'base'] as const satisfies readonly Variant[]

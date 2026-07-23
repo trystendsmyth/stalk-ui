@@ -4,6 +4,7 @@ import { z } from 'zod'
 import {
   getAddCommandTool,
   getAuditChecklistTool,
+  getComponentsManifestTool,
   getInstallInstructionsTool,
   getProjectRegistriesTool,
   listItemsTool,
@@ -112,6 +113,18 @@ export const createMcpServer = ({ context, scope }: ServerOptions): McpServer =>
       inputSchema: {},
     },
     () => toMcp(getAuditChecklistTool()),
+  )
+
+  server.registerTool(
+    'get_components_manifest',
+    {
+      description:
+        'Fetch the published Storybook components manifest (per-component metadata: stories, props, docs). Optionally filter to entries matching `component`.',
+      inputSchema: {
+        component: z.string().optional(),
+      },
+    },
+    async (args) => toMcp(await wrap(() => getComponentsManifestTool(args))),
   )
 
   if (scope === 'local') {

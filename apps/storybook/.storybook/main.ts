@@ -21,6 +21,11 @@ const config: StorybookConfig = {
     name: '@storybook/react-vite',
     options: {},
   },
+  features: {
+    // Emit manifests/components.json in the static build — the published
+    // Storybook becomes AI-queryable via the CLI MCP `get_components_manifest`.
+    componentsManifest: true,
+  },
   viteFinal: (config) => ({
     ...config,
     resolve: {
