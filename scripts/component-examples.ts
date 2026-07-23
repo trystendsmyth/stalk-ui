@@ -301,7 +301,7 @@ export const componentExamples = {
   ],
   toolbar: [
     '<Toolbar aria-label="Formatting">\n  <Toolbar.ToggleGroup type="multiple" aria-label="Text formatting">\n    <Toolbar.ToggleItem value="bold" aria-label="Bold"><Bold /></Toolbar.ToggleItem>\n    <Toolbar.ToggleItem value="italic" aria-label="Italic"><Italic /></Toolbar.ToggleItem>\n  </Toolbar.ToggleGroup>\n  <Toolbar.Separator />\n  <Toolbar.Button>Comment</Toolbar.Button>\n  <Toolbar.Link href="#">Share</Toolbar.Link>\n</Toolbar>',
-    '<Toolbar aria-label="Formatting">\n  <Toolbar.ToggleGroup type="multiple" aria-label="Text formatting">\n    <Toolbar.ToggleItem value="bold" aria-label="Bold" tooltip="Bold" shortcut="\u2318B"><Bold /></Toolbar.ToggleItem>\n    <Toolbar.ToggleItem value="italic" aria-label="Italic" tooltip="Italic" shortcut="\u2318I"><Italic /></Toolbar.ToggleItem>\n  </Toolbar.ToggleGroup>\n  <Toolbar.Separator />\n  <Toolbar.Button tooltip="Add a comment" shortcut={[\'\u2318\', \'\u21e7\', \'M\']}>Comment</Toolbar.Button>\n</Toolbar>',
+    '<Toolbar aria-label="Formatting">\n  <Toolbar.ToggleGroup type="multiple" aria-label="Text formatting">\n    <Toolbar.ToggleItem value="bold" aria-label="Bold" tooltip="Bold" shortcut="\u2318B"><Bold /></Toolbar.ToggleItem>\n    <Toolbar.ToggleItem value="italic" aria-label="Italic" tooltip="Italic" shortcut="\u2318I"><Italic /></Toolbar.ToggleItem>\n  </Toolbar.ToggleGroup>\n  <Toolbar.Separator />\n  <Toolbar.Button tooltip="Add a comment" shortcut="\u2318\u21e7M">Comment</Toolbar.Button>\n</Toolbar>',
   ],
   tooltip: [
     '<Tooltip.Provider>\n  <Tooltip.Root>\n    <Tooltip.Trigger>Help</Tooltip.Trigger>\n    <Tooltip.Content>Helpful context</Tooltip.Content>\n  </Tooltip.Root>\n</Tooltip.Provider>',

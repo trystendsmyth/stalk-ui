@@ -38,6 +38,8 @@ export const Default: Story = {
   ),
 }
 
+// Hovering any control shows its tooltip with the shortcut as Kbd chips; the
+// shared provider means siblings then open without the delay.
 export const Shortcuts: Story = {
   parameters: { controls: { disable: true } },
   render: () => (
@@ -49,9 +51,17 @@ export const Shortcuts: Story = {
         <Toolbar.ToggleItem value="italic" aria-label="Italic" tooltip="Italic" shortcut="⌘I">
           <Italic />
         </Toolbar.ToggleItem>
+        <Toolbar.ToggleItem
+          value="underline"
+          aria-label="Underline"
+          tooltip="Underline"
+          shortcut="⌘U"
+        >
+          <Underline />
+        </Toolbar.ToggleItem>
       </Toolbar.ToggleGroup>
       <Toolbar.Separator />
-      <Toolbar.Button tooltip="Add a comment" shortcut={['⌘', '⇧', 'M']}>
+      <Toolbar.Button tooltip="Add a comment" shortcut="⌘⇧M">
         Comment
       </Toolbar.Button>
     </Toolbar>

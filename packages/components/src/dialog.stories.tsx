@@ -44,10 +44,12 @@ export const Default: Story = {
             Share this project with teammates and manage who can edit it.
           </Dialog.Description>
         </Dialog.Header>
-        <VStack alignItems="stretch" gap="8">
-          <label htmlFor="dialog-email">Email</label>
-          <Input id="dialog-email" placeholder="teammate@stalk-ui.com" type="email" />
-        </VStack>
+        <Dialog.Body>
+          <VStack alignItems="stretch" gap="8">
+            <label htmlFor="dialog-email">Email</label>
+            <Input id="dialog-email" placeholder="teammate@stalk-ui.com" type="email" />
+          </VStack>
+        </Dialog.Body>
         <Dialog.Footer>
           <Button>Send invite</Button>
         </Dialog.Footer>
@@ -87,9 +89,11 @@ export const Open: Story = {
 }
 
 export const ScrollInside: Story = {
-  args: { defaultOpen: true },
   render: (args) => (
     <Dialog.Root {...args}>
+      <Dialog.Trigger asChild>
+        <Button variant="outline">Release notes</Button>
+      </Dialog.Trigger>
       <Dialog.Content className={css({ maxH: '20rem' })} scrollBehavior="inside">
         <Dialog.Header>
           <Dialog.Title>Release notes</Dialog.Title>
@@ -121,10 +125,40 @@ export const ScrollInside: Story = {
   ),
 }
 
-export const NonModal: Story = {
-  args: { defaultOpen: true, modal: false },
+export const Draggable: Story = {
+  args: { modal: false },
   render: (args) => (
     <Dialog.Root {...args}>
+      <Dialog.Trigger asChild>
+        <Button variant="outline">Open inspector</Button>
+      </Dialog.Trigger>
+      <Dialog.Content draggable overlay={false}>
+        <Dialog.Header>
+          <Dialog.Title>Inspector</Dialog.Title>
+          <Dialog.Description>
+            Drag the header to move this panel; release near home to snap back.
+          </Dialog.Description>
+        </Dialog.Header>
+        <Dialog.Body>Floating, non-modal, draggable.</Dialog.Body>
+        <Dialog.Footer>
+          <Dialog.Close asChild>
+            <Button size="sm" variant="outline">
+              Close
+            </Button>
+          </Dialog.Close>
+        </Dialog.Footer>
+      </Dialog.Content>
+    </Dialog.Root>
+  ),
+}
+
+export const NonModal: Story = {
+  args: { modal: false },
+  render: (args) => (
+    <Dialog.Root {...args}>
+      <Dialog.Trigger asChild>
+        <Button variant="outline">Open panel</Button>
+      </Dialog.Trigger>
       <Dialog.Content overlay={false}>
         <Dialog.Header>
           <Dialog.Title>Non-modal panel</Dialog.Title>
