@@ -562,6 +562,14 @@
       "path": "/r/shadcn/toggle.json",
       "sha256": "e4001183a168bbd6deddbfee2d2aba6762eda0ea224454fb65f46f7543501e59"
     },
+    "text-editor": {
+      "path": "/r/text-editor.json",
+      "sha256": "f6fdc19c554ca77d8c24e671d1f57d5aab27d72c23d57947c23ebee16327e8b8"
+    },
+    "shadcn/text-editor": {
+      "path": "/r/shadcn/text-editor.json",
+      "sha256": "52f73bcbb05e2d8a55a012fdd533bfc84ae56a932e0e9ce043c863cf1fcf1057"
+    },
     "toolbar": {
       "path": "/r/toolbar.json",
       "sha256": "688bbdb899c91e61cf0c28f2248f85e6f25ecfda654db678dcf67d8479773378"

@@ -10,4 +10,18 @@ export const ru = {
     noResults: 'Результатов не найдено',
     placeholder: 'Выберите вариант...',
   },
+  textEditor: {
+    bold: 'Полужирный',
+    italic: 'Курсив',
+    underline: 'Подчёркнутый',
+    strikethrough: 'Зачёркнутый',
+    code: 'Код',
+    link: 'Ссылка',
+    setLink: 'Задать ссылку',
+    emoji: 'Эмодзи',
+    undo: 'Отменить',
+    redo: 'Повторить',
+    textColor: 'Цвет текста',
+    highlight: 'Выделение цветом',
+  },
 } satisfies MessageDictionary

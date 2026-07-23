@@ -140,6 +140,7 @@ export const componentGroups = [
       'phone-input',
       'otp-input',
       'editable',
+      'text-editor',
     ],
   },
   {

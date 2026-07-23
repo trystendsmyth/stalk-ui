@@ -453,6 +453,24 @@ export const textarea = ({ invalid = false, size = 'md' }: TextareaRecipeOptions
     .filter(Boolean)
     .join(' ')
 
+interface TextEditorRecipeOptions {
+  size?: 'sm' | 'md'
+}
+
+export const textEditor = ({ size = 'md' }: TextEditorRecipeOptions = {}) => ({
+  root: 'stalk-text-editor__root',
+  toolbar: 'stalk-text-editor__toolbar',
+  content: [
+    'stalk-text-editor__content',
+    size === 'sm' ? 'stalk-text-editor__content--size_sm' : undefined,
+  ]
+    .filter(Boolean)
+    .join(' '),
+  bubble: 'stalk-text-editor__bubble',
+  counter: 'stalk-text-editor__counter',
+  swatch: 'stalk-text-editor__swatch',
+})
+
 interface AccordionRecipeOptions {
   variant?: 'inline' | 'card'
 }

@@ -12,4 +12,18 @@ export const ar = {
     noResults: 'لا توجد نتائج',
     placeholder: 'اختر خياراً...',
   },
+  textEditor: {
+    bold: 'غامق',
+    italic: 'مائل',
+    underline: 'تسطير',
+    strikethrough: 'يتوسطه خط',
+    code: 'كود',
+    link: 'رابط',
+    setLink: 'تعيين الرابط',
+    emoji: 'رموز تعبيرية',
+    undo: 'تراجع',
+    redo: 'إعادة',
+    textColor: 'لون النص',
+    highlight: 'تمييز',
+  },
 } satisfies MessageDictionary

@@ -268,6 +268,7 @@ export const componentExamples = {
     '<Text tone="danger">Something needs your attention.</Text>',
     '<Text>Press <Text.Strong>Save</Text.Strong> to keep changes, or <Text.Em>cancel</Text.Em>.</Text>',
   ],
+  'text-editor': ['<TextEditorDemo />'],
   textarea: [
     '<Textarea aria-label="Message" placeholder="Write a message…" />',
     '<Textarea invalid aria-label="Message" defaultValue="too short" />',

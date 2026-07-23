@@ -10,4 +10,18 @@ export const es = {
     noResults: 'No se encontraron resultados',
     placeholder: 'Selecciona una opción...',
   },
+  textEditor: {
+    bold: 'Negrita',
+    italic: 'Cursiva',
+    underline: 'Subrayado',
+    strikethrough: 'Tachado',
+    code: 'Código',
+    link: 'Enlace',
+    setLink: 'Establecer enlace',
+    emoji: 'Emojis',
+    undo: 'Deshacer',
+    redo: 'Rehacer',
+    textColor: 'Color del texto',
+    highlight: 'Resaltado',
+  },
 } satisfies MessageDictionary

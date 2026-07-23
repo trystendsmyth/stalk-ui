@@ -72,6 +72,7 @@ import { tabs } from './tabs'
 import { tag } from './tag'
 import { tagsInput } from './tags-input'
 import { text } from './text'
+import { textEditor } from './text-editor'
 import { textarea } from './textarea'
 import { timePicker } from './time-picker'
 import { timeline } from './timeline'
@@ -159,6 +160,7 @@ export const registryItems = [
   timePicker,
   toast,
   toggle,
+  textEditor,
   toolbar,
   tooltip,
   copyButton,
