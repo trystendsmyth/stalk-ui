@@ -21,6 +21,12 @@ export interface DatePickerPreset {
   range: DateRange
 }
 
+/** A quick date ("Today", "Tomorrow") rendered beside the single calendar. */
+export interface DatePickerSinglePreset {
+  label: string
+  date: Date
+}
+
 interface DatePickerBaseProps {
   /** BCP-47 locale for the typed field / formatted range. */
   locale?: string
@@ -39,6 +45,8 @@ export interface DatePickerSingleProps extends DatePickerBaseProps {
   /** Selected date (controlled). */
   value?: Date | undefined
   onChange?: (date: Date | undefined) => void
+  /** Quick dates rendered in a rail beside the calendar. */
+  presets?: readonly DatePickerSinglePreset[]
 }
 
 export interface DatePickerRangeProps extends DatePickerBaseProps {
@@ -73,6 +81,7 @@ const SingleDatePicker = /* @__PURE__ */ forwardRef<HTMLDivElement, DatePickerSi
     {
       value,
       onChange,
+      presets,
       locale,
       size = 'md',
       invalid = false,
@@ -114,14 +123,33 @@ const SingleDatePicker = /* @__PURE__ */ forwardRef<HTMLDivElement, DatePickerSi
           </div>
         </Popover.Anchor>
         <Popover.Content align="start" className={styles.content}>
-          <Calendar
-            mode="single"
-            {...(value === undefined ? {} : { selected: value, defaultMonth: value })}
-            onSelect={(date) => {
-              onChange?.(date)
-              setOpen(false)
-            }}
-          />
+          <div className={styles.panel}>
+            {presets !== undefined && presets.length > 0 ? (
+              <div className={styles.presets}>
+                {presets.map((preset) => (
+                  <button
+                    key={preset.label}
+                    type="button"
+                    className={styles.preset}
+                    onClick={() => {
+                      onChange?.(preset.date)
+                      setOpen(false)
+                    }}
+                  >
+                    {preset.label}
+                  </button>
+                ))}
+              </div>
+            ) : null}
+            <Calendar
+              mode="single"
+              {...(value === undefined ? {} : { selected: value, defaultMonth: value })}
+              onSelect={(date) => {
+                onChange?.(date)
+                setOpen(false)
+              }}
+            />
+          </div>
         </Popover.Content>
       </Popover.Root>
     )

@@ -56,11 +56,12 @@ pnpm dlx @stalk-ui/cli add @stalk-ui/date-picker
 
 ### `<DatePicker.Single>`
 
-| Prop       | Type                                | Required | Default | Description                 |
-| ---------- | ----------------------------------- | -------- | ------- | --------------------------- |
-| `mode`     | `'single'`                          | No       | -       | -                           |
-| `value`    | `Date \| undefined`                 | No       | -       | Selected date (controlled). |
-| `onChange` | `(date: Date \| undefined) => void` | No       | -       | -                           |
+| Prop       | Type                                | Required | Default | Description                                         |
+| ---------- | ----------------------------------- | -------- | ------- | --------------------------------------------------- |
+| `mode`     | `'single'`                          | No       | -       | -                                                   |
+| `value`    | `Date \| undefined`                 | No       | -       | Selected date (controlled).                         |
+| `onChange` | `(date: Date \| undefined) => void` | No       | -       | -                                                   |
+| `presets`  | `readonly DatePickerSinglePreset[]` | No       | -       | Quick dates rendered in a rail beside the calendar. |
 
 ## Variants
 
