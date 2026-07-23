@@ -42,13 +42,18 @@ export const checkbox = ({ size = 'md' }: CheckboxRecipeOptions = {}) => ({
 })
 
 interface DialogRecipeOptions {
+  layout?: 'padded' | 'banded'
   scrollBehavior?: 'outside' | 'inside'
 }
 
-export const dialog = ({ scrollBehavior = 'outside' }: DialogRecipeOptions = {}) => ({
+export const dialog = ({
+  layout = 'padded',
+  scrollBehavior = 'outside',
+}: DialogRecipeOptions = {}) => ({
   close: 'stalk-dialog__close',
   content: [
     'stalk-dialog__content',
+    layout === 'banded' ? 'stalk-dialog__content--layout_banded' : undefined,
     scrollBehavior === 'inside' ? 'stalk-dialog__content--scrollBehavior_inside' : undefined,
   ]
     .filter(Boolean)
@@ -57,6 +62,7 @@ export const dialog = ({ scrollBehavior = 'outside' }: DialogRecipeOptions = {})
   description: 'stalk-dialog__description',
   footer: 'stalk-dialog__footer',
   header: 'stalk-dialog__header',
+  headerActions: 'stalk-dialog__headerActions',
   overlay: 'stalk-dialog__overlay',
   title: 'stalk-dialog__title',
 })

@@ -132,20 +132,23 @@ export const Draggable: Story = {
       <Dialog.Trigger asChild>
         <Button variant="outline">Open inspector</Button>
       </Dialog.Trigger>
-      <Dialog.Content draggable overlay={false}>
+      <Dialog.Content draggable layout="banded" overlay={false}>
         <Dialog.Header>
           <Dialog.Title>Inspector</Dialog.Title>
-          <Dialog.Description>
-            Drag the header to move this panel; release near home to snap back.
+
+          <Dialog.Description className={css({ me: 'auto' })}>
+            Drag the header to move this panel
           </Dialog.Description>
+          <Dialog.HeaderActions>
+            <Dialog.Close aria-label="Close dialog">
+              <X aria-hidden size={16} />
+            </Dialog.Close>
+          </Dialog.HeaderActions>
         </Dialog.Header>
         <Dialog.Body>Floating, non-modal, draggable.</Dialog.Body>
         <Dialog.Footer>
-          <Dialog.Close asChild>
-            <Button size="sm" variant="outline">
-              Close
-            </Button>
-          </Dialog.Close>
+          <Button fullWidth>Action One</Button>
+          <Button fullWidth>Action Two</Button>
         </Dialog.Footer>
       </Dialog.Content>
     </Dialog.Root>

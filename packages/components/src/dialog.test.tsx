@@ -95,8 +95,44 @@ test('scrollBehavior="inside" hands the scroll to Dialog.Body', async () => {
   expect((await axe(container)).violations).toHaveLength(0)
 })
 
-// Pointer-capture drags cannot be scripted with user-event; fireEvent drives
-// the raw pointer sequence.
+test('layout="banded" applies the banded content variant', () => {
+  render(
+    <Dialog.Root defaultOpen>
+      <Dialog.Content layout="banded">
+        <Dialog.Header>
+          <Dialog.Title>Panel</Dialog.Title>
+        </Dialog.Header>
+        <Dialog.Description>Banded regions.</Dialog.Description>
+      </Dialog.Content>
+    </Dialog.Root>,
+  )
+
+  expect(screen.getByRole('dialog', { name: 'Panel' })).toHaveClass(
+    'stalk-dialog__content--layout_banded',
+  )
+})
+
+test('header actions pin an inline close inside the header bar', async () => {
+  const { container } = render(
+    <Dialog.Root defaultOpen>
+      <Dialog.Content>
+        <Dialog.Header>
+          <Dialog.Title>Settings</Dialog.Title>
+          <Dialog.HeaderActions>
+            <Dialog.Close aria-label="Close dialog">×</Dialog.Close>
+          </Dialog.HeaderActions>
+        </Dialog.Header>
+        <Dialog.Description>Manage preferences.</Dialog.Description>
+      </Dialog.Content>
+    </Dialog.Root>,
+  )
+
+  const close = screen.getByRole('button', { name: 'Close dialog' })
+  expect(close.parentElement).toHaveClass('stalk-dialog__headerActions')
+  expect((await axe(container)).violations).toHaveLength(0)
+})
+
+// Pointer-capture drags can't be scripted with user-event.
 test('draggable content moves with a header drag and snaps back near home', async () => {
   const { container } = render(
     <Dialog.Root defaultOpen>
@@ -114,10 +150,26 @@ test('draggable content moves with a header drag and snaps back near home', asyn
   const header = screen.getByText('Inspector').closest('div')
   if (header === null) throw new Error('missing header')
 
+  // jsdom's zero rects read as "at the edge" to the clamp; stub real geometry.
+  const domRect = (left: number, top: number, width: number, height: number) =>
+    ({
+      left,
+      top,
+      right: left + width,
+      bottom: top + height,
+      width,
+      height,
+      x: left,
+      y: top,
+      toJSON: () => ({}),
+    }) as DOMRect
+  content.getBoundingClientRect = () => domRect(256, 278, 512, 212)
+  header.getBoundingClientRect = () => domRect(280, 302, 464, 28)
+
   fireEvent.pointerDown(header, { button: 0, pointerId: 1, clientX: 100, clientY: 100 })
   fireEvent.pointerMove(header, { pointerId: 1, clientX: 180, clientY: 140 })
   fireEvent.pointerUp(header, { pointerId: 1 })
-  expect(content.style.transform).toContain('translate3d(80px, 40px, 0)')
+  expect(content.style.transform).toBe('translate3d(80px, 40px, 0)')
 
   fireEvent.pointerDown(header, { button: 0, pointerId: 1, clientX: 100, clientY: 100 })
   fireEvent.pointerMove(header, { pointerId: 1, clientX: 30, clientY: 65 })

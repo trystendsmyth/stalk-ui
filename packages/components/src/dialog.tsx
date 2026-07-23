@@ -11,6 +11,17 @@ import type {
 } from 'react'
 
 const styles = /* @__PURE__ */ dialogRecipe()
+// Static variant calls: no per-render recipe work, and extraction always sees them.
+const contentStyles = /* @__PURE__ */ {
+  padded: {
+    outside: dialogRecipe().content,
+    inside: dialogRecipe({ scrollBehavior: 'inside' }).content,
+  },
+  banded: {
+    outside: dialogRecipe({ layout: 'banded' }).content,
+    inside: dialogRecipe({ layout: 'banded', scrollBehavior: 'inside' }).content,
+  },
+}
 
 // Drag plumbing between a draggable Content and its Header (the drag handle).
 interface DialogDragHandlers {
@@ -22,15 +33,19 @@ interface DialogDragHandlers {
 
 const DialogDragContext = /* @__PURE__ */ createContext<DialogDragHandlers | null>(null)
 
+// Pair `draggable` with `layout="banded"` — the header band is the full-bleed
+// handle by construction. The wash yields while an inline close is hovered so
+// the two affordances don't fight.
 const dragHandle = /* @__PURE__ */ css({
   cursor: 'grab',
   touchAction: 'none',
   userSelect: 'none',
-  _active: { cursor: 'grabbing' },
+  _hover: { bgColor: 'bg.subtle' },
+  '&:has(.stalk-dialog__close:hover)': { bgColor: 'transparent' },
+  '&[data-dragging]': { cursor: 'grabbing', bgColor: 'bg.subtle' },
 })
 
-// Drags starting on interactive children (e.g. a Close button in the header)
-// stay clicks.
+// Drags starting on interactive children (e.g. a header Close) stay clicks.
 const INTERACTIVE_SELECTOR = 'a, button, input, select, textarea, [role="button"]'
 
 export const DialogRoot = DialogPrimitive.Root
@@ -70,6 +85,12 @@ export interface DialogContentProps extends Omit<
    */
   overlay?: boolean
   /**
+   * `padded` (default): the content pads and regions are text blocks.
+   * `banded`: header/body/footer are full-width separator-bound bands — the
+   * fit for dense panels and draggable dialogs.
+   */
+  layout?: 'padded' | 'banded'
+  /**
    * `outside` (default) scrolls the whole panel; `inside` pins header/footer
    * and hands the scroll to `Dialog.Body`.
    */
@@ -92,6 +113,7 @@ export const DialogContent = /* @__PURE__ */ forwardRef<
     className,
     draggable = false,
     dragSnapDistance = 24,
+    layout = 'padded',
     overlay = true,
     scrollBehavior = 'outside',
     ...props
@@ -99,9 +121,20 @@ export const DialogContent = /* @__PURE__ */ forwardRef<
   ref,
 ) {
   const contentRef = useRef<HTMLDivElement | null>(null)
-  // Offset lives outside React state: pointermove writes the transform
-  // directly, so dragging never re-renders the dialog subtree.
-  const drag = useRef({ pointerId: -1, startX: 0, startY: 0, baseX: 0, baseY: 0, x: 0, y: 0 })
+  // Offset lives outside React state; pointermove writes styles directly.
+  const drag = useRef({
+    pointerId: -1,
+    startX: 0,
+    startY: 0,
+    baseX: 0,
+    baseY: 0,
+    x: 0,
+    y: 0,
+    minX: 0,
+    maxX: 0,
+    minY: 0,
+    maxY: 0,
+  })
 
   const composedRef = useCallback(
     (node: HTMLDivElement | null) => {
@@ -117,12 +150,9 @@ export const DialogContent = /* @__PURE__ */ forwardRef<
     if (element === null) return
     drag.current.x = x
     drag.current.y = y
-    // Compose with the recipe's centering transform; clearing the inline style
-    // at home restores the recipe entirely.
+    // The recipe centers via `translate`, so the offset owns `transform`.
     element.style.transform =
-      x === 0 && y === 0
-        ? ''
-        : `translate(-50%, -50%) translate3d(${String(x)}px, ${String(y)}px, 0)`
+      x === 0 && y === 0 ? '' : `translate3d(${String(x)}px, ${String(y)}px, 0)`
   }, [])
 
   const dragHandlers = useMemo<DialogDragHandlers | null>(() => {
@@ -131,14 +161,28 @@ export const DialogContent = /* @__PURE__ */ forwardRef<
       className: dragHandle,
       onPointerDown: (event) => {
         if (event.button !== 0) return
+        const state = drag.current
+        if (state.pointerId !== -1) return // one drag at a time
         if (event.target instanceof Element && event.target.closest(INTERACTIVE_SELECTOR) !== null)
           return
-        const state = drag.current
+        const content = contentRef.current
+        if (content === null) return
         state.pointerId = event.pointerId
         state.startX = event.clientX
         state.startY = event.clientY
         state.baseX = state.x
         state.baseY = state.y
+        // Keep the panel on-screen; the header (only handle) stays reachable.
+        const rect = content.getBoundingClientRect()
+        const headerBottom = event.currentTarget.getBoundingClientRect().bottom
+        state.minX = state.baseX - rect.left
+        state.maxX = state.baseX + window.innerWidth - rect.right
+        state.minY = state.baseY - rect.top
+        state.maxY = state.baseY + window.innerHeight - headerBottom
+        // Track 1:1 while dragging; the recipe transition animates the snap-back.
+        content.style.transition = 'none'
+        content.style.willChange = 'transform'
+        event.currentTarget.setAttribute('data-dragging', '')
         if (typeof event.currentTarget.setPointerCapture === 'function') {
           event.currentTarget.setPointerCapture(event.pointerId)
         }
@@ -147,21 +191,26 @@ export const DialogContent = /* @__PURE__ */ forwardRef<
         const state = drag.current
         if (state.pointerId !== event.pointerId) return
         applyOffset(
-          state.baseX + event.clientX - state.startX,
-          state.baseY + event.clientY - state.startY,
+          Math.min(state.maxX, Math.max(state.minX, state.baseX + event.clientX - state.startX)),
+          Math.min(state.maxY, Math.max(state.minY, state.baseY + event.clientY - state.startY)),
         )
       },
       onPointerUp: (event) => {
         const state = drag.current
         if (state.pointerId !== event.pointerId) return
         state.pointerId = -1
+        event.currentTarget.removeAttribute('data-dragging')
+        const content = contentRef.current
+        if (content !== null) {
+          content.style.transition = ''
+          content.style.willChange = ''
+        }
         if (Math.hypot(state.x, state.y) <= dragSnapDistance) applyOffset(0, 0)
       },
     }
   }, [draggable, dragSnapDistance, applyOffset])
 
-  const contentClass =
-    scrollBehavior === 'outside' ? styles.content : dialogRecipe({ scrollBehavior }).content
+  const contentClass = contentStyles[layout][scrollBehavior]
   return (
     <DialogPortal>
       {overlay ? <DialogOverlay /> : null}
@@ -199,6 +248,13 @@ export const DialogHeader = /* @__PURE__ */ forwardRef<
       {...props}
     />
   )
+})
+
+export const DialogHeaderActions = /* @__PURE__ */ forwardRef<
+  HTMLDivElement,
+  HTMLAttributes<HTMLDivElement>
+>(function DialogHeaderActions({ className, ...props }, ref) {
+  return <div ref={ref} className={cx(styles.headerActions, className)} {...props} />
 })
 
 export const DialogTitle = /* @__PURE__ */ forwardRef<
@@ -243,6 +299,7 @@ export const Dialog = /* @__PURE__ */ Object.assign(DialogRootComponent, {
   Description: DialogDescription,
   Footer: DialogFooter,
   Header: DialogHeader,
+  HeaderActions: DialogHeaderActions,
   Overlay: DialogOverlay,
   Portal: DialogPortal,
   Root: DialogRoot,

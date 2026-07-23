@@ -3427,12 +3427,22 @@
 
     .stalk-dialog__overlay {
       inset: var(--spacing-0);
+      position: fixed;
       background-color: black.a8;
+      z-index: var(--z-index-modal);
 }
 
-    .stalk-dialog__overlay,.stalk-dialog__content {
-      position: fixed;
-      z-index: var(--z-index-modal);
+    .stalk-dialog__overlay[data-state="open"] {
+      --enter-opacity: 0;
+      animation-name: enter;
+      animation-duration: var(--durations-fast);
+}
+
+    .stalk-dialog__overlay[data-state="closed"] {
+      --exit-opacity: 0;
+      animation-name: exit;
+      animation-duration: var(--durations-fast);
+      animation-fill-mode: forwards;
 }
 
     .stalk-dialog__content {
@@ -3440,20 +3450,35 @@
       padding: var(--spacing-24);
       overflow: auto;
       border-radius: var(--radii-lg);
+      position: fixed;
       inset-inline-start: 50%;
       inset-block-start: 50%;
-      transform: translate(-50%, -50%);
+      translate: -50% -50%;
       background-color: var(--colors-bg-default);
       box-shadow: var(--shadows-lg);
       color: var(--colors-fg-default);
+      z-index: var(--z-index-modal);
+      --transition-prop: transform;
+      transition-property: transform;
+      --transition-duration: var(--durations-fast);
+      transition-duration: var(--durations-fast);
       width: min(calc(100vw - 2rem), 32rem);
       max-height: calc(100vh - 2rem);
 }
 
-    .stalk-dialog__body {
-      flex: 1 1 auto;
-      min-height: var(--sizes-0);
-      overflow-y: auto;
+    .stalk-dialog__content[data-state="open"] {
+      --enter-opacity: 0;
+      --enter-scale: 0.97;
+      animation-name: enter;
+      animation-duration: var(--durations-fast);
+}
+
+    .stalk-dialog__content[data-state="closed"] {
+      --exit-opacity: 0;
+      --exit-scale: 0.97;
+      animation-name: exit;
+      animation-duration: var(--durations-fast);
+      animation-fill-mode: forwards;
 }
 
     .stalk-dialog__header {
@@ -3461,6 +3486,29 @@
       display: grid;
       padding-inline-end: var(--spacing-32);
       padding-bottom: var(--spacing-base);
+}
+
+    .stalk-dialog__header:has(> .stalk-dialog__headerActions) {
+      gap: var(--spacing-12);
+      display: flex;
+      align-items: center;
+      padding-inline-end: var(--spacing-0);
+}
+
+    .stalk-dialog__header:has(> .stalk-dialog__headerActions) > :first-child {
+      min-width: var(--sizes-0);
+}
+
+    .stalk-dialog__headerActions {
+      gap: var(--spacing-4);
+      display: flex;
+      align-items: center;
+      flex-shrink: 0;
+      margin-inline-start: auto;
+}
+
+    .stalk-dialog__headerActions .stalk-dialog__close {
+      position: static;
 }
 
     .stalk-dialog__title {
@@ -7147,6 +7195,9 @@
       .stalk-accordion__content,.stalk-collapsible__content {
         animation-duration: 0s;
 }
+      .stalk-dialog__overlay,.stalk-dialog__content {
+        animation-name: none;
+}
       .stalk-navigation-menu__triggerIcon {
         --transition-duration: 0s;
         transition-duration: 0s;
@@ -7530,10 +7581,60 @@
     letter-spacing: var(--letter-spacings-normal);
 }
 
+  .stalk-dialog__content--layout_banded {
+    padding: var(--spacing-0);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+  .stalk-dialog__content--layout_banded > .stalk-dialog__header {
+    gap: var(--spacing-12);
+    padding-block: var(--spacing-12);
+    display: flex;
+    align-items: center;
+    padding-inline-start: var(--spacing-24);
+    padding-inline-end: var(--spacing-56);
+    min-height: var(--sizes-44);
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    border-bottom-color: var(--colors-border-muted);
+}
+
+  .stalk-dialog__content--layout_banded > .stalk-dialog__header:has(> .stalk-dialog__headerActions) {
+    padding-inline-end: var(--spacing-12);
+}
+
+  .stalk-dialog__content--layout_banded > .stalk-dialog__header > :first-child {
+    min-width: var(--sizes-0);
+}
+
+  .stalk-dialog__content--layout_banded > .stalk-dialog__body {
+    flex: 1 1 auto;
+    padding-inline: var(--spacing-24);
+    padding-block: 16px;
+    min-height: var(--sizes-0);
+    overflow-y: auto;
+}
+
+  .stalk-dialog__content--layout_banded > .stalk-dialog__footer {
+    padding-inline: var(--spacing-24);
+    padding-block: var(--spacing-12);
+    border-top-width: 1px;
+    border-top-style: solid;
+    border-top-color: var(--colors-border-muted);
+}
+
   .stalk-dialog__content--scrollBehavior_inside {
     overflow: hidden;
     display: flex;
     flex-direction: column;
+}
+
+  .stalk-dialog__content--scrollBehavior_inside .stalk-dialog__body {
+    flex: 1 1 auto;
+    min-height: var(--sizes-0);
+    overflow-y: auto;
 }
 
   .stalk-dropdown-menu__item--inset_true {

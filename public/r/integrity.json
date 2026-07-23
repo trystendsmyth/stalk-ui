@@ -204,11 +204,11 @@
     },
     "dialog": {
       "path": "/r/dialog.json",
-      "sha256": "5a377aea2fd6ebd319b42062f637c722c8bb95ae92dd5a02d0d132556f7362d0"
+      "sha256": "45dc48a974638f38371f5764793ffadd2076193022a97b5bfe0c93546fc833d6"
     },
     "shadcn/dialog": {
       "path": "/r/shadcn/dialog.json",
-      "sha256": "86bdd56a113f238a3f6d60dfaec8d7bb877bb247c83400f3a17f89f180288ba1"
+      "sha256": "38f090ae8ccc31a61e651f8e37f8815cfac0a06a49a2a5d90e60e9c560f9c308"
     },
     "dropdown-menu": {
       "path": "/r/dropdown-menu.json",
