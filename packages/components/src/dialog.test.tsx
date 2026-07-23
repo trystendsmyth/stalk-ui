@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react'
+import { fireEvent, render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { expect, test } from 'vitest'
 import { axe } from 'vitest-axe'
@@ -92,5 +92,37 @@ test('scrollBehavior="inside" hands the scroll to Dialog.Body', async () => {
     'stalk-dialog__content--scrollBehavior_inside',
   )
   expect(screen.getByText('Long changelog')).toHaveClass('stalk-dialog__body')
+  expect((await axe(container)).violations).toHaveLength(0)
+})
+
+// Pointer-capture drags cannot be scripted with user-event; fireEvent drives
+// the raw pointer sequence.
+test('draggable content moves with a header drag and snaps back near home', async () => {
+  const { container } = render(
+    <Dialog.Root defaultOpen>
+      <Dialog.Content draggable>
+        <Dialog.Header>
+          <Dialog.Title>Inspector</Dialog.Title>
+          <Dialog.Description>Floating panel.</Dialog.Description>
+        </Dialog.Header>
+        <p>Panel body</p>
+      </Dialog.Content>
+    </Dialog.Root>,
+  )
+
+  const content = screen.getByRole('dialog', { name: 'Inspector' })
+  const header = screen.getByText('Inspector').closest('div')
+  if (header === null) throw new Error('missing header')
+
+  fireEvent.pointerDown(header, { button: 0, pointerId: 1, clientX: 100, clientY: 100 })
+  fireEvent.pointerMove(header, { pointerId: 1, clientX: 180, clientY: 140 })
+  fireEvent.pointerUp(header, { pointerId: 1 })
+  expect(content.style.transform).toContain('translate3d(80px, 40px, 0)')
+
+  fireEvent.pointerDown(header, { button: 0, pointerId: 1, clientX: 100, clientY: 100 })
+  fireEvent.pointerMove(header, { pointerId: 1, clientX: 30, clientY: 65 })
+  fireEvent.pointerUp(header, { pointerId: 1 })
+  expect(content.style.transform).toBe('')
+
   expect((await axe(container)).violations).toHaveLength(0)
 })
