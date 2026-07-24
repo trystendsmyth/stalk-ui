@@ -7,6 +7,7 @@ import type { RecipeConfig } from '../types'
 export const link = {
   className: 'stalk-link',
   description: 'Anchor styles for the Stalk UI Link component.',
+  jsx: ['Link', /^Link\./],
   base: {
     color: 'colorPalette.solid',
     colorPalette: 'accent',

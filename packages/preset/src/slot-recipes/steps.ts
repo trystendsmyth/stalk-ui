@@ -2,6 +2,7 @@ import type { RecipeConfig } from '../types'
 
 export const steps = {
   className: 'stalk-steps',
+  jsx: ['Steps', /^Steps\./],
   description:
     'Slot recipe for Steps / Stepper flows (numbered indicators, separators, per-state styling via data-state).',
   slots: ['root', 'item', 'indicator', 'separator', 'content', 'title', 'description'],

@@ -3,6 +3,7 @@ import type { RecipeConfig } from '../types'
 export const textarea = {
   className: 'stalk-textarea',
   description: 'Textarea styles shared by copied Stalk UI textarea components.',
+  jsx: ['Textarea', /^Textarea\./],
   base: {
     w: 'full',
     minW: '0',

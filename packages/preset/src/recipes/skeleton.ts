@@ -3,6 +3,7 @@ import type { RecipeConfig } from '../types'
 export const skeleton = {
   className: 'stalk-skeleton',
   description: 'Skeleton placeholder used while content is loading.',
+  jsx: ['Skeleton', /^Skeleton\./],
   base: {
     bgColor: 'bg.subtle',
     display: 'block',

@@ -3,6 +3,7 @@ import type { RecipeConfig } from '../types'
 export const checkbox = {
   className: 'stalk-checkbox',
   description: 'Slot recipe for the Stalk UI checkbox primitive (root + indicator).',
+  jsx: ['Checkbox', /^Checkbox\./],
   slots: ['root', 'indicator'],
   base: {
     root: {

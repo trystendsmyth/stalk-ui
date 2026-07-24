@@ -73,15 +73,88 @@ pnpm dlx @stalk-ui/cli add @stalk-ui/dialog
 </Dialog.Root>
 ```
 
+<ComponentPreview
+  slug="dialog"
+  example={2}
+  code={`<Dialog.Root defaultOpen modal={false}>
+  <Dialog.Content draggable layout="banded" overlay={false}>
+    <Dialog.Header>
+      <Dialog.Title>Inspector</Dialog.Title>
+      <Dialog.Description>Drag the header to move; release near home to snap back.</Dialog.Description>
+    </Dialog.Header>
+    <Dialog.Body>Floating panel</Dialog.Body>
+  </Dialog.Content>
+</Dialog.Root>`}
+/>
+
+```tsx
+<Dialog.Root defaultOpen modal={false}>
+  <Dialog.Content draggable layout="banded" overlay={false}>
+    <Dialog.Header>
+      <Dialog.Title>Inspector</Dialog.Title>
+      <Dialog.Description>
+        Drag the header to move; release near home to snap back.
+      </Dialog.Description>
+    </Dialog.Header>
+    <Dialog.Body>Floating panel</Dialog.Body>
+  </Dialog.Content>
+</Dialog.Root>
+```
+
+<ComponentPreview
+  slug="dialog"
+  example={3}
+  code={`<Dialog.Root>
+  <Dialog.Trigger>Release notes</Dialog.Trigger>
+  <Dialog.Content scrollBehavior="inside">
+    <Dialog.Header>
+      <Dialog.Title>Release notes</Dialog.Title>
+      <Dialog.Description>Header and footer stay pinned; the body scrolls.</Dialog.Description>
+    </Dialog.Header>
+    <Dialog.Body>Long changelog…</Dialog.Body>
+    <Dialog.Footer>
+      <Dialog.Close asChild>
+        <Button variant="outline">Close</Button>
+      </Dialog.Close>
+    </Dialog.Footer>
+  </Dialog.Content>
+</Dialog.Root>`}
+/>
+
+```tsx
+<Dialog.Root>
+  <Dialog.Trigger>Release notes</Dialog.Trigger>
+  <Dialog.Content scrollBehavior="inside">
+    <Dialog.Header>
+      <Dialog.Title>Release notes</Dialog.Title>
+      <Dialog.Description>Header and footer stay pinned; the body scrolls.</Dialog.Description>
+    </Dialog.Header>
+    <Dialog.Body>Long changelog…</Dialog.Body>
+    <Dialog.Footer>
+      <Dialog.Close asChild>
+        <Button variant="outline">Close</Button>
+      </Dialog.Close>
+    </Dialog.Footer>
+  </Dialog.Content>
+</Dialog.Root>
+```
+
 ## Props
 
-| Prop      | Type      | Required | Default | Description                                                                                                                                                                                                                                                                                                       |
-| --------- | --------- | -------- | ------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `overlay` | `boolean` | No       | -       | Render the dimming overlay behind the content. Default \`true\`. Set \`false\`<br />for a non-modal dialog (\`<Dialog modal={false}>\`) so the page behind stays<br />interactive and click-through — Radix's \`modal\` prop is forwarded by<br />\`Dialog.Root\`, this just drops the blocking overlay to match. |
+| Prop               | Type                    | Required | Default | Description                                                                                                                                                                                                                                                                                                       |
+| ------------------ | ----------------------- | -------- | ------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `overlay`          | `boolean`               | No       | -       | Render the dimming overlay behind the content. Default \`true\`. Set \`false\`<br />for a non-modal dialog (\`<Dialog modal={false}>\`) so the page behind stays<br />interactive and click-through — Radix's \`modal\` prop is forwarded by<br />\`Dialog.Root\`, this just drops the blocking overlay to match. |
+| `layout`           | `'padded' \| 'banded'`  | No       | -       | \`padded\` (default): the content pads and regions are text blocks.<br />\`banded\`: header/body/footer are full-width separator-bound bands — the<br />fit for dense panels and draggable dialogs.                                                                                                               |
+| `scrollBehavior`   | `'outside' \| 'inside'` | No       | -       | \`outside\` (default) scrolls the whole panel; \`inside\` pins header/footer<br />and hands the scroll to \`Dialog.Body\`.                                                                                                                                                                                        |
+| `draggable`        | `boolean`               | No       | -       | Let the pointer drag the dialog by its \`Dialog.Header\`. Pairs with<br />\`modal={false}\` + \`overlay={false}\` for floating panels.                                                                                                                                                                            |
+| `dragSnapDistance` | `number`                | No       | -       | Released within this many px of home, the dialog snaps back. Default 24.                                                                                                                                                                                                                                          |
 
 ## Variants
 
-No recipe variants are documented for this component.
+| Variant          | Values              |
+| ---------------- | ------------------- |
+| `layout`         | `padded`, `banded`  |
+| `scrollBehavior` | `outside`, `inside` |
 
 ## Registry
 

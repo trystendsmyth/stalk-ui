@@ -100,3 +100,22 @@ test('range presets apply their range and close the popover', async () => {
   expect(onChange).toHaveBeenCalledWith({ from: RANGE_START, to: RANGE_END })
   expect(screen.queryByRole('button', { name: 'Last 7 days' })).not.toBeInTheDocument()
 })
+
+test('single presets apply their date and close the popover', async () => {
+  const user = userEvent.setup()
+  const onChange = vi.fn<(date: Date | undefined) => void>()
+  render(
+    <DatePicker
+      aria-label="Due date"
+      calendarLabel="Open due calendar"
+      presets={[{ label: 'Today', date: RANGE_START }]}
+      onChange={onChange}
+    />,
+  )
+
+  await user.click(screen.getByRole('button', { name: 'Open due calendar' }))
+  await user.click(await screen.findByRole('button', { name: 'Today' }))
+
+  expect(onChange).toHaveBeenCalledWith(RANGE_START)
+  expect(screen.queryByRole('button', { name: 'Today' })).not.toBeInTheDocument()
+})

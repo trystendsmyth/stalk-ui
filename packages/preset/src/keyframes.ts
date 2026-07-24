@@ -36,6 +36,22 @@ export const keyframes = {
     from: { opacity: '1', transform: 'scale(1)' },
     to: { opacity: '0', transform: 'scale(0.96)' },
   },
+  // Composable enter/exit driven by CSS vars — set via the `animateIn`/
+  // `animateOut` + fade/zoom/spin/slide utilities; unset vars fall back to rest.
+  enter: {
+    from: {
+      opacity: 'var(--enter-opacity, 1)',
+      transform:
+        'translate3d(var(--enter-translate-x, 0), var(--enter-translate-y, 0), 0) scale3d(var(--enter-scale, 1), var(--enter-scale, 1), 1) rotate(var(--enter-rotate, 0))',
+    },
+  },
+  exit: {
+    to: {
+      opacity: 'var(--exit-opacity, 1)',
+      transform:
+        'translate3d(var(--exit-translate-x, 0), var(--exit-translate-y, 0), 0) scale3d(var(--exit-scale, 1), var(--exit-scale, 1), 1) rotate(var(--exit-rotate, 0))',
+    },
+  },
   // Radix exposes the measured content size via `--radix-accordion-content-height`
   // / `--radix-collapsible-content-height` so we can animate from 0 to the
   // intrinsic height without measuring it ourselves. The trigger stays anchored

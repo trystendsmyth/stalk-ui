@@ -6,6 +6,20 @@ const panelHeight = 'min(calc(100vh - 3rem), 24rem)'
 export const sheet = {
   className: 'stalk-sheet',
   description: 'Slot recipe for edge-anchored Sheet panels backed by Radix Dialog.',
+  jsx: [
+    'Sheet',
+    'SheetRoot',
+    'SheetTrigger',
+    'SheetPortal',
+    'SheetClose',
+    'SheetOverlay',
+    'SheetContent',
+    'SheetHeader',
+    'SheetTitle',
+    'SheetDescription',
+    'SheetFooter',
+    /^Sheet\./,
+  ],
   slots: ['overlay', 'content', 'header', 'title', 'description', 'footer', 'close'],
   base: {
     overlay: {

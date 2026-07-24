@@ -2,6 +2,18 @@ import type { RecipeConfig } from '../types'
 
 export const command = {
   className: 'stalk-command',
+  jsx: [
+    'Command',
+    'CommandRoot',
+    'CommandInput',
+    'CommandList',
+    'CommandEmpty',
+    'CommandGroup',
+    'CommandItem',
+    'CommandSeparator',
+    'CommandShortcut',
+    /^Command\./,
+  ],
   description:
     'Slot recipe for the cmdk-backed command palette (root, input, list, empty, group, item, separator, shortcut).',
   slots: [

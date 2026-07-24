@@ -5,6 +5,7 @@ import type { RecipeConfig } from '../types'
 // lives on the actual control.
 export const calendar = {
   className: 'stalk-calendar',
+  jsx: ['Calendar', /^Calendar\./],
   description:
     'Slot recipe for the react-day-picker calendar grid (root, nav, month grid, day cells, and selection states).',
   slots: [

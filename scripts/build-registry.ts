@@ -53,9 +53,14 @@ const clientOnlyPackages = [
   'input-otp',
   'react-international-phone',
   'react-qrcode-logo',
+  'react-resizable-panels',
+  'vaul',
 ]
-const sourceNeedsUseClient = (source: string): boolean =>
+export const sourceNeedsUseClient = (source: string): boolean =>
   source.includes("from '@radix-ui/") ||
+  // createStyleContext calls React createContext at module scope, which throws
+  // inside a Server Component even though the wrapper file has no hooks.
+  source.includes('createStyleContext') ||
   clientOnlyPackages.some((pkg) => source.includes(`from '${pkg}'`)) ||
   clientHookPattern.test(source)
 const useClientDirective = "'use client'\n\n"

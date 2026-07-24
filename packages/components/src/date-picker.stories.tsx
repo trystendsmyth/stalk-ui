@@ -54,6 +54,27 @@ type Story = StoryObj<typeof meta>
 
 export const Default: Story = {}
 
+// mode="single" with quick dates ("Today", "Tomorrow") in a rail beside the calendar.
+export const Presets: Story = {
+  parameters: { controls: { disable: true } },
+  render: () => {
+    const [date, setDate] = useState<Date | undefined>(new Date(2024, 5, 3))
+    const day = (offset: number) => new Date(2024, 5, 20 + offset)
+    return (
+      <DatePicker
+        aria-label="Due date"
+        presets={[
+          { label: 'Today', date: day(0) },
+          { label: 'Tomorrow', date: day(1) },
+          { label: 'Next week', date: day(7) },
+        ]}
+        value={date}
+        onChange={setDate}
+      />
+    )
+  },
+}
+
 // mode="range": a formatted range field opening a two-month range calendar,
 // with optional quick-range presets ("Last 7 days") in a rail beside it.
 export const Range: Story = {

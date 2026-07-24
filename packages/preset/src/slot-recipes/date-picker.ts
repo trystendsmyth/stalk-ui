@@ -2,6 +2,7 @@ import type { RecipeConfig } from '../types'
 
 export const datePicker = {
   className: 'stalk-date-picker',
+  jsx: ['DatePicker', /^DatePicker\./],
   description:
     'Slot recipe for the Date Picker composition (the field wrapper, the in-field calendar trigger, and the calendar popover surface).',
   slots: ['root', 'trigger', 'content', 'rangeField', 'rangeValue', 'panel', 'presets', 'preset'],

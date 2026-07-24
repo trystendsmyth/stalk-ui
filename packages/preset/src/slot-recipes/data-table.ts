@@ -2,6 +2,7 @@ import type { RecipeConfig } from '../types'
 
 export const dataTable = {
   className: 'stalk-data-table',
+  jsx: ['DataTable', 'DataTableAdvanced', /^DataTable\./],
   description:
     'Slot recipe for the TanStack-backed data table wrapper (root, sortable header button, pagination footer).',
   slots: ['root', 'pagination', 'pageInfo', 'sortButton', 'toolbar', 'resizeHandle'],

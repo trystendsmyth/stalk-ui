@@ -2,6 +2,7 @@ import type { RecipeConfig } from '../types'
 
 export const rating = {
   className: 'stalk-rating',
+  jsx: ['Rating', /^Rating\./],
   description:
     'Slot recipe for the Rating control (radio-group semantics; active items fill with the accent).',
   slots: ['root', 'item', 'icon'],

@@ -2,6 +2,7 @@ import type { RecipeConfig } from '../types'
 
 export const progress = {
   className: 'stalk-progress',
+  jsx: ['Progress', /^Progress\./],
   description:
     'Slot recipe for the Stalk UI progress bar (linear track + indicator, circular gauge).',
   slots: ['root', 'indicator', 'circle', 'circleTrack', 'circleRange', 'valueText'],

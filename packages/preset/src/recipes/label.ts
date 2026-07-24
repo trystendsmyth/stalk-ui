@@ -3,6 +3,7 @@ import type { RecipeConfig } from '../types'
 export const label = {
   className: 'stalk-label',
   description: 'Label styles shared by copied Stalk UI label components.',
+  jsx: ['Label', /^Label\./],
   base: {
     color: 'fg.default',
     cursor: 'default',

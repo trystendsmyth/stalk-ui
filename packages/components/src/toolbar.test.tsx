@@ -55,3 +55,20 @@ test('forwards ref to the root element', () => {
   )
   expect(ref.current).toBeInstanceOf(HTMLDivElement)
 })
+
+test('shows a tooltip with the shortcut keys on hover', async () => {
+  const user = userEvent.setup()
+  render(
+    <Toolbar aria-label="Formatting">
+      <Toolbar.Button tooltip="Add a comment" shortcut="⌘M">
+        Comment
+      </Toolbar.Button>
+    </Toolbar>,
+  )
+
+  await user.hover(screen.getByRole('button', { name: 'Comment' }))
+  const tooltip = await screen.findByRole('tooltip')
+
+  expect(tooltip).toHaveTextContent('Add a comment')
+  expect(tooltip).toHaveTextContent('⌘M')
+})

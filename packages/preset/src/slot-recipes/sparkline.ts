@@ -9,6 +9,7 @@ import type { RecipeConfig } from '../types'
 export const sparkline = {
   className: 'stalk-sparkline',
   description: 'Slot recipe for Sparkline — a compact inline-SVG trend (root, area, line, point).',
+  jsx: ['Sparkline', /^Sparkline\./],
   slots: ['root', 'area', 'line', 'lineMuted', 'point', 'referenceLine', 'referenceBand'],
   base: {
     root: {

@@ -2,6 +2,19 @@ import type { RecipeConfig } from '../types'
 
 export const colorPicker = {
   className: 'stalk-color-picker',
+  jsx: [
+    'ColorPicker',
+    'ColorPickerRoot',
+    'ColorPickerTrigger',
+    'ColorPickerContent',
+    'ColorPickerPicker',
+    'ColorPickerInput',
+    'ColorPickerControls',
+    'ColorPickerSwatches',
+    'ColorPickerSwatch',
+    'ColorPickerEyeDropper',
+    /^ColorPicker\./,
+  ],
   description:
     'Slot recipe for the ColorPicker (trigger, content, picker, input, swatches, swatch, eyeDropper).',
   slots: [

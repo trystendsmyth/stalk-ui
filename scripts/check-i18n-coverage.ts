@@ -1,18 +1,31 @@
 // Asserts every locale matches the `en` key-shape and has non-empty,
-// non-verbatim translations. Update TARGET_LOCALES when scope changes.
+// non-verbatim translations. Locales are discovered from src/locales so a new
+// locale is covered the moment its file lands.
 
-import { ar } from '../packages/i18n/src/locales/ar'
-import { en } from '../packages/i18n/src/locales/en'
-import { es } from '../packages/i18n/src/locales/es'
-import { zhCN } from '../packages/i18n/src/locales/zh-cn'
+import { readdirSync } from 'node:fs'
+import { join } from 'node:path'
 
 import type { MessageDictionary } from '../packages/i18n/src/types'
 
-const TARGET_LOCALES: Record<string, MessageDictionary> = {
-  ar,
-  en,
-  es,
-  'zh-CN': zhCN,
+const localesDirectory = join('packages/i18n/src/locales')
+
+const localeFiles = readdirSync(localesDirectory)
+  .filter((file) => file.endsWith('.ts') && !file.endsWith('.test.ts'))
+  .map((file) => file.replace('.ts', ''))
+  .sort()
+
+const TARGET_LOCALES: Record<string, MessageDictionary> = {}
+for (const locale of localeFiles) {
+  const module = (await import(`../packages/i18n/src/locales/${locale}`)) as Record<
+    string,
+    MessageDictionary
+  >
+  const dictionaries = Object.values(module)
+  const dictionary = dictionaries[0]
+  if (dictionaries.length !== 1 || dictionary === undefined) {
+    throw new Error(`Expected exactly one dictionary export in locales/${locale}.ts`)
+  }
+  TARGET_LOCALES[locale] = dictionary
 }
 
 const flatten = (
@@ -31,7 +44,11 @@ const flatten = (
   return out
 }
 
-const baseline = flatten(en)
+const enDictionary = TARGET_LOCALES.en
+if (enDictionary === undefined) {
+  throw new Error('locales/en.ts is the baseline and must exist')
+}
+const baseline = flatten(enDictionary)
 const baselineKeys = new Set(baseline.keys())
 const failures: string[] = []
 
@@ -60,7 +77,7 @@ for (const [locale, dictionary] of Object.entries(TARGET_LOCALES)) {
     if (value.trim() === '') {
       failures.push(`${locale}: key '${key}' is empty — every key must have a translation`)
     }
-    if (locale !== 'en' && value === baseline.get(key)) {
+    if (value === baseline.get(key)) {
       failures.push(
         `${locale}: key '${key}' has the same value as 'en' (likely untranslated): ${JSON.stringify(value)}`,
       )
@@ -85,5 +102,5 @@ if (failures.length > 0) {
 console.log(
   `i18n coverage check passed: ${String(baselineKeys.size)} keys × ${String(
     Object.keys(TARGET_LOCALES).length,
-  )} locales (en, ar, es, zh-CN).`,
+  )} locales (${localeFiles.join(', ')}).`,
 )

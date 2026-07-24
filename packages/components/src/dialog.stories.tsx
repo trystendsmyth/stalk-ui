@@ -44,10 +44,12 @@ export const Default: Story = {
             Share this project with teammates and manage who can edit it.
           </Dialog.Description>
         </Dialog.Header>
-        <VStack alignItems="stretch" gap="8">
-          <label htmlFor="dialog-email">Email</label>
-          <Input id="dialog-email" placeholder="teammate@stalk-ui.com" type="email" />
-        </VStack>
+        <Dialog.Body>
+          <VStack alignItems="stretch" gap="8">
+            <label htmlFor="dialog-email">Email</label>
+            <Input id="dialog-email" placeholder="teammate@stalk-ui.com" type="email" />
+          </VStack>
+        </Dialog.Body>
         <Dialog.Footer>
           <Button>Send invite</Button>
         </Dialog.Footer>
@@ -86,10 +88,80 @@ export const Open: Story = {
   ),
 }
 
-export const NonModal: Story = {
-  args: { defaultOpen: true, modal: false },
+export const ScrollInside: Story = {
   render: (args) => (
     <Dialog.Root {...args}>
+      <Dialog.Trigger asChild>
+        <Button variant="outline">Release notes</Button>
+      </Dialog.Trigger>
+      <Dialog.Content className={css({ maxH: '20rem' })} scrollBehavior="inside">
+        <Dialog.Header>
+          <Dialog.Title>Release notes</Dialog.Title>
+          <Dialog.Description>
+            With `scrollBehavior` set to `inside`, the header and footer stay pinned while
+            Dialog.Body owns the scroll.
+          </Dialog.Description>
+        </Dialog.Header>
+        <Dialog.Body>
+          {Array.from({ length: 12 }, (_, i) => (
+            <p key={i}>
+              Entry {i + 1}: fixed the thing, improved the other thing, and documented the third
+              thing so the changelog has enough height to demonstrate an inner scroll region.
+            </p>
+          ))}
+        </Dialog.Body>
+        <Dialog.Footer>
+          <Dialog.Close asChild>
+            <Button size="sm" variant="outline">
+              Close
+            </Button>
+          </Dialog.Close>
+        </Dialog.Footer>
+        <Dialog.Close aria-label="Close dialog">
+          <X aria-hidden size={16} />
+        </Dialog.Close>
+      </Dialog.Content>
+    </Dialog.Root>
+  ),
+}
+
+export const Draggable: Story = {
+  args: { modal: false },
+  render: (args) => (
+    <Dialog.Root {...args}>
+      <Dialog.Trigger asChild>
+        <Button variant="outline">Open inspector</Button>
+      </Dialog.Trigger>
+      <Dialog.Content draggable layout="banded" overlay={false}>
+        <Dialog.Header>
+          <Dialog.Title>Inspector</Dialog.Title>
+
+          <Dialog.Description className={css({ me: 'auto' })}>
+            Drag the header to move this panel
+          </Dialog.Description>
+          <Dialog.HeaderActions>
+            <Dialog.Close aria-label="Close dialog">
+              <X aria-hidden size={16} />
+            </Dialog.Close>
+          </Dialog.HeaderActions>
+        </Dialog.Header>
+        <Dialog.Body>Floating, non-modal, draggable.</Dialog.Body>
+        <Dialog.Footer>
+          <Button fullWidth>Action One</Button>
+          <Button fullWidth>Action Two</Button>
+        </Dialog.Footer>
+      </Dialog.Content>
+    </Dialog.Root>
+  ),
+}
+
+export const NonModal: Story = {
+  args: { modal: false },
+  render: (args) => (
+    <Dialog.Root {...args}>
+      <Dialog.Trigger asChild>
+        <Button variant="outline">Open panel</Button>
+      </Dialog.Trigger>
       <Dialog.Content overlay={false}>
         <Dialog.Header>
           <Dialog.Title>Non-modal panel</Dialog.Title>

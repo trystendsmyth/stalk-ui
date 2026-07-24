@@ -5,6 +5,21 @@ import type { RecipeConfig } from '../types'
 export const alertDialog = {
   className: 'stalk-alert-dialog',
   description: 'Slot recipe for Radix-backed alert dialogs (confirmation prompts).',
+  jsx: [
+    'AlertDialog',
+    'AlertDialogRoot',
+    'AlertDialogTrigger',
+    'AlertDialogPortal',
+    'AlertDialogAction',
+    'AlertDialogCancel',
+    'AlertDialogOverlay',
+    'AlertDialogContent',
+    'AlertDialogHeader',
+    'AlertDialogTitle',
+    'AlertDialogDescription',
+    'AlertDialogFooter',
+    /^AlertDialog\./,
+  ],
   slots: ['overlay', 'content', 'header', 'title', 'description', 'footer'],
   base: {
     overlay: {

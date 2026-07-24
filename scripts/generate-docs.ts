@@ -129,6 +129,8 @@ const componentDescriptions = {
   tag: 'An interactive chip — clickable, removable, with optional avatar, icon, or count. Use over Badge when the label is actionable.',
   'tags-input': 'Collects multiple values as removable Tag chips with keyboard and paste entry.',
   text: 'Renders body text with consistent size, weight, and tone.',
+  'text-editor':
+    'A Tiptap-backed rich text editor with a composable toolbar, bubble menu, and character counter.',
   'time-picker': 'Selects a time of day with hour, minute, and AM/PM selects.',
   textarea: 'Collects multi-line text from a user.',
   timeline: 'Lists chronological events along a rail of toned dots and connectors.',

@@ -32,6 +32,11 @@ export interface TokenGroup {
 export interface RecipeConfig {
   className?: string
   description?: string
+  /**
+   * JSX names Panda's extractor tracks, so wrapper-passed variant props
+   * (`<SelectField size="sm">`) still emit CSS. Exact names + `^Name\.` regex.
+   */
+  jsx?: (string | RegExp)[]
   base?: Record<string, unknown>
   slots?: string[]
   variants?: Record<string, Record<string, Record<string, unknown>>>

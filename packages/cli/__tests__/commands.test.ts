@@ -524,17 +524,24 @@ describe('CLI command golden files', () => {
 
       expect(normalizeOutput(process.cwd(), output)).toMatchInlineSnapshot(`
         [
-          "Stalk UI ships with three themes:
+          "Stalk UI ships three theme identities and 8 curated accent palettes:
 
           neutral (default) - applied automatically
           rainbow           - apply via data-panda-theme="rainbow"
           monochrome        - apply via data-panda-theme="monochrome"
+
+          palettes          - blue, violet, teal, emerald, amber, yellow, orange, red
 
         To use a theme, add the data-panda-theme attribute to the appropriate
         element in your HTML or layout:
 
           <html data-panda-theme="rainbow">  <!-- whole app -->
           <div data-panda-theme="rainbow">   <!-- a subtree -->
+
+        Palettes generate CSS only for projects that opt in — add the ones you
+        use to staticCss in panda.config.ts:
+
+          staticCss: { themes: ['emerald'] }
 
         For runtime switching between themes, see:
         https://stalk-ui.com/en/docs/getting-started/theming",
@@ -547,7 +554,7 @@ describe('CLI command golden files', () => {
         Runtime switching: https://stalk-ui.com/en/docs/getting-started/theming",
           "Unknown theme: midnight
 
-        Available themes: neutral, rainbow, monochrome
+        Available themes: neutral, rainbow, monochrome, blue, violet, teal, emerald, amber, yellow, orange, red
 
         To add custom themes, see:
         https://stalk-ui.com/en/docs/getting-started/custom-themes",

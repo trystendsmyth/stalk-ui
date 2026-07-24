@@ -26,6 +26,9 @@ const PACKAGE_SIZE_OVERRIDES: Record<string, number> = {
   'react-day-picker': 4 * 1024 * 1024,
   // Headless core shipped as ESM + CJS + UMD builds; tree-shakes at consumers.
   '@tanstack/react-table': 1 * 1024 * 1024,
+  // ProseMirror engine — the price of a rich text editor; registry-scoped, only
+  // installed with text-editor.
+  '@tiptap/core': 2.5 * 1024 * 1024,
 }
 
 const SELF_PACKAGES = new Set([

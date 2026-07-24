@@ -41,6 +41,16 @@
         "default": "./dist/locales/ar.cjs"
       }
     },
+    "./locales/de": {
+      "import": {
+        "types": "./dist/locales/de.d.ts",
+        "default": "./dist/locales/de.js"
+      },
+      "require": {
+        "types": "./dist/locales/de.d.cts",
+        "default": "./dist/locales/de.cjs"
+      }
+    },
     "./locales/en": {
       "import": {
         "types": "./dist/locales/en.d.ts",
@@ -59,6 +69,76 @@
       "require": {
         "types": "./dist/locales/es.d.cts",
         "default": "./dist/locales/es.cjs"
+      }
+    },
+    "./locales/fr": {
+      "import": {
+        "types": "./dist/locales/fr.d.ts",
+        "default": "./dist/locales/fr.js"
+      },
+      "require": {
+        "types": "./dist/locales/fr.d.cts",
+        "default": "./dist/locales/fr.cjs"
+      }
+    },
+    "./locales/hi": {
+      "import": {
+        "types": "./dist/locales/hi.d.ts",
+        "default": "./dist/locales/hi.js"
+      },
+      "require": {
+        "types": "./dist/locales/hi.d.cts",
+        "default": "./dist/locales/hi.cjs"
+      }
+    },
+    "./locales/it": {
+      "import": {
+        "types": "./dist/locales/it.d.ts",
+        "default": "./dist/locales/it.js"
+      },
+      "require": {
+        "types": "./dist/locales/it.d.cts",
+        "default": "./dist/locales/it.cjs"
+      }
+    },
+    "./locales/ja": {
+      "import": {
+        "types": "./dist/locales/ja.d.ts",
+        "default": "./dist/locales/ja.js"
+      },
+      "require": {
+        "types": "./dist/locales/ja.d.cts",
+        "default": "./dist/locales/ja.cjs"
+      }
+    },
+    "./locales/ko": {
+      "import": {
+        "types": "./dist/locales/ko.d.ts",
+        "default": "./dist/locales/ko.js"
+      },
+      "require": {
+        "types": "./dist/locales/ko.d.cts",
+        "default": "./dist/locales/ko.cjs"
+      }
+    },
+    "./locales/pt-br": {
+      "import": {
+        "types": "./dist/locales/pt-br.d.ts",
+        "default": "./dist/locales/pt-br.js"
+      },
+      "require": {
+        "types": "./dist/locales/pt-br.d.cts",
+        "default": "./dist/locales/pt-br.cjs"
+      }
+    },
+    "./locales/ru": {
+      "import": {
+        "types": "./dist/locales/ru.d.ts",
+        "default": "./dist/locales/ru.js"
+      },
+      "require": {
+        "types": "./dist/locales/ru.d.cts",
+        "default": "./dist/locales/ru.cjs"
       }
     },
     "./locales/zh-cn": {

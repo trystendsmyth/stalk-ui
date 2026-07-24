@@ -1,4 +1,5 @@
 export { defineTheme } from './define-theme'
+export { paletteThemeNames, paletteThemes } from './themes/palettes'
 export type { DefineThemeOptions, StalkTheme } from './define-theme'
 export {
   createAccentSemanticTokens,

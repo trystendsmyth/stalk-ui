@@ -41,12 +41,28 @@ export const checkbox = ({ size = 'md' }: CheckboxRecipeOptions = {}) => ({
   indicator: 'stalk-checkbox__indicator',
 })
 
-export const dialog = () => ({
+interface DialogRecipeOptions {
+  layout?: 'padded' | 'banded'
+  scrollBehavior?: 'outside' | 'inside'
+}
+
+export const dialog = ({
+  layout = 'padded',
+  scrollBehavior = 'outside',
+}: DialogRecipeOptions = {}) => ({
   close: 'stalk-dialog__close',
-  content: 'stalk-dialog__content',
+  content: [
+    'stalk-dialog__content',
+    layout === 'banded' ? 'stalk-dialog__content--layout_banded' : undefined,
+    scrollBehavior === 'inside' ? 'stalk-dialog__content--scrollBehavior_inside' : undefined,
+  ]
+    .filter(Boolean)
+    .join(' '),
+  body: 'stalk-dialog__body',
   description: 'stalk-dialog__description',
   footer: 'stalk-dialog__footer',
   header: 'stalk-dialog__header',
+  headerActions: 'stalk-dialog__headerActions',
   overlay: 'stalk-dialog__overlay',
   title: 'stalk-dialog__title',
 })
@@ -436,6 +452,24 @@ export const textarea = ({ invalid = false, size = 'md' }: TextareaRecipeOptions
   ['stalk-textarea', `stalk-textarea--${size}`, invalid ? 'stalk-textarea--invalid' : undefined]
     .filter(Boolean)
     .join(' ')
+
+interface TextEditorRecipeOptions {
+  size?: 'sm' | 'md'
+}
+
+export const textEditor = ({ size = 'md' }: TextEditorRecipeOptions = {}) => ({
+  root: 'stalk-text-editor__root',
+  toolbar: 'stalk-text-editor__toolbar',
+  content: [
+    'stalk-text-editor__content',
+    size === 'sm' ? 'stalk-text-editor__content--size_sm' : undefined,
+  ]
+    .filter(Boolean)
+    .join(' '),
+  bubble: 'stalk-text-editor__bubble',
+  counter: 'stalk-text-editor__counter',
+  swatch: 'stalk-text-editor__swatch',
+})
 
 interface AccordionRecipeOptions {
   variant?: 'inline' | 'card'

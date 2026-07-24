@@ -8,6 +8,7 @@ import type { RecipeConfig } from '../types'
 export const text = {
   className: 'stalk-text',
   description: 'Typography styles shared by the Stalk UI Text and Heading components.',
+  jsx: ['Text', 'Strong', 'Em', 'Quote', 'Heading', /^Text\./],
   base: {
     color: 'fg.default',
     // Primitives stay margin-free; spacing belongs to layout, not the glyph run.

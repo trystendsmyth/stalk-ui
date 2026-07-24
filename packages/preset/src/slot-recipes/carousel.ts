@@ -30,6 +30,15 @@ const control = {
 export const carousel = {
   className: 'stalk-carousel',
   description: 'Slot recipe for Embla-backed carousels.',
+  jsx: [
+    'Carousel',
+    'CarouselRoot',
+    'CarouselContent',
+    'CarouselItem',
+    'CarouselPrevious',
+    'CarouselNext',
+    /^Carousel\./,
+  ],
   slots: ['root', 'viewport', 'content', 'item', 'previous', 'next'],
   base: {
     root: { position: 'relative' },

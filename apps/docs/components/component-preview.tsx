@@ -82,6 +82,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@stalk-ui/components/t
 import { Tag } from '@stalk-ui/components/tag'
 import { TagsInput } from '@stalk-ui/components/tags-input'
 import { Text } from '@stalk-ui/components/text'
+import { TextEditor, useTextEditor } from '@stalk-ui/components/text-editor'
 import { Textarea } from '@stalk-ui/components/textarea'
 import { TimePicker } from '@stalk-ui/components/time-picker'
 import { Timeline } from '@stalk-ui/components/timeline'
@@ -368,6 +369,28 @@ const FrameworkCombobox = () => {
   )
 }
 
+const TextEditorDemo = () => {
+  const editor = useTextEditor({
+    characterLimit: 280,
+    content: '<p>A <strong>rich</strong> text surface with <em>marks</em> and history.</p>',
+    label: 'Message',
+    placeholder: 'Write something…',
+  })
+  return (
+    <TextEditor.Root editor={editor} style={{ maxWidth: '28rem', width: '100%' }}>
+      <TextEditor.Toolbar aria-label="Formatting">
+        <TextEditor.MarkButton mark="bold" />
+        <TextEditor.MarkButton mark="italic" />
+        <TextEditor.MarkButton mark="underline" />
+        <TextEditor.MarkButton mark="code" />
+        <TextEditor.HistoryButtons />
+      </TextEditor.Toolbar>
+      <TextEditor.Content />
+      <TextEditor.Counter limit={280} />
+    </TextEditor.Root>
+  )
+}
+
 const ProfileForm = () => {
   const form = useForm<{ bio: string }>({ defaultValues: { bio: '' } })
   return (
@@ -518,6 +541,9 @@ const liveScope = {
   Tag,
   TagsInput,
   Text,
+  TextEditor,
+  TextEditorDemo,
+  useTextEditor,
   Textarea,
   TimePicker,
   Toaster,

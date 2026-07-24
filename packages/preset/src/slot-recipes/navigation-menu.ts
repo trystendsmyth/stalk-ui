@@ -3,6 +3,17 @@ import type { RecipeConfig } from '../types'
 export const navigationMenu = {
   className: 'stalk-navigation-menu',
   description: 'Slot recipe for Radix-backed navigation menus with per-item dropdown panels.',
+  jsx: [
+    'NavigationMenu',
+    'NavigationMenuSub',
+    'NavigationMenuRoot',
+    'NavigationMenuList',
+    'NavigationMenuItem',
+    'NavigationMenuTrigger',
+    'NavigationMenuContent',
+    'NavigationMenuLink',
+    /^NavigationMenu\./,
+  ],
   slots: ['root', 'list', 'item', 'trigger', 'triggerIcon', 'content', 'link'],
   base: {
     root: {

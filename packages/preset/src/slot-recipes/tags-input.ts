@@ -3,6 +3,7 @@ import type { RecipeConfig } from '../types'
 export const tagsInput = {
   className: 'stalk-tags-input',
   description: 'Slot recipe for TagsInput — a wrapping chip shell around an inline field.',
+  jsx: ['TagsInput', /^TagsInput\./],
   slots: ['root', 'field'],
   base: {
     // Mirrors the `input` shell (bg/border/focus ring) but wraps its children so

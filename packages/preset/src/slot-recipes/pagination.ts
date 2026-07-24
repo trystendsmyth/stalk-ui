@@ -3,6 +3,17 @@ import type { RecipeConfig } from '../types'
 export const pagination = {
   className: 'stalk-pagination',
   description: 'Slot recipe for pagination navigation. Links reuse the button recipe.',
+  jsx: [
+    'Pagination',
+    'PaginationRoot',
+    'PaginationContent',
+    'PaginationItem',
+    'PaginationLink',
+    'PaginationPrevious',
+    'PaginationNext',
+    'PaginationEllipsis',
+    /^Pagination\./,
+  ],
   slots: ['root', 'content', 'item', 'ellipsis'],
   base: {
     root: {

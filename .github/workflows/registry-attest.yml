@@ -1,0 +1,43 @@
+name: Registry Provenance
+
+# SLSA-style build provenance for the registry payload — public/r/*.json is
+# exactly what `stalk-ui add` installs, so attest it on every main push.
+# Verify any served manifest with:
+#   gh attestation verify <file> --repo trystendsmyth/stalk-ui
+# (npm package provenance is separate and automatic: the Release workflow
+# publishes via npm trusted publishing, which attaches attestations itself.)
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'public/r/**'
+      - '.github/workflows/registry-attest.yml'
+
+permissions:
+  contents: read
+  id-token: write
+  attestations: write
+
+concurrency:
+  group: registry-attest-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  attest:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - name: Write build manifest
+        run: |
+          {
+            echo "project=github.com/${GITHUB_REPOSITORY}"
+            echo "commit=${GITHUB_SHA}"
+            echo "ref=${GITHUB_REF_NAME}"
+            echo "run=${GITHUB_RUN_ID}"
+          } > build-manifest.txt
+      - uses: actions/attest-build-provenance@v3
+        with:
+          subject-path: |
+            public/r/**/*.json
+            build-manifest.txt

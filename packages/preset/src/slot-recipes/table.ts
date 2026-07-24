@@ -2,6 +2,20 @@ import type { RecipeConfig } from '../types'
 
 export const table = {
   className: 'stalk-table',
+  jsx: [
+    'Table',
+    'TableRoot',
+    'TableHeader',
+    'TableBody',
+    'TableFooter',
+    'TableRow',
+    'TableHead',
+    'TableCell',
+    'TableCaption',
+    'TableExpandableRow',
+    'TableExpandTrigger',
+    /^Table\./,
+  ],
   description:
     'Slot recipe for data tables (root, table, header, body, footer, row, head, cell, caption).',
   slots: [

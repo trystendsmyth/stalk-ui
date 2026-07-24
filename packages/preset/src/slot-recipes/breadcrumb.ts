@@ -3,6 +3,17 @@ import type { RecipeConfig } from '../types'
 export const breadcrumb = {
   className: 'stalk-breadcrumb',
   description: 'Slot recipe for breadcrumb navigation trails.',
+  jsx: [
+    'Breadcrumb',
+    'BreadcrumbRoot',
+    'BreadcrumbList',
+    'BreadcrumbItem',
+    'BreadcrumbLink',
+    'BreadcrumbPage',
+    'BreadcrumbSeparator',
+    'BreadcrumbEllipsis',
+    /^Breadcrumb\./,
+  ],
   slots: ['root', 'list', 'item', 'link', 'page', 'separator', 'ellipsis'],
   base: {
     root: {

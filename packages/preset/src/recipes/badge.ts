@@ -3,6 +3,7 @@ import type { RecipeConfig } from '../types'
 export const badge = {
   className: 'stalk-badge',
   description: 'Badge styles for compact status and metadata labels.',
+  jsx: ['Badge', /^Badge\./],
   base: {
     alignItems: 'center',
     colorPalette: 'accent',

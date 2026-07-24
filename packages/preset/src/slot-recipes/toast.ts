@@ -3,6 +3,7 @@ import type { RecipeConfig } from '../types'
 export const toast = {
   className: 'stalk-toast',
   description: 'Slot recipe for Sonner-backed toast notifications.',
+  jsx: ['Toaster', /^Toaster\./],
   slots: [
     'toaster',
     'toast',

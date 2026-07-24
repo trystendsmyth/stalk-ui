@@ -2,6 +2,16 @@ import type { RecipeConfig } from '../types'
 
 export const stat = {
   className: 'stalk-stat',
+  jsx: [
+    'Stat',
+    'StatRoot',
+    'StatLabel',
+    'StatValue',
+    'StatUnit',
+    'StatTrend',
+    'StatDelta',
+    /^Stat\./,
+  ],
   description:
     'Slot recipe for Stat / KPI read-outs (label, value, unit, toned delta, trend slot).',
   slots: ['root', 'label', 'value', 'unit', 'delta', 'trend'],

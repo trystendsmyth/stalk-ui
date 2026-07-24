@@ -2,6 +2,7 @@ import type { RecipeConfig } from '../types'
 
 export const swap = {
   className: 'stalk-swap',
+  jsx: ['Swap', /^Swap\./],
   description:
     'Slot recipe for Swap (two elements stacked in one grid cell; the active one shows with a fade/rotate/flip transition).',
   slots: ['root', 'indicator'],

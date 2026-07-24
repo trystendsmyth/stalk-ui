@@ -2,6 +2,14 @@ import type { RecipeConfig } from '../types'
 
 export const dataList = {
   className: 'stalk-data-list',
+  jsx: [
+    'DataList',
+    'DataListRoot',
+    'DataListItem',
+    'DataListValue',
+    'DataListLabel',
+    /^DataList\./,
+  ],
   description:
     'Slot recipe for DataList — label/value pairs (root, item, label, value) laid out horizontally or vertically.',
   slots: ['root', 'item', 'label', 'value'],

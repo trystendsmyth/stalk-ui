@@ -1,4 +1,4 @@
-import { defaultConfig, DEFAULT_VARIANT } from '../constants'
+import { defaultConfig, DEFAULT_VARIANT, defaultStorybookUrl } from '../constants'
 
 import {
   auditChecklist,
@@ -115,3 +115,37 @@ export const getProjectRegistriesTool = (context: ToolContext) => {
 export const getInstallInstructionsTool = () => ({ text: installInstructions })
 
 export const getAuditChecklistTool = () => ({ text: auditChecklist })
+
+export interface GetComponentsManifestArgs {
+  component?: string | undefined
+}
+
+// The published Storybook build emits manifests/components.json (Storybook
+// `componentsManifest` feature): per-component metadata kept current by the
+// Pages deploy. STALK_STORYBOOK_URL points at previews or a local static build.
+export const getComponentsManifestTool = async (args: GetComponentsManifestArgs) => {
+  const baseUrl = (process.env.STALK_STORYBOOK_URL ?? defaultStorybookUrl).replace(/\/+$/, '')
+  const url = `${baseUrl}/manifests/components.json`
+  const response = await fetch(url)
+  if (!response.ok) {
+    throw new Error(`Storybook manifest fetch failed: ${url} (HTTP ${String(response.status)})`)
+  }
+  const manifest = (await response.json()) as Record<string, unknown>
+
+  if (args.component === undefined) {
+    return {
+      text: [`Storybook components manifest (${url}):`, '', JSON.stringify(manifest, null, 2)].join(
+        '\n',
+      ),
+    }
+  }
+
+  const wanted = args.component.toLowerCase()
+  const entries = Object.entries(manifest).filter(([key]) => key.toLowerCase().includes(wanted))
+  if (entries.length === 0) {
+    return {
+      text: `No manifest entry matches "${args.component}". Keys: ${Object.keys(manifest).join(', ')}`,
+    }
+  }
+  return { text: JSON.stringify(Object.fromEntries(entries), null, 2) }
+}

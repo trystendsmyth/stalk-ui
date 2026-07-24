@@ -3,6 +3,7 @@ import type { RecipeConfig } from '../types'
 export const radio = {
   className: 'stalk-radio',
   description: 'Slot recipe for the Stalk UI radio primitive (root + indicator).',
+  jsx: ['Radio', 'RadioRoot', 'RadioItem', /^Radio\./],
   slots: ['root', 'indicator'],
   base: {
     root: {

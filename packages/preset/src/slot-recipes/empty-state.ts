@@ -2,6 +2,15 @@ import type { RecipeConfig } from '../types'
 
 export const emptyState = {
   className: 'stalk-empty-state',
+  jsx: [
+    'EmptyState',
+    'EmptyStateRoot',
+    'EmptyStateTitle',
+    'EmptyStateDescription',
+    'EmptyStateActions',
+    'EmptyStateIcon',
+    /^EmptyState\./,
+  ],
   description:
     'Slot recipe for EmptyState placeholders (icon, title, description, actions) shown when a view has no data.',
   slots: ['root', 'icon', 'title', 'description', 'actions'],

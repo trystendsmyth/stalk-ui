@@ -9,6 +9,17 @@ import type { RecipeConfig } from '../types'
  */
 export const heatmap = {
   className: 'stalk-heatmap',
+  jsx: [
+    'HeatMap',
+    'HeatMapRoot',
+    'HeatMapGroup',
+    'HeatMapRow',
+    'HeatMapCell',
+    'HeatMapCellLabel',
+    'HeatMapCellValue',
+    'HeatMapCellMeta',
+    /^HeatMap\./,
+  ],
   description:
     'Slot recipe for HeatMap — a labeled matrix of color-coded cells (root, table, corner, columnHeader, rowHeader, cell, legend).',
   slots: [

@@ -12,12 +12,25 @@ overrides:
   # ajv pulls fast-uri transitively (via @modelcontextprotocol/sdk in the docs
   # app); pin past the path-traversal / host-confusion advisories (GHSA-q3j6-
   # qgpj-74h6, GHSA-v39h-62p7-jpjc). ajv's range already allows the patch.
+  '@babel/core@<=7.29.0': ^7.29.1
+  '@hono/node-server@<2.0.5': ^2.0.5
+  body-parser@>=2.0.0 <2.3.0: ^2.3.0
+  brace-expansion@>=3.0.0 <5.0.7: ^5.0.7
   fast-uri: '>=3.1.2'
+  fast-uri@>=3.0.0 <3.1.3: ^3.1.3
+  fast-uri@>=3.0.0 <=3.1.3: ^3.1.4
   # hono <4.12.25 has a CORS-middleware advisory (reflects any Origin with
   # credentials when `origin` defaults to wildcard) — GHSA-88fw-hqm2-52qc. Pulled
   # transitively via @modelcontextprotocol/sdk / @hono/node-server (docs app + CLI
   # MCP). The patch is within hono's 4.x range, so the parents stay satisfied.
   hono: '>=4.12.25'
+  hono@>=4.0.0 <4.12.27: ^4.12.27
+  hono@>=4.11.8 <4.12.27: ^4.12.27
+  hono@>=4.3.3 <4.12.27: ^4.12.27
+  next@>=16.0.0 <16.2.11: ^16.2.11
+  postcss@<8.5.10: ^8.5.10
+  postcss@<=8.5.11: ^8.5.12
+  sharp@<0.35.0: ^0.35.0
 
 catalog:
   react: ^19.2.7
@@ -48,3 +61,14 @@ minimumReleaseAgeExclude:
   - next@16.2.7
   - react-dom@19.2.7
   - react@19.2.7
+  - postcss@8.5.10
+  - '@babel/core@7.29.1'
+  - brace-expansion@5.0.7
+  - body-parser@2.3.0
+  - hono@4.12.27
+  - '@hono/node-server@2.0.5'
+  - fast-uri@3.1.4
+  - sharp@0.35.0
+  - next@16.2.11
+  - fast-uri@3.1.3
+  - postcss@8.5.12

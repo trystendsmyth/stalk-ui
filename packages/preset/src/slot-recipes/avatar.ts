@@ -3,6 +3,7 @@ import type { RecipeConfig } from '../types'
 export const avatar = {
   className: 'stalk-avatar',
   description: 'Slot recipe for the Avatar component (root, image, fallback).',
+  jsx: ['Avatar', 'AvatarRoot', 'AvatarImage', 'AvatarFallback', /^Avatar\./],
   slots: ['root', 'image', 'fallback'],
   base: {
     root: {

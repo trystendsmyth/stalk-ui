@@ -3,6 +3,7 @@ import type { RecipeConfig } from '../types'
 export const toggle = {
   className: 'stalk-toggle',
   description: 'Slot recipe for the Toggle and ToggleGroup primitives (root, item).',
+  jsx: ['Toggle', 'ToggleGroup', 'ToggleGroupItem', /^Toggle\./, /^ToggleGroup\./],
   slots: ['root', 'item'],
   base: {
     root: {
