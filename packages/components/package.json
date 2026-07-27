@@ -49,7 +49,7 @@
     "@tiptap/core": "^3.28.0",
     "@tiptap/extension-character-count": "^3.28.0",
     "@tiptap/extension-highlight": "^3.28.0",
-    "@tiptap/extension-placeholder": "^3.28.0",
+    "@tiptap/extension-placeholder": "^3.29.0",
     "@tiptap/extension-task-item": "^3.28.0",
     "@tiptap/extension-task-list": "^3.28.0",
     "@tiptap/extension-text-align": "^3.28.0",
