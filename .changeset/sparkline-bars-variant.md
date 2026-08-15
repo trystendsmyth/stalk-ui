@@ -1,6 +1,10 @@
 ---
-'@stalk-ui/components': minor
-'@stalk-ui/preset': minor
+'@stalk-ui/cli': patch
+'@stalk-ui/components': patch
+'@stalk-ui/i18n': patch
+'@stalk-ui/preset': patch
+'@stalk-ui/tsconfig': patch
+'@stalk-ui/utils': patch
 ---
 
 Sparkline `variant="bars"` — a zero-anchored micro bar chart for discrete per-bucket counts (deploys per day, events per bucket), staying inside the Sparkline tenet: tiny, inline, no axes.
