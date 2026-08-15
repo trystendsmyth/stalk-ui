@@ -25,6 +25,7 @@ export default defineConfig({
     'src/radio.tsx',
     'src/select.tsx',
     'src/sortable.tsx',
+    'src/sparkline.tsx',
     'src/switch.tsx',
     'src/textarea.tsx',
     'src/time-picker.tsx',

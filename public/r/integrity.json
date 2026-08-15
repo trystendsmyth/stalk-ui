@@ -460,11 +460,11 @@
     },
     "sparkline": {
       "path": "/r/sparkline.json",
-      "sha256": "2d51edd01cbd6eef299c06e1131482f938a5fd20647cd08dbd4a32795229c80c"
+      "sha256": "fce3de39ad25b0a7e3ea3daa3d34f4e37a0293938b8978aaa1e06065ae35bbd3"
     },
     "shadcn/sparkline": {
       "path": "/r/shadcn/sparkline.json",
-      "sha256": "db9eed2970bff35b5c5a875d3541b94e85395500e0b17d13ed09954f8d716859"
+      "sha256": "c982048a9bfcd5a57c69088a7bde57f1659494697c9caaf4b776904754f94c5e"
     },
     "spinner": {
       "path": "/r/spinner.json",

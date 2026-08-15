@@ -135,7 +135,6 @@ const writeNextFixtureFiles = async (tempDirectory: string) => {
   await writeJson(join(tempDirectory, 'tsconfig.json'), {
     compilerOptions: {
       allowJs: true,
-      baseUrl: '.',
       esModuleInterop: true,
       incremental: true,
       jsx: 'preserve',
@@ -143,8 +142,10 @@ const writeNextFixtureFiles = async (tempDirectory: string) => {
       module: 'esnext',
       moduleResolution: 'bundler',
       noEmit: true,
+      // No baseUrl: a TS 6.0 deprecation error (TS5101); paths resolve relative
+      // to the tsconfig since TS 4.4.
       paths: {
-        'styled-system/*': ['styled-system/*'],
+        'styled-system/*': ['./styled-system/*'],
       },
       resolveJsonModule: true,
       skipLibCheck: true,
@@ -412,7 +413,6 @@ const runShadcnCompatFixture = async (tempDirectory: string, env: TestEnvironmen
   await writePnpmWorkspaceSettings(tempDirectory)
   await writeJson(join(tempDirectory, 'tsconfig.json'), {
     compilerOptions: {
-      baseUrl: '.',
       paths: {
         '@/*': ['./src/*'],
       },
@@ -422,7 +422,6 @@ const runShadcnCompatFixture = async (tempDirectory: string, env: TestEnvironmen
   })
   await writeJson(join(tempDirectory, 'tsconfig.app.json'), {
     compilerOptions: {
-      baseUrl: '.',
       paths: {
         '@/*': ['./src/*'],
       },
