@@ -181,6 +181,13 @@
     "webpack": false
   },
   {
+    "name": "component: sparkline",
+    "disablePlugins": ["@size-limit/esbuild", "@size-limit/webpack"],
+    "path": "packages/components/dist/sparkline.js",
+    "limit": "2 KB",
+    "webpack": false
+  },
+  {
     "name": "component: switch",
     "disablePlugins": ["@size-limit/esbuild", "@size-limit/webpack"],
     "path": "packages/components/dist/switch.js",

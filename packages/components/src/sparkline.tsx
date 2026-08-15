@@ -15,7 +15,12 @@ const n = (value: number) => value.toFixed(2)
 export interface SparklineProps extends Omit<SVGProps<SVGSVGElement>, 'children'> {
   /** Primary series of numbers, left → right. Needs at least two points to draw a line. */
   data: number[]
-  /** Additional series sharing the same x/y domain, drawn as muted lines. */
+  /**
+   * Mark shape: a trend line, or bars anchored to a zero baseline (negative values
+   * hang below it). Bars suit discrete per-bucket counts. Default `line`.
+   */
+  variant?: 'line' | 'bars'
+  /** Additional series sharing the same x/y domain, drawn as muted lines. Line variant only. */
   series?: number[][]
   /** Reference threshold: a single value draws a dashed line; `[low, high]` shades a band. */
   reference?: number | [number, number]
@@ -23,14 +28,20 @@ export interface SparklineProps extends Omit<SVGProps<SVGSVGElement>, 'children'
   width?: number
   /** Intrinsic height in px. Default `24`. */
   height?: number
-  /** Tone for the line / area / point. Default `accent`. */
+  /** Tone for the line / area / bars / point. Default `accent`. */
   tone?: Tone
-  /** Fill the area beneath the primary line. */
+  /** Fill the area beneath the primary line. Line variant only. */
   area?: boolean
-  /** Mark the final data point of the primary series. */
+  /** Mark the final data point of the primary series. Line variant only. */
   showLastPoint?: boolean
   /** Line thickness in px. Default `1.5`. */
   strokeWidth?: number
+  /** Gap between bars in px. Bars variant only. Default `1`. */
+  gap?: number
+  /** Bar corner radius in px, clamped to half the bar width. Bars variant only. Default `1`. */
+  radius?: number
+  /** Emphasize the final bar by fading the others. Bars variant only. */
+  highlightLast?: boolean
   /**
    * Accessible label, e.g. "Revenue, last 30 days". When omitted the sparkline is
    * decorative (`aria-hidden`) — pair it with adjacent text in that case.
@@ -70,6 +81,7 @@ export const Sparkline = /* @__PURE__ */ forwardRef<SVGSVGElement, SparklineProp
   function Sparkline(
     {
       data,
+      variant = 'line',
       series,
       reference,
       width = 80,
@@ -78,22 +90,28 @@ export const Sparkline = /* @__PURE__ */ forwardRef<SVGSVGElement, SparklineProp
       area = false,
       showLastPoint = false,
       strokeWidth = 1.5,
+      gap = 1,
+      radius = 1,
+      highlightLast = false,
       className,
       'aria-label': ariaLabel,
       ...props
     },
     ref,
   ) {
-    const pad = Math.max(strokeWidth, showLastPoint ? strokeWidth + 1.5 : strokeWidth)
+    const bars = variant === 'bars'
+    const pad = bars ? 0 : Math.max(strokeWidth, showLastPoint ? strokeWidth + 1.5 : strokeWidth)
     const refValues =
       reference === undefined ? [] : Array.isArray(reference) ? reference : [reference]
+    const lineSeries = bars ? [] : (series ?? [])
     // Shared domain spans every series and the reference so they align vertically.
-    const everyValue = [...data, ...(series ?? []).flat(), ...refValues]
+    // Bars encode magnitude by length, so their domain must include zero.
+    const everyValue = [...data, ...lineSeries.flat(), ...refValues, ...(bars ? [0] : [])]
     const min = everyValue.length > 0 ? Math.min(...everyValue) : 0
     const max = everyValue.length > 0 ? Math.max(...everyValue) : 0
     const scale = buildScale(width, height, pad, min, max)
 
-    const primary = data.length > 0 ? toPoints(data, scale) : []
+    const primary = !bars && data.length > 0 ? toPoints(data, scale) : []
     const primaryLine = toLine(primary)
     const first = primary.at(0)
     const last = primary.at(-1)
@@ -102,6 +120,19 @@ export const Sparkline = /* @__PURE__ */ forwardRef<SVGSVGElement, SparklineProp
       area && first && last
         ? `${primaryLine} L${n(last[0])} ${baseline} L${n(first[0])} ${baseline} Z`
         : undefined
+
+    // Bars measure from the zero baseline; negatives hang below it. A hairline
+    // minimum keeps zero-adjacent buckets visible.
+    const y0 = scale.yFor(0)
+    const gapPx = data.length > 1 ? Math.min(gap, width / data.length / 2) : 0
+    const barW = data.length > 0 ? (width - gapPx * (data.length - 1)) / data.length : 0
+    const barRects = bars
+      ? data.map((value, index) => {
+          const y = scale.yFor(value)
+          const h = Math.max(Math.abs(y - y0), 1)
+          return { h, x: index * (barW + gapPx), y: y <= y0 ? y0 - h : y0 }
+        })
+      : []
 
     const refBand = Array.isArray(reference)
       ? {
@@ -143,8 +174,19 @@ export const Sparkline = /* @__PURE__ */ forwardRef<SVGSVGElement, SparklineProp
             y2={n(refLineY)}
           />
         ) : null}
+        {barRects.map((bar, index) => (
+          <rect
+            key={index}
+            className={highlightLast && index < barRects.length - 1 ? styles.barMuted : styles.bar}
+            height={n(bar.h)}
+            rx={n(Math.min(radius, barW / 2))}
+            width={n(barW)}
+            x={n(bar.x)}
+            y={n(bar.y)}
+          />
+        ))}
         {areaPath ? <path className={styles.area} d={areaPath} /> : null}
-        {(series ?? []).map((s, i) =>
+        {lineSeries.map((s, i) =>
           s.length > 0 ? (
             <path
               key={i}

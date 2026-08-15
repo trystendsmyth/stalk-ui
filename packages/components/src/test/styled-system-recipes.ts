@@ -196,7 +196,12 @@ export const sparkline = () => ({
   root: 'stalk-sparkline__root',
   area: 'stalk-sparkline__area',
   line: 'stalk-sparkline__line',
+  lineMuted: 'stalk-sparkline__lineMuted',
   point: 'stalk-sparkline__point',
+  bar: 'stalk-sparkline__bar',
+  barMuted: 'stalk-sparkline__barMuted',
+  referenceLine: 'stalk-sparkline__referenceLine',
+  referenceBand: 'stalk-sparkline__referenceBand',
 })
 
 interface SpinnerRecipeOptions {
