@@ -5886,6 +5886,15 @@
       stroke: var(--colors-bg-default);
 }
 
+    .stalk-sparkline__bar,.stalk-sparkline__barMuted {
+      fill: var(--colors-color-palette-solid);
+      stroke: none;
+}
+
+    .stalk-sparkline__barMuted {
+      opacity: 0.4;
+}
+
     .stalk-sparkline__referenceLine {
       fill: none;
       stroke: var(--colors-border-strong);

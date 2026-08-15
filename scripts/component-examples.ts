@@ -243,6 +243,7 @@ export const componentExamples = {
   sparkline: [
     '<Sparkline data={[4, 6, 5, 8, 7, 9, 6, 10, 12, 9, 13, 11]} aria-label="Revenue, last 12 weeks" />',
     '<Sparkline data={[4, 6, 5, 8, 7, 9, 6, 10, 12, 9, 13, 11]} tone="success" area showLastPoint aria-label="Signups trend" />',
+    '<Sparkline variant="bars" data={[3, 5, 2, 8, 6, 9, 4, 7, 10, 6, 8, 12]} highlightLast aria-label="Deploys per day, last 12 days" />',
   ],
   spinner: [
     '<Spinner aria-label="Loading" />',
