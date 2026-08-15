@@ -24,11 +24,21 @@ jobs:
               repo: context.repo.repo,
             })
 
-            const publishCommand = repo.private ? "" : "pnpm changeset:publish"
+            // Dependabot merges never carry changesets, so there is nothing to
+            // publish — skip the publish step and let the action only maintain
+            // the release PR. (Squash merges keep dependabot as commit author.)
+            const headAuthor = context.payload.head_commit?.author?.username ?? ""
+            const isDependabot = headAuthor === "dependabot[bot]"
+
+            const publishCommand = repo.private || isDependabot ? "" : "pnpm changeset:publish"
             core.setOutput("publish_command", publishCommand)
 
             if (repo.private) {
               core.notice("Repository is private. Skip npm publish and allow Changesets to prepare or update the release PR only.")
+            }
+
+            if (isDependabot) {
+              core.notice("Dependabot merge. Skip npm publish and allow Changesets to prepare or update the release PR only.")
             }
 
   release:
@@ -48,8 +58,11 @@ jobs:
           node-version-file: '.nvmrc'
           cache: 'pnpm'
           registry-url: 'https://registry.npmjs.org'
+      # Pinned to the npm 11 major: trusted publishing needs >= 11.5.1, and the
+      # registry CLI in the publish path should only change majors deliberately
+      # (npm 12's `npm info --json` array output broke changesets 2.31.0).
       - name: Ensure npm >= 11.5.1 for trusted publishing
-        run: npm install -g npm@latest
+        run: npm install -g npm@11
       - run: pnpm install --frozen-lockfile
       - name: OIDC preflight
         if: needs.preflight.outputs.publish_command != ''
