@@ -118,7 +118,7 @@ const componentDescriptions = {
   sortable:
     'Reorders a list by dragging, with keyboard and pointer support. Controlled and headless — compose it into reorderable lists, sortable rows, or multi-column boards.',
   sparkline:
-    'Draws a compact inline-SVG trend line with no charting dependency; tints follow the tone and color mode.',
+    'Draws a compact inline-SVG trend — a line or zero-anchored bars — with no charting dependency; tints follow the tone and color mode.',
   spinner: 'Indicates an indeterminate loading state with an accessible label.',
   stat: 'Displays a KPI read-out with label, value, toned delta, and a trend slot.',
   steps: 'Shows progress through a multi-step flow with numbered, stateful indicators.',
